@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<!-- Appenders -->
+	<!-- <appender> 태그로 로그 항목들을 출력할 대상 지정 -->
+	<!-- 기본적인 로그들을 콘솔에 출력할 수 있도록 appender 설정 -->
+	<appender name="console" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
+		</layout>
+	</appender>
+	
+	<!-- 여기서부터 현재 프로젝트(애플리케이션) 내의 각 로그에 대한 레벨 설정 -->	
+	<!-- 로그 레벨(심각도) - TRACE < DEBUG < INFO < WARN < ERROR < FATAL -->
+	<!-- Application Loggers -->
+	<logger name="com.itwillbs.test3_mybatis">
+		<level value="info" />
+	</logger>
+	
+	<!-- 3rdparty Loggers -->
+	<logger name="org.springframework.core">
+		<level value="info" />
+	</logger>
+	
+	<logger name="org.springframework.beans">
+		<level value="info" />
+	</logger>
+	
+	<logger name="org.springframework.context">
+		<level value="info" />
+	</logger>
+
+	<logger name="org.springframework.web">
+		<level value="info" />
+	</logger>`
+
+	<!-- ================================================================= -->
+	<!-- log4jdbc 를 활용한 SQL 로그 출력을 위해 SQL Logger 항목 설정 추가 -->
+	<!-- logger 태그의 name 속성에는 관리할 로그 이름 설정(정해진 이름 사용) -->
+	<!-- 1. jdbc.sqlonly 로그 : SQL 쿼리 문장에 대한 로그(전달인자 포함한 전체 문장 출력해줌) -->
+	<logger name="jdbc.sqlonly" additivity="false">
+		<level value="OFF" /> <!-- 현재 로그 레벨을 OFF 로 설정 시 해당 로그는 사용하지 않음 -->
+		<appender-ref ref="console" /> <!-- 현재 로그를 콘솔에 출력하겠다는 설정 -->
+	</logger>
+	
+	<!-- 2. jdbc.sqltiming 로그 : sqlonly 로그 + 실행에 소용된 시간(밀리초)을 포함하는 로그 -->
+	<logger name="jdbc.sqltiming" additivity="false">
+		<level value="info" /> <!-- 현재 로그 레벨을 INFO 레벨로 처리한다는 설정 -->
+		<appender-ref ref="console" /> <!-- 현재 로그를 콘솔에 출력하겠다는 설정 -->
+	</logger>
+	
+	<!-- 3. jdbc.audit 로그 : JDBC 호출 정보에 대한 로그(ResultSet 결과 제외) => 내용 많음 -->
+	<logger name="jdbc.audit" additivity="false">
+		<level value="OFF" /> <!-- 현재 로그 레벨을 OFF 로 설정 시 해당 로그는 사용하지 않음 -->
+		<appender-ref ref="console" /> <!-- 현재 로그를 콘솔에 출력하겠다는 설정 -->
+	</logger>
+	
+	<!-- 4. jdbc.resultset 로그 : ResultSet 객체 내용을 포함한 JDBC 호출 정보에 대한 로그 => 내용 많음 -->
+	<logger name="jdbc.resultset" additivity="false">
+		<level value="OFF" /> <!-- 현재 로그 레벨을 OFF 로 설정 시 해당 로그는 사용하지 않음 -->
+		<appender-ref ref="console" /> <!-- 현재 로그를 콘솔에 출력하겠다는 설정 -->
+	</logger>
+	
+	<!-- 5. jdbc.resultsettable 로그 : SELECT 구문 실행 결과(데이터 테이블 = ResultSet 객체 내용) 에 대한 로그 -->
+	<logger name="jdbc.resultsettable" additivity="false">
+		<level value="info" /> <!-- 현재 로그 레벨을 INFO 레벨로 처리한다는 설정 -->
+		<appender-ref ref="console" /> <!-- 현재 로그를 콘솔에 출력하겠다는 설정 -->
+	</logger>
+	<!-- ================================================================= -->
+	<!-- 기본적인 시스템의 로그 설정(priority 태그로 로그의 심각도 설정) -->
+	<!-- Root Logger -->
+	<root>
+<!-- 		<priority value="DEBUG" /> -->
+<!-- 		<priority value="INFO" /> -->
+		<priority value="WARN" />
+		<appender-ref ref="console" />
+	</root>
+	
+</log4j:configuration>
+
+
+
+
+
+
+
+
+
+
