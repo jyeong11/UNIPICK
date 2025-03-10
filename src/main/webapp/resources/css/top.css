@@ -1,6 +1,22 @@
 @charset "UTF-8";
 
+#header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+}
+#icons-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
 #logo {
-	width: 10%;
-	background-color: black;
+	width: 180px;
+}
+i{
+	color: black;
+	font-size: x-large;
 }
