@@ -23,7 +23,10 @@
 	<jsp:include page="./inc/top.jsp"></jsp:include>
 	</div>
 	<h1>퇴사하고싶습니다</h1>
-
+	
+	<div>
+		<jsp:include page="./inc/footer.jsp"></jsp:include>
+	</div>
 </body>
 
 </html>
