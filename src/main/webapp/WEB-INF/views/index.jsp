@@ -25,7 +25,7 @@
 	<h1>퇴사하고싶습니다</h1>
 	
 	<div>
-		<jsp:include page="./inc/footer.jsp"></jsp:include>
+		<jsp:include page="./inc/bottom.jsp"></jsp:include>
 	</div>
 </body>
 
