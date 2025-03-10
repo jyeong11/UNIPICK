@@ -2,11 +2,16 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<title>UNIPICK</title>
 </head>
 <body>
-<h1>퇴사하고싶습니다</h1>
+	<!-- Topbar -->
+	<div id="topNav">
+	<jsp:include page="./inc/top.jsp"></jsp:include>
+	</div>
+	<h1>퇴사하고싶습니다</h1>
 
 </body>
 
