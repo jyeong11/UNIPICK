@@ -9,6 +9,6 @@ public class SellerController {
 	@GetMapping("seller")
 	public String sellerMain() {
 		
-		return "seller/sellerMain";
+		return "seller/sellermain";
 	}
 }

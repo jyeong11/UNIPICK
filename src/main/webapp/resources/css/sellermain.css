@@ -1,0 +1,31 @@
+@charset "UTF-8";
+#logo {
+	width: 180px;
+}
+
+#seller-container{
+	max-width: 1200px;
+	margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+}
+.box {
+  width: 800px;   
+  height: 120px;  
+  border: 1px solid #ecedee;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  border-radius: 20px;
+  color: #292b2b;
+  position: relative;
+  left: 380px;
+}
+/* .box > ul { */
+/* 	padding: 0 10px;	 */
+/* } */
+.box > ul > li  {
+   padding: 0 10px;
+}

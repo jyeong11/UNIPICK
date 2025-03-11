@@ -9,7 +9,7 @@
 	<header>
 	    <div id="header-container">
 	        <!-- 로고 -->
-	        <a href="index.jsp">
+	        <a href="index">
 	        	<img src="${pageContext.request.contextPath}/resources/images/로고 가로.png" alt="로고" id="logo">
 	        </a>
 	        <!-- 검색 아이콘 & 장바구니 아이콘 -->
