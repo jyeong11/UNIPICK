@@ -21,6 +21,13 @@ i{
 	color: black;
 	font-size: x-large;
 }
+#top_icon li {
+	margin-right: 50px;
+}
+#top_icon {
+	list-style-type: none;
+	display: flex;
+}
 
 #search{
 	border-bottom: 2px solid #202429;

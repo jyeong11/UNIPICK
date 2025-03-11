@@ -15,20 +15,14 @@
 	        <!-- 검색 아이콘 & 장바구니 아이콘 -->
 	        <div id="icons-container">
 		        <form action="/search">
-		        	<div id="search">
-		        		<ul>
-			        	<li><input type="search"><button type="submit" id="search_btn"></button><i class="fa fa-solid fa-magnifying-glass"></i></li>
+		        	<div>
+		        		<ul id="top_icon">
+			        	<li><div id="search"><input type="search"><button type="submit" id="search_btn"><i class="fa fa-solid fa-magnifying-glass"></i></button></div></li>
 			            <!-- 검색 아이콘 --> 
-						 <li><a href="cart.jsp" class="cart_btn"><i class="fa fa-solid fa-cart-shopping" ></i></a></li>
+						 <li><a href="cart.jsp" class="cart_btn"><i class="fa fa-solid fa-cart-shopping"></i></a></li>
 	            		</ul>
 					</div>
 	            </form>
-<!-- 					<div> -->
-<!-- 					<button type="submit" id="search_btn"><i class="fa fa-solid fa-magnifying-glass"></i></button> -->
-<!-- 					</div> -->
-				
-		            <!-- 장바구니 아이콘 -->
-	           
 	        </div>
 	    </div>
     </header>
