@@ -10,7 +10,7 @@
 		<div class="first">
 			<div>
 				<a href="#">
-					<img src="${pageContext.request.contextPath }/resources/images/favicon.png">
+					<img src="${pageContext.request.contextPath }/resources/images/banner1.jpg">
 					<div>
 						<div>스토어명</div>
 						<div>상품명</div>
