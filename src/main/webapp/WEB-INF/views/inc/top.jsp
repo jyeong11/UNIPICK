@@ -12,14 +12,15 @@
 	        <a href="index.jsp">
 	        	<img src="${pageContext.request.contextPath}/resources/images/로고 가로.png" alt="로고" id="logo">
 	        </a>
-			
 	        <!-- 검색 아이콘 & 장바구니 아이콘 -->
 	        <div id="icons-container">
-	        	<div>
+	        <form action="/search">
+	        	<div id="search">
 		        	<input type="search">
 		            <!-- 검색 아이콘 -->
-		            <a href="search.jsp"><i class="fa fa-solid fa-magnifying-glass"></i></a>
+		            <button type="submit" id="search_btn"><i class="fa fa-solid fa-magnifying-glass"></i></button>
 				</div>
+			</form>
 	            <!-- 장바구니 아이콘 -->
 	            <a href="cart.jsp"><i class="fa fa-solid fa-cart-shopping"></i></a>
 	        </div>
