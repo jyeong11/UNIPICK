@@ -17,9 +17,12 @@
 			<dd>help@unipick.com</dd>
 			</dl>
 		</div>
-		<div class="bottom">
+		<div class="bottom line">
 		
 		</div>
 	</div>
 </div>
+<nav>
+<img class="chat" src="${pageContext.request.contextPath }/resources/images/chat.png">
+</nav>
 </footer>
