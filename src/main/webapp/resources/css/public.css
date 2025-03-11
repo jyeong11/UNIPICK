@@ -4,16 +4,6 @@ body {
   font-family: "Noto Sans KR", sans-serif;
   color: #292b2b;
 }
-.ft-wrap{
-	font-size: 0.6rem;
-	background-color: #D3D3D3;
-}
-button{
-	background-color: black;
-	color: white;
-	border: none;
-	
-}
 
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
@@ -52,14 +42,16 @@ table {border-collapse: collapse;border-spacing: 0;}
 /* 모바일 가로 & 테블릿 세로 (해상도 480px ~ 767px)*/
 @media all and (min-width:480px) and (max-width:767px) {
 	.ft-wrap {background: #f5f6f8;color:#4f5558;padding:1rem;}
-	.ft-inner .top dl {flex-wrap: wrap;gap: 0 10px;}
-	.ft-inner .top dl dt {flex:0 0 auto;}
-	.ft-inner .top dl dd {flex:0 0 auto;}
+	.ft-inner .top dl {flex-wrap:wrap; gap: 0 10px;}
+	.ft-inner .top dl dt {font-weight:300;}
+	.ft-inner .top dl dd {font-weight:100;}
 }
 /* 모바일 세로 (해상도 ~ 479px)*/
 @media all and (max-width:479px) {
 	.ft-wrap {background: #f5f6f8;color:#c0c6d0;padding:1rem;}
 	.ft-inner .top dl {flex-wrap: wrap;gap: 0 10px;}
-	.ft-inner .top dl dt {flex:0 0 auto;}
-	.ft-inner .top dl dd {flex:0 0 auto;}
+	.ft-inner .top dl dt {font-weight:300;}
+	.ft-inner .top dl dd {font-weight:100;}
 }
+
+.page-inner {max-width:1300px;margin:0 auto;padding:1rem;min-height:500px;}
