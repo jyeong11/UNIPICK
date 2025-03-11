@@ -17,6 +17,7 @@
 <link href="${pageContext.request.contextPath }/resources/css/top.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/footer.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/index.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/best.css" rel="stylesheet" type="text/css">
 <!-- Banner -->
 <link href="${pageContext.request.contextPath }/resources/css/swiper-bundle.min.css" rel="stylesheet" type="text/css">
 <!-- Favicon -->
@@ -43,7 +44,7 @@
 				<a href="/store">
 					<span>스토어</span>
 				</a>
-				<a href="event">
+				<a href="/event">
 					<span>이벤트</span>
 				</a>
 			<li>
@@ -63,14 +64,14 @@
 	<!-- 베스트 -->
 	<section>
 		<div>
-			<jsp:include page="./inc/best.jsp"></jsp:include>
+			<jsp:include page="./inc/best_proudct.jsp"></jsp:include>
 		</div>
 	</section>
 	
 	<!-- 신상 -->
 	<section>
 		<div>
-			<jsp:include page="./inc/new.jsp"></jsp:include>
+			<jsp:include page="./inc/new_product.jsp"></jsp:include>
 		</div>
 	</section>
 	<div>
