@@ -16,6 +16,8 @@
 <link href="${pageContext.request.contextPath }/resources/css/footer.css" rel="stylesheet" type="text/css">
 <!-- Favicon -->
 <link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
+<!-- Banner -->
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 	<title>UNIPICK</title>
 </head>
 <body>
@@ -23,8 +25,9 @@
 	<div id="topNav">
 	<jsp:include page="./inc/top.jsp"></jsp:include>
 	</div>
-	<h1>퇴사하고싶습니다</h1>
-	
+	<div>
+	<jsp:include page="./inc/banner.jsp"></jsp:include>
+	</div>
 	<div>
 		<jsp:include page="./inc/bottom.jsp"></jsp:include>
 	</div>
