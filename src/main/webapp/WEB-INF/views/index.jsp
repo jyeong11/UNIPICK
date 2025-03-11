@@ -52,6 +52,27 @@
 	<div>
 		<jsp:include page="./inc/banner.jsp"></jsp:include>
 	</div>
+	
+	<!-- 상품 추천 -->	
+	<section>
+		<div>
+			<jsp:include page="./inc/recommendation.jsp"></jsp:include>
+		</div>
+	</section>
+	
+	<!-- 베스트 -->
+	<section>
+		<div>
+			<jsp:include page="./inc/best.jsp"></jsp:include>
+		</div>
+	</section>
+	
+	<!-- 신상 -->
+	<section>
+		<div>
+			<jsp:include page="./inc/new.jsp"></jsp:include>
+		</div>
+	</section>
 	<div>
 		<jsp:include page="./inc/bottom.jsp"></jsp:include>
 	</div>
