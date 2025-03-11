@@ -29,8 +29,10 @@ span {font-weight: bold;}
 @media all and (min-width:480px) and (max-width:767px) {
 	#top_menu {font-size: 15px;}
 	li{gap: 2rem;}
+	.my_btn{display: none;}
 }
 @media all and (max-width:479px) {
 	#top_menu {font-size: 15px;}
 	li{gap: 2rem;}
+	.my_btn i{display: none;}
 }

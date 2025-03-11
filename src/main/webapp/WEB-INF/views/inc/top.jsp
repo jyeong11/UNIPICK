@@ -9,7 +9,7 @@
 	<header>
 	    <div id="header-container">
 	        <!-- 로고 -->
-	        <a href="index">
+	        <a href="index.jsp">
 	        	<img src="${pageContext.request.contextPath}/resources/images/로고 가로.png" alt="로고" id="logo">
 	        </a>
 	        <!-- 검색 아이콘 & 장바구니 아이콘 -->
@@ -20,6 +20,7 @@
 			        	<li><div id="search"><input type="search"><button type="submit" id="search_btn"><i class="fa fa-solid fa-magnifying-glass"></i></button></div></li>
 			            <!-- 검색 아이콘 --> 
 						 <li><a href="cart.jsp" class="cart_btn"><i class="fa fa-solid fa-cart-shopping"></i></a></li>
+						 <li><a href="#" class="my_btn"><i class="fa-solid fa-user"></i></a></li>
 	            		</ul>
 					</div>
 	            </form>

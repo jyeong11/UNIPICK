@@ -2,7 +2,10 @@
 
 footer {
 	padding-bottom: 30px;
+	color: #4f5558;
 }
+
+
 
 /* 컴퓨터 데스크트탑 가로 (해상도 1280px ~ 1920px) */
 @media all and (min-width:1280px) and (max-width:1920px){
@@ -12,12 +15,13 @@ footer {
 .bottom ul li {display: inline-block;gap: 0 10px;}
 .bottom ul li:not(:last-child) {margin-right: 15px;}
 .bottom ul li a {text-decoration: none;color: #292b2b;font-size: 14px;}
+.swiper-wrapper {transition-property: height, transform;transition-duration: 0.5s;transition-timing-function: ease-in-out;}
 .swiper-container {width: 100%;height: 400px;overflow: hidden;}
 .swiper-slide img {width: 100%;height: 100%;object-fit: cover;display: inline-block;}
 .ft-wrap {background: #f5f6f8;color:#4f5558;padding:2rem;}
 .ft-inner .top {margin-top: 1rem;padding-bottom:0;font-size: 14px;font-weight:300;line-height:1.6;}
-.ft-inner .top h3 {font-size:16px;}
-.ft-inner .top dl {display:flex;align-items:center;gap:1rem;}
+.ft-inner .top h3 {font-size:20px;}
+.ft-inner .top dl {display:flex;align-items:center;gap:1rem;border-bottom: 1px solid; padding-bottom:12px; padding-top:10px;}
 .ft-inner .top dl dt {font-weight:700;}
 .ft-inner .top dl dd {font-weight:300;}
 }
@@ -30,12 +34,13 @@ footer {
 .bottom ul li {display: inline-block;gap: 0 10px;}
 .bottom ul li:not(:last-child) {margin-right: 15px;}
 .bottom ul li a {text-decoration: none;color: #292b2b;font-size: 14px;}
+.swiper-wrapper {transition-property: height, transform;transition-duration: 0.5s;transition-timing-function: ease-in-out;}
 .swiper-container {width: 100%;height: 400px;overflow: hidden;}
 .swiper-slide img {width: 100%;height: 100%;object-fit: cover;display: inline-block;}
 .ft-wrap {background: #f5f6f8;color:#4f5558;padding:2rem;}
 .ft-inner .top {margin-top: 1rem;padding-bottom:12px;font-size: 14px;font-weight:300;line-height:1.6;}
-.ft-inner .top h3 {font-size:16px;}
-.ft-inner .top dl {display:flex;align-items:center;gap:1rem;}
+.ft-inner .top h3 {font-size:20px;}
+.ft-inner .top dl {display:flex;align-items:center;gap:1rem;border-bottom: 1px solid; padding-bottom:12px; padding-top:10px;}
 .ft-inner .top dl dt {font-weight:700;}
 .ft-inner .top dl dd {font-weight:300;}
 }
@@ -52,6 +57,7 @@ footer {
 .bottom ul li {display: inline-block;gap: 0 10px;}
 .bottom ul li:not(:last-child) {margin-right: 10px;}
 .bottom ul li a {text-decoration: none;color: #292b2b;font-size: 14px;}
+.swiper-wrapper {transition-property: height, transform;transition-duration: 0.5s;transition-timing-function: ease-in-out;}
 .swiper-container {width: 100%;height: 400px;overflow: hidden;}
 .swiper-slide img {width: 100%;height: 100%;object-fit: cover;display: inline-block;}
 .ft-wrap {background: #f5f6f8;color:#4f5558;padding:2rem;}
