@@ -22,7 +22,7 @@
 				</div>
 			</form>
 	            <!-- 장바구니 아이콘 -->
-	            <a href="cart.jsp"><i class="fa fa-solid fa-cart-shopping"></i></a>
+	            <a href="cart.jsp" class="cart_btn"><i class="fa fa-solid fa-cart-shopping"></i></a>
 	        </div>
 	    </div>
     </header>

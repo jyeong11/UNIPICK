@@ -16,6 +16,7 @@
 #logo {
 	width: 180px;
 }
+
 i{
 	color: black;
 	font-size: x-large;
@@ -28,12 +29,15 @@ i{
 #search_btn{
 	border: none;
 	background-color: white;
+	transform: translateY(-10px);
 }
 
 input[type="search"] {
     border: none; 
 	font-size: 18px;
 	outline: none;
-	justify-content: space-between;
-	
+}
+.cart_btn i {
+  	font-size: 2rem;
+	transform: translateY(-5px);  	
 }
