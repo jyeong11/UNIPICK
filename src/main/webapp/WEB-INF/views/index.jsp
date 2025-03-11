@@ -16,6 +16,7 @@
 <link href="${pageContext.request.contextPath }/resources/css/public.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/top.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/footer.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/index.css" rel="stylesheet" type="text/css">
 <!-- Banner -->
 <link href="${pageContext.request.contextPath }/resources/css/swiper-bundle.min.css" rel="stylesheet" type="text/css">
 <!-- Favicon -->
@@ -24,12 +25,32 @@
 	<title>UNIPICK</title>
 </head>
 <body>
-	<!-- Topbar -->
 	<div id="topNav">
-	<jsp:include page="./inc/top.jsp"></jsp:include>
+		<jsp:include page="./inc/top.jsp"></jsp:include>
+	</div>
+	<div id="top_menu">
+		<ul class="menu-nav">
+			<li class="menu-inner">
+				<a href="/index">
+					<span>홈</span>
+				</a>
+				<a href="/newarrive">
+					<span>신상</span>
+				</a>
+				<a href="/best">
+					<span>베스트</span>
+				</a>
+				<a href="/store">
+					<span>스토어</span>
+				</a>
+				<a href="event">
+					<span>이벤트</span>
+				</a>
+			<li>
+		</ul>
 	</div>
 	<div>
-	<jsp:include page="./inc/banner.jsp"></jsp:include>
+		<jsp:include page="./inc/banner.jsp"></jsp:include>
 	</div>
 	<div>
 		<jsp:include page="./inc/bottom.jsp"></jsp:include>
