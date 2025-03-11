@@ -20,22 +20,3 @@
   object-fit: cover;
   display: inline-block;
 }
-
-.swiper-button-prev,
-.swiper-button-next {
-  top: 50% !important;
-  transform: translateY(100%) !important;
-  color: #FF0000 !important;
-  font-size: 2rem !important;
-  z-index: 10 !important;
-}
-
-.swiper-button-prev {
-  left: 10px !important;
-  right: auto !important;
-}
-
-.swiper-button-next {
-  right: 10px !important;
-  left: auto !important;
-}
