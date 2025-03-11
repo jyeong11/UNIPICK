@@ -20,3 +20,8 @@ i{
 	color: black;
 	font-size: x-large;
 }
+input[type="search"] {
+    border: none; 
+    border-bottom: 2px solid #202429;;
+	font-size: 18px;
+}
