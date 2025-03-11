@@ -16,13 +16,19 @@
 	        <div id="icons-container">
 		        <form action="/search">
 		        	<div id="search">
-			        	<input type="search">
-			            <!-- 검색 아이콘 -->
-			            <button type="submit" id="search_btn"><i class="fa fa-solid fa-magnifying-glass"></i></button>
+		        		<ul>
+			        	<li><input type="search"><button type="submit" id="search_btn"></button><i class="fa fa-solid fa-magnifying-glass"></i></li>
+			            <!-- 검색 아이콘 --> 
+						 <li><a href="cart.jsp" class="cart_btn"><i class="fa fa-solid fa-cart-shopping" ></i></a></li>
+	            		</ul>
 					</div>
-				</form>
+	            </form>
+<!-- 					<div> -->
+<!-- 					<button type="submit" id="search_btn"><i class="fa fa-solid fa-magnifying-glass"></i></button> -->
+<!-- 					</div> -->
+				
 		            <!-- 장바구니 아이콘 -->
-	            <a href="cart.jsp" class="cart_btn"><i class="fa fa-solid fa-cart-shopping"></i></a>
+	           
 	        </div>
 	    </div>
     </header>

@@ -71,15 +71,6 @@ ul, dl,dt,dd {margin:0;padding:0;list-style:none}
 	.ft-inner .top dl {display:flex;align-items:center;gap:1rem;}
 	.ft-inner .top dl dt {font-weight:700;}
 	.ft-inner .top dl dd {font-weight:300;}
-	#logo {width: 200px !important;}
-/* 	#search {width: 250px !important;} */
-	#search input {
-/* 	    width: 100% !important; */
-/* 	    padding: 8px 12px !important; */
-/* 	    font-size: 16px !important; */
-	}
-/* 	#search_btn {font-size: 18px !important;} */
-/* 	.cart_btn i {font-size: 24px !important;} */
 }
 /* 노트북 & 테블릿 가로 (해상도 1024px ~ 1279px)*/
 @media all and (min-width:1024px) and (max-width:1279px) {
@@ -90,14 +81,9 @@ ul, dl,dt,dd {margin:0;padding:0;list-style:none}
 	.ft-inner .top dl dt {font-weight:700;}
 	.ft-inner .top dl dd {font-weight:300;}
 	#logo {width: 150px !important;}
-    #search {width: 200px !important;}
     #search input {font-size: 14px !important; padding: 6px 10px !important;}
-    #search_btn {
-        font-size: 16px !important;
-    }
-    .cart_btn i {
-        font-size: 20px !important;
-    }
+    #search_btn i {font-size: 20px !important;}
+    .cart_btn i {font-size: 20px !important;}
 }
 /* 테블릿 가로 (해상도 768px ~ 1023px)*/
 @media all and (min-width:768px) and (max-width:1023px) {
@@ -108,9 +94,8 @@ ul, dl,dt,dd {margin:0;padding:0;list-style:none}
 	.ft-inner .top dl dt {font-weight:700;}
 	.ft-inner .top dl dd {font-weight:300;}
 	#logo {width: 120px !important;}
-    #search {width: 150px !important;}
     #search input {font-size: 12px !important; padding: 5px 8px !important;}
-    #search_btn {font-size: 14px !important;}
+    #search_btn i {font-size: 18x !important;}
     .cart_btn i {font-size: 18px !important;}
 }
 /* 모바일 가로 & 테블릿 세로 (해상도 480px ~ 767px)*/
@@ -121,11 +106,12 @@ ul, dl,dt,dd {margin:0;padding:0;list-style:none}
     .ft-inner .top dl dt {flex:0 0 auto; font-weight: 700;}
     .ft-inner .top dl dd {flex:0 0 auto;}
     #logo {width: 100px !important;}
-    #search {width: 120px !important;}
-    #search input {font-size: 10px !important; padding: 4px 6px !important;}
-    #search_btn { font-size: 12px !important; }
+    #search input {font-size: 10px !important;}
+    #search_btn i { font-size: 16px !important;}
+    .cart_btn li{position: relative; left:20px; display: inline-block;}
     .cart_btn i {font-size: 16px !important; }
-    #search {border-bottom: none !important;}
+    /*#search {border-bottom: none !important;}*/
+
 }
 /* 모바일 세로 (해상도 ~ 479px)*/
 @media all and (max-width:479px) {
@@ -134,10 +120,9 @@ ul, dl,dt,dd {margin:0;padding:0;list-style:none}
 	.ft-inner .top dl {display: flex; flex-wrap: wrap;gap: 0 10px;}
     .ft-inner .top dl dt {flex:0 0 auto; font-weight: 700;}
     .ft-inner .top dl dd { flex:0 0 auto;}
-    #logo { width: 100px !important;}
-    #search {width: 120px !important;}
-    #search input {font-size: 10px !important; padding: 4px 6px !important;}
-    #search_btn {font-size: 12px !important;}
+    #logo {width: 100px !important;}
+    #search input {font-size: 10px !important;}
+    #search_btn i {font-size: 16px !important;}
     .cart_btn i {font-size: 16px !important;}
     #search {border-bottom: none !important;}
 }
