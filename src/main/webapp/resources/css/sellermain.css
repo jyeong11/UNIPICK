@@ -25,7 +25,19 @@
 }
 .container li {
 	padding-top: 8px;
+	word-wrap: break-word; 
 }
-.container ul li a {
+ul li a {
  	color : #292b2b;
+}
+.chat, .ft-nav {
+	display: none;
+}
+.container-wrapper {
+  display: flex;        
+  flex-direction: column;
+  gap: 20px;                   
+}
+.container {
+  width: 50%;
 }

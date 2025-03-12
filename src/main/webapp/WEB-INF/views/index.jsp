@@ -76,7 +76,7 @@
 		</div>
 	</section>
 	<div>
-		<jsp:include page="./inc/buyer_footer.jsp"></jsp:include>
+		<jsp:include page="./inc/footer.jsp"></jsp:include>
 	</div>
 </body>
 

@@ -8,7 +8,6 @@ public class SellerController {
 
 	@GetMapping("seller")
 	public String sellerMain() {
-		
-		return "seller/sellermain";
+		return "seller/seller_login";
 	}
 }
