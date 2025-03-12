@@ -36,6 +36,7 @@ form {
     background-color: white;
     border: 1px solid #e5e5e5;
     box-shadow: none;
+    margin-bottom: 15px;
 }
 .greet{
 	font-size: larger;
