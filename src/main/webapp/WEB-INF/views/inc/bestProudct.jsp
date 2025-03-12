@@ -8,143 +8,155 @@
 	<div id = "img12">
 		<!-- 1번 줄 -->
 		<div class="first">
-			<div>
-				<a href="#">
-					<img src="${pageContext.request.contextPath }/resources/images/banner1.jpg">
-					<div>
-						<div>스토어명</div>
-						<div>상품명</div>
-						<div>가격</div>
-						<div>뱃지 등등</div>
-					</div>
-				</a>
+			<div class="top_view">
+				<div class="best_product">
+					<a href="#">
+						<img src="${pageContext.request.contextPath }/resources/images/banner1.jpg">
+						<div>
+							<div>스토어명</div>
+							<div>상품명</div>
+							<div>가격</div>
+							<div>뱃지 등등</div>
+						</div>
+					</a>
+				</div>
+				<div class="best_product">
+					<a href="#">
+						<img src="${pageContext.request.contextPath }/resources/images/favicon.png">
+						<div>
+							<div>스토어명</div>
+							<div>상품명</div>
+							<div>가격</div>
+							<div>뱃지 등등</div>
+						</div>
+					</a>
+				</div>
 			</div>
-			<div>
-				<a href="#">
-					<img src="${pageContext.request.contextPath }/resources/images/favicon.png">
-					<div>
-						<div>스토어명</div>
-						<div>상품명</div>
-						<div>가격</div>
-						<div>뱃지 등등</div>
-					</div>
-				</a>
-			</div>
-			<div>
-				<a href="#">
-					<img src="${pageContext.request.contextPath }/resources/images/favicon.png">
-					<div>
-						<div>스토어명</div>
-						<div>상품명</div>
-						<div>가격</div>
-						<div>뱃지 등등</div>
-					</div>
-				</a>
-			</div>
-			<div>
-				<a href="#">
-					<img src="${pageContext.request.contextPath }/resources/images/favicon.png">
-					<div>
-						<div>스토어명</div>
-						<div>상품명</div>
-						<div>가격</div>
-						<div>뱃지 등등</div>
-					</div>
-				</a>
+			<div class="bottom_view">
+				<div class="best_product">
+					<a href="#">
+						<img src="${pageContext.request.contextPath }/resources/images/favicon_b.png">
+						<div>
+							<div>스토어명</div>
+							<div>상품명</div>
+							<div>가격</div>
+							<div>뱃지 등등</div>
+						</div>
+					</a>
+				</div>
+				<div class="best_product">
+					<a href="#">
+						<img src="${pageContext.request.contextPath }/resources/images/favicon.png">
+						<div>
+							<div>스토어명</div>
+							<div>상품명</div>
+							<div>가격</div>
+							<div>뱃지 등등</div>
+						</div>
+					</a>
+				</div>
 			</div>
 		</div>
 		<!-- 2번 줄 -->
 		<div class="second">
-			<div>
-				<a href="#">
-					<img src="${pageContext.request.contextPath }/resources/images/favicon.png">
-					<div>
-						<div>스토어명</div>
-						<div>상품명</div>
-						<div>가격</div>
-						<div>뱃지 등등</div>
-					</div>
-				</a>
+			<div class="top_view">
+				<div class="best_product">
+					<a href="#">
+						<img src="${pageContext.request.contextPath }/resources/images/favicon_b.png">
+						<div>
+							<div>스토어명</div>
+							<div>상품명</div>
+							<div>가격</div>
+							<div>뱃지 등등</div>
+						</div>
+					</a>
+				</div>
+				<div class="best_product">
+					<a href="#">
+						<img src="${pageContext.request.contextPath }/resources/images/favicon.png">
+						<div>
+							<div>스토어명</div>
+							<div>상품명</div>
+							<div>가격</div>
+							<div>뱃지 등등</div>
+						</div>
+					</a>
+				</div>
 			</div>
-			<div>
-				<a href="#">
-					<img src="${pageContext.request.contextPath }/resources/images/favicon.png">
-					<div>
-						<div>스토어명</div>
-						<div>상품명</div>
-						<div>가격</div>
-						<div>뱃지 등등</div>
-					</div>
-				</a>
-			</div>
-			<div>
-				<a href="#">
-					<img src="${pageContext.request.contextPath }/resources/images/favicon.png">
-					<div>
-						<div>스토어명</div>
-						<div>상품명</div>
-						<div>가격</div>
-						<div>뱃지 등등</div>
-					</div>
-				</a>
-			</div>
-			<div>
-				<a href="#">
-					<img src="${pageContext.request.contextPath }/resources/images/favicon.png">
-					<div>
-						<div>스토어명</div>
-						<div>상품명</div>
-						<div>가격</div>
-						<div>뱃지 등등</div>
-					</div>
-				</a>
+			<div class="bottom_view">
+				<div class="best_product">
+					<a href="#">
+						<img src="${pageContext.request.contextPath }/resources/images/favicon_b.png">
+						<div>
+							<div>스토어명</div>
+							<div>상품명</div>
+							<div>가격</div>
+							<div>뱃지 등등</div>
+						</div>
+					</a>
+				</div>
+				<div class="best_product">
+					<a href="#">
+						<img src="${pageContext.request.contextPath }/resources/images/favicon.png">
+						<div>
+							<div>스토어명</div>
+							<div>상품명</div>
+							<div>가격</div>
+							<div>뱃지 등등</div>
+						</div>
+					</a>
+				</div>
 			</div>
 		</div>
 		<!-- 3번 줄 -->
-		<div class="third">
-			<div>
-				<a href="#">
-					<img src="${pageContext.request.contextPath }/resources/images/favicon.png">
-					<div>
-						<div>스토어명</div>
-						<div>상품명</div>
-						<div>가격</div>
-						<div>뱃지 등등</div>
-					</div>
-				</a>
+		<div class="top_view">
+			<div class="third">
+				<div class="best_product">
+					<a href="#">
+						<img src="${pageContext.request.contextPath }/resources/images/favicon_b.png">
+						<div>
+							<div>스토어명</div>
+							<div>상품명</div>
+							<div>가격</div>
+							<div>뱃지 등등</div>
+						</div>
+					</a>
+				</div>
+				<div class="best_product">
+					<a href="#">
+						<img src="${pageContext.request.contextPath }/resources/images/favicon.png">
+						<div>
+							<div>스토어명</div>
+							<div>상품명</div>
+							<div>가격</div>
+							<div>뱃지 등등</div>
+						</div>
+					</a>
+				</div>
 			</div>
-			<div>
-				<a href="#">
-					<img src="${pageContext.request.contextPath }/resources/images/favicon.png">
-					<div>
-						<div>스토어명</div>
-						<div>상품명</div>
-						<div>가격</div>
-						<div>뱃지 등등</div>
-					</div>
-				</a>
-			</div>
-			<div>
-				<a href="#">
-					<img src="${pageContext.request.contextPath }/resources/images/favicon.png">
-					<div>
-						<div>스토어명</div>
-						<div>상품명</div>
-						<div>가격</div>
-						<div>뱃지 등등</div>
-					</div>
-				</a>
-			</div>
-			<div>
-				<a href="#">
-					<img src="${pageContext.request.contextPath }/resources/images/favicon.png">
-					<div>
-						<div>스토어명</div>
-						<div>상품명</div>
-						<div>가격</div>
-						<div>뱃지 등등</div>
-					</div>
-				</a>
+			<div class="bottom_view">
+				<div class="best_product">
+					<a href="#">
+						<img src="${pageContext.request.contextPath }/resources/images/favicon_b.png">
+						<div>
+							<div>스토어명</div>
+							<div>상품명</div>
+							<div>가격</div>
+							<div>뱃지 등등</div>
+						</div>
+					</a>
+				</div>
+				<div class="best_product">
+					<a href="#">
+						<img src="${pageContext.request.contextPath }/resources/images/favicon.png">
+						<div>
+							<div>스토어명</div>
+							<div>상품명</div>
+							<div>가격</div>
+							<div>뱃지 등등</div>
+						</div>
+					</a>
+				</div>
 			</div>
 		</div>
 	</div>
