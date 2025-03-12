@@ -65,14 +65,14 @@
 	<!-- 베스트 -->
 	<section>
 		<div>
-			<jsp:include page="./inc/best_proudct.jsp"></jsp:include>
+			<jsp:include page="./inc/bestProudct.jsp"></jsp:include>
 		</div>
 	</section>
 	
 	<!-- 신상 -->
 	<section>
 		<div>
-			<jsp:include page="./inc/new_product.jsp"></jsp:include>
+			<jsp:include page="./inc/newProduct.jsp"></jsp:include>
 		</div>
 	</section>
 	<div>

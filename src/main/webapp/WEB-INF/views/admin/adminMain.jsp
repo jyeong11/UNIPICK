@@ -3,10 +3,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 
+<!-- css -->
 <link href="${pageContext.request.contextPath }/resources/css/public.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resources/css/admin_main.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/adminMain.css" rel="stylesheet" type="text/css">
+
+<!-- js -->
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/adminSidebar.js"></script>
 
 <link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
 <title>유니픽 관리자</title>
@@ -23,7 +28,7 @@
 	
 	<div class="main_container">
 		<div id="left_bar">
-			<jsp:include page="../inc/admin_sidebar.jsp"></jsp:include>
+			<jsp:include page="../inc/adminSidebar.jsp"></jsp:include>
 		</div>
 		
 		<div class="content">
