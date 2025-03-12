@@ -11,21 +11,21 @@
     align-items: center;
     padding: 15px;
 }
-.box {
-  width: 800px;   
-  height: 120px;  
-  border: 1px solid #ecedee;
-  align-items: center;
-  justify-content: center;
-  border-radius: 20px;
-  border-radius: 20px;
-  color: #292b2b;
-  position: relative;
-  left: 380px;
+.container {
+	max-width: 960px;
+  	margin: 0 auto;
+  	border: 1px solid #ecedee;
+  	border-radius: 20px;
+  	padding: 10px 0 10px 10px; 
 }
-/* .box > ul { */
-/* 	padding: 0 10px;	 */
-/* } */
-.box > ul > li  {
-   padding: 0 10px;
+
+.container h6 {
+	border-bottom: 1px solid #292b2b;
+	padding-bottom: 8px;
+}
+.container li {
+	padding-top: 8px;
+}
+.container ul li a {
+ 	color : #292b2b;
 }

@@ -25,13 +25,53 @@
 		 	</ul>
 		 </div>
 	</div>	 
-	<div class="box">
+	<div class="container">
 		<h6>오늘의 할일</h6>
 		<ul>
-			<li>지영이바보<li>
+			<li><a href ="">신규주문 1</a><li>
+			<li><a href ="">취소관리 2</a><li>
+			<li><a href ="">반품관리 3</a><li>
+			<li><a href ="">교환괸리 10</a><li>
+			<li><a href ="">답변대기 15</a><li>
 		</ul>
 	</div>
-	
+	<div class="container">
+		<h6>방문자</h6>
+		<ul>
+			<li>통계~~~~~~~~~~~<li>
+		</ul>
+	</div>
+	<div class="container">
+		<h6>기간별 분석</h6>
+		<ul>
+			<li>분석~~~~~~~~~~~~<li>
+		</ul>
+	</div>
+	<div class="container">
+		<h6>가이드 리스트</h6>
+		<ul>
+			<li>리스트!!!!!!<li>
+		</ul>
+	</div>
+	<div class="container">
+		<h6>공지사항</h6>
+		<ul>
+			<li>리스트~~~!!~!<li>
+			<li>리스트~~~!!~!<li>
+			<li>리스트~~~!!~!<li>
+			<li>리스트~~~!!~!<li>
+			<li>리스트~~~!!~!<li>
+			<li>리스트~~~!!~!<li>
+			<li>리스트~~~!!~!<li>
+			<li>리스트~~~!!~!<li>
+			<li>리스트~~~!!~!<li>
+			<li>리스트~~~!!~!<li>
+			<li>리스트~~~!!~!<li>
+			<li>리스트~~~!!~!<li>
+			<li>리스트~~~!!~!<li>
+			<li>리스트~~~!!~!<li>
+		</ul>
+	</div>
 	
 </body>
 </html>
