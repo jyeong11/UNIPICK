@@ -6,7 +6,6 @@
 <div id="recommendation">
 	<div class = "two">
 		<h2>추천 상품</h2>
-		<a href="#">더보기</a>
 	</div>
 	<div class="slider-wrapper">
 	    <div class="slider-container">
