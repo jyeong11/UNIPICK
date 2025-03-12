@@ -25,15 +25,12 @@ function login() {
 		
 	    $.ajax({
 	        type: "POST",
-	        url: seller/login,
+	        url: "sellerlogin",
 	        data: JSON.stringify(loginData),
 	        contentType: "application/json; charset=UTF-8",
 	        dataType: "json",
 	        success: function(res) {
-	            if (res.success) {
-	                window.location.href = "sellerMain.jsp";
-	            } 
-	            alert("로그인 실패: " + res.message);
+            	window.location.href = "seller";
 	        },
 	        error: function(xhr, status, error) {
 	            console.error("로그인 요청 실패", error);

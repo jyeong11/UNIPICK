@@ -36,7 +36,7 @@
         			먼저 로그인 해주세요 :)
         		</div>
 			 	<div><input type="text" id="sellerId" class="seller-info" placeholder="셀러 아이디"></div>
-				<div><input type="text" id="sellerPw" class="seller-info" placeholder="셀러 비밀번호"></div>
+				<div><input type="password" id="sellerPw" class="seller-info" placeholder="셀러 비밀번호"></div>
 	            <button type="submit">로그인</button>
 	            <div>
 		            <label class="seller-btn"><input type="checkbox">아이디/비밀번호 기억하기</label>
