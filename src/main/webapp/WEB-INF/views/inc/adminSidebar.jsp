@@ -6,8 +6,8 @@
         <li class="menu-item">
             <a href="#" class="menu-title">공통코드</a>
             <ul class="submenu">
-                <li><a href="admin/commoncode">공통코드</a></li>
-                <li><a href="admin/detailcommoncode">상세공통코드</a></li>
+                <li><a href="javascript:void(0);" class="menuLink">공통코드</a></li>
+                <li><a href="admin/detailCommoncode">상세공통코드</a></li>
             </ul>
         </li>
         <li class="menu-item">

@@ -11,7 +11,7 @@ public class AdminController {
 	@GetMapping
 	public String adminMain() {
 		
-		return "admin/admin_main";
+		return "admin/adminMain";
 	}
 	
 	@GetMapping("commoncode")
@@ -21,6 +21,6 @@ public class AdminController {
 	
 	@GetMapping("detailcommoncode")
 	public String detailcommoncode() {
-		return "admin/detail_commoncode";
+		return "admin/detailCommoncode";
 	}
 }
