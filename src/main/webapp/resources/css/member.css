@@ -1,0 +1,331 @@
+@charset "UTF-8";
+
+body {font-family: "Noto Sans KR", sans-serif;}
+
+
+@media all and (min-width:1280px) and (max-width:1920px){
+footer {padding-bottom: 0px !important;}
+.logo {position: relative;top: 2rem;width: 180px;}
+.login-container {display: flex;justify-content: center;align-items: center;text-align: center;flex-direction: column;}
+.sec01 {position: relative;}
+.ft {position: relative;bottom: -7rem;}
+a {padding-bottom: 1rem;}
+.memberform {padding: 20vh;width: 90vh;height: 90vh;box-sizing: border-box;margin-top: 10px;background: #fff;border-radius: 20px;box-shadow: 0 4px 31px 0 rgba(0, 0, 0, 0.1);}
+.sec-span {font-size: 2rem;padding: 2rem;}
+.member-info{padding: 5px; margin: -4px;}
+.member-info input{  width: 100%;
+  padding: 11px 16px;
+  border: 1px solid rgb(228, 230, 233);
+  background: rgb(255, 255, 255);
+  font-weight: bold;
+  color: rgb(32, 36, 41);
+  border-radius: 6px;
+  height: 52px;  /* 버튼과 동일한 높이로 변경 */
+  font-size: 16px;
+  box-sizing: border-box;}
+  
+.memberbutton{  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 0px 16px;
+  text-decoration: none;
+  color: white;
+  height: 52px; /* 입력 필드와 동일하게 */
+  border-radius: 6px; /* 입력 필드와 동일하게, 필요에 따라 조정 */
+  width: 100%;  /* 입력 필드와 동일한 너비 적용 */
+  box-sizing: border-box;
+  margin-top:15px;}
+
+.btn-wrap{
+display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.btn-wrap-btn{background-color: white; color: black; border: none;}
+.btn-wrap-btn span{font-weight: 400 !important;}
+}
+
+@media all and (min-width:1024px) and (max-width:1279px){
+footer {padding-bottom: 0px !important;}
+.logo {position: relative;top: 2rem;width: 180px;}
+.login-container {display: flex;justify-content: center;align-items: center;text-align: center;flex-direction: column;padding-bottom: 10rem;}
+.sec01 {position: relative;top: 3rem;}
+.ft {position: relative;bottom: -7rem;}
+a {padding-bottom: 1rem;}
+.memberform {padding: 20vh;width: 90vh;height: 90vh;box-sizing: border-box;margin-top: 10px;background: #fff;border-radius: 20px;box-shadow: 0 4px 31px 0 rgba(0, 0, 0, 0.1);}
+.sec-span {font-size: 2rem;padding: 2rem;}
+.member-info{padding: 5px; margin: -4px;}
+.member-info input{  width: 100%;
+  padding: 11px 16px;
+  border: 1px solid rgb(228, 230, 233);
+  background: rgb(255, 255, 255);
+  font-weight: bold;
+  color: rgb(32, 36, 41);
+  border-radius: 6px;
+  height: 52px;  /* 버튼과 동일한 높이로 변경 */
+  font-size: 16px;
+  box-sizing: border-box;}
+  
+.memberbutton{  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 0px 16px;
+  text-decoration: none;
+  color: white;
+  height: 52px; /* 입력 필드와 동일하게 */
+  border-radius: 6px; /* 입력 필드와 동일하게, 필요에 따라 조정 */
+  width: 100%;  /* 입력 필드와 동일한 너비 적용 */
+  box-sizing: border-box;
+  margin-top:15px;}
+
+.btn-wrap{
+display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.btn-wrap-btn{background-color: white; color: black; border: none;}
+.btn-wrap-btn span{font-weight: 400 !important;}
+}
+
+@media all and (min-width:768px) and (max-width:1023px){
+footer {padding-bottom: 0px !important;}
+.logo {position: relative;top: 2rem;width: 180px;}
+.login-container {display: flex;justify-content: center;align-items: center;text-align: center;flex-direction: column;padding-bottom: 3rem;}
+.sec01 {position: relative;top: 1rem;}
+.ft {position: relative;bottom: 2rem;}
+a {padding-bottom: 1rem;}
+.memberform {padding: 20vh;width: 90vh;height: 90vh;box-sizing: border-box;margin-top: 10px;background: #fff;border-radius: 20px;box-shadow: 0 4px 31px 0 rgba(0, 0, 0, 0.1);}
+.sec-span {font-size: 2rem;padding: 2rem;}
+.member-info{padding: 5px; margin: -4px;}
+.member-info input{  width: 100%;
+  padding: 11px 16px;
+  border: 1px solid rgb(228, 230, 233);
+  background: rgb(255, 255, 255);
+  font-weight: bold;
+  color: rgb(32, 36, 41);
+  border-radius: 6px;
+  height: 52px;  /* 버튼과 동일한 높이로 변경 */
+  font-size: 16px;
+  box-sizing: border-box;}
+  
+.memberbutton{  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 0px 16px;
+  text-decoration: none;
+  color: white;
+  height: 52px; /* 입력 필드와 동일하게 */
+  border-radius: 6px; /* 입력 필드와 동일하게, 필요에 따라 조정 */
+  width: 100%;  /* 입력 필드와 동일한 너비 적용 */
+  box-sizing: border-box;
+  margin-top:15px;}
+
+.btn-wrap{
+display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.btn-wrap-btn{background-color: white; color: black; border: none;}
+.btn-wrap-btn span{font-weight: 400 !important;}
+}
+
+@media all and (min-width:480px) and (max-width:767px){
+footer {padding-bottom: 0px !important;}
+.logo {position: relative;top: 2rem;width: 180px;}
+.login-container {display: flex;justify-content: center;align-items: center;text-align: center;flex-direction: column;padding-bottom: 3rem;}
+.sec01 {position: relative;top: 1rem;}
+.ft {position: relative;bottom: 2rem;}
+a {padding-bottom: 1rem;}
+.memberform {padding: 20vh;width: 90vh;box-sizing: border-box;margin-top: 10px;background: #fff;border-radius: 20px;box-shadow: 0 4px 31px 0 rgba(0, 0, 0, 0.1);}
+.sec-span {font-size: 2rem;padding: 2rem;}
+.member-info{padding: 5px; margin: -4px;}
+.member-info input{  width: 100%;
+  padding: 11px 16px;
+  border: 1px solid rgb(228, 230, 233);
+  background: rgb(255, 255, 255);
+  font-weight: bold;
+  color: rgb(32, 36, 41);
+  border-radius: 6px;
+  height: 52px;  /* 버튼과 동일한 높이로 변경 */
+  font-size: 16px;
+  box-sizing: border-box;}
+  
+.memberbutton{  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 0px 16px;
+  text-decoration: none;
+  color: white;
+  height: 52px; /* 입력 필드와 동일하게 */
+  border-radius: 6px; /* 입력 필드와 동일하게, 필요에 따라 조정 */
+  width: 100%;  /* 입력 필드와 동일한 너비 적용 */
+  box-sizing: border-box;
+  margin-top:15px;}
+
+.btn-wrap{
+display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    vertical-align: middle;
+    cursor: pointer;
+    padding-top: 20px;
+}
+.btn-wrap-btn{background-color: white; color: black; border: none;}
+.btn-wrap-btn span{font-weight: 400 !important;}
+.nbutton{background-color: green;display: inline-flex
+;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        outline: none;
+        border: none;
+        font-size: 16px;
+        font-weight: 700;
+        padding: 0px 16px;
+        text-decoration: none;
+        color: white;
+        height: 52px;
+        border-radius: 6px;
+        width: 100%;
+        box-sizing: border-box;
+        margin-top: 15px;}
+.kbutton{background-color: yellow;
+display: inline-flex;
+color: black;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        outline: none;
+        border: none;
+        font-size: 16px;
+        font-weight: 700;
+        padding: 0px 16px;
+        text-decoration: none;
+        color: white;
+        height: 52px;
+        border-radius: 6px;
+        width: 100%;
+        box-sizing: border-box;
+        margin-top: 15px;}
+}
+
+@media all and (max-width:479px) {
+footer {padding-bottom: 0px !important;}
+.logo {position: relative;top: 2rem;width: 180px;}
+.login-container {display: flex;justify-content: center;align-items: center;text-align: center;flex-direction: column;padding-bottom: 3rem;}
+.sec01 {position: relative;top: 1rem;}
+.ft {position: relative;bottom: 2rem;}
+a {padding-bottom: 1rem;}
+.memberform {padding: 20vh;width: 90vh;box-sizing: border-box;margin-top: 10px;background: #fff;border-radius: 20px;box-shadow: 0 4px 31px 0 rgba(0, 0, 0, 0.1);}
+.sec-span {font-size: 2rem;padding: 2rem;}
+.member-info{padding: 5px; margin: -4px;}
+.member-info input{  width: 100%;
+  padding: 11px 16px;
+  border: 1px solid rgb(228, 230, 233);
+  background: rgb(255, 255, 255);
+  font-weight: bold;
+  color: rgb(32, 36, 41);
+  border-radius: 6px;
+  height: 52px;  /* 버튼과 동일한 높이로 변경 */
+  font-size: 16px;
+  box-sizing: border-box;}
+  
+.memberbutton{  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 0px 16px;
+  text-decoration: none;
+  color: white;
+  height: 52px; /* 입력 필드와 동일하게 */
+  border-radius: 6px; /* 입력 필드와 동일하게, 필요에 따라 조정 */
+  width: 100%;  /* 입력 필드와 동일한 너비 적용 */
+  box-sizing: border-box;
+  margin-top:15px;}
+
+.btn-wrap{
+display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    vertical-align: middle;
+    cursor: pointer;
+    padding-top: 20px;
+}
+.btn-wrap-btn{background-color: white; color: black; border: none;}
+.btn-wrap-btn span{font-weight: 400 !important;}
+.nbutton{background-color: green;display: inline-flex
+;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        outline: none;
+        border: none;
+        font-size: 16px;
+        font-weight: 700;
+        padding: 0px 16px;
+        text-decoration: none;
+        color: white;
+        height: 52px;
+        border-radius: 6px;
+        width: 100%;
+        box-sizing: border-box;
+        margin-top: 15px;}
+.kbutton{background-color: yellow;
+display: inline-flex;
+color: black;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        outline: none;
+        border: none;
+        font-size: 16px;
+        font-weight: 700;
+        padding: 0px 16px;
+        text-decoration: none;
+        color: white;
+        height: 52px;
+        border-radius: 6px;
+        width: 100%;
+        box-sizing: border-box;
+        margin-top: 15px;}
+}

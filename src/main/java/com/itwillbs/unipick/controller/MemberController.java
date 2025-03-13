@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MemberController {
 
-	@GetMapping("memberJoin")
+	@GetMapping("memberLogin")
 	public String memberJoin() {
 		
-		return "member/member";
+		return "member/memberLogin";
 	}
 }

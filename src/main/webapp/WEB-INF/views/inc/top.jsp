@@ -20,7 +20,7 @@
 			        	<li><div id="search"><input type="search"><button type="submit" id="search_btn"><i class="fa fa-solid fa-magnifying-glass"></i></button></div></li>
 			            <!-- 검색 아이콘 --> 
 						 <li><a href="cart.jsp" class="cart_btn"><i class="fa fa-solid fa-cart-shopping"></i></a></li>
-						 <li><a href="memberJoin" class="my_btn"><i class="fa-solid fa-user"></i></a></li>
+						 <li><a href="memberLogin" class="my_btn"><i class="fa-solid fa-user"></i></a></li>
 	            		</ul>
 					</div>
 	            </form>

@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -8,7 +9,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
-
 <!-- Font Awesome 5 Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -19,6 +19,7 @@
 <link href="${pageContext.request.contextPath }/resources/css/index.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/best.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/recommendation.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/member.css" rel="stylesheet" type="text/css">
 <!-- Banner -->
 <link href="${pageContext.request.contextPath }/resources/css/swiper-bundle.min.css" rel="stylesheet" type="text/css">
 <!-- Favicon -->
@@ -27,57 +28,26 @@
 <title>UNIPICK</title>
 </head>
 <body>
-	<div id="topNav">
-		<jsp:include page="./inc/top.jsp"></jsp:include>
-	</div>
-	<div id="top_menu">
-		<ul class="menu-nav">
-			<li class="menu-inner">
-				<a href="/index">
-					<span>홈</span>
-				</a>
-				<a href="/newarrive">
-					<span>신상</span>
-				</a>
-				<a href="/best">
-					<span>베스트</span>
-				</a>
-				<a href="/store">
-					<span>스토어</span>
-				</a>
-				<a href="/event">
-					<span>이벤트</span>
-				</a>
-			<li>
-		</ul>
-	</div>
-	<div>
-		<jsp:include page="./inc/banner.jsp"></jsp:include>
-	</div>
-	
-	<!-- 상품 추천 -->	
-	<section>
-		<div>
-			<jsp:include page="./inc/recommendation.jsp"></jsp:include>
-		</div>
-	</section>
-	
-	<!-- 베스트 -->
-	<section>
-		<div>
-			<jsp:include page="./inc/bestProudct.jsp"></jsp:include>
-		</div>
-	</section>
-	
-	<!-- 신상 -->
-	<section>
-		<div>
-			<jsp:include page="./inc/newProduct.jsp"></jsp:include>
-		</div>
-	</section>
-	<div>
-		<jsp:include page="./inc/footer.jsp"></jsp:include>
-	</div>
+	<div class="login-container">
+		 <form action="" method="post" class="memberform" onsubmit="return false">
+		 	<a href=""><img src="${pageContext.request.contextPath}/resources/images/로고 가로.png" alt="로고" class="logo"></a>
+		 	<div class="sec01">
+		 	<div class="sec-span"><span>안녕하세요 유니픽입니다</span></div>
+			<div class="member-info"><input type="text"  placeholder="아이디 입력"></div>
+			<div class="member-info"><input type="password"  placeholder="비밀번호 입력"></div>
+	        <button type="submit" class="memberbutton">로그인</button>
+            </div>
+        <div class="btn-wrap">
+        <button class="btn-wrap-btn" type="button"><span>아이디 찾기</span></button>
+        <button class="btn-wrap-btn" type="button"><span>비밀번호 찾기</span></button>
+        <button class="btn-wrap-btn" type="button"><span>회원가입</span></button>
+        </div>
+        <div><button type="submit" class="nbutton">네이버 로그인</button></div>
+        <div><button type="submit" class="kbutton">카카오톡 로그인</button></div>
+        </form>
+    </div>
+<div class="ft">
+	<jsp:include page="../inc/footer.jsp"></jsp:include>
+</div>
 </body>
-
 </html>
