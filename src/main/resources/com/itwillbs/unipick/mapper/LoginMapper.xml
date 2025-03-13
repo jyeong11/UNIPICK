@@ -5,7 +5,7 @@
 <mapper namespace="com.itwillbs.unipick.mapper.LoginMapper">
 	<select id="SellerLogin" parameterType="map">
 		SELECT *
-		  FROM seller
+		  FROM sellers
 		WHERE sel_id = #{sellerId}
 <!-- 		<if test="sellerPw != ''"> -->
 		  AND sel_pw = #{sellerPw}

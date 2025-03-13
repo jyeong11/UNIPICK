@@ -1,11 +1,15 @@
 @charset "UTF-8";
+body {
+	 background-color: #f5f5f5;
+	 font-family: "Noto Sans KR", sans-serif;
+}
 #logo {
 	width: 180px;
 }
 
 #seller-container{
 	max-width: 1200px;
-	margin: 0 auto;
+/* 	margin: 0 auto; */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -17,10 +21,11 @@
   	border: 1px solid #ecedee;
   	border-radius: 20px;
   	padding: 10px 0 10px 10px; 
+  	margin-bottom: 10px;
 }
 
 .container h6 {
-	border-bottom: 1px solid #292b2b;
+	border-bottom: 1px solid #eeeeee;
 	padding-bottom: 8px;
 }
 .container li {
@@ -35,9 +40,81 @@ ul li a {
 }
 .container-wrapper {
   display: flex;        
-  flex-direction: column;
+  flex-direction: row;
   gap: 20px;                   
 }
 .container {
-  width: 50%;
+  width: 1200px;
+  margin-left: 100px;
+  background-color: white;
+  color: #4f5558;  
 }
+
+#left_bar {
+    order: -1;
+    width: 180px;
+}
+.sidebar {
+    width: 180px;
+    height: 97%;
+    background-color: white;
+    color: #4f5558;
+    padding: 20px;
+    top: 0;
+    left: 0;
+    overflow-y: auto;
+    transition: transform 0.3s ease;
+    border-radius: 20px;
+}
+
+.sidebar.hidden {
+    transform: translateX(-100%);
+}
+
+.menu-item {
+    margin-bottom: 10px;
+}
+
+.menu-title {
+    display: block;
+    color: #4f5558;
+    padding: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: white;
+    border-radius: 5px;
+}
+h2 {
+	padding-bottom: 15px;
+}
+.menu-title:hover {
+    background-color: #f2a900;
+}
+
+.submenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    padding-left: 15px;
+}
+
+.submenu.open {
+    max-height: 250px; /* 충분한 높이 설정 */
+}
+
+.submenu li {
+    padding: 5px 0;
+}
+
+.submenu a {
+    display: block;
+    color: #4f5558;
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.submenu a:hover {
+    background-color: #f2a900;
+  }

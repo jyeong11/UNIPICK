@@ -9,8 +9,16 @@
 <link href="${pageContext.request.contextPath }/resources/css/sellerMain.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/footer.css" rel="stylesheet" type="text/css">
 
+<!-- 구글 폰트 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+
 <!-- favicon -->
 <link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
+<!--  js -->
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/seller.js"></script>
 <title>유니픽 셀러</title>
 </head>
 <body>
@@ -22,11 +30,15 @@
 		 </div>
 		 <div>
 		 	<ul>
-		 		<li><a href ="">XXX님 쇼핑몰</a></li>
+		 		<li><a href="javascript:void(0)" id ="selMypage">XXX님 쇼핑몰</a></li>
 		 	</ul>
 		 </div>
 	</div>	
 	<div class="container-wrapper"> 
+		<div id="left_bar">
+			<jsp:include page="../inc/sellerSidebar.jsp"></jsp:include>
+		</div>
+		<div class="containers">	
 		<div class="container">
 			<h6>오늘의 할일</h6>
 			<ul>
@@ -73,6 +85,7 @@
 				<li>리스트~~~!!~!<li>
 				<li>리스트~~~!!~!<li>
 			</ul>
+		</div>
 		</div>
 	</div>
 	<div>

@@ -12,12 +12,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwillbs.unipick.service.LoginService;
+import com.itwillbs.unipick.service.SellerService;
 
 @Controller
 public class SellerController {
 
 	@Autowired
 	LoginService loginService;
+	@Autowired
+	SellerService selService;
 	
 	@GetMapping("sellerlogin")
 	public String Login() {
@@ -30,14 +33,31 @@ public class SellerController {
 	public Map<String, Object> sellerLogin(@RequestBody Map<String, Object> logindata,
 										   HttpSession session) {
 		Map<String, Object> sellerinfo = loginService.SellerLogin(logindata);
-//		session.setAttribute("id",logindata.get(sellerId));
+		session.setAttribute("selId", sellerinfo.get("sellerId"));
 		return sellerinfo;
 	}
 	
+	//메인
 	@GetMapping("seller")
 	public String sellerMain(HttpSession sellerid) {
 //		map.put("sellerId",(String)sellerid.getAttribute("id"));
 //		Map<String, Object> sellerinfo = loginService.SellerLogin(sellerid);
 		return "seller/sellerMain";
+	}
+	
+	@GetMapping("prdRegister")
+	public String prdRegister() {
+		return "seller/prdRegister";
+	}
+	
+	//마이페이지
+	@ResponseBody
+	@GetMapping("selMypage")
+	public Map<String, Object> sellerMypage(@RequestBody Map<String, Object> seldata,
+											HttpSession ses){
+		System.out.println(ses.getAttribute("selId"));
+//		selService.selinfo();
+		
+		return seldata;
 	}
 }
