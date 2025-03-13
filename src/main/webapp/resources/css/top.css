@@ -25,6 +25,7 @@ i{
 	margin-right: 50px;
 }
 #top_icon {
+	display:inline-block;
 	list-style-type: none;
 	display: flex;
 }
@@ -46,6 +47,11 @@ input[type="search"] {
 	transform: translateY(-10px);
 }
 .cart_btn i {
-  	font-size: 2rem;
+	width: 26px;
 	transform: translateY(-5px);  	
+}
+
+.my_btn i {
+	width: 26px;
+	transform: translateY(-5px);  
 }
