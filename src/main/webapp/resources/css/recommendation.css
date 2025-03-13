@@ -16,6 +16,10 @@
 	color: #292b2b;
 }
 
+.two {
+	margin-bottom: 10px;	
+}
+
 .slider-wrapper {
     display: flex;
     flex-direction: column;
@@ -37,7 +41,7 @@
 .slider {
     display: flex;
     transition: transform 0.5s ease-in-out;
-    width: auto; /* 전체 슬라이드의 너비는 자동으로 계산됨 */
+    width: auto;
 }
 
 .slide img {

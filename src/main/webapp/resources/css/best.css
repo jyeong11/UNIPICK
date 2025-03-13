@@ -36,7 +36,7 @@
     aspect-ratio: 1;
 }
 
-.best_product {
+.product_posting {
 	padding: 5px;
 }
 
@@ -71,10 +71,16 @@
 	#best {
     	padding-left: 15px;
     }
+    #img12 .first, #img12 .second, #img12 .third{
+    	display: block;
+    }
 }
 /* 모바일 세로 (해상도 ~ 479px) */
 @media all and (max-width:479px) {
 	#best {
     	padding-left: 15px;
+    }
+    #img12 .first, #img12 .second, #img12 .third{
+    	display: block;
     }
 }
