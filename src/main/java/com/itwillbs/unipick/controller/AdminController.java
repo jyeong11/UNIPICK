@@ -32,7 +32,7 @@ public class AdminController {
 		return "admin/commoncode";
 	}
 	
-	@GetMapping("detailcommoncode")
+	@GetMapping("/detailcommoncode")
 	public String detailcommoncode() {
 		return "admin/detailCommoncode";
 	}
@@ -49,7 +49,7 @@ public class AdminController {
 	// 상세 공통코드 화면이동
 	@GetMapping("commonCodeDetail")
 	public String commoncodedetail() {
-		return "commoncode/commoncodedetail";
+		return "admin/commoncodedetail";
 	}
 	
 	// 상세 공통코드 조회
