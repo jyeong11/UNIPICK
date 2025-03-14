@@ -30,7 +30,7 @@
 		 </div>
 		 <div>
 		 	<ul>
-		 		<li><a href="javascript:void(0)" id ="selMypage">XXX님 쇼핑몰</a></li>
+		 		<li><a href="javascript:void(0)" id ="selMypage">XXX 스토어</a></li>
 		 	</ul>
 		 </div>
 	</div>	

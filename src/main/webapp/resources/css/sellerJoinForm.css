@@ -1,0 +1,96 @@
+@charset "UTF-8";
+
+#logo {
+	width: 180px;
+}
+
+body {
+    background-color: #f4f4f4;
+}
+
+#signup-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    max-width: 600px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0px auto;
+    
+}
+#seller-join {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #333;
+    margin: 30px;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+.input-group {
+	display: flex;
+    margin-bottom: 15px;
+    margin-top: 10px;
+    flex-direction: row;
+}
+
+.input-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    width: 126px
+}
+
+.content-tilte {
+	font-weight: bold;	
+	padding-bottom: 25px;
+    font-size: larger;
+    padding-top: 25px;
+}
+.input-group input, .input-group textarea {
+    width: 63%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+#join-title{
+	margin-bottom: -15px;
+}
+h3{
+	margin-top: -6px;
+}
+.input-group button {
+    width: 100%;
+    padding: 15px;
+    background-color: #f2a900;
+    color: black;
+    border: medium;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.join-message{
+    padding: 20px 0 55px 0;
+    font-size: 13px;
+    color: #878796;
+}
+#DuplicationCk{
+    width: 108px !important;
+    height: 40px;
+    margin-left: 20px;
+    padding: 0 !important;
+}
+.error-message {
+    color: red;
+    font-size: 10px;
+    margin-top: 5px; /* 에러 메시지와 입력 필드 간의 간격을 줍니다 */
+    display: flex;
+    flex-direction: row;
+
+}

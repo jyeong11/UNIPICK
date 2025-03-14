@@ -15,16 +15,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.itwillbs.unipick.service.AdminService;
 
 @Controller
-@RequestMapping("admin")
 public class AdminController {
 	
 	@Autowired
 	AdminService adminservice;
-
 	
-	@GetMapping
+	@GetMapping("admin")
 	public String adminMain() {
 		return "admin/adminMain";
+	}
+	@GetMapping("commonCode")
+	public String admincommoncode() {
+		return "admin/commonCode";
 	}
 	
 	@GetMapping("commoncode")
