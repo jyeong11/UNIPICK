@@ -3,14 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-	<!--  
-	<typeAlias type="실제 클래스타입(패키지명 포함)" alias="별칭"/>
-	 -->
-	<typeAliases>
-<!-- 		<typeAlias type="com.itwillbs.test3_mybatis.vo.StudentVO" alias="student"/> -->
-<!-- 		<typeAlias type="com.itwillbs.test3_mybatis.vo.ProductVO" alias="product"/> -->
-			<typeAlias type="com.itwillbs.unipick.vo.MemberVO" alias="member"/>
-	</typeAliases>
+
 	
 	
 	
