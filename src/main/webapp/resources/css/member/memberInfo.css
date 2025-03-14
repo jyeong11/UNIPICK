@@ -1,0 +1,154 @@
+@charset "UTF-8";
+.join-wrap h3 {
+	text-align: center;
+	color: var(--dark);
+	font-size: 150%;
+	font-weight: bolder;
+	margin: 2rem auto 1rem;
+}
+
+#memo {
+    text-align: center; 
+    font-size: 0.8rem;
+    color: #292b2b;
+    margin-bottom: 1rem;
+    font-weight: 500; 
+}
+
+#form-container {
+	height: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #fff;
+	margin: 10px auto 30px;
+}
+
+#form-inner-container {
+	background: #fff;border-radius: 20px;box-shadow: 0 4px 31px 0 rgba(0, 0, 0, 0.1);
+}
+
+#sign-up-container, #sign-in-container {
+    display: inline-block;
+    padding: 2rem;
+}
+
+.join-wrap  form input[type="text"] , .join-wrap  form input[type="password"], 
+.join-wrap  form input[type="button"],  .join-wrap  form input[type="submit"],  
+.join-wrap  form input[type="date"] {
+	display: block;
+	margin-bottom: 11px;
+	border: 0;
+	background-color: #f3f7f5;
+	padding: 0.8rem 1rem;
+	margin-top: 10px;
+	border-radius: 8px;
+	width: 100%;
+	border: 1px solid #ddd;
+	font-size: 0.875rem;
+}
+
+#gender-container {
+	display: flex;
+	gap: 10px;
+	margin-top: 10px;
+}
+
+.gender-option {
+	display: flex;
+	align-items: center;
+	padding: 5px;
+	border-radius: 30px;
+	gap: 8px;
+	margin-bottom: 20px;
+}
+
+
+.mem_addr_form {
+	display: flex;
+	margin-bottom: 20px;
+	margin-top: 10px;
+	border-radius: 30px;
+}
+
+.join-wrap button {
+	padding: 1rem;
+	background-color: #0dcc5a;
+	border-radius: 10px;
+	color: white;
+	margin-bottom: 20px; /* 버튼 아래쪽 여백 추가 */
+	font-weight: 700;
+	font-size: 1rem;
+	width: 100%;
+	margin-top: 20px;
+}
+
+.join-wrap button:hover {
+	background-color: #05b94d;
+}
+.join-wrap section {margin-top:10px;}
+/* .join-wrap section label {margin-top: 10px;display:flex;width: 100%; padding-left: 10px;} */
+.terms-text { font-weight: 500; padding-left: 10px; color: var(--dark);}
+
+label {
+    display: inline-block;
+    position: relative;
+}
+.required {
+    right: -10px; 
+    color: var(--red);
+}
+
+/* "전체 동의하기" 항목과 아래 약관들 간격 추가 */
+section.row.last-row > label[for="terms_all"] {
+/*     display: block; 블록 형태로 표시 */
+    margin-bottom: 10px; /* 아래와의 간격 설정 */
+}
+
+/* 약관 항목은 기존대로 정렬 */
+section.row.last-row > div {
+    display: flex;
+    flex-direction: column; /* 세로 정렬 */
+    gap: 10px; /* 각 항목 간 간격 */
+}
+
+/* 생년월일 섹션 스타일 */
+section.row label[for="mem_birthday"] {
+    display: block; /* 레이블을 블록 요소로 처리 */
+    margin-bottom: 10px; /* 아래와의 간격 추가 */
+}
+
+.birthday-select {
+    display: flex;
+    gap: 10px; /* 각 select 요소 사이 간격 */
+}
+
+.birthday-select .form-sel {
+    padding: 5px;
+    width: auto;
+    margin-bottom: 20px;
+}
+
+#joinForm .row .box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+#joinForm .row .box input[type=button], #joinForm .row .box input[type=submit] {width:150px;background: var(--primary);color: var(--white);font-weight: 700;cursor: pointer;border-color: var(--primary);}
+#joinForm .result {font-size:14px; margin-bottom:1rem;}
+#joinForm .row .box input[type=button].before {background:var(--primary);}
+#joinForm .row .box input[type=button].after {background: #555;border-color:#555;}
+#joinForm .row .box .auth-input {position:relative;flex: 1 1 0;}
+#joinForm .row .box .auth-input .rest-time {position:absolute;right: 11px;top: 50%;transform: translateY(-50%);color: #555;font-weight: 700;font-size: 13px;}
+
+#joinForm .row .form-sel {border: 1px solid #ddd;background: var(--ivory);padding: 8px 20px 8px 10px;font-size: 14px;color: var(--dark);border-radius: 8px;margin: 10px 0;}
+#joinForm .row.last-row {margin-top: 3rem;padding-top: 1rem;border-top:1px solid #eee;margin-bottom: 1rem;} 
+#joinForm .row.last-row > label:first-child {font-size:16px;}
+
+.join-success {text-align:center;padding: 5rem;height: 100%;}
+.join-success svg {font-size:100px; color:var(--primary);margin-bottom:2rem;}
+.join-success .ttl {font-size: 28px;color: var(--dark);margin-bottom: 2rem;}
+.join-success p {font-size:16px;color:var(--dark);line-height:1.4;margin-bottom:2rem;}
+.join-success a {width:300px;display:block;margin:10px auto;background:var(--primary);padding: 16px;border-radius:6px;font-weight: 600;color: var(--white);}
+.join-success a:first-of-type {background:var(--dark); color:var(--white);}

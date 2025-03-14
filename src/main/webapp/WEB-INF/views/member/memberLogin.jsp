@@ -19,7 +19,7 @@
 <link href="${pageContext.request.contextPath }/resources/css/index.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/best.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/recommendation.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resources/css/memberLogin.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/member/memberLogin.css" rel="stylesheet" type="text/css">
 <!-- Banner -->
 <link href="${pageContext.request.contextPath }/resources/css/swiper-bundle.min.css" rel="stylesheet" type="text/css">
 <!-- Favicon -->
@@ -42,8 +42,8 @@
         <button class="btn-wrap-btn" type="button"><span>비밀번호 찾기</span></button>
         <input class="btn-wrap-btn" type="button"  onclick="location.href ='memberJoin'" value="회원가입">
         </div>
-        <div><button type="submit" class="nbutton">네이버 로그인</button></div>
-        <div><button type="submit" class="kbutton">카카오톡 로그인</button></div>
+<!--         <div><button type="submit" class="nbutton">네이버 로그인</button></div> -->
+<!--         <div><button type="submit" class="kbutton">카카오톡 로그인</button></div> -->
         </form>
     </div>
 <div class="ft">
