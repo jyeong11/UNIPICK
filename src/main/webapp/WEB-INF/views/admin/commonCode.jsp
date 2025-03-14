@@ -18,7 +18,7 @@
 	href="${pageContext.request.contextPath }/resources/images/favicon.png">
 <!--  js -->
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/commondcode.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/commonCode.js"></script>
 <title>유니픽 관리자</title>
 </head>
 <body>
