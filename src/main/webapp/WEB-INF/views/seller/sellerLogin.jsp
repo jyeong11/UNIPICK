@@ -35,11 +35,12 @@
         			<br>
         			먼저 로그인 해주세요 :)
         		</div>
-			 	<div><input type="text" id="sellerId" class="seller-info" placeholder="셀러 아이디"></div>
+			 	<div><input type="text" id="sellerId" class="seller-info" value="${savedSellerId != null ? savedSellerId : ''}" 
+					    placeholder="셀러 아이디"></div>
 				<div><input type="password" id="sellerPw" class="seller-info" placeholder="셀러 비밀번호"></div>
 	            <button type="submit">로그인</button>
 	            <div>
-		            <label class="seller-btn"><input type="checkbox">아이디 기억하기</label>
+		            <label class="seller-btn"><input type="checkbox" id="rememberId">아이디 기억하기</label>
 		            <a href="#" class="seller-btn">비밀번호 찾기 |</a>
 		            <a href="#" id="join" class="seller-btn">셀러 가입</a>
 	            </div>

@@ -9,30 +9,30 @@
 		WHERE adm_id = #{admId}
 	</select>
 		<!-- 상세 코드 조회 -->
-<!--   	<select id="detailCodeList" parameterType="map"> -->
-<!-- 	  	SELECT COUNT(*) OVER () - ROW_NUMBER() OVER (ORDER BY d.code_id DESC) + 1 AS code_num, -->
-<!-- 	    	   c.com_cd, -->
-<!-- 	    	   c.com_nm, -->
-<!-- 	    	   d.cod_id, -->
-<!-- 	    	   d.cod_nm AS detailcode_nm, -->
-<!-- 	    	   d.com_yn, -->
-<!-- 	    	   d.cod_pr, -->
-<!-- 	    	   d.cod_so -->
-<!-- 		  FROM common_code c -->
-<!-- 		  JOIN common_detailcode d ON c.code_id = d.code_id -->
-<!-- 		 where 1 = 1 -->
-<!-- 		 <choose> -->
-<!-- 		   	<when test="code_id != null and !code_id.equals('')"> -->
-<!-- 		   		AND c.com_cd LIKE CONCAT(#{code_id}, '%') -->
-<!-- 		   	</when> -->
-<!-- 		   	<when test="cod_id != null and !cod_id.equals('')"> -->
-<!-- 		   		AND d.cod_id LIKE CONCAT(#{detail_id}, '%') -->
-<!-- 		   	</when> -->
-<!-- 		   	<when test="cod_nm != null and !cod_nm.equals('')"> -->
-<!-- 		   		AND d.cod_nm LIKE CONCAT(#{code_nm}, '%') -->
-<!-- 		   	</when> -->
-<!-- 	     </choose> -->
-<!--   	</select> -->
+  	<select id="detailCodeList" parameterType="map">
+	  	SELECT COUNT(*) OVER () - ROW_NUMBER() OVER (ORDER BY d.code_id DESC) + 1 AS code_num,
+	    	   c.com_cd,
+	    	   c.com_nm,
+	    	   d.cod_id,
+	    	   d.cod_nm AS detailcode_nm,
+	    	   d.com_yn,
+	    	   d.cod_pr,
+	    	   d.cod_so
+		  FROM common_code c
+		  JOIN common_detailcode d ON c.com_cd = d.com_cd
+		 where 1 = 1
+		 <choose>
+		   	<when test="code_id != null and !code_id.equals('')">
+		   		AND c.com_cd LIKE CONCAT(#{code_id}, '%')
+		   	</when>
+		   	<when test="cod_id != null and !cod_id.equals('')">
+		   		AND d.cod_id LIKE CONCAT(#{detail_id}, '%')
+		   	</when>
+		   	<when test="cod_nm != null and !cod_nm.equals('')">
+		   		AND d.cod_nm LIKE CONCAT(#{code_nm}, '%')
+		   	</when>
+	     </choose>
+  	</select>
   	
   	<!-- 상세 코드 등록 -->
 <!--   	<insert id="detailcoderegister" parameterType="map"> -->

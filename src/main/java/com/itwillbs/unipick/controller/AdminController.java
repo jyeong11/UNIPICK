@@ -56,6 +56,7 @@ public class AdminController {
 	@ResponseBody
 	@GetMapping("cmDetailCodeList")
 	public List<Map<String, Object>> cmdetailcodelist(@RequestParam Map<String, Object> map) {	
+		System.out.println(map);
 		return adminservice.detailCodeList(map);
 	}
 	

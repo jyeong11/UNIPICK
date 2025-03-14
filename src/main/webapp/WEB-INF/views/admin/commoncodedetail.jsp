@@ -18,7 +18,6 @@
 <script src="${pageContext.request.contextPath }/resources/js/commoncodedetail.js"></script>
 <title>팀어센드 : 상세공통코드</title>
 
-	
 </head>
 <body>
 	<div class="container-fluid">
@@ -30,9 +29,7 @@
 				<div class="card-body">
 					<div class="d-flex align-items-start gap-4">
 							<div class="col-1">
-								<input class="btn btn_main_color"
-	                                     data-bs-toggle="modal" data-bs-target="#exampleModal"
-	                                     id="btnModal" type="button" class="btn btn_main_color" value="등록">
+								<input id="btnModal" type="button" value="등록">
 							</div>
 							<div class="col-1" style="margin-left: 750px">
 										<select class="form-select" id="searchKind">
@@ -46,8 +43,7 @@
 											placeholder="검색어로 조회">
 									</div>
 									<div class="col-1">
-										<button id="codeDetailSearch"
-											class="btn btn-primary mb-3 btn_main_color" type="button">조회</button>
+										<button id="codeDetailSearch" type="button">조회</button>
 									</div>
 								</div>
 								<div class="table-responsive">

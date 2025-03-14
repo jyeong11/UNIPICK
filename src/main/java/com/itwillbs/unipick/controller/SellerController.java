@@ -2,10 +2,14 @@ package com.itwillbs.unipick.controller;
 
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,7 +27,16 @@ public class SellerController {
 	SellerService selService;
 	
 	@GetMapping("sellerlogin")
-	public String Login() {
+	public String Login(HttpServletRequest request, Model model) {
+	    // 저장된 쿠키 확인
+	    Cookie[] cookies = request.getCookies();
+	    if (cookies != null) {
+	        for (Cookie cookie : cookies) {
+	            if ("rememberedSellerId".equals(cookie.getName())) {
+	                model.addAttribute("savedSellerId", cookie.getValue());
+	            }
+	        }
+	    } 
 		return "seller/sellerLogin";
 	}
 	
@@ -31,9 +44,30 @@ public class SellerController {
 	@ResponseBody
 	@PostMapping("sellerlogin")
 	public Map<String, Object> sellerLogin(@RequestBody Map<String, Object> logindata,
-										   HttpSession session) {
+										   HttpSession session,
+										   HttpServletResponse res) {
 		Map<String, Object> sellerinfo = loginService.SellerLogin(logindata);
-		session.setAttribute("selId", sellerinfo.get("sellerId"));
+		System.out.println("sellerinfo"+sellerinfo);
+		if (sellerinfo != null) {
+	        // 로그인 성공 시 세션에 저장
+	        session.setAttribute("selId", sellerinfo.get("sel_id"));
+	        // "아이디 기억하기" 체크 여부 확인
+	        boolean rememberMe = (boolean) logindata.getOrDefault("rememberMe", false);
+
+	        if (rememberMe) {
+	            // 30일 동안 유지되는 쿠키 생성
+	            Cookie cookie = new Cookie("rememberedSellerId", sellerinfo.get("sel_id").toString());
+	            cookie.setMaxAge(60 * 60 * 24 * 30); // 30일
+	            cookie.setPath("/"); // 사이트 전체에서 접근 가능
+	            res.addCookie(cookie); // 쿠키 저장
+	        } else {
+	            // 체크 안 했으면 기존 쿠키 삭제 (만료 시간 0)
+	            Cookie cookie = new Cookie("rememberedSellerId", "");
+	            cookie.setMaxAge(0); 
+	            cookie.setPath("/");
+	            res.addCookie(cookie);
+	        }
+	    }
 		return sellerinfo;
 	}
 	
