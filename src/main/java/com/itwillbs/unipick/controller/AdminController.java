@@ -22,7 +22,7 @@ public class AdminController {
 	
 	@GetMapping("admin")
 	public String adminMain() {
-		return "admin/adminMain";
+		return "admin/admincopy";
 	}
 	@GetMapping("commonCode")
 	public String admincommoncode() {
