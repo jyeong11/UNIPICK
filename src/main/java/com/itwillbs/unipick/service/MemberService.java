@@ -13,6 +13,7 @@ public class MemberService {
 	@Autowired
 	MemberMapper mapper;
 	
+	
 //	 // 이메일 중복 체크: 중복이면 true, 아니면 false
 //    public boolean checkEmail(String email) {
 //        return mapper.checkEmail(email) > 0;
