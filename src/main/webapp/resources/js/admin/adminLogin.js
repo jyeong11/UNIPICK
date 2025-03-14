@@ -41,6 +41,8 @@ $(function() {
 	        success: function(res) {
 				if(res.success){
 					window.location.href = "admin";
+				} else {
+					alert(res.msg);
 				}
 	        },
 	        error: function(xhr, status, error) {

@@ -23,26 +23,26 @@
 	
 	<!-- 상세 코드 조회 -->
   	<select id="detailCodeList" parameterType="map">
-	  	SELECT COUNT(*) OVER () - ROW_NUMBER() OVER (ORDER BY d.code_id DESC) + 1 AS code_num,
+	  	SELECT COUNT(*) OVER () - ROW_NUMBER() OVER (ORDER BY d.cod_cd DESC) + 1 AS cod_nb,
 	    	   c.com_cd,
 	    	   c.com_nm,
-	    	   d.cod_id,
-	    	   d.cod_nm AS detailcode_nm,
-	    	   d.com_yn,
+	    	   d.cod_cd,
+	    	   d.cod_nm,
+	    	   d.cod_yn,
 	    	   d.cod_pr,
 	    	   d.cod_so
 		  FROM common_code c
 		  JOIN common_detailcode d ON c.com_cd = d.com_cd
 		 where 1 = 1
 		 <choose>
-		   	<when test="code_id != null and !code_id.equals('')">
-		   		AND c.com_cd LIKE CONCAT(#{code_id}, '%')
+		   	<when test="com_cd != null and !com_cd.equals('')">
+		   		AND c.com_cd LIKE CONCAT(#{com_cd}, '%')
 		   	</when>
-		   	<when test="cod_id != null and !cod_id.equals('')">
-		   		AND d.cod_id LIKE CONCAT(#{detail_id}, '%')
+		   	<when test="cod_cd != null and !cod_cd.equals('')">
+		   		AND d.cod_cd LIKE CONCAT(#{cod_cd}, '%')
 		   	</when>
 		   	<when test="cod_nm != null and !cod_nm.equals('')">
-		   		AND d.cod_nm LIKE CONCAT(#{code_nm}, '%')
+		   		AND d.cod_nm LIKE CONCAT(#{cod_nm}, '%')
 		   	</when>
 	     </choose>
   	</select>

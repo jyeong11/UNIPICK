@@ -15,7 +15,7 @@
 <link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
 <!--  js -->
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/commoncodedetail.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/admin/commoncodedetail.js"></script>
 <title>팀어센드 : 상세공통코드</title>
 
 </head>
@@ -56,8 +56,8 @@
 													<th>공통코드명</th>
 													<th>상세공통코드</th>
 													<th>상세코드명</th>
-													<th>사용여부</th>
 													<th>정렬순번</th>
+													<th>사용여부</th>
 												</tr>
 											</thead>
 											<tbody id="commonDetailTableBody">

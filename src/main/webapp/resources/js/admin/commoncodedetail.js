@@ -22,11 +22,11 @@ $(function() {
 		let word = wordElement ? wordElement.value : null;
 		
 		if(kind == "option1" && word != ''){
-			data.code_id = word;
+			data.com_cd = word;
 		} else if(kind == "option2"){
-			data.detail_id = word;
+			data.cod_cd = word;
 		} else if(kind == "option3"){
-			data.code_nm = word;
+			data.cod_nm = word;
 		}
 		
 		$.ajax({
@@ -38,16 +38,17 @@ $(function() {
 				let tablebody;
 				
                 res.forEach(function(cd) {
+					debugger;
                     tablebody += `
                         <tr>
 							<td class="codeDeatilUpdate btn btn-link project_font_color" data-bs-toggle="modal" 
-                            data-bs-target="#exampleModal">${cd.code_num}</td>
-							<td>${cd.code_id}</td>
-							<td>${cd.code_nm}</td>
-                            <td>${cd.detail_id}</td>
-							<td>${cd.detailcode_nm}</td>
-							<td>${cd.use_yn}</td>
-                            <td>${cd.code_sort}</td>
+                            data-bs-target="#exampleModal">${cd.cod_nb}</td>
+							<td>${cd.com_cd}</td>
+							<td>${cd.com_nm}</td>
+                            <td>${cd.cod_cd}</td>
+							<td>${cd.cod_nm}</td>
+							<td>${cd.cod_so}</td>
+							<td>${cd.cod_yn}</td>
                         </tr>
                     `;
 				});

@@ -24,33 +24,6 @@ public class AdminController {
 	@Autowired
 	AdminService adminservice;
 	
-	// 관리자 메인 페이지 화면이동
-	@GetMapping("admin")
-	public String adminMain() {
-		return "admin/admincopy";
-	}
-
-	@GetMapping("commonCode")
-	public String admincommoncode() {
-		return "admin/commonCode";
-	}
-	
-	@GetMapping("commoncode")
-	public String commoncode() {
-		return "admin/commoncode";
-	}
-	
-	@GetMapping("/detailcommoncode")
-	public String detailcommoncode() {
-		return "admin/detailCommoncode";
-	}
-	
-	// 상세 공통코드 화면이동
-	@GetMapping("commonCodeDetail")
-	public String commoncodedetail() {
-		return "admin/commoncodedetail";
-	}
-	
 	// 로그인 페이지 화면이동
 	@GetMapping("adminlogin")
 	public String adminlogin() {
@@ -61,6 +34,24 @@ public class AdminController {
 	@GetMapping("adminmypage")
 	public String adminmypage() {
 		return "admin/adminMyPage";
+	}
+	
+	// 관리자 메인 페이지 화면이동
+	@GetMapping("admin")
+	public String adminMain() {
+		return "admin/admincopy";
+	}
+	
+	// 공통코드 화면이동
+	@GetMapping("commonCode")
+	public String admincommoncode() {
+		return "admin/commonCode";
+	}
+	
+	// 상세 공통코드 화면이동
+	@GetMapping("commonCodeDetail")
+	public String admincommoncodedetail() {
+		return "admin/commonCodeDetail";
 	}
 	
 	// 관리자 로그인
@@ -117,6 +108,7 @@ public class AdminController {
 		return response;
 	}
 	
+	// 관리자 정보
 	@ResponseBody
 	@GetMapping("adminInfo")
 	public Map<String, Object> adminInfo(HttpSession session) {
