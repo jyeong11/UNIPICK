@@ -41,21 +41,23 @@
 			</nav>
 		</div>
 		<main class="css-ds6z7l">
-		<h1 class="">이메일과 비밀번호를<br>입력해주세요.</h1>
-		<form>
-		<div class="css-138pfvh">
-		<label class="BODY_13">이메일을 입력해주세요.</label>
-		<span class="BODY_15"><input type="email" placeholder="로그인 시 필요" required class="css-1wr8iut">
-		</span>
-		</div>
-		<div class="css-138pfvh">
-		<label class="BODY_13">비밀번호</label>
-		<span class="BODY_15">
-		<input placeholder="영문, 숫자, 특수문자 포함 8자 이상" required type="password" class="css-1wr8iut">
-		</span>
-		</div>
-		</form>
-		<button class="css-1lhlb22">완료</button>
+			<h1 class="">
+				이메일과 비밀번호를<br>입력해주세요.
+			</h1>
+			<form action="memberLogin" method="post">
+				<div class="css-138pfvh">
+					<label class="BODY_13">이메일을 입력해주세요.</label> <span class="BODY_15"><input
+						type="email" placeholder="로그인 시 필요" required class="css-1wr8iut">
+					</span>
+				</div>
+				<div class="css-138pfvh">
+					<label class="BODY_13">비밀번호</label> <span class="BODY_15"> <input
+						placeholder="영문, 숫자, 특수문자 포함 8자 이상" required type="password"
+						class="css-1wr8iut">
+					</span>
+				</div>
+			</form>
+			<button class="css-1lhlb22">완료</button>
 		</main>
 	</div>
 </body>
