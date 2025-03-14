@@ -1,0 +1,72 @@
+@charset "UTF-8";
+
+body {
+	font-family: "Noto Sans KR", sans-serif;
+}
+#logo {
+	width: 180px;
+}
+#login-container {
+  display: flex;
+  justify-content: center;     
+  align-items: center;      
+  text-align: center;         
+  flex-direction: column;
+}
+form {
+  padding: 20px;
+  width: 500px;
+  height: 500px;
+  box-sizing: border-box;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 31px 0 rgba(0, 0, 0, 0.1);
+}
+.admin-info{
+	width: 65%;
+	height: auto;
+    padding: 13px 16px;
+    font-size: 14px;
+    line-height: 1.5;
+    border-radius: 8px;
+    background-color: white;
+    border: 1px solid #e5e5e5;
+    box-shadow: none;
+    margin-bottom: 15px;
+}
+input:focus{
+	border: 1px solid #a1a9ad ;
+    outline: none;
+}
+button {
+    width: 73%;
+    padding: 13px 0;
+    font-size: 12px;
+    color: #fff;
+    background: #000;
+    border-radius: 8px;
+	cursor: pointer;
+}
+#join{
+	color: #f2a900 !important;
+}
+label {
+	margin-right: 100px;
+}
+.admin-btn {
+	margin-right: 235px;
+	font-size: 12px;
+}
+
+#greet-talk{
+	color: #4f5558;
+	font-size: 13px;
+	padding-top: 20px;
+}
+
+a {
+ 	color : #4f5558;
+ 	text-decoration: none;
+}

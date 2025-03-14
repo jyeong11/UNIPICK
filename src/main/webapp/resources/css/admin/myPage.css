@@ -1,0 +1,16 @@
+@charset "UTF-8";
+.my-data{
+	display: felx;
+	flex-direction: column;
+	width: 80px;
+}
+
+#cancel-btn {
+	background-color: #F5F6F8;
+	color: #4F5558;
+}
+
+button {
+	cursor: pointer;
+/* 	border: none; */
+}

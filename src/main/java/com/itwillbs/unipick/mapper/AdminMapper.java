@@ -7,7 +7,10 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface AdminMapper {
+	// 관리자 정보 조회
 	public Map<String, Object> adminInfo(Map<String, Object> admin);
+	// 관리자 정보 수정
+	public int adminEdit(Map<String,Object> admin);
 	// 상세 코드 조회
 	public List<Map<String, Object>> detailCodeList(Map<String, Object> map);
 	// 상세 코드 등록

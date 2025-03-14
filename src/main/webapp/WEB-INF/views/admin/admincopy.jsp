@@ -20,8 +20,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Nunito:wght@200..1000&display=swap" rel="stylesheet">
-<link href="${pageContext.request.contextPath }/resources/css/admincopy/admincopy2.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath }/resources/css/admincopy/admincopy.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath }/resources/css/admincopy/admCopy.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath }/resources/css/admincopy/sd-admin-2Copy.css" rel="stylesheet">
 <link href="/resources/adm/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 <link href="/resources/adm/vendor/datatables/datatables.min.css" rel="stylesheet">
 
@@ -168,10 +168,13 @@
    <!-- Topbar Navbar -->
    <ul class="navbar-nav ml-auto">
        <li class="nav-item dropdown no-arrow">
-           <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               <span class="mr-2 d-none d-lg-inline text-gray-600 small">관리자</span>
+<!--            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
+               <span class="mr-2 d-none d-lg-inline text-gray-600 small"><a href="adminmypage">${sessionScope.admId }</a></span>
                <img class="img-profile rounded-circle" src="../../resources/adm/img/admin_profile.png">
-           </a>
+<!--            </a> -->
+           <div id="임시">
+               <a href="adminlogin">로그아웃</a>
+           </div>
            <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                 aria-labelledby="userDropdown">
