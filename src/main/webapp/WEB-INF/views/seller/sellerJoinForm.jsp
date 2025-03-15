@@ -32,7 +32,7 @@
             <div class="input-group">
                 <label for="storeId">아이디</label>
                 <input type="text" id="storeId" name="storeId" style="width:250px; height: 18px">
-                <button id="DuplicationCk">중복체크</button>
+                <button id="DuplicationCk" type="button">중복체크</button>
             </div>
 
             <div class="input-group">
@@ -88,7 +88,7 @@
             	<br>
             	"문의: 051) 803-0909, 평일 10:00-18:00(토/일 공휴일 휴무, 점심 13:00-14:00)"
             </div>
-            <div class="input-group"><button>회원가입</button></div>
+            <div class="input-group"><button type=submit>회원가입</button></div>
 			
             
         </form>

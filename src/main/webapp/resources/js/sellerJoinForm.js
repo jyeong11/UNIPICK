@@ -1,17 +1,27 @@
 document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("storePw").addEventListener("keyup", validatePassword);
     document.getElementById("storePwCheck").addEventListener("keyup", validatePasswordCheck);
-    
+	document.getElementById("DuplicationCk").addEventListener("click", idChecked);
+	
+
+    function encodeFileAsBase64(file, callback) {
+    var reader = new FileReader();
+    reader.onloadend = function() {
+        callback(reader.result.split(',')[1]); // Base64 문자열만 추출
+    };
+    reader.readAsDataURL(file);  // 파일을 Base64로 인코딩
+	}
+
     // 폼 제출 시 AJAX로 데이터 전송
     document.getElementById("storeSignupForm").addEventListener("submit", function (event) {
-	   debugger;
 	 	event.preventDefault();
 	    
 	    if (validateForm()) {
 	        var formData = new FormData(document.getElementById("storeSignupForm"));
 	        var businessLicenseFile = document.getElementById("businessLicense").files[0];
+
 	        
-	        // 파일을 Base64로 변환 후 AJAX 전송
+//	         파일을 Base64로 변환 후 AJAX 전송
 	        encodeFileAsBase64(businessLicenseFile, function(base64File) {
 	            var jsonData = {
 	                storeId: formData.get("storeId"),
@@ -25,6 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	                phNumber: formData.get("phNumber")
 	            };
 	
+debugger;
 	            $.ajax({
 	                type: "POST",
 	                url: "joinSucess",
@@ -32,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	                data: JSON.stringify(jsonData),  // JSON 형태로 전송
 	                success: function (res) {
 	                    alert("입점 신청이 완료되었습니다.");
-	                    window.location.href = "successPage.html"; // 성공 페이지로 이동
+//	                    window.location.href = "successPage.html"; // 성공 페이지로 이동
 	                },
 	                error: function (xhr, textStatus, errorThrown) {
 	                    alert("다시 접속해주세요.");
@@ -117,7 +128,7 @@ function submitForm() {
         data: formData,
         processData: false,  // FormData는 자동으로 처리되므로 processData는 false
         contentType: false,  // multipart/form-data로 전송
-        success: function (res) {
+        success: function(res) {
             alert("입점 신청이 완료되었습니다.");
             window.location.href = "successPage.html"; // 성공 페이지로 이동
         },
@@ -125,4 +136,23 @@ function submitForm() {
             alert("다시 접속해주세요.");
         }
     });
+}
+function idChecked() {
+	var storeId = document.getElementById("storeId").value
+	var data = {
+		storeId : storeId
+	}
+	debugger;
+	$.ajax({
+		type: "POST",
+		url: "selinfo",
+		contentType: "application/json",
+		data: JSON.stringify(data),
+		success: function(res) {
+			alert(res.msg);
+		},
+		error: function (xhr, textStatus, errorThrown) {
+            alert("다시 접속해주세요.");
+        }
+	});
 }

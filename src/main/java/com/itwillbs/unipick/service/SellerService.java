@@ -12,7 +12,11 @@ public class SellerService {
 	@Autowired
 	SellerMapper mapper;
 	
-	public Map<String, Object> sellerjoin(Map<String, Object> sellerinfo) {
+	public int sellerjoin(Map<String, Object> sellerinfo) {
 		return mapper.sellerjoin(sellerinfo);
+	}
+	
+	public Map<String, Object> sellerselect(Map<String, Object> seldata) {
+		return mapper.sellerselect(seldata);
 	}
 }

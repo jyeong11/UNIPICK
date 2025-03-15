@@ -7,5 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface SellerMapper {
 
-	public Map<String, Object> sellerjoin(Map<String, Object> sellerinfo);
+	public int sellerjoin(Map<String, Object> sellerinfo);
+	
+	public Map<String, Object> sellerselect(Map<String, Object> seldata);
 }
