@@ -19,7 +19,47 @@
 		   SET adm_pw = #{admPw}
 		 WHERE adm_id = #{admId}
 	</update>
-	
+	<!--   	코드 등록 -->
+  	<insert id="registerDB" parameterType="map">
+  	INSERT INTO common_code (
+		  	com_cd, 
+		  	com_nm,
+		  	com_yn
+	) VALUES (
+	 		#{com_cd}, 
+	 		#{com_nm}, 
+	 		#{com_yn}
+		 	)
+  	</insert>
+<!--   	코드 수정 -->
+  	<update id="updateDB" parameterType="map">
+  	UPDATE common_code
+	   SET com_nm = #{com_nm},
+		   com_yn = #{com_yn}
+	 WHERE com_cd = #{com_cd}
+  	</update>
+<!--   	코드 조회 -->
+  	<select id="codeList" parameterType="map">
+  	SELECT COUNT(*) OVER () - ROW_NUMBER() OVER (ORDER BY com_nm DESC) + 1 AS com_nb,
+  			   com_cd, 
+  			   com_nm, 
+  			   com_yn
+  	  FROM common_code
+  	  where 1 = 1
+  	  <choose>
+	   	<when test="com_cd != null and !com_cd.equals('')">
+	   		AND com_cd LIKE CONCAT(#{com_cd}, '%')
+	   	</when>
+	   	<when test="com_nm != null and !com_nm.equals('')">
+	   		AND com_nm LIKE CONCAT(#{com_nm}, '%')
+	   	</when>
+     </choose>
+  	</select>
+  	
+  	<delete id="deleteDB" parameterType="map">
+  	DELETE FROM common_code 
+  	 WHERE com_cd = #{com_cd}
+  	</delete>
 	
 	<!-- 상세 코드 조회 -->
   	<select id="detailCodeList" parameterType="map">

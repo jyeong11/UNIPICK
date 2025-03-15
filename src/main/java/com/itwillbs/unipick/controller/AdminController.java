@@ -47,11 +47,49 @@ public class AdminController {
 	public String admincommoncode() {
 		return "admin/commonCode";
 	}
+	// 공통코드 화면 List 
+	@ResponseBody
+	@GetMapping("cmCodeList")
+	public List<Map<String, Object>> commoncode(@RequestParam Map<String, Object> map) {
+		System.out.println(map);
+		return adminservice.codeList(map);
+	}
+		
 	
 	// 상세 공통코드 화면이동
 	@GetMapping("commonCodeDetail")
 	public String admincommoncodedetail() {
-		return "admin/commonCodeDetail";
+		return "admin/NewFile";
+	}
+	
+	// 코드 등록시 insert
+	@ResponseBody
+	@PostMapping("cmcodeRegister")
+	public void cmcoderegister(@RequestParam Map<String, Object> code) {
+		
+		adminservice.registerDB(code);
+		
+		Map<String, Object> insertDBcode = new HashMap<String, Object>();
+		insertDBcode.put("codeList", adminservice.codeList(code));
+		
+	}
+	
+	//코드 수정
+	@ResponseBody
+	@PostMapping("cmcodeUpdate")
+	public void cmcodeupdate(@RequestParam Map<String, Object> code) {
+		
+		adminservice.updateDB(code);
+	
+	}
+	
+	//코드 삭제
+	@ResponseBody
+	@PostMapping("cmcodeDelete")
+	public Map<String, Object> cmcodedelete(@RequestParam Map<String, Object> code) {
+		adminservice.deleteDB(code);
+		
+		return code;
 	}
 	
 	// 관리자 로그인

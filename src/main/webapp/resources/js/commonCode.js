@@ -1,7 +1,6 @@
 $(function() {
-	// event
-    codeList();
-
+	codeList();
+	
 	$('#codeSearch').on('click',function(){
 		codeList();
 	}); // 검색 이벤트
@@ -14,17 +13,17 @@ $(function() {
     // 공통코드 등록 클릭시
     $(document).on("click", "#coderegister", function() {
 		alert("등록 되었습니다.")
-        let code = $('#code').val();
-        let codeName = $('#codeName').val();
-        let useYN = $('#useYN').val();
+        let com_cd = $('#code').val();
+        let com_nm = $('#codeName').val();
+        let com_yn = $('#useYN').val();
 
         $.ajax({
             type: 'POST',
             url: 'cmcodeRegister',
             data: { 
-                code: code, 
-                codeName: codeName,
-                useYN: useYN
+                com_cd: com_cd, 
+                com_nm: com_nm,
+                com_yn: com_yn
             },
             success: function() {
                 codeList();
@@ -49,11 +48,10 @@ $(function() {
 		let word = wordElement ? wordElement.value : null;
 		
 		if(kind == "option1" && word != ''){
-			data.code_id = word;
+			data.com_cd = word;
 		} else if(kind == "option2"){
-			data.code_nm = word;
+			data.com_nm = word;
 		}
-	
         $.ajax({
             type: "GET",
             url: "cmCodeList",
@@ -66,10 +64,10 @@ $(function() {
                     bodydata += `
                         <tr>
                             <td class="codeUpdate btn btn-link" data-bs-toggle="modal" 
-                       		 data-bs-target="#exampleModal">${cd.code_num}</td>
-                            <td>${cd.code_id}</td>
-                            <td>${cd.code_nm}</td>
-                            <td>${cd.use_yn}</td>
+                       		 data-bs-target="#exampleModal">${cd.com_nb}</td>
+                            <td>${cd.com_cd}</td>
+                            <td>${cd.com_nm}</td>
+							<td>${cd.com_yn}</td>
                         </tr>
                     `;
                 });
@@ -88,10 +86,10 @@ $(function() {
 		let row = $(this).closest("tr");
 	    
 		let selectData = {
-			code_num: row.find("td:eq(0)").text(),
-	        code_id: row.find("td:eq(1)").text(),
-	        code_nm: row.find("td:eq(2)").text(),
-	        use_yn: row.find("td:eq(3)").text() 
+			com_nb: row.find("td:eq(0)").text(),
+	        com_cd: row.find("td:eq(1)").text(),
+	        com_nm: row.find("td:eq(2)").text(),
+	        com_yn: row.find("td:eq(3)").text() 
 	    };
 
 		 let bodydata;
@@ -100,13 +98,13 @@ $(function() {
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label">공통코드 : </label>
                     <div class="col-sm-3">
-                        <input type="text" id="code" class="col-sm-2 form-control" value="${selectData.code_id}" disabled>
+                        <input type="text" id="code" class="col-sm-2 form-control" value="${selectData.com_cd}" disabled>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label">코드명 : </label>
                     <div class="col-sm-3">
-                        <input type="text" id="codeName" class="col-sm-2 form-control" value="${selectData.code_nm}">
+                        <input type="text" id="codeName" class="col-sm-2 form-control" value="${selectData.com_nm}">
                     </div>
                 </div>
                 <div class="row mb-1">
@@ -126,7 +124,7 @@ $(function() {
             `;
             $('#modal-con').append(bodydata);
 		
-			document.getElementById("useYN").value = selectData.use_yn;
+			document.getElementById("useYN").value = selectData.com_yn;
 	
     });
 	// 공통코드 수정 버튼 클릭시
@@ -140,9 +138,9 @@ $(function() {
 			type: "POST",
 			url: "cmcodeUpdate",
 			data: { 
-                code_id: code,
-	            code_nm: codeName,
-	            use_yn: useYN
+                com_cd: code,
+	            com_nm: codeName,
+	            com_yn: useYN
             },
 			success: function(){
 				codeList();
@@ -165,7 +163,7 @@ $(function() {
 			type: "POST",
 			url: "cmcodeDelete",
 			data: { 
-                code_id: code,
+                com_cd: code,
             },
 			success: function(code){
 				codeList();
