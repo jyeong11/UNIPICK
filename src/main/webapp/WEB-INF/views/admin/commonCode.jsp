@@ -20,7 +20,8 @@
 
 <!-- css -->
 <link href="${pageContext.request.contextPath }/resources/css/public.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resources/css/commonCode.css" rel="stylesheet" type="text/css">
+<%-- <link href="${pageContext.request.contextPath }/resources/css/commonCode.css" rel="stylesheet" type="text/css"> --%>
+<link href="${pageContext.request.contextPath }/resources/css/admin/adminMain.css" rel="stylesheet" type="text/css">
 
 <!-- favicon -->
 <link rel="icon"
@@ -31,6 +32,19 @@
 <title>유니픽 관리자</title>
 </head>
 <body>
+	<div id="admin-container">
+		<div>
+			<a href="admin">
+		       	<img src="${pageContext.request.contextPath}/resources/images/로고 가로.png" alt="로고" id="logo">
+			</a>
+		 </div>
+		 <div class="login_div">
+		 	<ul class="login_ul">
+		 		<li><a href="javascript:void(0);" id="admin_id">admin</a></li>
+		 		<li class="logout_btn"><a href="#" id="logout">로그아웃</a></li>
+		 	</ul>
+		 </div>
+	</div>
 	<!-- Sidebar -->
 	<div class="d-flex">
 		<jsp:include page="../inc/adminSidebar.jsp"></jsp:include>
@@ -59,8 +73,7 @@
 											placeholder="검색어로 조회">
 									</div>
 									<div class="col-1">
-										<button id="codeSearch"
-											class="btn btn-primary mb-3 btn_main_color" type="button">조회</button>
+										<button id="codeSearch" class="btn btn-primary mb-3 btn_main_color" type="button" type="button">조회</button>
 									</div>
 								</div>
 								<div class="table-responsive">

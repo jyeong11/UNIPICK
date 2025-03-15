@@ -63,7 +63,7 @@ $(function() {
                 res.forEach(function(cd) {
                     bodydata += `
                         <tr>
-                            <td class="codeUpdate btn btn-link" data-bs-toggle="modal" 
+                            <td class="codeUpdate btn btn-link no-border" data-bs-toggle="modal" 
                        		 data-bs-target="#exampleModal">${cd.com_nb}</td>
                             <td>${cd.com_cd}</td>
                             <td>${cd.com_nm}</td>

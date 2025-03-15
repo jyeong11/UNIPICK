@@ -7,8 +7,8 @@
 
 <!-- css -->
 <link href="${pageContext.request.contextPath }/resources/css/public.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resources/css/adminMain.css" rel="stylesheet" type="text/css">
-
+<link href="${pageContext.request.contextPath }/resources/css/admin/adminMain.css" rel="stylesheet" type="text/css">
+<%-- <link href="${pageContext.request.contextPath }/resources/css/admin/commonCode.css" rel="stylesheet" type="text/css"> --%>
 <!-- js -->
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/adminMain.js"></script>

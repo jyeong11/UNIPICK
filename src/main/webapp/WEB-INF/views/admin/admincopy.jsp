@@ -122,8 +122,6 @@
 </ul>
 <!-- End of Sidebar -->
 <script>
-// 	console.log("현재 페이지 주소: " + window.location.pathname);
-
 	document.addEventListener("DOMContentLoaded", function(){
 		// 현재 페이지에 해당하는 메뉴 활성화
 		let pathName = window.location.pathname.substring(1);
@@ -372,67 +370,14 @@
                                     <div class="chart-pie pt-4 pb-2">
                                         <canvas id="categoryStats"></canvas>
                                     </div>
-                                    <div class="mt-4 text-center small" id="categoryLabels">
-<!--                                         <span class="mr-2"> -->
-<!--                                             <i class="fas fa-circle text-primary"></i> 여성의류 -->
-<!--                                         </span> -->
-<!--                                         <span class="mr-2"> -->
-<!--                                             <i class="fas fa-circle text-success"></i> 남성의류 -->
-<!--                                         </span> -->
-<!--                                         <span class="mr-2"> -->
-<!--                                             <i class="fas fa-circle text-info"></i> 레저/스포츠 -->
-<!--                                         </span> -->
-<!--                                         <span class="mr-2"> -->
-<!--                                             <i class="fas fa-circle text-secondary"></i> 생활용품 -->
-<!--                                         </span> -->
-<!--                                         <span class="mr-2"> -->
-<!--                                             <i class="fas fa-circle text-warning"></i> 키즈 -->
-<!--                                         </span> -->
-<!--                                         <span class="mr-2"> -->
-<!--                                             <i class="fas fa-circle text-danger"></i> 도서 -->
-<!--                                         </span> -->
-                                    </div>
                                 </div>
                             </div>
                         </div>
-                        
-                        <!-- Bar Chart -->
-                        <div class="col-xl-5 col-lg-5">
-	                        <div class="card shadow mb-4">
-	                            <div class="card-header py-3">
-	                                <h6 class="m-0 font-weight-bold text-primary">최근 일주일간 중고거래</h6>
-	                            </div>
-	                            <div class="card-body">
-	                            	<div class="text-sm-right font-weight-bold"><a href="AdmProductOrderList">거래내역 보러가기 <i class="fa-solid fa-arrow-right"></i></a></div>
-	                            	<div class="table-responsive">
-		                                <table class="table table-bordered compact" id="transactionList" width="100%" cellspacing="0">
-		                                    <thead></thead>
-		                                    <tbody></tbody>
-		                                </table>
-		                          	</div>
-	                            </div>
-	                        </div>
-                    	</div>
-                    
-                    
                     </div> <!-- /.row -->
-
                 </div>
                 <!-- /.container-fluid -->
-
             </div>
             <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-    <div class="copyright text-center my-auto">
-        <span>Copyright &copy; GoodBuy Admin 2024-2025</span>
-    </div>
-</div>
-            </footer>
-            <!-- End of Footer -->
-
         </div>
         <!-- End of Content Wrapper -->
 
@@ -440,13 +385,13 @@
     <!-- End of Page Wrapper -->
 
     <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
+<!--     <a class="scroll-to-top rounded" href="#page-top"> -->
+<!--         <i class="fas fa-angle-up"></i> -->
+<!--     </a> -->
 
     <!-- Bootstrap core JavaScript-->
-    <script src="/resources/adm/vendor/jquery/jquery.min.js"></script>
-<!--     <script src="/resources/adm/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
+<!--     <script src="/resources/adm/vendor/jquery/jquery.min.js"></script> -->
+    <script src="/resources/js/admin/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
 <!--     <script src="/resources/adm/vendor/jquery-easing/jquery.easing.min.js"></script> -->
@@ -455,13 +400,13 @@
     <script src="/resources/js/admin/sb-admin-2.js"></script>
     
     <!-- Page level plugins -->
-    <script src="/resources/adm/vendor/chart.js/Chart.min.js"></script>
-	<script src="/resources/adm/vendor/datepicker/moment.min.js"></script>
-	<script src="/resources/adm/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="/resources/adm/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<!--     <script src="/resources/adm/vendor/chart.js/Chart.min.js"></script> -->
+<!-- 	<script src="/resources/adm/vendor/datepicker/moment.min.js"></script> -->
+<!-- 	<script src="/resources/adm/vendor/datatables/jquery.dataTables.min.js"></script> -->
+<!--     <script src="/resources/adm/vendor/datatables/dataTables.bootstrap4.min.js"></script> -->
 	
     <!-- Page level custom scripts -->
-    <script src="/resources/adm/js/index.js"></script>
+<!--     <script src="/resources/adm/js/index.js"></script> -->
     
 
 </body>

@@ -39,7 +39,7 @@ public class AdminController {
 	// 관리자 메인 페이지 화면이동
 	@GetMapping("admin")
 	public String adminMain() {
-		return "admin/admincopy";
+		return "admin/adminMain";
 	}
 	
 	// 공통코드 화면이동
@@ -47,19 +47,19 @@ public class AdminController {
 	public String admincommoncode() {
 		return "admin/commonCode";
 	}
+	
+	// 상세 공통코드 화면이동
+	@GetMapping("commonCodeDetail")
+	public String admincommoncodedetail() {
+		return "admin/NewFile";
+	}
+	
 	// 공통코드 화면 List 
 	@ResponseBody
 	@GetMapping("cmCodeList")
 	public List<Map<String, Object>> commoncode(@RequestParam Map<String, Object> map) {
 		System.out.println(map);
 		return adminservice.codeList(map);
-	}
-		
-	
-	// 상세 공통코드 화면이동
-	@GetMapping("commonCodeDetail")
-	public String admincommoncodedetail() {
-		return "admin/NewFile";
 	}
 	
 	// 코드 등록시 insert
