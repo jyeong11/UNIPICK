@@ -23,7 +23,6 @@ function login() {
         alert("아이디와 비밀번호를 입력해주세요.");
         return;
     }
-	debugger;
     let loginData = {
         sellerId: sellerId,
         sellerPw: sellerPw,
@@ -43,7 +42,12 @@ function login() {
         contentType: "application/json; charset=UTF-8",
         dataType: "json",
         success: function(res) {
-        	window.location.href = "seller";
+			if(res.success){
+				window.location.href = "seller";
+			} else {
+				alert(res.msg);
+			}
+
         },
         error: function(xhr, status, error) {
             console.error("로그인 요청 실패", error);

@@ -1,6 +1,7 @@
 package com.itwillbs.unipick.controller;
 
 import java.util.Base64;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -48,8 +49,12 @@ public class SellerController {
 										   HttpSession session,
 										   HttpServletResponse res) {
 		Map<String, Object> sellerinfo = loginService.SellerLogin(logindata);
-		System.out.println("sellerinfo"+sellerinfo);
+		
+		boolean success = false;
+		String msg = "아이디 또는 비밀번호가 틀렸습니다.";
+		
 		if (sellerinfo != null) {
+			success = true;
 	        // 로그인 성공 시 세션에 저장
 	        session.setAttribute("selId", sellerinfo.get("sel_id"));
 	        // "아이디 기억하기" 체크 여부 확인
@@ -69,7 +74,12 @@ public class SellerController {
 	            res.addCookie(cookie);
 	        }
 	    }
-		return sellerinfo;
+		
+		Map<String, Object> response = new HashMap<String, Object>();
+		response.put("success", success);
+		response.put("msg", msg);
+		
+		return response;
 	}
 	//셀러 회원가입
 	@GetMapping("sellerjoin")

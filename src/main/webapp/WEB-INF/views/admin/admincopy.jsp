@@ -119,10 +119,6 @@
                 <a class="collapse-item" href="AdmLogList">로그 기록</a>
             </div>
         </div>
-    <hr class="sidebar-divider d-none d-md-block">
-    <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
-    </div>
 </ul>
 <!-- End of Sidebar -->
 <script>
@@ -450,13 +446,13 @@
 
     <!-- Bootstrap core JavaScript-->
     <script src="/resources/adm/vendor/jquery/jquery.min.js"></script>
-    <script src="/resources/adm/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!--     <script src="/resources/adm/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
 
     <!-- Core plugin JavaScript-->
-    <script src="/resources/adm/vendor/jquery-easing/jquery.easing.min.js"></script>
+<!--     <script src="/resources/adm/vendor/jquery-easing/jquery.easing.min.js"></script> -->
 
     <!-- Custom scripts for all pages-->
-    <script src="/resources/adm/js/sb-admin-2.min.js"></script>
+    <script src="/resources/js/admin/sb-admin-2.js"></script>
     
     <!-- Page level plugins -->
     <script src="/resources/adm/vendor/chart.js/Chart.min.js"></script>
@@ -467,10 +463,6 @@
     <!-- Page level custom scripts -->
     <script src="/resources/adm/js/index.js"></script>
     
-    <script>
-//     	const categoryStats = '';
-//     	let data = categoryStats.replaceAll('=', ':').replaceAll('{', '{"').replaceAll(':', '":').replaceAll('", ', '", "');
-    </script>
 
 </body>
 
