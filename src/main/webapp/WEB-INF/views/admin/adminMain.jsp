@@ -11,7 +11,7 @@
 <%-- <link href="${pageContext.request.contextPath }/resources/css/admin/commonCode.css" rel="stylesheet" type="text/css"> --%>
 <!-- js -->
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/adminMain.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/admin/adminMain.js"></script>
 
 <link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
 <title>유니픽 관리자</title>
@@ -25,8 +25,8 @@
 		 </div>
 		 <div class="login_div">
 		 	<ul class="login_ul">
-		 		<li><a href="javascript:void(0);" id="admin_id">admin</a></li>
-		 		<li class="logout_btn"><a href="#" id="logout">로그아웃</a></li>
+		 		<li><a href="javascript:void(0);" id="admin_id">${sessionScope.admId }</a></li>
+		 		<li class="logout_btn"><a href="adminlogin" id="logout">로그아웃</a></li>
 		 	</ul>
 		 </div>
 	</div>

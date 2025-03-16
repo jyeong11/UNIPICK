@@ -68,11 +68,12 @@ table, th, td {
     border: 1px solid #ecedee !important; /* 테두리 추가 */
 }
 
-#codeSearch, #cmcdUpdate, #commonColse{
+#codeSearch, #coderegister, #cmcdUpdate, #commonColse,
+#codeDetailSearch, #codeDetailRegister, #cdDetailUpdate, #commonDetailColse{
 	color: white;
 	background: black;	
 }
-#cmcodeDelete {
+#cmcodeDelete, #cdDetailDelete {
 	color: #fff;
     background-color: #e74a3b
 }

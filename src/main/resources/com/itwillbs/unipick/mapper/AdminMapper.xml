@@ -61,7 +61,7 @@
   	 WHERE com_cd = #{com_cd}
   	</delete>
 	
-	<!-- 상세 코드 조회 -->
+<!-- 상세 코드 조회 -->
   	<select id="detailCodeList" parameterType="map">
 	  	SELECT COUNT(*) OVER () - ROW_NUMBER() OVER (ORDER BY d.cod_cd DESC) + 1 AS cod_nb,
 	    	   c.com_cd,
@@ -88,38 +88,35 @@
   	</select>
   	
   	<!-- 상세 코드 등록 -->
-<!--   	<insert id="detailcoderegister" parameterType="map"> -->
-<!--   		insert into common_detailcode( -->
-<!--   			   code_id, -->
-<!--   			   detail_id, -->
-<!--   			   code_nm, -->
-<!--   			   use_yn, -->
-<!--   			   code_sort, -->
-<!--   			   cd_registdate, -->
-<!--   			   cd_register -->
-<!--   			   ) -->
-<!--   		values(#{code_id}, -->
-<!-- 			   #{detail_id}, -->
-<!-- 			   #{code_nm}, -->
-<!-- 			   #{use_yn}, -->
-<!-- 			   #{code_sort}, -->
-<!-- 			   now(), -->
-<!-- 			   #{cd_register}) -->
-<!--   	</insert> -->
+  	<insert id="detailcoderegister" parameterType="map">
+  		insert into common_detailcode(
+  			   com_cd,
+  			   cod_cd,
+  			   cod_nm,
+  			   cod_yn,
+  			   cod_so
+  			   )
+  		values(#{com_cd},
+			   #{cod_cd},
+			   #{cod_nm},
+			   #{cod_yn},
+			   #{cod_so})
+  	</insert>
+  	
 <!--   	상세 코드 수정 -->
-<!--   	<update id="updateDBcodeDetail" parameterType="map"> -->
-<!--   	UPDATE common_detailcode -->
-<!-- 	   SET detail_id = #{codeDetail}, -->
-<!-- 	   	   code_nm = #{codeDetailName}, -->
-<!-- 	   	   code_sort = #{sortNum}, -->
-<!-- 		   use_yn = #{useYN}, -->
-<!-- 		   cd_modifydate = NOW(), -->
-<!-- 		   cd_modifier = #{sId} -->
-<!-- 	 WHERE detail_id = #{beforecodeDetailName} -->
-<!--   	</update> -->
+  	<update id="updateDBcodeDetail" parameterType="map">
+  	UPDATE common_detailcode
+	   SET cod_cd = #{cod_cd},
+	   	   cod_nm = #{cod_nm},
+	   	   cod_so = #{cod_so},
+		   cod_yn = #{cod_yn}
+	 WHERE cod_cd = #{beforecod_cd}
+  	</update>
+  	
 <!--   	상세 코드 삭제 -->
-<!--   	<delete id="updateDBcodeDelete" parameterType="map"> -->
-<!--   	DELETE FROM common_detailcode  -->
-<!--   	 WHERE detail_id = #{codeDetail} -->
-<!--   	</delete> -->
+  	<delete id="updateDBcodeDelete" parameterType="map">
+  	DELETE FROM common_detailcode
+  	 WHERE cod_cd = #{cod_cd}
+  	</delete>
+  	
 </mapper>

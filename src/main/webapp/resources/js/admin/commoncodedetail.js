@@ -38,7 +38,6 @@ $(function() {
 				let tablebody;
 				
                 res.forEach(function(cd) {
-					debugger;
                     tablebody += `
                         <tr>
 							<td class="codeDeatilUpdate btn btn-link project_font_color" data-bs-toggle="modal" 
@@ -75,7 +74,7 @@ $(function() {
 						<div class="row mb-3">
 							<label class="col-sm-2 col-form-label">공통코드 : </label>
 							<div class="col-sm-3">
-								<input type="text" id="code" class="col-sm-2 form-control" value="${res[0].code_id}" disabled>
+								<input type="text" id="code" class="col-sm-2 form-control" value="${res[0].com_cd}" disabled>
 							</div>
 						</div>
 						<div class="row mb-3">
@@ -120,7 +119,7 @@ $(function() {
 				$('#modal-con').append(bodydata);
 					
 					res.forEach(function(code) {
-						$('#codeNameSelect').append(`<option value="${code.code_id}">${code.code_nm}</option>`);
+						$('#codeNameSelect').append(`<option value="${code.com_cd}">${code.com_nm}</option>`);
 					});
 			},
 			error: function(xhr, status, error) {
@@ -137,11 +136,11 @@ $(function() {
 	 $(document).on('click', '#codeDetailRegister', function(){
 		confirm("등록하시겠습니까?") ? alert("등록이 완료되었습니다.") : alert("등록이 취소되었습니다.");
 		let data = {};
-		data.code_id = $('#code').val();
-		data.detail_id = $('#codeDetail').val();
-		data.code_nm = $('#codeDetailName').val();
-		data.use_yn = $('#useYN').val();
-		data.code_sort = $('#sortNum').val();
+		data.com_cd = $('#code').val();
+		data.cod_cd = $('#codeDetail').val();
+		data.cod_nm = $('#codeDetailName').val();
+		data.cod_yn = $('#useYN').val();
+		data.cod_so = $('#sortNum').val();
 		
 		$.ajax({
 			type: 'POST',
@@ -168,12 +167,12 @@ $(function() {
 		let row = $(this).closest("tr");
 	    
 		selectData = {
-	        code_id: row.find("td:eq(1)").text(),
-			code_nm: row.find("td:eq(2)").text(),
-	        detail_id: row.find("td:eq(3)").text(),
-			detailcode_nm: row.find("td:eq(4)").text(),
-			use_yn: row.find("td:eq(5)").text(),
-	        code_sort: row.find("td:eq(6)").text() 
+	        com_cd: row.find("td:eq(1)").text(),
+			com_nm: row.find("td:eq(2)").text(),
+	        cod_cd: row.find("td:eq(3)").text(),
+			cod_nm: row.find("td:eq(4)").text(),
+			cod_so: row.find("td:eq(5)").text(),
+	        cod_yn: row.find("td:eq(6)").text()
 	    };
 		let bodydata;
 		$('#modal-con').empty();
@@ -181,31 +180,31 @@ $(function() {
 				<div class="row mb-3">
 					<label class="col-sm-2 col-form-label">공통코드 : </label>
 					<div class="col-sm-3">
-						<input type="text" id="code" class="col-sm-2 form-control" value="${selectData.code_id}" disabled>
+						<input type="text" id="code" class="col-sm-2 form-control" value="${selectData.com_cd}" disabled>
 					</div>
 				</div>
 				<div class="row mb-3">
 					<label class="col-sm-2 col-form-label">코드명 : </label>
 					<div class="col-sm-3">
-						<input type="text" id="codeNameSelect" class="col-sm-2 form-control" value="${selectData.code_nm}" disabled>
+						<input type="text" id="codeNameSelect" class="col-sm-2 form-control" value="${selectData.com_nm}" disabled>
 					</div>
 				</div>
 				<div class="row mb-3">
 					<label class="col-sm-2 col-form-label">상세코드 : </label>
 					<div class="col-sm-3">
-						<input type="text" id="codeDetail" class="col-sm-2 form-control" value="${selectData.detail_id}">
+						<input type="text" id="codeDetail" class="col-sm-2 form-control" value="${selectData.cod_cd}">
 					</div>
 				</div>
 				<div class="row mb-3">
 					<label class="col-sm-2 col-form-label">상세코드명 : </label>
 					<div class="col-sm-3">
-						<input type="text" id="codeDetailName" class="col-sm-2 form-control" value="${selectData.detailcode_nm}">
+						<input type="text" id="codeDetailName" class="col-sm-2 form-control" value="${selectData.cod_nm}">
 					</div>
 				</div>
 				<div class="row mb-3">
 					<label class="col-sm-2 col-form-label">정렬순번 : </label>
 					<div class="col-sm-3">
-						<input type="text" id="sortNum" class="col-sm-2 form-control" value="${selectData.code_sort}">
+						<input type="text" id="sortNum" class="col-sm-2 form-control" value="${selectData.cod_so}">
 					</div>
 				</div>
 				<div class="row mb-1">
@@ -229,20 +228,20 @@ $(function() {
 		// 수정버튼 클릭시
 		$(document).on('click', '#cdDetailUpdate', function(){
 			confirm("수정하시겠습니까?") ? alert("수정이 완료되었습니다.") : alert("수정이 취소되었습니다.");
-			let codeDetail = $('#codeDetail').val();
-			let codeDetailName = $('#codeDetailName').val();
-	        let sortNum = $('#sortNum').val();
-	        let useYN = $('#useYN').val();
+			let cod_cd = $('#codeDetail').val();
+			let cod_nm = $('#codeDetailName').val();
+	        let cod_so = $('#sortNum').val();
+	        let cod_yn = $('#useYN').val();
 			
 			$.ajax({
 				type: "POST",
 				url: "cmcdDetailUpdate",
 				data: { 
-					beforecodeDetailName: selectData.detail_id, //이전 상세코드
-		            codeDetail: codeDetail, // 상세코드
-		            codeDetailName: codeDetailName, // 상세코드명
-					sortNum: sortNum,
-					useYN: useYN,
+					beforecod_cd: selectData.cod_cd, //이전 상세코드
+		            cod_cd: cod_cd, // 상세코드
+		            cod_nm: cod_nm, // 상세코드명
+					cod_so: cod_so,
+					cod_yn: cod_yn,
 	            },
 				success: function(code){
 					codeDetailList();
@@ -258,13 +257,13 @@ $(function() {
 				alert("삭제 취소되었습니다.")
 				return;
 			}
-			let codeDetail = $('#codeDetail').val();
+			let cod_cd = $('#codeDetail').val();
 			
 			$.ajax({
 				type: "POST",
 				url: "cmcdDetailDelete",
 				data: { 
-		            codeDetail: codeDetail, //상세코드
+		            cod_cd: cod_cd, //상세코드
 	            },
 				success: function(code){
 					codeDetailList();

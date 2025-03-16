@@ -73,7 +73,7 @@
 											placeholder="검색어로 조회">
 									</div>
 									<div class="col-1">
-										<button id="codeSearch" class="btn btn-primary mb-3 btn_main_color" type="button" type="button">조회</button>
+										<button id="codeSearch" class="btn btn-primary mb-3 btn_main_color" type="button">조회</button>
 									</div>
 								</div>
 								<div class="table-responsive">

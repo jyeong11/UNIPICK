@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+.common-top-div {
+	display: flex;
+	justify-content: space-between;
+}
+
+.common-serche-div {
+	display: flex;
+}
+
+#searchKind, #codeDetailSearchWord {
+	height:	18px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+#codeDetailSearchWord {
+	width: 250px;	
+}
+
+.common-top-div > div {
+	width: auto;
+}
+
+.aaa {
+	display: flex;
+	justify-content: flex-end; flex-grow: 1;
+	gap: 10px;
+}

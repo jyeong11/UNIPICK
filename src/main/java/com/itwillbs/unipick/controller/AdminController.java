@@ -51,7 +51,7 @@ public class AdminController {
 	// 상세 공통코드 화면이동
 	@GetMapping("commonCodeDetail")
 	public String admincommoncodedetail() {
-		return "admin/NewFile";
+		return "admin/commonCodeDetail";
 	}
 	
 	// 공통코드 화면 List 
@@ -170,9 +170,7 @@ public class AdminController {
 	// 상세 공통코드 등록
 	@ResponseBody
 	@PostMapping("cmDatailCodeRegister")
-	public void detailCodeRegister(@RequestParam Map<String, Object> map,
-														HttpSession session) {
-		map.put("cd_register", (Integer)session.getAttribute("sId"));
+	public void detailCodeRegister(@RequestParam Map<String, Object> map) {
 		adminservice.detailcoderegister(map);
 		
 	}
@@ -180,10 +178,7 @@ public class AdminController {
 	//상세 코드 수정
 	@ResponseBody
 	@PostMapping("cmcdDetailUpdate")
-	public void cmcdDetailUpdate(@RequestParam Map<String, Object> map,
-												HttpSession session) {
-		int sId = (int)session.getAttribute("sId");
-		map.put("sId", sId);
+	public void cmcdDetailUpdate(@RequestParam Map<String, Object> map) {
 		adminservice.updateDBcodeDetail(map);
 	
 	}
