@@ -241,7 +241,7 @@ $(function() {
 		            cod_cd: cod_cd, // 상세코드
 		            cod_nm: cod_nm, // 상세코드명
 					cod_so: cod_so,
-					cod_yn: cod_yn,
+					cod_yn: cod_yn
 	            },
 				success: function(code){
 					codeDetailList();
@@ -263,7 +263,7 @@ $(function() {
 				type: "POST",
 				url: "cmcdDetailDelete",
 				data: { 
-		            cod_cd: cod_cd, //상세코드
+		            cod_cd: cod_cd //상세코드
 	            },
 				success: function(code){
 					codeDetailList();

@@ -19,49 +19,53 @@
 		   SET adm_pw = #{admPw}
 		 WHERE adm_id = #{admId}
 	</update>
+	
 	<!--   	코드 등록 -->
   	<insert id="registerDB" parameterType="map">
-  	INSERT INTO common_code (
-		  	com_cd, 
-		  	com_nm,
-		  	com_yn
-	) VALUES (
-	 		#{com_cd}, 
-	 		#{com_nm}, 
-	 		#{com_yn}
-		 	)
+	  	INSERT INTO common_code (
+			  	com_cd, 
+			  	com_nm,
+			  	com_yn
+		) VALUES (
+		 		#{com_cd}, 
+		 		#{com_nm}, 
+		 		#{com_yn}
+			 	)
   	</insert>
-<!--   	코드 수정 -->
+  	
+	<!--   	코드 수정 -->
   	<update id="updateDB" parameterType="map">
-  	UPDATE common_code
-	   SET com_nm = #{com_nm},
-		   com_yn = #{com_yn}
-	 WHERE com_cd = #{com_cd}
+	  	UPDATE common_code
+		   SET com_nm = #{com_nm},
+			   com_yn = #{com_yn}
+		 WHERE com_cd = #{com_cd}
   	</update>
-<!--   	코드 조회 -->
+  	
+	<!--   	코드 조회 -->
   	<select id="codeList" parameterType="map">
-  	SELECT COUNT(*) OVER () - ROW_NUMBER() OVER (ORDER BY com_nm DESC) + 1 AS com_nb,
-  			   com_cd, 
-  			   com_nm, 
-  			   com_yn
-  	  FROM common_code
-  	  where 1 = 1
-  	  <choose>
-	   	<when test="com_cd != null and !com_cd.equals('')">
-	   		AND com_cd LIKE CONCAT(#{com_cd}, '%')
-	   	</when>
-	   	<when test="com_nm != null and !com_nm.equals('')">
-	   		AND com_nm LIKE CONCAT(#{com_nm}, '%')
-	   	</when>
-     </choose>
+	  	SELECT COUNT(*) OVER () - ROW_NUMBER() OVER (ORDER BY com_nm DESC) + 1 AS com_nb,
+	  			   com_cd, 
+	  			   com_nm, 
+	  			   com_yn
+	  	  FROM common_code
+	  	  where 1 = 1
+	  	  <choose>
+		   	<when test="com_cd != null and !com_cd.equals('')">
+		   		AND com_cd LIKE CONCAT(#{com_cd}, '%')
+		   	</when>
+		   	<when test="com_nm != null and !com_nm.equals('')">
+		   		AND com_nm LIKE CONCAT(#{com_nm}, '%')
+		   	</when>
+	     </choose>
   	</select>
   	
+  	<!-- 코드 삭제 -->
   	<delete id="deleteDB" parameterType="map">
-  	DELETE FROM common_code 
-  	 WHERE com_cd = #{com_cd}
+	  	DELETE FROM common_code 
+	  	 WHERE com_cd = #{com_cd}
   	</delete>
 	
-<!-- 상세 코드 조회 -->
+	<!-- 상세 코드 조회 -->
   	<select id="detailCodeList" parameterType="map">
 	  	SELECT COUNT(*) OVER () - ROW_NUMBER() OVER (ORDER BY d.cod_cd DESC) + 1 AS cod_nb,
 	    	   c.com_cd,
@@ -89,34 +93,108 @@
   	
   	<!-- 상세 코드 등록 -->
   	<insert id="detailcoderegister" parameterType="map">
-  		insert into common_detailcode(
+  		INSERT into common_detailcode(
   			   com_cd,
   			   cod_cd,
   			   cod_nm,
   			   cod_yn,
   			   cod_so
   			   )
-  		values(#{com_cd},
+  		VALUES(#{com_cd},
 			   #{cod_cd},
 			   #{cod_nm},
 			   #{cod_yn},
 			   #{cod_so})
   	</insert>
   	
-<!--   	상세 코드 수정 -->
+	<!--   	상세 코드 수정 -->
   	<update id="updateDBcodeDetail" parameterType="map">
-  	UPDATE common_detailcode
-	   SET cod_cd = #{cod_cd},
-	   	   cod_nm = #{cod_nm},
-	   	   cod_so = #{cod_so},
-		   cod_yn = #{cod_yn}
-	 WHERE cod_cd = #{beforecod_cd}
+	  	UPDATE common_detailcode
+		   SET cod_cd = #{cod_cd},
+		   	   cod_nm = #{cod_nm},
+		   	   cod_so = #{cod_so},
+			   cod_yn = #{cod_yn}
+		 WHERE cod_cd = #{beforecod_cd}
   	</update>
   	
-<!--   	상세 코드 삭제 -->
+	<!--   	상세 코드 삭제 -->
   	<delete id="updateDBcodeDelete" parameterType="map">
-  	DELETE FROM common_detailcode
-  	 WHERE cod_cd = #{cod_cd}
+	  	DELETE FROM common_detailcode
+	  	 WHERE cod_cd = #{cod_cd}
   	</delete>
+  	
+	<!--   계층 코드 등록 -->
+  	<insert id="insertLvCode" parameterType="map">
+	  	INSERT INTO level (
+			  	lev_cd, 
+			  	lev_nm,
+			  	lev_so,
+			  	lev_yn
+		) VALUES (
+		 		#{lev_cd}, 
+		 		#{lev_nm},
+		 		#{lev_so}, 
+		 		#{lev_yn}
+			 	)
+  	</insert>
+  	
+	<!--   	계층 코드 수정 -->
+  	<update id="updateLvCode" parameterType="map">
+	  	UPDATE level
+		   SET lev_nm = #{lev_nm},
+		   	   lev_so = #{lev_so},
+			   lev_yn = #{lev_yn}
+		 WHERE lev_cd = #{lev_cd}
+  	</update>
+  	
+	<!--   	계층 코드 조회 -->
+  	<select id="selectLvCode" parameterType="map">
+	  	SELECT COUNT(*) OVER () - ROW_NUMBER() OVER (ORDER BY lev_nm DESC) + 1 AS lev_nb,
+	  			   lev_cd, 
+	  			   lev_nm,
+	  			   lev_so,
+	  			   lev_yn
+	  	  FROM level
+	  	  where 1 = 1
+	  	  <choose>
+		   	<when test="lev_cd != null and !lev_cd.equals('')">
+		   		AND lev_cd LIKE CONCAT(#{lev_cd}, '%')
+		   	</when>
+		   	<when test="lev_nm != null and !lev_nm.equals('')">
+		   		AND lev_nm LIKE CONCAT(#{lev_nm}, '%')
+		   	</when>
+	     </choose>
+  	</select>
+  	
+	<!-- 계층 코드 삭제 -->
+  	<delete id="deleteLvCode" parameterType="map">
+	  	DELETE FROM level 
+	  	 WHERE lev_cd = #{lev_cd}
+  	</delete>
+  	
+  	<!-- 사이드 메뉴 -->
+  	<select id="sideMainMenuList">
+  		SELECT lev_cd,
+  			   lev_nm,
+  			   lev_so,
+  			   lev_yn
+  		  FROM level
+  		 WHERE lev_cd LIKE CONCAT(#{menu}, '%')
+  		   AND CHAR_LENGTH(lev_cd) = 9
+  		   AND lev_yn = 'y'
+  		 ORDER BY lev_so
+  	</select>
+  	
+  	<select id="sideSubMenuList">
+  		SELECT lev_cd,
+  			   lev_nm,
+  			   lev_so,
+  			   lev_yn
+  		  FROM level
+  		 WHERE lev_cd LIKE CONCAT(#{menu}, '%')
+  		   AND CHAR_LENGTH(lev_cd) = 11
+  		   AND lev_yn = 'y'
+  		 ORDER BY lev_so
+  	</select>
   	
 </mapper>

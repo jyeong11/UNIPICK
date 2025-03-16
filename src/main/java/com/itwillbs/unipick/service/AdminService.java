@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwillbs.unipick.mapper.AdminMapper;
 
@@ -43,20 +44,41 @@ public class AdminService {
 	public List<Map<String, Object>> detailCodeList(Map<String, Object> map) {
 		return mapper.detailCodeList(map);
 	}
-	
 	// 상세 코드 등록
 	public int detailcoderegister(Map<String, Object> map) {
 		return mapper.detailcoderegister(map);
 	}
-	
 	// 상세 코드 수정
 	public int updateDBcodeDetail(Map<String, Object> map) {
 		return mapper.updateDBcodeDetail(map);
 	}
-	
 	// 상세 코드 삭제
 	public int updateDBcodeDelete(Map<String, Object> map) {
 		return mapper.updateDBcodeDelete(map);
+	}
+	// 계층 코드등록
+	public int insertLvCode(Map<String, Object> code) {
+		return mapper.insertLvCode(code);
+	}
+	// 계층 코드 수정
+	public int updateLvCode(Map<String, Object> code) {
+		return mapper.updateLvCode(code);
+	}
+	// 계층 코드 조회
+	public List<Map<String, Object>> selectLvCode(Map<String, Object> map) {	
+		return mapper.selectLvCode(map);
+	}
+	// 계층 코드 삭제
+	public int deleteLvCode(Map<String, Object> code) {	
+		return mapper.deleteLvCode(code);
+	}
+	// 사이드 메인 메뉴
+	public List<Map<String, Object>> sideMainMenuList(Map<String, Object> map) {
+		return mapper.sideMainMenuList(map);
+	}
+	// 사이드 서브 메뉴
+	public List<Map<String, Object>> sideSubMenuList(Map<String, Object> map) {
+		return mapper.sideSubMenuList(map);
 	}
 		
 }

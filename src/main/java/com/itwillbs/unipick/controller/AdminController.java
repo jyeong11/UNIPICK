@@ -1,5 +1,6 @@
 package com.itwillbs.unipick.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,6 +53,12 @@ public class AdminController {
 	@GetMapping("commonCodeDetail")
 	public String admincommoncodedetail() {
 		return "admin/commonCodeDetail";
+	}
+	
+	// 계층코드 화면이동
+	@GetMapping("commonCodeLevel")
+	public String commoncodelevel() {
+		return "admin/commonCodeLevel";
 	}
 	
 	// 공통코드 화면 List 
@@ -190,5 +197,48 @@ public class AdminController {
 	
 		adminservice.updateDBcodeDelete(map);
 	}
+	
+	// 계층코드 조회
+	@ResponseBody
+	@GetMapping("lvCodeList")
+	public List<Map<String, Object>> lvCodeList(@RequestParam Map<String, Object> map) {	
+		return adminservice.selectLvCode(map);
+	}
+	
+	// 계층 코드 등록
+	@ResponseBody
+	@PostMapping("lvCodeRegister")
+	public void lvCodeRegister(@RequestBody Map<String, Object> map) {
+		adminservice.insertLvCode(map);
+	}
+	
+	//계층 코드 수정
+	@ResponseBody
+	@PostMapping("lvCodeUpdate")
+	public void lvCodeUpdate(@RequestParam Map<String, Object> map) {
+		adminservice.updateLvCode(map);
+	}
+	
+	//계층 코드 삭제
+	@ResponseBody
+	@PostMapping("lvCodeDelete")
+	public void lvCodeDelete(@RequestParam Map<String, Object> map){
+		adminservice.deleteLvCode(map);
+	}
+	
+	// 사이드 메뉴
+	@ResponseBody
+	@PostMapping("sideMenu")
+	public Map<String,Object> sideMenu(@RequestParam Map<String, Object> map){
+		
+		Map<String, Object> menu = new HashMap<String, Object>();
+		menu.put("main", adminservice.sideMainMenuList(map));
+		menu.put("sub", adminservice.sideSubMenuList(map));
+		
+		System.out.println(menu);
+		
+		return menu; 
+	}
+	
 	
 }

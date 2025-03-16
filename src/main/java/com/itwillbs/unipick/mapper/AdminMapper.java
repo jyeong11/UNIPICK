@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Mapper
 public interface AdminMapper {
@@ -27,4 +28,16 @@ public interface AdminMapper {
 	public int 	updateDBcodeDetail(Map<String, Object> map);
 	// 상세 코드 삭제
 	public int 	updateDBcodeDelete(Map<String, Object> map);
+	// 계층 코드 조회
+	public List<Map<String, Object>> selectLvCode(Map<String, Object> map);
+	// 계층 코드 등록
+	public int insertLvCode(Map<String, Object> map);
+	// 계층 코드 수정
+	public int 	updateLvCode(Map<String, Object> map);
+	// 계층 코드 삭제
+	public int 	deleteLvCode(Map<String, Object> map);
+	// 사이드 메인 메뉴
+	public List<Map<String, Object>> sideMainMenuList(Map<String, Object> map);
+	// 사이드 서브 메뉴
+	public List<Map<String, Object>> sideSubMenuList(Map<String, Object> map);
 }
