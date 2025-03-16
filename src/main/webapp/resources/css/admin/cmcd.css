@@ -9,7 +9,7 @@
 	display: flex;
 }
 
-#searchKind, #codeDetailSearchWord {
+#searchKind, #codeDetailSearchWord, #codeSearchWord {
 	height:	18px;
     padding: 10px;
     border: 1px solid #ccc;
@@ -17,7 +17,7 @@
     font-size: 14px;
 }
 
-#codeDetailSearchWord {
+#codeDetailSearchWord, #codeSearchWord {
 	width: 250px;	
 }
 

@@ -22,6 +22,7 @@
 <link href="${pageContext.request.contextPath }/resources/css/public.css" rel="stylesheet" type="text/css">
 <%-- <link href="${pageContext.request.contextPath }/resources/css/commonCode.css" rel="stylesheet" type="text/css"> --%>
 <link href="${pageContext.request.contextPath }/resources/css/admin/adminMain.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/admin/cmcd.css" rel="stylesheet" type="text/css">
 
 <!-- favicon -->
 <link rel="icon"
@@ -56,24 +57,25 @@
 							<h6 class="m-0 font-weight-bold">공통코드</h6>
 						</div>
 						<div class="card-body">
-								<div class="d-flex align-items-start gap-4">
-									<div class="col-1">
+								<div class="common-top-div">
+									<div class="top-btn">
 										<input class="btn btn_main_color"
                                         data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                        id="btnModal" type="button" class="btn btn_main_color" value="등록">
+                                        id="btnModal" type="button"value="등록">
 									</div>
-									<div class="col-1" style="margin-left: 750px">
-										<select class="form-select" id="searchKind">
-											<option value="option1">공통코드</option>
-											<option value="option2">코드명</option>
-										</select>
-									</div>
-									<div class="col-3">
-										<input type="text" id="codeSearchWord" class="form-control"
-											placeholder="검색어로 조회">
-									</div>
-									<div class="col-1">
-										<button id="codeSearch" class="btn btn-primary mb-3 btn_main_color" type="button">조회</button>
+									<div class="search-div">
+										<div>
+											<select id="searchKind">
+												<option value="option1">공통코드</option>
+												<option value="option2">코드명</option>
+											</select>
+										</div>
+										<div>
+											<input type="text" id="codeSearchWord" placeholder="검색어로 조회">
+										</div>
+										<div>
+											<button id="codeSearch" class="btn btn-primary mb-3 btn_main_color" type="button">조회</button>
+										</div>
 									</div>
 								</div>
 								<div class="table-responsive">

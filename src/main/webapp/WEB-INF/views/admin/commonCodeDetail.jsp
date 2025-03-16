@@ -77,31 +77,31 @@
 										<button id="codeDetailSearch" class="btn btn-primary mb-3 btn_main_color" type="button">조회</button>
 									</div>
 								</div>
+							</div>
+							<div class="table-responsive">
+								<div id="commonTable">
+									<table id="dataTable" class="table table-bordered">
+										<thead>
+											<tr class="project_table_tr">
+												<th>순번</th>
+												<th>공통코드</th>
+												<th>공통코드명</th>
+												<th>상세공통코드</th>
+												<th>상세코드명</th>
+												<th>정렬순번</th>
+												<th>사용여부</th>
+											</tr>
+										</thead>
+										<tbody id="commonDetailTableBody">
+											<tr>
+												<td></td>
+												<td></td>
+												<td></td>
+											</tr>
+										</tbody>
+									</table>
 								</div>
-								<div class="table-responsive">
-									<div id="commonTable">
-										<table id="dataTable" class="table table-bordered">
-											<thead>
-												<tr class="project_table_tr">
-													<th>순번</th>
-													<th>공통코드</th>
-													<th>공통코드명</th>
-													<th>상세공통코드</th>
-													<th>상세코드명</th>
-													<th>정렬순번</th>
-													<th>사용여부</th>
-												</tr>
-											</thead>
-											<tbody id="commonDetailTableBody">
-												<tr>
-													<td></td>
-													<td></td>
-													<td></td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
+							</div>
 						</div>
 						<!-- 						조회버튼 클릭시 모달창 뜸 -->
 							<div class="modal fade" id="exampleModal" tabindex="-1"
