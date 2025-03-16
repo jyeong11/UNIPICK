@@ -62,7 +62,7 @@
                                        data-bs-toggle="modal" data-bs-target="#exampleModal"
                                        id="btnModal" type="button" value="등록">
 								</div>
-								<div class="aaa">
+								<div class="search-div">
 									<div>
 										<select id="searchKind">
 											<option value="option1">공통코드</option>
