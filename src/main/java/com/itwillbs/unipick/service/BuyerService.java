@@ -8,6 +8,4 @@ import com.itwillbs.unipick.mapper.BuyerMapper;
 @Service
 public class BuyerService {
 	
-	@Autowired
-	BuyerMapper buyermapper;
 }
