@@ -87,10 +87,12 @@ table, th, td {
 .container-fluid{
 	width: 86% !important;
 }
-*, ::after, ::before {
-    box-sizing: content-box;
+*{
+   box-sizing: border-box;
 }
-
+body {
+    overflow-x: hidden !important;
+}
 #seller-container{
 	width: 1200px;
 	margin: 0 auto;
@@ -101,11 +103,12 @@ table, th, td {
 }
 
 .container {
-	max-width: 1200px;
+	max-width: 100%;
 	width: 1200px;
   	margin-bottom: 10px;
   	border: 1px solid #ecedee;
   	border-radius: 20px;
+  	overflow-x: auto;
   	padding: 10px 0 10px 10px; 
 }
 
@@ -130,8 +133,12 @@ table, th, td {
      left: 0;
      overflow-y: auto;
      transition: transform 0.3s ease;
+     box-sizing: content-box;
  }
-
+input, select {
+    min-width: 110px;
+    min-height: 42px
+}
  .sidebar.hidden {
      transform: translateX(-100%);
  }

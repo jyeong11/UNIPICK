@@ -34,7 +34,7 @@
 	
 	<div class="main_container">
 		<div id="left_bar">
-			<jsp:include page="../inc/adminSidebar2.jsp"></jsp:include>
+			<jsp:include page="../inc/adminSidebar.jsp"></jsp:include>
 		</div>
 		
 		<div class="content">

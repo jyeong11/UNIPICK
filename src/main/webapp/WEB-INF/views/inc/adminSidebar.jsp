@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<script src="${pageContext.request.contextPath }/resources/js/adminSidebar.js"></script>
+<%-- <script src="${pageContext.request.contextPath }/resources/js/adminSidebar.js"></script> --%>
 <nav class="sidebar" id="sidebar">
     <h2>메뉴</h2>
     <ul class="menu">
