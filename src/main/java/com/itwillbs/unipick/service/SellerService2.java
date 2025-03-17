@@ -54,6 +54,21 @@ public class SellerService2 {
                 // 클라이언트 접근용 가상 경로 생성 (예: "/resources/uploads/2025/02/11/UUID_파일명")
                 String fileVirtualPath = virtualPath + "/" + subDir + "/" + fileName;
                 result.put("filePath", fileVirtualPath);
+               
+                String productId = (String) session.getAttribute("productId"); // 또는 request.getParameter("productId")
+                String sellerId = (String) session.getAttribute("sellerId");   // 또는 request.getParameter("sellerId")
+
+             // DB에 이미지 정보 등록을 위한 파라미터 설정
+                Map<String, Object> paramMap = new HashMap<>();
+                paramMap.put("imageId", UUID.randomUUID().toString()); // 혹은 DB가 자동생성하는 경우 생략 가능
+                // productId, sellerId 등은 폼의 다른 파라미터 또는 세션 정보를 통해 받아와야 합니다.
+                paramMap.put("productId","TEST_PRODUCT_ID" );
+                paramMap.put("sellerId", "TEST_SELLER_ID" );
+                paramMap.put("fileName", fileName);
+                paramMap.put("filePath", fileVirtualPath);
+
+                // 매퍼의 insertProductImage 메서드 호출
+                mapper.insertProductImage(paramMap);
             }
         } catch (Exception e) {
             e.printStackTrace();

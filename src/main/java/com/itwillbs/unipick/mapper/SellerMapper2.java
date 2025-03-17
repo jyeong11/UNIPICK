@@ -8,4 +8,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface SellerMapper2 {
 
 	public Map<String, Object> prdList(Map<String, Object> prdList);
+
+	public void insertProductImage(Map<String, Object> paramMap);
 }
