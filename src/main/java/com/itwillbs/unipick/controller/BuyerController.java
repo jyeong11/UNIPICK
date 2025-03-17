@@ -20,8 +20,13 @@ public class BuyerController {
 	
 	
 	@GetMapping("new")
-	public String memberNew() {
+	public String buyerNew() {
 		return "buyer/buyerNew";
+	}
+	
+	@GetMapping("best")
+	public String buyerBest() {
+		return "buyer/buyerBest";
 	}
 		
 	// 급여 메뉴 공통코드

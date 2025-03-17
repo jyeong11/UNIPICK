@@ -33,7 +33,7 @@
 	<div id="top_menu">
 		<ul class="menu-nav">
 			<li class="menu-inner">
-				<a href="">
+				<a href="/UNIPICK">
 					<span>홈</span>
 				</a>
 				<a href="new">

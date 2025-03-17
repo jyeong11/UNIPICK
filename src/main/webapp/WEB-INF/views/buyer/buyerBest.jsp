@@ -55,9 +55,9 @@
 	</div>
 	
 	<div id="content">
-		<div id = "new">
+		<div id = "best">
 			<div class = "two">
-				<h2>오늘의 신상</h2>
+				<h2>베스트</h2>
 			</div>
 			<div id = "img12">
 				<!-- 1번 줄 -->

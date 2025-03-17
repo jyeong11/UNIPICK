@@ -3,7 +3,7 @@
 <div id = "new">
 	<div class = "two">
 		<h2>신상품</h2>
-		<a href="/newarrive">더보기</a>
+		<a href="new">더보기</a>
 	</div>
 	<div id = "img12">
 		<!-- 1번 줄 -->
