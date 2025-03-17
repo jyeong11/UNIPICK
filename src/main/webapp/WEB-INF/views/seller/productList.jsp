@@ -48,5 +48,8 @@
 			</div>
 		</div>
 	</div>
+	<div>
+	<input type="button" onclick="location.href='prdRegister'" value="이메일로 이동">
+	</div>
 </body>
 </html>

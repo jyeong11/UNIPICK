@@ -128,10 +128,6 @@ public class SellerController {
 		return "seller/sellerMain";
 	}
 	
-	@GetMapping("prdRegister")
-	public String prdRegister() {
-		return "seller/prdRegister";
-	}
 	
 	//마이페이지
 	@ResponseBody
