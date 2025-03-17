@@ -4,6 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>UNIPICK</title>
+
+
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -13,44 +18,96 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 	crossorigin="anonymous"></script>
-<!-- 구글 폰트 -->
+
+<!-- default -->
+<script
+	src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
+
+<!-- font-awesome -->
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/public/fontawesome/all.min.css" />
+<script
+	src="${pageContext.request.contextPath }/resources/public/fontawesome/all.min.js"></script>
+
+<!-- CSS for Page -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
-
-<!-- css -->
-<link href="${pageContext.request.contextPath }/resources/css/public.css" rel="stylesheet" type="text/css">
-<%-- <link href="${pageContext.request.contextPath }/resources/css/commonCode.css" rel="stylesheet" type="text/css"> --%>
-<link href="${pageContext.request.contextPath }/resources/css/admin/adminMain.css" rel="stylesheet" type="text/css">
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Nunito:wght@200..1000&display=swap"
+	rel="stylesheet">
+<link
+	href="${pageContext.request.contextPath }/resources/public/css/sb-admin-2.css"
+	rel="stylesheet">
+<link
+	href="${pageContext.request.contextPath }/resources/public/css/adm.css"
+	rel="stylesheet">
+<link
+	href="${pageContext.request.contextPath }/resources/public/vendor/datatables/dataTables.bootstrap4.min.css"
+	rel="stylesheet">
+<link
+	href="${pageContext.request.contextPath }/resources/public/vendor/datatables/datatables.min.css"
+	rel="stylesheet">
 <link href="${pageContext.request.contextPath }/resources/css/admin/cmcd.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/public.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/admin/adminMain.css" rel="stylesheet" type="text/css">
 
-<!-- favicon -->
-<link rel="icon"
-	href="${pageContext.request.contextPath }/resources/images/favicon.png">
-<!--  js -->
-<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
+<!-- script -->
 <script src="${pageContext.request.contextPath }/resources/js/admin/commonCodeLevel.js"></script>
-<title>유니픽 관리자</title>
-</head>
-<body>
-	<div id="admin-container">
-		<div>
-			<a href="admin">
-		       	<img src="${pageContext.request.contextPath}/resources/images/로고 가로.png" alt="로고" id="logo">
-			</a>
-		 </div>
-		 <div class="login_div">
-		 	<ul class="login_ul">
-		 		<li><a href="javascript:void(0);" id="admin_id">admin</a></li>
-		 		<li class="logout_btn"><a href="#" id="logout">로그아웃</a></li>
-		 	</ul>
-		 </div>
-	</div>
-	<!-- Sidebar -->
-	<div class="d-flex">
-		<jsp:include page="../inc/adminSidebar.jsp"></jsp:include>
 
-			<div class="container-fluid">
+
+</head>
+<body id="page-top">
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+		<div>
+			<jsp:include page="../inc/adminSidebar.jsp"></jsp:include>
+		</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const menuTitles = document.querySelectorAll(".menu-title");
+
+    menuTitles.forEach(title => {
+        title.addEventListener("click", function (event) {
+            event.preventDefault(); // 링크 이동 방지
+            const submenu = this.nextElementSibling;
+            submenu.classList.toggle("open");
+        });
+    });
+});
+</script>
+		<script type="text/javascript">
+
+// 	console.log("현재 페이지 주소: " + window.location.pathname);
+
+	document.addEventListener("DOMContentLoaded", function(){
+		// 현재 페이지에 해당하는 메뉴 활성화
+		let pathName = window.location.pathname.substring(1);
+		let collapseItems = document.querySelectorAll(".collapse-item");
+		
+		collapseItems.forEach((item) => {
+			item.classList.remove("active");
+			
+			if (pathName == item.getAttribute('href') || pathName == item.getAttribute('data-sub-page') || pathName == item.getAttribute('data-sub-page2')) {
+				item.classList.add("active");
+				item.parentElement.parentElement.classList.add("show");
+				item.parentElement.parentElement.parentElement.classList.add("active");
+			}
+			
+		});
+	});
+</script>
+		<!-- // Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+            <div>
+            	<jsp:include page="../inc/adminTopbar.jsp"></jsp:include>
+            </div>
+                <!-- Begin Page Content -->
 				<section class="section">
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
@@ -112,7 +169,49 @@
 							</div>
 						</div>
 				</section>
-			</div>
-		</div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- End of Main Content -->
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+    <div class="copyright text-center my-auto">
+        <span>Copyright © UNIPICK Admin 2025</span>
+    </div>
+</div>
+            </footer>
+            <!-- End of Footer -->
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <svg class="svg-inline--fa fa-angle-up" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M201.4 137.4c12.5-12.5 32.8-12.5 45.3 0l160 160c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L224 205.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l160-160z"></path></svg><!-- <i class="fas fa-angle-up"></i> Font Awesome fontawesome.com -->
+    </a>
+
+     <!-- Bootstrap core JavaScript-->
+    <script src="${pageContext.request.contextPath }/resources/public/vendor/jquery/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="${pageContext.request.contextPath }/resources/public/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="${pageContext.request.contextPath }/resources/public/js/sb-admin-2.min.js"></script>
+    
+    <!-- Page level plugins -->
+    <script src="${pageContext.request.contextPath }/resources/public/vendor/chart.js/Chart.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/public/vendor/datepicker/moment.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/public/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/public/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+	
+    <!-- Page level custom scripts -->
+    <script src="${pageContext.request.contextPath }/resources/public/js/index.js"></script>
+
 </body>
+
+
 </html>

@@ -102,31 +102,31 @@ $(function() {
             bodydata = `
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label">공통코드 : </label>
-                    <div class="col-sm-3">
-                        <input type="text" id="code" class="col-sm-2 form-control" value="${selectData.lev_cd}" disabled>
+                    <div class="col-sm-8">
+                        <input type="text" id="code" class="col-sm-4 form-control" value="${selectData.lev_cd}" disabled>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label">코드명 : </label>
-                    <div class="col-sm-3">
-                        <input type="text" id="codeName" class="col-sm-2 form-control" value="${selectData.lev_nm}">
+                    <div class="col-sm-8">
+                        <input type="text" id="codeName" class="col-sm-4 form-control" value="${selectData.lev_nm}">
                     </div>
                 </div>
 				<div class="row mb-3">
                     <label class="col-sm-2 col-form-label">URL링크 : </label>
-                    <div class="col-sm-3">
-                        <input type="text" id="codeLink" class="col-sm-2 form-control" value="${selectData.lev_ul}">
+                    <div class="col-sm-8">
+                        <input type="text" id="codeLink" class="col-sm-4 form-control" value="${selectData.lev_ul}">
                     </div>
                 </div>
 				<div class="row mb-3">
 					<label class="col-sm-2 col-form-label">정렬순번 : </label>
-					<div class="col-sm-3">
-						<input type="text" id="sortNum" class="col-sm-2 form-control" value="${selectData.lev_so}">
+					<div class="col-sm-8">
+						<input type="text" id="sortNum" class="col-sm-4 form-control" value="${selectData.lev_so}">
 					</div>
 				</div>
                 <div class="row mb-1">
                     <label class="col-sm-2 col-form-label">사용여부 : </label>
-                    <div class="col-sm-3">
+                    <div class="col-sm-8">
                         <select id="useYN" class="col-sm-1 form-select">
                             <option value="y">사용</option>
                             <option value="n">미사용</option>
@@ -136,7 +136,7 @@ $(function() {
 				<div align="right">
 					<input type="button" id="cmcdUpdate" class="btn btn_main_color" value="수정">
 					<input type="button" id="cmcodeDelete" class="btn btn_main_color" value="삭제">
-					<input type="button" id="commonColse" class="btn btn_main_color" value="닫기" onclick="location.href ='commonCodeLevel'">	
+					<input type="button" id="commonColse" class="btn btn_main_color" value="닫기">	
 				</div>
             `;
             $('#modal-con').append(bodydata);
@@ -204,31 +204,31 @@ $(function() {
                 bodydata = `
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">공통코드 : </label>
-                        <div class="col-sm-3">
-                            <input type="text" id="code" class="col-sm-2 form-control">
+                        <div class="col-sm-8">
+                            <input type="text" id="code" class="col-sm-4 form-control">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">코드명 : </label>
-                        <div class="col-sm-3">
-                            <input type="text" id="codeName" class="col-sm-2 form-control">
+                        <div class="col-sm-8">
+                            <input type="text" id="codeName" class="col-sm-4 form-control">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">URL링크 : </label>
-                        <div class="col-sm-3">
-                            <input type="text" id="codeLink" class="col-sm-2 form-control">
+                        <div class="col-sm-8">
+                            <input type="text" id="codeLink" class="col-sm-4 form-control">
                         </div>
                     </div>
 					<div class="row mb-3">
 						<label class="col-sm-2 col-form-label">정렬순번 : </label>
-						<div class="col-sm-3">
-							<input type="text" id="sortNum" class="col-sm-2 form-control">
+						<div class="col-sm-8">
+							<input type="text" id="sortNum" class="col-sm-4 form-control">
 						</div>
 					</div>
                     <div class="row mb-1">
                         <label class="col-sm-2 col-form-label">사용여부 : </label>
-                        <div class="col-sm-3">
+                        <div class="col-sm-8">
                             <select id="useYN" class="col-sm-1 form-select">
                                 <option value="y">사용</option>
                                 <option value="n">미사용</option>
@@ -237,7 +237,7 @@ $(function() {
                     </div>
 					<div align="right">
 						<input type="button" id="coderegister" class="btn btn_main_color" value="등록">
-						<input type="button" id="commonColse" class="btn btn_main_color" value="닫기" onclick="location.href ='commonCodeLevel'">	
+						<input type="button" id="commonColse" class="btn btn_main_color" value="닫기">	
 					</div>
                 `;
                 $('#modal-con').append(bodydata);
@@ -247,4 +247,8 @@ $(function() {
             }
         });
     });
+
+	$(document).on("click", "#commonColse", function() {
+	    $('#exampleModal').modal('hide'); // 모달 닫기
+	});
 });

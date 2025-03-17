@@ -8,10 +8,6 @@
 	display: flex;
 }
 
-#logo {
-	width: 180px;
-}
-
 #admin-container {
 	display: flex;
 	justify-content: space-between;

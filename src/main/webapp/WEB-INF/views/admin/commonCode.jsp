@@ -54,6 +54,7 @@
 <!-- script -->
 <script src="${pageContext.request.contextPath }/resources/js/admin/commonCode.js"></script>
 
+
 </head>
 <body id="page-top">
 	<!-- Page Wrapper -->
@@ -62,7 +63,7 @@
 			<jsp:include page="../inc/adminSidebar.jsp"></jsp:include>
 		</div>
 
-		<script>
+<script>
 document.addEventListener("DOMContentLoaded", function () {
     const menuTitles = document.querySelectorAll(".menu-title");
 
@@ -189,23 +190,24 @@ document.addEventListener("DOMContentLoaded", function () {
         <svg class="svg-inline--fa fa-angle-up" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M201.4 137.4c12.5-12.5 32.8-12.5 45.3 0l160 160c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L224 205.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l160-160z"></path></svg><!-- <i class="fas fa-angle-up"></i> Font Awesome fontawesome.com -->
     </a>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="/resources/adm/vendor/jquery/jquery.min.js"></script>
-    <script src="/resources/adm/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+     <!-- Bootstrap core JavaScript-->
+    <script src="${pageContext.request.contextPath }/resources/public/vendor/jquery/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="/resources/adm/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/public/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="/resources/adm/js/sb-admin-2.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/public/js/sb-admin-2.min.js"></script>
     
     <!-- Page level plugins -->
-    <script src="/resources/adm/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="/resources/adm/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-    <script src="/resources/adm/vendor/datatables/datatables.min.js"></script>
-
+    <script src="${pageContext.request.contextPath }/resources/public/vendor/chart.js/Chart.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/public/vendor/datepicker/moment.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/public/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/public/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+	
     <!-- Page level custom scripts -->
-    <script src="/resources/adm/js/code_regist.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/public/js/index.js"></script>
 
 </body>
 

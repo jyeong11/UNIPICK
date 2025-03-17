@@ -119,7 +119,7 @@ $(function() {
 				<div align="right">
 					<input type="button" id="cmcdUpdate" class="btn btn_main_color" value="수정">
 					<input type="button" id="cmcodeDelete" class="btn btn_main_color" value="삭제">
-					<input type="button" id="commonColse" class="btn btn_main_color" value="닫기" onclick="location.href ='commonCode'">	
+					<input type="button" id="commonColse" class="btn btn_main_color" value="닫기">	
 				</div>
             `;
             $('#modal-con').append(bodydata);
@@ -204,7 +204,7 @@ $(function() {
                     </div>
 					<div align="right">
 						<input type="button" id="coderegister" class="btn btn_main_color" value="등록">
-						<input type="button" id="commonColse" class="btn btn_main_color" value="닫기" onclick="location.href ='commonCode'">	
+						<input type="button" id="commonColse" class="btn btn_main_color" value="닫기">	
 					</div>
                 `;
                 $('#modal-con').append(bodydata);
@@ -214,4 +214,9 @@ $(function() {
             }
         });
     });
+
+	$(document).on("click", "#commonColse", function() {
+	    $('#exampleModal').modal('hide'); // 모달 닫기
+	});
+	
 });

@@ -40,7 +40,7 @@ $(function() {
                 res.forEach(function(cd) {
                     tablebody += `
                         <tr>
-							<td class="codeDeatilUpdate btn btn-link project_font_color" data-bs-toggle="modal" 
+							<td class="codeDeatilUpdate btn btn-link no-border" data-bs-toggle="modal" 
                             data-bs-target="#exampleModal">${cd.cod_nb}</td>
 							<td>${cd.com_cd}</td>
 							<td>${cd.com_nm}</td>
@@ -73,38 +73,38 @@ $(function() {
 					 bodydata = `
 						<div class="row mb-3">
 							<label class="col-sm-2 col-form-label">공통코드 : </label>
-							<div class="col-sm-3">
-								<input type="text" id="code" class="col-sm-2 form-control" value="${res[0].com_cd}" disabled>
+							<div class="col-sm-8">
+								<input type="text" id="code" class="col-sm-4 form-control" value="${res[0].com_cd}" disabled>
 							</div>
 						</div>
 						<div class="row mb-3">
 							<label class="col-sm-2 col-form-label">코드명 : </label>
-							<div class="col-sm-3">
-								<select id="codeNameSelect" class="col-sm-2 form-select"></select>
+							<div class="col-sm-8">
+								<select id="codeNameSelect" class="col-sm-4 form-select"></select>
 							</div>
 						</div>
 						<div class="row mb-3">
 							<label class="col-sm-2 col-form-label">상세코드 : </label>
-							<div class="col-sm-3">
-								<input type="text" id="codeDetail" class="col-sm-2 form-control">
+							<div class="col-sm-8">
+								<input type="text" id="codeDetail" class="col-sm-4 form-control">
 							</div>
 						</div>
 						<div class="row mb-3">
 							<label class="col-sm-2 col-form-label">상세코드명 : </label>
-							<div class="col-sm-3">
-								<input type="text" id="codeDetailName" class="col-sm-2 form-control">
+							<div class="col-sm-8">
+								<input type="text" id="codeDetailName" class="col-sm-4 form-control">
 							</div>
 						</div>
 						<div class="row mb-3">
 							<label class="col-sm-2 col-form-label">정렬순번 : </label>
-							<div class="col-sm-3">
-								<input type="text" id="sortNum" class="col-sm-2 form-control">
+							<div class="col-sm-8">
+								<input type="text" id="sortNum" class="col-sm-4 form-control">
 							</div>
 						</div>
 						<div class="row mb-1">
 							<label class="col-sm-2 col-form-label">사용여부 : </label>
-							<div class="col-sm-3">
-								<select id="useYN" class="col-sm-1 form-select">
+							<div class="col-sm-8">
+								<select id="useYN" class="col-sm-4 form-select">
 									<option value="y">사용</option>
 									<option value="n">미사용</option>
 								</select>
@@ -112,7 +112,7 @@ $(function() {
 						</div>
 						<div align="right">
 							<input type="button" id="codeDetailRegister" class="btn btn_main_color" value="등록">
-							<input type="button" id="commonDetailColse" class="btn btn_main_color" value="닫기" onclick="location.href ='commonCodeDetail'">	
+							<input type="button" id="commonDetailColse" class="btn btn_main_color" value="닫기">	
 						</div>
 					`;
 				
@@ -179,38 +179,38 @@ $(function() {
 			 bodydata = `
 				<div class="row mb-3">
 					<label class="col-sm-2 col-form-label">공통코드 : </label>
-					<div class="col-sm-3">
-						<input type="text" id="code" class="col-sm-2 form-control" value="${selectData.com_cd}" disabled>
+					<div class="col-sm-8">
+						<input type="text" id="code" class="col-sm-4 form-control" value="${selectData.com_cd}" disabled>
 					</div>
 				</div>
 				<div class="row mb-3">
 					<label class="col-sm-2 col-form-label">코드명 : </label>
-					<div class="col-sm-3">
-						<input type="text" id="codeNameSelect" class="col-sm-2 form-control" value="${selectData.com_nm}" disabled>
+					<div class="col-sm-8">
+						<input type="text" id="codeNameSelect" class="col-sm-4 form-control" value="${selectData.com_nm}" disabled>
 					</div>
 				</div>
 				<div class="row mb-3">
 					<label class="col-sm-2 col-form-label">상세코드 : </label>
-					<div class="col-sm-3">
-						<input type="text" id="codeDetail" class="col-sm-2 form-control" value="${selectData.cod_cd}">
+					<div class="col-sm-8">
+						<input type="text" id="codeDetail" class="col-sm-4 form-control" value="${selectData.cod_cd}">
 					</div>
 				</div>
 				<div class="row mb-3">
 					<label class="col-sm-2 col-form-label">상세코드명 : </label>
-					<div class="col-sm-3">
-						<input type="text" id="codeDetailName" class="col-sm-2 form-control" value="${selectData.cod_nm}">
+					<div class="col-sm-8">
+						<input type="text" id="codeDetailName" class="col-sm-4 form-control" value="${selectData.cod_nm}">
 					</div>
 				</div>
 				<div class="row mb-3">
 					<label class="col-sm-2 col-form-label">정렬순번 : </label>
-					<div class="col-sm-3">
-						<input type="text" id="sortNum" class="col-sm-2 form-control" value="${selectData.cod_so}">
+					<div class="col-sm-8">
+						<input type="text" id="sortNum" class="col-sm-4 form-control" value="${selectData.cod_so}">
 					</div>
 				</div>
 				<div class="row mb-1">
 					<label class="col-sm-2 col-form-label">사용여부 : </label>
-					<div class="col-sm-3">
-						<select id="useYN" class="col-sm-1 form-select">
+					<div class="col-sm-8">
+						<select id="useYN" class="col-sm-4 form-select">
 							<option value="y">사용</option>
 							<option value="n">미사용</option>
 						</select>
@@ -219,57 +219,62 @@ $(function() {
 				<div align="right">
 					<input type="button" id="cdDetailUpdate" class="btn btn_main_color" value="수정">
 					<input type="button" id="cdDetailDelete" class="btn btn_main_color" value="삭제">
-					<input type="button" id="commonDetailColse" class="btn btn_main_color" value="닫기" onclick="location.href ='commonCodeDetail'">	
+					<input type="button" id="commonDetailColse" class="btn btn_main_color" value="닫기">	
 				</div>
 			`;
-			$('#modal-con').append(bodydata);
-		});
+		$('#modal-con').append(bodydata);
+	});
 		
-		// 수정버튼 클릭시
-		$(document).on('click', '#cdDetailUpdate', function(){
-			confirm("수정하시겠습니까?") ? alert("수정이 완료되었습니다.") : alert("수정이 취소되었습니다.");
-			let cod_cd = $('#codeDetail').val();
-			let cod_nm = $('#codeDetailName').val();
-	        let cod_so = $('#sortNum').val();
-	        let cod_yn = $('#useYN').val();
-			
-			$.ajax({
-				type: "POST",
-				url: "cmcdDetailUpdate",
-				data: { 
-					beforecod_cd: selectData.cod_cd, //이전 상세코드
-		            cod_cd: cod_cd, // 상세코드
-		            cod_nm: cod_nm, // 상세코드명
-					cod_so: cod_so,
-					cod_yn: cod_yn
-	            },
-				success: function(code){
-					codeDetailList();
-					$('#exampleModal').modal('hide');
-				}
-			});
-		});
-		// 상세코드 삭제버튼 클릭시
-		$(document).on('click', '#cdDetailDelete', function(){
-			if(confirm("삭제하시겠습니까?")){
-				alert("삭제가 완료되었습니다.")
-			} else{
-				alert("삭제 취소되었습니다.")
-				return;
+	// 수정버튼 클릭시
+	$(document).on('click', '#cdDetailUpdate', function(){
+		confirm("수정하시겠습니까?") ? alert("수정이 완료되었습니다.") : alert("수정이 취소되었습니다.");
+		let cod_cd = $('#codeDetail').val();
+		let cod_nm = $('#codeDetailName').val();
+        let cod_so = $('#sortNum').val();
+        let cod_yn = $('#useYN').val();
+		
+		$.ajax({
+			type: "POST",
+			url: "cmcdDetailUpdate",
+			data: { 
+				beforecod_cd: selectData.cod_cd, //이전 상세코드
+	            cod_cd: cod_cd, // 상세코드
+	            cod_nm: cod_nm, // 상세코드명
+				cod_so: cod_so,
+				cod_yn: cod_yn
+            },
+			success: function(code){
+				codeDetailList();
+				$('#exampleModal').modal('hide');
 			}
-			let cod_cd = $('#codeDetail').val();
-			
-			$.ajax({
-				type: "POST",
-				url: "cmcdDetailDelete",
-				data: { 
-		            cod_cd: cod_cd //상세코드
-	            },
-				success: function(code){
-					codeDetailList();
-					$('#exampleModal').modal('hide');
-				}
-			});
 		});
 	});
+	// 상세코드 삭제버튼 클릭시
+	$(document).on('click', '#cdDetailDelete', function(){
+		if(confirm("삭제하시겠습니까?")){
+			alert("삭제가 완료되었습니다.")
+		} else{
+			alert("삭제 취소되었습니다.")
+			return;
+		}
+		let cod_cd = $('#codeDetail').val();
+		
+		$.ajax({
+			type: "POST",
+			url: "cmcdDetailDelete",
+			data: { 
+	            cod_cd: cod_cd //상세코드
+            },
+			success: function(code){
+				codeDetailList();
+				$('#exampleModal').modal('hide');
+			}
+		});
+	});
+	
+	$(document).on("click", "#commonDetailColse", function() {
+	    $('#exampleModal').modal('hide'); // 모달 닫기
+	});
+	
+});
 	

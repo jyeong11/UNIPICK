@@ -31,40 +31,7 @@
 	<jsp:include page="../inc/adminSidebar.jsp"></jsp:include>
 </div>
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    const menuTitles = document.querySelectorAll(".menu-title");
 
-    menuTitles.forEach(title => {
-        title.addEventListener("click", function (event) {
-            event.preventDefault(); // 링크 이동 방지
-            const submenu = this.nextElementSibling;
-            submenu.classList.toggle("open");
-        });
-    });
-});
-</script>
-<script type="text/javascript">
-
-// 	console.log("현재 페이지 주소: " + window.location.pathname);
-
-	document.addEventListener("DOMContentLoaded", function(){
-		// 현재 페이지에 해당하는 메뉴 활성화
-		let pathName = window.location.pathname.substring(1);
-		let collapseItems = document.querySelectorAll(".collapse-item");
-		
-		collapseItems.forEach((item) => {
-			item.classList.remove("active");
-			
-			if (pathName == item.getAttribute('href') || pathName == item.getAttribute('data-sub-page') || pathName == item.getAttribute('data-sub-page2')) {
-				item.classList.add("active");
-				item.parentElement.parentElement.classList.add("show");
-				item.parentElement.parentElement.parentElement.classList.add("active");
-			}
-			
-		});
-	});
-</script>
 		<!-- // Sidebar -->
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -309,6 +276,41 @@ document.addEventListener("DOMContentLoaded", function () {
 //     	const categoryStats = '';
 //     	let data = categoryStats.replaceAll('=', ':').replaceAll('{', '{"').replaceAll(':', '":').replaceAll('", ', '", "');
     </script>
+    
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const menuTitles = document.querySelectorAll(".menu-title");
+
+    menuTitles.forEach(title => {
+        title.addEventListener("click", function (event) {
+            event.preventDefault(); // 링크 이동 방지
+            const submenu = this.nextElementSibling;
+            submenu.classList.toggle("open");
+        });
+    });
+});
+</script>
+<script type="text/javascript">
+
+// 	console.log("현재 페이지 주소: " + window.location.pathname);
+
+	document.addEventListener("DOMContentLoaded", function(){
+		// 현재 페이지에 해당하는 메뉴 활성화
+		let pathName = window.location.pathname.substring(1);
+		let collapseItems = document.querySelectorAll(".collapse-item");
+		
+		collapseItems.forEach((item) => {
+			item.classList.remove("active");
+			
+			if (pathName == item.getAttribute('href') || pathName == item.getAttribute('data-sub-page') || pathName == item.getAttribute('data-sub-page2')) {
+				item.classList.add("active");
+				item.parentElement.parentElement.classList.add("show");
+				item.parentElement.parentElement.parentElement.classList.add("active");
+			}
+			
+		});
+	});
+</script>
 
 </body>
 

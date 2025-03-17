@@ -8,6 +8,16 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>UNIPICK</title>
 
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+	crossorigin="anonymous"></script>
+
 <!-- default -->
 <script
 	src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
@@ -36,6 +46,12 @@
 <link
 	href="${pageContext.request.contextPath }/resources/public/vendor/datatables/datatables.min.css"
 	rel="stylesheet">
+<link href="${pageContext.request.contextPath }/resources/css/admin/cmcd.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/public.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/admin/adminMain.css" rel="stylesheet" type="text/css">
+
+<!-- script -->
+<script src="${pageContext.request.contextPath }/resources/js/admin/commonCode.js"></script>
 
 </head>
 <body id="page-top">
@@ -80,7 +96,6 @@ document.addEventListener("DOMContentLoaded", function () {
 	});
 </script>
     <!-- Page Wrapper -->
-	<div id="wrapper">
 <script>
 // 	console.log("현재 페이지 주소: " + window.location.pathname);
 
@@ -122,7 +137,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
     <div class="copyright text-center my-auto">
-        <span>Copyright © GoodBuy Admin 2024-2025</span>
+        <span>Copyright © UNIPICK Admin 2025</span>
     </div>
 </div>
             </footer>
@@ -138,43 +153,24 @@ document.addEventListener("DOMContentLoaded", function () {
         <svg class="svg-inline--fa fa-angle-up" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M201.4 137.4c12.5-12.5 32.8-12.5 45.3 0l160 160c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L224 205.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l160-160z"></path></svg><!-- <i class="fas fa-angle-up"></i> Font Awesome fontawesome.com -->
     </a>
 
-    <!-- Logout Modal-->
-<!--     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" -->
-<!--         aria-hidden="true"> -->
-<!--         <div class="modal-dialog" role="document"> -->
-<!--             <div class="modal-content"> -->
-<!--                 <div class="modal-header"> -->
-<!--                     <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5> -->
-<!--                     <button class="close" type="button" data-dismiss="modal" aria-label="Close"> -->
-<!--                         <span aria-hidden="true">×</span> -->
-<!--                     </button> -->
-<!--                 </div> -->
-<!--                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div> -->
-<!--                 <div class="modal-footer"> -->
-<!--                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button> -->
-<!--                     <a class="btn btn-primary" href="login.html">Logout</a> -->
-<!--                 </div> -->
-<!--             </div> -->
-<!--         </div> -->
-<!--     </div> -->
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="/resources/adm/vendor/jquery/jquery.min.js"></script>
-    <script src="/resources/adm/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+     <!-- Bootstrap core JavaScript-->
+    <script src="${pageContext.request.contextPath }/resources/public/vendor/jquery/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="/resources/adm/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/public/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="/resources/adm/js/sb-admin-2.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/public/js/sb-admin-2.min.js"></script>
     
     <!-- Page level plugins -->
-    <script src="/resources/adm/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="/resources/adm/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-    <script src="/resources/adm/vendor/datatables/datatables.min.js"></script>
-
+    <script src="${pageContext.request.contextPath }/resources/public/vendor/chart.js/Chart.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/public/vendor/datepicker/moment.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/public/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/public/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+	
     <!-- Page level custom scripts -->
-    <script src="/resources/adm/js/code_regist.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/public/js/index.js"></script>
 
 </body>
 
