@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="font-weight-bold text-primary text-uppercase mb-1">등록된 상품 건수</div>
+                                            <div class="font-weight-bold text-primary text-uppercase mb-1">오늘의 할일</div>
                                             <div class="h3 mb-0 font-weight-bold text-gray-800 counter-text" id="totalProducts">75</div>
                                         </div>
                                         <div class="col-auto">
@@ -142,18 +142,11 @@ document.addEventListener("DOMContentLoaded", function () {
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="font-weight-bold text-danger text-uppercase mb-1">미처리 신고</div>
+                                            <div class="font-weight-bold text-danger text-uppercase mb-1">미처리 신고 향후 지울수도</div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
                                                     <div class="h3 mb-0 mr-3 font-weight-bold text-gray-800 counter-text" id="pendingReports">17</div>
                                                 </div>
-<!--                                                 <div class="col"> -->
-<!--                                                     <div class="progress progress-sm mr-2"> -->
-<!--                                                         <div class="progress-bar bg-danger" role="progressbar" -->
-<!--                                                             style="width: 50%" aria-valuenow="50" aria-valuemin="0" -->
-<!--                                                             aria-valuemax="100"></div> -->
-<!--                                                     </div> -->
-<!--                                                 </div> -->
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -170,7 +163,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="font-weight-bold text-info text-uppercase mb-1">신규 가입자 수</div>
+                                            <div class="font-weight-bold text-info text-uppercase mb-1">신규 가입자 수 향후 지울수도</div>
                                             <div class="h3 mb-0 font-weight-bold text-gray-800 counter-text" id="newUsers">0</div>
                                         </div>
                                         <div class="col-auto">
@@ -207,7 +200,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             <div class="card shadow mb-4">
                                 <!-- Card Header -->
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">가격대별 상품 분포</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">일자별 방문자 내역</h6>
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
@@ -223,7 +216,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             <div class="card shadow mb-4">
                                 <!-- Card Header -->
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">카테고리별 통계</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">기간별 분석</h6>
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
