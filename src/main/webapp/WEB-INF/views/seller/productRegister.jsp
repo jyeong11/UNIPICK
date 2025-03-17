@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,6 +23,17 @@
 <link href="${pageContext.request.contextPath }/resources/public/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath }/resources/public/vendor/datatables/datatables.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath }/resources/css/seller/productRegister.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath }/resources/css/seller/product.css" rel="stylesheet">
+
+<!-- TOAST UI -->
+<link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
+<script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+<link rel="stylesheet" href="https://uicdn.toast.com/tui-color-picker/latest/tui-color-picker.min.css" />
+<link rel="stylesheet" href="https://uicdn.toast.com/editor-plugin-color-syntax/latest/toastui-editor-plugin-color-syntax.min.css" />	
+<script src="https://uicdn.toast.com/tui-color-picker/latest/tui-color-picker.min.js"></script>
+<script src="https://uicdn.toast.com/editor-plugin-color-syntax/latest/toastui-editor-plugin-color-syntax.min.js"></script>
+
+<script src="${pageContext.request.contextPath }/resources/js/seller/productRegister.js"></script>
 </head>
 <body id="page-top">
 <div id="wrapper">
@@ -156,26 +167,34 @@
 								<h2 class="item-regi-name">상품명</h2>
 								<div class="item-regi-box">
 									<input type="text" name="product_title" class="item-regi-title-text" id="item-regi-title-text">
-									<a href="ProductBanedItem" target='_blank'>거래금지 품목 보기</a>
 								</div>
-								<h6 class="item-regi-name-byte" id="item-regi-name-byte">(0 / 100)</h6>
+								<h6 class="item-regi-name-byte" id="item-regi-name-byte">(0 / 50)</h6>
 							</section>
 							<section class="item-regi-section">
 								<h2 class="item-regi-name">상품설명</h2>
-									<div><textarea class="item-regi-description-text" id="item-regi-description-text" name="product_intro"></textarea>
-								</div>
-								<h6 class="item-regi-description-byte" id="item-regi-description-byte">(0 / 2000)</h6>
+								<!-- toast ui editor : 에디터 옵션 설정 필요 -->
+									<div id="editor">
+									</div>
+								<h6 class="item-regi-description-byte" id="item-regi-description-byte">(0 / 2000)토스트UI가져와야하나 고민때려야함</h6>
 							</section>
 							<section class="item-regi-category">
-								<h6 class="item-regi-category-name">카테고리 & 태그</h6>
+								<h6 class="item-regi-category-name">카테고리</h6>
 								<select class="item-regi-category-box" name="product_category" id="product_category">
 								</select>
 							</section>
+							<section class="item-regi-price">
+								<h6 class="item-regi-name">상품 가격 설정</h6>
+								<div class="item-regi-price-box">
+									<div class="item-regi-price-number">
+										<input type="number" class="shipping-fee-price" id="shipping-fee-price" name="product_shipping_fee" placeholder="정가를 입력해주세요.">
+										<div><input type="number" class="item-price" name="product_price" id="product_price" placeholder="판매가를 입력해주세요."></div>
+										<input type="hidden" name="product_discount_status" value="0">
+									</div>
+								</div>
+							</section>
 							<section class="item-regi-trade-adr">
-								<h6 class="item-regi-name">직거래 주소 설정</h6>
+								<h6 class="item-regi-name">배송 설정</h6>
 								<div class="item-regi-trade-active">
-									<label><input type="radio" name="trade-adr-val" id="trade-enable" value="1" checked>직거래 가능</label>
-									<label><input type="radio" name="trade-adr-val" id="trade-disable" value="0">직거래 불가능</label>
 									<div class="item-trade-adr-box" id="item-trade-adr-box">
 										<div>
 											<input type="text" class="item-trade-adr-sub" id="item-trade-adr-sub" name="product_trade_adr1" readonly>
@@ -185,15 +204,29 @@
 								</div>	
 							</section>
 							<section class="item-regi-price">
-								<h6 class="item-regi-name">상품 가격 설정</h6>
+								<h6 class="item-regi-name">재고 설정</h6>
 								<div class="item-regi-price-box">
-									<label><input type="radio" name="shipping-fee" id="shipping-fee-enable"  value="0" checked>택배비 미포함</label>
-									<label><input type="radio" name="shipping-fee" id="shipping-fee-disable" value="1">택배비 포함</label>
 									<div class="item-regi-price-number">
-										<input type="number" class="shipping-fee-price" id="shipping-fee-price" name="product_shipping_fee" placeholder="택배비를 입력해주세요.">
-										<div><input type="number" class="item-price" name="product_price" id="product_price" placeholder="상품 가격을 입력해주세요."></div>
-										<label class="item-discount-box"><input type="checkbox" class="item-discount" name="product_discount_status" value="1">가격 제안 가능</label>
-										<input type="hidden" name="product_discount_status" value="0">
+										<input type="number" class="shipping-fee-price" id="shipping-fee-price" name="product_shipping_fee" placeholder="재고번호를 입력해주세요.">
+										<select class="item-regi-category-box" name="product_category" id="product_category"></select>
+									</div>
+								</div>
+							</section>
+							<section class="item-regi-price">
+								<h6 class="item-regi-name">색상 설정</h6>
+								<div class="item-regi-price-box">
+									<div class="item-regi-price-number">
+										<input type="number" class="shipping-fee-price" id="shipping-fee-price" name="product_shipping_fee" placeholder="재고번호를 입력해주세요.">
+										<select class="item-regi-category-box" name="product_category" id="product_category"></select>
+									</div>
+								</div>
+							</section>
+							<section class="item-regi-price">
+								<h6 class="item-regi-name">사이즈 설정</h6>
+								<div class="item-regi-price-box">
+									<div class="item-regi-price-number">
+										<input type="number" class="shipping-fee-price" id="shipping-fee-price" name="product_shipping_fee" placeholder="재고번호를 입력해주세요.">
+										<select class="item-regi-category-box" name="product_category" id="product_category"></select>
 									</div>
 								</div>
 							</section>
@@ -222,7 +255,48 @@
 	</div><!-- End of Page Wrapper -->
 </div>
 
+<!-- 	<div><textarea class="item-regi-description-text" id="item-regi-description-text" name="product_intro"></textarea> -->
+<!-- 								</div> -->
+
 <!-- --------------------------------------------------------------- -->
+<script type="text/javascript">
+const { colorSyntax } = toastui.Editor.plugin;
+const noteditor = new toastui.Editor({
+	el : document.querySelector('#editor'),
+	height : '300px',
+	initialEditType : 'wysiwyg', // 최초로 보여줄 에디터 타입 (markdown || wysiwyg)
+	initialValue : '', // 내용의 초기 값으로, 반드시 마크다운 문자열 형태여야 함
+	previewStyle : 'tab', // 올바른 값과 콤마 추가
+	plugins: [colorSyntax],
+	toolbarItems : [
+	    ['heading', 'bold', 'italic', 'strike'],
+	    ['hr', 'quote'],
+	    ['ul', 'ol', 'task'],
+	    ['code', 'codeblock'],
+	    ['image'],
+	  ],
+	  hooks: {
+		    addImageBlobHook: async (blob, callback) => {
+		        const formData = new FormData();
+		        formData.append('image', blob);
+
+		        try {
+		            const response = await fetch('/upload', {  // 이미지 업로드 API 엔드포인트
+		                method: 'POST',
+		                body: formData
+		            });
+
+		            const result = await response.json();
+		            callback(result.url, '이미지 설명');  // 업로드된 이미지 URL을 에디터에 삽입
+		        } catch (error) {
+		            console.error('이미지 업로드 실패:', error);
+		            alert('이미지 업로드 중 오류가 발생했습니다.');
+		        }
+		    }
+		}
+	});
+document.querySelector('.toastui-editor-defaultUI').style.width = '950px';
+</script>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     const menuTitles = document.querySelectorAll(".menu-title");
