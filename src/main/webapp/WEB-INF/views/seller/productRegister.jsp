@@ -98,9 +98,10 @@
 							<div class="card-body">
 						<section class="item-regi">
 					<div>
-						<form action="ProductRegist" id="productRegist" method="post" enctype="multipart/form-data">
+						<form action="productInsert" id="productRegist" method="post" enctype="multipart/form-data">
 							<section class="item-regi-img">
-								<h2 class="item-regi-name">상품이미지</h2>
+								<div class="card_head"><h2 class="item-regi-name">상품이미지</h2>
+								<h2 class="item-thumb-description">첫번째 상품 이미지는 대표썸네일로 등록됩니다.</h2></div>
 								<div class="item-thumb">
 									<button class="item-thumb-upload" type="button">
 										<img src="/resources/img/product-thumb-no.jpg" id="item-thumb-preview1">
@@ -161,7 +162,6 @@
 									</button>
 									<input type="file" class="item-thumb-upload-btn" id="item-thumb-upload-btn3" name="pic10">
 								</div>
-								<h2 class="item-thumb-description">첫번째 상품 이미지는 썸네일로 보여져요.</h2>
 							</section>
 							<section class="item-regi-section">
 								<h2 class="item-regi-name">상품명</h2>
@@ -179,8 +179,9 @@
 							</section>
 							<section class="item-regi-category">
 								<h6 class="item-regi-category-name">카테고리</h6>
-								<select class="item-regi-category-box" name="product_category" id="product_category">
-								</select>
+								<select class="item-regi-category-box" name="product_category" id="product_category"></select>
+								<select class="item-regi-category-box" name="product_category1" id="product_category1"></select>
+								<select class="item-regi-category-box" name="product_category2" id="product_category2"></select>
 							</section>
 							<section class="item-regi-price">
 								<h6 class="item-regi-name">상품 가격 설정</h6>
@@ -194,21 +195,16 @@
 							</section>
 							<section class="item-regi-trade-adr">
 								<h6 class="item-regi-name">배송 설정</h6>
-								<div class="item-regi-trade-active">
-									<div class="item-trade-adr-box" id="item-trade-adr-box">
-										<div>
-											<input type="text" class="item-trade-adr-sub" id="item-trade-adr-sub" name="product_trade_adr1" readonly>
-											<input type="button" class="item-trade-adr-search" value="주소검색" onclick="searchAdr()">
-										</div>
-									</div>
-								</div>	
+								<select class="item-regi-category-box" name="product_category" id="product_delivery"></select>
+								<select class="item-regi-category-box" name="product_category1" id="product_delivery1"></select>
+								<select class="item-regi-category-box" name="product_category2" id="product_delivery2"></select>	
 							</section>
 							<section class="item-regi-price">
 								<h6 class="item-regi-name">재고 설정</h6>
 								<div class="item-regi-price-box">
 									<div class="item-regi-price-number">
-										<input type="number" class="shipping-fee-price" id="shipping-fee-price" name="product_shipping_fee" placeholder="재고번호를 입력해주세요.">
 										<select class="item-regi-category-box" name="product_category" id="product_category"></select>
+										<input type="number" class="shipping-fee-price" id="shipping-fee-price" name="product_shipping_fee" placeholder="재고번호를 입력해주세요.">
 									</div>
 								</div>
 							</section>
@@ -216,8 +212,8 @@
 								<h6 class="item-regi-name">색상 설정</h6>
 								<div class="item-regi-price-box">
 									<div class="item-regi-price-number">
-										<input type="number" class="shipping-fee-price" id="shipping-fee-price" name="product_shipping_fee" placeholder="재고번호를 입력해주세요.">
-										<select class="item-regi-category-box" name="product_category" id="product_category"></select>
+									<select class="item-regi-category-box" name="product_category" id="product_category"></select>
+									<input type="number" class="shipping-fee-price" id="shipping-fee-price" name="product_shipping_fee" placeholder="재고번호를 입력해주세요.">
 									</div>
 								</div>
 							</section>
@@ -225,8 +221,8 @@
 								<h6 class="item-regi-name">사이즈 설정</h6>
 								<div class="item-regi-price-box">
 									<div class="item-regi-price-number">
-										<input type="number" class="shipping-fee-price" id="shipping-fee-price" name="product_shipping_fee" placeholder="재고번호를 입력해주세요.">
 										<select class="item-regi-category-box" name="product_category" id="product_category"></select>
+										<input type="number" class="shipping-fee-price" id="shipping-fee-price" name="product_shipping_fee" placeholder="재고번호를 입력해주세요.">
 									</div>
 								</div>
 							</section>

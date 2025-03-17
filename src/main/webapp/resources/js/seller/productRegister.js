@@ -48,7 +48,13 @@ $(function(){
 		}).done(function(data) {
 			for(let item of data) {
 				$("#product_category").append(
-					`<option>${item.CODE_NAME}</option>`
+					`<option>${item.lev_nm}</option>`
+				)
+				$("#product_category1").append(
+					`<option>${item.lev_nm}</option>`
+				)
+				$("#product_category2").append(
+					`<option>${item.lev_nm}</option>`
 				)
 			}
 		}).fail(function() {
@@ -56,15 +62,27 @@ $(function(){
 		})
 	}
 	
-	// 직거래 주소 입력박스
-	$("#trade-enable, #trade-disable").change(function() {
-	    if ($("#trade-enable").is(":checked")) {
-	        $("#item-trade-adr-box").show();
-	    } else {
-	        $("#item-trade-adr-box").hide();
-	        $("#item-trade-adr-sub").val("");
-	    }
-	});
+	// 베송 설정
+	if (window.location.href.includes("productRegister")) {
+		$.ajax({
+			url : "getCategory",
+			type : "GET",
+		}).done(function(data) {
+			for(let item of data) {
+				$("#product_delivery").append(
+					`<option>${item.lev_nm}</option>`
+				)
+				$("#product_delivery1").append(
+					`<option>${item.lev_nm}</option>`
+				)
+				$("#product_delivery2").append(
+					`<option>${item.lev_nm}</option>`
+				)
+			}
+		}).fail(function() {
+			alert("카테고리 불러오기 실패\n나중에 다시 시도해주세요.");
+		})
+	}
 	
 	// 배송비 입력박스
 	$("#shipping-fee-enable, #shipping-fee-disable").change(function() {
