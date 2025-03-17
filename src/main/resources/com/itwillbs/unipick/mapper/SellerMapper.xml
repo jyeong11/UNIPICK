@@ -4,8 +4,31 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itwillbs.unipick.mapper.SellerMapper">
 	<insert id="sellerjoin" parameterType="map">
-		insert into sellers(sel_bf) 
-			 values (#{sel_bf}, jdbcType=LONGBLOB)
+		INSERT INTO sellers(sel_id, 
+					        sel_pw, 
+					        sel_nm, 
+					        adm_id, 
+					        sel_rn,
+					        sel_mn,
+					        sel_cs, 
+					        sel_br, 
+					        sel_ad, 
+					        sel_bf, 
+					        sel_st, 
+					        sel_at
+		  )VALUES (#{storeId},
+			 	   #{storePw},
+			 	   #{storeNm},
+			 	   'admin',
+			 	   #{ceoNm},
+			 	   #{phNm},
+			 	   #{storeNumber},
+			 	   #{brn},
+			 	   #{storead},
+			 	   #{sel_bf},
+			 	   'ss01',
+			 	   DEFAULT)
+			 		
 	</insert>
 	
 	<select id="sellerselect" resultType="map">

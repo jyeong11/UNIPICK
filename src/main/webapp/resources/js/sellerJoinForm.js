@@ -2,53 +2,26 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("storePw").addEventListener("keyup", validatePassword);
     document.getElementById("storePwCheck").addEventListener("keyup", validatePasswordCheck);
 	document.getElementById("DuplicationCk").addEventListener("click", idChecked);
-	
-
-    function encodeFileAsBase64(file, callback) {
-    var reader = new FileReader();
-    reader.onloadend = function() {
-        callback(reader.result.split(',')[1]); // Base64 문자열만 추출
-    };
-    reader.readAsDataURL(file);  // 파일을 Base64로 인코딩
-	}
 
     // 폼 제출 시 AJAX로 데이터 전송
     document.getElementById("storeSignupForm").addEventListener("submit", function (event) {
 	 	event.preventDefault();
-	    
-	    if (validateForm()) {
-	        var formData = new FormData(document.getElementById("storeSignupForm"));
-	        var businessLicenseFile = document.getElementById("businessLicense").files[0];
-			debugger;        
-//	         파일을 Base64로 변환
-	        encodeFileAsBase64(businessLicenseFile, function(base64File) {
-	            var jsonData = {
-	                storeId: formData.get("storeId"),
-	                storePw: formData.get("storePw"),
-	                storePwCheck: formData.get("storePwCheck"),
-	                storeNm: formData.get("storeNm"),
-	                storeKind: formData.get("storeKind"),
-	                businessLicense: base64File,  // Base64 인코딩된 파일
-	                storeNumber: formData.get("storeNumber"),
-	                phNm: formData.get("phNm"),
-	                phNumber: formData.get("phNumber")
-	            };
-	
-	            $.ajax({
-	                type: "POST",
-	                url: "joinSucess",
-	                contentType: "application/json",
-	                data: JSON.stringify(jsonData),
-	                success: function (res) {
-	                    alert("입점 신청이 완료되었습니다.");
-//	                    window.location.href = "successPage.jsp; 
-	                },
-	                error: function (xhr, textStatus, errorThrown) {
-	                    alert("다시 접속해주세요.");
-	                }
-	            });
-	        });
-   		 }
+		let formData = new FormData(this); 
+    
+        $.ajax({
+            type: "POST",
+            url: "joinSucess",
+			processData: false,
+            contentType: false,
+			data: formData,
+            success: function (res) {
+                alert("입점 신청이 완료되었습니다.");
+				document.getElementById("storeSignupForm").reset();
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                alert("다시 접속해주세요.");
+            }
+        });
 	});
 });
 

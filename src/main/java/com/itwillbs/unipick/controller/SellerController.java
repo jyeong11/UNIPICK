@@ -1,9 +1,16 @@
 package com.itwillbs.unipick.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -16,10 +23,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.itwillbs.unipick.service.LoginService;
 import com.itwillbs.unipick.service.SellerService;
+import com.mysql.cj.Session;
 
 @Controller
 public class SellerController {
@@ -28,6 +38,8 @@ public class SellerController {
 	LoginService loginService;
 	@Autowired
 	SellerService selService;
+	
+	String virtualPath = "/resources/businessLicense";
 	
 	@GetMapping("sellerlogin")
 	public String Login(HttpServletRequest request, Model model) {
@@ -91,21 +103,27 @@ public class SellerController {
 	
 	@ResponseBody
 	@PostMapping("joinSucess")
-	public Map<String, Object> joinSucess(@RequestBody Map<String, Object> sellerinfo) {
-		System.out.println("!@#!@#!@#");
-		System.out.println("!@#$%^&&" + sellerinfo);
-        String base64File = (String) sellerinfo.get("businessLicense");
-        
-        System.out.println(base64File);
-        
-        byte[] decodedBytes = Base64.getDecoder().decode(base64File);
-
-        System.out.println("Decoded File Length   : " + decodedBytes.length);
-        sellerinfo.put("sel_bf", decodedBytes);
-        
-		selService.sellerjoin(sellerinfo);
+	public Map<String, Object> joinSucess(@RequestParam Map<String, Object> sellerInfo,
+										  @RequestParam("businessLicense") MultipartFile businessLicense,
+										  HttpSession session) {
+		System.out.println(sellerInfo);
+       
+		String realPath = session.getServletContext().getRealPath(virtualPath);
+		System.out.println("asdhasdfhjh : " + realPath);
 		
-		return sellerinfo;
+		String subDir = createDirectories(realPath);
+		realPath += "/" + subDir;
+		
+		String fileName = "";
+		String origin = businessLicense.getOriginalFilename();
+		if(!origin.equals("")) {
+			fileName = UUID.randomUUID().toString() + "_" + origin;
+			String file = subDir + "/" + fileName;
+			sellerInfo.put("sel_bf", file);
+		}
+		selService.sellerjoin(sellerInfo);
+		
+		return sellerInfo;
 	}
 	// 아이디 중복체크
 	@ResponseBody
@@ -140,5 +158,41 @@ public class SellerController {
 		return seldata;
 	}
 	
-	
+	private String createDirectories(String realPath) {
+		// Date 클래스 또는 LocalXXX 클래스 활용
+		// 실제 날자 및 시간 관련 정보 생성 시에는 LocalXXX 클래스를 사용하고
+		// 기존에 있는 라이브러리를 사용할 때 Date를 요구하는 경우에 Date 타입 활용
+		
+		// 1. LocalXXX 클래스 활용
+		// => 날짜 정보: LocalDate, 시간정보: LocalTime, 날짜 및 시간: LocalDateTime
+		LocalDate today = LocalDate.now(); // 현재 시스템의 날짜 정보 생성
+		// 2025-02-05
+		
+		// 2. 날짜 포멧을 디렉토리 형식에 맞게 변경(ex. 2025-01-06 => 2025/01/06)
+		String datePattern = "yyyy/MM/dd";
+		
+		// 3. 지정한 포멧을 적용하여 날짜 형식 변경
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern(datePattern);
+		String subDir = today.format(dtf);
+		
+		// 4. 기존 실제 업로드 경로에 서브디렉토리 결합
+		realPath += "/" + subDir;
+		
+		try {
+			// 5. 해당 디렉토리를 실제 경로상에 생성
+			// 5-1) java.nio.file.Paths 클래스의 get() 메서드 호출하여 Path 객체 리턴받기
+			Path path = Paths.get(realPath);
+			
+			// 5-2) Files 클래스의 static 메서드 createDirectories() 호출하여 실제 경로 생성
+			// => 파라미터로 Path 타입 객체 전달
+			// => 이때, 경로 상에서 생성되지 않은 모든 디렉토리를 생성해준다!
+			//   (만약, 서브디렉토리 상의 최종 디렉토리 1개만 생성 시 createDirectory() 메서드 사용가능)
+			Files.createDirectories(path);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return subDir;
+	}	
 }
+

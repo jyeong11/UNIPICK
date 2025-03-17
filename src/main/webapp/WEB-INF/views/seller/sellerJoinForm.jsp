@@ -55,14 +55,18 @@
             </div>
             
             <div class="input-group">
-                <label for="storeKind">쇼핑몰 분류지정</label>
-                <select style="width: 100px;">
-                	<option value="">의류</option>
-                	<option value="">가방</option>
-                	<option value="">신발</option>
-                </select>
+                <label for="ceoNm">대표자 명</label>
+                <input type="text" id="ceoNm" name="ceoNm">
             </div>
             
+            <div class="input-group">
+                <label for="brn">사업자등록번호</label>
+                <input type="text" id="brn" name="brn">
+            </div>
+             <div class="input-group">
+                <label for="storead">사업장주소</label>
+                <input type="text" id="storead" name="storead">
+            </div>
             <div class="input-group">
                 <label for="businessLicense">사업자 등록증</label>
                 <input type="file" id="businessLicense" name="businessLicense">
