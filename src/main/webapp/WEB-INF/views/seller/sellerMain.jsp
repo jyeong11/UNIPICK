@@ -3,10 +3,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="shortcut icon" href="/resources/img/g_favicon.ico" type="image/x-icon">
-<link rel="icon" href="/resources/img/g_favicon.ico" type="image/x-icon">
-<title>굿바이 - 중고거래, 이웃과 함께 더 쉽게!</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>UNIPICK</title>
 
 <!-- default -->
 <script src="/resources/js/jquery-3.7.1.js"></script>
@@ -26,120 +24,26 @@
 
 </head>
 <body id="page-top">
-
-    <!-- Page Wrapper -->
-    <div id="wrapper">
-
-		<!-- Sidebar -->
-       	
-<!-- Sidebar -->
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="AdmMain">GoodBuy Admin</a>
-    <hr class="sidebar-divider my-0">
-    <li class="nav-item">
-        <a class="nav-link" href="AdmMain"><i class="fa-solid fa-house"></i> <span>Main</span></a>
-    </li>
-    <hr class="sidebar-divider">
-    <div class="sidebar-heading">System Setting</div>
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu01" aria-expanded="true" aria-controls="menu01">
-            <i class="fas fa-fw fa-cog"></i> <span>공통코드 관리</span>
-        </a>
-        <div id="menu01" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="AdmCommoncodeRegistForm">공통코드 등록</a>
-                <a class="collapse-item" href="AdmCommoncodeList">공통코드 목록</a>
-            </div>
-        </div>
-    </li>
-    <hr class="sidebar-divider">
-    <div class="sidebar-heading">Site Setting</div>
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu02" aria-expanded="true" aria-controls="menu02">
-        	<i class="fa-solid fa-user"></i> <span>회원 관리</span>
-        </a>
-        <div id="menu02" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-            	<h6 class="collapse-header">User List</h6>
-                <a class="collapse-item" href="AdmMemberList" data-sub-page="AdmMemberDetailForm">회원 목록</a>
-            </div>
-        </div>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu03" aria-expanded="true" aria-controls="menu03">
-        	<i class="fa-solid fa-credit-card"></i> <span>거래 관리</span>
-        </a>
-        <div id="menu03" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-            	<h6 class="collapse-header">Payment Management</h6>
-                <a class="collapse-item" href="AdmProductList">상품 목록</a>
-                <a class="collapse-item" href="AdmProductOrderList">상품 거래내역</a>
-<!--                 <a class="collapse-item" href="AdmPaymentList">페이 판매내역</a> -->
-            </div>
-        </div>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu04" aria-expanded="true" aria-controls="menu04">
-        	<i class="fa-solid fa-land-mine-on"></i> <span>신고 관리</span>
-        </a>
-        <div id="menu04" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-            	<h6 class="collapse-header">Report Management</h6>
-                <a class="collapse-item" href="AdmProductReportList">신고 상품 관리</a>
-                <a class="collapse-item" href="AdmMemberReportList">신고 회원 관리</a>
-            </div>
-        </div>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu05" aria-expanded="true" aria-controls="menu05">
-        	<i class="fa-solid fa-newspaper"></i> <span>고객지원 관리</span>
-        </a>
-        <div id="menu05" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-            	<h6 class="collapse-header">Customer Management</h6>
-                <a class="collapse-item" href="AdmNoticeList" data-sub-page="AdmNoticeModify" data-sub-page2="AdmNoticeRegist">공지사항 관리</a>
-                <a class="collapse-item" href="AdmSupportList">1:1 문의 관리</a>
-                <a class="collapse-item" href="AdmFaqList">FAQ 관리</a>
-            </div>
-        </div>
-    </li>
-    <hr class="sidebar-divider">
-    <div class="sidebar-heading">Chart</div>
-    <li class="nav-item">
-        <a class="nav-link" href="#" data-toggle="collapse" data-target="#menu06" aria-expanded="true" aria-controls="menu06">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>통계 및 로그</span>
-        </a>
-        <div id="menu06" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-            	<h6 class="collapse-header">ADMIN</h6>
-                <a class="collapse-item" href="AdmChartList">채팅 통계</a>
-                <a class="collapse-item" href="PeriodAnalysis">기간별 통계</a>
-                <a class="collapse-item" href="AdmLogList">로그 기록</a>
-            </div>
-        </div>
-<!--     <hr class="sidebar-divider"> -->
-<!--     <div class="sidebar-heading">Marketing</div> -->
-<!--     <li class="nav-item"> -->
-<!--         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu05" aria-expanded="true" aria-controls="menu05"> -->
-<!--         	<i class="fa-solid fa-rectangle-ad"></i> <span>광고 관리</span> -->
-<!--         </a> -->
-<!--         <div id="menu05" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar"> -->
-<!--             <div class="bg-white py-2 collapse-inner rounded"> -->
-<!--             	<h6 class="collapse-header">Advertisement</h6> -->
-<!--                 <a class="collapse-item" href="AdmAdList">광고 회원 및 상품 목록</a> -->
-<!--                 <a class="collapse-item" href="AdmAdPayList">광고 서비스 결제내역</a> -->
-<!--             </div> -->
-<!--         </div> -->
-<!--     </li> -->
-    </li>
-    <hr class="sidebar-divider d-none d-md-block">
-    <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
-    </div>
-</ul>
-<!-- End of Sidebar -->
+<div>
+<jsp:include page="../inc/sellerSidebar.jsp"></jsp:include>
+</div>
+ 
 <script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const menuTitles = document.querySelectorAll(".menu-title");
+
+    menuTitles.forEach(title => {
+        title.addEventListener("click", function (event) {
+            event.preventDefault(); // 링크 이동 방지
+            const submenu = this.nextElementSibling;
+            submenu.classList.toggle("open");
+        });
+    });
+});
+</script>
+<script type="text/javascript">
+
 // 	console.log("현재 페이지 주소: " + window.location.pathname);
 
 	document.addEventListener("DOMContentLoaded", function(){
@@ -169,65 +73,6 @@
 
                <!-- Topbar -->
                
-<!-- Topbar -->
-<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-    <!-- Sidebar Toggle (Topbar) -->
-   <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-       <i class="fa fa-bars"></i>
-   </button>
-   
-   <!-- Title -->
-	<h4 class="m-0 text-gray-900">Good Buy 관리자 대시보드</h4>
-	
-   <!-- Topbar Navbar -->
-   <ul class="navbar-nav ml-auto">
-       <li class="nav-item dropdown no-arrow">
-           <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               <span class="mr-2 d-none d-lg-inline text-gray-600 small">관리자</span>
-               <img class="img-profile rounded-circle" src="../../resources/adm/img/admin_profile.png">
-<!--                <img class="img-profile rounded-circle" src="../../resources/adm/img/undraw_profile.svg"> -->
-           </a>
-           <!-- Dropdown - User Information -->
-            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="/." target="_blank">
-                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                    사용자 화면
-                </a>
-                <a class="dropdown-item" href="AdmLogList">
-                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                    로그 기록
-                </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                    로그아웃
-                </a>
-            </div>
-        </li>
-    </ul>
-</nav>
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">로그아웃 하시겠습니까?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">로그아웃 후에는 관리자 사이트 접근이 불가능합니다.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
-                <a class="btn btn-primary" href="MemberLogout">로그아웃</a>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End of Topbar -->
-               <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -389,24 +234,6 @@
                                         <canvas id="categoryStats"></canvas>
                                     </div>
                                     <div class="mt-4 text-center small" id="categoryLabels">
-<!--                                         <span class="mr-2"> -->
-<!--                                             <i class="fas fa-circle text-primary"></i> 여성의류 -->
-<!--                                         </span> -->
-<!--                                         <span class="mr-2"> -->
-<!--                                             <i class="fas fa-circle text-success"></i> 남성의류 -->
-<!--                                         </span> -->
-<!--                                         <span class="mr-2"> -->
-<!--                                             <i class="fas fa-circle text-info"></i> 레저/스포츠 -->
-<!--                                         </span> -->
-<!--                                         <span class="mr-2"> -->
-<!--                                             <i class="fas fa-circle text-secondary"></i> 생활용품 -->
-<!--                                         </span> -->
-<!--                                         <span class="mr-2"> -->
-<!--                                             <i class="fas fa-circle text-warning"></i> 키즈 -->
-<!--                                         </span> -->
-<!--                                         <span class="mr-2"> -->
-<!--                                             <i class="fas fa-circle text-danger"></i> 도서 -->
-<!--                                         </span> -->
                                     </div>
                                 </div>
                             </div>
