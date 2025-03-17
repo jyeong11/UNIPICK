@@ -131,6 +131,8 @@ public class AdminController {
 	            cookie.setPath("/");
 	            res.addCookie(cookie);
 	        }
+	        
+	        
 	    }
 		
 		Map<String, Object> response = new HashMap<String, Object>();
@@ -229,15 +231,9 @@ public class AdminController {
 	// 사이드 메뉴
 	@ResponseBody
 	@PostMapping("sideMenu")
-	public Map<String,Object> sideMenu(@RequestParam Map<String, Object> map){
+	public List<Map<String,Object>> sideMenu(@RequestParam Map<String, Object> map){
 		
-		Map<String, Object> menu = new HashMap<String, Object>();
-		menu.put("main", adminservice.sideMainMenuList(map));
-		menu.put("sub", adminservice.sideSubMenuList(map));
-		
-		System.out.println(menu);
-		
-		return menu; 
+		return adminservice.MenuList(map);
 	}
 	
 	

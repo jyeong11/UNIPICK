@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<script src="${pageContext.request.contextPath }/resources/js/adminSidebar.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/admin/adminSidebar.js"></script>
 <nav class="sidebar" id="sidebar">
     <h2>메뉴</h2>
     <ul class="menu">
@@ -47,17 +47,3 @@
         </li>
     </ul>
 </nav>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const menuTitles = document.querySelectorAll(".menu-title");
-
-        menuTitles.forEach(title => {
-            title.addEventListener("click", function (event) {
-                event.preventDefault(); // 링크 이동 방지
-                const submenu = this.nextElementSibling;
-                submenu.classList.toggle("open");
-            });
-        });
-    });
-</script>

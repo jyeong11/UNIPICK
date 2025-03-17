@@ -128,11 +128,13 @@
 	  	INSERT INTO level (
 			  	lev_cd, 
 			  	lev_nm,
+			  	lev_ul,
 			  	lev_so,
 			  	lev_yn
 		) VALUES (
 		 		#{lev_cd}, 
 		 		#{lev_nm},
+		 		#{lev_ul},
 		 		#{lev_so}, 
 		 		#{lev_yn}
 			 	)
@@ -143,6 +145,7 @@
 	  	UPDATE level
 		   SET lev_nm = #{lev_nm},
 		   	   lev_so = #{lev_so},
+		   	   lev_ul = #{lev_ul},
 			   lev_yn = #{lev_yn}
 		 WHERE lev_cd = #{lev_cd}
   	</update>
@@ -152,6 +155,7 @@
 	  	SELECT COUNT(*) OVER () - ROW_NUMBER() OVER (ORDER BY lev_nm DESC) + 1 AS lev_nb,
 	  			   lev_cd, 
 	  			   lev_nm,
+	  			   IFNULL(lev_ul,'') as lev_ul,
 	  			   lev_so,
 	  			   lev_yn
 	  	  FROM level
@@ -176,6 +180,7 @@
   	<select id="sideMainMenuList">
   		SELECT lev_cd,
   			   lev_nm,
+  			   lev_ul,
   			   lev_so,
   			   lev_yn
   		  FROM level
@@ -188,6 +193,7 @@
   	<select id="sideSubMenuList">
   		SELECT lev_cd,
   			   lev_nm,
+  			   lev_ul,
   			   lev_so,
   			   lev_yn
   		  FROM level

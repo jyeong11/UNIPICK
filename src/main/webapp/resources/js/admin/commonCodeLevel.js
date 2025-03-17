@@ -17,6 +17,7 @@ $(function() {
 		let data = {};
 		data.lev_cd = $('#code').val();
 		data.lev_nm = $('#codeName').val();
+		data.lev_ul = $('#codeLink').val();
 		data.lev_yn = $('#useYN').val();
 		data.lev_so = $('#sortNum').val();
 
@@ -67,6 +68,7 @@ $(function() {
                        		 data-bs-target="#exampleModal">${cd.lev_nb}</td>
                             <td>${cd.lev_cd}</td>
                             <td>${cd.lev_nm}</td>
+							<td>${cd.lev_ul}</td>
 							<td>${cd.lev_so}</td>
 							<td>${cd.lev_yn}</td>
                         </tr>
@@ -90,8 +92,9 @@ $(function() {
 			lev_nb: row.find("td:eq(0)").text(),
 	        lev_cd: row.find("td:eq(1)").text(),
 	        lev_nm: row.find("td:eq(2)").text(),
-			lev_so: row.find("td:eq(3)").text(),
-	        lev_yn: row.find("td:eq(4)").text() 
+			lev_ul: row.find("td:eq(3)").text(),
+			lev_so: row.find("td:eq(4)").text(),
+	        lev_yn: row.find("td:eq(5)").text() 
 	    };
 	debugger;
 		 let bodydata;
@@ -107,6 +110,12 @@ $(function() {
                     <label class="col-sm-2 col-form-label">코드명 : </label>
                     <div class="col-sm-3">
                         <input type="text" id="codeName" class="col-sm-2 form-control" value="${selectData.lev_nm}">
+                    </div>
+                </div>
+				<div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">URL링크 : </label>
+                    <div class="col-sm-3">
+                        <input type="text" id="codeLink" class="col-sm-2 form-control" value="${selectData.lev_ul}">
                     </div>
                 </div>
 				<div class="row mb-3">
@@ -140,15 +149,17 @@ $(function() {
 		confirm("수정하시겠습니까?") ? alert("수정이 완료되었습니다.") : alert("수정이 취소되었습니다.");
 		let code = $('#code').val();
         let codeName = $('#codeName').val();
+		let codeLink = $('#codeLink').val();
         let useYN = $('#useYN').val();
 		let sortNum = $('#sortNum').val();
-		
+		debugger;
 		$.ajax({
 			type: "POST",
 			url: "lvCodeUpdate",
 			data: { 
                 lev_cd: code,
 	            lev_nm: codeName,
+				lev_ul: codeLink,
 	            lev_yn: useYN,
 				lev_so: sortNum
             },
@@ -201,6 +212,12 @@ $(function() {
                         <label class="col-sm-2 col-form-label">코드명 : </label>
                         <div class="col-sm-3">
                             <input type="text" id="codeName" class="col-sm-2 form-control">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">URL링크 : </label>
+                        <div class="col-sm-3">
+                            <input type="text" id="codeLink" class="col-sm-2 form-control">
                         </div>
                     </div>
 					<div class="row mb-3">

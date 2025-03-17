@@ -1,5 +1,7 @@
 package com.itwillbs.unipick.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -73,12 +75,24 @@ public class AdminService {
 		return mapper.deleteLvCode(code);
 	}
 	// 사이드 메인 메뉴
-	public List<Map<String, Object>> sideMainMenuList(Map<String, Object> map) {
-		return mapper.sideMainMenuList(map);
-	}
-	// 사이드 서브 메뉴
-	public List<Map<String, Object>> sideSubMenuList(Map<String, Object> map) {
-		return mapper.sideSubMenuList(map);
+	public List<Map<String, Object>> MenuList(Map<String, Object> map) {
+		List<Map<String, Object>> mainMenus = mapper.sideMainMenuList(map);
+        List<Map<String, Object>> subMenus = mapper.sideSubMenuList(map);
+		
+        Map<String, List<Map<String, Object>>> subMenuMap = new HashMap<>();
+        for (Map<String, Object> sub : subMenus) {
+            String parentCode = (String) sub.get("parent_code");
+            subMenuMap.computeIfAbsent(parentCode, k -> new ArrayList<>()).add(sub);
+        }
+
+        // 상위 메뉴에 하위 메뉴 추가
+        for (Map<String, Object> main : mainMenus) {
+            String mainCode = (String) main.get("code");
+            main.put("subCodes", subMenuMap.getOrDefault(mainCode, new ArrayList<>()));
+        }
+        
+        return mainMenus;
+		
 	}
 		
 }
