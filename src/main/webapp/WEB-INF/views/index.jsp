@@ -33,19 +33,19 @@
 	<div id="top_menu">
 		<ul class="menu-nav">
 			<li class="menu-inner">
-				<a href="/index">
+				<a href="">
 					<span>홈</span>
 				</a>
-				<a href="/newarrive">
+				<a href="new">
 					<span>신상</span>
 				</a>
-				<a href="/best">
+				<a href="best">
 					<span>베스트</span>
 				</a>
-				<a href="/store">
+				<a href="store">
 					<span>스토어</span>
 				</a>
-				<a href="/event">
+				<a href="event">
 					<span>이벤트</span>
 				</a>
 			<li>

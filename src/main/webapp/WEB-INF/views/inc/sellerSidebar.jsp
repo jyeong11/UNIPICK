@@ -2,7 +2,9 @@
 
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="seller">UNIPICK ADMIN</a>
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="seller">
+		<img src="${pageContext.request.contextPath}/resources/images/로고 가로.png" alt="로고" id="logo">
+	</a>
     <hr class="sidebar-divider">
     <div class="sidebar-heading">상품관리</div>
     <li class="nav-item">
