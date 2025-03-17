@@ -41,6 +41,20 @@ public class SellerController {
 	
 	String virtualPath = "/resources/businessLicense";
 	
+	//셀러 회원가입
+	@GetMapping("sellerjoin")
+	public String sellerJoin() {
+		return "seller/sellerJoinForm";
+	}
+	
+	//메인
+	@GetMapping("seller")
+	public String sellerMain(HttpSession sellerid) {
+//		map.put("sellerId",(String)sellerid.getAttribute("id"));
+//		Map<String, Object> sellerinfo = loginService.SellerLogin(sellerid);
+		return "seller/sellerMain";
+	}
+	
 	@GetMapping("sellerlogin")
 	public String Login(HttpServletRequest request, Model model) {
 	    // 저장된 쿠키 확인
@@ -95,12 +109,6 @@ public class SellerController {
 		return response;
 	}
 	
-	//셀러 회원가입
-	@GetMapping("sellerjoin")
-	public String sellerJoin() {
-		return "seller/sellerJoinForm";
-	}
-	
 	@ResponseBody
 	@PostMapping("joinSucess")
 	public Map<String, Object> joinSucess(@RequestParam Map<String, Object> sellerInfo,
@@ -138,14 +146,6 @@ public class SellerController {
 		response.put("msg", msg);
 		return response;
 	}
-	//메인
-	@GetMapping("seller")
-	public String sellerMain(HttpSession sellerid) {
-//		map.put("sellerId",(String)sellerid.getAttribute("id"));
-//		Map<String, Object> sellerinfo = loginService.SellerLogin(sellerid);
-		return "seller/sellerMain";
-	}
-	
 	
 	//마이페이지
 	@ResponseBody
