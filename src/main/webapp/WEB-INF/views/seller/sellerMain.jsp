@@ -24,8 +24,8 @@
 
 </head>
 <body id="page-top">
-<div>
-<jsp:include page="../inc/sellerSidebar.jsp"></jsp:include>
+ 	<div id="wrapper"><div>
+	<jsp:include page="../inc/sellerSidebar.jsp"></jsp:include>
 </div>
  
 <script>
@@ -42,8 +42,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 <script type="text/javascript">
-
-// 	console.log("현재 페이지 주소: " + window.location.pathname);
 
 	document.addEventListener("DOMContentLoaded", function(){
 		// 현재 페이지에 해당하는 메뉴 활성화
@@ -71,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <div id="content">
 
                <!-- Topbar -->
-               
+               <h4 class="m-0 text-gray-900">UNIPICK 판매자 대시보드</h4>
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">

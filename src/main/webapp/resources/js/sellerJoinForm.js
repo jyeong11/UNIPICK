@@ -19,9 +19,8 @@ document.addEventListener("DOMContentLoaded", function () {
 	    if (validateForm()) {
 	        var formData = new FormData(document.getElementById("storeSignupForm"));
 	        var businessLicenseFile = document.getElementById("businessLicense").files[0];
-
-	        
-//	         파일을 Base64로 변환 후 AJAX 전송
+			debugger;        
+//	         파일을 Base64로 변환
 	        encodeFileAsBase64(businessLicenseFile, function(base64File) {
 	            var jsonData = {
 	                storeId: formData.get("storeId"),
@@ -35,15 +34,14 @@ document.addEventListener("DOMContentLoaded", function () {
 	                phNumber: formData.get("phNumber")
 	            };
 	
-debugger;
 	            $.ajax({
 	                type: "POST",
 	                url: "joinSucess",
 	                contentType: "application/json",
-	                data: JSON.stringify(jsonData),  // JSON 형태로 전송
+	                data: JSON.stringify(jsonData),
 	                success: function (res) {
 	                    alert("입점 신청이 완료되었습니다.");
-//	                    window.location.href = "successPage.html"; // 성공 페이지로 이동
+//	                    window.location.href = "successPage.jsp; 
 	                },
 	                error: function (xhr, textStatus, errorThrown) {
 	                    alert("다시 접속해주세요.");

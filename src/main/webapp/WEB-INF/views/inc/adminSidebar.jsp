@@ -5,7 +5,7 @@
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="AdmMain">UNIPICK ADMIN</a>
     <hr class="sidebar-divider my-0">
     <li class="nav-item">
-        <a class="nav-link" href="AdmMain"><i class="fa-solid fa-house"></i> <span>Main</span></a>
+        <a class="nav-link" href="admin"><i class="fa-solid fa-house"></i> <span>Main</span></a>
     </li>
     <hr class="sidebar-divider">
     <div class="sidebar-heading">CommonCode</div>

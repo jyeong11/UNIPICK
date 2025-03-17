@@ -92,14 +92,15 @@ public class SellerController {
 	@ResponseBody
 	@PostMapping("joinSucess")
 	public Map<String, Object> joinSucess(@RequestBody Map<String, Object> sellerinfo) {
+		System.out.println("!@#!@#!@#");
 		System.out.println("!@#$%^&&" + sellerinfo);
-		// Base64로 인코딩된 파일을 디코딩하여 파일 처리
         String base64File = (String) sellerinfo.get("businessLicense");
+        
+        System.out.println(base64File);
+        
         byte[] decodedBytes = Base64.getDecoder().decode(base64File);
 
-        // 디코딩된 데이터를 파일로 저장하는 로직 추가
-        // 파일 저장 로직은 필요에 따라 구현
-        System.out.println("Decoded File Length: " + decodedBytes.length);
+        System.out.println("Decoded File Length   : " + decodedBytes.length);
         sellerinfo.put("sel_bf", decodedBytes);
         
 		selService.sellerjoin(sellerinfo);

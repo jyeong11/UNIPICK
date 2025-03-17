@@ -47,11 +47,11 @@
 </head>
 <body>
 	<div id="admin-container">
-		<div>
-			<a href="admin">
-		       	<img src="${pageContext.request.contextPath}/resources/images/로고 가로.png" alt="로고" id="logo">
-			</a>
-		 </div>
+<!-- 		<div> -->
+<!-- 			<a href="admin"> -->
+<%-- 		       	<img src="${pageContext.request.contextPath}/resources/images/로고 가로.png" alt="로고" id="logo"> --%>
+<!-- 			</a> -->
+<!-- 		 </div> -->
 		 <div class="login_div">
 		 	<ul class="login_ul">
 		 		<li><a href="javascript:void(0);" id="admin_id">admin</a></li>

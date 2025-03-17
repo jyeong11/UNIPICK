@@ -26,7 +26,7 @@
 <body id="page-top">
     <!-- Page Wrapper -->
     <div id="wrapper"><div>
-<jsp:include page="../inc/adminSidebar.jsp"></jsp:include>
+	<jsp:include page="../inc/adminSidebar.jsp"></jsp:include>
 </div>
 
 <script>
