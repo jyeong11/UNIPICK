@@ -4,10 +4,10 @@
     <h2>메뉴</h2>
     <ul class="menu">
         <li class="menu-item">
-            <a href="#" class="menu-title">상품관리</a>
+            <a href="prdList" class="menu-title">상품관리</a>
             <ul class="submenu">
                 <li><a href="prdRegister">상품등록</a></li>
-                <li><a href="">상품조회</a></li>
+                <li><a href="prdList">상품조회</a></li>
             </ul>
         </li>
         <li class="menu-item">
