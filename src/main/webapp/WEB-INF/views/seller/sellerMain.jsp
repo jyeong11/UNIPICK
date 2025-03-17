@@ -7,11 +7,11 @@
 <title>UNIPICK</title>
 
 <!-- default -->
-<script src="/resources/js/jquery-3.7.1.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
 
 <!-- font-awesome -->
-<link rel="stylesheet" href="/resources/fontawesome/all.min.css" />
-<script src="/resources/fontawesome/all.min.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/public/fontawesome/all.min.css" />
+<script src="${pageContext.request.contextPath }/resources/public/fontawesome/all.min.js"></script>
 
 <!-- CSS for Page -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,7 +28,6 @@
 <jsp:include page="../inc/sellerSidebar.jsp"></jsp:include>
 </div>
  
-<script>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     const menuTitles = document.querySelectorAll(".menu-title");

@@ -27,9 +27,22 @@
 <!-- favicon -->
 <link rel="icon"
 	href="${pageContext.request.contextPath }/resources/images/favicon.png">
+	
+	<!-- font-awesome -->
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/public/fontawesome/all.min.css" />
+<script src="${pageContext.request.contextPath }/resources/public/fontawesome/all.min.js"></script>
+	
 <!--  js -->
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/commonCode.js"></script>
+
+
+
+<link href="${pageContext.request.contextPath }/resources/public/css/sb-admin-2.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath }/resources/public/css/adm.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath }/resources/public/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath }/resources/public/vendor/datatables/datatables.min.css" rel="stylesheet">
+</head>
 <title>유니픽 관리자</title>
 </head>
 <body>
@@ -112,5 +125,28 @@
 				</section>
 			</div>
 		</div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="${pageContext.request.contextPath }/resources/public/vendor/jquery/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="${pageContext.request.contextPath }/resources/public/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="${pageContext.request.contextPath }/resources/public/js/sb-admin-2.min.js"></script>
+    
+    <!-- Page level plugins -->
+    <script src="${pageContext.request.contextPath }/resources/public/vendor/chart.js/Chart.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/public/vendor/datepicker/moment.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/public/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/public/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+	
+    <!-- Page level custom scripts -->
+    <script src="${pageContext.request.contextPath }/resources/public/js/index.js"></script>
+    
+    <script>
+//     	const categoryStats = '';
+//     	let data = categoryStats.replaceAll('=', ':').replaceAll('{', '{"').replaceAll(':', '":').replaceAll('", ', '", "');
+    </script>
 </body>
 </html>
