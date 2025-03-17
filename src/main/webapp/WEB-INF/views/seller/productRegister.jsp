@@ -12,15 +12,17 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/public/fontawesome/all.min.css" />
 <script src="${pageContext.request.contextPath }/resources/public/fontawesome/all.min.js"></script>
 
-<!-- CSS for Page -->
+<!-- font -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Nunito:wght@200..1000&display=swap" rel="stylesheet">
+
+<!-- CSS for Page -->
 <link href="${pageContext.request.contextPath }/resources/public/css/sb-admin-2.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath }/resources/public/css/adm.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath }/resources/public/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath }/resources/public/vendor/datatables/datatables.min.css" rel="stylesheet">
-
+<link href="${pageContext.request.contextPath }/resources/css/seller/productRegister.css" rel="stylesheet">
 </head>
 <body id="page-top">
 <div id="wrapper">
@@ -34,7 +36,7 @@
 					<!-- Sidebar Toggle (Mobile Topbar) -->
 					<button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3"><i class="fa fa-bars"></i></button>
 					<!-- Title -->
-					<h4 class="m-0 text-gray-900">상품등록</h4>
+					<h4 class="m-0 text-gray-900">판매자 대시보드</h4>
 					<!-- Topbar Navbar -->
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item dropdown no-arrow"><a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"aria-expanded="false">
@@ -72,8 +74,145 @@
     				</div>
 				</div>
 	</div><!-- End of Topbar -->
-		<!-- Footer -->
-		<footer class="sticky-footer bg-white">
+	
+	
+			<!-- Content -->
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card shadow mb-4">
+							<div class="card-header py-3">
+								<h5 class="m-0 font-weight-bold text-primary">상품 등록</h5>
+							</div>
+							<div class="card-body">
+						<section class="item-regi">
+					<div>
+						<form action="ProductRegist" id="productRegist" method="post" enctype="multipart/form-data">
+							<section class="item-regi-img">
+								<h2 class="item-regi-name">상품이미지</h2>
+								<div class="item-thumb">
+									<button class="item-thumb-upload" type="button">
+										<img src="/resources/img/product-thumb-no.jpg" id="item-thumb-preview1">
+									</button>
+									<input type="file" class="item-thumb-upload-btn" id="item-thumb-upload-btn1" name="pic1">
+								</div>
+								<div class="item-thumb">
+									<button class="item-thumb-upload" type="button">
+										<img src="/resources/img/product-thumb-no.jpg" id="item-thumb-preview2">
+									</button>
+									<input type="file" class="item-thumb-upload-btn" id="item-thumb-upload-btn2" name="pic2">
+								</div>
+								<div class="item-thumb">
+									<button class="item-thumb-upload" type="button">
+										<img src="/resources/img/product-thumb-no.jpg" id="item-thumb-preview3">
+									</button>
+									<input type="file" class="item-thumb-upload-btn" id="item-thumb-upload-btn3" name="pic3">
+								</div>
+								<div class="item-thumb">
+									<button class="item-thumb-upload" type="button">
+										<img src="/resources/img/product-thumb-no.jpg" id="item-thumb-preview4">
+									</button>
+									<input type="file" class="item-thumb-upload-btn" id="item-thumb-upload-btn3" name="pic4">
+								</div>
+								<div class="item-thumb">
+									<button class="item-thumb-upload" type="button">
+										<img src="/resources/img/product-thumb-no.jpg" id="item-thumb-preview5">
+									</button>
+									<input type="file" class="item-thumb-upload-btn" id="item-thumb-upload-btn3" name="pic5">
+								</div>
+								<div class="item-thumb">
+									<button class="item-thumb-upload" type="button">
+										<img src="/resources/img/product-thumb-no.jpg" id="item-thumb-preview6">
+									</button>
+									<input type="file" class="item-thumb-upload-btn" id="item-thumb-upload-btn3" name="pic6">
+								</div>
+								<div class="item-thumb">
+									<button class="item-thumb-upload" type="button">
+										<img src="/resources/img/product-thumb-no.jpg" id="item-thumb-preview7">
+									</button>
+									<input type="file" class="item-thumb-upload-btn" id="item-thumb-upload-btn3" name="pic7">
+								</div>
+								<div class="item-thumb">
+									<button class="item-thumb-upload" type="button">
+										<img src="/resources/img/product-thumb-no.jpg" id="item-thumb-preview8">
+									</button>
+									<input type="file" class="item-thumb-upload-btn" id="item-thumb-upload-btn3" name="pic8">
+								</div>
+								<div class="item-thumb">
+									<button class="item-thumb-upload" type="button">
+										<img src="/resources/img/product-thumb-no.jpg" id="item-thumb-preview9">
+									</button>
+									<input type="file" class="item-thumb-upload-btn" id="item-thumb-upload-btn3" name="pic9">
+								</div>
+								<div class="item-thumb">
+									<button class="item-thumb-upload" type="button">
+										<img src="/resources/img/product-thumb-no.jpg" id="item-thumb-preview10">
+									</button>
+									<input type="file" class="item-thumb-upload-btn" id="item-thumb-upload-btn3" name="pic10">
+								</div>
+								<h2 class="item-thumb-description">첫번째 상품 이미지는 썸네일로 보여져요.</h2>
+							</section>
+							<section class="item-regi-section">
+								<h2 class="item-regi-name">상품명</h2>
+								<div class="item-regi-box">
+									<input type="text" name="product_title" class="item-regi-title-text" id="item-regi-title-text">
+									<a href="ProductBanedItem" target='_blank'>거래금지 품목 보기</a>
+								</div>
+								<h6 class="item-regi-name-byte" id="item-regi-name-byte">(0 / 100)</h6>
+							</section>
+							<section class="item-regi-section">
+								<h2 class="item-regi-name">상품설명</h2>
+									<div><textarea class="item-regi-description-text" id="item-regi-description-text" name="product_intro"></textarea>
+								</div>
+								<h6 class="item-regi-description-byte" id="item-regi-description-byte">(0 / 2000)</h6>
+							</section>
+							<section class="item-regi-category">
+								<h6 class="item-regi-category-name">카테고리 & 태그</h6>
+								<select class="item-regi-category-box" name="product_category" id="product_category">
+								</select>
+							</section>
+							<section class="item-regi-trade-adr">
+								<h6 class="item-regi-name">직거래 주소 설정</h6>
+								<div class="item-regi-trade-active">
+									<label><input type="radio" name="trade-adr-val" id="trade-enable" value="1" checked>직거래 가능</label>
+									<label><input type="radio" name="trade-adr-val" id="trade-disable" value="0">직거래 불가능</label>
+									<div class="item-trade-adr-box" id="item-trade-adr-box">
+										<div>
+											<input type="text" class="item-trade-adr-sub" id="item-trade-adr-sub" name="product_trade_adr1" readonly>
+											<input type="button" class="item-trade-adr-search" value="주소검색" onclick="searchAdr()">
+										</div>
+									</div>
+								</div>	
+							</section>
+							<section class="item-regi-price">
+								<h6 class="item-regi-name">상품 가격 설정</h6>
+								<div class="item-regi-price-box">
+									<label><input type="radio" name="shipping-fee" id="shipping-fee-enable"  value="0" checked>택배비 미포함</label>
+									<label><input type="radio" name="shipping-fee" id="shipping-fee-disable" value="1">택배비 포함</label>
+									<div class="item-regi-price-number">
+										<input type="number" class="shipping-fee-price" id="shipping-fee-price" name="product_shipping_fee" placeholder="택배비를 입력해주세요.">
+										<div><input type="number" class="item-price" name="product_price" id="product_price" placeholder="상품 가격을 입력해주세요."></div>
+										<label class="item-discount-box"><input type="checkbox" class="item-discount" name="product_discount_status" value="1">가격 제안 가능</label>
+										<input type="hidden" name="product_discount_status" value="0">
+									</div>
+								</div>
+							</section>
+							<div class="item-regi-submit-group">
+								<input type="button" class="item-backpage" onclick="history.back()" value="뒤로 가기">
+								<input type="submit" class="item-submit" value="상품 등록">
+							</div>
+						</form>
+					</div>
+				</section>
+		
+							
+							</div>
+						</div>
+					</div>
+				</div><!-- /.container-fluid -->
+			</div><!-- End of Content -->
+			<!-- Footer -->
+			<footer class="sticky-footer bg-white">
 			<div class="container my-auto">
 				<div class="copyright text-center my-auto">
 					<span>Copyright &copy; UNIPICK SELLER 2025</span>
