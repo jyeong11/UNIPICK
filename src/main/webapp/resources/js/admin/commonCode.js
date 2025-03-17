@@ -97,20 +97,20 @@ $(function() {
             bodydata = `
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label">공통코드 : </label>
-                    <div class="col-sm-3">
-                        <input type="text" id="code" class="col-sm-2 form-control" value="${selectData.com_cd}" disabled>
+                    <div class="col-sm-8">
+                        <input type="text" id="code" class="col-sm-4 form-control" value="${selectData.com_cd}" disabled>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label">코드명 : </label>
-                    <div class="col-sm-3">
-                        <input type="text" id="codeName" class="col-sm-2 form-control" value="${selectData.com_nm}">
+                    <div class="col-sm-8">
+                        <input type="text" id="codeName" class="col-sm-4 form-control" value="${selectData.com_nm}">
                     </div>
                 </div>
                 <div class="row mb-1">
                     <label class="col-sm-2 col-form-label">사용여부 : </label>
-                    <div class="col-sm-3">
-                        <select id="useYN" class="col-sm-1 form-select">
+                    <div class="col-sm-8">
+                        <select id="useYN" class="col-sm-4 form-select">
                             <option value="y">사용</option>
                             <option value="n">미사용</option>
                         </select>
@@ -183,20 +183,20 @@ $(function() {
                 bodydata = `
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">공통코드 : </label>
-                        <div class="col-sm-3">
-                            <input type="text" id="code" class="col-sm-2 form-control">
+                        <div class="col-sm-8">
+                            <input type="text" id="code" class="col-sm-4 form-control">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">코드명 : </label>
-                        <div class="col-sm-3">
-                            <input type="text" id="codeName" class="col-sm-2 form-control">
+                        <div class="col-sm-8">
+                            <input type="text" id="codeName" class="col-sm-4 form-control">
                         </div>
                     </div>
                     <div class="row mb-1">
                         <label class="col-sm-2 col-form-label">사용여부 : </label>
-                        <div class="col-sm-3">
-                            <select id="useYN" class="col-sm-1 form-select">
+                        <div class="col-sm-8">
+                            <select id="useYN" class="col-sm-4 form-select">
                                 <option value="y">사용</option>
                                 <option value="n">미사용</option>
                             </select>
