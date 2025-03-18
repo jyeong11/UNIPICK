@@ -19,12 +19,25 @@ document.addEventListener("DOMContentLoaded", function () {
     return true;
   }
 
-  // 2. 카테고리 드롭다운 초기화
+  // 2. 드롭다운 초기화 (카테고리, 배송, 재고 옵션)
   async function initDropdowns() {
-    const apiUrl = contextPath + '/productCategory';
+    // 공통 함수: dropdown 채우기
+    function populateDropdown(dropdown, items) {
+      dropdown.innerHTML = '<option value="">선택하세요</option>';
+      items.forEach(({ lev_cd, lev_nm }) => {
+        const option = document.createElement('option');
+        option.value = lev_cd;
+        option.textContent = lev_nm;
+        dropdown.appendChild(option);
+      });
+    }
+    // 카테고리 초기화
+    const cat1 = document.getElementById('product_category');
+    const cat2 = document.getElementById('product_category_sub');
+    const cat3 = document.getElementById('product_category_detail');
     async function fetchCategories(parentCode = '') {
       try {
-        const response = await fetch(`${apiUrl}?parentCode=${parentCode}`);
+        const response = await fetch(`${contextPath}/productCategory?parentCode=${parentCode}`);
         if (!response.ok) throw new Error('네트워크 오류');
         return await response.json();
       } catch (error) {
@@ -32,27 +45,58 @@ document.addEventListener("DOMContentLoaded", function () {
         return [];
       }
     }
-    function populateDropdown(dropdown, categories) {
-      dropdown.innerHTML = '<option value="">선택하세요</option>';
-      categories.forEach(({ lev_cd, lev_nm }) => {
-        const option = document.createElement('option');
-        option.value = lev_cd;
-        option.textContent = lev_nm;
-        dropdown.appendChild(option);
+    async function initCategory() {
+      populateDropdown(cat1, await fetchCategories());
+      cat1.addEventListener('change', async function () {
+        populateDropdown(cat2, await fetchCategories(this.value));
+        populateDropdown(cat3, []);
+      });
+      cat2.addEventListener('change', async function () {
+        populateDropdown(cat3, await fetchCategories(this.value));
       });
     }
-    const cat1 = document.getElementById('product_category');
-    const cat2 = document.getElementById('product_category_sub');
-    const cat3 = document.getElementById('product_category_detail');
 
-    populateDropdown(cat1, await fetchCategories());
-    cat1.addEventListener('change', async function () {
-      populateDropdown(cat2, await fetchCategories(this.value));
-      populateDropdown(cat3, []);
-    });
-    cat2.addEventListener('change', async function () {
-      populateDropdown(cat3, await fetchCategories(this.value));
-    });
+    // 배송 옵션 초기화
+    const deliverySelect = document.getElementById('product_delivery');
+    async function initDelivery() {
+      deliverySelect.innerHTML = '<option value="">선택하세요</option>';
+      try {
+        const response = await fetch(contextPath + '/deliveryOptions');
+        if (!response.ok) throw new Error('네트워크 오류');
+        const options = await response.json();
+        options.forEach(option => {
+          const opt = document.createElement('option');
+          opt.value = option.cod_cd;
+          opt.textContent = option.cod_nm;
+          deliverySelect.appendChild(opt);
+        });
+      } catch (error) {
+        console.error('배송 옵션 로딩 오류:', error);
+      }
+    }
+
+    // 재고 관리 옵션 초기화 (공통코드 STOCK_MANAGEMENT 활용)
+    const stockSelect = document.getElementById('stock_management');
+    async function initStockOptions() {
+      stockSelect.innerHTML = '<option value="">선택하세요</option>';
+      try {
+        const response = await fetch(contextPath + '/stockOptions');
+        if (!response.ok) throw new Error('네트워크 오류');
+        const options = await response.json();
+        options.forEach(option => {
+          const opt = document.createElement('option');
+          opt.value = option.cod_cd;
+          opt.textContent = option.cod_nm;
+          stockSelect.appendChild(opt);
+        });
+      } catch (error) {
+        console.error('재고 옵션 로딩 오류:', error);
+      }
+    }
+
+    await initCategory();
+    await initDelivery();
+    await initStockOptions();
   }
 
   // 3. 썸네일 미리보기 (이벤트 위임)
@@ -62,14 +106,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const index = btn.getAttribute('data-index');
     const input = document.getElementById(`item-thumb-upload-btn${index}`);
     input.click();
-    input.addEventListener("change", function (event) {
-      const file = event.target.files[0];
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        document.getElementById(`item-thumb-preview${index}`).src = e.target.result;
-      };
-      reader.readAsDataURL(file);
-    });
+    // change 이벤트 중복 등록 방지
+    if (!input.dataset.bound) {
+      input.addEventListener("change", function (event) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          document.getElementById(`item-thumb-preview${index}`).src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      });
+      input.dataset.bound = "true";
+    }
   });
 
   // 4. 글자 수 체크 (제목)
@@ -122,26 +170,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   document.querySelector('.toastui-editor-defaultUI').style.width = '950px';
 
-  // 6. 배송 옵션 드롭다운 초기화
-  async function initDeliveryDropdown() {
-    const deliverySelect = document.getElementById('product_delivery');
-    deliverySelect.innerHTML = '<option value="">선택하세요</option>';
-    try {
-      const response = await fetch(contextPath + '/deliveryOptions');
-      if (!response.ok) throw new Error('네트워크 오류');
-      const options = await response.json();
-      options.forEach(option => {
-        const opt = document.createElement('option');
-        opt.value = option.cod_cd;   // 상세코드 ID
-        opt.textContent = option.cod_nm;  // 상세코드 이름
-        deliverySelect.appendChild(opt);
-      });
-    } catch (error) {
-      console.error('배송 옵션 로딩 오류:', error);
-    }
-  }
-
-  // 7. 상품 등록 폼 제출 이벤트
+  // 6. 폼 제출 이벤트
   $("#productRegist").on("submit", async function (event) {
     event.preventDefault();
     if (!validateForm()) return;
@@ -171,9 +200,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // 8. 기타 초기화 (카테고리, 배송 옵션, 배송비 표시 등)
-  initDropdowns();
-  initDeliveryDropdown();
+  // 7. 기타 초기화 (배송비 노출 등)
   $("#shipping-fee-enable, #shipping-fee-disable").change(function () {
     if ($("#shipping-fee-enable").is(":checked")) {
       $("#list_price").show();
@@ -181,4 +208,51 @@ document.addEventListener("DOMContentLoaded", function () {
       $("#list_price").hide().val(0);
     }
   });
+
+  // 8. 색상 다중 선택 기능 추가 (이전 답변 참조)
+  document.getElementById("add-color").addEventListener("click", function () {
+    const container = document.getElementById("color-container");
+    const newColorInput = document.createElement("input");
+    newColorInput.type = "color";
+    newColorInput.name = "color_number";
+    newColorInput.className = "color-picker";
+    newColorInput.style.marginRight = "5px";
+    const removeBtn = document.createElement("button");
+    removeBtn.type = "button";
+    removeBtn.textContent = "삭제";
+    removeBtn.className = "btn btn-sm btn-outline-danger";
+    removeBtn.addEventListener("click", function () {
+      newColorInput.remove();
+      removeBtn.remove();
+    });
+    container.appendChild(newColorInput);
+    container.appendChild(removeBtn);
+  });
+
+ 
+// "사이즈 추가" 버튼 클릭 시 새로운 select 요소 추가
+document.getElementById("add-size").addEventListener("click", function () {
+    const container = document.getElementById("size-container");
+    const newSelect = document.createElement("select");
+    newSelect.name = "size_option";
+    newSelect.className = "size-select";
+    newSelect.style.marginRight = "5px";
+    populateSizeSelect(newSelect, globalSizeOptions);
+
+    // 삭제 버튼 생성
+    const removeBtn = document.createElement("button");
+    removeBtn.type = "button";
+    removeBtn.textContent = "삭제";
+    removeBtn.className = "btn btn-sm btn-outline-danger";
+    removeBtn.addEventListener("click", function () {
+        newSelect.remove();
+        removeBtn.remove();
+    });
+
+    container.appendChild(newSelect);
+    container.appendChild(removeBtn);
+});
+
+  // 전체 드롭다운 초기화 실행
+  initDropdowns();
 });

@@ -142,30 +142,36 @@
                           </div>
                         </div>
                       </section>
-                      <!-- 배송, 재고, 색상, 사이즈 설정 영역 (각 영역은 별도 ID/Name 적용) -->
+                      <!-- 배송, 재고, 색상, 사이즈 설정 영역 -->
                       <section class="item-regi-trade-adr">
                         <h6 class="item-regi-name">배송 설정</h6>
                         <select class="item-regi-category-box" name="delivery_option" id="product_delivery"></select>
                       </section>
                       <section class="item-regi-stock">
                         <h6 class="item-regi-name">재고 설정</h6>
-                        <div class="item-regi-price-box">
                           <input type="number" id="stock_number" name="stock_number" placeholder="재고 수량을 입력해주세요." required>
-                        </div>
+                          <select class="item-regi-stock-box" name="stock_management" id="stock_management"></select>
                       </section>
-                      <section class="item-regi-color">
-                        <h6 class="item-regi-name">색상 설정</h6>
-                        <div class="item-regi-price-box">
-                          <select class="item-regi-category-box" name="color_option" id="color_option"></select>
-                        </div>
-                      </section>
-                      <section class="item-regi-size">
-                        <h6 class="item-regi-name">사이즈 설정</h6>
-                        <div class="item-regi-price-box">
-                          <select class="item-regi-category-box" name="size_option" id="size_option"></select>
-                        </div>
-                      </section>
-                      <!-- 제출 버튼 -->
+					  <section class="item-regi-color">
+						<h6 class="item-regi-name">색상 설정</h6>
+						<!-- 색상 입력들이 추가될 영역 -->
+						<div id="color-container">
+							<input type="color" name="color_number" class="color-picker" required>
+						</div>
+						<!-- 색상 입력 추가 버튼 -->
+						<button type="button" id="add-color" class="btn btn-sm btn-outline-primary">색상 추가</button>
+						</section>
+						<!-- 사이즈 영역 예시 -->
+						<section class="item-regi-size">
+						<h6 class="item-regi-name">사이즈 설정</h6>
+						<!-- 사이즈 선택 입력들이 추가될 영역 -->
+						<div id="size-container">
+						<select name="size_option" class="size-select"></select>
+						</div>
+						<!-- 사이즈 선택 추가 버튼 -->
+						<button type="button" id="add-size" class="btn btn-sm btn-outline-primary">사이즈 추가</button>
+						</section>
+						<!-- 제출 버튼 -->
                       <div class="item-regi-submit-group">
                         <input type="button" class="item-backpage" onclick="history.back()" value="뒤로 가기">
                         <input type="submit" class="item-submit" value="상품 등록">
@@ -198,5 +204,4 @@
   <script src="${pageContext.request.contextPath}/resources/public/vendor/datatables/jquery.dataTables.min.js"></script>
   <script src="${pageContext.request.contextPath}/resources/public/vendor/datatables/dataTables.bootstrap4.min.js"></script>
   <script src="${pageContext.request.contextPath}/resources/public/js/index.js"></script>
-</body>
-</html>
+  

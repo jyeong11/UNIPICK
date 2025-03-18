@@ -75,8 +75,18 @@ public class SellerService2 {
         mapper.insertCategorySelection(selection);
     }
     
-    // 배송 옵션 조회 (공통코드 그룹 "DELIVERY" 사용)
+    // 배송 옵션 조회 (공통코드 그룹 "SHIPPING" 사용)
     public List<Map<String, Object>> getDeliveryOptions() {
         return mapper.selectDeliveryOptions("SHIPPING");
     }
+    
+    // 재고 관리 옵션 조회 (공통코드 그룹 "STOCK_MANAGEMENT" 사용)
+    public List<Map<String, Object>> getStockOptions() {
+        return mapper.selectStockOptions("STOCK_MANAGEMENT");
+    }
+    
+    public void insertProductColor(Map<String, Object> colorData) {
+        mapper.insertProductColor(colorData);
+    }
+    
 }
