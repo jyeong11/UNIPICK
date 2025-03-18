@@ -62,9 +62,9 @@ public class SellerRestController2 {
     }
 
     // 상품 등록 API
-    @PostMapping("/insertProduct")  
+    @PostMapping("api/insertProduct")  
     public ResponseEntity<?> insertProduct(@RequestBody Map<String, Object> productData) {
-        productData.put("prd_id", UUID.randomUUID().toString());
+//        productData.put("prd_id", UUID.randomUUID().toString());
         sellerService.insertProduct(productData);
         return ResponseEntity.ok(Map.of("message", "상품 등록 성공"));
     }

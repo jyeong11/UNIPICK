@@ -53,7 +53,7 @@
       prd_bd
     )
     VALUES (
-      #{prd_id},
+      1,
       #{prd_nm},
       #{sel_id},
       #{prd_cd},
