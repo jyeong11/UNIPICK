@@ -3,7 +3,9 @@ $(function() {
 	loadData();
 	
 	$("#cancel-btn").on("click", function () {
-	    window.history.back();
+		if(confirm("취소하시겠습니까?")){
+			window.location.href = "admin";
+		}
 	})
 	
 	$("#edit-btn").on("click", function () {
@@ -15,14 +17,11 @@ $(function() {
 	        type: "GET",
 	        url: "adminInfo",
 	        success: function(res) {
-				$(".my-data").empty();
-				let row = $(
-					`<input type="text" id="id" disabled value="${res.adm_id }">
-					 <input type="password" id="pw" placeholder="비밀번호">
-					 <input type="password" id="pw-check" placeholder="비밀번호 확인">
-					 <input type="text" disabled value="${res.adm_nm }">`
-				);
-				$('.my-data').append(row);
+					 let id = `<input type="text" id="id" readonly value="${res.adm_id }">`
+					 let nm = `<input type="text" readonly value="${res.adm_nm }">`
+				
+				$('#id').append(id);
+				$('#nm').append(nm);
 	        },
 	        error: function(xhr, status, error) {
             	alert("서버 오류가 발생했습니다.");
@@ -32,20 +31,24 @@ $(function() {
 	
 	
 	function editPw() {
-		let admId = document.getElementById("id").value.trim();
-		let admPw = document.getElementById("pw").value.trim();
-	    let admPwCheck = document.getElementById("pw-check").value.trim();
 		
-		if(admPw === "" && admPwCheck === ""){
-			alert("비밀번호를 입력해주세요.");
-			return;
-		} else if(admPw !==  admPwCheck) {
-	        alert("비밀번호가 일치하지 않습니다.");
+		let admPw = document.getElementById("pw").value;
+	    let admPwCheck = document.getElementById("pw-check").value;
+		
+		if (!admPw || !admPwCheck) {
+        	alert("비밀번호를 입력한 후 수정을 눌러주세요.");
 			return;
 	    }
+		debugger;
+		let admId = $('#id').prop('value').trim();
+		admPw = admPw.trim();
+	    admPwCheck = admPwCheck.trim();
+		
 		let data = {};
 		data.admId = admId;
 		data.admPw = admPw;
+		
+		
 		
 		$.ajax({
 	        type: "POST",

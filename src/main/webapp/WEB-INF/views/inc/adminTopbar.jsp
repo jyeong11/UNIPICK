@@ -21,16 +21,20 @@
            <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                 aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="/." target="_blank">
+                <a class="dropdown-item" href="main" target="_blank">
                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                    사용자 화면
+                    구매자 화면
+                </a>
+                <a class="dropdown-item" href="seller" target="_blank">
+                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                    판매자 화면
                 </a>
                 <a class="dropdown-item" href="AdmLogList">
                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                     로그 기록
                 </a>
-                <a class="dropdown-item" href="adminMyPage" data-toggle="modal" data-target="#logoutModal">
-                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                <a class="dropdown-item" href="adminMyPage">
+                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                     마이페이지
                 </a>
                 <div class="dropdown-divider"></div>
@@ -56,7 +60,7 @@
             <div class="modal-body">로그아웃 후에는 관리자 사이트 접근이 불가능합니다.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
-                <a class="btn btn-primary" href="MemberLogout">로그아웃</a>
+                <a class="btn btn-primary" href="adminLogin">로그아웃</a>
             </div>
         </div>
     </div>

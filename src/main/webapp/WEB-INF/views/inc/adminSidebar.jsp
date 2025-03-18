@@ -94,7 +94,6 @@
 </ul>
 <!-- End of Sidebar -->
 <script>
-<script>
 document.addEventListener("DOMContentLoaded", function () {
     const menuTitles = document.querySelectorAll(".menu-title");
 
