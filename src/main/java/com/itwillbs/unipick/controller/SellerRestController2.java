@@ -92,5 +92,6 @@ public class SellerRestController2 {
     public List<Map<String, Object>> getSizeOptions(){
     	return sellerService.getSizeOptions();
     }
- 
+    
+    
 }

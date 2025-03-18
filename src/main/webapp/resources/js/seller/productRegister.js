@@ -190,7 +190,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const formData = new FormData();
         formData.append('image', blob);
         try {
-          const response = await fetch(contextPath + 'resources//upload', {
+		  const response = await fetch(contextPath + '/upload', {
             method: 'POST',
             body: formData
           });
