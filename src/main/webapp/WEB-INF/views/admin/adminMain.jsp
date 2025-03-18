@@ -116,13 +116,6 @@
                                                 <div class="col-auto">
                                                     <div class="h3 mb-0 mr-3 font-weight-bold text-gray-800 counter-text" id="pendingReports">17</div>
                                                 </div>
-<!--                                                 <div class="col"> -->
-<!--                                                     <div class="progress progress-sm mr-2"> -->
-<!--                                                         <div class="progress-bar bg-danger" role="progressbar" -->
-<!--                                                             style="width: 50%" aria-valuenow="50" aria-valuemin="0" -->
-<!--                                                             aria-valuemax="100"></div> -->
-<!--                                                     </div> -->
-<!--                                                 </div> -->
                                             </div>
                                         </div>
                                         <div class="col-auto">
