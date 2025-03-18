@@ -1,7 +1,6 @@
 $(function() {
 	$(document).ready(function() {
     if (searchterm !== "") {
-	debugger;
         $.ajax({
             url: "searchProduct",
             method: "GET",
@@ -10,10 +9,9 @@ $(function() {
                 let resultHtml = "";
                 if (res.length > 0) {
                     res.forEach(function(prd) {
-						debugger;
                         resultHtml += `
                             <div class="prd-item">
-                                <img src="${prd.prd_image}" alt="${prd.prd_nm}" style="width:100px; height:100px;">
+                                <img src="${prd.prd_id}" alt="${prd.prd_nm}" style="width:100px; height:100px;">
                                 <div>${prd.prd_nm}</div>
                                 <div>${prd.prd_op}원</div>
 								<div>${prd.prd_sp}원</div>

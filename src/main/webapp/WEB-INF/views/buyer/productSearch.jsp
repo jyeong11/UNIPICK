@@ -21,6 +21,7 @@
 <link href="${pageContext.request.contextPath }/resources/css/buyer/buyerMenuBar.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/top.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/footer.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/buyer/productSearch.css" rel="stylesheet" type="text/css">
 <!-- favicon -->
 <link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
 </head>
@@ -33,9 +34,9 @@
 	<div>
 		 <jsp:include page="../inc/buyerMenuBar.jsp"></jsp:include>
 	</div>
-	
-	<div id="search_results"></div>
-	
+	<div id="content">
+		<div id="search_results"></div>
+	</div>
 	<div id="footer">
 		<jsp:include page="../inc/footer.jsp"></jsp:include>
 	</div>

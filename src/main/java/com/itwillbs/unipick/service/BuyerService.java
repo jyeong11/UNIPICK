@@ -14,10 +14,11 @@ public class BuyerService {
 	@Autowired
 	BuyerMapper mapper;
 	
+	//상단메뉴바
 	public List<Map<String, Object>> getAllMenu(){
 		return mapper.getAllMenu();
 	}
-	
+	//상품검색
 	public List<Map<String, Object>> getSearchPrd(String query) {
 		return mapper.getSearchPrd(query);
 	}

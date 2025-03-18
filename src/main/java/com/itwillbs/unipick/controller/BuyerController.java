@@ -72,10 +72,7 @@ public class BuyerController {
 	@ResponseBody
 	@GetMapping("searchProduct")
 	public List<Map<String, Object>> searchProduct(@RequestParam("query") String query) {
-		
 		List<Map<String, Object>> selectPrd = buyService.getSearchPrd(query);
-		
-		System.out.println(selectPrd);
 		return selectPrd;
 	}
 	
