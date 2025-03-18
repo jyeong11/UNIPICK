@@ -31,15 +31,16 @@ public class BuyerController {
 	public String buyerBest() {
 		return "buyer/buyerBest";
 	}
+	@GetMapping("cart")
+	public String buyerCart() {
+		return "buyer/buyerCart";
+	}
 		
 	// 상단 메뉴바 공통코드
 	@ResponseBody
 	@GetMapping("menu")
-	public List<Map<String, Object>> getAllMenu(/* @RequestParam Map<String,Object> data */) {
-		
-//		System.out.println("!@#$%^&" + data);
+	public List<Map<String, Object>> getAllMenu() {
 		List<Map<String, Object>> menu = buyService.getAllMenu();
-		System.out.println("MENU" + menu);
 		return menu;
 	}
 }

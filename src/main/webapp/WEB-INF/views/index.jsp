@@ -30,7 +30,7 @@
 	<div id="topNav">
 		<jsp:include page="./inc/top.jsp"></jsp:include>
 	</div>
-	<div id="topNav">
+	<div>
 		<jsp:include page="./inc/buyerMenuBar.jsp"></jsp:include>
 	</div>
 	<div>

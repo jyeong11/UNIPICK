@@ -2,7 +2,7 @@
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/buyer/buyerMenuBar.js"></script>
 
-<link href="${pageContext.request.contextPath }/resources/css/buyerMenuBar.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/buyer/buyerMenuBar.css" rel="stylesheet" type="text/css">
 	<div id="top_menu">
 		<ul class="menu-nav">
 			<li class="menu-inner"></li>
