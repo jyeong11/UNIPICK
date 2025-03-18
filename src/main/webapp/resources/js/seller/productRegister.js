@@ -1,6 +1,42 @@
 document.addEventListener("DOMContentLoaded", function () {
+  // 1. 전역 사이즈 옵션 데이터 변수 (초기값은 빈 배열)
+  let globalSizeOptions = [];
 
-  // 1. 유효성 검사 함수
+  // 2. 사이즈 옵션 select 요소를 채우는 공통 함수
+  function populateSizeSelect(selectElement, options) {
+    selectElement.innerHTML = '<option value="">선택하세요</option>';
+    options.forEach(option => {
+      const opt = document.createElement('option');
+      // SQL 쿼리 결과의 컬럼명이 cod_cd, cod_nm 이므로 사용
+      opt.value = option.cod_cd;      
+      opt.textContent = option.cod_nm;  
+      selectElement.appendChild(opt);
+    });
+  }
+
+  // 3. 서버에서 사이즈 옵션 데이터를 가져와 전역 변수에 할당 후 메인 드롭다운에 옵션 채우기
+  fetch(contextPath + '/sizeOptions')
+    .then(response => {
+      if (!response.ok) throw new Error("네트워크 오류");
+      return response.json();
+    })
+    .then(data => {
+      globalSizeOptions = data;
+      console.log("사이즈 옵션 로딩 완료:", globalSizeOptions);
+      // 메인 드롭다운(HTML에 미리 배치된 select#product_size)에 옵션 채우기
+      const mainSizeSelect = document.getElementById("product_size");
+      if (mainSizeSelect) {
+        populateSizeSelect(mainSizeSelect, globalSizeOptions);
+      }
+      // "사이즈 추가" 버튼 활성화 (만약 비활성화 되어 있었다면)
+      document.getElementById("add-size").disabled = false;
+    })
+    .catch(error => {
+      console.error("사이즈 옵션 로딩 오류:", error);
+      alert("사이즈 옵션 데이터를 불러오지 못했습니다.");
+    });
+
+  // 4. 유효성 검사 함수
   function validateForm() {
     if (!$("#item-thumb-upload-btn1").val()) {
       alert("썸네일을 등록해주세요!");
@@ -19,9 +55,8 @@ document.addEventListener("DOMContentLoaded", function () {
     return true;
   }
 
-  // 2. 드롭다운 초기화 (카테고리, 배송, 재고 옵션)
+  // 5. 드롭다운 초기화 (카테고리, 배송, 재고 옵션 등)
   async function initDropdowns() {
-    // 공통 함수: dropdown 채우기
     function populateDropdown(dropdown, items) {
       dropdown.innerHTML = '<option value="">선택하세요</option>';
       items.forEach(({ lev_cd, lev_nm }) => {
@@ -31,6 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
         dropdown.appendChild(option);
       });
     }
+
     // 카테고리 초기화
     const cat1 = document.getElementById('product_category');
     const cat2 = document.getElementById('product_category_sub');
@@ -75,27 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
-    // 사이즈 옵션 초기화
-    const SizeSelect = document.getElementById('product_size');
-    async function initSizeOptions() {
-      SizeSelect.innerHTML = '<option value="">선택하세요</option>';
-      try {
-        const response = await fetch(contextPath + '/sizeOptions');
-        if (!response.ok) throw new Error('네트워크 오류');
-        const options = await response.json();
-        options.forEach(option => {
-          const opt = document.createElement('option');
-          opt.value = option.com_cd;
-          opt.textContent = option.com_nm;
-          SizeSelect.appendChild(opt);
-        });
-      } catch (error) {
-        console.error('배송 옵션 로딩 오류:', error);
-      }
-    }
-
-
-    // 재고 관리 옵션 초기화 (공통코드 STOCK_MANAGEMENT 활용)
+    // 재고 관리 옵션 초기화
     const stockSelect = document.getElementById('stock_management');
     async function initStockOptions() {
       stockSelect.innerHTML = '<option value="">선택하세요</option>';
@@ -114,41 +130,18 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
-	// 재고 관리 옵션 초기화 (공통코드 STOCK_MANAGEMENT 활용)
-    const sizeSelect = document.getElementById('product_size');
-    async function initSizeOptions() {
-      sizeSelect.innerHTML = '<option value="">선택하세요</option>';
-      try {
-        const response = await fetch(contextPath + '/sizeOptions');
-        if (!response.ok) throw new Error('네트워크 오류');
-        const options = await response.json();
-        options.forEach(option => {
-          const opt = document.createElement('option');
-          opt.value = option.cod_cd;
-          opt.textContent = option.cod_nm;
-          sizeSelect.appendChild(opt);
-        });
-      } catch (error) {
-        console.error('재고 옵션 로딩 오류:', error);
-      }
-    }
-
-	
-
     await initCategory();
     await initDelivery();
     await initStockOptions();
-	await initSizeOptions();
   }
 
-  // 3. 썸네일 미리보기 (이벤트 위임)
+  // 6. 썸네일 미리보기 (이벤트 위임)
   document.querySelector('.item-thumb-group').addEventListener('click', function (e) {
     const btn = e.target.closest('.item-thumb-upload');
     if (!btn) return;
     const index = btn.getAttribute('data-index');
     const input = document.getElementById(`item-thumb-upload-btn${index}`);
     input.click();
-    // change 이벤트 중복 등록 방지
     if (!input.dataset.bound) {
       input.addEventListener("change", function (event) {
         const file = event.target.files[0];
@@ -162,7 +155,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // 4. 글자 수 체크 (제목)
+  // 7. 글자 수 체크 (제목)
   function updateByteCount(inputSelector, countSelector, maxLength, alertMsg) {
     $(inputSelector).on('keydown change', function () {
       const content = $(this).val();
@@ -176,7 +169,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   updateByteCount("#item-regi-title-text", "#item-regi-name-byte", 50, "최대 50자까지 입력 가능합니다.");
 
-  // 5. TOAST UI Editor 초기화
+  // 8. TOAST UI Editor 초기화
   const { colorSyntax } = toastui.Editor.plugin;
   const noteditor = new toastui.Editor({
     el: document.querySelector('#editor'),
@@ -184,7 +177,7 @@ document.addEventListener("DOMContentLoaded", function () {
     initialEditType: 'wysiwyg',
     initialValue: '',
     previewStyle: 'tab',
-    plugins:[colorSyntax],
+    plugins: [colorSyntax],
     toolbarItems: [
       ['heading', 'bold', 'italic', 'strike'],
       ['hr', 'quote'],
@@ -212,7 +205,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   document.querySelector('.toastui-editor-defaultUI').style.width = '950px';
 
-  // 6. 폼 제출 이벤트
+  // 9. 폼 제출 이벤트 처리
   $("#productRegist").on("submit", async function (event) {
     event.preventDefault();
     if (!validateForm()) return;
@@ -242,7 +235,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // 7. 기타 초기화 (배송비 노출 등)
+  // 10. 배송비 노출 토글
   $("#shipping-fee-enable, #shipping-fee-disable").change(function () {
     if ($("#shipping-fee-enable").is(":checked")) {
       $("#list_price").show();
@@ -251,7 +244,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // 8. 색상 다중 선택 기능 추가
+  // 11. 색상 다중 선택 기능 추가
   document.getElementById("add-color").addEventListener("click", function () {
     const container = document.getElementById("color-container");
     const newColorInput = document.createElement("input");
@@ -259,6 +252,7 @@ document.addEventListener("DOMContentLoaded", function () {
     newColorInput.name = "color_number";
     newColorInput.className = "color-picker";
     newColorInput.style.marginRight = "5px";
+    
     const removeBtn = document.createElement("button");
     removeBtn.type = "button";
     removeBtn.textContent = "삭제";
@@ -271,30 +265,31 @@ document.addEventListener("DOMContentLoaded", function () {
     container.appendChild(removeBtn);
   });
 
- 
-	// "사이즈 추가" 버튼 클릭 시 새로운 select 요소 추가
-	document.getElementById("add-size").addEventListener("click", function () {
+  // 12. "사이즈 추가" 버튼 클릭 시 동적으로 사이즈 select 요소 추가
+  document.getElementById("add-size").addEventListener("click", function () {
+    if (globalSizeOptions.length === 0) {
+      alert("사이즈 옵션 데이터가 아직 로딩되지 않았습니다. 잠시 후 다시 시도해주세요.");
+      return;
+    }
     const container = document.getElementById("size-container");
     const newSelect = document.createElement("select");
     newSelect.name = "size_option";
     newSelect.className = "size-select";
     newSelect.style.marginRight = "5px";
     populateSizeSelect(newSelect, globalSizeOptions);
-
-    // 삭제 버튼 생성
+    
     const removeBtn = document.createElement("button");
     removeBtn.type = "button";
     removeBtn.textContent = "삭제";
     removeBtn.className = "btn btn-sm btn-outline-danger";
     removeBtn.addEventListener("click", function () {
-        newSelect.remove();
-        removeBtn.remove();
+      newSelect.remove();
+      removeBtn.remove();
     });
-
     container.appendChild(newSelect);
     container.appendChild(removeBtn);
-});
+  });
 
-  // 전체 드롭다운 초기화 실행
+  // 13. 전체 드롭다운 초기화 실행 (카테고리, 배송, 재고 옵션)
   initDropdowns();
 });
