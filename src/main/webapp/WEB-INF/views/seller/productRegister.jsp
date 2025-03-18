@@ -142,21 +142,22 @@
                           </div>
                         </div>
                       </section>
-                      <!-- 배송, 재고, 색상, 사이즈 설정 영역 (각 영역은 별도 ID/Name 적용) -->
+                      <!-- 배송, 재고, 색상, 사이즈 설정 영역 -->
                       <section class="item-regi-trade-adr">
                         <h6 class="item-regi-name">배송 설정</h6>
                         <select class="item-regi-category-box" name="delivery_option" id="product_delivery"></select>
                       </section>
                       <section class="item-regi-stock">
                         <h6 class="item-regi-name">재고 설정</h6>
-                        <div class="item-regi-price-box">
+                      
                           <input type="number" id="stock_number" name="stock_number" placeholder="재고 수량을 입력해주세요." required>
-                        </div>
+                          <select class="item-regi-stock-box" name="stock_management" id="stock_management"></select>
+                        
                       </section>
                       <section class="item-regi-color">
                         <h6 class="item-regi-name">색상 설정</h6>
                         <div class="item-regi-price-box">
-                          <select class="item-regi-category-box" name="color_option" id="color_option"></select>
+                          <input type="color" id="color_number" name="color_number" placeholder="색상을 입력해주세요." required>
                         </div>
                       </section>
                       <section class="item-regi-size">
@@ -198,5 +199,4 @@
   <script src="${pageContext.request.contextPath}/resources/public/vendor/datatables/jquery.dataTables.min.js"></script>
   <script src="${pageContext.request.contextPath}/resources/public/vendor/datatables/dataTables.bootstrap4.min.js"></script>
   <script src="${pageContext.request.contextPath}/resources/public/js/index.js"></script>
-</body>
-</html>
+  

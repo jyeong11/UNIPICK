@@ -134,7 +134,9 @@ body {
 .item-regi-trade-adr select,
 .item-regi-stock input[type="number"],
 .item-regi-color select,
-.item-regi-size select {
+.item-regi-size select,
+.item-regi-stock select,
+.item-regi-color input[type="color"] {
   margin-left: 10px;
   width: 200px;  /* 필요에 따라 조정 가능 */
   height: 40px;

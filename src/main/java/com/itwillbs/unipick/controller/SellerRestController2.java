@@ -61,4 +61,9 @@ public class SellerRestController2 {
         List<Map<String, Object>> options = sellerService.getDeliveryOptions();
         return ResponseEntity.ok(options);
     }
+    
+    @GetMapping("/stockOptions")
+    public List<Map<String, Object>> getStockOptions() {
+        return sellerService.getStockOptions();
+    }
 }

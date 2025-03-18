@@ -99,5 +99,13 @@
 	AND cod_yn = 'Y'
 	ORDER BY cod_so
 </select>
+
+<select id="selectStockOptions" parameterType="String" resultType="map">
+  SELECT cod_cd, cod_nm, cod_pr, cod_so, cod_yn
+	FROM common_detailcode
+	WHERE com_cd = #{comCd}
+ 	 AND cod_yn = 'y'
+	ORDER BY cod_so
+</select>
   
 </mapper>

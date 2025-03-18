@@ -19,4 +19,7 @@ public interface SellerMapper2 {
     public void insertCategorySelection(Map<String, Object> selection);
     
     List<Map<String, Object>> selectDeliveryOptions(String comCd);
+    
+    // 재고 관리 옵션을 위한 상세 공통코드 조회 (공통코드 그룹: STOCK_MANAGEMENT)
+    List<Map<String, Object>> selectStockOptions(String comCd);
 }
