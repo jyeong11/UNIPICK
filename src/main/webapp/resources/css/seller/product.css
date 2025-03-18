@@ -98,6 +98,21 @@ body{
 /* =============================== product_regi.jsp =============================== */
 /* ================================================================================ */
 
+.item-thumb-group {
+  display: flex;
+  flex-wrap: wrap; /* 여러 줄로 넘어갈 경우 사용 */
+  gap: 10px;       /* 요소 간 간격 조정 (선택사항) */
+}
+
+.item-regi-price input[type="number"] {
+  width: 200px;
+  height: 40px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 0 14px;
+  margin-bottom: 10px;
+}
+
 .terms-wrap {
     max-width: 1320px;
     margin: 3rem auto;
