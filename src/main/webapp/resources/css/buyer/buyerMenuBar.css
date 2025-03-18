@@ -13,6 +13,7 @@
     justify-content: center;
     gap: 10rem; 
     padding-bottom: 18px;
+    margin-right: 200px;
 }
 li {
     display: flex;

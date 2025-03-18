@@ -53,6 +53,8 @@
 
 <!-- script -->
 <script src="${pageContext.request.contextPath }/resources/js/admin/commonCode.js"></script>
+<!-- Favicon -->
+<link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
 
 
 </head>

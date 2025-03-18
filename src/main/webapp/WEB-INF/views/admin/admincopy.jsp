@@ -24,6 +24,8 @@
 <link href="${pageContext.request.contextPath }/resources/css/admincopy/sd-admin-2Copy.css" rel="stylesheet">
 <link href="/resources/adm/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 <link href="/resources/adm/vendor/datatables/datatables.min.css" rel="stylesheet">
+<!-- Favicon -->
+<link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
 
 </head>
 <body id="page-top">

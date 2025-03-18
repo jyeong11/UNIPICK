@@ -16,6 +16,8 @@
 <!-- js -->
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/admin/adminLogin.js"></script>
+<!-- Favicon -->
+<link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
 
 <title>유니픽 관리자</title>
 </head>

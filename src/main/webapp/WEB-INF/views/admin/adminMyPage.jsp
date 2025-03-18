@@ -43,6 +43,8 @@
 
 <!-- script -->
 <script src="${pageContext.request.contextPath }/resources/js/admin/myPage.js"></script>
+<!-- Favicon -->
+<link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
 
 </head>
 <body id="page-top">

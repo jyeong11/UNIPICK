@@ -23,6 +23,8 @@
 <link href="${pageContext.request.contextPath }/resources/public/vendor/datatables/datatables.min.css" rel="stylesheet">
 <%-- <link href="${pageContext.request.contextPath }/resources/css/admin/adminMain.css" rel="stylesheet"> --%>
 <link href="${pageContext.request.contextPath }/resources/css/public.css" rel="stylesheet">
+<!-- Favicon -->
+<link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
 
 </head>
 <body id="page-top">

@@ -27,15 +27,19 @@ public class BuyerController {
 		return "buyer/buyerCategory";
 	}
 	
+	// 신상품 페이지 이동
 	@GetMapping("new")
 	public String buyerNew() {
 		return "buyer/buyerNew";
 	}
 	
+	// 베스트 페이지 이동
 	@GetMapping("best")
 	public String buyerBest() {
 		return "buyer/buyerBest";
 	}
+	
+	// 장바구니 페이지 이동
 	@GetMapping("cart")
 	public String buyerCart() {
 		return "buyer/buyerCart";
@@ -48,4 +52,14 @@ public class BuyerController {
 		List<Map<String, Object>> menu = buyService.getAllMenu();
 		return menu;
 	}
+	
+	// 상단 메뉴바 공통코드
+	@ResponseBody
+	@GetMapping("firstCategory")
+	public /*List<Map<String, Object>>*/ void firstCategory() {
+		System.out.println("aaabbbccc");
+		
+		return ;
+	}
+	
 }
