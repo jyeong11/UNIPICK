@@ -21,6 +21,11 @@ public class BuyerController {
 	@Autowired
 	BuyerService buyService;
 	
+	// 카테고리 페이지 이동
+	@GetMapping("category")
+	public String category() {
+		return "buyer/buyerCategory";
+	}
 	
 	@GetMapping("new")
 	public String buyerNew() {

@@ -29,29 +29,8 @@
 		<jsp:include page="../inc/top.jsp"></jsp:include>
 	</div>
 
-
-	<div class="content">
-	<div id="top_menu">
-		<ul class="menu-nav">
-			<li class="menu-inner">
-				<a href="/UNIPICK">
-					<span>홈</span>
-				</a>
-				<a href="new">
-					<span>신상</span>
-				</a>
-				<a href="best">
-					<span>베스트</span>
-				</a>
-				<a href="store">
-					<span>스토어</span>
-				</a>
-				<a href="event">
-					<span>이벤트</span>
-				</a>
-			<li>
-		</ul>
-	</div>
+	<div>
+		<jsp:include page="../inc/buyerMenuBar.jsp"></jsp:include>
 	</div>
 	
 	<div id="content">
