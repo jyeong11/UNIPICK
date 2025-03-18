@@ -19,4 +19,14 @@
   	   FROM products
       WHERE prd_nm like CONCAT('%',#{query},'%'); 
   	</select>
+  	
+  	<!-- 카테고리 메뉴 -->
+  	<select id="getCategory" parameterType="map">
+  		SELECT *
+  		  FROM level
+  		 WHERE lev_cd like 'CATEGORY%'
+  		   AND lev_yn = 'y'
+  		 ORDER by lev_cd, lev_so;
+  	</select>
+  	
   </mapper>

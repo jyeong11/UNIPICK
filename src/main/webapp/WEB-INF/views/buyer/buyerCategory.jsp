@@ -47,9 +47,9 @@
 				</ul>
 			</section>
 			<section class="second-category">
-			
+				<ul class="second-info">
+				</ul>
 			</section>
-		
 		</section>
 		
 		

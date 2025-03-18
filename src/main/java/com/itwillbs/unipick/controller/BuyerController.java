@@ -76,5 +76,12 @@ public class BuyerController {
 		return selectPrd;
 	}
 	
+	// 카테고리 메뉴
+	@ResponseBody
+	@GetMapping("firstCategory")
+	public List<Map<String, Object>> firstCategory() {
+		return buyService.getCategory();
+	}
+	
 	
 }

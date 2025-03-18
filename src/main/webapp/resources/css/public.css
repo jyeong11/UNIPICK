@@ -48,7 +48,7 @@ ul, dl,dt,dd {margin:0;padding:0;list-style:none}
 :root {
   --gray: #f5f6f8; /*footer, 상세 맨위 밑 버튼*/
   --gray-footer: #4f5558; /*footer font*/
-  --point:#f2a900ff; /*point컬러*/
+  --point:#f2a900; /*point컬러*/
   --tag:#7422bd; /*tag컬러*/
   --all-font: #292b2b; /*footer 외 모든 폰트컬러*/
   --but: #black; /*button컬러*/

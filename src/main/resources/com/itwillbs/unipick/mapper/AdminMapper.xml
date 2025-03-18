@@ -152,7 +152,7 @@
   	
 	<!--   	계층 코드 조회 -->
   	<select id="selectLvCode" parameterType="map">
-	  	SELECT COUNT(*) OVER () - ROW_NUMBER() OVER (ORDER BY lev_nm DESC) + 1 AS lev_nb,
+	  	SELECT COUNT(*) OVER () - ROW_NUMBER() OVER (ORDER BY lev_cd DESC) + 1 AS lev_nb,
 	  			   lev_cd, 
 	  			   lev_nm,
 	  			   IFNULL(lev_ul,'') as lev_ul,

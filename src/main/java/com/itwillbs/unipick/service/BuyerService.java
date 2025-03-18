@@ -22,4 +22,9 @@ public class BuyerService {
 	public List<Map<String, Object>> getSearchPrd(String query) {
 		return mapper.getSearchPrd(query);
 	}
+	// 카테고리 메뉴
+	public List<Map<String, Object>> getCategory() {
+		return mapper.getCategory();
+	}
+
 }
