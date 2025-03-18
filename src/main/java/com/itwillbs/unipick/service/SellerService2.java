@@ -2,6 +2,7 @@ package com.itwillbs.unipick.service;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -78,5 +79,19 @@ public class SellerService2 {
         return result;
     }
 	
+	
+    // 상품 등록: productData에 포함된 정보를 PRODUCTS 테이블에 삽입
+    public void insertProduct(Map<String, Object> product) {
+        // product.get("prd_cd")는 이미 최종 카테고리 코드가 설정되어 있어야 함
+        mapper.insertProduct(product);
+    }
+
+    // 카테고리 조회
+    public List<Map<String, Object>> getCategories(String parentCode) {
+        return mapper.selectCategories(parentCode);
+    }
+    public void saveCategorySelection(Map<String, Object> selection) {
+    	mapper.insertCategorySelection(selection);
+    }
 	
 }

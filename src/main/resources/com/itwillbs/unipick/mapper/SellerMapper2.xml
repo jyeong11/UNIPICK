@@ -40,5 +40,56 @@
           AND fil_nm = #{fileName}
     </select>
     
+      <!-- 상품 등록 쿼리 -->
+  <insert id="insertProduct" parameterType="map">
+  INSERT INTO products (
+    prd_id,
+    prd_nm,
+    sel_id,
+    prd_cd,
+    prd_ds,
+    prd_op,
+    prd_sp,
+    prd_bd
+  )
+  VALUES (
+    #{prd_id},
+    #{prd_nm},
+    #{sel_id},
+    #{prd_cd},
+    #{prd_ds},
+    #{prd_op},
+    #{prd_sp},
+    #{prd_bd}
+  )
+</insert>
+
+  <!-- 계층형 카테고리 조회 쿼리 -->
+  <select id="selectCategories" resultType="HashMap" parameterType="String">
+    SELECT lev_cd, lev_nm, lev_ul, lev_so, lev_yn
+    FROM level
+    <where>
+      <choose>
+        <!-- 부모 코드가 없으면 기본 부모 코드 'CATEGORY'의 자식 반환 -->
+        <when test="_parameter == null or _parameter == ''">
+          lev_cd LIKE CONCAT('CATEGORY', '%')
+          AND LENGTH(lev_cd) = LENGTH('CATEGORY') + 2
+        </when>
+        <!-- 부모 코드가 있으면 해당 코드의 자식 반환 -->
+        <otherwise>
+          lev_cd LIKE CONCAT(#{_parameter}, '%')
+          AND LENGTH(lev_cd) = LENGTH(#{_parameter}) + 2
+        </otherwise>
+      </choose>
+    </where>
+    ORDER BY lev_so
+  </select>
+
+  <!-- Map 기반으로 사용자가 선택한 카테고리 정보 저장 -->
+  <insert id="insertCategorySelection" parameterType="Map">
+    INSERT INTO category_selection (product_category, product_category1, product_category2)
+    VALUES (#{product_category}, #{product_category1}, #{product_category2})
+  </insert>
+    
 
 </mapper>
