@@ -8,5 +8,6 @@
   	   FROM level
   	  WHERE lev_cd like '%BUYERMENU%'
   	    AND lev_yn = 'y'
+  	  ORDER BY lev_so
   	</select>
   </mapper>
