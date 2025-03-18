@@ -29,8 +29,12 @@
                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                     로그 기록
                 </a>
+                <a class="dropdown-item" href="adminMyPage" data-toggle="modal" data-target="#logoutModal">
+                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                    마이페이지
+                </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                <a class="dropdown-item" href="adminLogin" data-toggle="modal" data-target="#logoutModal">
                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                     로그아웃
                 </a>

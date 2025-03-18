@@ -26,13 +26,13 @@ public class AdminController {
 	AdminService adminservice;
 	
 	// 로그인 페이지 화면이동
-	@GetMapping("adminlogin")
-	public String adminlogin() {
+	@GetMapping("adminLogin")
+	public String adminLogin() {
 		return "admin/adminLogin";
 	}
 	
 	// 마이 페이지 화면이동
-	@GetMapping("adminmypage")
+	@GetMapping("adminMyPage")
 	public String adminmypage() {
 		return "admin/adminMyPage";
 	}
