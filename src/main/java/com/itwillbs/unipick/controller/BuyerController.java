@@ -44,6 +44,12 @@ public class BuyerController {
 	public String buyerCart() {
 		return "buyer/buyerCart";
 	}
+	
+	@GetMapping("productSearch")
+	public String productSearch() {
+		return "buyer/productSearch";
+	}
+	
 		
 	// 상단 메뉴바 공통코드
 	@ResponseBody
@@ -61,5 +67,17 @@ public class BuyerController {
 		
 		return ;
 	}
+	
+	// 상품검색
+	@ResponseBody
+	@GetMapping("searchProduct")
+	public List<Map<String, Object>> searchProduct(@RequestParam("query") String query) {
+		
+		List<Map<String, Object>> selectPrd = buyService.getSearchPrd(query);
+		
+		System.out.println(selectPrd);
+		return selectPrd;
+	}
+	
 	
 }

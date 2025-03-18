@@ -7,6 +7,9 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface BuyerMapper {
-		public List<Map<String, Object>> getAllMenu();
+	//상단 메뉴바
+	public List<Map<String, Object>> getAllMenu();
+	//상품검색
+	public List<Map<String, Object>> getSearchPrd(String query);
 	
 }

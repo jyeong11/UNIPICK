@@ -10,4 +10,10 @@
   	    AND lev_yn = 'y'
   	  ORDER BY lev_so
   	</select>
+  	
+  	<select id="getSearchPrd" parameterType="map">
+  	 SELECT *
+  	   FROM products
+      WHERE prd_nm like CONCAT('%',#{query},'%'); 
+  	</select>
   </mapper>

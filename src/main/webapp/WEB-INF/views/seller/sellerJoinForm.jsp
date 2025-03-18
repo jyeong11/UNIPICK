@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- css -->
 <link href="${pageContext.request.contextPath }/resources/css/sellerJoinForm.css" rel="stylesheet" type="text/css">
 
 <!-- 구글 폰트 -->
