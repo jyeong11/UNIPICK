@@ -3,4 +3,10 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.itwillbs.unipick.mapper.BuyerMapper">
+  	<select id="getAllMenu" parameterType="map">
+  	 SELECT lev_nm, lev_ul, lev_cd
+  	   FROM level
+  	  WHERE lev_cd like '%BUYERMENU%'
+  	    AND lev_yn = 'y'
+  	</select>
   </mapper>

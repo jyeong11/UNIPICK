@@ -16,13 +16,13 @@
 <link href="${pageContext.request.contextPath }/resources/css/public.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/top.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/footer.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resources/css/index.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/best.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/recommendation.css" rel="stylesheet" type="text/css">
 <!-- Banner -->
 <link href="${pageContext.request.contextPath }/resources/css/swiper-bundle.min.css" rel="stylesheet" type="text/css">
 <!-- Favicon -->
 <link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
+
 
 <title>UNIPICK</title>
 </head>
@@ -31,7 +31,7 @@
 		<jsp:include page="./inc/top.jsp"></jsp:include>
 	</div>
 	<div id="topNav">
-		<jsp:include page="./inc/buyermenuBar.jsp"></jsp:include>
+		<jsp:include page="./inc/buyerMenuBar.jsp"></jsp:include>
 	</div>
 	<div>
 		<jsp:include page="./inc/banner.jsp"></jsp:include>
