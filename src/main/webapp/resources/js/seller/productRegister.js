@@ -1,29 +1,27 @@
-$(function(){
-  // 폼 유효성 검사 함수
+document.addEventListener("DOMContentLoaded", function () {
+
+  // 1. 유효성 검사 함수
   function validateForm() {
-    if ($("#item-thumb-upload-btn1").val() === "") {
+    if (!$("#item-thumb-upload-btn1").val()) {
       alert("썸네일을 등록해주세요!");
       $("#item-thumb-preview1").focus();
       return false;
     }
-    if ($("#item-regi-title-text").val() === "") {
+    if (!$("#item-regi-title-text").val()) {
       alert("제목을 입력해주세요!");
       $("#item-regi-title-text").focus();
       return false;
     }
-    if ($("#item-regi-description-text").val() === "") {
+    if (!noteditor.getMarkdown().trim()) {
       alert("내용을 입력해주세요!");
-      $("#item-regi-description-text").focus();
       return false;
     }
-    // 기타 유효성 검사 조건 생략
     return true;
   }
 
-  //카테고리 드롭다운 초기화 및 이벤트 설정
+  // 2. 카테고리 드롭다운 초기화
   async function initDropdowns() {
-    const apiUrl = contextPath + '/productCategory'; // GET 요청 URL
-    //상위 코드에 따른 카테고리 데이터를 로드하는 함수
+    const apiUrl = contextPath + '/productCategory';
     async function fetchCategories(parentCode = '') {
       try {
         const response = await fetch(`${apiUrl}?parentCode=${parentCode}`);
@@ -34,8 +32,6 @@ $(function(){
         return [];
       }
     }
-
-    // 드롭다운에 옵션 채우기
     function populateDropdown(dropdown, categories) {
       dropdown.innerHTML = '<option value="">선택하세요</option>';
       categories.forEach(({ lev_cd, lev_nm }) => {
@@ -45,91 +41,121 @@ $(function(){
         dropdown.appendChild(option);
       });
     }
+    const cat1 = document.getElementById('product_category');
+    const cat2 = document.getElementById('product_category_sub');
+    const cat3 = document.getElementById('product_category_detail');
 
-    const productCategory  = document.getElementById('product_category');
-    const productCategory1 = document.getElementById('product_category1');
-    const productCategory2 = document.getElementById('product_category2');
-
-    // 첫 번째 드롭다운 초기화 (부모 코드가 없을 때)
-    populateDropdown(productCategory, await fetchCategories());
-
-    // 첫 번째 드롭다운 변경 시 중분류 및 소분류 업데이트
-    productCategory.addEventListener('change', async function () {
-      populateDropdown(productCategory1, await fetchCategories(this.value));
-      populateDropdown(productCategory2, []);
+    populateDropdown(cat1, await fetchCategories());
+    cat1.addEventListener('change', async function () {
+      populateDropdown(cat2, await fetchCategories(this.value));
+      populateDropdown(cat3, []);
     });
-
-    // 중분류 변경 시 소분류 업데이트
-    productCategory1.addEventListener('change', async function () {
-      populateDropdown(productCategory2, await fetchCategories(this.value));
+    cat2.addEventListener('change', async function () {
+      populateDropdown(cat3, await fetchCategories(this.value));
     });
   }
 
-  // 썸네일 등록 (기존 기능)
-  $('.item-thumb-upload').on('click', function(){
-    let id = this.children[0].id;
-    let idx = id.substr(id.length - 1);
-    let myInput = document.getElementById("item-thumb-upload-btn" + idx);
-    myInput.click();
-    $("#item-thumb-upload-btn" + idx).on("change", function(event) {
-      let file = event.target.files[0];
-      let reader = new FileReader();
-      reader.onload = function(e) {
-        $("#item-thumb-preview" + idx).attr("src", e.target.result);
-      }
+  // 3. 썸네일 미리보기 (이벤트 위임)
+  document.querySelector('.item-thumb-group').addEventListener('click', function (e) {
+    const btn = e.target.closest('.item-thumb-upload');
+    if (!btn) return;
+    const index = btn.getAttribute('data-index');
+    const input = document.getElementById(`item-thumb-upload-btn${index}`);
+    input.click();
+    input.addEventListener("change", function (event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        document.getElementById(`item-thumb-preview${index}`).src = e.target.result;
+      };
       reader.readAsDataURL(file);
     });
   });
 
-  // 글자수 체크 기능 (기존 기능)
-  function updateByteCount(selector, byteSelector, maxLength, alertMessage) {
-    $(selector).on('keydown change', function() {
-      let content = $(this).val();
-      $(byteSelector).text("(" + content.length + " / " + maxLength + ")");
+  // 4. 글자 수 체크 (제목)
+  function updateByteCount(inputSelector, countSelector, maxLength, alertMsg) {
+    $(inputSelector).on('keydown change', function () {
+      const content = $(this).val();
+      $(countSelector).text(`(${content.length} / ${maxLength})`);
       if (content.length > maxLength) {
-        alert(alertMessage);
+        alert(alertMsg);
         $(this).val(content.substring(0, maxLength));
-        $(byteSelector).text("(" + maxLength + " / " + maxLength + ")");
+        $(countSelector).text(`(${maxLength} / ${maxLength})`);
       }
     });
   }
-  if ($("#item-regi-title-text").length) {
-    updateByteCount("#item-regi-title-text", "#item-regi-name-byte", 50, "최대 50자까지 입력 가능합니다.");
-  }
-  if ($("#item-regi-description-text").length) {
-    updateByteCount("#item-regi-description-text", "#item-regi-description-byte", 2000, "최대 2000자까지 입력 가능합니다.");
-  }
+  updateByteCount("#item-regi-title-text", "#item-regi-name-byte", 50, "최대 50자까지 입력 가능합니다.");
 
-  // 상품등록 폼 제출 이벤트 통합 처리
-  $("#productRegist").on("submit", async function(event) {
-    event.preventDefault();
-
-    if (!validateForm()) return;
-
-    // 상품 등록 폼 데이터 수집
-    // 카테고리의 경우, 드롭다운 중 가장 하위 단계(값이 존재하는 마지막 항목)를 최종 카테고리로 판단합니다.
-    let finalCategory = "";
-    if ($("#product_category2").val()) {
-      finalCategory = $("#product_category2").val();
-    } else if ($("#product_category1").val()) {
-      finalCategory = $("#product_category1").val();
-    } else {
-      finalCategory = $("#product_category").val();
+  // 5. TOAST UI Editor 초기화
+  const { colorSyntax } = toastui.Editor.plugin;
+  const noteditor = new toastui.Editor({
+    el: document.querySelector('#editor'),
+    height: '300px',
+    initialEditType: 'wysiwyg',
+    initialValue: '',
+    previewStyle: 'tab',
+    plugins: [colorSyntax],
+    toolbarItems: [
+      ['heading', 'bold', 'italic', 'strike'],
+      ['hr', 'quote'],
+      ['ul', 'ol', 'task'],
+      ['code', 'codeblock'],
+      ['image'],
+    ],
+    hooks: {
+      addImageBlobHook: async (blob, callback) => {
+        const formData = new FormData();
+        formData.append('image', blob);
+        try {
+          const response = await fetch(contextPath + '/upload', {
+            method: 'POST',
+            body: formData
+          });
+          const result = await response.json();
+          callback(result.url, '이미지 설명');
+        } catch (error) {
+          console.error('이미지 업로드 실패:', error);
+          alert('이미지 업로드 중 오류가 발생했습니다.');
+        }
+      }
     }
-    
-    // 기타 상품 데이터(예: 제목, 설명 등)는 폼의 다른 필드에서 가져와야 합니다.
-    const productData = {
-      prd_id: "", // 상품 ID는 UUID 생성 등으로 처리 (여기서는 생략)
-      prd_nm: $("#item-regi-title-text").val(),
-      sel_id: "TEST_SELLER_ID", // 세션 또는 폼에서 전달받아야 함
-      prd_cd: finalCategory, // 최종 카테고리 코드 저장
-      prd_ds: true,           // 노출여부 (예시)
-      prd_op: $("#shipping-fee-price").val(),  // 정가 예시
-      prd_sp: $("#product_price").val(),         // 판매가 예시
-      prd_bd: ""              // 뱃지 (필요 시 처리)
-    };
+  });
+  document.querySelector('.toastui-editor-defaultUI').style.width = '950px';
 
-    // POST 요청: 상품 등록 API 호출
+  // 6. 배송 옵션 드롭다운 초기화
+  async function initDeliveryDropdown() {
+    const deliverySelect = document.getElementById('product_delivery');
+    deliverySelect.innerHTML = '<option value="">선택하세요</option>';
+    try {
+      const response = await fetch(contextPath + '/deliveryOptions');
+      if (!response.ok) throw new Error('네트워크 오류');
+      const options = await response.json();
+      options.forEach(option => {
+        const opt = document.createElement('option');
+        opt.value = option.cod_cd;   // 상세코드 ID
+        opt.textContent = option.cod_nm;  // 상세코드 이름
+        deliverySelect.appendChild(opt);
+      });
+    } catch (error) {
+      console.error('배송 옵션 로딩 오류:', error);
+    }
+  }
+
+  // 7. 상품 등록 폼 제출 이벤트
+  $("#productRegist").on("submit", async function (event) {
+    event.preventDefault();
+    if (!validateForm()) return;
+    let finalCategory = $("#product_category_detail").val() || $("#product_category_sub").val() || $("#product_category").val();
+    const productData = {
+      prd_id: "", // UUID는 서버에서 생성
+      prd_nm: $("#item-regi-title-text").val(),
+      sel_id: "TEST_SELLER_ID", // 실제 세션 값 사용
+      prd_cd: finalCategory,
+      prd_ds: true,
+      prd_op: $("#list_price").val(),
+      prd_sp: $("#sale_price").val(),
+      prd_bd: ""
+    };
     try {
       const response = await fetch(contextPath + '/api/insertProduct', {
         method: 'POST',
@@ -145,16 +171,14 @@ $(function(){
     }
   });
 
-  // 드롭다운 초기화 실행
+  // 8. 기타 초기화 (카테고리, 배송 옵션, 배송비 표시 등)
   initDropdowns();
-
-  // 배송비 입력박스, 기타 설정 (생략)
-  $("#shipping-fee-enable, #shipping-fee-disable").change(function() {
+  initDeliveryDropdown();
+  $("#shipping-fee-enable, #shipping-fee-disable").change(function () {
     if ($("#shipping-fee-enable").is(":checked")) {
-      $("#shipping-fee-price").show();
+      $("#list_price").show();
     } else {
-      $("#shipping-fee-price").hide();
-      $("#shipping-fee-price").val(0);
+      $("#list_price").hide().val(0);
     }
   });
 });

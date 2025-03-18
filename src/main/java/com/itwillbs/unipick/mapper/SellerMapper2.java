@@ -8,13 +8,15 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface SellerMapper2 {
 
-	public Map<String, Object> prdList(Map<String, Object> prdList);
+    public Map<String, Object> prdList(Map<String, Object> prdList);
 
-	public void insertProductImage(Map<String, Object> paramMap);
-	
-	void insertProduct(Map<String, Object> product);
-    
+    public void insertProductImage(Map<String, Object> paramMap);
+
+    void insertProduct(Map<String, Object> product);
+
     List<Map<String, Object>> selectCategories(String parentCode);
-	
-	public void insertCategorySelection(Map<String, Object> selection);
+
+    public void insertCategorySelection(Map<String, Object> selection);
+    
+    List<Map<String, Object>> selectDeliveryOptions(String comCd);
 }

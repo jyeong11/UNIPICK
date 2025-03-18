@@ -4,65 +4,65 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itwillbs.unipick.mapper.SellerMapper2">
 
-	    <!-- 이미지 정보 등록 -->
-    <insert id="insertProductImage" parameterType="map">
-        INSERT INTO product_images (
-            img_id,
-            prd_id,
-            sel_id,
-            fil_nm,
-            fil_pt,
-            ntc_ca,
-            ntc_ua
-        )
-        VALUES (
-            #{imageId},
-            #{productId},
-            #{sellerId},
-            #{fileName},
-            #{filePath},
-            NOW(),
-            NOW()
-        )
-    </insert>
+  <!-- 이미지 정보 등록 -->
+  <insert id="insertProductImage" parameterType="map">
+    INSERT INTO product_images (
+      img_id,
+      prd_id,
+      sel_id,
+      fil_nm,
+      fil_pt,
+      ntc_ca,
+      ntc_ua
+    )
+    VALUES (
+      #{imageId},
+      #{productId},
+      #{sellerId},
+      #{fileName},
+      #{filePath},
+      NOW(),
+      NOW()
+    )
+  </insert>
 
-    <!-- 이미지 정보 삭제 -->
-    <delete id="deleteProductImage" parameterType="map">
-        DELETE FROM product_images
-        WHERE prd_id = #{productId}
-          AND fil_nm = #{fileName}
-    </delete>
+  <!-- 이미지 정보 삭제 -->
+  <delete id="deleteProductImage" parameterType="map">
+    DELETE FROM product_images
+    WHERE prd_id = #{productId}
+      AND fil_nm = #{fileName}
+  </delete>
 
-    <!-- 이미지 정보 조회 (존재 여부 확인) -->
-    <select id="selectProductImage" parameterType="map" resultType="map">
-        SELECT * FROM product_images
-        WHERE prd_id = #{productId}
-          AND fil_nm = #{fileName}
-    </select>
-    
-      <!-- 상품 등록 쿼리 -->
+  <!-- 이미지 정보 조회 (존재 여부 확인) -->
+  <select id="selectProductImage" parameterType="map" resultType="map">
+    SELECT * FROM product_images
+    WHERE prd_id = #{productId}
+      AND fil_nm = #{fileName}
+  </select>
+
+  <!-- 상품 등록 쿼리 -->
   <insert id="insertProduct" parameterType="map">
-  INSERT INTO products (
-    prd_id,
-    prd_nm,
-    sel_id,
-    prd_cd,
-    prd_ds,
-    prd_op,
-    prd_sp,
-    prd_bd
-  )
-  VALUES (
-    #{prd_id},
-    #{prd_nm},
-    #{sel_id},
-    #{prd_cd},
-    #{prd_ds},
-    #{prd_op},
-    #{prd_sp},
-    #{prd_bd}
-  )
-</insert>
+    INSERT INTO products (
+      prd_id,
+      prd_nm,
+      sel_id,
+      prd_cd,
+      prd_ds,
+      prd_op,
+      prd_sp,
+      prd_bd
+    )
+    VALUES (
+      #{prd_id},
+      #{prd_nm},
+      #{sel_id},
+      #{prd_cd},
+      #{prd_ds},
+      #{prd_op},
+      #{prd_sp},
+      #{prd_bd}
+    )
+  </insert>
 
   <!-- 계층형 카테고리 조회 쿼리 -->
   <select id="selectCategories" resultType="HashMap" parameterType="String">
@@ -90,6 +90,14 @@
     INSERT INTO category_selection (product_category, product_category1, product_category2)
     VALUES (#{product_category}, #{product_category1}, #{product_category2})
   </insert>
-    
-
+  
+  <!-- 배송 옵션 조회 쿼리 (단순 문자열 파라미터는 기본 이름 'value'로 사용) -->
+  <select id="selectDeliveryOptions" parameterType="String" resultType="map">
+	SELECT cod_cd, cod_nm, cod_pr, cod_so, cod_yn
+	FROM common_detailcode
+	WHERE cod_cd LIKE CONCAT(#{value}, '%')
+	AND cod_yn = 'Y'
+	ORDER BY cod_so
+</select>
+  
 </mapper>
