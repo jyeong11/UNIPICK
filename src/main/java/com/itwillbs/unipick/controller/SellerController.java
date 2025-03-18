@@ -1,5 +1,6 @@
 package com.itwillbs.unipick.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -82,9 +83,7 @@ public class SellerController {
 		
 		if (sellerinfo != null) {
 			success = true;
-	        // 로그인 성공 시 세션에 저장
 	        session.setAttribute("selId", sellerinfo.get("sel_id"));
-	        // "아이디 기억하기" 체크 여부 확인
 	        boolean rememberMe = (boolean) logindata.getOrDefault("rememberMe", false);
 
 	        if (rememberMe) {
@@ -109,26 +108,36 @@ public class SellerController {
 		return response;
 	}
 	
+	//셀러가입
 	@ResponseBody
 	@PostMapping("joinSucess")
 	public Map<String, Object> joinSucess(@RequestParam Map<String, Object> sellerInfo,
 										  @RequestParam("businessLicense") MultipartFile businessLicense,
-										  HttpSession session) {
-		System.out.println(sellerInfo);
+										  HttpServletRequest req) {
        
-		String realPath = session.getServletContext().getRealPath(virtualPath);
-		System.out.println("asdhasdfhjh : " + realPath);
+		// 1. 실제 배포 경로 가져오기 (톰캣 내 실제 저장될 경로)
+	    String uploadDir = req.getServletContext().getRealPath("/resources/businessLicense/");
+	    System.out.println("업로드 경로: " + uploadDir);
 		
-		String subDir = createDirectories(realPath);
-		realPath += "/" + subDir;
+	    String subDir = createDirectories(uploadDir);
+	    uploadDir += "/" + subDir;
 		
+	    // 파일저장
 		String fileName = "";
 		String origin = businessLicense.getOriginalFilename();
 		if(!origin.equals("")) {
 			fileName = UUID.randomUUID().toString() + "_" + origin;
-			String file = subDir + "/" + fileName;
-			sellerInfo.put("sel_bf", file);
-		}
+			File file = new File(uploadDir, fileName);
+			System.out.println("파일이 저장될 위치: " + file.getAbsolutePath());
+			try {
+	            businessLicense.transferTo(file); // 파일 저장
+	            System.out.println("파일 저장 완료: " + file.getAbsolutePath());
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	            System.out.println("파일 저장 실패");
+	        }
+	        sellerInfo.put("sel_bf", "/resources/businessLicense/" + fileName);
+	    }
 		selService.sellerjoin(sellerInfo);
 		
 		return sellerInfo;

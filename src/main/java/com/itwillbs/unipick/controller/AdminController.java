@@ -113,9 +113,7 @@ public class AdminController {
 		
 		if (adminInfo != null) {
 			success = true;
-	        // 로그인 성공 시 세션에 저장'
 	        session.setAttribute("admId", adminInfo.get("adm_id"));
-	        // "아이디 기억하기" 체크 여부 확인
 	        boolean rememberMe = (boolean) admin.getOrDefault("rememberMe", false);
 
 	        if (rememberMe) {
@@ -123,7 +121,7 @@ public class AdminController {
 	            Cookie cookie = new Cookie("rememberedAdminId", adminInfo.get("adm_id").toString());
 	            cookie.setMaxAge(60 * 60 * 24 * 30); // 30일
 	            cookie.setPath("/"); // 사이트 전체에서 접근 가능
-	            res.addCookie(cookie); // 쿠키 저장
+	            res.addCookie(cookie);
 	        } else {
 	            // 체크 안 했으면 기존 쿠키 삭제 (만료 시간 0)
 	            Cookie cookie = new Cookie("rememberedAdminId", "");
@@ -131,8 +129,6 @@ public class AdminController {
 	            cookie.setPath("/");
 	            res.addCookie(cookie);
 	        }
-	        
-	        
 	    }
 		
 		Map<String, Object> response = new HashMap<String, Object>();
