@@ -50,7 +50,6 @@ public class BuyerController {
 		return "buyer/productSearch";
 	}
 	
-		
 	// 상단 메뉴바 공통코드
 	@ResponseBody
 	@GetMapping("menu")
@@ -62,10 +61,8 @@ public class BuyerController {
 	// 상단 메뉴바 공통코드
 	@ResponseBody
 	@GetMapping("firstCategory")
-	public /*List<Map<String, Object>>*/ void firstCategory() {
-		System.out.println("aaabbbccc");
-		
-		return ;
+	public List<Map<String, Object>> firstCategory() {
+		return buyService.getCategory();
 	}
 	
 	// 상품검색
@@ -75,13 +72,5 @@ public class BuyerController {
 		List<Map<String, Object>> selectPrd = buyService.getSearchPrd(query);
 		return selectPrd;
 	}
-	
-	// 카테고리 메뉴
-	@ResponseBody
-	@GetMapping("firstCategory")
-	public List<Map<String, Object>> firstCategory() {
-		return buyService.getCategory();
-	}
-	
 	
 }
