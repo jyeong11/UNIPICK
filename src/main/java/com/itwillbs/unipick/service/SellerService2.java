@@ -89,4 +89,8 @@ public class SellerService2 {
         mapper.insertProductColor(colorData);
     }
     
+    
+    public List<Map<String, Object>> getSizeOptions() {
+        return mapper.selectSizeOptions("SIZE");
+    }
 }

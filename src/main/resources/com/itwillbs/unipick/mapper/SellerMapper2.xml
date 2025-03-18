@@ -113,5 +113,14 @@
   VALUES (#{sel_id}, #{prd_id}, #{clr_nm}, #{clr_hx})
 </insert>
 
+ 
+ <select id="selectSizeOptions" parameterType="String" resultType="map">
+	SELECT cod_cd, cod_nm, cod_pr, cod_so, cod_yn
+	FROM common_detailcode
+	WHERE com_cd LIKE CONCAT(#{value}, '%')
+	AND cod_yn = 'Y'
+	ORDER BY cod_so
+</select>
+
   
 </mapper>
