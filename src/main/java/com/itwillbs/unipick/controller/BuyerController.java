@@ -44,11 +44,17 @@ public class BuyerController {
 	public String buyerCart() {
 		return "buyer/buyerCart";
 	}
-	
+	//상품검색
 	@GetMapping("productSearch")
 	public String productSearch() {
 		return "buyer/productSearch";
 	}
+	//상세조회
+	@GetMapping("productDetail")
+	public String productDetail() {
+		return "buyer/productDetail";
+	}
+
 	
 	// 상단 메뉴바 공통코드
 	@ResponseBody

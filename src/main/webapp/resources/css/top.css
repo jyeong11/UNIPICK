@@ -16,6 +16,17 @@
 #logo {
 	width: 180px;
 }
+#topNav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: white; /* 배경색 지정 (필수) */
+    z-index: 1000; /* 다른 요소 위에 표시 */
+}
+.menu-nav{
+	margin-top: 127px;	
+}
 
 i{
 	color: black;
