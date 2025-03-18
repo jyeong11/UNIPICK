@@ -166,10 +166,10 @@
 						<h6 class="item-regi-name">사이즈 설정</h6>
 						<!-- 사이즈 선택 입력들이 추가될 영역 -->
 						<div id="size-container">
-						<select name="size_option" class="size-select"></select>
+							<select name="size_option" class="size-select" id="product_size"></select>
 						</div>
 						<!-- 사이즈 선택 추가 버튼 -->
-						<button type="button" id="add-size" class="btn btn-sm btn-outline-primary">사이즈 추가</button>
+							<button type="button" id="add-size" class="btn btn-sm btn-outline-primary">사이즈 추가</button>
 						</section>
 						<!-- 제출 버튼 -->
                       <div class="item-regi-submit-group">

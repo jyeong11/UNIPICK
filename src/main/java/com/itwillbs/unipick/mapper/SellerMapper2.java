@@ -26,4 +26,6 @@ public interface SellerMapper2 {
     
     public void insertProductColor(Map<String, Object> colorData);
     
+    List<Map<String, Object>>selectSizeOptions(String comCd);
+    
 }

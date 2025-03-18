@@ -88,5 +88,9 @@ public class SellerRestController2 {
         return sellerService.getStockOptions();
     }
 
+    @GetMapping("/sizeOptions")
+    public List<Map<String, Object>> getSizeOptions(){
+    	return sellerService.getSizeOptions();
+    }
  
 }

@@ -75,6 +75,26 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
+    // 사이즈 옵션 초기화
+    const SizeSelect = document.getElementById('product_size');
+    async function initSizeOptions() {
+      SizeSelect.innerHTML = '<option value="">선택하세요</option>';
+      try {
+        const response = await fetch(contextPath + '/sizeOptions');
+        if (!response.ok) throw new Error('네트워크 오류');
+        const options = await response.json();
+        options.forEach(option => {
+          const opt = document.createElement('option');
+          opt.value = option.com_cd;
+          opt.textContent = option.com_nm;
+          SizeSelect.appendChild(opt);
+        });
+      } catch (error) {
+        console.error('배송 옵션 로딩 오류:', error);
+      }
+    }
+
+
     // 재고 관리 옵션 초기화 (공통코드 STOCK_MANAGEMENT 활용)
     const stockSelect = document.getElementById('stock_management');
     async function initStockOptions() {
@@ -94,9 +114,31 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
+	// 재고 관리 옵션 초기화 (공통코드 STOCK_MANAGEMENT 활용)
+    const sizeSelect = document.getElementById('product_size');
+    async function initSizeOptions() {
+      sizeSelect.innerHTML = '<option value="">선택하세요</option>';
+      try {
+        const response = await fetch(contextPath + '/sizeOptions');
+        if (!response.ok) throw new Error('네트워크 오류');
+        const options = await response.json();
+        options.forEach(option => {
+          const opt = document.createElement('option');
+          opt.value = option.cod_cd;
+          opt.textContent = option.cod_nm;
+          sizeSelect.appendChild(opt);
+        });
+      } catch (error) {
+        console.error('재고 옵션 로딩 오류:', error);
+      }
+    }
+
+	
+
     await initCategory();
     await initDelivery();
     await initStockOptions();
+	await initSizeOptions();
   }
 
   // 3. 썸네일 미리보기 (이벤트 위임)
@@ -142,7 +184,7 @@ document.addEventListener("DOMContentLoaded", function () {
     initialEditType: 'wysiwyg',
     initialValue: '',
     previewStyle: 'tab',
-    plugins: [colorSyntax],
+    plugins:[colorSyntax],
     toolbarItems: [
       ['heading', 'bold', 'italic', 'strike'],
       ['hr', 'quote'],
@@ -155,7 +197,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const formData = new FormData();
         formData.append('image', blob);
         try {
-          const response = await fetch(contextPath + '/upload', {
+          const response = await fetch(contextPath + 'resources//upload', {
             method: 'POST',
             body: formData
           });
@@ -209,7 +251,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // 8. 색상 다중 선택 기능 추가 (이전 답변 참조)
+  // 8. 색상 다중 선택 기능 추가
   document.getElementById("add-color").addEventListener("click", function () {
     const container = document.getElementById("color-container");
     const newColorInput = document.createElement("input");
@@ -230,8 +272,8 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
  
-// "사이즈 추가" 버튼 클릭 시 새로운 select 요소 추가
-document.getElementById("add-size").addEventListener("click", function () {
+	// "사이즈 추가" 버튼 클릭 시 새로운 select 요소 추가
+	document.getElementById("add-size").addEventListener("click", function () {
     const container = document.getElementById("size-container");
     const newSelect = document.createElement("select");
     newSelect.name = "size_option";
