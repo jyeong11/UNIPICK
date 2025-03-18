@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface SellerMapper2 {
@@ -22,4 +23,7 @@ public interface SellerMapper2 {
     
     // 재고 관리 옵션을 위한 상세 공통코드 조회 (공통코드 그룹: STOCK_MANAGEMENT)
     List<Map<String, Object>> selectStockOptions(String comCd);
+    
+    public void insertProductColor(Map<String, Object> colorData);
+    
 }

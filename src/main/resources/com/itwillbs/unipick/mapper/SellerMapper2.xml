@@ -107,5 +107,11 @@
  	 AND cod_yn = 'y'
 	ORDER BY cod_so
 </select>
+
+<insert id="insertProductColor" parameterType="map">
+  INSERT INTO colors (sel_id, prd_id, clr_nm, clr_hx)
+  VALUES (#{sel_id}, #{prd_id}, #{clr_nm}, #{clr_hx})
+</insert>
+
   
 </mapper>

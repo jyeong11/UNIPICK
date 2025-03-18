@@ -84,4 +84,9 @@ public class SellerService2 {
     public List<Map<String, Object>> getStockOptions() {
         return mapper.selectStockOptions("STOCK_MANAGEMENT");
     }
+    
+    public void insertProductColor(Map<String, Object> colorData) {
+        mapper.insertProductColor(colorData);
+    }
+    
 }
