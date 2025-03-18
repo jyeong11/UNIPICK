@@ -33,7 +33,8 @@
 <script src="https://uicdn.toast.com/tui-color-picker/latest/tui-color-picker.min.js"></script>
 <script src="https://uicdn.toast.com/editor-plugin-color-syntax/latest/toastui-editor-plugin-color-syntax.min.js"></script>
 
-<script src="${pageContext.request.contextPath }/resources/js/seller/productRegister.js"></script>
+<script> var contextPath = '${pageContext.request.contextPath}';</script>
+<script src="${pageContext.request.contextPath}/resources/js/seller/productRegister.js"></script>
 </head>
 <body id="page-top">
 <div id="wrapper">
@@ -174,7 +175,7 @@
 								<h2 class="item-regi-name">상품설명</h2>
 								<!-- toast ui editor : 에디터 옵션 설정 필요 -->
 									<div id="editor">
-									</div>
+								</div>
 								<h6 class="item-regi-description-byte" id="item-regi-description-byte">(0 / 2000)토스트UI가져와야하나 고민때려야함</h6>
 							</section>
 							<section class="item-regi-category">
@@ -255,6 +256,7 @@
 <!-- 								</div> -->
 
 <!-- --------------------------------------------------------------- -->
+
 <script type="text/javascript">
 const { colorSyntax } = toastui.Editor.plugin;
 const noteditor = new toastui.Editor({
