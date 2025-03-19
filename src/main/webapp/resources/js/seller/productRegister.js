@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // 3. 서버에서 사이즈 옵션 데이터를 가져와 전역 변수에 할당 후 메인 드롭다운에 옵션 채우기
-  fetch(contextPath + '/sizeOptions')
+  fetch(contextPath + '/seller/sizeOptions')
     .then(response => {
       if (!response.ok) throw new Error("네트워크 오류");
       return response.json();
@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const cat3 = document.getElementById('product_category_detail');
     async function fetchCategories(parentCode = '') {
       try {
-        const response = await fetch(`${contextPath}/productCategory?parentCode=${parentCode}`);
+        const response = await fetch(`${contextPath}/seller/productCategory?parentCode=${parentCode}`);
         if (!response.ok) throw new Error('네트워크 오류');
         return await response.json();
       } catch (error) {
@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
     async function initDelivery() {
       deliverySelect.innerHTML = '<option value="">선택하세요</option>';
       try {
-        const response = await fetch(contextPath + '/deliveryOptions');
+        const response = await fetch(contextPath + 'seller/deliveryOptions');
         if (!response.ok) throw new Error('네트워크 오류');
         const options = await response.json();
         options.forEach(option => {
@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
     async function initStockOptions() {
       stockSelect.innerHTML = '<option value="">선택하세요</option>';
       try {
-        const response = await fetch(contextPath + '/stockOptions');
+        const response = await fetch(contextPath + 'seller/stockOptions');
         if (!response.ok) throw new Error('네트워크 오류');
         const options = await response.json();
         options.forEach(option => {
@@ -246,7 +246,7 @@ $("#productRegist").on("submit", async function (event) {
 
     const result = await response.json();
     console.log("상품 등록 완료:", result);
-    window.location.href = contextPath + "/productList";
+    window.location.href = contextPath + "seller/productList";
 
   } catch (error) {
     console.error("저장 오류:", error);
