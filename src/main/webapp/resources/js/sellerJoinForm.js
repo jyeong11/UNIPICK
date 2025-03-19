@@ -113,7 +113,7 @@ function idChecked() {
 	var data = {
 		storeId : storeId
 	}
-	debugger;
+	
 	$.ajax({
 		type: "POST",
 		url: "selinfo",

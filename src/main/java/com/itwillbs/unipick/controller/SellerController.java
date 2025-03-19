@@ -116,8 +116,7 @@ public class SellerController {
 										  HttpServletRequest req) {
        
 		// 1. 실제 배포 경로 가져오기 (톰캣 내 실제 저장될 경로)
-	    String uploadDir = req.getServletContext().getRealPath("/resources/businessLicense/");
-	    System.out.println("업로드 경로: " + uploadDir);
+	    String uploadDir = "D:/UNIPICK/src/main/webapp/resources/businessLicense";
 		
 	    String subDir = createDirectories(uploadDir);
 	    uploadDir += "/" + subDir;
@@ -128,10 +127,8 @@ public class SellerController {
 		if(!origin.equals("")) {
 			fileName = UUID.randomUUID().toString() + "_" + origin;
 			File file = new File(uploadDir, fileName);
-			System.out.println("파일이 저장될 위치: " + file.getAbsolutePath());
 			try {
 	            businessLicense.transferTo(file); // 파일 저장
-	            System.out.println("파일 저장 완료: " + file.getAbsolutePath());
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	            System.out.println("파일 저장 실패");
