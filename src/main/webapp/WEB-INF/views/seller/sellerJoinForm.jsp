@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <!-- css -->
-<link href="${pageContext.request.contextPath }/resources/css/sellerJoinForm.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/seller/sellerJoinForm.css" rel="stylesheet" type="text/css">
 
 <!-- 구글 폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,7 +17,7 @@
 
 <!-- js -->
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/sellerJoinForm.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/seller/sellerJoinForm.js"></script>
 
 <title>유니픽 셀러</title>
 </head>

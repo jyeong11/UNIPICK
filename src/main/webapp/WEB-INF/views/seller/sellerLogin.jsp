@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<link href="${pageContext.request.contextPath }/resources/css/sellerLogin.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/seller/sellerLogin.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/footer.css" rel="stylesheet" type="text/css">
 
 <!-- 구글 폰트 -->
@@ -15,7 +15,7 @@
 <link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
 <!-- js -->
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/sellerLogin.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/seller/sellerLogin.js"></script>
 
 <title>유니픽 셀러</title>
 </head>
