@@ -14,6 +14,11 @@ public class BuyerService {
 	@Autowired
 	BuyerMapper mapper;
 	
+	// 방문자 수 증가
+	public void visitCount() {
+        mapper.visitCount();
+    }
+	
 	//상단메뉴바
 	public List<Map<String, Object>> getAllMenu(){
 		return mapper.getAllMenu();

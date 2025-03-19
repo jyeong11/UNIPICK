@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface BuyerMapper {
+	// 방문자 수 증가
+	public void visitCount();
 	//상단 메뉴바
 	public List<Map<String, Object>> getAllMenu();
 	//상품검색

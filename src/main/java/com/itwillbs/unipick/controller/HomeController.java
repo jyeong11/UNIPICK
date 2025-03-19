@@ -1,16 +1,25 @@
 package com.itwillbs.unipick.controller;
 
 import java.util.Locale;
+import java.util.UUID;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.connector.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.itwillbs.unipick.service.BuyerService;
 
 
 /*
@@ -25,18 +34,50 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class HomeController {
 	
+	@Autowired
+    private BuyerService buyerService;
+	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 		
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model, HttpSession session) {
+	public String home(Locale locale, Model model, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
-		return "index";
+		String visitorId = getVisitorIdFromCookies(request);
+
+        // 쿠키가 없으면 새로 생성하고 DB에 방문자 수를 증가시킴
+        if (visitorId == null) {
+            visitorId = UUID.randomUUID().toString();
+            createVisitorCookie(response, visitorId);
+            buyerService.visitCount();
+        }
+        
+        return "index"; // 방문 후 홈 화면으로 이동
+		
 	} // home() 메서드 끝
 	
 	@GetMapping("main")
 	public String mainPage() {
 	    return "redirect:/";
 	}
+	
+	private String getVisitorIdFromCookies(HttpServletRequest request) {
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if ("visitorId".equals(cookie.getName())) {
+                    return cookie.getValue();
+                }
+            }
+        }
+        return null;
+    }
+    
+    private void createVisitorCookie(HttpServletResponse response, String visitorId) {
+        Cookie cookie = new Cookie("visitorId", visitorId);
+        cookie.setMaxAge(60 * 60 * 24 * 365); // 1년 동안 유효
+        cookie.setPath("/");
+        response.addCookie(cookie);
+    }
 	
 }

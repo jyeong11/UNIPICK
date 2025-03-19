@@ -4,6 +4,13 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.itwillbs.unipick.mapper.BuyerMapper">
   	
+  	<!-- 방문자 수 증가 -->
+  	<insert id="visitCount">
+  		INSERT INTO visit (vis_dt, vis_ct) VALUES (DATE(now()), 1)
+			ON DUPLICATE KEY 
+		UPDATE vis_ct = vis_ct + 1;
+  	</insert>
+  	
 <!--   	상단메뉴바 -->
   	<select id="getAllMenu" parameterType="map">
   	 SELECT lev_nm, lev_ul, lev_cd
