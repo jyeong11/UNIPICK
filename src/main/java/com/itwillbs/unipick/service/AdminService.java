@@ -113,5 +113,14 @@ public class AdminService {
 	public void updateStatus(@Param("status") String status, @Param("prdCd") String prdCd){
 		mapper.updateStatus(status, prdCd);
 	}
+	
+	// 방문자 수
+	public Map<String, Object> mainPrint() {
+		Map<String, Object> mainData = new HashMap<String, Object>();
+		mainData.put("visCnt", mapper.visitCount());
+		mainData.put("joinList", mapper.joinList());
+		
+		return mainData;
+	}
 		
 }

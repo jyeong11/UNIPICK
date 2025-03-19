@@ -242,5 +242,22 @@
 		 SET prd_st = #{status}
 	   WHERE prd_cd = #{prdCd}
 	</update>
+	
+	<!-- 가입 리스트 -->
+	<select id="joinList">
+		SELECT buy_em,
+			   buy_nm,
+			   '구매자' AS buy_st,
+			   DATE_FORMAT(acc_at, '%Y-%m-%d %H:%i:%s') as buy_at
+		  FROM buyers
+		 WHERE acc_at >= NOW() - INTERVAL 7 DAY
+		 UNION
+		SELECT sel_id,
+			   sel_nm,
+			   '판매자' AS sel_st,
+			   DATE_FORMAT(sel_at, '%Y-%m-%d %H:%i:%s') as sel_at
+		  FROM sellers
+		 WHERE sel_at >= NOW() - INTERVAL 7 DAY;
+	</select>
   	
 </mapper>

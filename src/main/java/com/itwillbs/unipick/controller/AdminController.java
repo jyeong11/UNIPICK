@@ -269,4 +269,12 @@ public class AdminController {
 		System.out.println("status!@#$%^&*(" + prdCd);
 		adminservice.updateStatus(status, prdCd);
 	}
+	
+	// 메인 페이지 출력
+	@ResponseBody
+	@GetMapping("mainPrint")
+	public Map<String, Object> mainPrint() {
+		return adminservice.mainPrint();
+	}
+
 }

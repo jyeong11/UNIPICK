@@ -50,4 +50,6 @@ public interface AdminMapper {
 	public Map<String, Object> visitCount();
 	// 상품 접수 상태변경
 	void updateStatus(@Param("status") String status, @Param("prdCd") String prdCd);
+	// 가입 리스트
+	public List<Map<String, Object>> joinList();
 }

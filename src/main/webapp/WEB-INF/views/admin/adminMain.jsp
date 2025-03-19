@@ -70,6 +70,28 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-xl-5 col-lg-5">
+	                        <div class="card shadow mb-4">
+	                            <div class="card-header py-3">
+	                                <h6 class="m-0 font-weight-bold text-primary">최근 일주일 가입내역</h6>
+	                            </div>
+	                            <div class="card-body">
+	                            	<div class="table-responsive">
+		                                <table class="table table-bordered compact" id="transactionList" width="100%" cellspacing="0">
+		                                    <thead>
+		                                    <tr role="row">
+		                                 		<th>아이디/이메일</th>
+		                                 		<th>이름/상호명</th>
+		                                 		<th>가입자 유형</th>
+		                                 		<th>가입일시</th>
+		                                    </tr>
+		                                    </thead>
+		                                    <tbody class="tbody"></tbody>
+		                                </table>
+		                          	</div>
+	                            </div>
+	                        </div>
+                    	</div>
                     
                     </div> <!-- /.row -->
 
