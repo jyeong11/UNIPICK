@@ -103,5 +103,11 @@ public class AdminService {
 	public Map<String, Object> getprdListDetail(Map<String, Object> prdCd) {
 		return mapper.getprdListDetail(prdCd);
 	}
+	
+	// 방문자 수
+	public Map<String, Object> visitCount() {
+		return mapper.visitCount();
+	}
+	
 		
 }

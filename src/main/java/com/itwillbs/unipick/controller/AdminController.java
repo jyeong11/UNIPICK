@@ -255,4 +255,10 @@ public class AdminController {
 		return prdDeailList;
 	}
 	
+	// 방문자 수
+	@ResponseBody
+	@GetMapping("visitCount")
+	public Map<String, Object> visitCount() {
+		return adminservice.visitCount();
+	}
 }

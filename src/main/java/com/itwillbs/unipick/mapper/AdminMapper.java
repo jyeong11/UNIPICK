@@ -44,4 +44,6 @@ public interface AdminMapper {
 	public List<Map<String, Object>> getPrdList();
 	//상품 상세조회
 	public Map<String, Object> getprdListDetail(Map<String, Object> prdCd);
+	// 방문자 수
+	public Map<String, Object> visitCount();
 }

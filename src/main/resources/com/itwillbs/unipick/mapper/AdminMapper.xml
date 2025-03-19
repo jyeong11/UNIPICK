@@ -217,5 +217,12 @@
 	     ON p.sel_id = s.sel_id
 	  where prd_cd = #{prd_cd}
 	</select>
+	
+	<!-- 방문자 수 -->
+	<select id="visitCount" parameterType="map">
+		SELECT vis_dt, vis_ct
+		  FROM visit
+		 WHERE vis_dt = DATE(now());
+	</select>
   	
 </mapper>

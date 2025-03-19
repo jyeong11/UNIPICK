@@ -8,6 +8,7 @@
 
 <!-- default -->
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/admin/adminMain.js"></script>
 
 <!-- font-awesome -->
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/public/fontawesome/all.min.css" />
@@ -58,8 +59,9 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="font-weight-bold text-primary text-uppercase mb-1">등록된 상품 건수</div>
-                                            <div class="h3 mb-0 font-weight-bold text-gray-800 counter-text" id="totalProducts">75</div>
+                                            <div class="font-weight-bold text-primary text-uppercase mb-1">오늘의 방문자 수</div>
+                                            <div class="h3 mb-0 font-weight-bold text-gray-600 counter-text" id="visit-date"></div>
+                                            <div class="h3 mb-0 font-weight-bold text-gray-800 counter-text" id="visit-count"></div>
                                         </div>
                                         <div class="col-auto">
                                         	<i class="fa-solid fa-box fa-2x text-gray-300"></i>
@@ -68,156 +70,6 @@
                                 </div>
                             </div>
                         </div>
-                        
-                         <!-- 상단2) 현재 거래 진행중인 상품 건수 -->
-                        <div class="col-xl-4 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="font-weight-bold text-success text-uppercase mb-1">진행중인 거래 수</div>
-                                            <div class="h3 mb-0 font-weight-bold text-gray-800 counter-text" id="activeTrades">49</div>
-                                        </div>
-                                        <div class="col-auto">
-                                        	<i class="fa-solid fa-tag fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- 상단3) 완료된 거래 건수 -->
-                        <div class="col-xl-4 col-md-6 mb-4">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="font-weight-bold text-warning text-uppercase mb-1">완료된 거래 수</div>
-                                            <div class="h3 mb-0 font-weight-bold text-gray-800 counter-text" id="completeTrades">5</div>
-                                        </div>
-                                        <div class="col-auto">
-                                        	<i class="fa-solid fa-clipboard-list fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> <!-- /.row -->
-                    
-                    <!-- Content Row 메인 상단2 -->
-                    <div class="row">
-                    	
-                    	<!-- 상단4) 미처리 신고 -->
-                        <div class="col-xl-4 col-md-6 mb-4">
-                            <div class="card border-left-danger shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="font-weight-bold text-danger text-uppercase mb-1">미처리 신고</div>
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col-auto">
-                                                    <div class="h3 mb-0 mr-3 font-weight-bold text-gray-800 counter-text" id="pendingReports">17</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fa-solid fa-flag fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                         <!-- 상단5) 신규 가입자 수 -->
-                        <div class="col-xl-4 col-md-6 mb-4">
-                            <div class="card border-left-info shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="font-weight-bold text-info text-uppercase mb-1">신규 가입자 수</div>
-                                            <div class="h3 mb-0 font-weight-bold text-gray-800 counter-text" id="newUsers">0</div>
-                                        </div>
-                                        <div class="col-auto">
-                                        	<i class="fa-solid fa-user-plus fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- 상단6) 전체 회원 수 -->
-                        <div class="col-xl-4 col-md-6 mb-4">
-                            <div class="card border-left-secondary shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="font-weight-bold text-secondary text-uppercase mb-1">전체 회원 수</div>
-                                            <div class="h3 mb-0 font-weight-bold text-gray-800 counter-text"  id="totalUsers">59</div>
-                                        </div>
-                                        <div class="col-auto">
-                                        	<i class="fa-solid fa-users fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> <!-- /.row -->
-                    
-                     <!-- Content Row 메인 하단 -->
-                    <div class="row">
-                    
-                    	<!-- Area Chart -->
-                        <div class="col-xl-3 col-lg-3">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header -->
-                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">가격대별 상품 분포</h6>
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    <div class="chart-area">
-                                        <canvas id="priceRangeChart"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Pie Chart -->
-                        <div class="col-xl-4 col-lg-4">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header -->
-                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">카테고리별 통계</h6>
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    <div class="chart-pie pt-4 pb-2">
-                                        <canvas id="categoryStats"></canvas>
-                                    </div>
-                                    <div class="mt-4 text-center small" id="categoryLabels">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Bar Chart -->
-                        <div class="col-xl-5 col-lg-5">
-	                        <div class="card shadow mb-4">
-	                            <div class="card-header py-3">
-	                                <h6 class="m-0 font-weight-bold text-primary">최근 일주일간 중고거래</h6>
-	                            </div>
-	                            <div class="card-body">
-	                            	<div class="text-sm-right font-weight-bold"><a href="AdmProductOrderList">거래내역 보러가기 <i class="fa-solid fa-arrow-right"></i></a></div>
-	                            	<div class="table-responsive">
-		                                <table class="table table-bordered compact" id="transactionList" width="100%" cellspacing="0">
-		                                    <thead></thead>
-		                                    <tbody></tbody>
-		                                </table>
-		                          	</div>
-	                            </div>
-	                        </div>
-                    	</div>
-                    
                     
                     </div> <!-- /.row -->
 

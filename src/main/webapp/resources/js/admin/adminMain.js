@@ -1,28 +1,18 @@
 $(function () {
 	
-	$('#admin_id').on('click',function(){
-		let id = document.querySelector('#admin_id').text
-		adminMyPage(id);
-	}); // att 검색 이벤트
-	
-	
-	function adminMyPage(id) {
 		
-		let data = {};
-		
-		data.admId = id;
-		
-		$.ajax({
+	// 방문자 수 출력
+	$.ajax({
 			type:"GET",
-			url:"admin/adminInfo",
-			data: data,
+			url:"visitCount",
 			success: function(res){
-				$(".main_container").empty();
+				visitCnt = res.vis_ct == null ? 0 : res.vis_ct
+				
+				$('#visit-date').append(new Date().toLocaleDateString('en-CA'));
+				$('#visit-count').append(visitCnt + '명');
 			},
 			error : function(xhr, textStatus,errorThrown){
 				alert("ajax구문 오류");
 			}
 		});
-	}
-	
 });
