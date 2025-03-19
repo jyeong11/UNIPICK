@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Mapper
 public interface AdminMapper {
@@ -46,4 +48,6 @@ public interface AdminMapper {
 	public Map<String, Object> getprdListDetail(Map<String, Object> prdCd);
 	// 방문자 수
 	public Map<String, Object> visitCount();
+	// 상품 접수 상태변경
+	void updateStatus(@Param("status") String status, @Param("prdCd") String prdCd);
 }

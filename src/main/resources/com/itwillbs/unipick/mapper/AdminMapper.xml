@@ -208,7 +208,18 @@
 	 SELECT p.prd_nm, p.prd_cd, s.sel_nm, p.prd_op, p.prd_sp, p.prd_st
 	   FROM products p JOIN sellers s
 	     ON p.sel_id = s.sel_id
-	  WHERE p.prd_st = '접수'
+	  WHERE 1 = 1
+	 <choose>
+	   	<when test="prd_cd != null and !prd_cd.equals('')">
+	   		AND p.prd_cd LIKE CONCAT(#{prd_cd}, '%')
+	   	</when>
+	   	<when test="prd_nm != null and !prd_nm.equals('')">
+	   		AND p.prd_nm LIKE CONCAT(#{prd_nm}, '%')
+	   	</when>
+	   	<when test="cod_nm != null and !cod_nm.equals('')">
+	   		AND d.cod_nm LIKE CONCAT(#{cod_nm}, '%')
+	   	</when>
+     </choose>
 	</select>
 <!-- 	상품 상세 관리 -->
 	<select id="getprdListDetail" parameterType="map">
@@ -224,5 +235,12 @@
 		  FROM visit
 		 WHERE vis_dt = DATE(now());
 	</select>
+	
+<!-- 	상품 접수 상태변경 -->
+	<update id="updateStatus" parameterType="map">
+	  UPDATE products 
+		 SET prd_st = #{status}
+	   WHERE prd_cd = #{prdCd}
+	</update>
   	
 </mapper>

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -108,6 +109,9 @@ public class AdminService {
 	public Map<String, Object> visitCount() {
 		return mapper.visitCount();
 	}
-	
+	// 상품 접수 상태변경
+	public void updateStatus(@Param("status") String status, @Param("prdCd") String prdCd){
+		mapper.updateStatus(status, prdCd);
+	}
 		
 }

@@ -147,9 +147,10 @@ document.addEventListener("DOMContentLoaded", function () {
 								<div class="search-div">
 									<div>
 										<select id="searchKind">
-											<option value="prd_id">상품ID</option>
+											<option value="prd_cd">상품코드</option>
+											<option value="prd_nm">상품명</option>
 											<option value="store_nm">스토어명</option>
-											<option value="store_rn">대표자명</option>
+											<option value="store_st">상태</option>
 										</select>
 									</div>
 									<div>

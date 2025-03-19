@@ -249,9 +249,7 @@ public class AdminController {
 	@ResponseBody
 	@PostMapping("admprdListDetail")
 	public Map<String, Object> admprdListDetail(@RequestParam Map<String, Object> prdCd) {
-		System.out.println(prdCd);
 		Map<String, Object> prdDeailList = adminservice.getprdListDetail(prdCd);
-		System.out.println("@!#$$$$$#!$$!~" + prdDeailList);
 		return prdDeailList;
 	}
 	
@@ -260,5 +258,15 @@ public class AdminController {
 	@GetMapping("visitCount")
 	public Map<String, Object> visitCount() {
 		return adminservice.visitCount();
+	}
+	
+	//상품 접수 상태값 바꾸기
+	@ResponseBody
+	@PostMapping("selectPrdstatus")
+	public void selectPrdstatus(@RequestParam("status") String status,
+	        					@RequestParam("prd_cd") String prdCd) {
+		System.out.println("status!@#$%^&*(" + status);
+		System.out.println("status!@#$%^&*(" + prdCd);
+		adminservice.updateStatus(status, prdCd);
 	}
 }
