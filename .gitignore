@@ -39,3 +39,9 @@ target/
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+src/main/webapp/META-INF/MANIFEST.MF
+src/main/webapp/META-INF/maven/com.itwillbs/UNIPICK/pom.properties
+src/main/webapp/META-INF/maven/com.itwillbs/UNIPICK/pom.xml
+target/m2e-wtp/web-resources/META-INF/MANIFEST.MF
+target/m2e-wtp/web-resources/META-INF/maven/com.itwillbs/UNIPICK/pom.properties
+target/m2e-wtp/web-resources/META-INF/maven/com.itwillbs/UNIPICK/pom.xml
