@@ -31,7 +31,16 @@
 
 #img12 {
 	display: flex;
-	flex-wrap: wrap;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.product-posting {
+    width: calc(50% - 20px);  /* 2개씩 한 줄에 배치 */
+    box-sizing: border-box;   /* padding을 포함한 크기 계산 */
+    border: 1px solid #ddd;
+    padding: 20px;
+    text-align: center;
 }
 
 #img12 div img {
@@ -42,14 +51,6 @@
 	 width: 100%;
     height: auto;
     aspect-ratio: 1;
-}
-
-.product_posting {
-	padding: 5px;
-}
-
-#img12 div {
-	flex: 1 1 calc(100%);
 }
 
 #img12 .first, .second, .third {

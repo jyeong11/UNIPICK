@@ -14,5 +14,8 @@ public interface BuyerMapper {
 	// 카테고리 메뉴
 	public List<Map<String, Object>> getCategory();
 	
+	// 정렬 
+	public List<Map<String, Object>> productSort();
+	
 	public List<Map<String, Object>> getProductSortKind();
 }

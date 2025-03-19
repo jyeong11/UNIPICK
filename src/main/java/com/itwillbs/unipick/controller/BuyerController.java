@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -84,11 +85,20 @@ public class BuyerController {
 		return selectPrd;
 	}
 	
-	// 상품정렬
+	// 상품정렬종류
 	@ResponseBody
 	@GetMapping("productSortKind")
 	public List<Map<String, Object>> productSortKind() {
 		return buyService.getProductSortKind();
+	}
+	
+	// 상품정렬
+	@ResponseBody
+	@PostMapping("productSort")
+	public List<Map<String, Object>> productSort(@RequestBody Map<String,Object> kind) {
+		System.out.println("1@#!@#!@#!@#!@#!@#!@#!@#!@#!#!@#!@#");
+		System.out.println(kind);
+		return buyService.productSort();
 	}
 	
 }
