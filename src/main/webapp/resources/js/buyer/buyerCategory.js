@@ -1,11 +1,10 @@
 $(function() {
 	firstCategory();
 	
-	$('.second-info').on('click', '.second-cate', function() {
-        let a = $(this).text();
-        debugger;
-        window.location.href = "product?category=" + encodeURIComponent(a);
-    });
+	$('.second-info').on('click', '.second-cate, .all-cate', function() {
+	    let address = $(this).text();
+	    window.location.href = "productList?category=" + encodeURIComponent(address);
+	});
 
 	$('.first-info').on('click', 'li', function() {
     let categoryName = $(this).text();  // 클릭된 첫 번째 카테고리 이름

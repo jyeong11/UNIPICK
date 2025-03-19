@@ -29,4 +29,11 @@
   		 ORDER by lev_cd, lev_so;
   	</select>
   	
+  	<!--  -->
+  	<select id="getProductSortKind" parameterType="map">
+  		SELECT *
+  		  FROM common_detailcode
+ 		 WHERE com_cd = 'PRODUCT_SORT';
+  	</select>
+  	
   </mapper>

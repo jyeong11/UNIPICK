@@ -39,24 +39,21 @@
 	
 	<div class="content">
 		<div class = "two">
-				<h2>카테고리</h2>
+			<h2>카테고리</h2>
 		</div>
 		<section class="all">
 			<section class="first-category">
 				<ul class="first-info">
+					<li class="all-cate">전체</li>
 				</ul>
 			</section>
 			<section class="second-category">
 				<ul class="second-info">
+					<li class="all-cate">전체</li>
 				</ul>
 			</section>
 		</section>
-		
-		
-		
 	</div>
-	
-	
 	
 	<div id="footer">
 		<jsp:include page="../inc/footer.jsp"></jsp:include>

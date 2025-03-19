@@ -2,7 +2,7 @@
 <div class="ft-nav">
 	<ul class="ft-navinner">
 		<li><a href="#"><i class="fa-solid fa-house"></i><span class="gray-footer">홈</span></a></li>
-		<li><a href="#"><i class="fa-solid fa-bars"></i><span class="gray-footer">카테고리</span></a></li>
+		<li><a href="category"><i class="fa-solid fa-bars"></i><span class="gray-footer">카테고리</span></a></li>
 		<li><a href="#"><i class="fa-solid fa-heart"></i><span class="gray-footer">찜</span></a></li>
 		<li><a href="memberJoin"><i class="fa-solid fa-user"></i><span class="gray-footer">마이페이지</span></a></li>
 	</ul>

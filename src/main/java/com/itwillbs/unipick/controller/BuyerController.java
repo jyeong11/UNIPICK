@@ -54,7 +54,12 @@ public class BuyerController {
 	public String productDetail() {
 		return "buyer/productDetail";
 	}
-
+	
+	// 상품 리스트 페이지 이동
+	@GetMapping("productList")
+	public String productList() {
+		return "buyer/productList";
+	}
 	
 	// 상단 메뉴바 공통코드
 	@ResponseBody
@@ -77,6 +82,13 @@ public class BuyerController {
 	public List<Map<String, Object>> searchProduct(@RequestParam("query") String query) {
 		List<Map<String, Object>> selectPrd = buyService.getSearchPrd(query);
 		return selectPrd;
+	}
+	
+	// 상품정렬
+	@ResponseBody
+	@GetMapping("productSortKind")
+	public List<Map<String, Object>> productSortKind() {
+		return buyService.getProductSortKind();
 	}
 	
 }

@@ -26,5 +26,9 @@ public class BuyerService {
 	public List<Map<String, Object>> getCategory() {
 		return mapper.getCategory();
 	}
+	
+	public List<Map<String, Object>> getProductSortKind() {
+		return mapper.getProductSortKind();
+	}
 
 }

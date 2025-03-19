@@ -52,19 +52,19 @@
 	cursor: default;
 }
 
-.second-cate:hover, .first-info li:hover {
+.second-cate:hover, .first-info li:hover, .all-cate:hover {
 	cursor: pointer;
 	background-color: #f2a900;
 }
 
-.second-info li.first-cate {
+.second-info li.first-cate, .second-info li.all-cate {
 	font-weight: bold;
 	width: 100%;
 }
 
 .first-info, .second-info {
     position: sticky;
-    top: 0; /* 스크롤 시 화면 상단에 고정되도록 설정 */
-    background-color: #fff; /* 배경색을 설정하여 잘 보이도록 */
-    z-index: 10; /* 다른 요소들보다 위에 표시되도록 설정 */
+    top: 100px;
+    background-color: #fff;
+    z-index: 10;
 }
