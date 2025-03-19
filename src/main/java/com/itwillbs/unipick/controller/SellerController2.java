@@ -11,7 +11,7 @@ public class SellerController2 {
         return "seller/productRegister";
     }
     
-    @GetMapping("productList")
+    @GetMapping("selProductList")
     public String prdList() {
         return "seller/productList";
     }

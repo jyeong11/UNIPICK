@@ -206,34 +206,52 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelector('.toastui-editor-defaultUI').style.width = '950px';
 
   // 9. 폼 제출 이벤트 처리
-  $("#productRegist").on("submit", async function (event) {
-    event.preventDefault();
-    if (!validateForm()) return;
-    let finalCategory = $("#product_category_detail").val() || $("#product_category_sub").val() || $("#product_category").val();
-    const productData = {
-      prd_id: "", // UUID는 서버에서 생성
-      prd_nm: $("#item-regi-title-text").val(),
-      sel_id: "TEST_SELLER_ID", // 실제 세션 값 사용
-      prd_cd: finalCategory,
-      prd_ds: true,
-      prd_op: $("#list_price").val(),
-      prd_sp: $("#sale_price").val(),
-      prd_bd: ""
-    };
-    try {
-      const response = await fetch(contextPath + '/api/insertProduct', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(productData)
-      });
-      if (!response.ok) throw new Error('저장 실패');
-      const result = await response.json();
-      console.log('상품 등록 완료:', result);
-      window.location.href = contextPath + '/productList';
-    } catch (error) {
-      console.error('저장 오류:', error);
-    }
+$("#productRegist").on("submit", async function (event) {
+  event.preventDefault();
+  if (!validateForm()) return;
+
+  let formData = new FormData();
+  formData.append("prd_nm", $("#item-regi-title-text").val());
+  formData.append("prd_op", $("#list_price").val());
+  formData.append("prd_sp", $("#sale_price").val());
+  formData.append("sel_id", "TEST_SELLER_ID"); // 실제 세션 값 사용
+  formData.append("prd_cd", $("#product_category_detail").val() || $("#product_category_sub").val() || $("#product_category").val());
+  
+  // 🎨 색상 추가
+  document.querySelectorAll("input[name='color_number']").forEach(input => {
+    formData.append("colors", input.value);
   });
+
+  // 📏 사이즈 추가
+  document.querySelectorAll("select[name='size_option']").forEach(select => {
+    formData.append("sizes", select.value);
+  });
+
+  // 📦 재고 수량 추가
+  formData.append("stock_qty", $("#stock_quantity").val());
+
+  // 📸 이미지 파일 추가
+  let fileInput = document.getElementById("item-thumb-upload-btn1");
+  if (fileInput.files.length > 0) {
+    formData.append("image", fileInput.files[0]);
+  }
+
+  try {
+    const response = await fetch(contextPath + "/seller/registerProduct", {
+      method: "POST",
+      body: formData
+    });
+
+    if (!response.ok) throw new Error("저장 실패");
+
+    const result = await response.json();
+    console.log("상품 등록 완료:", result);
+    window.location.href = contextPath + "/productList";
+
+  } catch (error) {
+    console.error("저장 오류:", error);
+  }
+});
 
   // 10. 배송비 노출 토글
   $("#shipping-fee-enable, #shipping-fee-disable").change(function () {

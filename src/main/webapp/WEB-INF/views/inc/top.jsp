@@ -30,7 +30,7 @@
 			                </div>
 			            </li>
 			            <li><a href="cart" class="cart_btn"><i class="fa fa-solid fa-cart-shopping"></i></a></li>
-			            <li><a href="memberLogin" class="my_btn"><i class="fa-solid fa-user"></i></a></li>
+			            <li><a href="buyerLogin" class="my_btn"><i class="fa-solid fa-user"></i></a></li>
 			        </ul>
 			    </div>
 			</div>

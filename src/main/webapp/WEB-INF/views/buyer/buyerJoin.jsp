@@ -18,7 +18,7 @@
 <link href="${pageContext.request.contextPath }/resources/css/top.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/footer.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/index.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resources/css/member/memberJoin.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/buyer/buyerJoin.css" rel="stylesheet" type="text/css">
 
 <link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
 <title>UNIPICK</title>
@@ -67,7 +67,7 @@
 		<span>(선택) 마케팅 개인정보 제3자 제공 동의</span>
 		</label><a href="#" class="cssjoin">보기</a></div>
 		</form>
-		<button class="joinBtn" onclick="location.href='memberAuthentication'">다음</button>
+		<button class="joinBtn" onclick="location.href='buyerAuthentication'">다음</button>
 		<div class="joinAgree">"‘선택' 항목에 동의하지 않아도 서비스 이용이 가능합니다."<br>
 		"개인정보 수집 및 이용에 대한 동의를 거부할 권리가 있으며,"<br>
 		"동의 거부시 회원제 서비스 이용이 제한됩니다."</div>

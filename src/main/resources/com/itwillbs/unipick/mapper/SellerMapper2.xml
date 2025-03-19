@@ -16,11 +16,11 @@
       ntc_ua
     )
     VALUES (
-      #{imageId},
-      #{productId},
-      #{sellerId},
-      #{fileName},
-      #{filePath},
+      #{img_id},
+      #{prd_id},
+      #{sel_id},
+      #{fil_nm},
+      #{fil_pt},
       NOW(),
       NOW()
     )
@@ -50,19 +50,55 @@
       prd_ds,
       prd_op,
       prd_sp,
-      prd_bd
+      prd_bd,
+      prd_st
     )
     VALUES (
-      1,
+      default,
       #{prd_nm},
       #{sel_id},
       #{prd_cd},
       #{prd_ds},
       #{prd_op},
       #{prd_sp},
-      #{prd_bd}
+      #{prd_bd},
+      default
     )
   </insert>
+  
+    <!-- 옵션 정보 등록 (컬러 & 사이즈) -->
+  <insert id="insertProductOptions" parameterType="map">
+    INSERT INTO options (
+      prd_id,
+      clr_id,
+      siz_nm
+    )
+    VALUES (
+      #{prd_id},
+      #{clr_id},
+      #{siz_nm}
+    )
+  </insert>
+  
+    <!-- 재고 정보 등록 -->
+  <insert id="insertStock" parameterType="map">
+    INSERT INTO stock (
+      opt_id,
+      stk_qt
+    )
+    VALUES (
+      #{opt_id},
+      #{stk_qt}
+    )
+  </insert>
+  
+    <!-- 색상 등록 -->
+
+<insert id="insertProductColor" parameterType="map">
+  INSERT INTO colors (sel_id, prd_id, clr_nm, clr_hx)
+  VALUES (#{sel_id}, #{prd_id}, #{clr_nm}, #{clr_hx})
+</insert>
+
 
   <!-- 계층형 카테고리 조회 쿼리 -->
   <select id="selectCategories" resultType="HashMap" parameterType="String">
@@ -107,11 +143,6 @@
  	 AND cod_yn = 'y'
 	ORDER BY cod_so
 </select>
-
-<insert id="insertProductColor" parameterType="map">
-  INSERT INTO colors (sel_id, prd_id, clr_nm, clr_hx)
-  VALUES (#{sel_id}, #{prd_id}, #{clr_nm}, #{clr_hx})
-</insert>
 
  
  <select id="selectSizeOptions" parameterType="String" resultType="map">

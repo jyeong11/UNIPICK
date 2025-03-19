@@ -10,33 +10,33 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.itwillbs.unipick.service.MemberService;
+import com.itwillbs.unipick.service.BuyerService2;
 
 @Controller
-public class MemberController {
+public class BuyerController2 {
 	
 	@Autowired
-	MemberService memberService;
+	BuyerService2 buyerService;
 
-	@GetMapping("memberLogin")
-	public String memberLogin() {
+	@GetMapping("buyerLogin")
+	public String buyerLogin() {
 		
-		return "member/memberLogin";
+		return "buyer/buyerLogin";
 	}
 	
-	@GetMapping("memberJoin")
-	public String memberJoin() {
+	@GetMapping("buyerJoin")
+	public String buyerJoin() {
 	
-		return "member/memberJoin";
+		return "buyer/buyerJoin";
 	}
-	@GetMapping("memberAuthentication")
-	public String memberAuthentication() {
-		return "member/memberAuthentication";
+	@GetMapping("buyerAuthentication")
+	public String buyerAuthentication() {
+		return "buyer/buyerAuthentication";
 	}
 	
-	@GetMapping("memberEmail")
-	public String memberEamil() {
-		return "member/memberEmail";
+	@GetMapping("buyerEmail")
+	public String buyerEamil() {
+		return "buyer/buyerEmail";
 	}
 	
 //	@ResponseBody

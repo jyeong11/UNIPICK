@@ -18,7 +18,7 @@
 <link href="${pageContext.request.contextPath }/resources/css/top.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/footer.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/index.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resources/css/memberJoin.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/buyer/buyerJoin.css" rel="stylesheet" type="text/css">
 
 <link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
 <title>UNIPICK</title>

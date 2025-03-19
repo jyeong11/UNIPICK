@@ -18,7 +18,7 @@
 <link href="${pageContext.request.contextPath }/resources/css/top.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/footer.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/index.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resources/css/member/memberJoin.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/buyer/buyerJoin.css" rel="stylesheet" type="text/css">
 
 <link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
 <title>UNIPICK</title>
@@ -76,6 +76,6 @@
 
 		</main>
 	</div>
-	<input type="button" onclick="location.href='memberEmail'" value="이메일로 이동">
+	<input type="button" onclick="location.href='buyerEmail'" value="이메일로 이동">
 </body>
 </html>

@@ -5,13 +5,13 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.itwillbs.unipick.mapper.MemberMapper;
+import com.itwillbs.unipick.mapper.BuyerMapper2;
 
 @Service
-public class MemberService {
+public class BuyerService2 {
 
 	@Autowired
-	MemberMapper mapper;
+	BuyerMapper2 mapper;
 	
 	
 //	 // 이메일 중복 체크: 중복이면 true, 아니면 false
