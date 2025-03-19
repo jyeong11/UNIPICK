@@ -40,4 +40,8 @@ public interface AdminMapper {
 	public List<Map<String, Object>> sideMainMenuList(Map<String, Object> map);
 	// 사이드 서브 메뉴
 	public List<Map<String, Object>> sideSubMenuList(Map<String, Object> map);
+	//상품관리
+	public List<Map<String, Object>> getPrdList();
+	//상품 상세조회
+	public Map<String, Object> getprdListDetail(Map<String, Object> prdCd);
 }

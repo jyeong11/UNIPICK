@@ -1,0 +1,27 @@
+@charset "UTF-8";
+.admProductList-top-div > div {
+    width: auto;
+}
+.search-div {
+    display: flex
+;
+    justify-content: flex-end;
+    flex-grow: 1;
+    gap: 10px;
+}
+#searchKind, #ListSearchWord{
+    height: 18px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+.card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.25rem;
+}
+#search{
+	color: white;
+    background: black;
+}

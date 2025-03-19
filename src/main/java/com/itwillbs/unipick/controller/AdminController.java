@@ -42,6 +42,11 @@ public class AdminController {
 	public String adminMain() {
 		return "admin/adminMain";
 	}
+	//상품 목록 화면이동
+	@GetMapping("admProductList")
+	public String AdmProductList() {
+		return "admin/admProductList";
+	}
 	
 	// 공통코드 화면이동
 	@GetMapping("commonCode")
@@ -217,7 +222,7 @@ public class AdminController {
 		adminservice.updateLvCode(map);
 	}
 	
-	//계층 코드 삭제
+	// 계층 코드 삭제
 	@ResponseBody
 	@PostMapping("lvCodeDelete")
 	public void lvCodeDelete(@RequestParam Map<String, Object> map){
@@ -232,5 +237,22 @@ public class AdminController {
 		return adminservice.MenuList(map);
 	}
 	
+	// 관리자 상품관리
+	@ResponseBody
+	@PostMapping("admproductList")
+	public List<Map<String, Object>> admproductList() {
+		List<Map<String, Object>> prdList = adminservice.getPrdList();
+		return prdList;
+	}
+	
+	// 상품 상세조회
+	@ResponseBody
+	@PostMapping("admprdListDetail")
+	public Map<String, Object> admprdListDetail(@RequestParam Map<String, Object> prdCd) {
+		System.out.println(prdCd);
+		Map<String, Object> prdDeailList = adminservice.getprdListDetail(prdCd);
+		System.out.println("@!#$$$$$#!$$!~" + prdDeailList);
+		return prdDeailList;
+	}
 	
 }

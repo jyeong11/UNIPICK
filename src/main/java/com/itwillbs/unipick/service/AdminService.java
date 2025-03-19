@@ -94,5 +94,14 @@ public class AdminService {
         return mainMenus;
 		
 	}
+	// 상품관리
+	public List<Map<String, Object>> getPrdList() {
+		return mapper.getPrdList();
+	}
+	
+	// 상품 상세조회
+	public Map<String, Object> getprdListDetail(Map<String, Object> prdCd) {
+		return mapper.getprdListDetail(prdCd);
+	}
 		
 }

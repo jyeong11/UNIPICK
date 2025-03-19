@@ -203,4 +203,19 @@
   		 ORDER BY lev_so
   	</select>
   	
+<!--   	상품관리 -->
+	<select id="getPrdList" parameterType="map">
+	 SELECT p.prd_nm, p.prd_cd, s.sel_nm, p.prd_op, p.prd_sp, p.prd_st
+	   FROM products p JOIN sellers s
+	     ON p.sel_id = s.sel_id
+	  WHERE p.prd_st = '접수'
+	</select>
+<!-- 	상품 상세 관리 -->
+	<select id="getprdListDetail" parameterType="map">
+	 SELECT p.prd_cd, s.sel_nm, p.prd_nm, p.prd_op, p.prd_sp, p.prd_st
+	   FROM products p JOIN sellers s
+	     ON p.sel_id = s.sel_id
+	  where prd_cd = #{prd_cd}
+	</select>
+  	
 </mapper>

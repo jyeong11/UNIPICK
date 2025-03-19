@@ -55,7 +55,6 @@ $(function() {
 				$('#commonDetailTableBody').append(tablebody);
 			},
 			error: function(xhr, status, error) {
-				console.error("AJAX error:", error);
 				alert("오류가 발생했습니다.");
 			}
 		

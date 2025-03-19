@@ -42,7 +42,7 @@
         <div id="menu03" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
             	<h6 class="collapse-header">상품관리</h6>
-                <a class="collapse-item" href="AdmProductList">상품 목록</a>
+                <a class="collapse-item" href="admProductList">상품 목록</a>
             </div>
         </div>
     </li>
