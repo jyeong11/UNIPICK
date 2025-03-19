@@ -17,7 +17,8 @@
   	<select id="getSearchPrd" parameterType="map">
   	 SELECT *
   	   FROM products
-      WHERE prd_nm like CONCAT('%',#{query},'%'); 
+      WHERE prd_nm like CONCAT('%',#{query},'%')
+      	AND prd_st = '승인' 
   	</select>
   	
   	<!-- 카테고리 메뉴 -->
