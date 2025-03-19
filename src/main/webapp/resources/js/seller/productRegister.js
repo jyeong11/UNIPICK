@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
     async function initDelivery() {
       deliverySelect.innerHTML = '<option value="">선택하세요</option>';
       try {
-        const response = await fetch(contextPath + 'seller/deliveryOptions');
+        const response = await fetch(contextPath + '/seller/deliveryOptions');
         if (!response.ok) throw new Error('네트워크 오류');
         const options = await response.json();
         options.forEach(option => {
@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
     async function initStockOptions() {
       stockSelect.innerHTML = '<option value="">선택하세요</option>';
       try {
-        const response = await fetch(contextPath + 'seller/stockOptions');
+        const response = await fetch(contextPath + '/seller/stockOptions');
         if (!response.ok) throw new Error('네트워크 오류');
         const options = await response.json();
         options.forEach(option => {
@@ -246,7 +246,7 @@ $("#productRegist").on("submit", async function (event) {
 
     const result = await response.json();
     console.log("상품 등록 완료:", result);
-    window.location.href = contextPath + "seller/productList";
+    window.location.href = contextPath + "/seller/productList";
 
   } catch (error) {
     console.error("저장 오류:", error);
