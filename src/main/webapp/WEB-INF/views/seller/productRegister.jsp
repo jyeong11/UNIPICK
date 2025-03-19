@@ -102,9 +102,9 @@
                           <c:forEach var="i" begin="1" end="10">
                             <div class="item-thumb">
                               <button type="button" class="item-thumb-upload" data-index="${i}">
-                                <img src="/resources/img/product-thumb-no.jpg" id="item-thumb-preview${i}">
+                                <img src="/resources/img/product-thumb-no.jpg"  id="item-thumb-preview${i}">
                               </button>
-                              <input type="file" class="item-thumb-upload-btn" id="item-thumb-upload-btn${i}" name="pic${i}">
+                              <input type="file" class="item-thumb-upload-btn" id="item-thumb-upload-btn${i}" name="productData">
                             </div>
                           </c:forEach>
                         </div>
@@ -116,6 +116,13 @@
                           <input type="text" name="product_title" class="item-regi-title-text" id="item-regi-title-text" maxlength="50">
                         </div>
                         <h6 class="item-regi-name-byte" id="item-regi-name-byte">(0 / 50)</h6>
+                      </section>
+                      <section class="item-regi-section">
+                        <h2 class="item-regi-name">상품코드</h2>
+                        <div class="item-regi-box">
+                          <input type="text" name="product_code" class="item-regi-title-text" id="item-regi-code-text" maxlength="20">
+                        </div>
+                        <h6 class="item-regi-name-byte" id="item-regi-name-byte">(0 / 20)</h6>
                       </section>
                       <section class="item-regi-section">
                         <h2 class="item-regi-name">상품설명</h2>

@@ -46,34 +46,32 @@
       prd_nm,
       sel_id,
       prd_cd,
-      prd_ds,
       prd_op,
       prd_sp,
-      prd_bd,
-      prd_st
+      prd_ca
     )
     VALUES (
       #{prd_nm},
       #{sel_id},
       #{prd_cd},
-      #{prd_ds},
       #{prd_op},
       #{prd_sp},
-      #{prd_bd},
-      default
+      #{prd_ca}
     )
   </insert>
   
     <!-- 옵션 정보 등록 (컬러 & 사이즈) -->
   <insert id="insertProductOptions" parameterType="map">
     INSERT INTO options (
-      prd_id,
-      clr_id,
-      siz_nm
+      prd_nm,
+      siz_nm,
+      clr_nm,
+      prd_qt
     )
     VALUES (
-      #{prd_id},
-      #{clr_id},
+      #{prd_nm},
+      #{sizes},
+      #{colors},
       #{siz_nm}
     )
   </insert>

@@ -215,10 +215,11 @@ $("#productRegist").on("submit", async function (event) {
   // 🟢 상품 데이터 객체 생성
   let productData = {
     prd_nm: $("#item-regi-title-text").val(),
+	prd_cd: $("#item-regi-code-text").val(),
     prd_op: $("#list_price").val(),
     prd_sp: $("#sale_price").val(),
     sel_id: "TEST_SELLER_ID", // 실제 로그인한 사용자의 ID 사용
-    prd_cd: $("#product_category_detail").val() || $("#product_category_sub").val() || $("#product_category").val(),
+    prd_ca: $("#product_category_detail").val() || $("#product_category_sub").val() || $("#product_category").val(),
     stock_qty: $("#stock_quantity").val(),
     colors: [],
     sizes: []
