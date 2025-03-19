@@ -43,7 +43,6 @@
   <!-- 상품 등록 쿼리 -->
   <insert id="insertProduct" parameterType="map">
     INSERT INTO products (
-      prd_id,
       prd_nm,
       sel_id,
       prd_cd,
@@ -54,7 +53,6 @@
       prd_st
     )
     VALUES (
-      default,
       #{prd_nm},
       #{sel_id},
       #{prd_cd},

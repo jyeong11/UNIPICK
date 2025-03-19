@@ -60,18 +60,14 @@ public class SellerService2 {
     public void registerProduct(Map<String, Object> productData, List<MultipartFile> imageFiles) {
         // 1. 상품 정보 저장
         mapper.insertProduct(productData);
-        Integer productId = (Integer) productData.get("product_id"); // DB에서 생성된 ID 가져오기
 
-        if (productId == null) {
-            throw new RuntimeException("상품 등록 실패: product_id가 생성되지 않음");
-        }
 
         // 2. 상품 이미지 저장
         for (MultipartFile imageFile : imageFiles) {
             Map<String, Object> imageData = uploadImage(imageFile);
             if (imageData.containsKey("error")) continue; // 오류 발생 시 해당 이미지 스킵
             
-            imageData.put("product_id", productId);
+           
             mapper.insertProductImage(imageData);
         }
 
@@ -79,7 +75,7 @@ public class SellerService2 {
         List<Map<String, Object>> stockList = (List<Map<String, Object>>) productData.get("stockList");
         if (stockList != null) {
             for (Map<String, Object> stock : stockList) {
-                stock.put("product_id", productId);
+              
                 mapper.insertStock(stock);
             }
         }
@@ -89,7 +85,7 @@ public class SellerService2 {
         if (colorList != null) {
             for (String color : colorList) {
                 Map<String, Object> colorData = new HashMap<>();
-                colorData.put("product_id", productId);
+      
                 colorData.put("color", color);
                 mapper.insertColor(colorData);
             }
@@ -100,7 +96,7 @@ public class SellerService2 {
         if (sizeList != null) {
             for (String size : sizeList) {
                 Map<String, Object> sizeData = new HashMap<>();
-                sizeData.put("product_id", productId);
+   
                 sizeData.put("size", size);
                 mapper.insertSize(sizeData);
             }

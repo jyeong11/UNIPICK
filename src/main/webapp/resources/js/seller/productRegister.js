@@ -211,36 +211,59 @@ $("#productRegist").on("submit", async function (event) {
   if (!validateForm()) return;
 
   let formData = new FormData();
-  formData.append("prd_nm", $("#item-regi-title-text").val());
-  formData.append("prd_op", $("#list_price").val());
-  formData.append("prd_sp", $("#sale_price").val());
-  formData.append("sel_id", "TEST_SELLER_ID"); // 실제 세션 값 사용
-  formData.append("prd_cd", $("#product_category_detail").val() || $("#product_category_sub").val() || $("#product_category").val());
-  
+
+  // 🟢 상품 데이터 객체 생성
+  let productData = {
+    prd_nm: $("#item-regi-title-text").val(),
+    prd_op: $("#list_price").val(),
+    prd_sp: $("#sale_price").val(),
+    sel_id: "TEST_SELLER_ID", // 실제 로그인한 사용자의 ID 사용
+    prd_cd: $("#product_category_detail").val() || $("#product_category_sub").val() || $("#product_category").val(),
+    stock_qty: $("#stock_quantity").val(),
+    colors: [],
+    sizes: []
+  };
+
   // 🎨 색상 추가
   document.querySelectorAll("input[name='color_number']").forEach(input => {
-    formData.append("colors", input.value);
+    productData.colors.push(input.value);
   });
 
   // 📏 사이즈 추가
   document.querySelectorAll("select[name='size_option']").forEach(select => {
-    formData.append("sizes", select.value);
+    productData.sizes.push(select.value);
   });
 
-  // 📦 재고 수량 추가
-  formData.append("stock_qty", $("#stock_quantity").val());
+  // ✅ 상품 데이터 JSON 변환 후 FormData에 추가
+  formData.append("productData", new Blob([JSON.stringify(productData)], { type: "application/json" }));
 
   // 📸 이미지 파일 추가
   let fileInput = document.getElementById("item-thumb-upload-btn1");
   if (fileInput.files.length > 0) {
-    formData.append("image", fileInput.files[0]);
+    for (let i = 0; i < fileInput.files.length; i++) {
+      formData.append("imageFiles", fileInput.files[i]); // 여러 개의 이미지 추가
+    }
+  } else {
+    formData.append("imageFiles", ""); // 파일이 없을 경우 빈 값 추가
   }
 
   try {
+    console.log("fetch 요청 시작");
+    console.log("폼 데이터 확인:");
+    for (let pair of formData.entries()) {
+      console.log(pair[0], pair[1]); // key-value 값 출력
+    }
+
     const response = await fetch(contextPath + "/seller/registerProduct", {
       method: "POST",
-      body: formData
+      body: formData,
+      headers: {
+        "Accept": "application/json" // JSON 응답을 받기 위해 추가
+      }
     });
+
+    console.log("서버 응답 상태:", response.status);
+    console.log("서버 응답:", await response.text());
 
     if (!response.ok) throw new Error("저장 실패");
 
@@ -252,6 +275,7 @@ $("#productRegist").on("submit", async function (event) {
     console.error("저장 오류:", error);
   }
 });
+
 
   // 10. 배송비 노출 토글
   $("#shipping-fee-enable, #shipping-fee-disable").change(function () {
