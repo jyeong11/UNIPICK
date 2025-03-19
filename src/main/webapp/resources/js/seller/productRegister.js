@@ -220,8 +220,10 @@ $("#productRegist").on("submit", async function (event) {
     prd_sp: $("#sale_price").val(),
     sel_id: "TEST_SELLER_ID", // 실제 로그인한 사용자의 ID 사용
     prd_ca: $("#product_category_detail").val() || $("#product_category_sub").val() || $("#product_category").val(),
-    stock_qty: $("#stock_quantity").val(),
-    colors: [],
+    prd_qt: $("#stock_quantity").val(),
+	prd_ds: $("#prd_ds_checkbox").is(":checked") ? 1 : 0,
+	prd_bd: $("#some_element").val(),
+	colors: [],
     sizes: []
   };
 
@@ -264,13 +266,15 @@ $("#productRegist").on("submit", async function (event) {
     });
 
     console.log("서버 응답 상태:", response.status);
-    console.log("서버 응답:", await response.text());
 
-    if (!response.ok) throw new Error("저장 실패");
-
+    if (!response.ok) {
+    const errorText = await response.text();
+    console.error("서버 응답 오류 메시지:", errorText);
+    throw new Error("저장 실패");
+  }
     const result = await response.json();
     console.log("상품 등록 완료:", result);
-    window.location.href = contextPath + "/seller/productList";
+    window.location.href = contextPath + "/selProductList";
 
   } catch (error) {
     console.error("저장 오류:", error);

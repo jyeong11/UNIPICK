@@ -37,7 +37,7 @@ public class SellerRestController2 {
             // 상품 등록 서비스 호출
             sellerService.registerProduct(productData, imageFiles);
 
-            return ResponseEntity.ok("상품이 등록되었습니다.");
+            return ResponseEntity.ok(Map.of("message", "상품이 등록되었습니다."));
         } catch (Exception e) {
             return ResponseEntity.status(500).body("상품 등록 중 오류 발생: " + e.getMessage());
         }

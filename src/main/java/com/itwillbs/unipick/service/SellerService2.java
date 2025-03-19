@@ -26,33 +26,43 @@ public class SellerService2 {
 
     // 파일 업로드 및 검증
     public Map<String, Object> uploadImage(MultipartFile imageFile) {
-        Map<String, Object> result = new HashMap<>();
+        Map<String, Object> imageData = new HashMap<>();
+
         if (imageFile == null || imageFile.isEmpty()) {
-            result.put("error", "업로드할 파일이 없습니다.");
-            return result;
+            imageData.put("error", "이미지 파일이 없습니다.");
+            return imageData;
         }
 
-        // 확장자 검사 (jpg, png만 허용)
-        String originalFilename = imageFile.getOriginalFilename();
-        if (originalFilename == null || !originalFilename.matches(".*\\.(jpg|png)$")) {
-            result.put("error", "허용되지 않는 파일 형식입니다. (jpg, png만 가능)");
-            return result;
-        }
-
-        // 고유 파일명 생성
-        String uniqueFileName = UUID.randomUUID() + "_" + originalFilename;
-        String savePath = Paths.get(UPLOAD_DIR, uniqueFileName).toString();
-
-        // 파일 저장
         try {
-            imageFile.transferTo(new File(savePath));
-            result.put("imagePath", savePath);
-            result.put("imageName", uniqueFileName);
-        } catch (IOException e) {
-            result.put("error", "파일 저장 실패: " + e.getMessage());
+            // ✅ 파일 원본 이름 가져오기
+            String originalFilename = imageFile.getOriginalFilename();
+            System.out.println("✅ 원본 파일명: " + originalFilename);
+
+            if (originalFilename == null || originalFilename.trim().isEmpty()) {
+                imageData.put("error", "파일명이 올바르지 않습니다.");
+                return imageData;
+            }
+
+            // ✅ 고유한 파일명 생성 (중복 방지)
+            String uniqueFilename = System.currentTimeMillis() + "_" + originalFilename;
+
+            // ✅ 파일 저장 경로 설정
+            String filePath = "/upload/images/" + uniqueFilename;
+
+            // ✅ 필수 데이터 저장
+            imageData.put("fil_nm", uniqueFilename); // ✅ 파일명 추가
+            imageData.put("fil_pt", filePath); // ✅ 파일 경로 추가
+
+            System.out.println("📂 저장될 파일명: " + uniqueFilename);
+            System.out.println("📂 저장될 경로: " + filePath);
+
+        } catch (Exception e) {
+            System.out.println("❌ 이미지 업로드 중 오류 발생: " + e.getMessage());
+            imageData.put("error", "파일 업로드 실패");
+            e.printStackTrace();
         }
 
-        return result;
+        return imageData;
     }
 
     // ✅ 트랜잭션 적용하여 상품, 이미지, 재고, 색상, 사이즈 한 번에 저장
@@ -60,45 +70,63 @@ public class SellerService2 {
     public void registerProduct(Map<String, Object> productData, List<MultipartFile> imageFiles) {
         // 1. 상품 정보 저장
         mapper.insertProduct(productData);
+        System.out.println("상품 등록 후 productData: " + productData);
+        System.out.println("상품 코드 (prd_cd): " + productData.get("prd_cd"));
 
+        if (productData.get("prd_cd") == null) {
+            System.out.println("❌ prd_cd가 NULL입니다! 상품이 정상적으로 저장되지 않았습니다.");
+            return;
+        }
 
-        // 2. 상품 이미지 저장
+     // 2. 상품 이미지 저장
         for (MultipartFile imageFile : imageFiles) {
+            System.out.println("🔥 이미지 처리 시작 - 파일명: " + (imageFile != null ? imageFile.getOriginalFilename() : "null"));
+
+            if (imageFile == null || imageFile.isEmpty()) {
+                System.out.println("🚨 이미지 파일이 비어 있음, 처리 스킵!");
+                continue;
+            }
+
+            System.out.println("🛠 `uploadImage()` 함수 호출 전");
+
             Map<String, Object> imageData = uploadImage(imageFile);
-            if (imageData.containsKey("error")) continue; // 오류 발생 시 해당 이미지 스킵
-            
-           
-            mapper.insertProductImage(imageData);
+            System.out.println("🔥 업로드된 이미지 데이터: " + imageData);
+
+            if (imageData.containsKey("error")) {
+                System.out.println("🚨 이미지 업로드 중 오류 발생, 스킵! (에러: " + imageData.get("error") + ")");
+                continue;
+            }
+
+            // ✅ 여기서 `sel_id` 추가!
+            imageData.put("prd_cd", productData.get("prd_cd"));
+            imageData.put("sel_id", productData.get("sel_id"));  // 추가 ✅
+
+            System.out.println("📤 이미지 삽입 직전 imageData: " + imageData);
+
+            try {
+                mapper.insertProductImage(imageData);
+                System.out.println("✅ 이미지 데이터 삽입 성공");
+            } catch (Exception e) {
+                System.out.println("❌ 이미지 데이터 삽입 실패: " + e.getMessage());
+                e.printStackTrace();
+            }
         }
 
         // 3. 재고 저장
         List<Map<String, Object>> stockList = (List<Map<String, Object>>) productData.get("stockList");
         if (stockList != null) {
+            System.out.println("stockList: " + stockList);
             for (Map<String, Object> stock : stockList) {
-              
-                mapper.insertStock(stock);
-            }
-        }
+                stock.put("prd_cd", productData.get("prd_cd"));
+                System.out.println("옵션 데이터 삽입 전: " + stock);
 
-        // 4. 색상 저장
-        List<String> colorList = (List<String>) productData.get("colorList");
-        if (colorList != null) {
-            for (String color : colorList) {
-                Map<String, Object> colorData = new HashMap<>();
-      
-                colorData.put("color", color);
-                mapper.insertColor(colorData);
-            }
-        }
-
-        // 5. 사이즈 저장
-        List<String> sizeList = (List<String>) productData.get("sizeList");
-        if (sizeList != null) {
-            for (String size : sizeList) {
-                Map<String, Object> sizeData = new HashMap<>();
-   
-                sizeData.put("size", size);
-                mapper.insertSize(sizeData);
+                try {
+                    mapper.insertStock(stock);
+                    System.out.println("옵션 데이터 삽입 성공");
+                } catch (Exception e) {
+                    System.out.println("옵션 데이터 삽입 실패: " + e.getMessage());
+                    e.printStackTrace();
+                }
             }
         }
     }
