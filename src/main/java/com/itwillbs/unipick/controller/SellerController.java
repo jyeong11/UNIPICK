@@ -56,6 +56,12 @@ public class SellerController {
 		return "seller/sellerMain";
 	}
 	
+	//셀러 상품 상세 조회
+	@GetMapping("sellerPrdDetail")
+	public String sellerPrdDetail() {
+		return "seller/sellerPrdDetail";
+	}
+	
 	@GetMapping("sellerlogin")
 	public String Login(HttpServletRequest request, Model model) {
 	    // 저장된 쿠키 확인
@@ -163,6 +169,15 @@ public class SellerController {
 		
 		return seldata;
 	}
+	
+	// 상품 상세 조회
+	@ResponseBody
+	@PostMapping("productDetail")
+	public Map<String, Object> productDetail(@RequestBody Map<String, Object> prdData){
+		
+		return selService.productDetail(prdData);
+	}
+	
 	
 	private String createDirectories(String realPath) {
 		LocalDate today = LocalDate.now();

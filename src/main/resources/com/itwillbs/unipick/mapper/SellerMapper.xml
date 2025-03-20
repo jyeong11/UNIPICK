@@ -36,6 +36,13 @@
 		  from sellers
 		 where sel_id = #{storeId}
 	</select>
+	
+	<!-- 상품 상세 조회 -->
+	<select id="productDetail" parameterType="map">
+		select prd_nm, prd_cd, prd_op, prd_sp, prd_ca
+		  from products
+		 where prd_cd = #{prd_cd}
+	</select>
 
 
 
