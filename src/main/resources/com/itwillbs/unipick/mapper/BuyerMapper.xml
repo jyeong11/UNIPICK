@@ -74,7 +74,24 @@
   		  FROM products p
   		  LEFT JOIN product_images i ON p.prd_cd = i.prd_cd
   		  JOIN sellers s ON p.sel_id = s.sel_id
-  		 where p.prd_ca = #{lev_cd}
+  		 WHERE p.prd_ca = #{lev_cd}
+  		 <choose>
+  		 	<when test="kind == 'PST01'">
+  		 		ORDER BY 1
+  		 	</when>
+  		 	<when test="kind == 'PST02'">
+  		 		ORDER BY 1
+  		 	</when>
+  		 	<when test="kind == 'PST03'">
+  		 		ORDER BY 1
+  		 	</when>
+  		 	<when test="kind == 'PST04'">
+  		 		ORDER BY prd_sp DESC
+  		 	</when>
+  		 	<when test="kind == 'PST05'">
+  		 		ORDER BY prd_sp
+  		 	</when>
+  		 </choose>
   	</select>
   	
   	<!--   	상품 옵션 -->

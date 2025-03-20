@@ -27,6 +27,8 @@ $(function() {
 		
 		let data = {lev_cd : cateCode,
 					kind : $('#product-sort').val()};
+					
+		$('#img12').empty();
 		
 		$.ajax({
 			type: "POST",
