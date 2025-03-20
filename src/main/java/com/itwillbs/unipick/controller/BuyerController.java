@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -45,14 +46,24 @@ public class BuyerController {
 	public String buyerCart() {
 		return "buyer/buyerCart";
 	}
+	
 	//상품검색
 	@GetMapping("productSearch")
 	public String productSearch() {
 		return "buyer/productSearch";
 	}
-	//상세조회
+	
+	// 상품 상세조회 (조회)
 	@GetMapping("productDetail")
-	public String productDetail() {
+	public String productDetail(@RequestParam("prd_cd") String prdCd, Model model) {
+		Map<String, Object> prdList = buyService.getPrdDetail(prdCd);
+		List<String> prdImg = buyService.getPrdImg(prdCd);
+		List<Map<String, Object>> optionList = buyService.getPrdOption(prdCd); 
+		
+		model.addAttribute("prd", prdList);
+		model.addAttribute("prdImg", prdImg);
+		model.addAttribute("optionList", optionList);
+		
 		return "buyer/productDetail";
 	}
 	
@@ -101,4 +112,10 @@ public class BuyerController {
 		return buyService.productSort();
 	}
 	
+	// 상품옵션
+	@ResponseBody
+	@PostMapping("getSizeByColor")
+	public List<Map<String, Object>> getSizeByColor(@RequestBody Map<String, Object> option){
+		return buyService.getColors(option); 
+	}
 }

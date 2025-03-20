@@ -1,0 +1,149 @@
+@charset "UTF-8";
+.product-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    flex-direction: column;
+}
+
+.product-container img {
+    width: 400px;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.product-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.product-info h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.product-info p {
+    font-size: 18px;
+    color: #666;
+}
+
+.product-info .discount {
+    font-size: 30px;
+    font-weight: bold;
+    color: #333;
+    margin-right: 16px;
+    
+}
+.dc {
+	font-size: 30px;
+	color : #f2a900;
+	padding-right: 17px;
+}
+.button-container {
+    display: flex;
+    gap: 10px;
+    margin: 20px 52px 0 16px;
+}
+.option-box {
+    background-color: #f5f5f5; 
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    margin: 0 52px 0 16px;
+    width: 38%;
+}
+#scrollToBottom {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #fff;
+    color: #a1a9ad;
+    border: none;
+    border-radius: 39px;
+    margin: 5px;
+    position: fixed;
+    width: 3rem;
+    right: 20px;
+    bottom: 166px;
+    z-index: 9999;
+    cursor: pointer;
+}
+#scrollToTop{
+	padding: 10px;
+    font-size: 16px;
+    background-color: #fff;
+    color: #a1a9ad;
+    border: none;
+    border-radius: 39px;
+    margin: 5px;
+    position: fixed;
+    width: 3rem;
+    right: 20px;
+    bottom: 210px;
+    z-index: 9999;
+    cursor: pointer;
+}
+
+.scroll-button:hover {
+    background-color: #0056b3;
+}
+select {
+    margin: 0 52px 0 16px;
+    color: #202429;
+    font-size: 16px;
+    line-height: 50px;
+    border-radius: 6px;
+    width: 40%;
+    height: 50px;
+    padding: 0;
+    border: 1px solid #e6e6e6;
+    background-color: #fff;
+}
+.button-container button {
+    padding: 12px 20px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+}
+.original-price{
+	text-decoration: line-through;
+	color: #808893;
+	font-size: 20px;
+}
+#price {
+	display: flex;
+}
+
+.buy-now {
+    background-color: black;
+    color: white;
+}
+div > a {
+	text-decoration: none;
+	color: #333;	
+}
+div > a > i {
+	padding-right: 13px
+} 
+.npay {
+    background-color: #f2a900;
+    color: white;
+}
+#prdDetailBar{
+    display: flex;
+    margin: auto;
+    gap: 290px;
+    font-size: 20px;
+    padding: 17px 4px 22px   
+}

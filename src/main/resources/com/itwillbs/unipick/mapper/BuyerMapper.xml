@@ -20,6 +20,30 @@
   	  ORDER BY lev_so
   	</select>
   	
+  	<!--   	상품상세조회 -->
+	<select id="getPrdDetail" parameterType="map">
+	  SELECT prd_cd, sel_id, prd_nm, 
+	  		 CONCAT(ROUND(((prd_op - prd_sp) / prd_op) * 100, 0), '%') AS dc,
+	  		 FORMAT(prd_op, 0) AS prd_op, 
+	  		 FORMAT(prd_sp, 0) AS prd_sp 
+	    FROM products
+	   WHERE prd_cd = #{prdCd}
+	</select>
+	
+<!-- 	상품 상세 이미지 -->
+	<select id="getPrdImg" parameterType="map">
+	 SELECT fil_pt
+	   FROM product_images
+	  WHERE prd_cd = #{prdCd}
+	</select>
+	
+<!-- 	상품 상세 옵션 -->
+	<select id="getPrdOption" parameterType="map">
+	 SELECT siz_nm, clr_nm, prd_qt
+	   FROM options
+	  WHERE prd_cd = #{prdCd}
+	</select>
+	
 <!--   	상품검색 -->
   	<select id="getSearchPrd" parameterType="map">
   	 SELECT *
@@ -53,4 +77,13 @@
  		 WHERE 1 = 1
   	</select>
   	
+  	<!--   	상품 옵션 -->
+	<select id="getColors" parameterType="map">
+	 SELECT o.siz_nm, o.prd_qt, 
+	 		FORMAT(p.prd_sp, 0) AS prd_sp
+	   FROM options o JOIN products p 
+         ON o.prd_cd = p.prd_cd
+	  WHERE o.prd_cd =#{prd_cd}
+	  	AND o.clr_nm = #{color}
+	</select>
   </mapper>
