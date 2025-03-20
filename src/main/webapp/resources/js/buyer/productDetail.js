@@ -65,5 +65,10 @@ $(function() {
         $("#selected-option").hide();
         loadSize();
     });
+	document.getElementById("loadMoreBtn").addEventListener("click", function() {
+	    var moreItems = document.getElementById("moreItems");
+	    moreItems.style.display = "block";  // 상품 더보기 정보를 표시
+	    this.style.display = "none";  // 더보기 버튼 숨기기
+	});
 	
 });

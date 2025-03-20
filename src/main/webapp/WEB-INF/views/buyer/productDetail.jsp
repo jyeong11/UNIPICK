@@ -36,47 +36,67 @@
 	</div>
 	 <div class="product-container">
     <!-- 왼쪽 상품 이미지 -->
-	    <div>
-			<c:forEach var="image" items="${prdImg}">
-				<img src="${image}" class="product-img" />
-			</c:forEach>
+	    <div class="product-image">
+	    	<img src="${pageContext.request.contextPath }/resources/images/favicon_b.png" alt="1">
+<!-- 	    상품등록 되면 쓸 거 -->
+<%-- 			<c:forEach var="image" items="${prdImg}"> --%>
+<%-- 				<img src="${image}" class="product-img" /> --%>
+<%-- 			</c:forEach> --%>
 		</div>
-	
-	    <div class="product-info">
-	        <div><a href=""><i class="fa-solid fa-house"></i>${prd.sel_id}</a></div>
-	        <h2>${prd.prd_nm}</h2>
-	        <div id="price">
-	        	<p><span class="dc">${prd.dc}</span></p>
-		        <p><span class="discount">${prd.prd_sp}원</span></p>
-		        <p><span class="original-price">${prd.prd_op}원</span></p>
-			</div>
-	        <select id="color" onchange="loadSize()">
-				<option>[color]를 선택하세요.</option>
-				<c:forEach var="option" items="${optionList}">
-					<option value="${option.clr_nm}">${option.clr_nm}</option>
+		<div id="product">
+		    <div class="product-info">
+		        <div><a href=""><i class="fa-solid fa-house"></i>${prd.sel_id}</a></div>
+		        <h2>${prd.prd_nm}</h2>
+		        <div id="price">
+		        	<p><span class="dc">${prd.dc}</span></p>
+			        <p><span class="discount">${prd.prd_sp}원</span></p>
+			        <p><span class="original-price">${prd.prd_op}원</span></p>
+				</div>
+		        <select id="color" onchange="loadSize()">
+					<option>[색상]을 선택하세요.</option>
+					<c:forEach var="option" items="${optionList}">
+						<option value="${option.clr_nm}">${option.clr_nm}</option>
+					</c:forEach>
+				</select>
+		
+		        <select id="size" disabled>
+				    <option selected>[사이즈]를 선택하세요.</option>
+				</select>
+				<div id="selected-option" class="option-box" style="display: none;">
+				    <span id="option-text">옵션을 선택하세요</span>
+				    <span id="option-price"></span>
+				</div>
+		        <div class="button-container">
+		            <button class="buy-now">바로 구매</button>
+		            <button class="npay">UNI Pay 구매</button>
+		           <button class="cart-btn">
+					    <i class="cart fa fa-solid fa-cart-shopping"></i>
+					</button>
+					<button class="wishlist-btn">
+					    <i class="fa-regular fa-heart"></i>
+					</button>
+		        </div>
+					<button id="scrollToTop">↑</button>
+					<button id="scrollToBottom">↓</button>
+		    	</div>
+		    </div>
+		 </div>
+		    <div id="prdDetailBar">
+		    	<ul><li>상품정보</li></ul>
+		    	<ul><li>리뷰</li></ul>
+		    	<ul><li>문의</li></ul>
+		 	</div>
+		 	<div id="detailEp">
+		 		<c:forEach begin="1" end="10">
+		    		<img src="${pageContext.request.contextPath }/resources/images/favicon_b.png" alt="1">
 				</c:forEach>
-			</select>
-	
-	        <select id="size" disabled>
-			    <option selected>[size]를 선택하세요.</option>
-			</select>
-			<div id="selected-option" class="option-box" style="display: none;">
-			    <span id="option-text">옵션을 선택하세요</span>
-			    <span id="option-price"></span>
 			</div>
-	        <div class="button-container">
-	            <button class="buy-now">바로 구매</button>
-	            <button class="npay">UNI Pay 구매</button>
-	        </div>
-			<button id="scrollToTop">↑</button>
-			<button id="scrollToBottom">↓</button>
-	    </div>
-	    <div id="prdDetailBar">
-	    	<ul><li>상품정보</li></ul>
-	    	<ul><li>리뷰</li></ul>
-	    	<ul><li>문의</li></ul>
-	    </div>
-	</div>
+			<div id="moreItems" style="display: none;">
+        <c:forEach begin="6" end="10">
+            <img src="${pageContext.request.contextPath }/resources/images/favicon_b.png" alt="1">
+        </c:forEach>
+    </div>
+    <button id="loadMoreBtn">상품 더보기</button>
 	
 	<div id="footer">
 		<jsp:include page="../inc/footer.jsp"></jsp:include>

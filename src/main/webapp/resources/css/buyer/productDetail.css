@@ -3,12 +3,16 @@
     display: flex;
     align-items: flex-start;
     gap: 40px;
-    max-width: 1000px;
+    max-width: 1160px;
     margin: 40px auto;
     padding: 20px;
-    flex-direction: column;
 }
+#product,.product-container {
+	display: flex;
+	justify-content: space-between;
+    align-items: flex-start;
 
+}
 .product-container img {
     width: 400px;
     height: auto;
@@ -48,7 +52,7 @@
 }
 .button-container {
     display: flex;
-    gap: 10px;
+    gap: 14px;
     margin: 20px 52px 0 16px;
 }
 .option-box {
@@ -102,11 +106,29 @@ select {
     font-size: 16px;
     line-height: 50px;
     border-radius: 6px;
-    width: 40%;
+    width: 64%;
     height: 50px;
-    padding: 0;
+    padding: 10px;
     border: 1px solid #e6e6e6;
     background-color: #fff;
+}
+.cart-btn:hover, .wishlist-btn:hover {
+    background-color: #f0f0f0; /* 호버 시 배경색 */
+}
+
+.cart-btn, .wishlist-btn {
+    border: 1px solid #e3e5e8 !important;
+    border-radius: 5px; /* 테두리 모서리 둥글게 */
+    padding: 10px; /* 버튼 안의 여백 */
+    background-color: transparent; /* 버튼 배경을 투명하게 */
+    cursor: pointer; /* 마우스를 올리면 포인터 모양으로 변경 */
+    display: inline-flex; /* 버튼 안의 내용이 가로로 배치되도록 */
+    justify-content: center; /* 내용이 가운데로 정렬 */
+    align-items: center; /* 내용이 세로로 정렬 */
+}
+.cart-btn i, .wishlist-btn i {
+    color: #000;
+    font-size: 20px;
 }
 .button-container button {
     padding: 12px 20px;
@@ -145,5 +167,49 @@ div > a > i {
     margin: auto;
     gap: 290px;
     font-size: 20px;
-    padding: 17px 4px 22px   
+    padding: 20px 17px 20px 525px; 
+    text-align: center;
+    position: sticky;
+    top: 100px;
+    z-index: 1000; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+
+#prdDetailBar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0; 
+    display: inline-block;
+    margin-right: 20px;
+}
+
+#prdDetailBar li {
+    display: inline;
+}
+
+#detailEp{
+	text-align: center;
+	margin-bottom: 10px;
+}
+#loadMoreBtn {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#loadMoreBtn:hover {
+    background-color: #0056b3;
+}
+
+#detailEp img {
+    display: block;  
+    margin: 0 auto;
+    margin-bottom: 10px; 
 }
