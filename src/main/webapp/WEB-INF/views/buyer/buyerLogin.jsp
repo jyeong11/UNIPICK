@@ -17,7 +17,7 @@
 <link href="${pageContext.request.contextPath }/resources/css/top.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/footer.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/index.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resources/css/best.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/buyer/buyerbest.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/recommendation.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/buyer/buyerLogin.css" rel="stylesheet" type="text/css">
 <!-- Banner -->

@@ -1,0 +1,165 @@
+@charset "UTF-8";
+
+#admin-container > div > a {
+	padding-left: 15px;
+}
+
+.main_container {
+	display: flex;
+}
+
+#admin-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.login_div {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	gap: 20px;
+	margin-right: 480px;
+	font-size:large;
+}
+
+.login_div a {
+	color: #292B2B;
+}
+
+.login_ul {
+	display: flex;
+}
+
+.login_ul li {
+	border-right: 1px solid #444;
+	padding-right: 10px;
+	padding-left: 10px;
+}
+
+.login_ul .logout_btn {
+	border-right: 0;
+}
+
+.sidebar > h2 {
+	margin-bottom: 10px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.no-border {
+    border: none !important;
+}
+table, th, td {
+    border: 1px solid #ecedee !important; /* 테두리 추가 */
+}
+
+#codeSearch, #coderegister, #cmcdUpdate, #commonColse,
+#codeDetailSearch, #codeDetailRegister, #cdDetailUpdate, #commonDetailColse{
+	color: white;
+	background: black;	
+}
+#cmcodeDelete, #cdDetailDelete {
+	color: #fff;
+    background-color: #e74a3b
+}
+.gap-4 {
+    gap: 0 !important;
+}
+#btnModal {
+	background: black;
+	color: white;
+}
+.container-fluid{
+	width: 86% !important;
+}
+*{
+   box-sizing: border-box;
+}
+body {
+    overflow-x: hidden !important;
+}
+#seller-container{
+	width: 1200px;
+	margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+}
+
+.container {
+	max-width: 100%;
+	width: 1200px;
+  	margin-bottom: 10px;
+  	border: 1px solid #ecedee;
+  	border-radius: 20px;
+  	overflow-x: auto;
+  	padding: 10px 0 10px 10px; 
+}
+
+.container h6 {
+	border-bottom: 1px solid #292b2b;
+	padding-bottom: 8px;
+}
+.container li {
+	padding-top: 8px;
+}
+.container ul li a {
+ 	color : #292b2b;
+}
+
+input, select {
+    min-width: 110px;
+    min-height: 42px
+}
+ .sidebar.hidden {
+     transform: translateX(-100%);
+ }
+
+ .menu-item {
+     margin-bottom: 10px;
+ }
+
+ .menu-title {
+     display: block;
+     color: white;
+     padding: 10px;
+     text-decoration: none;
+     font-weight: bold;
+     cursor: pointer;
+     background-color: #444;
+     border-radius: 5px;
+ }
+
+ .menu-title:hover {
+     background-color: #555;
+ }
+
+ .submenu {
+     max-height: 0;
+     overflow: hidden;
+     transition: max-height 0.3s ease-out;
+     padding-left: 15px;
+ }
+
+ .submenu.open {
+     max-height: 200px; /* 충분한 높이 설정 */
+ }
+
+ .submenu li {
+     padding: 5px 0;
+ }
+
+ .submenu a {
+     display: block;
+     color: #ddd;
+     padding: 8px;
+     text-decoration: none;
+     border-radius: 5px;
+ }
+
+ .submenu a:hover {
+     background-color: #555;
+ }

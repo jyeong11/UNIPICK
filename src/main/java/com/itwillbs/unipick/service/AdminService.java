@@ -114,11 +114,12 @@ public class AdminService {
 		mapper.updateStatus(status, prdCd);
 	}
 	
-	// 방문자 수
+	// 메인 페이지 출력
 	public Map<String, Object> mainPrint() {
 		Map<String, Object> mainData = new HashMap<String, Object>();
 		mainData.put("visCnt", mapper.visitCount());
 		mainData.put("joinList", mapper.joinList());
+		mainData.put("reportList", mapper.reportList());
 		
 		return mainData;
 	}

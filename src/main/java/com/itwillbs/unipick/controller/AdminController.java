@@ -253,7 +253,7 @@ public class AdminController {
 		return prdDeailList;
 	}
 	
-	// 방문자 수
+	// 방문자 수 증가
 	@ResponseBody
 	@GetMapping("visitCount")
 	public Map<String, Object> visitCount() {

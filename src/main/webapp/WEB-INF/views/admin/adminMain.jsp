@@ -22,8 +22,8 @@
 <link href="${pageContext.request.contextPath }/resources/public/css/adm.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath }/resources/public/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath }/resources/public/vendor/datatables/datatables.min.css" rel="stylesheet">
-<%-- <link href="${pageContext.request.contextPath }/resources/css/admin/adminMain.css" rel="stylesheet"> --%>
 <link href="${pageContext.request.contextPath }/resources/css/public.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath }/resources/css/admin/adminMain.css" rel="stylesheet">
 <!-- Favicon -->
 <link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
 
@@ -70,6 +70,7 @@
                                 </div>
                             </div>
                         </div>
+                        <div style="width: 500px;"></div>
                         <div class="col-xl-5 col-lg-5">
 	                        <div class="card shadow mb-4">
 	                            <div class="card-header py-3">
@@ -77,16 +78,40 @@
 	                            </div>
 	                            <div class="card-body">
 	                            	<div class="table-responsive">
-		                                <table class="table table-bordered compact" id="transactionList" width="100%" cellspacing="0">
+		                                <table class="table table-bordered compact" id="joinList" width="100%" cellspacing="0">
 		                                    <thead>
 		                                    <tr role="row">
+		                                    	<th>가입자 유형</th>
+		                                    	<th>이름/상호명</th>
 		                                 		<th>아이디/이메일</th>
-		                                 		<th>이름/상호명</th>
-		                                 		<th>가입자 유형</th>
 		                                 		<th>가입일시</th>
 		                                    </tr>
 		                                    </thead>
-		                                    <tbody class="tbody"></tbody>
+		                                    <tbody class="join-tbody"></tbody>
+		                                </table>
+		                          	</div>
+	                            </div>
+	                        </div>
+                    	</div>
+                    	<div class="col-xl-5 col-lg-5">
+	                        <div class="card shadow mb-4">
+	                            <div class="card-header py-3">
+	                                <h6 class="m-0 font-weight-bold text-primary">신고내역</h6>
+	                                <a href="adminReport" id="report-link">신고 리스트 이동</a>
+	                            </div>
+	                            <div class="card-body">
+	                            	<div class="table-responsive">
+		                                <table class="table table-bordered compact" id="reportList" width="100%" cellspacing="0">
+		                                    <thead>
+		                                    <tr role="row">
+		                                    	<th>신고대상</th>
+		                                    	<th>신고대상 아이디/이메일</th>
+		                                 		<th>신고자 아이디/이메일</th>
+		                                 		<th>신고일시</th>
+		                                 		<th>신고상태</th>
+		                                    </tr>
+		                                    </thead>
+		                                    <tbody class="report-tbody"></tbody>
 		                                </table>
 		                          	</div>
 	                            </div>
@@ -105,7 +130,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
     <div class="copyright text-center my-auto">
-        <span>Copyright &copy; GoodBuy Admin 2024-2025</span>
+        <span>Copyright &copy; UNIPICK Admin 2025</span>
     </div>
 </div>
             </footer>

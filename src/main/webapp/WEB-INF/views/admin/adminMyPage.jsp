@@ -38,7 +38,7 @@
 <link href="${pageContext.request.contextPath }/resources/public/vendor/datatables/datatables.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath }/resources/css/admin/cmcd.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/public.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resources/css/admin/adminMain.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/admin/adminPublic.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/admin/myPage.css" rel="stylesheet" type="text/css">
 
 <!-- script -->

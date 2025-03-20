@@ -48,7 +48,7 @@
   	<select id="productSort" parameterType="map">
   		SELECT *
   		  FROM products p
-  		  LEFT JOIN product_images i ON p.prd_id = i.prd_id
+  		  LEFT JOIN product_images i ON p.prd_cd = i.prd_cd
   		  JOIN sellers s ON p.sel_id = s.sel_id
  		 WHERE 1 = 1
   	</select>

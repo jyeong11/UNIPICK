@@ -257,7 +257,19 @@
 			   '판매자' AS sel_st,
 			   DATE_FORMAT(sel_at, '%Y-%m-%d %H:%i:%s') as sel_at
 		  FROM sellers
-		 WHERE sel_at >= NOW() - INTERVAL 7 DAY;
+		 WHERE sel_at >= NOW() - INTERVAL 7 DAY
+		 ORDER BY buy_at DESC
+	</select>
+	
+	<!-- 신고내역 리스트 -->
+	<select id="reportList">
+		SELECT buy_em,
+			   sel_id,
+	    	   rpt_tg,
+	    	   DATE_FORMAT(rpt_dt, '%Y-%m-%d %H:%i:%s') AS rpt_dt,
+	    	   rpt_st
+		  FROM report
+		 ORDER BY rpt_dt DESC
 	</select>
   	
 </mapper>

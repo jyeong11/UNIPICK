@@ -52,4 +52,6 @@ public interface AdminMapper {
 	void updateStatus(@Param("status") String status, @Param("prdCd") String prdCd);
 	// 가입 리스트
 	public List<Map<String, Object>> joinList();
+	// 신고내역 리스트
+	public List<Map<String,Object>> reportList();
 }

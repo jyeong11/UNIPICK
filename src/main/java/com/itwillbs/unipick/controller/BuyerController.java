@@ -59,7 +59,7 @@ public class BuyerController {
 	// 상품 리스트 페이지 이동
 	@GetMapping("productList")
 	public String productList() {
-		return "buyer/productList";
+		return "buyer/buyerProductList";
 	}
 	
 	// 상단 메뉴바 공통코드
