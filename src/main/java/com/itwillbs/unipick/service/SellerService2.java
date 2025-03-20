@@ -22,9 +22,7 @@ public class SellerService2 {
     @Autowired
     private SellerMapper2 mapper;
 
-    private static final String UPLOAD_DIR = "/upload/images"; // application.properties에서 관리 가능
-
-    // 파일 업로드 및 검증
+ // 파일 업로드 및 검증
     public Map<String, Object> uploadImage(MultipartFile imageFile) {
         Map<String, Object> imageData = new HashMap<>();
 
@@ -44,17 +42,30 @@ public class SellerService2 {
             }
 
             // ✅ 고유한 파일명 생성 (중복 방지)
-            String uniqueFilename = System.currentTimeMillis() + "_" + originalFilename;
+            String uniqueFilename = UUID.randomUUID().toString() + "_" + originalFilename;
+
+            // ✅ 실제 저장할 경로 (로컬 파일 시스템)
+            String uploadDir = "D:/Person/workspace/UNIPICK-PROJECT/UNIPICK/src/main/webapp/resources/productImg/";
+            File folder = new File(uploadDir);
+            if (!folder.exists()) {
+                folder.mkdirs(); // 폴더가 없으면 생성
+            }
 
             // ✅ 파일 저장 경로 설정
-            String filePath = "/upload/images/" + uniqueFilename;
+            String fullPath = uploadDir + uniqueFilename;
+            File destFile = new File(fullPath);
+            imageFile.transferTo(destFile); // 파일 저장
+
+            // ✅ DB에 저장할 가상 경로
+            String filePath = "/productImg/" + uniqueFilename;
 
             // ✅ 필수 데이터 저장
             imageData.put("fil_nm", uniqueFilename); // ✅ 파일명 추가
-            imageData.put("fil_pt", filePath); // ✅ 파일 경로 추가
+            imageData.put("fil_pt", filePath); // ✅ 가상 경로 추가
 
-            System.out.println("📂 저장될 파일명: " + uniqueFilename);
-            System.out.println("📂 저장될 경로: " + filePath);
+            System.out.println("📂 저장된 파일명: " + uniqueFilename);
+            System.out.println("📂 실제 저장 경로: " + fullPath);
+            System.out.println("📂 DB 저장 경로: " + filePath);
 
         } catch (Exception e) {
             System.out.println("❌ 이미지 업로드 중 오류 발생: " + e.getMessage());

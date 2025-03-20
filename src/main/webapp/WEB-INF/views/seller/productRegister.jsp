@@ -104,7 +104,7 @@
                               <button type="button" class="item-thumb-upload" data-index="${i}">
                                 <img src="/resources/img/product-thumb-no.jpg"  id="item-thumb-preview${i}">
                               </button>
-                              <input type="file" class="item-thumb-upload-btn" id="item-thumb-upload-btn${i}" name="productData">
+                              <input type="file" class="item-thumb-upload-btn" id="item-thumb-upload-btn${i}" name="imageFiles" multiple>
                             </div>
                           </c:forEach>
                         </div>
