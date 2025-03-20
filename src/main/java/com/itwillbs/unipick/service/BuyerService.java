@@ -48,8 +48,8 @@ public class BuyerService {
 		return mapper.getProductSortKind();
 	}
 	// 상품정렬
-	public List<Map<String, Object>> productSort() {
-		return mapper.productSort();
+	public List<Map<String, Object>> productSort(Map<String, Object> option) {
+		return mapper.productSort(option);
 	}
 	//상품 컬러
 	public List<Map<String, Object>> getColors(Map<String, Object> option) {

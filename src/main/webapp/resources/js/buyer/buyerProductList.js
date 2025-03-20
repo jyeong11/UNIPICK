@@ -1,13 +1,12 @@
 $(function() {
-	productList();
 	
-	$('#product-sort').on('change',productList);
-	
+	$('#product-sort').on('change',function(){productList();});
 	
 	let query = window.location.search;
 	let param = new URLSearchParams(query);
-	let category = param.get('category');
-	$('#category').append(category);
+	let cateName = param.get('category');
+	$('#category').append(cateName);
+	let cateCode = param.get('lev_cd');
 	
 	$.ajax({
 		type: "GET",
@@ -17,16 +16,17 @@ $(function() {
 						  .join('');
 
     		$('#product-sort').append(kind);
+			productList();
 		},
         error: function(xhr, status, error) {
         	alert("서버 오류가 발생했습니다.");
         }
 	});
 	
-	
-	function productList(){ 
+	function productList(){  
 		
-		let data = {kind : $('#product-sort').val()};
+		let data = {lev_cd : cateCode,
+					kind : $('#product-sort').val()};
 		
 		$.ajax({
 			type: "POST",

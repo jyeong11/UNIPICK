@@ -2,8 +2,10 @@ $(function() {
 	firstCategory();
 	
 	$('.second-info').on('click', '.second-cate, .all-cate', function() {
-	    let address = $(this).text();
-	    window.location.href = "productList?category=" + encodeURIComponent(address);
+	    let cateName = $(this).text();
+    	let cateCode = $(this).data('value');
+	    window.location.href = "productList?lev_cd=" + encodeURIComponent(cateCode) 
+							   + "&category=" + encodeURIComponent(cateName);
 	});
 
 	$('.first-info').on('click', 'li', function() {
@@ -74,7 +76,7 @@ $(window).on('scroll', function() {
         		$('.first-info').append(firstCate); // 한 번에 추가
 								
 				let secondCate = res.map(item => {let className = item.lev_cd.length === 10 ? 'class="first-cate"' : 'class="second-cate"';
-								        		  return `<li ${className}>${item.lev_nm}</li>`;})
+								        		  return `<li data-value="${item.lev_cd}" ${className}>${item.lev_nm}</li>`;})
 								    .join('');
 								
 				$('.second-info').append(secondCate); // 한 번에 추가

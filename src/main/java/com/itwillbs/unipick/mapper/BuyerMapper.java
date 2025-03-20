@@ -21,10 +21,10 @@ public interface BuyerMapper {
 	public List<Map<String, Object>> getPrdOption(String prdCd);
 	// 카테고리 메뉴
 	public List<Map<String, Object>> getCategory();
-	// 정렬 
-	public List<Map<String, Object>> productSort();
-	
+	// 상품 정렬 종류 
 	public List<Map<String, Object>> getProductSortKind();
+	// 상품 정렬
+	public List<Map<String, Object>> productSort(Map<String, Object> option);
 	// 상품컬러
 	public List<Map<String, Object>> getColors(Map<String, Object> option);
 }

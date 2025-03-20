@@ -106,10 +106,8 @@ public class BuyerController {
 	// 상품정렬
 	@ResponseBody
 	@PostMapping("productSort")
-	public List<Map<String, Object>> productSort(@RequestBody Map<String,Object> kind) {
-		System.out.println("1@#!@#!@#!@#!@#!@#!@#!@#!@#!#!@#!@#");
-		System.out.println(kind);
-		return buyService.productSort();
+	public List<Map<String, Object>> productSort(@RequestBody Map<String,Object> option) {
+		return buyService.productSort(option);
 	}
 	
 	// 상품옵션
