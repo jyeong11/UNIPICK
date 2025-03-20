@@ -53,16 +53,19 @@
   </insert>
   
   
-  
-    <!-- 옵션 정보 등록 (컬러 & 사이즈) -->
-  <insert id="insertProductOptions" parameterType="map">
-    INSERT INTO options (prd_cd, siz_nm, clr_nm, prd_qt)
-    VALUES
-    <foreach collection="sizes" item="size" index="index" separator=",">
-        (#{prd_cd}, #{size}, #{colors[index]}, #{prd_qt})
-    </foreach>
-</insert>
+<insert id="insertProductOptions" parameterType="map">
+  <!-- 사이즈를 반복적으로 삽입 -->
+  <foreach collection="sizes" item="size" separator=",">
+    INSERT INTO options (prd_cd, siz_nm, prd_qt)
+    VALUES (#{prd_cd}, #{size}, #{prd_qt});
+  </foreach>
 
+  <!-- 색상을 반복적으로 삽입 -->
+  <foreach collection="colors" item="color" separator=",">
+    INSERT INTO options (prd_cd, clr_nm, prd_qt)
+    VALUES (#{prd_cd}, #{color}, #{prd_qt});
+  </foreach>
+</insert>
   
 
   <!-- 이미지 정보 삭제 -->

@@ -163,7 +163,7 @@
 						<h6 class="item-regi-name">색상 설정</h6>
 						<!-- 색상 입력들이 추가될 영역 -->
 						<div id="color-container">
-							<input type="color" name="color_number" class="color-picker" required>
+							<input type="color" name="color_number[]" class="color-picker" required>
 						</div>
 						<!-- 색상 입력 추가 버튼 -->
 						<button type="button" id="add-color" class="btn btn-sm btn-outline-primary">색상 추가</button>
@@ -173,7 +173,7 @@
 						<h6 class="item-regi-name">사이즈 설정</h6>
 						<!-- 사이즈 선택 입력들이 추가될 영역 -->
 						<div id="size-container">
-							<select name="size_option" class="size-select" id="product_size"></select>
+							<select name="size_option[]" class="size-select" id="product_size"></select>
 						</div>
 						<!-- 사이즈 선택 추가 버튼 -->
 							<button type="button" id="add-size" class="btn btn-sm btn-outline-primary">사이즈 추가</button>
