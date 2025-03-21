@@ -219,17 +219,17 @@ div > a > i {
 	margin: 20px auto;
     width: 46%;
 }
-#selAnthorprd {
+#selAnthorprd, #pickPrd {
 	display: flex;
 	flex-wrap: wrap;  /* 줄 바꿈 허용 */
     gap: 20px;
 }
-#selAnthorprd img {
+#selAnthorprd img , #pickPrd img{
     width: calc(33.33% - 10px); /* 3개씩 배치 (여백 고려) */
     max-width: 278px;
     height: auto;
 }
-#selAnthorTitle{
+#selAnthorTitle, #pickTitle, #reviewsTitle, #qaTitle{
 	display: flex;	
 	justify-content: space-between; 
 	border-top: 1px solid #e8e9eb;
@@ -239,6 +239,13 @@ div > a > i {
     font-size: 15px;
     vertical-align: middle;
 }
-#picks{
+#picks, #reviews, #qa{
     padding-top: 25px;	
+}
+html {
+    scroll-behavior: smooth;
+}
+a {
+    text-decoration: none;
+    color: #242729;
 }

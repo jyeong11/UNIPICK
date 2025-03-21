@@ -250,14 +250,14 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       }
     });
-
     try {
       const response = await fetch(contextPath + "/seller/registerProduct", {
         method: "POST",
         body: formData,
-        headers: {
-          "Accept": "application/json" // JSON 응답을 받기 위해 추가
-        }
+//        headers: {
+//          "Accept": "application/json" // JSON 응답을 받기 위해 추가
+//        }
+		contentType:"application/json" 
       });
 
       if (!response.ok) {

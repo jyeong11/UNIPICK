@@ -13,9 +13,9 @@ public interface SellerMapper2 {
 
     void insertProduct(Map<String, Object> product);
     void insertProductImage(Map<String, Object> paramMap);
-    void insertStock(Map<String, Object> stockData);
-    void insertColor(Map<String, Object> colorData);
-    void insertSize(Map<String, Object> sizeData);
+//    void insertStock(Map<String, Object> stockData);
+//    void insertColor(Map<String, Object> colorData);
+//    void insertSize(Map<String, Object> sizeData);
     void insertProductOptions(Map<String, Object> productData);
 
     List<Map<String, Object>> selectCategories(String parentCode);

@@ -82,9 +82,15 @@
 		    </div>
 		 </div>
 		    <div id="prdDetailBar">
-		    	<ul><li>상품정보</li></ul>
-		    	<ul><li>리뷰</li></ul>
-		    	<ul><li>문의</li></ul>
+		    	<ul>
+				    <li><a href="#detailEp">상품정보</a></li>
+				</ul>
+				<ul>
+				    <li><a href="#reviews">리뷰</a></li>
+				</ul>
+				<ul>
+				    <li><a href="#qa">문의</a></li>
+				</ul>
 		 	</div>
 		 	<div id="detailEp">
 		 		<c:forEach begin="1" end="5">
@@ -109,14 +115,25 @@
 			        	</c:forEach>
 		    		</div>
 		    		<div id="picks">
-		    			<div id="selAnthorTitle">
+		    			<div id="pickTitle">
 		    				<p>당신을 위한 추천상품</p>
 		    				<a href=""><span class="small-text">더보기 ></span></a>
 		    			</div>
-		    			<div id="selAnthorprd">
+		    			<div id="pickPrd">
 			    			<c:forEach begin="6" end="10">
 				            	<img src="${pageContext.request.contextPath }/resources/images/favicon_b.png" alt="1">
 				        	</c:forEach>
+		    			</div>
+		    		</div>
+		    		<div id="reviews">
+		    			<div id="reviewsTitle">
+							<p>리뷰</p>
+							<a href=""><span class="small-text">전체보기 ></span></a>		    			
+		    			</div>
+		    		</div>
+		    		<div id="qa">
+		    			<div id="qaTitle">
+							<p>문의</p>
 		    			</div>
 		    		</div>
 	    		</div>

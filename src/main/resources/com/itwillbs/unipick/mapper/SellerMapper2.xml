@@ -30,6 +30,7 @@
       default
     )
   </insert>
+  
 
 
   <!-- 이미지 정보 등록 -->
@@ -51,22 +52,15 @@
       NOW()
     )
   </insert>
-  
-  
 <insert id="insertProductOptions" parameterType="map">
-  <!-- 사이즈를 반복적으로 삽입 -->
-  <foreach collection="sizes" item="size" separator=",">
-    INSERT INTO options (prd_cd, siz_nm, prd_qt)
-    VALUES (#{prd_cd}, #{size}, #{prd_qt});
-  </foreach>
-
-  <!-- 색상을 반복적으로 삽입 -->
-  <foreach collection="colors" item="color" separator=",">
-    INSERT INTO options (prd_cd, clr_nm, prd_qt)
-    VALUES (#{prd_cd}, #{color}, #{prd_qt});
-  </foreach>
+	INSERT INTO options (prd_cd, siz_nm, clr_nm) VALUES
+    <foreach collection="options" item="opt" separator=",">
+        (#{opt.prd_cd}, #{opt.siz_nm}, '${opt.clr_nm}')
+    </foreach>
 </insert>
   
+  
+
 
   <!-- 이미지 정보 삭제 -->
   <delete id="deleteProductImage" parameterType="map">
