@@ -16,7 +16,8 @@
 		prd_ca,
 		prd_ds,
 		prd_bd,
-		prd_st
+		prd_st,
+		prd_dt
     )
     VALUES (
       #{prd_nm},
@@ -27,6 +28,7 @@
       #{prd_ca},
       #{prd_ds},
       #{prd_bd},
+      default,
       default
     )
   </insert>
