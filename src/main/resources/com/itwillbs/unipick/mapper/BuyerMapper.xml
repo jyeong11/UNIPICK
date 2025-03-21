@@ -22,12 +22,14 @@
   	
   	<!--   	상품상세조회 -->
 	<select id="getPrdDetail" parameterType="map">
-	  SELECT prd_cd, sel_id, prd_nm, 
-	  		 CONCAT(ROUND(((prd_op - prd_sp) / prd_op) * 100, 0), '%') AS dc,
-	  		 FORMAT(prd_op, 0) AS prd_op, 
-	  		 FORMAT(prd_sp, 0) AS prd_sp 
-	    FROM products
-	   WHERE prd_cd = #{prdCd}
+	 SELECT p.prd_cd, s.sel_nm, p.prd_nm, 
+	  		CONCAT(ROUND(((p.prd_op - p.prd_sp) / p.prd_op) * 100, 0), '%') AS dc,
+	  		FORMAT(p.prd_op, 0) AS prd_op, 
+	  		FORMAT(p.prd_sp, 0) AS prd_sp 
+	    FROM products p 
+	    JOIN sellers s
+          ON p.sel_id = s.sel_id
+	   WHERE prd_cd = #{prdCd};
 	</select>
 	
 <!-- 	상품 상세 이미지 -->

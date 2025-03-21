@@ -45,7 +45,7 @@
 		</div>
 		<div id="product">
 		    <div class="product-info">
-		        <div><a href=""><i class="fa-solid fa-house"></i>${prd.sel_id}</a></div>
+		        <div><a href=""><i class="fa-solid fa-house"></i>${prd.sel_nm}</a></div>
 		        <h2>${prd.prd_nm}</h2>
 		        <div id="price">
 		        	<p><span class="dc">${prd.dc}</span></p>
@@ -87,16 +87,40 @@
 		    	<ul><li>문의</li></ul>
 		 	</div>
 		 	<div id="detailEp">
-		 		<c:forEach begin="1" end="10">
+		 		<c:forEach begin="1" end="5">
 		    		<img src="${pageContext.request.contextPath }/resources/images/favicon_b.png" alt="1">
 				</c:forEach>
 			</div>
 			<div id="moreItems" style="display: none;">
-        <c:forEach begin="6" end="10">
-            <img src="${pageContext.request.contextPath }/resources/images/favicon_b.png" alt="1">
-        </c:forEach>
-    </div>
-    <button id="loadMoreBtn">상품 더보기</button>
+		        <c:forEach begin="6" end="10">
+		            <img src="${pageContext.request.contextPath }/resources/images/favicon_b.png" alt="1">
+		        </c:forEach>
+    		</div>
+	    	<button id="loadMoreBtn">상품 더보기 ↓</button>
+	    	<section>
+	    		<div id="selAnthor">
+	    			<div id="selAnthorTitle">
+	    				<p>${prd.sel_nm}의 다른 상품</p>
+	    				<a href=""><span class="small-text">더보기 ></span></a>
+	    			</div>
+		    		<div id="selAnthorprd">
+		    			<c:forEach begin="6" end="10">
+			            	<img src="${pageContext.request.contextPath }/resources/images/favicon_b.png" alt="1">
+			        	</c:forEach>
+		    		</div>
+		    		<div id="picks">
+		    			<div id="selAnthorTitle">
+		    				<p>당신을 위한 추천상품</p>
+		    				<a href=""><span class="small-text">더보기 ></span></a>
+		    			</div>
+		    			<div id="selAnthorprd">
+			    			<c:forEach begin="6" end="10">
+				            	<img src="${pageContext.request.contextPath }/resources/images/favicon_b.png" alt="1">
+				        	</c:forEach>
+		    			</div>
+		    		</div>
+	    		</div>
+	    	</section>
 	
 	<div id="footer">
 		<jsp:include page="../inc/footer.jsp"></jsp:include>

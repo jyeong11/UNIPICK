@@ -70,5 +70,19 @@ $(function() {
 	    moreItems.style.display = "block";  // 상품 더보기 정보를 표시
 	    this.style.display = "none";  // 더보기 버튼 숨기기
 	});
+	// 맨 위로 스크롤
+	document.getElementById('scrollToTop').addEventListener('click', function () {
+	    window.scrollTo({
+	        top: 0,
+	        behavior: 'smooth'
+		});
+	});
+	// 맨 밑으로 스크롤
+	document.getElementById('scrollToBottom').addEventListener('click', function () {
+	    window.scrollTo({
+	        top: document.documentElement.scrollHeight,
+	        behavior: 'smooth'
+		});
+	});
 	
 });

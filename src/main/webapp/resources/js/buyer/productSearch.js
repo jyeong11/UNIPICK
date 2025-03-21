@@ -35,22 +35,5 @@ $(function() {
 	$(document).on("click", ".prd-item", function() {
         let prdCd = $(this).data("id");
         window.location.href = `productDetail?prd_cd=${prdCd}`;
-		debugger;
     });
-	// 맨 위로 스크롤
-	document.getElementById('scrollToTop').addEventListener('click', function () {
-	    window.scrollTo({
-	        top: 0,
-	        behavior: 'smooth' // 부드러운 스크롤 효과
-	    });
-	});
-	
-	// 맨 밑으로 스크롤
-	document.getElementById('scrollToBottom').addEventListener('click', function () {
-	    window.scrollTo({
-	        top: document.documentElement.scrollHeight,
-	        behavior: 'smooth' // 부드러운 스크롤 효과
-		});
-	});
-	
 });
