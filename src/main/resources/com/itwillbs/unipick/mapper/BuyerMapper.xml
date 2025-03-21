@@ -84,19 +84,20 @@
   			   s.sel_nm,
   			   p.prd_cd,
   			   p.prd_nm,
-  			   p.prd_op,
-  			   p.prd_sp,
+  			   FORMAT(p.prd_op, 0) AS prd_op,
+  			   FORMAT(p.prd_sp, 0) AS prd_sp,
   			   p.prd_bd,
                p.prd_ca,
+               p.prd_dt,
   			   r.count
   		  FROM products p 
 		  LEFT JOIN (SELECT prd_cd, fil_nm, fil_pt
 						FROM RankedImages
 						WHERE rn = 1) i ON p.prd_cd = i.prd_cd
 		  LEFT JOIN sellers s ON p.sel_id = s.sel_id
-		  LEFT JOIN (select prd_cd, count(*) as 'count'
-				  from options o join reviews r on o.opt_id = r.opt_id
-				 group by prd_cd) r on p.prd_cd = r.prd_cd
+		  LEFT JOIN (SELECT prd_cd, COUNT(*) AS 'count'
+				  	   FROM options o JOIN reviews r ON o.opt_id = r.opt_id
+				 	  GROUP by prd_cd) r ON p.prd_cd = r.prd_cd
 		 WHERE 1 = 1
   		 <if test="lev_cd != 'All'">
   		 	AND p.prd_ca = #{lev_cd}
@@ -106,10 +107,10 @@
   		 		ORDER BY 1
   		 	</when>
   		 	<when test="kind == 'PST02'">
-  		 		ORDER BY r.count DESC;
+  		 		ORDER BY r.count DESC
   		 	</when>
   		 	<when test="kind == 'PST03'">
-  		 		ORDER BY 1
+  		 		ORDER BY p.prd_dt DESC
   		 	</when>
   		 	<when test="kind == 'PST04'">
   		 		ORDER BY prd_sp DESC
