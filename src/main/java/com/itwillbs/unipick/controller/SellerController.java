@@ -61,6 +61,10 @@ public class SellerController {
 	public String sellerPrdDetail() {
 		return "seller/sellerPrdDetail";
 	}
+	@GetMapping("sellerOrdDetail")
+	public String sellerOrdDetail() {
+		return "seller/sellerOrdDetail";
+	}
 	
 	@GetMapping("sellerlogin")
 	public String Login(HttpServletRequest request, Model model) {

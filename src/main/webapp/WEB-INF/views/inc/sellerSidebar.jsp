@@ -42,7 +42,7 @@
         <div id="menu03" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
             	<h6 class="collapse-header">쿠폰관리</h6>
-                <a class="collapse-item" href="AdmProductList">상품</a>
+                <a class="collapse-item" href="sellerOrdDetail">상품</a>
             </div>
         </div>
     </li>
@@ -79,7 +79,7 @@
         <div id="menu06" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
             	<h6 class="collapse-header">채팅</h6>
-                <a class="collapse-item" href="#">실시간채팅</a>
+                <a class="collapse-item" href="">실시간채팅</a>
                 <a class="collapse-item" href="#">채팅신고</a>
             </div>
         </div>
