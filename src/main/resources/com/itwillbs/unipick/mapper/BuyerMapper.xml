@@ -76,7 +76,10 @@
   		  FROM products p
   		  LEFT JOIN product_images i ON p.prd_cd = i.prd_cd
   		  JOIN sellers s ON p.sel_id = s.sel_id
-  		 WHERE p.prd_ca = #{lev_cd}
+  		 WHERE 1 = 1
+  		 <if test="lev_cd != 'All'">
+  		 	AND p.prd_ca = #{lev_cd}
+  		 </if>
   		 <choose>
   		 	<when test="kind == 'PST01'">
   		 		ORDER BY 1
