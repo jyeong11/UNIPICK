@@ -134,7 +134,7 @@
                         <h6 class="item-regi-category-name">카테고리</h6>
                         <select class="item-regi-category-box" name="product_category" id="product_category"></select>
                         <select class="item-regi-category-box" name="product_category_sub" id="product_category_sub"></select>
-                        <select class="item-regi-category-box" name="product_category_detail" id="product_category_detail"></select>
+<!--                         <select class="item-regi-category-box" name="product_category_detail" id="product_category_detail"></select> -->
                       </section>
                       <!-- 가격 설정 영역 -->
                       <section class="item-regi-price">
@@ -150,34 +150,31 @@
                         </div>
                       </section>
                       <!-- 배송, 재고, 색상, 사이즈 설정 영역 -->
-                      <section class="item-regi-trade-adr">
-                        <h6 class="item-regi-name">배송 설정</h6>
-                        <select class="item-regi-category-box" name="delivery_option" id="product_delivery"></select>
-                      </section>
-                      <section class="item-regi-stock">
-                        <h6 class="item-regi-name">재고 설정</h6>
-                          <input type="number" id="stock_number" name="stock_number" placeholder="재고 수량을 입력해주세요." required>
-                          <select class="item-regi-stock-box" name="stock_management" id="stock_management"></select>
-                      </section>
-					  <section class="item-regi-color">
-						<h6 class="item-regi-name">색상 설정</h6>
-						<!-- 색상 입력들이 추가될 영역 -->
-						<div id="color-container">
+<!--                       <section class="item-regi-trade-adr"> -->
+<!--                         <h6 class="item-regi-name">배송 설정</h6> -->
+<!--                         <select class="item-regi-category-box" name="delivery_option" id="product_delivery"></select> -->
+<!--                       </section> -->
+                      	<section class="item-regi-stock">
+                        <h6 class="item-regi-name">옵션 설정</h6>
+                        <div id="option-container">
 							<input type="color" name="color_number[]" class="color-picker" required>
-						</div>
-						<!-- 색상 입력 추가 버튼 -->
-						<button type="button" id="add-color" class="btn btn-sm btn-outline-primary">색상 추가</button>
-						</section>
-						<!-- 사이즈 영역 예시 -->
-						<section class="item-regi-size">
-						<h6 class="item-regi-name">사이즈 설정</h6>
-						<!-- 사이즈 선택 입력들이 추가될 영역 -->
-						<div id="size-container">
 							<select name="size_option[]" class="size-select" id="product_size"></select>
-						</div>
-						<!-- 사이즈 선택 추가 버튼 -->
-							<button type="button" id="add-size" class="btn btn-sm btn-outline-primary">사이즈 추가</button>
-						</section>
+                          <input type="number" name="stock_number[]" class="stock-number" id="stock_number" placeholder="재고 수량을 입력해주세요." required>
+                          </div>
+<!--                           <select class="item-regi-stock-box" name="stock_management" id="stock_management"></select> -->
+							<button type="button" id="add-option" class="btn btn-sm btn-outline-primary">추가</button>
+                      	</section>
+<!-- 					  	<section class="item-regi-color"> -->
+<!-- 						<h6 class="item-regi-name">색상 설정</h6> -->
+<!-- 						<div id="color-container"> -->
+<!-- 							<input type="color" name="color_number[]" class="color-picker" required> -->
+<!-- 						</div> -->
+<!-- 						<button type="button" id="add-color" class="btn btn-sm btn-outline-primary">색상 추가</button> -->
+<!-- 						</section> -->
+<!-- 						<section class="item-regi-size"> -->
+<!-- 						<h6 class="item-regi-name">사이즈 설정</h6> -->
+<!-- 							<button type="button" id="add-size" class="btn btn-sm btn-outline-primary">사이즈 추가</button> -->
+<!-- 						</section> -->
 						<!-- 제출 버튼 -->
                       <div class="item-regi-submit-group">
                         <input type="button" class="item-backpage" onclick="history.back()" value="뒤로 가기">

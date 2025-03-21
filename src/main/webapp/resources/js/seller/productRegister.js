@@ -26,7 +26,6 @@ document.addEventListener("DOMContentLoaded", function () {
       if (mainSizeSelect) {
         populateSizeSelect(mainSizeSelect, globalSizeOptions);
       }
-      document.getElementById("add-size").disabled = false;  // "사이즈 추가" 버튼 활성화
     })
     .catch(error => {
       console.error("사이즈 옵션 로딩 오류:", error);
@@ -66,7 +65,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const cat1 = document.getElementById('product_category');
     const cat2 = document.getElementById('product_category_sub');
-    const cat3 = document.getElementById('product_category_detail');
     async function fetchCategories(parentCode = '') {
       try {
         const response = await fetch(`${contextPath}/seller/productCategory?parentCode=${parentCode}`);
@@ -81,52 +79,12 @@ document.addEventListener("DOMContentLoaded", function () {
       populateDropdown(cat1, await fetchCategories());
       cat1.addEventListener('change', async function () {
         populateDropdown(cat2, await fetchCategories(this.value));
-        populateDropdown(cat3, []);
       });
-      cat2.addEventListener('change', async function () {
-        populateDropdown(cat3, await fetchCategories(this.value));
-      });
-    }
 
-    const deliverySelect = document.getElementById('product_delivery');
-    async function initDelivery() {
-      deliverySelect.innerHTML = '<option value="">선택하세요</option>';
-      try {
-        const response = await fetch(contextPath + '/seller/deliveryOptions');
-        if (!response.ok) throw new Error('네트워크 오류');
-        const options = await response.json();
-        options.forEach(option => {
-          const opt = document.createElement('option');
-          opt.value = option.cod_cd;
-          opt.textContent = option.cod_nm;
-          deliverySelect.appendChild(opt);
-        });
-      } catch (error) {
-        console.error('배송 옵션 로딩 오류:', error);
-      }
-    }
-
-    const stockSelect = document.getElementById('stock_management');
-    async function initStockOptions() {
-      stockSelect.innerHTML = '<option value="">선택하세요</option>';
-      try {
-        const response = await fetch(contextPath + '/seller/stockOptions');
-        if (!response.ok) throw new Error('네트워크 오류');
-        const options = await response.json();
-        options.forEach(option => {
-          const opt = document.createElement('option');
-          opt.value = option.cod_cd;
-          opt.textContent = option.cod_nm;
-          stockSelect.appendChild(opt);
-        });
-      } catch (error) {
-        console.error('재고 옵션 로딩 오류:', error);
-      }
     }
 
     await initCategory();
-    await initDelivery();
-    await initStockOptions();
+
   }
 
   // 6. 썸네일 미리보기 (이벤트 위임)
@@ -217,24 +175,33 @@ document.addEventListener("DOMContentLoaded", function () {
       prd_qt: $("#stock_number").val() || 0,  // null 처리 (기본값 0)
       prd_ds: $("#prd_ds_checkbox").is(":checked") ? 1 : 0,
       prd_bd: $("#some_element").val(),
+	  sizes: [],   // 사이즈 배열
       colors: [], // 색상 배열
-      sizes: []   // 사이즈 배열
+	  stocks: []
     };
 
     console.log("사이즈 배열:", productData.sizes);  // 사이즈 배열 출력
     console.log("색상 배열:", productData.colors);  // 색상 배열 출력
+	console.log("재고 배열:", productData.stocks);  // 색상 배열 출력
 
     // 색상 추가 (빈 값 제외)
-    document.querySelectorAll("input[name='color_number']").forEach(input => {
+    document.querySelectorAll("#option-container input[name='color_number[]']").forEach(input => {
       if (input.value.trim() !== "") {
         productData.colors.push(input.value); // 각 색상 값을 개별적으로 처리
       }
     });
 
     // 사이즈 추가 (빈 값 제외)
-    document.querySelectorAll("select[name='size_option']").forEach(select => {
+    document.querySelectorAll("#option-container select[name='size_option[]']").forEach(select => {
       if (select.value.trim() !== "") {
         productData.sizes.push(select.value); // 각 사이즈를 개별적으로 처리
+      }
+    });
+
+	// 재고 추가 (빈 값 제외)
+    document.querySelectorAll("#option-container input[name='stock_number[]']").forEach(input => {
+      if (input.value.trim() !== "") {
+        productData.stocks.push(input.value); // 각 사이즈를 개별적으로 처리
       }
     });
 
@@ -280,51 +247,54 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // 색상 다중 선택 기능 추가
-  document.getElementById("add-color").addEventListener("click", function () {
-    const container = document.getElementById("color-container");
+document.getElementById("add-option").addEventListener("click", function () {
+    const container = document.getElementById("option-container");
+
+    // 새로운 옵션을 감싸는 div 생성
+    const optionRow = document.createElement("div");
+    optionRow.className = "option-row";
+    optionRow.style.display = "flex";
+    optionRow.style.alignItems = "center";
+    optionRow.style.gap = "10px"; // 요소 간격 추가
+    optionRow.style.marginBottom = "10px"; // 아래 여백 추가
+
+    // 색상 입력 (color)
     const newColorInput = document.createElement("input");
     newColorInput.type = "color";
-    newColorInput.name = "color_number";
+    newColorInput.name = "color_number[]";
     newColorInput.className = "color-picker";
-    newColorInput.style.marginRight = "5px";
 
+    // 사이즈 선택 (select)
+    const newSizeSelect = document.createElement("select");
+    newSizeSelect.name = "size_option[]";
+    newSizeSelect.className = "size-select";
+    populateSizeSelect(newSizeSelect, globalSizeOptions); // 옵션 채우기
+
+    // 재고 수량 입력 (number)
+    const newStockInput = document.createElement("input");
+    newStockInput.type = "number";
+    newStockInput.name = "stock_number[]";
+    newStockInput.className = "stock-number";
+    newStockInput.placeholder = "재고 수량 입력";
+
+    // 삭제 버튼
     const removeBtn = document.createElement("button");
     removeBtn.type = "button";
     removeBtn.textContent = "삭제";
     removeBtn.className = "btn btn-sm btn-outline-danger";
     removeBtn.addEventListener("click", function () {
-      newColorInput.remove();
-      removeBtn.remove();
+        optionRow.remove();
     });
-    container.appendChild(newColorInput);
-    container.appendChild(removeBtn);
-  });
 
-  // "사이즈 추가" 버튼 클릭 시 동적으로 사이즈 select 요소 추가
-  document.getElementById("add-size").addEventListener("click", function () {
-    if (globalSizeOptions.length === 0) {
-      alert("사이즈 옵션 데이터가 아직 로딩되지 않았습니다. 잠시 후 다시 시도해주세요.");
-      return;
-    }
-    const container = document.getElementById("size-container");
-    const newSelect = document.createElement("select");
-    newSelect.name = "size_option";
-    newSelect.className = "size-select";
-    newSelect.style.marginRight = "5px";
-    populateSizeSelect(newSelect, globalSizeOptions);
+    // 요소들을 optionRow에 추가
+    optionRow.appendChild(newColorInput);
+    optionRow.appendChild(newSizeSelect);
+    optionRow.appendChild(newStockInput);
+    optionRow.appendChild(removeBtn);
 
-    const removeBtn = document.createElement("button");
-    removeBtn.type = "button";
-    removeBtn.textContent = "삭제";
-    removeBtn.className = "btn btn-sm btn-outline-danger";
-    removeBtn.addEventListener("click", function () {
-      newSelect.remove();
-      removeBtn.remove();
-    });
-    container.appendChild(newSelect);
-    container.appendChild(removeBtn);
-  });
+    // 컨테이너에 optionRow 추가
+    container.appendChild(optionRow);
+});
 
   initDropdowns();
 });

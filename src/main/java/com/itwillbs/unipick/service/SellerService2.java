@@ -119,7 +119,7 @@ public class SellerService2 {
        //옵션테이블 저장
         List<String> colors = (List<String>) productData.get("colors");
         List<String> sizes = (List<String>) productData.get("sizes");
-//        List<String> stocks = (List<String>) productData.get("sizes");
+        List<String> stocks = (List<String>) productData.get("stocks");
         List<String> prds = new ArrayList<String>();
         for(int i = 0; i < sizes.size(); i++) {
         	prds.add((String)productData.get("prd_cd"));
@@ -134,6 +134,7 @@ public class SellerService2 {
             option.put("prd_cd", prds.get(i));
             option.put("siz_nm", sizes.get(i));
             option.put("clr_nm", colors.get(i));
+            option.put("prd_qt", stocks.get(i));
             optionList.add(option);
         }
 

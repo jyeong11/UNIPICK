@@ -338,7 +338,25 @@
                     <mainClass>org.test.int1.Main</mainClass>
                 </configuration>
             </plugin>
-        </plugins>
+             <!-- maven-war-plugin 추가 -->
+       <plugin>
+    <artifactId>maven-war-plugin</artifactId>
+    <version>3.3.2</version>
+    <configuration>
+        <warSourceDirectory>src/main/webapp</warSourceDirectory>
+        <webResources>
+            <resource>
+                <directory>src/main/webapp/resources/productImg</directory>
+                <targetPath>productImg</targetPath>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
+            </resource>
+        </webResources>
+    </configuration>
+</plugin>
+    </plugins>
+        
         <pluginManagement>
         	<plugins>
         		<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
