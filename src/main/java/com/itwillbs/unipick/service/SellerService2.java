@@ -1,8 +1,6 @@
 package com.itwillbs.unipick.service;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,9 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.itwillbs.unipick.mapper.SellerMapper;
 import com.itwillbs.unipick.mapper.SellerMapper2;
-import com.google.gson.Gson;
 
 @Service
 public class SellerService2 {
@@ -116,7 +112,7 @@ public class SellerService2 {
                 e.printStackTrace();
             }
         }
-       //옵션테이블 저장
+  
         List<String> colors = (List<String>) productData.get("colors");
         List<String> sizes = (List<String>) productData.get("sizes");
         List<String> stocks = (List<String>) productData.get("stocks");
@@ -124,9 +120,7 @@ public class SellerService2 {
         for(int i = 0; i < sizes.size(); i++) {
         	prds.add((String)productData.get("prd_cd"));
         }
-        
-//        List<Map<String, Object>> option  = mapper.insertProductOptions(productData);
-//        productData.get("prd_cd")
+
         List<Map<String, Object>> optionList = new ArrayList<>();
 
         for (int i = 0; i < prds.size(); i++) {
@@ -144,50 +138,7 @@ public class SellerService2 {
         System.out.println("🔥 최종 데이터: " + param);  // 확인용 로그
 
         mapper.insertProductOptions(param);
-//    
-//        // 3. 재고 저장
-//        List<Map<String, Object>> stockList = (List<Map<String, Object>>) productData.get("stockList");
-//        if (stockList != null) {
-//            for (Map<String, Object> stock : stockList) {
-//                stock.put("prd_cd", productData.get("prd_cd"));
-//                try {
-//                    mapper.insertStock(stock);
-//                } catch (Exception e) {
-//                    System.out.println("❌ 옵션 데이터 삽입 실패: " + e.getMessage());
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-//
-//        // 4. 색상 데이터 개별 삽입
-//        List<String> colors = (List<String>) productData.get("colors");
-//        if (colors != null) {
-//            Map<String, Object> param = new HashMap<>();
-//            param.put("prd_cd", productData.get("prd_cd"));
-//            param.put("colors", colors);
-//
-//            try {
-//                mapper.insertColor(param);
-//            } catch (Exception e) {
-//                System.out.println("❌ 색상 데이터 삽입 실패: " + e.getMessage());
-//                e.printStackTrace();
-//            }
-//        }
-//
-//     // 사이즈 데이터 개별 삽입
-//        List<String> sizes = (List<String>) productData.get("sizes");
-//        if (sizes != null) {
-//            Map<String, Object> param = new HashMap<>();
-//            param.put("prd_cd", productData.get("prd_cd"));
-//            param.put("sizes", sizes); 
-//
-//            try {
-//                mapper.insertSize(param);
-//            } catch (Exception e) {
-//                System.out.println("❌ 사이즈 데이터 삽입 실패: " + e.getMessage());
-//                e.printStackTrace();
-//            }
-//        }
+
     }
 
     // 카테고리 조회
