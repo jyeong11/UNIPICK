@@ -1,5 +1,6 @@
 package com.itwillbs.unipick.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -44,8 +45,11 @@ public class BuyerService {
 		return mapper.getCategory();
 	}
 	// 상품정렬종류
-	public List<Map<String, Object>> getProductSortKind() {
-		return mapper.getProductSortKind();
+	public Map<String, Object> productListData() {
+		Map<String, Object> productListData = new HashMap<String, Object>();
+		productListData.put("cate", mapper.getCategory());
+		productListData.put("kind", mapper.getProductSortKind());
+		return productListData;
 	}
 	// 상품정렬
 	public List<Map<String, Object>> productSort(Map<String, Object> option) {

@@ -49,7 +49,7 @@
 			</section>
 			<section class="second-category">
 				<ul class="second-info">
-					<li class="all-cate">전체</li>
+					<li class="all-cate" data-value="All">전체</li>
 				</ul>
 			</section>
 		</section>

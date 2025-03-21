@@ -81,7 +81,7 @@ public class BuyerController {
 		return menu;
 	}
 	
-	// 상단 메뉴바 공통코드
+	// 카테고리
 	@ResponseBody
 	@GetMapping("firstCategory")
 	public List<Map<String, Object>> firstCategory() {
@@ -96,11 +96,11 @@ public class BuyerController {
 		return selectPrd;
 	}
 	
-	// 상품정렬종류
+	// 상품 리스트(카테고리, 정렬종류)
 	@ResponseBody
-	@GetMapping("productSortKind")
-	public List<Map<String, Object>> productSortKind() {
-		return buyService.getProductSortKind();
+	@GetMapping("productListData")
+	public Map<String, Object> productListData() {
+		return buyService.productListData();
 	}
 	
 	// 상품정렬

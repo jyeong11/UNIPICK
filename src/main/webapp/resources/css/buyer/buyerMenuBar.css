@@ -15,7 +15,7 @@
     padding-bottom: 18px;
     margin-right: 200px;
 }
-li {
+menu-inner {
     display: flex;
     gap: 2rem;
     justify-content: center;
@@ -33,12 +33,12 @@ span {
 .menu-inner a {
     white-space: nowrap;
     min-width: 60px;
-    text-align: center;
+    text-amenu-innergn: center;
     flex-shrink: 0;
 }
 
 @media all and (min-width: 768px) and (max-width: 1023px) {
-    li {
+    menu-inner {
         gap: 5rem;
     }
 }
@@ -47,7 +47,7 @@ span {
     #top_menu {
         font-size: 15px;
     }
-    li {
+    menu-inner {
         gap: 2rem;
     }
     .my_btn {
@@ -59,7 +59,7 @@ span {
     #top_menu {
         font-size: 15px;
     }
-    li {
+    menu-inner {
         gap: 2rem;
     }
     .my_btn i {

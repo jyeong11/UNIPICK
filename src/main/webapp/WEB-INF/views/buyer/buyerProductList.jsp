@@ -38,13 +38,22 @@
 	</div>
 	
 	<div class="content">
-		<div class = "two">
-			<h2 id="category"></h2>
-			<select id="product-sort"></select>
+		<div class="left-category">
+			<ul class="category-data">
+				<div class="first-cate">
+					<a href="productList?lev_cd=All&category=전체">전체</a>
+				</div>
+			</ul>
 		</div>
-		<section>
-			<div id = "img12"></div>
-		</section>
+		<div>
+			<div class = "two">
+				<h2 id="category"></h2>
+				<select id="product-sort"></select>
+			</div>
+			<section>
+				<div id = "img12"></div>
+			</section>
+		</div>
 	</div>
 	
 	<div id="footer">
