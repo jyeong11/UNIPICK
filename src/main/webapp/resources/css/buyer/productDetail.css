@@ -214,6 +214,7 @@ div > a > i {
 	color: #242729;
 	padding-bottom: 15px;
 	font-size: 24px;
+	padding-top: 20px;
 }
 #selAnthor {
 	margin: 20px auto;
@@ -239,7 +240,7 @@ div > a > i {
     font-size: 15px;
     vertical-align: middle;
 }
-#picks, #reviews, #qa{
+#picks, #reviews, #qa, #selCs{
     padding-top: 25px;	
 }
 html {
@@ -248,4 +249,44 @@ html {
 a {
     text-decoration: none;
     color: #242729;
+}
+#qaLogo i{
+    padding-top: 30px;
+    font-size: 34px;
+}
+#qaLogo {
+	text-align: center;
+}
+#qaConment {
+	text-align: center;	
+}
+.cmTitle {
+	font-size: 17px;
+    font-weight: 800;
+    color: #4f5558;
+}
+.cmcomend {
+	padding-top: 12px !important;
+    font-size: 16px !important;
+} 
+.qaBtn{
+	min-width: 236px;
+    background-color: black;
+    color: white;
+    height: 48px;
+    border-radius: 24px;
+    border: 0px;
+    cursor: pointer;
+    font-size: 18px;
+    padding-bottom: 5px;
+}
+#selCsTitle{
+	border-top: 1px solid #e8e9eb;
+    padding-top: 10px;
+    font-size: 24px;
+}
+.tie {
+	max-width: 120px;
+    width: 100%;
+    color: #828a8f;	
 }

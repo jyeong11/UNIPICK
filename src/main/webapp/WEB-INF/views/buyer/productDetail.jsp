@@ -136,9 +136,39 @@
 		    			<div id="qaTitle">
 							<p>문의</p>
 		    			</div>
+		    			<div id="qaLogo">
+		    				<i class="fa-solid fa-tags"></i>
+		    			</div>
+		    			<div id="qaConment">
+			    			<p class="cmTitle">상품에 대해 궁금한 것이 있으신가요?</p>
+			    			<p class="cmcomend"> 상품 관련 문의는
+			    				<strong>판매자가 상세히 답변</strong>
+			    				드립니다.
+			    				<br>
+			    				답변은 앱의 마이페이지 > 문의 내역 에서 확인하실 수 있습니다.
+			    			</p>
+			    			<button class="qaBtn">
+			    				<span>상품 문의하기</span>
+			    			</button>
+		    			</div>
+		    		</div>
+		    		<div id="selCs">
+		    			<div id="selCsTitle">
+		    				<p>판매자 고객센터</p>
+		    			</div>
+		    			<div>
+			    			<div>
+			    				<span class="tie">운영시간</span>
+			    				<span>10~12</span>
+			    			</div>
+			    			<div>
+			    				<span class="tie">고객센터번호</span>
+			    				<span>10</span>
+			    			</div>
 		    		</div>
 	    		</div>
 	    	</section>
+	    	
 	
 	<div id="footer">
 		<jsp:include page="../inc/footer.jsp"></jsp:include>
