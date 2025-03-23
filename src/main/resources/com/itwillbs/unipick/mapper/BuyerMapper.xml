@@ -130,4 +130,19 @@
 	  WHERE o.prd_cd =#{prd_cd}
 	  	AND o.clr_nm = #{color}
 	</select>
+	
+	<!-- 찜 등록 -->
+	<insert id="wishInsert" parameterType="map">
+		INSERT INTO wishlist(buy_em,
+							 prd_cd)
+					  VALUES(#{buy_em},
+							 #{prd_cd})
+	</insert>
+	
+	<!-- 찜 해제 -->
+	<delete id="wishDelete" parameterType="map">
+		DELETE FROM wishlist
+		 WHERE buy_em = #{buy_em}
+		   AND prd_cd = #{prd_cd}
+	</delete>
   </mapper>

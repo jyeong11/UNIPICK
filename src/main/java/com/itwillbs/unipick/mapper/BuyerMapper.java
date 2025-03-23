@@ -27,4 +27,8 @@ public interface BuyerMapper {
 	public List<Map<String, Object>> productSort(Map<String, Object> option);
 	// 상품컬러
 	public List<Map<String, Object>> getColors(Map<String, Object> option);
+	// 찜 등록
+	void wishInsert(Map<String, Object> wish);
+	// 찜 해제
+	void wishDelete(Map<String, Object> wish);
 }

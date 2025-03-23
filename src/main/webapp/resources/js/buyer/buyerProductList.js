@@ -8,12 +8,18 @@ $(function() {
 		productList();
 	});
 	
+	$(document).on("click", ".prdImg-div .heart", function(event) {
+		event.preventDefault();
+		wish($(this));
+	});
+	
 	let query = window.location.search;
 	let param = new URLSearchParams(query);
 	let cateName = param.get('category');
 	$('#category').append(cateName);
 	let cateCode = param.get('lev_cd');
 	
+	// 페이지 처음 이동 시 데이터 출력
 	$.ajax({
 		type: "GET",
         url: "productListData",
@@ -51,6 +57,7 @@ $(function() {
         }
 	});
 	
+	// 카테고리 선택
 	function categorySelect(cate) {
 		let selectCate = $(`.${cate.data("value")}`);
 		let icon = cate.find('i');
@@ -63,12 +70,9 @@ $(function() {
 	        selectCate.show(200);
 	    }
 
-		
-		
-		
-		
 	}
 	
+	// 상품리스트
 	function productList(){  
 		
 		let data = {lev_cd : cateCode,
@@ -82,16 +86,23 @@ $(function() {
 			data: JSON.stringify(data),
 			contentType: "application/json",
 	        success: function(res) {
-				let row = res.map(prd => `<div class="product_posting">
-												<a href="#">
-												<img src="${prd.fil_nm}" alt="${prd.fil_nm}">
-												<div>
-													<div>${prd.sel_nm}</div>
-													<div>${prd.prd_nm}</div>
-													<div>${prd.prd_op}</div>
-													<div>${prd.prd_sp}</div>
-													<div>${prd.prd_bd}</div>
-												</div>
+				let contextPath = "${pageContext.request.contextPath}";
+//				<img src="${prd.fil_nm}" alt="${prd.fil_nm}">
+				let row = res.map(prd => `<div class="product-posting">
+												<a href="qweqwe">
+													<div class="prdImg-div">
+														<img src="/UNIPICK/resources/images/favicon_b.png" class="sample">
+														<i class="fa-regular fa-heart heart"></i>
+													</div>
+													<div class="prdInfo-div">
+														<div>${prd.sel_nm}</div>
+														<div>${prd.prd_nm}</div>
+														<div>${prd.prd_op}</div>
+														<div>${prd.prd_sp}</div>
+														<div>${prd.prd_bd}</div>
+														<input type="hidden" value="${prd.prd_cd}">
+													</div>
+												</a>
 											</div>`)
 							  .join('');
 		
@@ -103,8 +114,35 @@ $(function() {
 		});
 	}
 	
-	
-	
-	
+	// 찜 버튼
+	function wish(heart) {
+		heartIcon = heart[0];
+		let prd_cd = heart.closest(".product-posting").find("input[type='hidden']").val();
+		alert(prd_cd);
+		heartIcon.classList.toggle("fa-regular");
+		heartIcon.classList.toggle("fa-solid");
+		
+		let action = "insert";
+		
+		if(heartIcon.classList.contains("fa-regular")) {
+			 action = "delete";
+		}
+		
+		data = {prd_cd : prd_cd, action : action};
+		
+		$.ajax({
+			type: "POST",
+	        url: "wishList",
+			data: JSON.stringify(data),
+			contentType: "application/json",
+	        success: function(msg) {
+				alert(msg);
+			},
+	        error: function(xhr, status, error) {
+	        	alert("서버 오류가 발생했습니다.");
+	        }
+		});
+		
+	}
 	
 });
