@@ -1,7 +1,49 @@
 @charset "UTF-8";
-.buyerOrdInfo{
-	margin: 20px 18px;
-}
-.buyerOrdInfo p {
+.title {
 	font-size: 20px;
+	margin-top: 10px;
+    margin-bottom: 10px;
+    color: #242729;
+}
+.buyerOrdInfo {
+    padding: 10px;
+}
+.section {
+    border-bottom: 1px solid #ddd;
+    padding: 0.75rem 1.25rem;
+}
+.section:last-child {
+    border-bottom: none;
+}
+.sel{
+	color: #f2a900;
+}
+.title {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.input-box {
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+.label {
+	color: #333;
+	padding-top: 6px;
+}
+.button-container {
+     display: flex;
+     justify-content: flex-end;
+     margin-top: 10px;
+}
+.button {
+    padding: 10px;
+    background-color: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 10px;
 }
