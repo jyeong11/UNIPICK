@@ -37,7 +37,7 @@ public class SellerService {
 	}
 	
 	// 주문 상세 조회
-	public List<Map<String, Object>> sellerOrdPrdDetail(Map<String, Object> prd_cd) {
-		return mapper.sellerOrdPrdDetail(prd_cd);
+	public List<Map<String, Object>> sellerOrdPrdDetail(Map<String, Object> ord_id) {
+		return mapper.sellerOrdPrdDetail(ord_id);
 	}
 }

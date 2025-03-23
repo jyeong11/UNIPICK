@@ -58,7 +58,7 @@
 		 ON pd.prd_cd = od.prd_cd
 	   JOIN buyers bu
 		 ON od.buy_em = bu.buy_em
-      WHERE pd.prd_cd = #{prd_cd}
+      WHERE od.ord_id = #{ord_id}
 	</select>
 
 

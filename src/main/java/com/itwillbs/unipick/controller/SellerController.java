@@ -183,14 +183,13 @@ public class SellerController {
 		return selService.productDetail(prdData);
 	}
 	
-	// 주문상세 조회
+	// 주문 상세 조회
 	@ResponseBody
 	@PostMapping("sellerOrdDetail")
-	public List<Map<String, Object>> sellerOrdPrdDetail(@RequestBody Map<String, Object> prd_cd) {
-		System.out.println("SADASDASDADSADSASD" + prd_cd);
-		selService.sellerOrdPrdDetail(prd_cd);
-		System.out.println(selService.sellerOrdPrdDetail(prd_cd));
-		return selService.sellerOrdPrdDetail(prd_cd);
+	public List<Map<String, Object>> sellerOrdPrdDetail(@RequestBody Map<String, Object> ord_id) {
+		selService.sellerOrdPrdDetail(ord_id);
+		System.out.println(selService.sellerOrdPrdDetail(ord_id));
+		return selService.sellerOrdPrdDetail(ord_id);
 	}
 	
 	// 사업자등록증 파일 함수 

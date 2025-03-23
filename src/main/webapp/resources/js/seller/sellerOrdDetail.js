@@ -1,14 +1,13 @@
 $(function(){
 	let query = window.location.search;
 	let param = new URLSearchParams(query);
-	let prd_cd = param.get('prd_cd');
-	
-	console.log(prd_cd);
+	let ord_id = param.get('ord_id');
+	console.log(ord_id);
 	$(document).ready(function() {
 		$.ajax({
 			url: "sellerOrdDetail",
 			method: "POST",
-			data: JSON.stringify({ prd_cd: prd_cd }),
+			data: JSON.stringify({ ord_id: ord_id }),
 			contentType: "application/json",
 			success: function(res){
 				debugger;
