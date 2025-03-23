@@ -43,6 +43,23 @@
 		  from products
 		 where prd_cd = #{prd_cd}
 	</select>
+	
+<!-- 	주문 상세 조회 -->
+	<select id="sellerOrdPrdDetail" parameterType="map">
+	 SELECT pd.prd_cd, pd.prd_nm, ot.siz_nm, ot.clr_nm, odd.odd_qt,
+		    bu.buy_em, bu.buy_nm, bu.buy_ph, od.ord_dm, 
+	        odd.odd_am, od.ord_pm
+	   FROM products pd 
+	   JOIN options ot
+		 ON pd.prd_cd = ot.prd_cd
+	   JOIN order_details odd
+		 ON ot.opt_id = odd.opt_id
+	   JOIN orders od 
+		 ON pd.prd_cd = od.prd_cd
+	   JOIN buyers bu
+		 ON od.buy_em = bu.buy_em
+      WHERE pd.prd_cd = #{prd_cd}
+	</select>
 
 
 

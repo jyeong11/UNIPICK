@@ -30,7 +30,7 @@
   <!-- favicon -->
   <link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
   <!-- 페이지 전용 JS (외부 파일로 분리) -->
-<%--   <script src="${pageContext.request.contextPath}/resources/js/seller/sellerPrdDetail.js"></script> --%>
+  <script src="${pageContext.request.contextPath}/resources/js/seller/sellerOrdDetail.js"></script>
 </head>
 <body id="page-top">
   <div id="wrapper">
@@ -91,24 +91,41 @@
                 </div>
                 <div>
 				    <div class="buyerOrdInfo">
-				        <div class="section">
-				            <div class="title">구매자 정보</div>
-				            <div class="label">아이디:</div> <input type="text" class="input-box" value="aaaaa" readonly>
-				            <div class="label">구매자명:</div> <input type="text" class="input-box" value="sssss" readonly>
-				            <div class="label">연락처:</div> <input type="text" class="input-box" value="010100100" readonly>
+				    	<div class="section">
+				            <div class="item-regi-name">상품 정보</div>
+				            <div class="label">상품코드:</div>
+				            <input type="text" class="input-box" value="aaaaa" readonly>
+				            <div class="label">상품명:</div> 
+				            <input type="text" class="input-box" value="sssss" readonly>
+				            <div class="label">주문 사이즈:</div> 
+				            <input type="text" class="input-box" value="sssss" readonly>
+				            <div class="label">주문 컬러:</div> 
+				            <input type="text" class="input-box" value="010100100" readonly>
+				            <div class="label">주문 갯수:</div> 
+				            <input type="text" class="input-box" value="sssss" readonly>
 				        </div>
 				        <div class="section">
-				            <div class="title">배송지 정보</div>
-				            <div class="label">주소:</div> <input type="text" class="input-box" value="어디시 어디구 어디로 1층 101호" readonly>
-				            <div class="label">배송메모:</div> <input type="text" class="input-box" value="부재시 경비실에 맡겨주세요" readonly>
+				            <div class="item-regi-name">구매자 정보</div>
+				            <div class="label">이메일:</div> 
+				            <input type="text" class="input-box" value="aaaaa" readonly>
+				            <div class="label">구매자명:</div> 
+				            <input type="text" class="input-box" value="sssss" readonly>
+				            <div class="label">연락처:</div> 
+				            <input type="text" class="input-box" value="010100100" readonly>
 				        </div>
 				        <div class="section">
-				            <div class="title">결제 정보</div>
-				            <div class="label">상품금액:</div> <input type="text" class="input-box" value="15,000" readonly>
-				            <div class="label">배송비:</div> <input type="text" class="input-box" value="2,500" readonly>
-				            <div class="label">할인:</div> <input type="text" class="input-box" value="0" readonly>
-				            <div class="label">적립금:</div> <input type="text" class="input-box" value="0" readonly>
-				            <div class="label">결제방식:</div> <input type="text" class="input-box" value="신용카드" readonly>
+				            <div class="item-regi-name">배송지 정보</div>
+				            <div class="label">주소:</div> 
+				            <input type="text" class="input-box" value="어디시 어디구 어디로 1층 101호" readonly>
+				            <div class="label">배송메모:</div> 
+				            <input type="text" class="input-box" value="부재시 경비실에 맡겨주세요" readonly>
+				        </div>
+				        <div class="section">
+				            <div class="item-regi-name">결제 정보</div>
+				            <div class="label">상품금액:</div> 
+				            <input type="text" class="input-box" value="15,000" readonly>
+				            <div class="label">결제방식:</div> 
+				            <input type="text" class="input-box" value="신용카드" readonly>
 				        </div>
 				        <div class="button-container">
 				            <button class="button">결제 요청 취소</button>
@@ -138,5 +155,5 @@
   <script src="${pageContext.request.contextPath}/resources/public/vendor/datepicker/moment.min.js"></script>
   <script src="${pageContext.request.contextPath}/resources/public/vendor/datatables/jquery.dataTables.min.js"></script>
   <script src="${pageContext.request.contextPath}/resources/public/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/public/js/index.js"></script>
+<%--   <script src="${pageContext.request.contextPath}/resources/public/js/index.js"></script> --%>
   

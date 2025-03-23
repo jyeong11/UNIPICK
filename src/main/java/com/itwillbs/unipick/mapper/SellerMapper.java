@@ -1,5 +1,6 @@
 package com.itwillbs.unipick.mapper;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -13,4 +14,7 @@ public interface SellerMapper {
 	
 	// 상품 상세 조회
 	public Map<String, Object> productDetail(Map<String, Object> prdData);
+	
+	// 주문 상세 조회
+	public List<Map<String, Object>> sellerOrdPrdDetail(Map<String, Object> prd_cd);
 }

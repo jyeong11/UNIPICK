@@ -1,6 +1,7 @@
 package com.itwillbs.unipick.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +34,10 @@ public class SellerService {
 		productDetail.put("cate", buyerMapper.getCategory());
 		
 		return productDetail;
+	}
+	
+	// 주문 상세 조회
+	public List<Map<String, Object>> sellerOrdPrdDetail(Map<String, Object> prd_cd) {
+		return mapper.sellerOrdPrdDetail(prd_cd);
 	}
 }
