@@ -59,4 +59,12 @@ public class BuyerService {
 	public List<Map<String, Object>> getColors(Map<String, Object> option) {
 		return mapper.getColors(option);
 	}
+	// 찜 등록
+	public void wishInsert(Map<String, Object> wish) {
+		mapper.wishInsert(wish);
+	}
+	// 찜 해제
+	public void wishDelete(Map<String, Object> wish) {
+		mapper.wishDelete(wish);
+	}
 }

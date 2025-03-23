@@ -3,6 +3,8 @@ package com.itwillbs.unipick.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.annotation.RequestScope;
 
 import com.itwillbs.unipick.service.AdminService;
 import com.itwillbs.unipick.service.BuyerService;
@@ -115,5 +118,29 @@ public class BuyerController {
 	@PostMapping("getSizeByColor")
 	public List<Map<String, Object>> getSizeByColor(@RequestBody Map<String, Object> option){
 		return buyService.getColors(option); 
+	}
+	
+	// 찜
+	@ResponseBody
+	@PostMapping("wishList")
+	public String wishList(@RequestBody Map<String, Object> wish, HttpSession session) {
+		
+		// 임시 아이디
+		session.setAttribute("id", "dol12@naver.com");
+		wish.put("buy_em", session.getAttribute("id"));
+		
+		String msg = "";
+		
+		System.out.println(wish.get("action"));
+		
+		if(wish.get("action").equals("insert")) {
+			buyService.wishInsert(wish);
+			msg = "insert";
+		} else {
+			buyService.wishDelete(wish);
+			msg = "delete";
+		}
+		
+		return msg;
 	}
 }
