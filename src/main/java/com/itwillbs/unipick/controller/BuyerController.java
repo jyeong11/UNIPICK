@@ -109,7 +109,10 @@ public class BuyerController {
 	// 상품정렬
 	@ResponseBody
 	@PostMapping("productSort")
-	public List<Map<String, Object>> productSort(@RequestBody Map<String,Object> option) {
+	public List<Map<String, Object>> productSort(@RequestBody Map<String,Object> option, HttpSession session) {
+		session.setAttribute("id", "dol12@naver.com");
+		option.put("buy_em", session.getAttribute("id"));
+		
 		return buyService.productSort(option);
 	}
 	

@@ -88,22 +88,25 @@ $(function() {
 	        success: function(res) {
 				let contextPath = "${pageContext.request.contextPath}";
 //				<img src="${prd.fil_nm}" alt="${prd.fil_nm}">
-				let row = res.map(prd => `<div class="product-posting">
-												<a href="qweqwe">
-													<div class="prdImg-div">
-														<img src="/UNIPICK/resources/images/favicon_b.png" class="sample">
-														<i class="fa-regular fa-heart heart"></i>
-													</div>
-													<div class="prdInfo-div">
-														<div>${prd.sel_nm}</div>
-														<div>${prd.prd_nm}</div>
-														<div>${prd.prd_op}</div>
-														<div>${prd.prd_sp}</div>
-														<div>${prd.prd_bd}</div>
-														<input type="hidden" value="${prd.prd_cd}">
-													</div>
-												</a>
-											</div>`)
+				debugger;
+				let row = res.map(prd => {let heartClass = prd.buy_em ? 'fa-solid' : 'fa-regular';
+										 return `<div class="product-posting">
+													<a href="qweqwe">
+														<div class="prdImg-div">
+															<img src="/UNIPICK/resources/images/favicon_b.png" class="sample">
+															<i class="${heartClass} fa-heart heart"></i>
+														</div>
+														<div class="prdInfo-div">
+															<div>${prd.sel_nm}</div>
+															<div>${prd.prd_nm}</div>
+															<div>${prd.prd_op}</div>
+															<div>${prd.prd_sp}</div>
+															<div>${prd.prd_bd}</div>
+															<input type="hidden" value="${prd.prd_cd}">
+														</div>
+													</a>
+												</div>`
+											})
 							  .join('');
 		
 				$('#img12').append(row);

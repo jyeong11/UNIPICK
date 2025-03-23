@@ -89,7 +89,8 @@
   			   p.prd_bd,
                p.prd_ca,
                p.prd_dt,
-  			   r.count
+  			   r.count,
+               w.buy_em
   		  FROM products p 
 		  LEFT JOIN (SELECT prd_cd, fil_nm, fil_pt
 						FROM RankedImages
@@ -98,6 +99,9 @@
 		  LEFT JOIN (SELECT prd_cd, COUNT(*) AS 'count'
 				  	   FROM options o JOIN reviews r ON o.opt_id = r.opt_id
 				 	  GROUP by prd_cd) r ON p.prd_cd = r.prd_cd
+		 LEFT JOIN (SELECT w.buy_em, w.prd_cd
+					  FROM wishlist w JOIN buyers b ON w.buy_em = b.buy_em
+					 WHERE w.buy_em = #{buy_em}) w on p.prd_cd = w.prd_cd
 		 WHERE 1 = 1
   		 <if test="lev_cd != 'All'">
   		 	AND p.prd_ca = #{lev_cd}
