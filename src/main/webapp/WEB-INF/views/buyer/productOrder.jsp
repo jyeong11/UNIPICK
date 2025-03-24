@@ -44,6 +44,8 @@
 	<div id="orderInfo-container"></div>
 	<div id="deliInfo-container"></div>
 	<div id="delprice-container"></div>
+	<div id="term-container"></div>
+	<div id="price-button"><button id="submit-btn" disabled>결제하기</button></div>
 	
 	<div id="footer">
 		<jsp:include page="../inc/footer.jsp"></jsp:include>

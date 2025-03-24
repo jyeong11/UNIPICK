@@ -187,7 +187,7 @@
 	
 <!-- 	상품 주문 -->
 	<select id="getPrdOrder" parameterType="map">
-	 SELECT p.prd_cd, s.sel_nm, p.prd_nm, 
+	 SELECT p.prd_cd, s.sel_nm, p.prd_nm, p.prd_sf,
 	  		CONCAT(ROUND(((p.prd_op - p.prd_sp) / p.prd_op) * 100, 0), '%') AS dc,
 	  		FORMAT(p.prd_op, 0) AS prd_op, 
 	  		FORMAT(p.prd_sp, 0) AS prd_sp,
