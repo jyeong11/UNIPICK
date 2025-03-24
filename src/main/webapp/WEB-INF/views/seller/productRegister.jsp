@@ -98,6 +98,10 @@
                       <section class="item-regi-img">
                         <div class="card_head">
                           <h2 class="item-regi-name">상품이미지</h2>
+                          
+                          <!-- TODO -->
+<%--                           <img src="${pageContext.request.contextPath}/resources/images/banner1.jpg"> --%>
+                          
                           <h2 class="item-thumb-description">첫번째 상품 이미지는 대표썸네일로 등록됩니다.</h2>
                         </div>
                         <div class="item-thumb-group">
@@ -129,6 +133,7 @@
                       <section class="item-regi-section">
                         <h2 class="item-regi-name">상품설명</h2>
                         <div id="editor"></div>
+                        <input type="hidden" id="prd_ct" name="prd_ct" value="">
                         <h6 class="item-regi-description-byte" id="item-regi-description-byte">(0 / 2000)</h6>
                       </section>
                       <!-- 카테고리 선택 영역 -->
@@ -162,7 +167,7 @@
                       	</section>
                       <div class="item-regi-submit-group">
                         <input type="button" class="item-backpage" onclick="history.back()" value="뒤로 가기">
-                        <input type="submit" class="item-submit" value="상품 등록">
+                        <input type="submit" id="createProduct" class="item-submit" value="상품 등록">
                       </div>
                     </form>
                   </section>
@@ -192,4 +197,3 @@
   <script src="${pageContext.request.contextPath}/resources/public/vendor/datatables/jquery.dataTables.min.js"></script>
   <script src="${pageContext.request.contextPath}/resources/public/vendor/datatables/dataTables.bootstrap4.min.js"></script>
   <script src="${pageContext.request.contextPath}/resources/public/js/index.js"></script>
-  

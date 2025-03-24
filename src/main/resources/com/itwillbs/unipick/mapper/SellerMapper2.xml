@@ -9,6 +9,7 @@
   <insert id="insertProduct" parameterType="map">
     INSERT INTO products (
      	prd_nm,
+     	prd_ct,
 		sel_id,
 		prd_cd,
 		prd_op,
@@ -21,6 +22,7 @@
     )
     VALUES (
       #{prd_nm},
+      #{prd_ct},
       #{sel_id},
       #{prd_cd},
       #{prd_op},

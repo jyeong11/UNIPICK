@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
       $("#item-regi-title-text").focus();
       return false;
     }
-    if (!noteditor.getMarkdown().trim()) {
+    if (!prdeditor.getMarkdown().trim()) {
       alert("내용을 입력해주세요!");
       return false;
     }
@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 8. TOAST UI Editor 초기화
   const { colorSyntax } = toastui.Editor.plugin;
-  const noteditor = new toastui.Editor({
+  const prdeditor = new toastui.Editor({
     el: document.querySelector('#editor'),
     height: '300px',
     initialEditType: 'wysiwyg',
@@ -139,18 +139,26 @@ document.addEventListener("DOMContentLoaded", function () {
     ],
     hooks: {
       addImageBlobHook: async (blob, callback) => {
+		debugger;
         const formData = new FormData();
-        formData.append('image', blob);
+        formData.append('file', blob);
         try {
-          const response = await fetch(contextPath + '/upload', {
-            method: 'POST',
-            body: formData
-          });
-          const result = await response.json();
-          callback(result.url, '이미지 설명');
+			const response = await fetch(contextPath + '/upload', {
+				method: 'POST',
+				body: formData
+			});
+			const result = await response.json();
+			console.log('이미지 업로드 응답:', result); 
+			if(result.url){
+	        	callback(contextPath + result.url, '이미지 설명');
+				console.log(contextPath + result.url);
+			} else {
+				console.error('이미지 URL이 없음:', result);
+		        alert('이미지 업로드 중 문제가 발생했습니다.');
+			}
         } catch (error) {
-          console.error('이미지 업로드 실패:', error);
-          alert('이미지 업로드 중 오류가 발생했습니다.');
+        	console.error('이미지 업로드 실패:', error);
+        	alert('이미지 업로드 중 오류가 발생했습니다.');
         }
       }
     }
@@ -161,6 +169,9 @@ document.addEventListener("DOMContentLoaded", function () {
   $("#productRegist").on("submit", async function (event) {
     event.preventDefault();
     if (!validateForm()) return;
+
+	let content = prdeditor.getHTML();
+    document.getElementById("prd_ct").value = content;
 
     let formData = new FormData();
 
@@ -175,6 +186,7 @@ document.addEventListener("DOMContentLoaded", function () {
       prd_qt: $("#stock_number").val() || 0,  // null 처리 (기본값 0)
       prd_ds: $("#prd_ds_checkbox").is(":checked") ? 1 : 0,
       prd_bd: $("#some_element").val(),
+	  prd_ct: content,
 	  sizes: [],   // 사이즈 배열
       colors: [], // 색상 배열
 	  stocks: [],

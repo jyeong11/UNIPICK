@@ -18,8 +18,12 @@ public class WebConfig implements WebMvcConfigurer {
         
     
         registry.addResourceHandler("/productImg/**")
-        		.addResourceLocations("file:///D:/Person/workspace/UNIPICK-PROJECT/UNIPICK/src/main/webapp/resources/productImg/")
+        		.addResourceLocations("file:///D:/UNIPICK/src/main/webapp/resources/productImg/")
         		.setCachePeriod(0);
+        
+        registry.addResourceHandler("/resources/upload/**")
+        .addResourceLocations("file:///D:/UNIPICK/src/main/webapp/resources/upload/")
+        .setCachePeriod(0);
         
         
     }
