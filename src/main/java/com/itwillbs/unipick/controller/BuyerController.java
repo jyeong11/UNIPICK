@@ -56,6 +56,12 @@ public class BuyerController {
 		return "buyer/productSearch";
 	}
 	
+	// 마이페이지
+	@GetMapping("myPage")
+	public String myPage() {
+		return "buyer/buyerMyPage";
+	}
+	
 	// 상품 상세조회 (조회)
 	@GetMapping("productDetail")
 	public String productDetail(@RequestParam("prd_cd") String prdCd, Model model) {
@@ -145,5 +151,18 @@ public class BuyerController {
 		}
 		
 		return msg;
+	}
+	
+	// 마이페이지 데이터
+	
+	@ResponseBody
+	@GetMapping("myPageData")
+	public Map<String, Object> myPageData(HttpSession session, Map<String, Object> myPage) {
+	
+		// 임시 아이디
+		session.setAttribute("id", "dol12@naver.com");
+		myPage.put("buy_em", session.getAttribute("id"));
+		
+		return buyService.myPageData(myPage);
 	}
 }

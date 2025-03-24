@@ -67,4 +67,11 @@ public class BuyerService {
 	public void wishDelete(Map<String, Object> wish) {
 		mapper.wishDelete(wish);
 	}
+	// 마이페이지 데이터
+	public Map<String, Object> myPageData(Map<String,Object> myPage) {
+		Map<String, Object> myPageDatas = new HashMap<String, Object>();
+		myPageDatas.put("buyer", buyerInfo());
+		myPageDatas.put("myIcon", mapper.myIcon());
+		return myPageDatas;
+	}
 }

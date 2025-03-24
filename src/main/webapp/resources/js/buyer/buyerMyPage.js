@@ -1,0 +1,36 @@
+$(function() {
+	
+	$('.myPageIcon').on('click', 'li', function() {
+		 window.location.href = $(this).data('value') 
+	});
+	
+	$.ajax({
+			url: "myPageData",
+			method: "GET",
+			success: function(res) {
+				const classMap = {
+		            "MyPage01": "fa-truck",
+		            "MyPage02": "fa-ticket",
+		            "MyPage03": "fa-coins",
+		            "MyPage04": "fa-comment-dots",
+		            "MyPage05": "fa-box-open",
+					"MyPage06": "fa-headset"
+
+		        };
+				
+				let icon = res.myIcon.map(item => {
+													let className = classMap[item.lev_cd];
+										            return `<li data-value="${item.lev_ul}"><i class="fa-solid ${className}"></i>${item.lev_nm}</li>`;
+										        })
+									.join('');
+								
+				$('.myPageIcon').append(icon);
+				
+        	},
+			error: function(xhr, status, error) {
+	        	alert("서버 오류가 발생했습니다.");
+	        }
+		});
+	
+	
+});

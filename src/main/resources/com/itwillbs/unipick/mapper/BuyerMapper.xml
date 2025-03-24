@@ -149,4 +149,14 @@
 		 WHERE buy_em = #{buy_em}
 		   AND prd_cd = #{prd_cd}
 	</delete>
+	
+	<!-- 마이페이지 데이터 -->
+	<select id="myIcon" parameterType="map">
+		SELECT lev_cd, lev_nm, lev_ul
+		  FROM level
+		 WHERE lev_cd LIKE 'MyPage%'
+		   AND lev_yn = 'y'
+		 ORDER BY lev_so
+	</select>
+	
   </mapper>
