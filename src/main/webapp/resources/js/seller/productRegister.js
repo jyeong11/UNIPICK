@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }
-  updateByteCount("#item-regi-title-text", "#item-regi-name-byte", 50, "최대 50자까지 입력 가능합니다.");
+  updateByteCount("#item-regi-title-text", "#item-regi-name-byte", 100, "최대 100자까지 입력 가능합니다.");
 
   // 8. TOAST UI Editor 초기화
   const { colorSyntax } = toastui.Editor.plugin;
@@ -177,7 +177,8 @@ document.addEventListener("DOMContentLoaded", function () {
       prd_bd: $("#some_element").val(),
 	  sizes: [],   // 사이즈 배열
       colors: [], // 색상 배열
-	  stocks: []
+	  stocks: [],
+	  colorsnm: []
     };
 
     console.log("사이즈 배열:", productData.sizes);  // 사이즈 배열 출력
@@ -188,6 +189,13 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll("#option-container input[name='color_number[]']").forEach(input => {
       if (input.value.trim() !== "") {
         productData.colors.push(input.value); // 각 색상 값을 개별적으로 처리
+      }
+    });
+
+	// 색상 추가 (빈 값 제외)
+    document.querySelectorAll("#option-container input[name='color_name[]']").forEach(input => {
+      if (input.value.trim() !== "") {
+        productData.colorsnm.push(input.value); // 각 색상 값을 개별적으로 처리
       }
     });
 
@@ -264,6 +272,12 @@ document.getElementById("add-option").addEventListener("click", function () {
     newColorInput.name = "color_number[]";
     newColorInput.className = "color-picker";
 
+	  // 색상 입력 (color)
+    const newColorText = document.createElement("input");
+    newColorText.type = "text";
+    newColorText.name = "color_name[]";
+    newColorText.className = "color-name";
+
     // 사이즈 선택 (select)
     const newSizeSelect = document.createElement("select");
     newSizeSelect.name = "size_option[]";
@@ -288,6 +302,7 @@ document.getElementById("add-option").addEventListener("click", function () {
 
     // 요소들을 optionRow에 추가
     optionRow.appendChild(newColorInput);
+	optionRow.appendChild(newColorText);
     optionRow.appendChild(newSizeSelect);
     optionRow.appendChild(newStockInput);
     optionRow.appendChild(removeBtn);

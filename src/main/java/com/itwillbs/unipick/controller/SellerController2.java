@@ -15,4 +15,6 @@ public class SellerController2 {
     public String prdList() {
         return "seller/productList";
     }
+    
+    
 }

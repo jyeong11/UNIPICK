@@ -13,11 +13,7 @@ public interface SellerMapper2 {
 
     void insertProduct(Map<String, Object> product);
     void insertProductImage(Map<String, Object> paramMap);
-//    void insertStock(Map<String, Object> stockData);
-//    void insertColor(Map<String, Object> colorData);
-//    void insertSize(Map<String, Object> sizeData);
     void insertProductOptions(Map<String, Object> productData);
-
     List<Map<String, Object>> selectCategories(String parentCode);
 
     public void insertCategorySelection(Map<String, Object> selection);
@@ -26,7 +22,6 @@ public interface SellerMapper2 {
     
     // 재고 관리 옵션을 위한 상세 공통코드 조회 (공통코드 그룹: STOCK_MANAGEMENT)
     List<Map<String, Object>> selectStockOptions(String comCd);
-    
     
     List<Map<String, Object>>selectSizeOptions(String comCd);
 

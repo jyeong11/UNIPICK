@@ -117,7 +117,7 @@
                         <div class="item-regi-box">
                           <input type="text" name="product_title" class="item-regi-title-text" id="item-regi-title-text" maxlength="50">
                         </div>
-                        <h6 class="item-regi-name-byte" id="item-regi-name-byte">(0 / 50)</h6>
+                        <h6 class="item-regi-name-byte" id="item-regi-name-byte">(0 / 100)</h6>
                       </section>
                       <section class="item-regi-section">
                         <h2 class="item-regi-name">상품코드</h2>
@@ -154,9 +154,10 @@
                         <h6 class="item-regi-name">옵션 설정</h6>
                         <div id="option-container">
 							<input type="color" name="color_number[]" class="color-picker" required>
+							<input type="text" name="color_name[]" class="color-name" id="color_name" required>
 							<select name="size_option[]" class="size-select" id="product_size"></select>
-                          <input type="number" name="stock_number[]" class="stock-number" id="stock_number" placeholder="재고 수량을 입력해주세요." required>
-                          </div>
+                          	<input type="number" name="stock_number[]" class="stock-number" id="stock_number" placeholder="재고 수량을 입력해주세요." required>
+                         </div>
 							<button type="button" id="add-option" class="btn btn-sm btn-outline-primary">추가</button>
                       	</section>
                       <div class="item-regi-submit-group">

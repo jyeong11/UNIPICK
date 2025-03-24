@@ -55,9 +55,9 @@
     )
   </insert>
 <insert id="insertProductOptions" parameterType="map">
-	INSERT INTO options (prd_cd, siz_nm, clr_nm, prd_qt) VALUES
+	INSERT INTO options (prd_cd, siz_nm, clr_cd, clr_nm, prd_qt) VALUES
     <foreach collection="options" item="opt" separator=",">
-        (#{opt.prd_cd}, #{opt.siz_nm}, '${opt.clr_nm}', #{opt.prd_qt})
+        (#{opt.prd_cd}, #{opt.siz_nm}, #{opt.clr_cd}, '${opt.clr_nm}', #{opt.prd_qt})
     </foreach>
 </insert>
   
