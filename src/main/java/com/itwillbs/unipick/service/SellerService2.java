@@ -43,7 +43,7 @@ public class SellerService2 {
             String uniqueFilename = UUID.randomUUID().toString() + "_" + originalFilename;
 
             // 실제 저장할 경로 (로컬 파일 시스템)
-            String uploadDir = "D:/Person/workspace/UNIPICK-PROJECT/UNIPICK/src/main/webapp/resources/productImg/";
+            String uploadDir = "D:/UNIPICK-PROJECT/UNIPICK/src/main/webapp/resources/productImg/";
             File folder = new File(uploadDir);
             if (!folder.exists()) {
                 folder.mkdirs(); // 폴더가 없으면 생성

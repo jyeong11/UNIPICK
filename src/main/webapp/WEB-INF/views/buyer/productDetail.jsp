@@ -38,7 +38,7 @@
 	 <div class="product-container">
     <!-- 왼쪽 상품 이미지 -->
 	    <div class="product-image">
-	    	<img src="${pageContext.request.contextPath }/resources/images/favicon_b.png" alt="1">
+	    	<img src="${pageContext.request.contextPath }/resources/productImg/507d5b8f-13aa-46c0-95fe-7eea78fd2dde_1.png" alt="1">
 <!-- 	    상품등록 되면 쓸 거 -->
 <%-- 			<c:forEach var="image" items="${prdImg}"> --%>
 <%-- 				<img src="${image}" class="product-img" /> --%>
