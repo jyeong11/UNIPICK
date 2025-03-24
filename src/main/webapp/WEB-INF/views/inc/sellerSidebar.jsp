@@ -16,7 +16,7 @@
             	<h6 class="collapse-header">상품관리</h6>
             	<a class="collapse-item" href="prdRegister">상품등록</a>
                 <a class="collapse-item" href="prdList">상품조회</a>
-                <a class="collapse-item" href="sellerPrdDetail?ord_id=1">상품상세조회(임시)</a>
+                <a class="collapse-item" href="sellerPrdDetail?prd_cd=PRD_105">상품상세조회(임시)</a>
             </div>
         </div>
     </li>
@@ -42,7 +42,7 @@
         <div id="menu03" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
             	<h6 class="collapse-header">쿠폰관리</h6>
-                <a class="collapse-item" href="sellerOrdDetail?prd_cd=CATEGORY0101">상품</a>
+                <a class="collapse-item" href="sellerOrdDetail?ord_id=1">상품</a>
             </div>
         </div>
     </li>

@@ -44,6 +44,7 @@
 	
 	<script>
         var searchterm = "<%= (query != null) ? query : "" %>";
+        var contextPath = "${pageContext.request.contextPath}";
     </script>
 </body>
 </html>

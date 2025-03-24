@@ -41,17 +41,25 @@
 	
 <!-- 	상품 상세 옵션 -->
 	<select id="getPrdOption" parameterType="map">
-	 SELECT siz_nm, clr_nm, prd_qt
-	   FROM options
+	 SELECT c.cod_nm, o.clr_nm, o.prd_qt
+       FROM options o
+       JOIN common_detailcode c
+         ON o.siz_nm = c.cod_cd
 	  WHERE prd_cd = #{prdCd}
 	</select>
 	
 <!--   	상품검색 -->
+  	<!--   	상품검색 -->
   	<select id="getSearchPrd" parameterType="map">
-  	 SELECT *
-  	   FROM products
-      WHERE prd_nm like CONCAT('%',#{query},'%')
-      	AND prd_st = '승인' 
+  	 SELECT pd.prd_nm, pd.sel_id, pd.prd_cd, 
+  	 		CONCAT(ROUND(((pd.prd_op - pd.prd_sp) / pd.prd_op) * 100, 0), '%') AS dc,
+			FORMAT(pd.prd_sp, 0) AS prd_sp, 
+			pd.prd_bd, pi.fil_nm, pi.fil_pt
+  	   FROM products pd
+       JOIN product_images pi
+         ON pd.prd_cd = pi.prd_cd
+      WHERE prd_nm LIKE CONCAT('%',#{query},'%')
+      	AND prd_st = '승인'; 
   	</select>
   	
   	<!-- 카테고리 메뉴 -->
@@ -126,11 +134,15 @@
   	</select>
   	
   	<!--   	상품 옵션 -->
+	<!--   	상품 옵션 -->
 	<select id="getColors" parameterType="map">
-	 SELECT o.siz_nm, o.prd_qt, 
+	 SELECT c.cod_nm, o.prd_qt, 
 	 		FORMAT(p.prd_sp, 0) AS prd_sp
-	   FROM options o JOIN products p 
+	   FROM options o 
+	   JOIN products p 
          ON o.prd_cd = p.prd_cd
+       JOIN common_detailcode c
+         ON o.siz_nm = c.cod_cd
 	  WHERE o.prd_cd =#{prd_cd}
 	  	AND o.clr_nm = #{color}
 	</select>

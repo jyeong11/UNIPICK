@@ -11,11 +11,13 @@ $(function() {
 	                    res.forEach(function(prd) {
 	                        resultHtml += `
 	                            <div class="prd-item" data-id="${prd.prd_cd}" style="cursor: pointer;">
-				                    <img src="${prd.prd_img}" alt="${prd.prd_nm}" style="width:100px; height:100px;">
-				                    <div>${prd.prd_nm}</div>
-				                    <div>${prd.prd_op}원</div>
-				                    <div>${prd.prd_sp}원</div>
-				                    <div>${prd.prd_bd}</div>
+				                    <img src="${contextPath}/resources/${prd.fil_pt}" class="prd-img">
+									<div class="prdInfo">${prd.prd_nm}</div>
+				                    <div class="prd_pr">
+				                    	<div class="dc">${prd.dc}</div>
+				                    	<div class="prd_sp">${prd.prd_sp}원</div>
+				                    </div>
+									<div>${prd.prd_bd} 산품뱃지 들어옴</div>
 				                </div>
 	                        `;
 	                    });

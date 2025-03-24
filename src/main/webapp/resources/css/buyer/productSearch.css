@@ -5,3 +5,29 @@
     margin: 0 auto;
     padding-top: 50px;
 }
+.prd-img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+}
+.prdInfo {
+	color: #292b2b;
+    font-weight: 600;
+    line-height: 16px;
+    font-size: 16px;
+    padding-bottom: 5px;
+}
+.dc {
+    font-size: 23px;
+    font-weight: bold;
+    color: #f2a900;
+    padding-right: 15px;
+}
+.prd_pr {
+	display: flex;
+}
+.prd_sp{
+	font-size: 18px;
+    padding-top: 4px;
+    font-weight: bold;
+}

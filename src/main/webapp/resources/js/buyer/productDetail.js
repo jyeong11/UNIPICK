@@ -23,12 +23,13 @@ $(function() {
 	}
 	function updateSize(sizes) {
         var sizeSelect = $('#size');
-        sizeSelect.empty();
+        
+		sizeSelect.empty();
 
         sizeSelect.append('<option>[size]를 선택하세요.</option>');
 
         $.each(sizes, function(index, size) {
-            sizeSelect.append('<option value="' + size.siz_nm + '">' + size.siz_nm);
+            sizeSelect.append('<option value="' + size.cod_nm + '">' + size.cod_nm);
         });
 		// 옵션 전부 클릭시 이벤트 발생
 		 sizeSelect.off("change").on("change", function () {
@@ -50,9 +51,13 @@ $(function() {
             data: JSON.stringify({prd_cd: prdCd, color: selectedColor, size: selectedSize}),
             contentType: "application/json",
             success: function (res) {
+	
                 $("#option-text").text(selectedColor + " / " + selectedSize);
                 $("#option-price").text(res[0].prd_sp + "원");
-                $("#selected-option").fadeIn();
+  				$('#price-text').text(res[0].prd_sp + '원');
+
+				$("#selected-option").fadeIn();
+  				$("#total-price").fadeIn();
             },
             error: function () {
                 alert("가격 정보를 불러오는 데 실패했습니다.");
@@ -84,5 +89,8 @@ $(function() {
 	        behavior: 'smooth'
 		});
 	});
+	document.querySelector(".npay").addEventListener("click", function () {
+        window.location.href = "productOrder";
+    });
 	
 });

@@ -64,7 +64,8 @@
     align-items: center;
     font-size: 16px;
     margin: 0 52px 0 16px;
-    width: 38%;
+    width: 81%;
+    height: 50px;
 }
 #scrollToBottom {
     padding: 10px;
@@ -106,7 +107,7 @@ select {
     font-size: 16px;
     line-height: 50px;
     border-radius: 6px;
-    width: 64%;
+    width: 85%;
     height: 50px;
     padding: 10px;
     border: 1px solid #e6e6e6;
@@ -287,6 +288,16 @@ a {
 }
 .tie {
 	max-width: 120px;
-    width: 100%;
+    width: 81%;
     color: #828a8f;	
+}
+#total-price {
+    background-color: transparent !important; 
+}
+#price-text {
+	font-size: 23px;
+	color: #f2a900;
+}
+.buy-total {
+ 	font-size: 23px;	
 }
