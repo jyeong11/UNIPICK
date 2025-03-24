@@ -78,4 +78,12 @@ public class BuyerService {
 	public List<Map<String, Object>> getPrdOrder(Map<String, Object> prd_cd) {
 		return mapper.getPrdOrder(prd_cd);
 	}
+	// 구매자 데이터
+	public Map<String, Object> buyerInfo(Map<String, Object> buy) {
+		return mapper.buyerInfo(buy);
+	}
+	// 구매자 정보수정
+	public void buyerModify(Map<String, Object> buyerInfo) {
+		mapper.buyerModify(buyerInfo);
+	}
 }

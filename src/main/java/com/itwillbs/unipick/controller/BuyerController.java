@@ -67,6 +67,19 @@ public class BuyerController {
 		return "buyer/productOrder";
 	}
 	
+	// 회원수정페이지 이동
+	@GetMapping("modify")
+	public String modify() {
+		return "buyer/buyerModify";
+	}
+	
+	// 로그아웃 이동
+	@GetMapping("logout")
+	public String logout(HttpSession session) {
+	    session.invalidate();
+		return "redirect:buyerLogin";
+	}
+	
 	// 상품 상세조회 (조회)
 	@GetMapping("productDetail")
 	public String productDetail(@RequestParam("prd_cd") String prdCd, Model model) {
@@ -177,5 +190,24 @@ public class BuyerController {
 		prd_cd.put("buy_em", "sadsa@naver.com");
 		List<Map<String, Object>> prdList = buyService.getPrdOrder(prd_cd);
 		return prdList;
+	}
+	
+	// 구매자 정보
+	@ResponseBody
+	@GetMapping("buyerInfo")
+	public Map<String, Object> buyerInfo(HttpSession session, Map<String, Object> buy) {
+		
+		// 임시 아이디
+		session.setAttribute("id", "dol12@naver.com");
+		buy.put("buy_em", session.getAttribute("id"));
+		
+		return buyService.buyerInfo(buy);
+	}
+	
+	// 구매자 정보 수정
+	@ResponseBody
+	@PostMapping("buyermodify")
+	public void buyermodify(@RequestBody Map<String, Object> buyerInfo) {
+		buyService.buyerModify(buyerInfo);
 	}
 }

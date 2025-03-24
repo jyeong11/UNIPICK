@@ -173,7 +173,14 @@
 	
 	<!-- 구매자 정보 -->
 	<select id="buyerInfo" parameterType="map">
-		SELECT buy_nn
+		SELECT buy_em,
+			   buy_nm,
+			   buy_ph,
+			   buy_bd,
+			   buy_nn,
+			   buy_gn,
+			   buy_ht,
+			   buy_wt
 		  FROM buyers
 		 WHERE buy_em = #{buy_em};
 	</select>
@@ -192,5 +199,18 @@
           ON p.prd_cd = pi.prd_cd
 	   WHERE p.prd_cd = #{prd_cd};
 	</select>
+	
+	<!-- 구매자 정보 수정 -->
+	<update id="buyerModify" parameterType="map">
+		UPDATE buyers SET buy_nm = #{buy_nm},
+						  buy_ph = #{buy_ph},
+						  buy_bd = #{buy_bd},
+						  buy_nn = #{buy_nn},
+						  buy_gn = #{buy_gn},
+						  buy_ht = #{buy_ht},
+						  buy_wt = #{buy_wt},
+						  acc_pa = #{acc_pa}
+					WHERE buy_em = #{buy_em}
+	</update>
 	
   </mapper>

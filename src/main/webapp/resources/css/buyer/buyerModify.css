@@ -1,0 +1,84 @@
+@charset "UTF-8";
+
+.root {
+	max-width: 640px;
+    margin: 0px auto;
+}
+
+#top {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 64px;
+	font-size: 20px;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	font-size: 18px;
+}
+
+#email {
+	text-align: center;
+	padding-top: 24px;
+	font-weight: bold;
+}
+
+.input-value {
+    height: 46px;
+    border-radius: 10px;
+    font-size: 18px;
+    padding-left: 15px;
+}
+
+/* .essential { */
+/* 	color: red; */
+/* } */
+
+.field {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+#DeleteAccount {
+	background-color: #f5f6f8;
+	color: #4f5558;
+}
+
+#last-div {
+	display: flex;
+	justify-content: flex-end;
+	gap: 10px;
+}
+
+.gender-btn, .size-div {
+	display: flex;
+	gap: 10px;
+}
+
+.gender-btn button {
+	flex: 1;
+}
+
+button {
+	height: 50px;
+  	font-size: inherit;
+  	border-radius: 8px;
+  	cursor: pointer;
+}
+
+.gray {
+	color: gray;
+}
+
+.note {
+	font-size: 12px;
+}
+
+.top-btn {
+	color: #f2a900;
+	font-size: 35px;
+}

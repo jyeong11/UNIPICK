@@ -75,7 +75,7 @@ public class HomeController {
     
     private void createVisitorCookie(HttpServletResponse response, String visitorId) {
         Cookie cookie = new Cookie("visitorId", visitorId);
-        cookie.setMaxAge(60 * 60 * 24 * 365); // 1년 동안 유효
+        cookie.setMaxAge(24 * 60 * 60);
         cookie.setPath("/");
         response.addCookie(cookie);
     }

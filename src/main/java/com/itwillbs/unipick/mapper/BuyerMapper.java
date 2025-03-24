@@ -28,14 +28,15 @@ public interface BuyerMapper {
 	// 상품컬러
 	public List<Map<String, Object>> getColors(Map<String, Object> option);
 	// 찜 등록
-	void wishInsert(Map<String, Object> wish);
+	public void wishInsert(Map<String, Object> wish);
 	// 찜 해제
-	void wishDelete(Map<String, Object> wish);
+	public void wishDelete(Map<String, Object> wish);
 	// 사용자 정보
-	Map<String, Object> buyerInfo(Map<String, Object> myPage);
+	public Map<String, Object> buyerInfo(Map<String, Object> buy);
 	// 마이페이지 데이터
-	List<Map<String, Object>> myIcon();
+	public List<Map<String, Object>> myIcon();
 	// 상품 주문 
 	public List<Map<String, Object>> getPrdOrder(Map<String, Object> prd_cd);
-	
+	// 구매자 정보 수정
+	public void buyerModify(Map<String, Object> buyerInfo);
 }

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>마이페이지지롱</title>
+<title>UNIPICK</title>
 <!-- 구글 폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -44,8 +44,8 @@
 		<div class="buyer-info">
 			<span class="nickName"></span>
 			<div>
-				<button>회원정보 수정</button>
-				<button>로그아웃</button>
+				<button id="modify">회원정보 수정</button>
+				<button id="logout">로그아웃</button>
 			</div>
 		</div>
 	</div>

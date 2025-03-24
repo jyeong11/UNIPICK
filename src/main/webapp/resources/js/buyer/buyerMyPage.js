@@ -1,7 +1,15 @@
 $(function() {
 	
 	$('.myPageIcon').on('click', 'li', function() {
-		 window.location.href = $(this).data('value') 
+		 window.location.href = $(this).data('value'); 
+	});
+	
+	$('#modify').on('click', function() {
+		 window.location.href = "modify";
+	});
+	
+	$('#logout').on('click', function() {
+		 window.location.href = "logout";
 	});
 	
 	$.ajax({
