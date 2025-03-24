@@ -40,9 +40,12 @@ $(function() {
             	`);
 				$("#delprice-container").html(`
 					<div id="total"><h2>최종 결제금액</h2></div>
-					<div><span>총 상품금액</span><span>4654</span</div>
-					<div><span>총 배송비</span><span> 3,000</span</div>
-            	`);
+					<div class="price">
+						<div id="total-pr"><span>총 상품금액</span><span>${sum.toLocaleString()}원</span></div>
+						<div id="total-dp"><span>총 배송비</span><span> 3,000원</span></div>
+						<div id="prpr"><span>결제 예상 금액</span><span> 3,000원</span></div>
+					</div>            	
+				`);
 
 
 	        }

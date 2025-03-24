@@ -109,3 +109,25 @@ input[type=text] {
     max-width: 1160px;
     margin: 57px auto;
 }
+.total-pr span, .price span{
+    width: 80px;
+    font-size: 17px;
+    font-weight: 500;
+    padding-top: 6px;
+}
+#total-pr{
+	display: flex;
+	justify-content: space-between;
+	padding-bottom: 15px;
+}
+#total-dp{
+	display: flex;
+	justify-content: space-between;	
+}
+#prpr span{
+	 font-size: 26px;
+}
+#prpr {
+	display: flex;
+	justify-content: space-between;	
+} 
