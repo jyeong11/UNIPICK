@@ -1,13 +1,23 @@
 @charset "UTF-8";
 
-.two {
-	padding-top: 50px;
-    padding-bottom: 30px;
-}
 
-.IconList-div, .two {
+
+.IconList-div, .two, .buyer-info {
 	width: 1200px;
 	margin: auto;
+}
+
+.two, .buyer-info {
+	padding-bottom: 30px;
+}
+
+.two {
+	padding-top: 50px;
+}
+
+.buyer-info {
+	display: flex;
+    justify-content: space-between;
 }
 
 .myPageIcon {

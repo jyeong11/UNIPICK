@@ -31,6 +31,8 @@ public interface BuyerMapper {
 	void wishInsert(Map<String, Object> wish);
 	// 찜 해제
 	void wishDelete(Map<String, Object> wish);
+	// 사용자 정보
+	Map<String, Object> buyerInfo(Map<String, Object> myPage);
 	// 마이페이지 데이터
 	List<Map<String, Object>> myIcon();
 }

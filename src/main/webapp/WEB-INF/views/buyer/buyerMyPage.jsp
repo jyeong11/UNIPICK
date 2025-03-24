@@ -41,10 +41,12 @@
 	</div>
 	
 	<div>
-		<div>
-			<span class="nickname"></span>
-			<button>회원정보 수정</button>
-			<button>로그아웃</button>
+		<div class="buyer-info">
+			<span class="nickName"></span>
+			<div>
+				<button>회원정보 수정</button>
+				<button>로그아웃</button>
+			</div>
 		</div>
 	</div>
 	

@@ -25,6 +25,7 @@ $(function() {
 									.join('');
 								
 				$('.myPageIcon').append(icon);
+				$('.nickName').append(res.buyer.buy_nn);
 				
         	},
 			error: function(xhr, status, error) {

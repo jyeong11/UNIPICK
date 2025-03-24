@@ -159,4 +159,11 @@
 		 ORDER BY lev_so
 	</select>
 	
+	<!-- 구매자 정보 -->
+	<select id="buyerInfo" parameterType="map">
+		SELECT buy_nn
+		  FROM buyers
+		 WHERE buy_em = #{buy_em};
+	</select>
+	
   </mapper>
