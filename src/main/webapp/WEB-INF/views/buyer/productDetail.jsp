@@ -177,7 +177,6 @@
 	</div>
 	<script>
     	var prdCd = "${prd.prd_cd}";
-    	
 	</script>
 </body>
 </html>

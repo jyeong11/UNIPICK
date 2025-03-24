@@ -90,7 +90,7 @@ $(function() {
 		});
 	});
 	document.querySelector(".npay").addEventListener("click", function () {
-        window.location.href = "productOrder";
+        window.location.href = `productOrder?prd_cd=${prdCd}`;
     });
 	
 });

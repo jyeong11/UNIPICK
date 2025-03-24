@@ -74,4 +74,8 @@ public class BuyerService {
 		myPageDatas.put("myIcon", mapper.myIcon());
 		return myPageDatas;
 	}
+	// 상품 주문
+	public List<Map<String, Object>> getPrdOrder(Map<String, Object> prd_cd) {
+		return mapper.getPrdOrder(prd_cd);
+	}
 }

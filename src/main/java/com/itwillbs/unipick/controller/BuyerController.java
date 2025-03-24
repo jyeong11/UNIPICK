@@ -61,6 +61,11 @@ public class BuyerController {
 	public String myPage() {
 		return "buyer/buyerMyPage";
 	}
+	// 주문페이지
+	@GetMapping("productOrder")
+	public String productOrder() {
+		return "buyer/productOrder";
+	}
 	
 	// 상품 상세조회 (조회)
 	@GetMapping("productDetail")
@@ -154,7 +159,6 @@ public class BuyerController {
 	}
 	
 	// 마이페이지 데이터
-	
 	@ResponseBody
 	@GetMapping("myPageData")
 	public Map<String, Object> myPageData(HttpSession session, Map<String, Object> myPage) {
@@ -164,5 +168,14 @@ public class BuyerController {
 		myPage.put("buy_em", session.getAttribute("id"));
 		
 		return buyService.myPageData(myPage);
+	}
+	
+	// 상품 주문
+	@ResponseBody
+	@PostMapping("productOrder")
+	public List<Map<String, Object>> productOrder(@RequestBody Map<String, Object> prd_cd) {
+		prd_cd.put("buy_em", "sadsa@naver.com");
+		List<Map<String, Object>> prdList = buyService.getPrdOrder(prd_cd);
+		return prdList;
 	}
 }

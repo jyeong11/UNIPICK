@@ -35,4 +35,7 @@ public interface BuyerMapper {
 	Map<String, Object> buyerInfo(Map<String, Object> myPage);
 	// 마이페이지 데이터
 	List<Map<String, Object>> myIcon();
+	// 상품 주문 
+	public List<Map<String, Object>> getPrdOrder(Map<String, Object> prd_cd);
+	
 }

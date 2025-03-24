@@ -178,4 +178,19 @@
 		 WHERE buy_em = #{buy_em};
 	</select>
 	
+<!-- 	상품 주문 -->
+	<select id="getPrdOrder" parameterType="map">
+	 SELECT p.prd_cd, s.sel_nm, p.prd_nm, 
+	  		CONCAT(ROUND(((p.prd_op - p.prd_sp) / p.prd_op) * 100, 0), '%') AS dc,
+	  		FORMAT(p.prd_op, 0) AS prd_op, 
+	  		FORMAT(p.prd_sp, 0) AS prd_sp,
+	  		pi.fil_pt
+	    FROM products p 
+	    JOIN sellers s
+          ON p.sel_id = s.sel_id
+        JOIN product_images pi
+          ON p.prd_cd = pi.prd_cd
+	   WHERE p.prd_cd = #{prd_cd};
+	</select>
+	
   </mapper>
