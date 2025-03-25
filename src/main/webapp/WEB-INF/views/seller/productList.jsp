@@ -23,6 +23,8 @@
 <link href="${pageContext.request.contextPath }/resources/public/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath }/resources/public/vendor/datatables/datatables.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath }/resources/css/seller/productRegister.css" rel="stylesheet">
+
+<script src="${pageContext.request.contextPath }/resources/js/seller/prdList.js"></script>
 </head>
 <body id="page-top">
 <div id="wrapper">
@@ -36,7 +38,7 @@
 					<!-- Sidebar Toggle (Mobile Topbar) -->
 					<button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3"><i class="fa fa-bars"></i></button>
 					<!-- Title -->
-					<h4 class="m-0 text-gray-900">판매자 대시보드</h4>
+					<h4 class="m-0 text-gray-900">상품 리스트</h4>
 					<!-- Topbar Navbar -->
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item dropdown no-arrow"><a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"aria-expanded="false">
@@ -82,62 +84,49 @@
                                 <div class="card-header py-3">
                                     <h5 class="m-0 font-weight-bold text-primary">상품 목록</h5>
                                 </div>
-                                <div class="card-body">
-                                	<div class="search-wrap border">
-                                		<section class="d-flex search-inner">
-	                                		<div class="col-5 px-4 search-box">
-			                                	<div class="search-ttl">상태별</div>
-											    <div class="category-filter input-group">
-											        <div class="form-check">
-													    <input class="form-check-input" id="reset" type="radio" name="status"  value="" checked>
-													    <label class="form-check-label" for="reset">전체</label>
-													</div>
-											        <div class="form-check ml-3">
-													    <input class="form-check-input" id="status0" type="radio" name="status" value="0">
-													    <label class="form-check-label" for="status0">판매중</label>
-													</div>
-											        <div class="form-check ml-3">
-													    <input class="form-check-input" id="status1" type="radio" name="status" value="1">
-													    <label class="form-check-label" for="status1">거래중</label>
-													</div>
-													<div class="form-check ml-3">
-													    <input class="form-check-input" id="status2" type="radio" name="status" value="2">
-													    <label class="form-check-label" for="status2">예약중</label>
-													</div>
-													<div class="form-check ml-3">
-													    <input class="form-check-input" id="status3" type="radio" name="status" value="3">
-													    <label class="form-check-label" for="status3">거래완료</label>
-													</div>
-													<div class="form-check ml-3">
-													    <input class="form-check-input" id="status4" type="radio" name="status" value="4">
-													    <label class="form-check-label" for="status4">신고처리</label>
-													</div>
-												</div>
-										    </div>
-										    <div class="col-3 px-4 search-box">
-			                                	<div class="search-ttl">기간별</div>
-												<div class="input-group align-items-center justify-content-center schDate-wrap">
-													<input type="text" class="form-control rounded-sm mr-2" placeholder="날짜 선택" value="" name="schDate" id="schDate"  autocomplete="off"/>
-													<button class="btn btn-primary" id="searchDateBtn" type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
-													<button class="btn btn-success ml-2" id="initDateBtn" type="button"><i class="fa-solid fa-rotate"></i></button>
-												</div>
-										    </div>
-										    <div class="col-4 px-4 search-box">
-						                        <div class="input-group">
-						                            <input type="text" id="searchKeyword" class="form-control bg-light border small" name="keyword_search" placeholder="회원ID, 상품명, 상품소개, 상태 검색" aria-label="Search" aria-describedby="basic-addon2">
-						                            <div class="input-group-append">
-						                                <button class="btn btn-primary" id="searchBtn" type="button">검색</button>
-						                            </div>
-						                        </div>
-					                        </div>
-									   	</section>
-									</div>
+    						<div class="container">
+							<div class="row align-items-start justify-content-end">
+								<div class="col-2">
+									<select class="form-select" id="noticeSearchKind">
+										<option value="option1">상품명</option>
+										<option value="option2">카테고리</option>
+										<option value="option3">상품코드</option>
+									</select>
+								</div>
+								<div class="col-3">
+									<input type="text" id="noticeSearchWord" class="form-control" placeholder="상품명, 카테고리, 상품코드로 검색">
+								</div>
+								<div class="col-1">
+									<button id="noticeSearch" class="btn btn_main_color mb-3" type="button">조회</button>
+								</div>
+							</div>
+						</div>
                                 	<div class="table-responsive">
 		                                <table class="table table-bordered compact" id="productList" width="100%" cellspacing="0">
 		                                    <thead></thead>
 		                                    <tbody></tbody>
 		                                </table>
 		                          	</div>
+		                          						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table table-bordered">
+									<thead align="center">
+										<tr class="project_table_tr">
+											<th>번호</th>
+											<th>상품명</th>
+											<th>판매가</th>
+											<th>카테고리</th>
+											<th>상태</th>
+											<th>재고</th>
+											<th>등록일</th>
+											<th>수정일</th>
+										</tr>
+									</thead>
+									<tbody id="noticeListTable" align="center">
+									</tbody>
+								</table>
+							</div>
+							<section id="pageList"></section>
                                 </div>
                             </div>
                         </div>
@@ -154,7 +143,12 @@
 		</footer><!-- End of Footer -->
 	</div><!-- End of Page Wrapper -->
 </div>
-
+<script>
+  // '.notice-title'를 클릭하면 '.notice-list'에 .show 클래스를 토글
+  document.querySelector('.notice-title').addEventListener('click', function() {
+    document.querySelector('.notice-list').classList.toggle('show');
+  });
+</script>
 <!-- --------------------------------------------------------------- -->
 <script>
 document.addEventListener("DOMContentLoaded", function () {
