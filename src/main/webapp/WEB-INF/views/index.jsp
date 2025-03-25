@@ -18,6 +18,11 @@
 <link href="${pageContext.request.contextPath }/resources/css/footer.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/buyer/buyerbest.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/recommendation.css" rel="stylesheet" type="text/css">
+
+<!-- js -->
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/index.js"></script>
+
 <!-- Banner -->
 <link href="${pageContext.request.contextPath }/resources/css/swiper-bundle.min.css" rel="stylesheet" type="text/css">
 <!-- Favicon -->
@@ -61,5 +66,4 @@
 		<jsp:include page="./inc/footer.jsp"></jsp:include>
 	</div>
 </body>
-
 </html>

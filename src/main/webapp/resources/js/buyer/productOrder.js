@@ -9,9 +9,11 @@ $(function() {
 		contentType: 'application/json',
 		success: function(res){
 			let sum = 0;
-			let totalShippingFee = 0;
+			let totalSf = 0;
+		
 	        if (res.length > 0) {
 	            res.forEach(function(item) {
+					let formatPrdSf = new Intl.NumberFormat().format(item.prd_sf);
 	                $("#order-container").append(`
 						<div class="ord-title">
 	                    	<div class="order-selnm">${item.sel_nm}</div>
@@ -21,18 +23,20 @@ $(function() {
 	                    	<div class="order-img">
 	                        	<img src="${contextPath}/resources${item.fil_pt}">
 	                    	</div>
-							<div class="prd">
-								<div class="prd-nm">${item.prd_nm}</div>
-								<div class="prd-sp">${item.prd_sp}원</div>
 							<div>
-						</div>
-						<div class="prd">
-								<div class="prd-sf">배송비</div>
-								<div class="prd-sf-wrap">${item.prd_sf}원</div>
-							<div>
+								<div class="prd">
+									<div class="prd-nm">${item.prd_nm}</div>
+									<div class="prd-sp">${item.prd_sp}원</div>
+								</div>
+								<div class="prd-1">
+									<div class="prd-sf">배송비</div>
+									<div class="prd-sf-wrap">${formatPrdSf}원</div>
+								</div>
+							</div>
 						</div>
 	                `);
 					 sum += parseInt(item.prd_sp.replace(',', ''));
+					 totalSf += item.prd_sf
 	            });
 				$("#orderInfo-container").html(`
                		 <div class="ttpr">총 주문금액:  ${sum.toLocaleString()}원</div>
@@ -50,7 +54,7 @@ $(function() {
 					<div id="total"><h2>최종 결제금액</h2></div>
 					<div class="price">
 						<div id="total-pr"><span>총 상품금액</span><span>${sum.toLocaleString()}원</span></div>
-						<div id="total-dp"><span>총 배송비</span><span> 3,000원</span></div>
+						<div id="total-dp"><span>총 배송비</span><span>${totalSf.toLocaleString()}원</span></div>
 					</div>
 					<div id="prpr"><span>결제 예상 금액</span><span id="sum">${sum.toLocaleString()}원</span></div>            	
 				`);
@@ -59,6 +63,7 @@ $(function() {
 					<div class="price">
 						<div id="payment"><span>빠른페이</span></div>
 					</div>
+					<div class="card-fisst"></div>
 					<div class="card-first">
 						<div class="tie">
 							<div id="pmregister"><span>유니페이</span></div>
@@ -98,7 +103,93 @@ $(function() {
             $("#submit-btn").prop("disabled", true).removeClass("active");
         }
     }
+	// 버튼 클릭시 금융원인증
 	$(document).on("click", "#openButton", function () {
-    	window.open("payment", "_blank", "width=380,height=670");
+    	let url = "https://testapi.openbanking.or.kr/oauth/2.0/authorize?response_type=code&client_id=8bb0ac90-e493-4346-9f78-c97710692e4b&redirect_uri=http://localhost:8080/UNIPICK&state=1a5b3w2s5x9q7w8e4a5h6n2j1k8u6yfc&auth_type=0&scope=login inquiry transfer";
+    	const popup = window.open(url, "_blank", "width=380,height=670");
+
+    	const popupClosed = setInterval(() => {
+	        if (popup.closed) {
+	            clearInterval(popupClosed); // 팝업 닫힘 확인
+	            // URL에서 code를 추출하여 서버로 전달
+	            const urlParams = new URLSearchParams(popup.location.search);
+	            const code = urlParams.get("code");
+	            if (code) {
+	                // 코드가 있을 경우 서버에 POST 요청하여 Access Token을 가져옴
+	                getAccessToken(code);
+					popup.close();
+					debugger;
+	            } else {
+	                alert('인증에 실패했습니다.');
+	            }
+			}
+		});
 	});
+
+	// 서버에 인증 코드를 보내 Access Token을 요청
+	function getAccessToken(code) {
+	    fetch('/UNIPICK/getToken', {
+	        method: 'POST',
+	        headers: {
+	            'Content-Type': 'application/json',
+	        },
+	        body: JSON.stringify({ code: code }),  // 인증 받은 code를 서버로 전달
+	    })
+	    .then(res => res.json())
+	    .then(data => {
+debugger;
+	        if (data.access_token) {
+	            // Access Token이 정상적으로 받았을 경우
+	            accountInfo(data.access_token);
+	        } else {
+	            alert('Access Token을 받을 수 없습니다.');
+	        }
+	    })
+	    .catch(error => {
+	        console.error('Error:', error);
+	        alert('서버 통신 오류가 발생했습니다.');
+	    });
+}
+
+	// 계좌 정보 요청
+	function accountInfo(accessToken) {
+	    fetch('getAccount', {
+	        method: 'POST',
+	        headers: {
+	            'Authorization': 'Bearer ' + accessToken,  // Bearer Token을 Authorization 헤더에 추가
+	            'Content-Type': 'application/json',
+	        }
+	    })
+	    .then(res => res.json())
+	    .then(data => {
+	        if (data.success) {
+	            const accInfoHTML = `
+	                <div id="acc-info">
+	                    <h3>${data.bank_nm}</h3>
+	                    <p>계좌번호: ${data.acc_num}</p>
+	                </div>
+	            `;
+	            $("#payment-container").html(`
+	                <div id="payment"><h2>결제수단</h2></div>
+	                ${accInfoHTML}
+	                <div class="price">
+	                    <div id="payment"><span>빠른페이</span></div>
+	                </div>
+	                <div class="card-fisst"></div> <!-- 여기서 계좌 정보를 삽입 -->
+	                <div class="card-first">
+	                    <div class="tie">
+	                        <div id="pmregister"><span>유니페이</span></div>
+	                        <button id="openButton" class="add_btn"> + 결제 수단 등록</button>
+	                    </div>
+	                </div>
+	            `);
+	        } else {
+	            alert('계좌번호를 불러오는데 실패');
+	        }
+	    })
+	    .catch(error => {
+	        console.error('Error:', error);
+	        alert('계좌 정보를 가져오는 데 오류가 발생했습니다.');
+	    });
+	}
 });

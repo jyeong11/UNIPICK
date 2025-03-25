@@ -110,7 +110,7 @@ input[type=text] {
     max-width: 1160px;
     margin: 57px auto;
 }
-.total-pr span, .price span{
+.total-pr span{
     width: 80px;
     font-size: 17px;
     font-weight: 500;
@@ -229,4 +229,13 @@ input[type="checkbox"]:checked::before {
 .tie {
 	text-align: center;
     padding-top: 22px;
+}
+.prd-1 {
+	display: flex;
+    justify-content: space-between;
+    padding-top: 48px;
+    font-size: 1.1em;
+}
+.prd-sf {
+	padding-left: 25px;
 }
