@@ -39,4 +39,6 @@ public interface BuyerMapper {
 	public List<Map<String, Object>> getPrdOrder(Map<String, Object> prd_cd);
 	// 구매자 정보 수정
 	public void buyerModify(Map<String, Object> buyerInfo);
+	// 리뷰 정보
+	public List<Map<String, Object>> reviewInfo(Map<String, Object> buyer);
 }

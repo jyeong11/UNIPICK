@@ -5,7 +5,6 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>UNIPICK</title>
-
 <!-- 구글 폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,15 +18,14 @@
 <link href="${pageContext.request.contextPath }/resources/css/top.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/footer.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/buyer/buyerMenuBar.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resources/css/buyer/buyerProductList.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/buyer/buyerReview.css" rel="stylesheet" type="text/css">
 
 <!-- Favicon -->
 <link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
 
 <!-- script -->
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/buyer/buyerProductList.js"></script>
-
+<script src="${pageContext.request.contextPath }/resources/js/buyer/buyerReview.js"></script>
 </head>
 <body>
 	<div id="topNav">
@@ -38,21 +36,21 @@
 	</div>
 	
 	<div class="content">
-		<div class="left-category">
-			<ul class="category-data">
-				<div class="first-cate">
-					<a href="productList?lev_cd=All&category=전체">전체</a>
-				</div>
-			</ul>
-		</div>
 		<div>
 			<div class = "two">
-				<h2 id="category"></h2>
-				<select id="product-sort"></select>
+				<h2>나의 리뷰</h2>
 			</div>
-			<section>
-				<div id = "img12"></div>
-			</section>
+			<div id="cards">
+				<div class="card">
+					<div id="nick">닉네임</div>
+					<div id="date" style="text-align: right">날짜</div>
+					<div id="star">별 평점</div>
+					<div id="prdName">상품명</div>
+					<div id="reviewImg">리뷰이미지</div>
+					<div id="options">옵션정보, 키, 몸무게</div>
+					<div id="reivewCon">리뷰내용</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	

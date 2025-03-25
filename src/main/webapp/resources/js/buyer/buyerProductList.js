@@ -75,6 +75,8 @@ $(function() {
 	// 상품리스트
 	function productList(){  
 		
+		const contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2));
+		
 		let data = {lev_cd : cateCode,
 					kind : $('#product-sort').val()};
 					
@@ -86,14 +88,12 @@ $(function() {
 			data: JSON.stringify(data),
 			contentType: "application/json",
 	        success: function(res) {
-				let contextPath = "${pageContext.request.contextPath}";
-//				<img src="${prd.fil_nm}" alt="${prd.fil_nm}">
-				debugger;
+				
 				let row = res.map(prd => {let heartClass = prd.buy_em ? 'fa-solid' : 'fa-regular';
 										 return `<div class="product-posting">
-													<a href="qweqwe">
+													<a href="productDetail?prd_cd=${prd.prd_cd}">
 														<div class="prdImg-div">
-															<img src="/UNIPICK/resources/images/favicon_b.png" class="sample">
+															<img src="${contextPath}/resources${prd.fil_pt}" alt="${prd.fil_nm}" class="prd-img">
 															<i class="${heartClass} fa-heart heart"></i>
 														</div>
 														<div class="prdInfo-div">
@@ -101,7 +101,7 @@ $(function() {
 															<div>${prd.prd_nm}</div>
 															<div>${prd.prd_op}</div>
 															<div>${prd.prd_sp}</div>
-															<div>${prd.prd_bd}</div>
+															<div>뱃지 : ${prd.prd_bd}</div>
 															<input type="hidden" value="${prd.prd_cd}">
 														</div>
 													</a>

@@ -1,7 +1,9 @@
 $(function() {
 	
-	let gen = "";
+	let gen = '';
+	let effectiveness = true;
 	
+	// 성별 클릭시
 	$('.female').on('click', function(){
 		$(this).removeClass("gray");
     	$('.male').addClass("gray");
@@ -12,14 +14,44 @@ $(function() {
     	$('.female').addClass("gray");
 		gen = "남";
 	});
+	
+	// 유효성 검사
+	// 이름
+	$('#name').on('keyup', function() {
+    	checkName($(this));
+	});
+	// 닉네임
+	$('#nickname').on('keyup', function() {
+    	checkNick($(this));
+	});
+	// 휴대폰번호
+	$('#phoneNumber').on('keyup', function() {
+		checkPhone($(this));
+	})
+	// 생년월일
+	$('#birthDate').on('keyup', function() {
+		checkBirth($(this));
+	})
+	// 키
+	$('#heightSize').on('keyup', function() {
+		checkHeight($(this));
+	})
+	$('#weightSize').on('keyup', function() {
+		checkWeight($(this));
+	})
+	
+	
+	// 탈퇴하기 클릭시
 	$('#DeleteAccount').on('click', function(){
 		alert("탈퇴할꺼얌");
 	});
 	
+	// 수정하기 클릭시
 	$('#modify').on('click', function() {
 		modify();
 	})
 	
+	// 초기 데이터
 	$.ajax({
 			url: "buyerInfo",
 			method: "GET",
@@ -47,8 +79,8 @@ $(function() {
 	        }
 		});
 		
-	
-	function modify() { 
+	// 수정
+	function modify() {
 		
 		data = {
 			buy_em : $('#email').text(),
@@ -64,6 +96,11 @@ $(function() {
 		};
 		debugger;
 		
+		if(!effectiveness){
+			alert('정보를 올바르게 입력 후 수정하기를 눌러주세요.');
+			return;
+		}
+		
 		$.ajax({
 			type: "POST",
 	        url: "buyermodify",
@@ -78,10 +115,149 @@ $(function() {
 	        }
 			
 		})
-		
-		
 	}
 	
+	// 유효성 검사
+	// 이름
+	function checkName(name) {
+		let nameValue = name.val().trim();
+	    let errorMsg = '';
+		effectiveness = false;
 	
+	    if (!nameValue) {
+	        errorMsg = '이름을 입력해주세요.';
+	    } else if (nameValue.length < 2 || nameValue.length > 5) {
+	        errorMsg = '이름은 2글자 이상 5글자 이하로 입력해주세요.';
+	    } else if (!/^[가-힣]+$/.test(nameValue)) {
+	        errorMsg = '이름은 한글만 입력 가능합니다.';
+	    }
+	
+	    if (errorMsg) {
+	        $('#nameError').text(errorMsg).css('color', 'red');
+	    } else {
+			effectiveness = true;
+	        $('#nameError').text('');
+	    }
+	}
+	
+	// 닉네임
+	function checkNick(nick) {
+		let nickValue = nick.val().trim();
+		let errorMsg = '';
+		effectiveness = false;
+		
+		if (!nickValue) {
+	        errorMsg = '닉네임을 입력해주세요.';
+	    } else if (nickValue.length < 2 || nickValue.length > 10) {
+	        errorMsg = '닉네임은 2글자 이상 10글자 이하로 입력해주세요.';
+	    }
+
+	    if (errorMsg) {
+	        $('#nickError').text(errorMsg).css('color', 'red');
+	    } else {
+			effectiveness = true;
+	        $('#nickError').text('');
+	    }
+	}
+	
+	// 핸드폰
+	function checkPhone(phone) {
+	    let phoneValue = phone.val().trim();
+	    let errorMsg = '';
+		effectiveness = false;
+	
+	    if (!phoneValue) {
+	        errorMsg = '휴대폰 번호를 입력해주세요.';
+	    } else {
+	        const phoneRegex = /^(01[016789])-?(\d{3,4})-?(\d{4})$/;
+	        if (!phoneRegex.test(phoneValue)) {
+	            errorMsg = '유효한 휴대폰 번호를 입력해주세요.';
+	        }
+	    }
+	
+	    if (errorMsg) {
+	        $('#phoneError').text(errorMsg).css('color', 'red');
+	    } else {
+			effectiveness = true;
+	        $('#phoneError').text('');
+	    }
+	}
+	
+	// 생년월일	
+	function checkBirth(birthDate) {
+	    let birthDateValue = birthDate.val().trim();
+	    let errorMsg = '';
+		effectiveness = false;
+	
+	    if (!birthDateValue) {
+	        errorMsg = '생년월일을 입력해주세요.';
+	    } else {
+	        const birthDateRegex = /^[0-9]{6}$/;
+	        if (!birthDateRegex.test(birthDateValue)) {
+	            errorMsg = '유효한 생년월일(YYMMDD)을 입력해주세요.';
+	        } else {
+	            // 날짜가 실제로 존재하는 유효한 날짜인지 확인
+	            const year = parseInt(birthDateValue.substr(0, 2), 10);
+	            const month = parseInt(birthDateValue.substr(2, 2), 10);
+	            const day = parseInt(birthDateValue.substr(4, 2), 10);
+	
+	            const fullYear = (year < 30 ? year + 2000 : year + 1900);
+	
+	            const date = new Date(fullYear, month - 1, day);
+	            if (date.getFullYear() !== fullYear || date.getMonth() + 1 !== month || date.getDate() !== day) {
+	                errorMsg = '유효한 날짜가 아닙니다.';
+	            }
+	        }
+	    }
+	
+	    if (errorMsg) {
+	        $('#birthError').text(errorMsg).css('color', 'red');
+	    } else {
+			effectiveness = true;
+	        $('#birthError').text('');
+	    }
+	}
+
+	// 키
+	function checkHeight(height) {
+	    let heightValue = height.val().trim();
+	    let errorMsg = '';
+	    effectiveness = false;
+	
+	    const numberRegex = /^[0-9]{3}$/;
+
+        const number = parseInt(heightValue, 10);
+        if (!numberRegex.test(heightValue) || number < 100 || number > 250) {
+            errorMsg = '키 또는 몸무게의 범위가 벗어났습니다.';
+        }
+
+	    if (errorMsg) {
+	        $('#sizeError').text(errorMsg).css('color', 'red');
+	    } else {
+			effectiveness = true;
+	        $('#sizeError').text('');
+	    }
+	}
+
+	// 몸무게
+	function checkWeight(weight) {
+	    let weightValue = weight.val().trim();
+	    let errorMsg = '';
+	    effectiveness = false;
+	
+	    const numberRegex = /^[0-9]{2,3}$/;  
+
+        const number = parseInt(weightValue, 10);
+        if (!numberRegex.test(weightValue) || number < 40 || number > 150) {
+            errorMsg = '키 또는 몸무게의 범위가 벗어났습니다.';
+        }
+	    
+	    if (errorMsg) {
+	        $('#sizeError').text(errorMsg).css('color', 'red');
+	    } else {
+	        effectiveness = true;
+	        $('#sizeError').text('');
+	    }
+	}
 	
 });

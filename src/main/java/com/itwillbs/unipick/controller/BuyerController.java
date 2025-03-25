@@ -5,7 +5,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.ognl.ASTProject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.annotation.RequestScope;
 
 import com.itwillbs.unipick.service.AdminService;
 import com.itwillbs.unipick.service.BuyerService;
@@ -104,6 +102,12 @@ public class BuyerController {
 	@GetMapping("productList")
 	public String productList() {
 		return "buyer/buyerProductList";
+	}
+	
+	// 리뷰 페이지 이동
+	@GetMapping("myReview")
+	public String myReview() {
+		return "buyer/buyerReview";
 	}
 	
 	// 상단 메뉴바 공통코드
@@ -215,5 +219,16 @@ public class BuyerController {
 	@PostMapping("buyermodify")
 	public void buyermodify(@RequestBody Map<String, Object> buyerInfo) {
 		buyService.buyerModify(buyerInfo);
+	}
+	
+	// 리뷰 정보
+	@ResponseBody
+	@GetMapping("reviewData")
+	public List<Map<String, Object>> reviewData(HttpSession session, Map<String, Object> buyer) {
+		// 임시 아이디
+		session.setAttribute("id", "dol12@naver.com");
+		buyer.put("buy_em", session.getAttribute("id"));
+		
+		return buyService.reviewInfo(buyer);
 	}
 }

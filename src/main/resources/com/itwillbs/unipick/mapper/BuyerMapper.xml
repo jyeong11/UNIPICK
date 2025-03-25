@@ -213,4 +213,23 @@
 					WHERE buy_em = #{buy_em}
 	</update>
 	
+	<!-- 리뷰 정보 -->
+	<select id="reviewInfo" parameterType="map">
+		SELECT b.buy_nn,
+			   DATE(r.rev_ca) as rev_ca,
+			   r.rev_rt,
+			   p.prd_nm,
+			   c.cod_nm,
+			   o.clr_nm,
+			   b.buy_ht,
+			   b.buy_wt,
+			   r.rev_ct
+		  FROM reviews r
+		  JOIN buyers b ON r.buy_em = b.buy_em
+		  JOIN options o ON r.opt_id = o.opt_id
+		  JOIN products p ON o.prd_cd = p.prd_cd
+		  JOIN common_detailcode c ON o.siz_nm = c.cod_cd
+		 WHERE r.buy_em = #{buy_em};
+	</select>
+	
   </mapper>

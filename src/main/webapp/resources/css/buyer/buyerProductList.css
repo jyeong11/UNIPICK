@@ -104,10 +104,9 @@
 	margin:0
 }
 
-/* 나중에 없애기 */
-.sample {
-	width: 242px;
-	height: 242px;
+.prd-img {
+	width: 280px;
+	height: auto;
 }
 
 .heart {

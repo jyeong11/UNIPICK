@@ -86,4 +86,8 @@ public class BuyerService {
 	public void buyerModify(Map<String, Object> buyerInfo) {
 		mapper.buyerModify(buyerInfo);
 	}
+	// 리뷰 정보
+	public List<Map<String,Object>> reviewInfo(Map<String, Object> buyer) {
+		return mapper.reviewInfo(buyer);
+	}
 }
