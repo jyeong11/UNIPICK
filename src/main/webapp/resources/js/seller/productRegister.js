@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
       return false;
     }
     if (!$("#item-regi-title-text").val()) {
-      alert("제목을 입력해주세요!");
+      alert("상품명을 입력해주세요!");
       $("#item-regi-title-text").focus();
       return false;
     }
@@ -186,6 +186,7 @@ document.addEventListener("DOMContentLoaded", function () {
       prd_qt: $("#stock_number").val() || 0,  // null 처리 (기본값 0)
       prd_ds: $("#prd_ds_checkbox").is(":checked") ? 1 : 0,
       prd_bd: $("#some_element").val(),
+	  prd_sf: $("#delivery_price").val()|| 0,
 	  prd_ct: content,
 	  sizes: [],   // 사이즈 배열
       colors: [], // 색상 배열
@@ -258,14 +259,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // 배송비 노출 토글
-  $("#shipping-fee-enable, #shipping-fee-disable").change(function () {
-    if ($("#shipping-fee-enable").is(":checked")) {
-      $("#list_price").show();
-    } else {
-      $("#list_price").hide().val(0);
-    }
-  });
+//  // 배송비 노출 토글
+//  $("#shipping-fee-enable, #shipping-fee-disable").change(function () {
+//    if ($("#shipping-fee-enable").is(":checked")) {
+//      $("#list_price").show();
+//    } else {
+//      $("#list_price").hide().val(0);
+//    }
+//  });
 
 document.getElementById("add-option").addEventListener("click", function () {
     const container = document.getElementById("option-container");
