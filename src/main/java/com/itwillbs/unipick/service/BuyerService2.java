@@ -13,18 +13,45 @@ public class BuyerService2 {
 	@Autowired
 	BuyerMapper2 mapper;
 	
+	public Map<String, Object> BuyerLogin(Map<String, Object> logindata) {
+		return mapper.BuyerLogin(logindata);
+	}
 	
-//	 // 이메일 중복 체크: 중복이면 true, 아니면 false
-//    public boolean checkEmail(String email) {
-//        return mapper.checkEmail(email) > 0;
-//    }
-//
-//    // 회원가입 처리: 중복되지 않은 경우 회원 정보 등록
-//    public boolean registerMember(Member member) {
-//        if (checkEmail(member.getEmail())) {
-//            return false; // 중복된 이메일 존재 시 등록 불가
-//        }
-//        // 실제 서비스에서는 비밀번호 암호화 적용 권장
-//        return mapper.insertMember(member) > 0;
-//    }
+
+    public boolean BuyEmail(String email) {
+        return mapper.BuyEmail(email) > 0;
+    }
+    
+    // 사용자 등록
+    public boolean registerBuyer(String email, String password, String phone) {
+        try {
+            mapper.insertBuyer(email, password, phone); // 사용자 정보를 DB에 삽입
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }
+	
+	/*// 이메일 비밀번호 보내기
+		public boolean resetPassword(String empNo, String empEm) {
+
+			EmployeeVO employee = loginMapper.findEmployeeByNoAndEmail(empNo, empEm);
+
+			if (employee == null) {
+				return false;
+			}
+
+			// 임시 비밀번호 생성 및 암호화
+			String tempPassword = generateTempPassword();
+		    String encryptedPassword = passwordEncoder.encode(tempPassword);
+		    mapper.updatePassword(empNo, encryptedPassword);
+
+			// 이메일 발송
+			String subject = "팀어센드 임시 비밀번호 안내";
+			String content = "임시 비밀번호: " + tempPassword + "<br>로그인 후 비밀번호를 변경해주세요.";
+			//mailClient.sendMail(empEm, subject, content);
+			
+			new Thread(() -> mailClient.sendMail(employee.getEmp_em(), subject, content)).start();
+			return true;
+		}*/

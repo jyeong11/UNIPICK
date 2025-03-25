@@ -4,6 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+
 import com.itwillbs.unipick.service.OtpService;
 
 @RestController
@@ -12,8 +14,12 @@ public class OtpController {
 
     private final OtpService otpService;
 
-    public OtpController(OtpService otpService) {
+    // HttpSession을 컨트롤러에 주입
+    private final HttpSession session;
+
+    public OtpController(OtpService otpService, HttpSession session) {
         this.otpService = otpService;
+        this.session = session;
     }
 
     // OTP 전송 요청
@@ -31,9 +37,15 @@ public class OtpController {
 
     // OTP 검증 요청
     @PostMapping("/verify")
-    public ResponseEntity<String> verifyOtp(@RequestParam("phone") String phone,
-                                            @RequestParam("otp") String otp) {
-        boolean verified = otpService.verifyOtp(phone, otp);
+    public ResponseEntity<String> verifyOtp(@RequestParam("otp") String otp) {
+        // 세션에서 userPhone 값을 가져오기
+        String userPhone = (String) session.getAttribute("userPhone");
+
+        if (userPhone == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("세션에서 전화번호를 찾을 수 없습니다.");
+        }
+
+        boolean verified = otpService.verifyOtp(userPhone, otp);
         if (verified) {
             return ResponseEntity.ok("인증이 완료되었습니다.");
         } else {

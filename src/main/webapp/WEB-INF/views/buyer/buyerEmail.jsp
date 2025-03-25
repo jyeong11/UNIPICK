@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page session="true" %>
+<%@ page import="javax.servlet.http.HttpSession" %>
+<%
+    HttpSession session = request.getSession();
+    String userPhone = (String) session.getAttribute("userPhone");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,6 +27,9 @@
 <link href="${pageContext.request.contextPath }/resources/css/buyer/buyerEmail.css" rel="stylesheet" type="text/css">
 
 <link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
+
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/buyer/buyerEmail.js"></script>
 <title>UNIPICK</title>
 </head>
 <body>
@@ -44,20 +53,23 @@
 			<h1 class="">
 				이메일과 비밀번호를<br>입력해주세요.
 			</h1>
-			<form action="memberLogin" method="post">
+			<form action="register" method="post">
 				<div class="css-138pfvh">
-					<label class="BODY_13">이메일을 입력해주세요.</label> <span class="BODY_15"><input
-						type="email" placeholder="로그인 시 필요" required class="css-1wr8iut">
+					<label class="BODY_13">이메일을 입력해주세요.</label>
+					<span class="BODY_15">
+					<input type="email" id="buy_em" class="css-1wr8iut" placeholder="로그인 시 필요" required >
 					</span>
+					<span id="checkIdResult"></span>
 				</div>
 				<div class="css-138pfvh">
-					<label class="BODY_13">비밀번호</label> <span class="BODY_15"> <input
-						placeholder="영문, 숫자, 특수문자 포함 8자 이상" required type="password"
-						class="css-1wr8iut">
-					</span>
+					<label class="BODY_13">비밀번호</label>
+					<span class="BODY_15">
+					<input type="password" id="buy_pw" class="css-1wr8iut" placeholder="영문, 숫자, 특수문자 포함 8자 이상" required></span>
+					<span id="checkPasswdResult"></span>
+					 <input type="hidden" name="phone" value="${userPhone}" />
 				</div>
 			</form>
-			<button class="css-1lhlb22">완료</button>
+			<button class="css-1lhlb22" id="completeBtn">완료</button>
 		</main>
 	</div>
 </body>

@@ -4,7 +4,34 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itwillbs.unipick.mapper.BuyerMapper2">
 
+	<select id="BuyerLogin" parameterType="map">
+		SELECT *
+		  FROM buyers
+		WHERE buy_em = #{buyerId}
+<!-- 		<if test="sellerPw != ''"> -->
+		  AND buy_pw = #{buyerPw}
+<!-- 		</if> -->
+	</select>
 
+<select id="BuyEmail" parameterType="String" resultType="int">
+    SELECT COUNT(*)
+      FROM buyers
+     WHERE buy_em = #{buy_em}
+</select>
+
+<insert id="insertBuyer">
+    INSERT INTO buyers (buy_em, buy_pw, buy_ph)
+    VALUES (#{buyer_em}, #{buyer_pw}, #{phone})
+</insert>
+
+
+
+<!-- <select id="findEmployeeByNoAndEmail" resultType="employee"> -->
+<!--     SELECT * -->
+<!--     FROM employee -->
+<!--     WHERE emp_id = #{empNo} -->
+<!--     AND emp_em = #{empEm} -->
+<!-- </select> -->
 
 
 

@@ -25,6 +25,8 @@
 <!-- Favicon -->
 <link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
 
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/buyer/buyerLogin.js"></script>
 <title>UNIPICK</title>
 </head>
 <body>
@@ -33,11 +35,14 @@
 		 	<a href=""><img src="${pageContext.request.contextPath}/resources/images/로고 가로.png" alt="로고" class="logo"></a>
 		 	<div class="sec01">
 		 	<div class="sec-span"><span>안녕하세요 유니픽입니다</span></div>
-			<div class="member-info"><input type="text"  placeholder="아이디 입력"></div>
-			<div class="member-info"><input type="password"  placeholder="비밀번호 입력"></div>
-	        <button type="submit" class="memberbutton">로그인</button>
+			<div class="member-info">
+			<input type="text" id="buyerId" placeholder="아이디 입력" value="${savedBuyerId != null ? savedBuyerId : ''}"></div>
+			<div class="member-info">
+			<input type="password" id="buyerPw" placeholder="비밀번호 입력"></div>
+	        <button type="submit" class="buyerbutton">로그인</button>
             </div>
         <div class="btn-wrap">
+        <label class="buyer-btn"><input type="checkbox" id="rememberId">아이디 기억하기</label>
         <button class="btn-wrap-btn" type="button"><span>아이디 찾기</span></button>
         <button class="btn-wrap-btn" type="button"><span>비밀번호 찾기</span></button>
         <input class="btn-wrap-btn" type="button"  onclick="location.href ='buyerJoin'" value="회원가입">
