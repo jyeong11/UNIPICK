@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwillbs.unipick.mapper.OtpMapper">
+
+	   <insert id="insertVerification" parameterType="map">
+        INSERT INTO VERIFICATION (pho_nm, pho_otp, pho_at)
+        VALUES (#{pho_nm}, #{pho_otp}, now())
+    </insert>
+    
+    <select id="selectByPhoneNumber" parameterType="string" resultType="map">
+        SELECT pho_nm, pho_otp, pho_at
+        FROM VERIFICATION
+        WHERE pho_nm = #{phone}
+    </select>
+    
+    <delete id="deleteByPhoneNumber" parameterType="string">
+        DELETE FROM VERIFICATION
+        WHERE pho_nm = #{phone}
+    </delete>
+
+</mapper>
