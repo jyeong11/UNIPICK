@@ -8,18 +8,29 @@ import java.util.Random;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
 import com.itwillbs.unipick.mapper.OtpMapper;
+
+import net.nurigo.sdk.NurigoApp;
+import net.nurigo.sdk.message.model.MessageType;
+import net.nurigo.sdk.message.request.SingleMessageSendingRequest;
+import net.nurigo.sdk.message.response.SingleMessageSentResponse;
+import net.nurigo.sdk.message.service.DefaultMessageService;
 
 // coolsms SDK의 Message 클래스는 해당 API 문서에 맞게 구현해 주세요.
 class Message {
     private String apiKey;
     private String apiSecret;
     
+    DefaultMessageService messageService;
+
     public Message(String apiKey, String apiSecret) {
-        this.apiKey = apiKey;
+        this.messageService = null;
+		this.apiKey = apiKey;
         this.apiSecret = apiSecret;
+        this.messageService = NurigoApp.INSTANCE.initialize(apiKey, apiSecret, "https://api.coolsms.co.kr");
     }
     
     public JSONObject send(Map<String, String> params) throws Exception {
@@ -28,6 +39,7 @@ class Message {
     }
 }
 
+@PropertySource("classpath:application.properties")
 @Service
 public class OtpService {
 
@@ -76,7 +88,13 @@ public class OtpService {
 
     // CoolSMS API를 활용한 SMS 전송
     private void sendSms(String phone, String message) {
-        Message coolsms = new Message(apiKey, apiSecret);
+        net.nurigo.sdk.message.model.Message coolsms = new net.nurigo.sdk.message.model.Message();
+        coolsms.setTo(phone);
+        coolsms.setFrom(sender);
+        coolsms.setText(message);
+        coolsms.setType(MessageType.SMS);
+        Message message2 = new Message(apiKey, apiSecret);
+        SingleMessageSentResponse response = message2.messageService.sendOne(new SingleMessageSendingRequest(coolsms));
         
         
         Map<String, String> params = new HashMap<>();
@@ -85,22 +103,6 @@ public class OtpService {
         params.put("text", message);
         params.put("type", "SMS");
 
-        try {
-            JSONObject result = coolsms.send(params);
-            System.out.println("SMS 전송 결과: " + result.toString());
-            String status = result.getString("result");  // result로 변경
-         // result 필드를 확인하여 success인지 확인
-            if (result.getString("result").equals("success")) {
-                System.out.println("SMS 전송 성공");
-            } else {
-                // 실패 시, 오류 코드 및 메시지 출력
-                String errorMessage = result.optString("error_message", "알 수 없는 오류");
-                String errorCode = result.optString("error_code", "알 수 없는 오류 코드");
-                System.out.println("SMS 전송 실패, 오류 메시지: " + errorMessage + ", 오류 코드: " + errorCode);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     // OTP 검증
