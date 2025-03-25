@@ -54,6 +54,18 @@ $(function() {
 					</div>
 					<div id="prpr"><span>결제 예상 금액</span><span id="sum">${sum.toLocaleString()}원</span></div>            	
 				`);
+				$("#payment-container").html(`
+					<div id="payment"><h2>결제수단</h2></div>
+					<div class="price">
+						<div id="payment"><span>빠른페이</span></div>
+					</div>
+					<div class="card-first">
+						<div class="tie">
+							<div id="pmregister"><span>유니페이</span></div>
+							<button  id ="openButton" class="add_btn"> + 결제 수단 등록</button>
+						</div>
+					</div> 	
+				`);
 				$("#term-container").html(`
 					<div id="total"><h2>주문내용 확인 및 결제 동의</h2></div>
 					<div class="price">
@@ -86,4 +98,7 @@ $(function() {
             $("#submit-btn").prop("disabled", true).removeClass("active");
         }
     }
+	$(document).on("click", "#openButton", function () {
+    	window.open("payment", "_blank", "width=380,height=670");
+	});
 });

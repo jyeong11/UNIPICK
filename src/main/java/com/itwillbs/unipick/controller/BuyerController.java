@@ -80,6 +80,11 @@ public class BuyerController {
 		return "redirect:buyerLogin";
 	}
 	
+	//주문시 페이 결제창 
+	@GetMapping("payment")
+	public String payment() {
+		return "buyer/payment";
+	}
 	// 상품 상세조회 (조회)
 	@GetMapping("productDetail")
 	public String productDetail(@RequestParam("prd_cd") String prdCd, Model model) {

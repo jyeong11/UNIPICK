@@ -44,6 +44,7 @@
 	<div id="orderInfo-container"></div>
 	<div id="deliInfo-container"></div>
 	<div id="delprice-container"></div>
+	<div id="payment-container"></div>
 	<div id="term-container"></div>
 	<div id="price-button"><button id="submit-btn" disabled>결제하기</button></div>
 	
