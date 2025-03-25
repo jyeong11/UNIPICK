@@ -18,7 +18,8 @@
 		prd_ds,
 		prd_bd,
 		prd_st,
-		prd_dt
+		prd_dt,
+		prd_sf
     )
     VALUES (
       #{prd_nm},
@@ -31,7 +32,8 @@
       #{prd_ds},
       #{prd_bd},
       default,
-      default
+      default,
+      prd_sf
     )
   </insert>
   

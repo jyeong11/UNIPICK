@@ -119,7 +119,7 @@
                       <section class="item-regi-section">
                         <h2 class="item-regi-name">상품명</h2>
                         <div class="item-regi-box">
-                          <input type="text" name="product_title" class="item-regi-title-text" id="item-regi-title-text" maxlength="50">
+                          <input type="text" name="product_title" class="item-regi-title-text" id="item-regi-title-text" maxlength="100">
                         </div>
                         <h6 class="item-regi-name-byte" id="item-regi-name-byte">(0 / 100)</h6>
                       </section>
@@ -141,6 +141,16 @@
                         <h6 class="item-regi-category-name">카테고리</h6>
                         <select class="item-regi-category-box" name="product_category" id="product_category"></select>
                         <select class="item-regi-category-box" name="product_category_sub" id="product_category_sub"></select>
+                      </section>
+                       <!-- 배송비 설정 영역 -->
+                      <section class="item-regi-price">
+                        <h6 class="item-regi-name">배송비 설정</h6>
+                        <div class="item-regi-price-box">
+                          <div class="item-regi-price-number">
+                            <input type="number" name="delivery_price" id="delivery_price"  placeholder="배송비를 입력해주세요." required>
+                            <input type="hidden" name="delivery_status" id="dilivery_status" value="0">
+                          </div>
+                        </div>
                       </section>
                       <!-- 가격 설정 영역 -->
                       <section class="item-regi-price">

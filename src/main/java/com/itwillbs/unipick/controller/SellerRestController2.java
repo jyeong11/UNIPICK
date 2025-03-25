@@ -49,12 +49,12 @@ public class SellerRestController2 {
         return sellerService.getCategories(parentCode);
     }
 
-    // 배송 옵션 조회 API
-    @GetMapping("/deliveryOptions")
-    public ResponseEntity<?> getDeliveryOptions() {
-        List<Map<String, Object>> options = sellerService.getDeliveryOptions();
-        return ResponseEntity.ok(options);
-    }
+//    // 배송 옵션 조회 API
+//    @GetMapping("/deliveryOptions")
+//    public ResponseEntity<?> getDeliveryOptions() {
+//        List<Map<String, Object>> options = sellerService.getDeliveryOptions();
+//        return ResponseEntity.ok(options);
+//    }
 
     // 재고 옵션 조회 API
     @GetMapping("/stockOptions")
