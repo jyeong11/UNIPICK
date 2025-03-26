@@ -37,21 +37,10 @@
 	
 	<div class="content">
 			<div class = "two">
-				<h2>나의 주문/배송 현황</h2>
+				<h2>주문 상세 조회</h2>
 			</div>
-			<div id="radio-search">	<!-- 검색, 정렬기준 -->
-				<div id="ord-radio">
-					<label class="search-radio"><input type="radio" name="choice" value="option1" checked> 최근 3개월</label>
-				    <label class="search-radio"><input type="radio" name="choice" value="option2"> 최근 1년</label>
-				    <label class="search-radio"><input type="radio" name="choice" value="option3"> 전체</label>
-			    </div>
-			    <div id="ord-search">
-				    <input type="text" id="searchData" placeholder="상품명 / 스토어명으로 검색">
-					<button id="ordSearch">검색</button>
-				</div>
-			</div>
-			<div id="cards"></div>
-		</div>
+			
+	</div>
 	
 	<div id="footer">
 		<jsp:include page="../inc/footer.jsp"></jsp:include>
