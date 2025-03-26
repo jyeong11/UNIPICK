@@ -136,5 +136,57 @@
 	ORDER BY cod_so
 </select>
 
+<select id="getProductList" resultType="map">
+  SELECT 
+      p.prd_cd,       <!-- 상품코드 -->
+      p.prd_nm,       <!-- 상품명 -->
+      p.prd_sp,       <!-- 판매가 -->
+      p.prd_ca,       <!-- 카테고리 -->
+      o.clr_nm,       <!-- 컬러이름 -->
+      o.siz_nm,       <!-- 사이즈이름 -->
+      o.prd_qt,       <!-- 재고수량 -->
+      p.prd_dt        <!-- 등록일 -->
+  FROM products p
+  INNER JOIN options o 
+      ON p.prd_cd = o.prd_cd
+  WHERE 1=1
+  <if test="map.prd_nm != null and !map.prd_nm.isEmpty()">
+      AND p.prd_nm LIKE CONCAT('%', #{map.prd_nm}, '%')
+  </if>
+  <if test="map.prd_ca != null and !map.prd_ca.isEmpty()">
+      AND p.prd_ca LIKE CONCAT('%', #{map.prd_ca}, '%')
+  </if>
+  <if test="map.clr_nm != null and !map.clr_nm.isEmpty()">
+      AND o.clr_nm LIKE CONCAT('%', #{map.clr_nm}, '%')
+  </if>
+  <if test="map.siz_nm != null and !map.siz_nm.isEmpty()">
+      AND o.siz_nm LIKE CONCAT('%', #{map.siz_nm}, '%')
+  </if>
+  ORDER BY p.prd_dt DESC
+  <if test="pageList != null">
+      LIMIT #{pageList[0]}, #{pageList[1]}
+  </if>
+</select>
+
+<!-- 상품 개수 조회 -->
+<select id="getProductListCount" resultType="int">
+  SELECT COUNT(*) 
+  FROM products p
+  INNER JOIN options o ON p.prd_cd = o.prd_cd
+  WHERE 1=1
+  <if test="map.prd_nm != null and !map.prd_nm.isEmpty()">
+      AND p.prd_nm LIKE CONCAT('%', #{map.prd_nm}, '%')
+  </if>
+  <if test="map.prd_ca != null and !map.prd_ca.isEmpty()">
+      AND p.prd_ca LIKE CONCAT('%', #{map.prd_ca}, '%')
+  </if>
+  <if test="map.clr_nm != null and !map.clr_nm.isEmpty()">
+      AND o.clr_nm LIKE CONCAT('%', #{map.clr_nm}, '%')
+  </if>
+  <if test="map.siz_nm != null and !map.siz_nm.isEmpty()">
+      AND o.siz_nm LIKE CONCAT('%', #{map.siz_nm}, '%')
+  </if>
+</select>
+
   
 </mapper>

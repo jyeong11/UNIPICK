@@ -1,15 +1,18 @@
 package com.itwillbs.unipick.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,7 +24,42 @@ public class SellerRestController2 {
 
     @Autowired
     private SellerService2 sellerService;
+    
+    
+  //AJAX를 통한 상품 리스트 조회
+    @ResponseBody
+    @GetMapping("/selProductList")
+    public Map<String, Object> getProductList(
+            @RequestParam(value = "prd_nm", required = false, defaultValue = "") String prdNm,
+            @RequestParam(value = "prd_ca", required = false, defaultValue = "") String prdCa,
+            @RequestParam(value = "clr_nm", required = false, defaultValue = "") String clrNm,
+            @RequestParam(value = "siz_nm", required = false, defaultValue = "") String sizNm,
+            @RequestParam(value = "startRow", required = false, defaultValue = "0") int startRow,
+            @RequestParam(value = "listLimit", required = false, defaultValue = "10") int listLimit) {
 
+        // 검색 조건 Map 생성
+        Map<String, String> searchParams = new HashMap<>();
+        searchParams.put("prd_nm", prdNm);
+        searchParams.put("prd_ca", prdCa);
+        searchParams.put("clr_nm", clrNm);
+        searchParams.put("siz_nm", sizNm);
+
+        // 상품 리스트 조회
+        List<Map<String, Object>> productList = sellerService.getProductList(searchParams, startRow, listLimit);
+
+        // 상품 개수 조회
+        int totalCount = sellerService.getProductListCount(searchParams);
+
+        // 응답 데이터 구성
+        Map<String, Object> response = new HashMap<>();
+        response.put("productList", productList);
+        response.put("totalCount", totalCount);
+
+        return response;
+    }
+
+
+    
     // ✅ 상품 등록 (상품 정보 + 이미지 + 재고 + 색상 + 사이즈)
     @PostMapping("/registerProduct")
     public ResponseEntity<?> registerProduct(

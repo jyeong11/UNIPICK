@@ -19,6 +19,29 @@ public class SellerService2 {
 
     @Autowired
     private SellerMapper2 mapper;
+    
+ // 검색 조건과 페이징 정보를 전달받아 상품 리스트 조회
+    public List<Map<String, Object>> getProductList(Map<String, String> searchParams, int startRow, int listLimit) {
+        // 페이징 정보 추가
+        List<Object> pageList = new ArrayList<>();
+        pageList.add(startRow);
+        pageList.add(listLimit);
+
+        // 파라미터를 Map에 넣어 매퍼에 전달
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("map", searchParams);  // 검색 조건
+        paramMap.put("pageList", pageList); // 페이징 정보
+
+        return mapper.getProductList(paramMap);  // 매퍼 호출
+    }
+
+    public int getProductListCount(Map<String, String> searchParams) {
+        return mapper.getProductListCount(searchParams);  // 상품 개수 조회
+    }
+    
+    
+    
+    
 
     // 파일 업로드 및 검증
     public Map<String, Object> uploadImage(MultipartFile imageFile) {

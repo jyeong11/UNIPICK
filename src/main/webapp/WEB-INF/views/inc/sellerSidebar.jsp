@@ -15,7 +15,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
             	<h6 class="collapse-header">상품관리</h6>
             	<a class="collapse-item" href="prdRegister">상품등록</a>
-                <a class="collapse-item" href="selProductList">상품조회</a>
+                <a class="collapse-item" href="seller/selProductList">상품조회</a>
                 <a class="collapse-item" href="sellerPrdDetail?prd_cd=PRD_105">상품상세조회(임시)</a>
             </div>
         </div>

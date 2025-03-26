@@ -26,6 +26,7 @@ public class BuyerController2 {
 	
 	@Autowired
 	BuyerService2 buyerService;
+	
 
 	@GetMapping("buyerlogin")
 	public String buyerLogin(HttpServletRequest request, Model model) {

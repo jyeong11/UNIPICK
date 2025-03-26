@@ -1,124 +1,114 @@
-$(document).ready(function() {
-	noticeSearch();
-	
-	$('#noticeSearch').on('click',function(){
-		noticeSearch();
-	}); // att 검색 이벤트
-	$('#noticeSearchWord').on('keydown', function(event){	// att 엔터 이벤트
-		if (event.key === 'Enter'){
-			$('#noticeSearch').click();
-		}
-	});
-	
-    $("#noticeListTable").on("click", ".not_ti a", function(event) {
-        event.preventDefault();
+$(document).ready(function(){
+    // 초기 페이지 및 한 페이지에 표시할 건수
+    let currentPage = 1;
+    const listLimit = 10;
 
-       let not_id = $(this).closest("tr").find(".display_no").data("not_id");
-        console.log("디테일 노티스 아이디 : " + not_id);
-        
-        if (not_id === "" || not_id === "0") {
-            alert("올바른 공지번호를 찾을 수 없습니다.");
-            return;
-        }
+    // 상품 목록 로드 함수
+    function loadProductList(page) {
+    let startRow = (page - 1) * listLimit;
+    let searchKind = $('#noticeSearchKind').val();
+    let prd_nm = "";
+    let prd_ca = "";
 
-
-function noticeSearch(pageNum = 1) {
-	
-        let data = {};
-		data.pageNum = pageNum;
-        
-		let kindElement = document.getElementById('noticeSearchKind');
-		let wordElement = document.getElementById('noticeSearchWord');
-		
-		let kind = kindElement ? kindElement.value : null;
-		let word = wordElement ? wordElement.value : null;
-		
-		if(word != null){
-			if(word.includes('%')){
-				word = word.replace("%", "\\%");
-			}
-			if(word.includes('_')){
-				word = word.replace("_", "\\_");
-			}
-		}
-		
-        if(kind == "option1" ){
-            data.not_ti = word;
-        } else if(kind == "option2"){
-            data.dep_nm = word;
-        } else if(kind == "option3"){
-            data.emp_nm = word;
-        }
-        $.ajax({
-            type:"GET",
-            url:"noticeSearch",
-            data: $.param(data),
-            success: function(res){
-                $('#noticeListTable').empty();
-				$("#pageList").empty();
-                res.list.forEach(function(notice){
-                    let row = $('<tr></tr>');
-                    row.append('<td class="display_no" data-not_id="' + notice.not_id + '">' + notice.display_no + '</td>');
-                    row.append(`<td class="not_ti"><a class="not_ati" href="" data-bs-toggle="modal" data-bs-target="#detailModal">${notice.not_ti}</a></td>`);
-                    row.append('<td>' + notice.dep_nm + '</td>');
-                    row.append('<td>' + notice.emp_nm + '</td>');
-                    row.append('<td>' + notice.date + '</td>');
-                    row.append('<td>' + notice.not_ct + '</td>');
-                    $('#noticeListTable').append(row);
-                });
-				paging(res.pageList[2]);
-				
-            },
-            complete: function() {
-                $('#noticeSearch').data('loading', false);
-            }
-        });	
+    // 검색 조건 설정
+    if (searchKind === "name") { // 상품명 검색
+        prd_nm = $('#noticeSearchWord').val();
+    } else if (searchKind === "category") { // 카테고리 검색
+        prd_ca = $('#noticeSearchWord').val();
+    } else if (searchKind === "code") { // 상품코드 검색
+        prd_nm = $('#noticeSearchWord').val();
     }
 
-	// 페이징 처리 함수
-	function paging(pageInfo) {
-		let prevBtn = $("<input>", {
-		    type: "button",
-			class: "btn btn-link project_font_color",
-		    value: "이전",
-		    click: function () {
-		        if (pageInfo.pageNum > 1) {
-					noticeSearch(pageInfo.pageNum - 1);
-		        }
-		    }
-		}).prop("disabled", pageInfo.pageNum === 1);
-		$("#pageList").append(prevBtn);
-		
-		// 페이지 번호 버튼 생성 (startPage ~ endPage)
-		for (let i = pageInfo.startPage; i <= pageInfo.endPage; i++) {
-		    let pageLink;
-		    if (i === pageInfo.pageNum) {
-		        // 현재 페이지는 강조 표시
-		        pageLink = $("<strong>").text(i);
-		    } else {
-		        pageLink = $("<a>", {
-		            href: "#",
-		            text: i,
-					class: "pageNum",
-		            click: function (e) {
-		                e.preventDefault();
-						noticeSearch(i);
-		            }
-		        });
-		    }
-		    $("#pageList").append(pageLink);
-		}
-			
-	    // '다음' 버튼 생성
-	    let nextBtn = $("<input>", {
-	        type: "button",
-	        value: "다음",
-			class: "btn btn-link project_font_color",
-	        click: function () {
-					noticeSearch(pageInfo.pageNum + 1);
-	        }
-	    }).prop("disabled", pageInfo.pageNum === pageInfo.maxPage);
-	    $("#pageList").append(nextBtn);
+    $.ajax({
+        url: "/seller/selProductList", // 서버 URL
+        type: "GET",
+        data: {
+            prd_nm: prd_nm,
+            prd_ca: prd_ca,
+            startRow: startRow,
+            listLimit: listLimit
+        },
+        dataType: "json",
+        success: function(data) {
+            renderProductList(data.productList);  // 상품 목록 렌더링
+            renderPagination(data.totalCount, page);  // 페이지네이션 렌더링
+        },
+        error: function(xhr, status, error) {
+            console.error("상품 목록 로드 실패:", error);
+        }
+    });
+}
+
+    // 상품 목록 테이블 렌더링
+    function renderProductList(productList) {
+        let $tableBody = $('#noticeListTable');
+        $tableBody.empty(); // 테이블 초기화
+        if (productList && productList.length > 0) {
+            $.each(productList, function(index, product) {
+                let row = `
+                    <tr>
+                        <td>${product.prd_cd}</td>
+                        <td>${product.prd_nm}</td>
+                        <td>${product.prd_sp}</td>
+                        <td>${product.prd_ca}</td>
+                        <td>${product.clr_nm}</td>
+						<td>${product.siz_nm}</td>
+                        <td>${product.prd_qt}</td>
+                        <td>${formatDate(product.prd_dt)}</td>
+                        <td><!-- 수정일 (필요 시 추가) --></td>
+                    </tr>`;
+                $tableBody.append(row);
+            });
+        } else {
+            $tableBody.append('<tr><td colspan="8">조회된 상품이 없습니다.</td></tr>');
+        }
     }
-	// 페이징 처리 함수 끝
+
+    // 날짜 형식 포맷팅
+    function formatDate(timestamp) {
+        let date = new Date(timestamp);
+        let year = date.getFullYear();
+        let month = String(date.getMonth() + 1).padStart(2, '0');
+        let day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
+
+    // 페이징 렌더링
+    function renderPagination(totalCount, currentPage) {
+        let totalPages = Math.ceil(totalCount / listLimit);
+        let $pagination = $('#pageList');
+        $pagination.empty();
+
+        if (currentPage > 1) {
+            $pagination.append(`<a href="#" class="page-link" data-page="${currentPage - 1}">이전</a>`);
+        }
+
+        for (let i = 1; i <= totalPages; i++) {
+            let activeClass = (i === currentPage) ? "active" : "";
+            $pagination.append(`<a href="#" class="page-link ${activeClass}" data-page="${i}">${i}</a>`);
+        }
+
+        if (currentPage < totalPages) {
+            $pagination.append(`<a href="#" class="page-link" data-page="${currentPage + 1}">다음</a>`);
+        }
+    }
+
+    // 검색 버튼 클릭 이벤트
+    $('#noticeSearch').on('click', function(){
+        currentPage = 1;
+        loadProductList(currentPage);
+    });
+
+    // 페이징 링크 클릭 이벤트
+    $('#pageList').on('click', '.page-link', function(e){
+        e.preventDefault();
+        let selectedPage = parseInt($(this).data('page'));
+        if (selectedPage && selectedPage !== currentPage) {
+            currentPage = selectedPage;
+            loadProductList(currentPage);
+        }
+    });
+
+    // 페이지 로딩 시 기본 상품 목록 호출
+    loadProductList(currentPage);
 });

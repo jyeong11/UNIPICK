@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,62 +80,54 @@
 				</div>
 	</div><!-- End of Topbar -->
 		        <!-- Begin Page Content -->
-                <div class="container-fluid">
+                				<div class="container-fluid">
 					<div class="row">
-                        <div class="col-lg-12">
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h5 class="m-0 font-weight-bold text-primary">상품 목록</h5>
-                                </div>
-    						<div class="container">
-							<div class="row align-items-start justify-content-end">
-								<div class="col-2">
-									<select class="form-select" id="noticeSearchKind">
-										<option value="option1">상품명</option>
-										<option value="option2">카테고리</option>
-										<option value="option3">상품코드</option>
-									</select>
+						<div class="col-lg-12">
+							<div class="card shadow mb-4">
+								<div class="card-header py-3">
+									<h5 class="m-0 font-weight-bold text-primary">상품 목록</h5>
 								</div>
-								<div class="col-3">
-									<input type="text" id="noticeSearchWord" class="form-control" placeholder="상품명, 카테고리, 상품코드로 검색">
+								<div class="container">
+									<div class="row align-items-start justify-content-end">
+										<div class="col-2">
+											<select class="form-select" id="noticeSearchKind">
+												<option value="name">상품명</option>
+												<option value="category">카테고리</option>
+												<option value="code">상품코드</option>
+											</select>
+										</div>
+										<div class="col-3">
+											<input type="text" id="noticeSearchWord" class="form-control" placeholder="검색어 입력">
+										</div>
+										<div class="col-1">
+											<button id="noticeSearch" class="btn btn_main_color" type="button">조회</button>
+										</div>
+									</div>
 								</div>
-								<div class="col-1">
-									<button id="noticeSearch" class="btn btn_main_color mb-3" type="button">조회</button>
+								<!-- 상품 목록 테이블 -->
+								<div class="table-responsive">
+								    <table class="table table-bordered" id="productList">
+								        <thead>
+								            <tr>
+								                <th>상품코드</th>
+								                <th>상품명</th>
+								                <th>판매가</th>
+								                <th>카테고리</th>
+								                <th>컬러이름</th>
+								                <th>사이즈이름</th>
+								                <th>재고수량</th>
+								                <th>등록일</th>
+								            </tr>
+								        </thead>
+								        <tbody id="noticeListTable">
+								            <!-- 상품 목록이 여기에 동적으로 추가됩니다 -->
+								        </tbody>
+								    </table>
 								</div>
 							</div>
 						</div>
-                                	<div class="table-responsive">
-		                                <table class="table table-bordered compact" id="productList" width="100%" cellspacing="0">
-		                                    <thead></thead>
-		                                    <tbody></tbody>
-		                                </table>
-		                          	</div>
-		                          						<div class="card-body">
-							<div class="table-responsive">
-								<table class="table table-bordered">
-									<thead align="center">
-										<tr class="project_table_tr">
-											<th>번호</th>
-											<th>상품명</th>
-											<th>판매가</th>
-											<th>카테고리</th>
-											<th>상태</th>
-											<th>재고</th>
-											<th>등록일</th>
-											<th>수정일</th>
-										</tr>
-									</thead>
-									<tbody id="noticeListTable" align="center">
-									</tbody>
-								</table>
-							</div>
-							<section id="pageList"></section>
-                                </div>
-                            </div>
-                        </div>
-                     </div>
-                <!-- /.container-fluid -->
-            </div><!-- End of Main Content -->
+					</div>
+				</div>
 		<!-- Footer -->
 		<footer class="sticky-footer bg-white">
 			<div class="container my-auto">
@@ -143,42 +138,6 @@
 		</footer><!-- End of Footer -->
 	</div><!-- End of Page Wrapper -->
 </div>
-<script>
-  // '.notice-title'를 클릭하면 '.notice-list'에 .show 클래스를 토글
-  document.querySelector('.notice-title').addEventListener('click', function() {
-    document.querySelector('.notice-list').classList.toggle('show');
-  });
-</script>
-<!-- --------------------------------------------------------------- -->
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    const menuTitles = document.querySelectorAll(".menu-title");
-
-    menuTitles.forEach(title => {
-        title.addEventListener("click", function (event) {
-            event.preventDefault(); // 링크 이동 방지
-            const submenu = this.nextElementSibling;
-            submenu.classList.toggle("open");
-        });
-    });
-});
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", function(){
-	let pathName = window.location.pathname.substring(1);
-	let collapseItems = document.querySelectorAll(".collapse-item");
-		
-	collapseItems.forEach((item) => {
-		item.classList.remove("active");
-			
-		if (pathName == item.getAttribute('href') || pathName == item.getAttribute('data-sub-page') || pathName == item.getAttribute('data-sub-page2')) {
-			item.classList.add("active");
-			item.parentElement.parentElement.classList.add("show");
-			item.parentElement.parentElement.parentElement.classList.add("active");
-			}
-		});
-	});
-</script>
     <!-- Bootstrap core JavaScript-->
     <script src="${pageContext.request.contextPath }/resources/public/vendor/jquery/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath }/resources/public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
