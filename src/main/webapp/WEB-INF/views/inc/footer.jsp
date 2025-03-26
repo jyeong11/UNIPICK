@@ -35,6 +35,6 @@
 	</div>
 </div>
 <nav>
-<img class="chat" src="${pageContext.request.contextPath }/resources/images/chat.png" alt="실시간 상담">
+<a href="chatMain"><img class="chat" src="${pageContext.request.contextPath }/resources/images/chat.png" alt="실시간 상담"></a>
 </nav>
 </footer>

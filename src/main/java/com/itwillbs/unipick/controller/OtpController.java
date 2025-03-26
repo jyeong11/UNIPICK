@@ -13,8 +13,6 @@ import com.itwillbs.unipick.service.OtpService;
 public class OtpController {
 
     private final OtpService otpService;
-
-    // HttpSession을 컨트롤러에 주입
     private final HttpSession session;
 
     public OtpController(OtpService otpService, HttpSession session) {
@@ -26,6 +24,7 @@ public class OtpController {
     @PostMapping("/send")
     public ResponseEntity<String> sendOtp(@RequestParam("phone") String phone) {
         try {
+            session.setAttribute("userPhone", phone); // 세션에 전화번호 저장
             otpService.sendOtp(phone);
             return ResponseEntity.ok("인증번호가 전송되었습니다.");
         } catch (Exception e) {
@@ -38,18 +37,25 @@ public class OtpController {
     // OTP 검증 요청
     @PostMapping("/verify")
     public ResponseEntity<String> verifyOtp(@RequestParam("otp") String otp) {
-        // 세션에서 userPhone 값을 가져오기
         String userPhone = (String) session.getAttribute("userPhone");
-
         if (userPhone == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("세션에서 전화번호를 찾을 수 없습니다.");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                                 .body("세션에서 전화번호를 찾을 수 없습니다.");
         }
-
+        
         boolean verified = otpService.verifyOtp(userPhone, otp);
         if (verified) {
+            session.removeAttribute("userPhone"); // 검증 성공 시 세션 삭제
             return ResponseEntity.ok("인증이 완료되었습니다.");
         } else {
-            return ResponseEntity.badRequest().body("인증번호가 올바르지 않거나 만료되었습니다.");
+            return ResponseEntity.badRequest()
+                                 .body("인증번호가 올바르지 않거나 만료되었습니다.");
         }
+    }
+    
+    @PostMapping("/setPhoneNumber")
+    public ResponseEntity<String> setPhoneNumber(@RequestParam("phone") String phone) {
+        session.setAttribute("phoneNumber", phone); // 세션에 휴대폰 번호 저장
+        return ResponseEntity.ok("휴대폰 번호 저장 성공");
     }
 }

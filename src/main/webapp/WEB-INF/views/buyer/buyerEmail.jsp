@@ -3,7 +3,6 @@
 <%@ page session="true" %>
 <%@ page import="javax.servlet.http.HttpSession" %>
 <%
-    HttpSession session = request.getSession();
     String userPhone = (String) session.getAttribute("userPhone");
 %>
 <!DOCTYPE html>

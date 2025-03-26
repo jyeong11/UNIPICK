@@ -1,6 +1,5 @@
 package com.itwillbs.unipick.service;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,26 +17,6 @@ import net.nurigo.sdk.message.model.MessageType;
 import net.nurigo.sdk.message.request.SingleMessageSendingRequest;
 import net.nurigo.sdk.message.response.SingleMessageSentResponse;
 import net.nurigo.sdk.message.service.DefaultMessageService;
-
-// coolsms SDK의 Message 클래스는 해당 API 문서에 맞게 구현해 주세요.
-class Message {
-    private String apiKey;
-    private String apiSecret;
-    
-    DefaultMessageService messageService;
-
-    public Message(String apiKey, String apiSecret) {
-        this.messageService = null;
-		this.apiKey = apiKey;
-        this.apiSecret = apiSecret;
-        this.messageService = NurigoApp.INSTANCE.initialize(apiKey, apiSecret, "https://api.coolsms.co.kr");
-    }
-    
-    public JSONObject send(Map<String, String> params) throws Exception {
-        // 실제 SMS 전송 로직 구현 (예시로 성공 결과를 반환)
-        return new JSONObject("{\"result\":\"success\"}");
-    }
-}
 
 @PropertySource("classpath:application.properties")
 @Service
@@ -60,27 +39,27 @@ public class OtpService {
 
     // 6자리 OTP 생성
     public String generateOTP() {
-        Random random = new Random();
-        int otp = 100000 + random.nextInt(900000);
-        return String.valueOf(otp);
+        return String.valueOf(100000 + new Random().nextInt(900000));
     }
 
     // OTP 발송 및 DB 저장
     public void sendOtp(String phone) {
         String otp = generateOTP();
-        // 현재 시각 기준 10분 후 만료
-        Date expiration = new Date(System.currentTimeMillis() + 10 * 60 * 1000);
+        Date expiration = new Date(System.currentTimeMillis() + 10 * 60 * 1000); // 10분 후 만료
 
-        // 기존 OTP 삭제 후 새로 저장
-        otpMapper.deleteByPhoneNumber(phone);
-
-        // XML 매퍼와 키 이름이 일치하도록 변경 (pho_nm, pho_otp, pho_at)
-        Map<String, Object> verification = new HashMap<>();
-        verification.put("pho_nm", phone);
-        verification.put("pho_otp", otp);
-        verification.put("pho_at", expiration);
-
-        otpMapper.insertVerification(verification);
+        // 기존 OTP가 있는지 확인
+        Map<String, Object> existingOtp = otpMapper.selectByPhoneNumber(phone);
+        if (existingOtp == null) {
+            // INSERT
+            Map<String, Object> verification = new HashMap<>();
+            verification.put("pho_nm", phone);
+            verification.put("pho_otp", otp);
+            verification.put("pho_at", expiration);
+            otpMapper.insertVerification(verification);
+        } else {
+            // UPDATE
+            otpMapper.updateVerification(phone, otp, expiration);
+        }
 
         // SMS 전송
         sendSms(phone, "인증번호: " + otp);
@@ -88,38 +67,37 @@ public class OtpService {
 
     // CoolSMS API를 활용한 SMS 전송
     private void sendSms(String phone, String message) {
-        net.nurigo.sdk.message.model.Message coolsms = new net.nurigo.sdk.message.model.Message();
-        coolsms.setTo(phone);
-        coolsms.setFrom(sender);
-        coolsms.setText(message);
-        coolsms.setType(MessageType.SMS);
-        Message message2 = new Message(apiKey, apiSecret);
-        SingleMessageSentResponse response = message2.messageService.sendOne(new SingleMessageSendingRequest(coolsms));
-        
-        
-        Map<String, String> params = new HashMap<>();
-        params.put("to", phone);
-        params.put("from", sender);
-        params.put("text", message);
-        params.put("type", "SMS");
+        try {
+            net.nurigo.sdk.message.model.Message coolsms = new net.nurigo.sdk.message.model.Message();
+            coolsms.setTo(phone);
+            coolsms.setFrom(sender);
+            coolsms.setText(message);
+            coolsms.setType(MessageType.SMS);
 
+            DefaultMessageService messageService = NurigoApp.INSTANCE.initialize(apiKey, apiSecret, "https://api.coolsms.co.kr");
+            SingleMessageSentResponse response = messageService.sendOne(new SingleMessageSendingRequest(coolsms));
+        } catch (Exception e) {
+            System.out.println("SMS 전송 실패: " + e.getMessage());
+        }
     }
 
     // OTP 검증
     public boolean verifyOtp(String phone, String otp) {
         Map<String, Object> verification = otpMapper.selectByPhoneNumber(phone);
         if (verification == null) {
+            System.out.println("OTP 정보 없음: " + phone);
             return false;
         }
         
         Date expiration = (Date) verification.get("pho_at");
-        // 만료 체크
         if (expiration.before(new Date())) {
+            System.out.println("OTP 만료됨: " + phone);
             otpMapper.deleteByPhoneNumber(phone);
             return false;
         }
-        // OTP 일치 여부 확인
-        if (verification.get("pho_otp").equals(otp)) {
+        
+        String savedOtp = String.valueOf(verification.get("pho_otp"));
+        if (savedOtp.equals(otp)) {
             otpMapper.deleteByPhoneNumber(phone);
             return true;
         }

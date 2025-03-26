@@ -1,5 +1,6 @@
 package com.itwillbs.unipick.mapper;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +18,9 @@ public interface OtpMapper {
     
     // 전화번호에 해당하는 OTP 데이터 삭제
     void deleteByPhoneNumber(String phone);
+
+    void updateVerification(@Param("pho_nm") String phone, @Param("pho_otp") String otp, @Param("pho_at") Date expiration);
+
 
 	
     

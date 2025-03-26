@@ -14,7 +14,7 @@ $(document).ready(function(){
             method: "POST",
             data: { phone: phone },
             success: function(response){
-                alert(response);
+                alert("인증번호 전송");
                 // OTP 입력란 활성화
                 $("#otpInput").prop("disabled", false);  // OTP 입력란 활성화
                 $("#verifyOtpBtn").prop("disabled", false); // 인증번호 확인 버튼 활성화
@@ -26,39 +26,48 @@ $(document).ready(function(){
         });
     });
 
-    // OTP 검증 요청
     $("#verifyOtpBtn").click(function(){
-        var phone = $("#phoneInput").val().trim().replace(/[^0-9]/g, ''); // 전화번호에서 숫자만 남기기
-        var otp = $("#otpInput").val().trim();
-        if(phone === "" || otp === ""){
-            alert("휴대폰 번호와 인증번호를 모두 입력해주세요.");
-            return;
+    // 버튼 비활성화: 중복 클릭 방지
+    $("#verifyOtpBtn").prop("disabled", true);
+    
+    var phone = $("#phoneInput").val().trim().replace(/[^0-9]/g, ''); // 전화번호에서 숫자만 남기기
+    var otp = $("#otpInput").val().trim();
+    if(phone === "" || otp === ""){
+        alert("휴대폰 번호와 인증번호를 모두 입력해주세요.");
+        // 입력 오류 발생 시 버튼 다시 활성화
+        $("#verifyOtpBtn").prop("disabled", false);
+        return;
+    }
+    $.ajax({
+        url: "/UNIPICK/api/otp/verify",
+        method: "POST",
+        data: { phone: phone, otp: otp },
+        success: function(response){
+            alert("인증완료");
+            // 인증 완료 후 세션에 휴대폰 번호 저장
+            $.ajax({
+                url: "/UNIPICK/api/otp/setPhoneNumber",
+                method: "POST",
+                data: { phone: phone }, // 서버로 전화번호 전송
+                success: function(response){
+                    // 인증 완료 후 buyerEmail.jsp 페이지로 이동
+                    window.location.href = "buyerEmail";
+                },
+                error: function(xhr){
+                    alert("전화번호 세션 저장 실패: " + xhr.responseText);
+                    // 실패 시 버튼 다시 활성화할 수 있음
+                    $("#verifyOtpBtn").prop("disabled", false);
+                }
+            });
+        },
+        error: function(xhr){
+            alert("OTP 검증 실패: " + xhr.responseText);
+            // AJAX 에러 발생 시 버튼 다시 활성화
+            $("#verifyOtpBtn").prop("disabled", false);
         }
-        $.ajax({
-            url: "/UNIPICK/api/otp/verify",
-            method: "POST",
-            data: { phone: phone, otp: otp },
-            success: function(response){
-                alert(response);
-                // 인증 완료 후 세션에 휴대폰 번호 저장
-                $.ajax({
-                    url: "/UNIPICK/setPhoneNumber",
-                    method: "POST",
-                    data: { phone: phone }, // 서버로 전화번호 전송
-                    success: function(response){
-                        // 인증 완료 후 buyerEmail.jsp 페이지로 이동
-                        window.location.href = "buyerEmail";
-                    },
-                    error: function(xhr){
-                        alert("전화번호 세션 저장 실패: " + xhr.responseText);
-                    }
-                });
-            },
-            error: function(xhr){
-                alert("OTP 검증 실패: " + xhr.responseText);
-            }
-        });
     });
+});
+
 
     // 타이머 시작 함수
     function startTimer(){
