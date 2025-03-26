@@ -2,6 +2,9 @@
 .admProductList-top-div > div {
     width: auto;
 }
+.prdList{
+	cursor: pointer;
+}
 .search-div {
     display: flex
 ;
@@ -10,7 +13,6 @@
     gap: 10px;
 }
 #searchKind, #ListSearchWord{
-    height: 18px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -21,7 +23,7 @@
     min-height: 1px;
     padding: 1.25rem;
 }
-#search{
-	color: white;
-    background: black;
+#search, #codeDetailRegister, #commonDetailColse{
+	color: white !important;
+    background: black !important;
 }

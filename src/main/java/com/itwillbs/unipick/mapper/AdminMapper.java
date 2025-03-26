@@ -43,9 +43,9 @@ public interface AdminMapper {
 	// 사이드 서브 메뉴
 	public List<Map<String, Object>> sideSubMenuList(Map<String, Object> map);
 	//상품관리
-	public List<Map<String, Object>> getPrdList();
+	public List<Map<String, Object>> getPrdList(Map<String, Object> map);
 	//상품 상세조회
-	public Map<String, Object> getprdListDetail(Map<String, Object> prdCd);
+	public List<Map<String, Object>> getprdListDetail(Map<String, Object> prdCd);
 	// 방문자 수
 	public Map<String, Object> visitCount();
 	// 상품 접수 상태변경

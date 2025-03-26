@@ -203,7 +203,7 @@
   		 ORDER BY lev_so
   	</select>
   	
-<!--   	상품관리 -->
+<!--   	상품관리 조회-->
 	<select id="getPrdList" parameterType="map">
 	 SELECT p.prd_nm, p.prd_cd, s.sel_nm, p.prd_op, p.prd_sp, p.prd_st
 	   FROM products p JOIN sellers s
@@ -216,17 +216,26 @@
 	   	<when test="prd_nm != null and !prd_nm.equals('')">
 	   		AND p.prd_nm LIKE CONCAT(#{prd_nm}, '%')
 	   	</when>
-	   	<when test="cod_nm != null and !cod_nm.equals('')">
-	   		AND d.cod_nm LIKE CONCAT(#{cod_nm}, '%')
+	   	<when test="store_nm != null and !store_nm.equals('')">
+	   		AND s.sel_nm LIKE CONCAT(#{store_nm}, '%')
+	   	</when>
+	   	<when test="store_st != null and !store_st.equals('')">
+	   		AND p.prd_st LIKE CONCAT(#{store_st}, '%')
 	   	</when>
      </choose>
 	</select>
 <!-- 	상품 상세 관리 -->
 	<select id="getprdListDetail" parameterType="map">
-	 SELECT p.prd_cd, s.sel_nm, p.prd_nm, p.prd_op, p.prd_sp, p.prd_st
-	   FROM products p JOIN sellers s
+	 SELECT p.prd_cd, s.sel_nm, p.prd_nm, p.prd_op, p.prd_sp, 
+	 		p.prd_st, o.clr_nm, o.prd_qt, c.cod_nm 
+	   FROM products p 
+	   JOIN sellers s
 	     ON p.sel_id = s.sel_id
-	  where prd_cd = #{prd_cd}
+      RIGHT JOIN options o
+         ON p.prd_cd = o.prd_cd
+	   JOIN common_detailcode c
+		 ON o.siz_nm = c.cod_cd 
+	  WHERE o.prd_cd = #{prd_cd};
 	</select>
 	
 	<!-- 방문자 수 -->

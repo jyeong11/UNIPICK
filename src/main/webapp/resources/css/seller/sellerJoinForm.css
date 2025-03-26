@@ -1,5 +1,8 @@
 @charset "UTF-8";
-
+#storeId {
+	width:250px;
+	height: 18px;
+}
 #logo {
 	width: 180px;
 }
@@ -52,13 +55,16 @@ h2 {
     padding-top: 25px;
 }
 .input-group input, .input-group textarea {
-    width: 63%;
+   	width: 42%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 14px;
+    padding-right: 60px;
 }
-
+#storePw{
+	font-size: 12px;
+}
 #join-title{
 	margin-bottom: -15px;
 }
@@ -89,8 +95,13 @@ h3{
 .error-message {
     color: red;
     font-size: 10px;
-    margin-top: 5px; /* 에러 메시지와 입력 필드 간의 간격을 줍니다 */
+    margin-top: 5px;
     display: flex;
     flex-direction: row;
-
+    font-size: 10px;
+    margin-top: 11px;
+    margin-left: 10px;
+}
+#pwMessage {
+    white-space: pre-line; /* 줄바꿈 허용 */
 }

@@ -156,11 +156,15 @@ public class SellerController {
 	public Map<String, Object> selInfo(@RequestBody Map<String, Object> seldata) {
 		Map<String, Object> selId = selService.sellerselect(seldata);
 		String msg = "사용가능한 아이디입니다.";
+		boolean success = true;
 		if (selId != null) {
 			msg = "중복된 아이디입니다.";
+			success = false;
 		}
 		Map<String, Object> response = new HashMap<String, Object>();
 		response.put("msg", msg);
+		response.put("success", success);
+		
 		return response;
 	}
 	

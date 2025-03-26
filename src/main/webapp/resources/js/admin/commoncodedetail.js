@@ -28,7 +28,6 @@ $(function() {
 		} else if(kind == "option3"){
 			data.cod_nm = word;
 		}
-		
 		$.ajax({
 			type: "GET",
 			url: "cmDetailCodeList",

@@ -151,15 +151,29 @@ $(function() {
 
     // 계좌 정보 요청
     function accountInfo(accessToken) {
-        fetch('getAccount', {
+        fetch('https://testapi.openbanking.or.kr/v2.0/transfer/withdraw/fin_num', {
             method: 'POST',
             headers: {
                 'Authorization': 'Bearer ' + accessToken,  // Bearer Token을 Authorization 헤더에 추가
                 'Content-Type': 'application/json',
-            }
+            },
+			body: {
+				bank_tran_id: "F123456789U4BC34239Z",
+				cntr_account_type: "N",
+				cntr_account_num: "1101230000678",
+				dps_print_content: "유니픽",
+				fintech_use_num: "123456789012345678901234",
+				tran_amt: "50000",
+				tran_dtime: "20250326101921",
+				req_client_name: "유니픽",
+				req_client_account_num: "1101230000678",
+				req_client_num: "HONGGILDONG1234",
+				transfer_purpose: "TR"
+			}
         })
         .then(res => res.json())
         .then(data => {
+	debugger;
             if (data.success) {
                 const accInfoHTML = `
                     <div id="acc-info">

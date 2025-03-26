@@ -240,17 +240,15 @@ public class AdminController {
 	// 관리자 상품관리
 	@ResponseBody
 	@PostMapping("admproductList")
-	public List<Map<String, Object>> admproductList() {
-		List<Map<String, Object>> prdList = adminservice.getPrdList();
-		return prdList;
+	public List<Map<String, Object>> admproductList(@RequestParam Map<String, Object> map) {
+		return adminservice.getPrdList(map);
 	}
 	
 	// 상품 상세조회
 	@ResponseBody
 	@PostMapping("admprdListDetail")
-	public Map<String, Object> admprdListDetail(@RequestParam Map<String, Object> prdCd) {
-		Map<String, Object> prdDeailList = adminservice.getprdListDetail(prdCd);
-		return prdDeailList;
+	public List<Map<String, Object>> admprdListDetail(@RequestParam Map<String, Object> prdCd) {
+		return adminservice.getprdListDetail(prdCd);
 	}
 	
 	// 방문자 수 증가

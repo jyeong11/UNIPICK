@@ -96,12 +96,12 @@ public class AdminService {
 		
 	}
 	// 상품관리
-	public List<Map<String, Object>> getPrdList() {
-		return mapper.getPrdList();
+	public List<Map<String, Object>> getPrdList(Map<String, Object> map) {
+		return mapper.getPrdList(map);
 	}
 	
 	// 상품 상세조회
-	public Map<String, Object> getprdListDetail(Map<String, Object> prdCd) {
+	public List<Map<String, Object>> getprdListDetail(Map<String, Object> prdCd) {
 		return mapper.getprdListDetail(prdCd);
 	}
 	
