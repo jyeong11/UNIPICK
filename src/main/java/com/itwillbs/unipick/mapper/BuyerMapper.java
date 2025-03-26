@@ -41,4 +41,7 @@ public interface BuyerMapper {
 	public void buyerModify(Map<String, Object> buyerInfo);
 	// 리뷰 정보
 	public List<Map<String, Object>> reviewInfo(Map<String, Object> buyer);
+	// 주문 정보
+	public List<Map<String, Object>> OrderListInfo(Map<String, Object> buyer);
+	
 }

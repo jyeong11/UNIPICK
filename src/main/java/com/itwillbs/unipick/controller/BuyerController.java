@@ -110,6 +110,12 @@ public class BuyerController {
 		return "buyer/buyerReview";
 	}
 	
+	// 주문/배송 페이지 이동
+	@GetMapping("myOrderList")
+	public String myOrderList() {
+		return "buyer/buyerOrderList";
+	}
+	
 	// 상단 메뉴바 공통코드
 	@ResponseBody
 	@GetMapping("menu")
@@ -231,4 +237,17 @@ public class BuyerController {
 		
 		return buyService.reviewInfo(buyer);
 	}
+	
+	// 리뷰 정보
+	@ResponseBody
+	@GetMapping("OrderListData")
+	public List<Map<String, Object>> OrderListData(HttpSession session, Map<String, Object> buyer) {
+		// 임시 아이디
+		session.setAttribute("id", "sadsa@naver.com");
+		buyer.put("buy_em", session.getAttribute("id"));
+		
+		return buyService.OrderListInfo(buyer);
+	}
+	
+	
 }

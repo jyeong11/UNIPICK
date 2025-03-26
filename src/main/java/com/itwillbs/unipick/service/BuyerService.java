@@ -90,4 +90,9 @@ public class BuyerService {
 	public List<Map<String,Object>> reviewInfo(Map<String, Object> buyer) {
 		return mapper.reviewInfo(buyer);
 	}
+	// 주문 정보
+	public List<Map<String,Object>> OrderListInfo(Map<String, Object> buyer) {
+		return mapper.OrderListInfo(buyer);
+	}
+	
 }
