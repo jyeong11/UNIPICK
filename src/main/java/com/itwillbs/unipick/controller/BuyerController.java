@@ -84,6 +84,14 @@ public class BuyerController {
 	public String payment() {
 		return "buyer/payment";
 	}
+	
+	// 주문 상세 페이지 이동
+	@GetMapping("orderDetail")
+	public String orderDetail() {
+		return "buyer/buyerOrderDetail";
+	}
+	
+	
 	// 상품 상세조회 (조회)
 	@GetMapping("productDetail")
 	public String productDetail(@RequestParam("prd_cd") String prdCd, Model model) {
