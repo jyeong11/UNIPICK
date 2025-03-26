@@ -208,8 +208,7 @@
 						  buy_nn = #{buy_nn},
 						  buy_gn = #{buy_gn},
 						  buy_ht = #{buy_ht},
-						  buy_wt = #{buy_wt},
-						  acc_pa = #{acc_pa}
+						  buy_wt = #{buy_wt}
 					WHERE buy_em = #{buy_em}
 	</update>
 	

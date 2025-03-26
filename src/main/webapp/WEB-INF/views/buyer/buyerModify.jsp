@@ -63,7 +63,7 @@
 					<label for="password">비밀번호</label><span id="passwdError"></span>
 				</div>
 				<input type="password" id="password" class="input-value" placeholder="비밀번호를 바꾸고 싶으면 입력 후 수정하기를 눌러주세요.">
-				<p class="note">*조건추가하고 유효성하기</p>
+				<p class="note">*비밀번호는 6자리 이상, 영문자(소문자,대문자) 및 특수문자를 포함해주세요.</p>
 			</div>
 			<div class="field">
 				<div class="modi-title">
@@ -97,12 +97,6 @@
 				<div class="body-div">
 					<p class="note">*키 범위 : 100 ~ 250cm</p>
 					<p class="note">*몸무게 범위 : 40 ~ 150kg</p>
-				</div>
-			</div>
-			<div class="field">
-				<div>
-					<input type="checkbox" id="agreement">
-					<label for="agreement">개인정보수집 및 동의(선택)</label>
 				</div>
 			</div>
 			<div class="field">

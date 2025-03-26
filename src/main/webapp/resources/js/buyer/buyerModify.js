@@ -24,6 +24,10 @@ $(function() {
 	$('#nickname').on('input', function() {
     	checkNick($(this));
 	});
+	// 비밀번호
+	$('#password').on('input', function() {
+		checkPasswd($(this));
+	})
 	// 휴대폰번호
 	$('#phoneNumber').on('input', function() {
 		checkPhone($(this));
@@ -36,6 +40,7 @@ $(function() {
 	$('#heightSize').on('input', function() {
 		checkHeight($(this));
 	})
+	// 몸무게
 	$('#weightSize').on('input', function() {
 		checkWeight($(this));
 	})
@@ -164,6 +169,27 @@ $(function() {
 	    } else {
 			effectiveness = true;
 	        $('#nickError').text('');
+	    }
+	}
+	
+	// 패스워드
+	function checkPasswd(pw) {
+		let pwValue = pw.val().trim();
+		let errorMsg = '';
+		effectiveness = false;
+
+		const passwordRegex = /^(?=.*[A-Z])(?=.*[\W_]).{6,}$/;
+		if (!passwordRegex.test(pwValue)) {
+			if(pwValue !== "") {
+	        	errorMsg = "조건을 만족하는 비밀번호를 입력해주세요.";
+			}
+	    }
+
+		if (errorMsg) {
+	        $('#passwdError').text(errorMsg).css('color', 'red');
+	    } else {
+			effectiveness = true;
+	        $('#passwdError').text('');
 	    }
 	}
 	
