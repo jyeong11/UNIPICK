@@ -19,7 +19,7 @@
      WHERE buy_em = #{buy_em}
 </select>
 
-<insert id="insertBuyer">
+<insert id="insertBuyer" parameterType="map">
     INSERT INTO buyers (buy_em, buy_pw, buy_ph)
     VALUES (#{buyer_em}, #{buyer_pw}, #{phone})
 </insert>

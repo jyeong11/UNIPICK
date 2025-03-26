@@ -105,16 +105,26 @@ public class BuyerController2 {
 	    return ResponseEntity.ok(response);
 	}
 	
-    @ResponseBody
-    @PostMapping("register")
+	@ResponseBody
+	@PostMapping("register")
 	public ResponseEntity<Map<String, Object>> register(@RequestParam("buyer_em") String email,
-			@RequestParam("buyer_pw") String password, HttpSession session) {
-		String phone = (String) session.getAttribute("userPhone"); // 세션에서 phone 값 가져오기
-		boolean success = buyerService.registerBuyer(email, password, phone); // 서비스 호출
-		Map<String, Object> response = new HashMap<>();
-		response.put("success", success);
-		return ResponseEntity.ok(response);
+	        @RequestParam("buyer_pw") String password, HttpSession session) {
+	    
+	    // 비밀번호 유효성 검사
+	    if (!buyerService.validatePassword(password)) {
+	        Map<String, Object> response = new HashMap<>();
+	        response.put("success", false);
+	        response.put("msg", "비밀번호가 유효하지 않습니다.");
+	        return ResponseEntity.badRequest().body(response);
+	    }
+
+	    String phone = (String) session.getAttribute("userPhone"); // 세션에서 phone 값 가져오기
+	    boolean success = buyerService.registerBuyer(email, password, phone); // 서비스 호출
+	    Map<String, Object> response = new HashMap<>();
+	    response.put("success", success);
+	    return ResponseEntity.ok(response);
 	}
+
 	
 	// 비밀번호찾기 페이지 이동
 		@GetMapping("empPass")

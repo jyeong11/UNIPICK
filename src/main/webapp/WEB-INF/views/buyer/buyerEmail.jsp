@@ -63,7 +63,7 @@
 				<div class="css-138pfvh">
 					<label class="BODY_13">비밀번호</label>
 					<span class="BODY_15">
-					<input type="password" id="buy_pw" class="css-1wr8iut" placeholder="영문, 숫자, 특수문자 포함 8자 이상" required></span>
+					<input type="password" id="buy_pw" class="css-1wr8iut" placeholder="영문, 숫자, 특수문자 포함 8자 이상" maxlength="16" required></span>
 					<span id="checkPasswdResult"></span>
 					 <input type="hidden" name="phone" value="${userPhone}" />
 				</div>

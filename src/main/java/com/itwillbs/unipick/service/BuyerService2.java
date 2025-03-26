@@ -22,8 +22,16 @@ public class BuyerService2 {
         return mapper.BuyEmail(email) > 0;
     }
     
-    // 사용자 등록
+    public boolean validatePassword(String password) {
+        // 비밀번호 규칙: 8~16자, 영문자, 숫자, 특수문자(!@#$%)
+        String regex = "^[A-Za-z0-9!@#$%]{8,16}$";
+        return password.matches(regex);
+    }
+
     public boolean registerBuyer(String email, String password, String phone) {
+        if (!validatePassword(password)) {
+            return false; // 비밀번호 유효성 검사 실패
+        }
         try {
             mapper.insertBuyer(email, password, phone); // 사용자 정보를 DB에 삽입
             return true;
@@ -31,6 +39,7 @@ public class BuyerService2 {
             return false;
         }
     }
+
 }
 	
 	/*// 이메일 비밀번호 보내기
