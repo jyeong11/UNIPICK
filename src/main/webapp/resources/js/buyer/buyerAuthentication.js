@@ -46,7 +46,7 @@ $(document).ready(function(){
             alert("인증완료");
             // 인증 완료 후 세션에 휴대폰 번호 저장
             $.ajax({
-                url: "/UNIPICK/api/otp/setPhoneNumber",
+                url: "buyerAuthentication",
                 method: "POST",
                 data: { phone: phone }, // 서버로 전화번호 전송
                 success: function(response){

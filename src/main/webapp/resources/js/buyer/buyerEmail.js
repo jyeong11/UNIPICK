@@ -1,11 +1,4 @@
-$(document).ready(function () {
-    // 이메일 입력 시 중복 검사
-    $("#buy_em").on("keyup", checkEmail);
-    // 비밀번호 입력 시 유효성 검사
-    $("#buy_pw").on("keyup", checkPass);
-});
-
-// 이메일 중복 검사
+// 이메일 중복 검사 함수 정의
 function checkEmail() {
     let email = $("#buy_em").val();
     let resultElement = $("#checkIdResult");
@@ -38,7 +31,7 @@ function checkEmail() {
     });
 }
 
-// 비밀번호 유효성 검사
+// 비밀번호 유효성 검사 함수 정의
 function checkPass() {
     let passwd = $("#buy_pw").val();
     let resultElement = $("#checkPasswdResult");
@@ -51,68 +44,20 @@ function checkPass() {
     }
 
     let complexity = [
-        ///[A-Z]/.test(passwd), // 대문자 포함 여부
         /[a-z]/.test(passwd), // 소문자 포함 여부
         /\d/.test(passwd),    // 숫자 포함 여부
         /[!@#$%]/.test(passwd) // 특수문자 포함 여부
     ].filter(Boolean).length; // true인 값 개수 세기
 
     let complexityLevels = [
-        //{ count: 4, msg: "안전", color: "blue" },
         { count: 3, msg: "안전", color: "green" },
         { count: 2, msg: "보통", color: "orange" },
         { count: 1, msg: "사용불가", color: "red" }
     ];
 
-    let level = complexityLevels.find(level => level.count === complexity) || complexityLevels[3];
+    let level = complexityLevels.find(level => level.count === complexity) || complexityLevels[2];
     resultElement.text(level.msg).css("color", level.color);
 }
-
-// 완료 버튼 클릭 시 가입 처리
-$("#completeBtn").on("click", function() {
-    let email = $("#buy_em").val();
-    let password = $("#buy_pw").val();
-    let userPhone = $("#hiddenPhone").val(); // hidden 값 가져오기
-
-    // 이메일 중복 검사 결과
-    let emailValid = $("#checkIdResult").text() === "사용 가능한 이메일입니다."; // 텍스트 비교
-    // 비밀번호 유효성 검사 결과
-    let passwordValid = $("#checkPasswdResult").text() === "안전"; // 텍스트 비교
-
-    // 이메일 및 비밀번호 유효성 검사
-    if (!emailValid) {
-        alert("이메일을 올바르게 입력하고 중복을 확인해주세요.");
-        return;
-    }
-
-    if (!passwordValid) {
-        alert("비밀번호를 올바르게 입력해주세요.");
-        return;
-    }
-
-    // 이메일과 비밀번호가 모두 유효하다면 서버로 데이터 전송
-    $.ajax({
-        type: "POST",
-        url: "UNIPICK/register", // 서버의 등록 API URL
-        data: { 
-            buyer_em: email, 
-            buyer_pw: password,
-            phone: userPhone // hidden 값 포함
-        },
-        success: function(response) {
-            if (response.success) {
-                // 등록이 성공하면 홈으로 이동
-                window.location.href = "/"; // 홈 페이지로 이동
-            } else {
-                alert("가입에 실패했습니다. 다시 시도해주세요.");
-            }
-        },
-        error: function() {
-            alert("오류가 발생했습니다.");
-        }
-    });
-});
-
 
 $(document).ready(function () {
     // 이메일 입력 시 중복 검사
@@ -124,7 +69,19 @@ $(document).ready(function () {
     $("#completeBtn").on("click", function() {
         let email = $("#buy_em").val();
         let password = $("#buy_pw").val();
+        let userPhone = $("#userPhone").val(); // hidden 값 가져오기
+        let check1 = $("#acc_ta").val();
+        let check2 = $("#acc_pa").val();
+        let check3 = $("#acc_ma").val();
 
+console.log({
+    buyer_em: email, 
+    buyer_pw: password,
+    phone: userPhone, 
+    acc_ta: check1,
+    acc_pa: check2,
+    acc_ma: check3
+});
         // 이메일 중복 검사 결과
         let emailValid = $("#checkIdResult").text() === "사용 가능한 이메일입니다."; // 텍스트 비교
         // 비밀번호 유효성 검사 결과
@@ -143,23 +100,30 @@ $(document).ready(function () {
 
         // 이메일과 비밀번호가 모두 유효하다면 서버로 데이터 전송
         $.ajax({
-            type: "POST",
-            url: "register", // 서버의 등록 API URL
-            data: { 
-                buyer_em: email, 
-                buyer_pw: password
-            },
-            success: function(response) {
-                if (response.success) {
-                    // 등록이 성공하면 홈으로 이동
-                    window.location.href = "/UNIPICK"; // 홈 페이지로 이동
-                } else {
-                    alert("가입에 실패했습니다. 다시 시도해주세요.");
-                }
-            },
-            error: function() {
-                alert("오류가 발생했습니다.");
-            }
-        });
+    type: "POST",
+    url: "buyerregister", // 정확한 경로로 수정
+    data: { 
+        buyer_em: email, 
+        buyer_pw: password,
+        phone: userPhone, // hidden 값 포함
+        acc_ta: check1,
+        acc_pa: check2,
+        acc_ma: check3
+    },
+    success: function(response) {
+        if (response.success) {
+            window.location.href = "/"; // 홈 페이지로 이동
+        } else {
+	console.log("서버 응답 실패:", response); // 서버 응답 실패 시 콘솔 로그
+            alert("가입에 실패했습니다. 다시 시도해주세요.");
+        }
+    },
+    error: function(xhr, status, error) {
+        console.error("Error:", error);
+        console.log("Status:", status);
+        console.log("Response Text:", xhr.responseText);
+        alert("오류가 발생했습니다.");
+    }
+});
     });
 });

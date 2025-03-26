@@ -86,10 +86,50 @@ public class BuyerController2 {
 	
 		return "buyer/buyerJoin";
 	}
+	
+    @PostMapping("buyerJoin")
+    @ResponseBody
+    public Map<String, Object> saveBuyerAgreement(
+            @RequestParam boolean acc_ta, 
+            @RequestParam boolean acc_pa, 
+            @RequestParam boolean acc_ma,
+            HttpSession session) {
+
+        // 세션에 약관 동의 정보 저장
+        session.setAttribute("acc_ta", acc_ta);
+        session.setAttribute("acc_pa", acc_pa);
+        session.setAttribute("acc_ma", acc_ma);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("success", true);
+        return response;
+    }
+	
 	@GetMapping("buyerAuthentication")
 	public String buyerAuthentication() {
 		return "buyer/buyerAuthentication";
 	}
+	
+	@PostMapping("buyerAuthentication")
+	@ResponseBody
+	public Map<String, Object> saveBuyerPhone(@RequestParam("phone") String phone, HttpSession session) {
+	    // 세션에서 약관 동의 정보 가져오기
+	    Boolean acc_ta = (Boolean) session.getAttribute("acc_ta");
+	    Boolean acc_pa = (Boolean) session.getAttribute("acc_pa");
+	    Boolean acc_ma = (Boolean) session.getAttribute("acc_ma");
+
+	    // 세션에 휴대폰 번호 저장
+	    System.out.println("tttttttt3242134124123123123");
+	    session.setAttribute("userPhone", phone);
+
+	    // 확인을 위한 로그 출력
+	    System.out.println("약관 동의 여부: " + acc_ta + ", " + acc_pa + ", " + acc_ma);
+	    
+	    Map<String, Object> response = new HashMap<>();
+	    response.put("success", true);
+	    return response;
+	}
+
 	
 	@GetMapping("buyerEmail")
 	public String buyerEamil() {
@@ -105,25 +145,82 @@ public class BuyerController2 {
 	    return ResponseEntity.ok(response);
 	}
 	
+	@PostMapping("buyerregister")
 	@ResponseBody
-	@PostMapping("register")
-	public ResponseEntity<Map<String, Object>> register(@RequestParam("buyer_em") String email,
-	        @RequestParam("buyer_pw") String password, HttpSession session) {
-	    
-	    // 비밀번호 유효성 검사
-	    if (!buyerService.validatePassword(password)) {
+	public ResponseEntity<Map<String, Object>> register(
+	        @RequestParam("buyer_em") String email,
+	        @RequestParam("buyer_pw") String password,
+	        @RequestParam("phone") String phone,
+	        @RequestParam("acc_ta") String accTa,
+	        @RequestParam("acc_pa") String accPa,
+	        @RequestParam("acc_ma") String accMa,
+	        HttpSession session) {
+
+	    // 세션에서 값을 가져옴
+	    String sessionPhone = (String) session.getAttribute("phone");
+	    Boolean sessionAccTa = (Boolean) session.getAttribute("acc_ta");
+	    Boolean sessionAccPa = (Boolean) session.getAttribute("acc_pa");
+	    Boolean sessionAccMa = (Boolean) session.getAttribute("acc_ma");
+
+	    // 세션 값이 없는 경우, 클라이언트에서 받은 값을 사용
+	    if (sessionPhone == null || sessionAccTa == null || sessionAccPa == null || sessionAccMa == null) {
+	        sessionPhone = phone;  // 클라이언트에서 받은 phone 값을 사용
+	        sessionAccTa = Boolean.parseBoolean(accTa);  // String을 Boolean으로 변환
+	        sessionAccPa = Boolean.parseBoolean(accPa);  // String을 Boolean으로 변환
+	        sessionAccMa = Boolean.parseBoolean(accMa);  // String을 Boolean으로 변환
+	    }
+
+	    // 로그 출력 - 세션 값 확인
+	    System.out.println("Session Phone: " + sessionPhone);
+	    System.out.println("Session acc_ta: " + sessionAccTa);
+	    System.out.println("Session acc_pa: " + sessionAccPa);
+	    System.out.println("Session acc_ma: " + sessionAccMa);
+
+	    // 이메일 유효성 검사
+	    if (email == null || email.isEmpty() || !email.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
 	        Map<String, Object> response = new HashMap<>();
 	        response.put("success", false);
-	        response.put("msg", "비밀번호가 유효하지 않습니다.");
+	        response.put("msg", "유효한 이메일을 입력해주세요.");
 	        return ResponseEntity.badRequest().body(response);
 	    }
 
-	    String phone = (String) session.getAttribute("userPhone"); // 세션에서 phone 값 가져오기
-	    boolean success = buyerService.registerBuyer(email, password, phone); // 서비스 호출
+	    // 비밀번호 유효성 검사 (최소 8자 이상)
+	    if (password == null || password.isEmpty() || password.length() < 8) {
+	        Map<String, Object> response = new HashMap<>();
+	        response.put("success", false);
+	        response.put("msg", "비밀번호는 8자 이상이어야 합니다.");
+	        return ResponseEntity.badRequest().body(response);
+	    }
+
+	    // 파라미터 준비
+	    Map<String, Object> param = new HashMap<>();
+	    param.put("email", email);
+	    param.put("password", password);
+	    param.put("phone", sessionPhone);
+	    param.put("acc_ta", sessionAccTa);
+	    param.put("acc_pa", sessionAccPa);
+	    param.put("acc_ma", sessionAccMa);
+
+	    // 서비스 호출
+	    boolean success = buyerService.registerBuyer(param);
+
+	    // 응답 준비
 	    Map<String, Object> response = new HashMap<>();
-	    response.put("success", success);
+	    if (success) {
+	        // 사용자 등록 성공시 세션 종료
+	        session.invalidate();
+	        response.put("success", true);
+	        response.put("msg", "사용자 등록이 성공적으로 완료되었습니다.");
+	    } else {
+	        response.put("success", false);
+	        response.put("msg", "사용자 등록에 실패했습니다.");
+	    }
+
 	    return ResponseEntity.ok(response);
 	}
+
+
+
 
 	
 	// 비밀번호찾기 페이지 이동

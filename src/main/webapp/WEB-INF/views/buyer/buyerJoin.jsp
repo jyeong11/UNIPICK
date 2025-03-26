@@ -17,10 +17,12 @@
 <link href="${pageContext.request.contextPath }/resources/css/public.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/top.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/footer.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resources/css/index.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/buyer/buyerJoin.css" rel="stylesheet" type="text/css">
 
 <link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
+
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/buyer/buyerJoin.js"></script>
 <title>UNIPICK</title>
 </head>
 <body>
@@ -36,38 +38,53 @@
 	</div>
 	<main class="css-ds6z7l">
 		<h1 class="HEAD_24 BOLD css-17sedfb e1pr4wto0">서비스 이용약관에<br>동의해주세요.</h1>
-		<form>
+		<form method="post" action="buyerJoin">
 		<div class="form8">
-		<label class="lb1"><input type="checkbox" class="ckbx">
+		<label class="lb1">
+		<input type="checkbox" id="terms_all" class="terms">
 		<span class="formspan">네, 모두 동의합니다.</span>
-		</label><a href="#" class="cssjoin">보기</a></div>
+		</label></div>
+		
 		<div class="css-19tsq9r"></div>
+		
 		<div class="form8">
-		<label class="lb1"><input type="checkbox" class="ckbx">
-		<span>(필수) 만 14세 이상입니다.</span>
+		<label class="lb1">
+		<input type="checkbox" id="terms_ta" name="terms" class="terms">
+		<span>(필수) 이용 약관 동의</span>
 		</label><a href="#" class="cssjoin">보기</a></div>
+		
 		<div class="form8">
-		<label class="lb1"><input type="checkbox" class="ckbx">
-		<span>(필수) 서비스 이용약관에 동의</span>
+		<label class="lb1">
+		<input type="checkbox" id="terms_pa" name="terms" class="terms">
+		<span>(필수) 개인 정보 처리 방침</span>
 		</label><a href="#" class="cssjoin">보기</a></div>
+		
 		<div class="form8">
-		<label class="lb1"><input type="checkbox" class="ckbx">
-		<span>(필수) 개인정보 수집이용에 동의</span>
+		<label class="lb1">
+		<input type="checkbox" id="terms_ma" name="terms" class="terms">
+		<span>(필수) 마케팅 동의</span>
 		</label><a href="#" class="cssjoin">보기</a></div>
-		<div class="form8">
-		<label class="lb1"><input type="checkbox" class="ckbx">
-		<span>(선택) 야간 혜택 수신에 동의</span>
-		</label><a href="#" class="cssjoin">보기</a></div>
-		<div class="form8">
-		<label class="lb1"><input type="checkbox" class="ckbx">
-		<span>(선택) 홍보 및 마케팅 이용에 동의</span>
-		</label><a href="#" class="cssjoin">보기</a></div>
-		<div class="form8">
-		<label class="lb1"><input type="checkbox" class="ckbx">
-		<span>(선택) 마케팅 개인정보 제3자 제공 동의</span>
-		</label><a href="#" class="cssjoin">보기</a></div>
+		
+<!-- 		<div class="form8"> -->
+<!-- 		<label class="lb1"> -->
+<!-- 		<input type="checkbox" name="terms" class="terms"> -->
+<!-- 		<span>(선택) 야간 혜택 수신에 동의</span> -->
+<!-- 		</label><a href="#" class="cssjoin">보기</a></div> -->
+		
+<!-- 		<div class="form8"> -->
+<!-- 		<label class="lb1"> -->
+<!-- 		<input type="checkbox" name="terms" class="terms"> -->
+<!-- 		<span>(선택) 홍보 및 마케팅 이용에 동의</span> -->
+<!-- 		</label><a href="#" class="cssjoin">보기</a></div> -->
+		
+<!-- 		<div class="form8"> -->
+<!-- 		<label class="lb1"> -->
+<!-- 		<input type="checkbox" name="terms" class="terms"> -->
+<!-- 		<span>(선택) 마케팅 개인정보 제3자 제공 동의</span> -->
+<!-- 		</label><a href="#" class="cssjoin">보기</a></div> -->
+		
 		</form>
-		<button class="joinBtn" onclick="location.href='buyerAuthentication'">다음</button>
+		<button class="joinBtn" id="completeBtn">다음</button>
 		<div class="joinAgree">"‘선택' 항목에 동의하지 않아도 서비스 이용이 가능합니다."<br>
 		"개인정보 수집 및 이용에 대한 동의를 거부할 권리가 있으며,"<br>
 		"동의 거부시 회원제 서비스 이용이 제한됩니다."</div>

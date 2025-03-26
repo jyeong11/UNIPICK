@@ -20,10 +20,14 @@
 </select>
 
 <insert id="insertBuyer" parameterType="map">
-    INSERT INTO buyers (buy_em, buy_pw, buy_ph)
-    VALUES (#{buyer_em}, #{buyer_pw}, #{phone})
+    INSERT INTO buyers (buy_em, buy_pw, buy_ph, acc_ta, acc_pa, acc_ma)
+    VALUES (#{email}, #{password}, #{phone}, #{acc_ta}, #{acc_pa}, #{acc_ma})
 </insert>
 
+<!--     <insert id="saveBuyerAgreement" parameterType="map"> -->
+<!--         INSERT INTO buyers (buy_em, acc_ta, acc_pa, acc_ma) -->
+<!--         VALUES ('example@email.com', #{acc_ta}, #{acc_pa}, #{acc_ma}) -->
+<!--     </insert> -->
 
 
 <!-- <select id="findEmployeeByNoAndEmail" resultType="employee"> -->

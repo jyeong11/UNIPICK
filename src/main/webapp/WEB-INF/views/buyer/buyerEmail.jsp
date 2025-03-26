@@ -1,9 +1,25 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page session="true" %>
 <%@ page import="javax.servlet.http.HttpSession" %>
+
 <%
     String userPhone = (String) session.getAttribute("userPhone");
+
+    
+    // Integer로 값 가져오기 (null 처리)
+    Integer check1 = (Integer) session.getAttribute("check1");
+    Integer check2 = (Integer) session.getAttribute("check2");
+    Integer check3 = (Integer) session.getAttribute("check3");
+
+    // 값이 null인 경우 기본값 설정
+    check1 = (check1 != null) ? check1 : 0;
+    check2 = (check2 != null) ? check2 : 0;
+    check3 = (check3 != null) ? check3 : 0;
+    
+    System.out.println("userPhone: " + userPhone);
+    System.out.println("acc_ta: " + check1);
+    System.out.println("acc_pa: " + check2);
+    System.out.println("acc_ma: " + check3);
 %>
 <!DOCTYPE html>
 <html>
@@ -65,7 +81,10 @@
 					<span class="BODY_15">
 					<input type="password" id="buy_pw" class="css-1wr8iut" placeholder="영문, 숫자, 특수문자 포함 8자 이상" maxlength="16" required></span>
 					<span id="checkPasswdResult"></span>
-					 <input type="hidden" name="phone" value="${userPhone}" />
+					<input type="hidden" id="userPhone" name="userPhone" value="${sessionScope.userPhone}" />
+					<input type="hidden" id="acc_ta" name="acc_ta" value="${sessionScope.acc_ta}" />
+					<input type="hidden" id="acc_pa" name="acc_pa" value="${sessionScope.acc_pa}" />
+					<input type="hidden" id="acc_ma" name="acc_ma" value="${sessionScope.acc_ma}" />
 				</div>
 			</form>
 			<button class="css-1lhlb22" id="completeBtn">완료</button>
