@@ -238,16 +238,15 @@ public class BuyerController {
 		return buyService.reviewInfo(buyer);
 	}
 	
-	// 리뷰 정보
+	// 주문 정보
 	@ResponseBody
-	@GetMapping("OrderListData")
-	public List<Map<String, Object>> OrderListData(HttpSession session, Map<String, Object> buyer) {
+	@PostMapping("OrderListData")
+	public List<Map<String, Object>> OrderListData(HttpSession session, @RequestBody Map<String, Object> buyer) {
 		// 임시 아이디
 		session.setAttribute("id", "sadsa@naver.com");
 		buyer.put("buy_em", session.getAttribute("id"));
 		
 		return buyService.OrderListInfo(buyer);
 	}
-	
 	
 }

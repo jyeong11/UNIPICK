@@ -24,3 +24,37 @@
 	width: 380px;
 	padding: 10px;
 }
+
+.prd-img {
+	width: 180px;
+    height: auto;
+}
+
+.second-info {
+	display: flex;
+	justify-content: space-between;
+	gap: 10px;
+}
+
+.order-info {
+	border-top: 1px solid black;
+}
+
+.order-btn {
+	width: 103px;
+}
+
+.none {
+	visibility: hidden;
+}
+
+.show {
+	display: inline-block;
+}
+
+#radio-search {
+	display: flex;
+	flex-direction: column;
+	padding: 20px 0 20px 0;
+	gap: 10px;
+}

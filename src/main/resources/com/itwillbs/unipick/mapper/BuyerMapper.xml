@@ -235,11 +235,13 @@
 	<!-- 주문 정보 -->
 	<select id="OrderListInfo" parameterType="map">
 		SELECT o.ord_at,
+			   o.ord_id,
 		 	   od.odd_st,
 			   od.odd_qt,
-			   od.odd_am,
+			   FORMAT(od.odd_am, 0) AS odd_am,
 			   c.cod_nm,
 			   p.prd_nm,
+			   p.prd_cd,
 			   s.sel_nm,
 			   op.clr_nm,
 			   pi.fil_pt
@@ -252,6 +254,13 @@
 		  JOIN (SELECT distinct fil_pt, prd_cd
 				  FROM product_images) pi ON p.prd_cd = pi.prd_cd
 		 WHERE buy_em = #{buy_em}
+		   <if test="date != null and !date.equals('')">
+		       AND DATE(o.ord_at) BETWEEN #{date} AND CURDATE()
+		   </if>
+		   <if test="searchData != null and !searchData.equals('')">
+		      AND (p.prd_nm like CONCAT ('%', #{searchData}, '%')
+		       OR  s.sel_nm like CONCAT ('%', #{searchData}, '%'))
+		   </if>
 	</select>
 	
   </mapper>

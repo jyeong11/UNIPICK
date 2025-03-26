@@ -39,41 +39,19 @@
 			<div class = "two">
 				<h2>나의 주문/배송 현황</h2>
 			</div>
-			<div>	<!-- 검색, 정렬기준 -->
-				
+			<div id="radio-search">	<!-- 검색, 정렬기준 -->
+				<div id="ord-radio">
+					<label class="search-radio"><input type="radio" name="choice" value="option1" checked> 최근 3개월</label>
+				    <label class="search-radio"><input type="radio" name="choice" value="option2"> 최근 1년</label>
+				    <label class="search-radio"><input type="radio" name="choice" value="option3"> 전체</label>
+			    </div>
+			    <div id="ord-search">
+				    <input type="text" id="searchData" placeholder="상품명 / 스토어명으로 검색">
+					<button id="ordSearch">검색</button>
+				</div>
 			</div>
 			<div>
 				<div id="cards">
-					<div class="card">
-						<div id="nick">날짜 + 주문번호 / 상세조회</div>
-						<div class="product">
-							<div id="date">스토어명</div>
-							<div id="star">사진</div>
-							<div id="star">사진 / 구매현황 + 상품명 + 옵션 수량 + 가격 </div>
-							<div id="prdName">리뷰 / 문의하기 버튼</div>
-						</div>
-						<div class="product">
-							<div id="date">스토어명</div>
-							<div id="star">사진</div>
-							<div id="star">사진 / 구매현황 + 상품명 + 옵션 수량 + 가격 </div>
-							<div id="prdName">리뷰 / 문의하기 버튼</div>
-						</div>
-					</div>
-					<div class="card">
-						<div id="nick">날짜 + 주문번호 / 상세조회</div>
-						<div class="product">
-							<div id="date">스토어명</div>
-							<div id="star">사진</div>
-							<div id="star">사진 / 구매현황 + 상품명 + 옵션 수량 + 가격 </div>
-							<div id="prdName">리뷰 / 문의하기 버튼</div>
-						</div>
-						<div class="product">
-							<div id="date">스토어명</div>
-							<div id="star">사진</div>
-							<div id="star">사진 / 구매현황 + 상품명 + 옵션 수량 + 가격 </div>
-							<div id="prdName">리뷰 / 문의하기 버튼</div>
-						</div>
-					</div>
 					<div class="card">
 						<div id="nick">날짜 + 주문번호 / 상세조회</div>
 						<div class="product">
