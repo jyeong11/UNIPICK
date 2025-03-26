@@ -48,7 +48,7 @@
 				<div class="modi-title">
 					<label for="name">이름</label><span id="nameError"></span>
 				</div>
-				<input type="text" id="name" class="input-value" placeholder="이름을 입력해 주세요.">
+				<input type="text" id="name" class="input-value" maxlength="5" placeholder="이름을 입력해 주세요.">
 				<p class="note">*최대 5글자</p>
 			</div>
 			<div class="field">
@@ -108,7 +108,7 @@
 			<div class="field">
 				<div id="last-div">
 					<button id="modify">수정하기</button>
-					<button id="DeleteAccount">탈퇴하기</button>
+					<button id="withdraw">탈퇴하기</button>
 				</div>
 			</div>
 		</div>

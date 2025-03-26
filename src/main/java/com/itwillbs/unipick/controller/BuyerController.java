@@ -91,6 +91,12 @@ public class BuyerController {
 		return "buyer/buyerOrderDetail";
 	}
 	
+	// 회원 탈퇴 페이지 이동
+	@GetMapping("withdraw")
+	public String withdraw() {
+		return "buyer/buyerWithdraw";
+	}
+	
 	
 	// 상품 상세조회 (조회)
 	@GetMapping("productDetail")
@@ -255,6 +261,18 @@ public class BuyerController {
 		buyer.put("buy_em", session.getAttribute("id"));
 		
 		return buyService.OrderListInfo(buyer);
+	}
+	
+	// 회원 탈퇴
+	@ResponseBody
+	@GetMapping("buyerWithdraw")
+	public void buyerWithdraw(HttpSession session, Map<String, Object> buyer) {
+		// 임시 아이디
+		session.setAttribute("id", "dol12@naver.com");
+		buyer.put("buy_em", session.getAttribute("id"));
+		
+		buyService.Withdraw(buyer);
+		session.invalidate();
 	}
 	
 }

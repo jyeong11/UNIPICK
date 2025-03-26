@@ -17,39 +17,38 @@ $(function() {
 	
 	// 유효성 검사
 	// 이름
-	$('#name').on('keyup', function() {
+	$('#name').on('input', function() {
     	checkName($(this));
 	});
 	// 닉네임
-	$('#nickname').on('keyup', function() {
+	$('#nickname').on('input', function() {
     	checkNick($(this));
 	});
 	// 휴대폰번호
-	$('#phoneNumber').on('keyup', function() {
+	$('#phoneNumber').on('input', function() {
 		checkPhone($(this));
 	})
 	// 생년월일
-	$('#birthDate').on('keyup', function() {
+	$('#birthDate').on('input', function() {
 		checkBirth($(this));
 	})
 	// 키
-	$('#heightSize').on('keyup', function() {
+	$('#heightSize').on('input', function() {
 		checkHeight($(this));
 	})
-	$('#weightSize').on('keyup', function() {
+	$('#weightSize').on('input', function() {
 		checkWeight($(this));
 	})
-	
-	
-	// 탈퇴하기 클릭시
-	$('#DeleteAccount').on('click', function(){
-		alert("탈퇴할꺼얌");
-	});
 	
 	// 수정하기 클릭시
 	$('#modify').on('click', function() {
 		modify();
 	})
+	
+	// 탈퇴하기 클릭시
+	$('#withdraw').on('click', function(){
+		window.location.href = 'withdraw';
+	});
 	
 	// 초기 데이터
 	$.ajax({
@@ -114,7 +113,7 @@ $(function() {
 	        	alert("서버 오류가 발생했습니다.");
 	        }
 			
-		})
+		});
 	}
 	
 	// 유효성 검사
@@ -123,7 +122,11 @@ $(function() {
 		let nameValue = name.val().trim();
 	    let errorMsg = '';
 		effectiveness = false;
-	
+		
+		if (nameValue.length > 5) {
+	        name.val(nameValue.substring(0, 5));
+	    }
+
 	    if (!nameValue) {
 	        errorMsg = '이름을 입력해주세요.';
 	    } else if (nameValue.length < 2 || nameValue.length > 5) {
@@ -146,6 +149,10 @@ $(function() {
 		let errorMsg = '';
 		effectiveness = false;
 		
+		if (nickValue.length > 10) {
+	        nick.val(nickValue.substring(0, 10));
+	    }
+		
 		if (!nickValue) {
 	        errorMsg = '닉네임을 입력해주세요.';
 	    } else if (nickValue.length < 2 || nickValue.length > 10) {
@@ -165,6 +172,10 @@ $(function() {
 	    let phoneValue = phone.val().trim();
 	    let errorMsg = '';
 		effectiveness = false;
+		
+		if (phoneValue.length > 13) {
+	        phone.val(phoneValue.substring(0, 13));
+	    }
 	
 	    if (!phoneValue) {
 	        errorMsg = '휴대폰 번호를 입력해주세요.';
@@ -188,6 +199,10 @@ $(function() {
 	    let birthDateValue = birthDate.val().trim();
 	    let errorMsg = '';
 		effectiveness = false;
+		
+		if (birthDateValue.length > 6) {
+	        birthDate.val(birthDateValue.substring(0, 6));
+	    }
 	
 	    if (!birthDateValue) {
 	        errorMsg = '생년월일을 입력해주세요.';
@@ -223,6 +238,10 @@ $(function() {
 	    let heightValue = height.val().trim();
 	    let errorMsg = '';
 	    effectiveness = false;
+
+		if (heightValue.length > 3) {
+	        height.val(heightValue.substring(0, 3));
+	    }
 	
 	    const numberRegex = /^[0-9]{3}$/;
 
@@ -244,6 +263,10 @@ $(function() {
 	    let weightValue = weight.val().trim();
 	    let errorMsg = '';
 	    effectiveness = false;
+
+		if (weightValue.length > 3) {
+	        weight.val(weightValue.substring(0, 3));
+	    }
 	
 	    const numberRegex = /^[0-9]{2,3}$/;  
 

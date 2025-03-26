@@ -1,0 +1,78 @@
+@charset "UTF-8";
+
+.root {
+	max-width: 640px;
+    margin: 0px auto;
+}
+
+#top {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 64px;
+	font-size: 20px;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+	font-size: 18px;
+	padding: 30px;
+}
+
+button {
+	height: 50px;
+  	font-size: inherit;
+  	border-radius: 8px;
+  	cursor: pointer;
+}
+
+.top-btn {
+	color: #f2a900;
+	font-size: 35px;
+}
+
+.radio-btn {
+	width: 15px;
+	height: 15px;
+	transform: scale(1.4);
+}
+
+.bottom-div{
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.last-div {
+	display: flex;
+    border-radius: 20px;
+    box-sizing: border-box;
+    padding: 10px;
+    border: 1px solid;
+    flex-direction: column;
+}
+
+#input-reason {
+	border: none;
+	outline: none;
+    height: 100%;
+    line-height: 1.35;
+    resize: none;
+    font-size: 18px;
+    color: #292b2b;
+    font-family: "Noto Sans KR", sans-serif;
+}
+
+p {
+	text-align: right;
+}
+
+.none {
+	visibility: hidden;
+}
+
+#submit {
+	width:100%;
+}

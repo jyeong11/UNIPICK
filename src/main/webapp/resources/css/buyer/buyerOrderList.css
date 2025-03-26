@@ -6,9 +6,10 @@
 }
 
 #cards {
-	display: flex;
-	gap: 10px;
-	padding-bottom: 30px;
+	display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(3, 1fr);
+    padding-bottom: 30px;
 }
 
 .card {
@@ -16,7 +17,6 @@
 	flex-direction: column;
 	gap: 12px;
 	border: 1px solid #ddd;
-	width: 400px;
 	padding: 16px;
 	border-radius: 16px;
 	background: #fff;
@@ -60,7 +60,11 @@
 }
 
 .order-btn {
-	width: 103px;
+	height: 39px;
+    font-size: inherit;
+    border-radius: 8px;
+    cursor: pointer;
+	width: 82px;
 }
 
 .none {
@@ -88,13 +92,7 @@
 
 #ordSearch {
 	height: 39px;
-    font-size: inherit;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.order-btn {
-	height: 39px;
+	width: 70px;
     font-size: inherit;
     border-radius: 8px;
     cursor: pointer;

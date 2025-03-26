@@ -33,17 +33,13 @@
     padding-left: 15px;
 }
 
-/* .essential { */
-/* 	color: red; */
-/* } */
-
 .field {
 	display: flex;
 	flex-direction: column;
 	gap: 5px;
 }
 
-#DeleteAccount {
+#withdraw {
 	background-color: #f5f6f8;
 	color: #4f5558;
 }

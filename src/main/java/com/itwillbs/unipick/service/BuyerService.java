@@ -94,5 +94,9 @@ public class BuyerService {
 	public List<Map<String,Object>> OrderListInfo(Map<String, Object> buyer) {
 		return mapper.OrderListInfo(buyer);
 	}
+	// 회원 탈퇴
+	public void Withdraw(Map<String, Object> buyer) {
+		mapper.Withdraw(buyer);
+	}
 	
 }
