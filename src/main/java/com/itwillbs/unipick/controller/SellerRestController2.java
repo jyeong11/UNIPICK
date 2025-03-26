@@ -54,7 +54,7 @@ public class SellerRestController2 {
         Map<String, Object> response = new HashMap<>();
         response.put("productList", productList);
         response.put("totalCount", totalCount);
-
+//머지나면안되니깐
         return response;
     }
 
