@@ -70,7 +70,7 @@
 				    <span id="price-text"></span>
 				</div>
 		        <div class="button-container">
-		            <button class="npay">UNI Pay 구매</button>
+		           <button class="kakao-pay-btn" onclick="requestKakaoPay(1000,'${prd.prd_cd}')">카카오페이 결제</button>
 		           <button class="cart-btn">
 					    <i class="cart fa fa-solid fa-cart-shopping"></i>
 					</button>
