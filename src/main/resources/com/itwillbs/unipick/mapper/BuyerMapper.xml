@@ -241,11 +241,12 @@
 			   o.ord_dm,
 		 	   od.odd_st,
 			   od.odd_qt,
-			   FORMAT(od.odd_am, 0) AS odd_am,
+			   od.odd_am,
 			   c.cod_nm,
 			   p.prd_nm,
 			   p.prd_cd,
 			   p.prd_sf,
+			   p.prd_sp,
 			   s.sel_nm,
 			   op.clr_nm,
 			   pi.fil_pt

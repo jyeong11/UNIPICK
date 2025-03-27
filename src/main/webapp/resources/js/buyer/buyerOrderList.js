@@ -65,6 +65,7 @@ function search() {
 											return
 										}
 										const date = new Date(item.ord_at).toLocaleString();
+										ord.add(item.ord_id);
 										return `<div class="card" id="${item.ord_id}">
 													<div class="top-info">
 														<div>${date}</div>
@@ -81,6 +82,7 @@ function search() {
 				if (item.odd_st === "배송완료"){
 					display = 'show';
 				}
+				const formatOddAm = new Intl.NumberFormat().format(item.odd_am);
                 let cardContent = `<a href="productDetail?prd_cd=${item.prd_cd}" class="product-link">
 									   <div class="order-info">
 									   		<div><b>${item.sel_nm}</b></div>
@@ -90,7 +92,7 @@ function search() {
 									           		<div>${item.odd_st}</div>
 										       		<div>${item.prd_nm}</div>
 											   		<div>${item.clr_nm} / ${item.cod_nm} / ${item.odd_qt}개</div>
-										       		<div><b>${item.odd_am}원</b></div>
+										       		<div><b>${formatOddAm}원</b></div>
 											   		<div>
 										           		<button id="reviewBtn" class="order-btn ${display}">리뷰쓰기</button>
 										           		<button id="questionBtn" class="order-btn">문의하기</button>
