@@ -155,13 +155,13 @@ JOIN common_detailcode c ON o.siz_nm = c.cod_cd
       AND p.prd_nm LIKE CONCAT('%', #{map.prd_nm}, '%')
   </if>
   <if test="map.prd_ca != null and !map.prd_ca.isEmpty()">
-      AND l.lev_nm LIKE CONCAT('%', #{map.lev_nm}, '%')
+      AND l.lev_nm LIKE CONCAT('%', #{map.prd_ca}, '%')
   </if>
   <if test="map.clr_nm != null and !map.clr_nm.isEmpty()">
-      AND FIND_IN_SET(#{map.clr_nm}, GROUP_CONCAT(DISTINCT o.clr_nm))
+      AND o.clr_nm LIKE CONCAT('%', #{map.clr_nm}, '%')
   </if>
   <if test="map.siz_nm != null and !map.siz_nm.isEmpty()">
-      AND FIND_IN_SET(#{map.cod_nm}, GROUP_CONCAT(DISTINCT c.cod_nm))
+      AND o.siz_nm LIKE CONCAT('%', #{map.siz_nm}, '%')
   </if>
   GROUP BY p.prd_cd, p.prd_nm, p.prd_sp, l.lev_nm, p.prd_dt
   ORDER BY p.prd_dt DESC

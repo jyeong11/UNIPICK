@@ -7,20 +7,20 @@ $(document).ready(function() {
     function loadProductList(page) {
         let startRow = (page - 1) * listLimit;
         let searchKind = $('#noticeSearchKind').val();
-        let prd_nm = "", prd_ca = "", prd_cd = "";
+        let prd_nm = "", prd_ca = "", prd_cd = "", clr_nm = "";
 
         if (searchKind === "name") { 
             prd_nm = $('#noticeSearchWord').val();
         } else if (searchKind === "category") { 
             prd_ca = $('#noticeSearchWord').val();
-        } else if (searchKind === "code") { 
-            prd_cd = $('#noticeSearchWord').val();
+        } else if (searchKind === "color") { 
+            clr_nm = $('#noticeSearchWord').val();
         }
 
         $.ajax({
             url: "/UNIPICK/seller/api/selProductList",
             type: "GET",
-            data: { prd_nm, prd_ca, prd_cd, startRow, listLimit },
+            data: { prd_nm, prd_ca, clr_nm, prd_cd, startRow, listLimit },
             dataType: "json",
             success: function(data) {
                 console.log("서버 응답:", data); // alert 대신 console.log 사용
@@ -97,6 +97,13 @@ $(document).ready(function() {
         if (selectedPage && selectedPage !== currentPage) {
             currentPage = selectedPage;
             loadProductList(currentPage);
+        }
+    });
+
+ $('#noticeSearchWord').on('keydown', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault(); // 기본 동작을 막기
+            $('#noticeSearch').trigger('click'); // 검색 버튼 클릭 이벤트 트리거
         }
     });
 
