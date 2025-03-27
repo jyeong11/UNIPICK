@@ -9,18 +9,74 @@
     text-align: center;
     flex-direction: column;
 }
+.result-box {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+}
+#sel_id {
+	margin-left: 16px;
+}
+.home-button {
+    margin-top: 10px;
+    padding: 10px 15px;
+    border: none;
+    background-color: #f2a900;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#sendOtpBtn{
+	height: 38px;
+    width: 93px;	
+}
+#timer {
+	color: red
+}
 .css-1wnzdoc {
 	display: flex;
     flex-direction: row;
     font-size: 13px;
 }
+#verifyOtpBtn {
+	margin-left: 19px;
+	margin-top: 2px;
+	max-height: 38px;
+}
+label {
+	padding-top: 10px;
+    padding-left: 5px;
+}
+#otpInput{
+	margin-left: 16px;
+}
+.input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.timer-box {
+    position: absolute;
+    right: 10px; /* input 내부에서 우측 끝에 배치 */
+    font-size: 14px;
+    color: #999;
+    background: transparent;
+    pointer-events: none; /* 클릭 방지 */
+}
 .BODY_13{
 	padding-right: 15px;
 }
 button {
-	max-width: 20px;
-	max-width: 113px;
-    max-height: fit-content;
+	max-width: 154px;
+    margin-left: 14px;
+    border: none;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
 }
 input {
 	height: auto;
@@ -67,7 +123,7 @@ input {
 form {
 	padding: 20px;
     width: 500px;
-    height: 500px;
+    height: 600px;
     box-sizing: border-box;
     margin-top: 10px;
     background: #fff;

@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itwillbs.unipick.mapper.SellerMapper">
+<!-- 	셀러 회원가입 -->
 	<insert id="sellerjoin" parameterType="map">
 		INSERT INTO sellers(sel_id, 
 					        sel_pw, 
@@ -60,7 +61,14 @@
 		 ON od.buy_em = bu.buy_em
       WHERE od.ord_id = #{ord_id}
 	</select>
-
+	
+<!-- 	셀러 계정 찾기 -->
+	<select id="otpSellerInfo" parameterType="String">
+     SELECT sel_id, sel_pw
+       FROM sellers
+      WHERE sel_cs = #{userPhone}
+      	AND sel_id = #{sel_id}
+	</select>
 
 
 </mapper>

@@ -40,4 +40,9 @@ public class SellerService {
 	public List<Map<String, Object>> sellerOrdPrdDetail(Map<String, Object> ord_id) {
 		return mapper.sellerOrdPrdDetail(ord_id);
 	}
+	
+	// 계정찾기 
+	public Map<String, Object> otpSellerInfo(String userPhone, String sel_id) {
+	    return mapper.otpSellerInfo(userPhone, sel_id);
+	}
 }

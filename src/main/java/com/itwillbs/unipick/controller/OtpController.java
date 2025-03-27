@@ -1,12 +1,16 @@
 package com.itwillbs.unipick.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import com.itwillbs.unipick.service.OtpService;
+import com.itwillbs.unipick.service.SellerService;
 
 @RestController
 @RequestMapping("/api/otp")
@@ -14,6 +18,8 @@ public class OtpController {
 
     private final OtpService otpService;
     private final HttpSession session;
+    @Autowired
+    SellerService selservice;
 
     public OtpController(OtpService otpService, HttpSession session) {
         this.otpService = otpService;
@@ -57,5 +63,29 @@ public class OtpController {
     public ResponseEntity<String> setPhoneNumber(@RequestParam("phone") String phone) {
         session.setAttribute("phoneNumber", phone); // 세션에 휴대폰 번호 저장
         return ResponseEntity.ok("휴대폰 번호 저장 성공");
+    }
+    
+    @PostMapping("/seller")
+    public ResponseEntity<?> Otp(@RequestParam("otp") String otp, 
+    							 @RequestParam("sel_id") String sel_id) {
+        String userPhone = (String) session.getAttribute("userPhone");
+        System.out.println("SADSA" + userPhone);
+        System.out.println("sel"+sel_id);
+
+        boolean verified = otpService.verifyOtp(userPhone, otp);
+        System.out.println("OTP 검증 결과: " + verified);
+        if (!verified) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                                 .body("인증번호가 올바르지 않습니다.");
+        }
+        Map<String, Object> sellerInfo = selservice.otpSellerInfo(userPhone, sel_id);
+        System.out.println("Seller Info: " + sellerInfo);
+        session.removeAttribute("userPhone");
+        
+        if (sellerInfo == null || sellerInfo.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                                 .body("아이디 및 휴대폰 번호를 다시 입력해주세요.");
+        }
+        return ResponseEntity.ok(sellerInfo);
     }
 }

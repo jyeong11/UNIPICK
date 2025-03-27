@@ -9,6 +9,7 @@
 	href="${pageContext.request.contextPath }/resources/css/seller/sellerFindAcc.css"
 	rel="stylesheet" type="text/css">
 
+
 <!-- 구글 폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,8 +37,7 @@
 				alt="로고" id="logo">
 		</div>
 		<div id="signup-container">
-			<form id="storeSignupForm" action="joinSucess" method="post"
-				enctype="multipart/form-data">
+			<form id="storeSignupForm" action="sellerlogin" >
 				<main class="css-ds6z7l">
 					<div class="css-1bwfwm7">
 						<div class="css-1ff3op5">
@@ -45,7 +45,12 @@
 						</div>
 					</div>
 					<div class="css-1rmy86f">
-						<!-- 휴대폰 번호 입력 -->
+						<div class="css-1wnzdoc">
+							<label>셀러 아이디</label>
+							<div class="css-1ycs6v8 input-container">
+								<input type="tel" id="sel_id" class="css-1oi39wj">
+							</div>
+						</div>
 						<div class="css-1wnzdoc">
 							<label class="BODY_13">휴대폰 번호</label>
 							<div class="css-1ycs6v8">
@@ -57,19 +62,16 @@
 						<!-- OTP 입력 -->
 						<div class="css-1wnzdoc">
 							<label class="BODY_13">인증번호</label>
-							<div class="css-1ycs6v8">
+							<div class="css-1ycs6v8 input-container">
 								<input id="otpInput" type="tel" placeholder="인증번호 6자리"
 									maxlength="6" class="css-1oi39wj">
-								<!-- 타이머 영역 (추가 구현 가능) -->
-								<div class="css-8lsbin">
-									<div spacing="8" class="css-1746nmm">
-										<div class="BODY_13" id="timer">10:00</div>
-									</div>
+								<div class="timer-box">
+									<span id="timer">3:00</span>
 								</div>
 							</div>
-							<button id="verifyOtpBtn" type="button" class="BODY_153">인증번호
-								확인</button>
+							<button id="verifyOtpBtn" type="button">인증번호 확인</button>
 						</div>
+						<div id="resultContainer"></div>
 					</div>
 				</main>
 			</form>
