@@ -22,7 +22,7 @@ $(function() {
 	                        `;
 	                    });
 	                } else {
-	                    resultHtml = "<p>검색 결과가 없습니다.</p>";
+	                    resultHtml = "<p>검색된 상품이 없습니다.</p>";
 	                }
 	                $("#search_results").html(resultHtml);
 	            },

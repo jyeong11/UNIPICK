@@ -41,7 +41,7 @@
 	            <button type="submit">로그인</button>
 	            <div>
 		            <label class="seller-btn"><input type="checkbox" id="rememberId">아이디 기억하기</label>
-		            <a href="#" class="seller-btn">비밀번호 찾기 |</a>
+		            <a href="sellerFindAcc" class="seller-btn">비밀번호 찾기 |</a>
 		            <a href="sellerjoin" id="join" class="seller-btn">셀러 가입</a>
 	            </div>
             </div>

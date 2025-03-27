@@ -43,13 +43,13 @@ public class SellerController {
 	
 	String virtualPath = "/resources/businessLicense";
 	
-	//셀러 회원가입
+	// 셀러 회원가입
 	@GetMapping("sellerjoin")
 	public String sellerJoin() {
 		return "seller/sellerJoinForm";
 	}
 	
-	//메인
+	// 메인
 	@GetMapping("seller")
 	public String sellerMain(HttpSession sellerid) {
 //		map.put("sellerId",(String)sellerid.getAttribute("id"));
@@ -57,14 +57,22 @@ public class SellerController {
 		return "seller/sellerMain";
 	}
 	
-	//셀러 상품 상세 조회
+	// 셀러 상품 상세 조회
 	@GetMapping("sellerPrdDetail")
 	public String sellerPrdDetail() {
 		return "seller/sellerPrdDetail";
 	}
+	
+	// 상품 주문 상세 조회
 	@GetMapping("sellerOrdDetail")
 	public String sellerOrdDetail() {
 		return "seller/sellerOrdDetail";
+	}
+	
+	// 셀러 계정찾기
+	@GetMapping("sellerFindAcc")
+	public String sellerFindAcc() {
+		return "seller/sellerFindAcc";
 	}
 	
 	@GetMapping("sellerlogin")
