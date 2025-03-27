@@ -87,7 +87,7 @@
 					<input type="hidden" id="acc_ma" name="acc_ma" value="${sessionScope.acc_ma}" />
 				</div>
 			</form>
-			<button class="css-1lhlb22" id="completeBtn">완료</button>
+			<button class="css-1lhlb22" id="completeBtn" >완료</button>
 		</main>
 	</div>
 </body>

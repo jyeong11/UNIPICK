@@ -97,7 +97,7 @@ console.log({
             alert("비밀번호를 올바르게 입력해주세요.");
             return;
         }
-
+	debugger;
         // 이메일과 비밀번호가 모두 유효하다면 서버로 데이터 전송
         $.ajax({
     type: "POST",
@@ -110,9 +110,14 @@ console.log({
         acc_pa: check2,
         acc_ma: check3
     },
+
+	dataType: "json",
     success: function(response) {
+
         if (response.success) {
-            window.location.href = "/UNIPICK"; // 홈 페이지로 이동
+	console.log("✅ 서버 응답:", response);
+console.log("✅ response.success 타입:", typeof response.success);
+             window.location.href = "main";
         } else {
 	console.log("서버 응답 실패:", response); // 서버 응답 실패 시 콘솔 로그
             alert("가입에 실패했습니다. 다시 시도해주세요.");
