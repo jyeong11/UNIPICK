@@ -30,7 +30,7 @@
 			                </div>
 			            </li>
 			            <li><a href="cart" class="cart_btn"><i class="fa fa-solid fa-cart-shopping"></i></a></li>
-			            <li><a href="buyerlogin" class="my_btn"><i class="fa-solid fa-user"></i></a></li>
+			            <li><a href="javascript:void(0);" onclick="myPage()" class="my_btn"><i class="fa-solid fa-user"></i></a></li>
 			        </ul>
 			    </div>
 			</div>

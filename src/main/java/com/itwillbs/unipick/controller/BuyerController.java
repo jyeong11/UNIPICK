@@ -76,7 +76,7 @@ public class BuyerController {
 	@GetMapping("logout")
 	public String logout(HttpSession session) {
 	    session.invalidate();
-		return "redirect:buyerLogin";
+		return "redirect:buyerlogin";
 	}
 	
 	//주문시 페이 결제창 
@@ -182,9 +182,7 @@ public class BuyerController {
 	@PostMapping("wishList")
 	public String wishList(@RequestBody Map<String, Object> wish, HttpSession session) {
 		
-		// 임시 아이디
-		session.setAttribute("id", "dol12@naver.com");
-		wish.put("buy_em", session.getAttribute("id"));
+		wish.put("buy_em", session.getAttribute("buyEm"));
 		
 		String msg = "";
 		
@@ -206,9 +204,7 @@ public class BuyerController {
 	@GetMapping("myPageData")
 	public Map<String, Object> myPageData(HttpSession session, Map<String, Object> myPage) {
 	
-		// 임시 아이디
-		session.setAttribute("id", "dol12@naver.com");
-		myPage.put("buy_em", session.getAttribute("id"));
+		myPage.put("buy_em", session.getAttribute("buyEm"));
 		
 		return buyService.myPageData(myPage);
 	}
@@ -227,9 +223,7 @@ public class BuyerController {
 	@GetMapping("buyerInfo")
 	public Map<String, Object> buyerInfo(HttpSession session, Map<String, Object> buy) {
 		
-		// 임시 아이디
-		session.setAttribute("id", "dol12@naver.com");
-		buy.put("buy_em", session.getAttribute("id"));
+		buy.put("buy_em", session.getAttribute("buyEm"));
 		
 		return buyService.buyerInfo(buy);
 	}
@@ -245,9 +239,7 @@ public class BuyerController {
 	@ResponseBody
 	@GetMapping("reviewData")
 	public List<Map<String, Object>> reviewData(HttpSession session, Map<String, Object> buyer) {
-		// 임시 아이디
-		session.setAttribute("id", "dol12@naver.com");
-		buyer.put("buy_em", session.getAttribute("id"));
+		buyer.put("buy_em", session.getAttribute("buyEm"));
 		
 		return buyService.reviewInfo(buyer);
 	}
@@ -256,9 +248,7 @@ public class BuyerController {
 	@ResponseBody
 	@PostMapping("OrderListData")
 	public List<Map<String, Object>> OrderListData(HttpSession session, @RequestBody Map<String, Object> buyer) {
-		// 임시 아이디
-		session.setAttribute("id", "sadsa@naver.com");
-		buyer.put("buy_em", session.getAttribute("id"));
+		buyer.put("buy_em", session.getAttribute("buyEm"));
 		
 		return buyService.OrderListInfo(buyer);
 	}
@@ -267,9 +257,7 @@ public class BuyerController {
 	@ResponseBody
 	@GetMapping("buyerWithdraw")
 	public void buyerWithdraw(HttpSession session, Map<String, Object> buyer) {
-		// 임시 아이디
-		session.setAttribute("id", "dol12@naver.com");
-		buyer.put("buy_em", session.getAttribute("id"));
+		buyer.put("buy_em", session.getAttribute("buyEm"));
 		
 		buyService.Withdraw(buyer);
 		session.invalidate();
@@ -279,10 +267,23 @@ public class BuyerController {
 	@ResponseBody
 	@PostMapping("myOrderDetail")
 	public List<Map<String, Object>> myOrderDetail(HttpSession session, @RequestBody Map<String, Object> buyer) {
-		// 임시 아이디
-		session.setAttribute("id", "sadsa@naver.com");
-		buyer.put("buy_em", session.getAttribute("id"));
+		buyer.put("buy_em", session.getAttribute("buyEm"));
 		
 		return buyService.OrderListInfo(buyer);
 	}
+	
+	@ResponseBody
+	@GetMapping("checkLogin")
+	public String checkLogin(HttpSession session) {
+		
+	    String userId = (String) session.getAttribute("buyEm");
+	    String url = "buyerlogin";
+	    
+	    if (userId != null && !userId.isEmpty()) {
+	        url = "myPage";
+	    }
+		
+		return url;
+	}
+	
 }
