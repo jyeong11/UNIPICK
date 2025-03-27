@@ -27,22 +27,23 @@ public class SellerRestController2 {
     
     
   //AJAX를 통한 상품 리스트 조회
-    @ResponseBody
-    @GetMapping("/selProductList")
+    @RequestMapping("/api/selProductList")
     public Map<String, Object> getProductList(
             @RequestParam(value = "prd_nm", required = false, defaultValue = "") String prdNm,
             @RequestParam(value = "prd_ca", required = false, defaultValue = "") String prdCa,
             @RequestParam(value = "clr_nm", required = false, defaultValue = "") String clrNm,
             @RequestParam(value = "siz_nm", required = false, defaultValue = "") String sizNm,
+            @RequestParam(value = "prd_cd", required = false, defaultValue = "") String prdCd,
             @RequestParam(value = "startRow", required = false, defaultValue = "0") int startRow,
             @RequestParam(value = "listLimit", required = false, defaultValue = "10") int listLimit) {
 
         // 검색 조건 Map 생성
         Map<String, String> searchParams = new HashMap<>();
-        searchParams.put("prd_nm", prdNm);
-        searchParams.put("prd_ca", prdCa);
-        searchParams.put("clr_nm", clrNm);
-        searchParams.put("siz_nm", sizNm);
+			if (!prdNm.isEmpty()) searchParams.put("prd_nm", prdNm);
+			if (!prdCa.isEmpty()) searchParams.put("prd_ca", prdCa);
+			if (!clrNm.isEmpty()) searchParams.put("clr_nm", clrNm);
+			if (!sizNm.isEmpty()) searchParams.put("siz_nm", sizNm);
+			if (!prdCd.isEmpty()) searchParams.put("prd_cd", prdCd);
 
         // 상품 리스트 조회
         List<Map<String, Object>> productList = sellerService.getProductList(searchParams, startRow, listLimit);
@@ -54,7 +55,7 @@ public class SellerRestController2 {
         Map<String, Object> response = new HashMap<>();
         response.put("productList", productList);
         response.put("totalCount", totalCount);
-//머지나면안되니깐
+
         return response;
     }
 
