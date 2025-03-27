@@ -228,7 +228,7 @@
 		  JOIN options o ON r.opt_id = o.opt_id
 		  JOIN products p ON o.prd_cd = p.prd_cd
 		  JOIN common_detailcode c ON o.siz_nm = c.cod_cd
-		 WHERE r.buy_em = #{buy_em};
+		 WHERE r.buy_em = #{buy_em}
 	</select>
 	
 	<!-- 주문 정보 -->

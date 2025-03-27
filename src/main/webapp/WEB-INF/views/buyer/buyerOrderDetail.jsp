@@ -23,7 +23,7 @@
 <link href="${pageContext.request.contextPath }/resources/css/buyer/buyerMenuBar.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/top.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/footer.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resources/css/buyer/productOrder.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/buyer/buyerOrderDetail.css" rel="stylesheet" type="text/css">
 <!-- favicon -->
 <link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
 </head>
@@ -42,22 +42,27 @@
 	<div id="order-container">
 		<div><h2>주문 상품 정보</h2></div>
 	</div>
+	<div id="orderInfo-container">
+    	<div class="ttpr">
+    		<span id="optTotal">상품 주문금액: </span><span>원</span>
+    	</div>
+	</div>
 	<div id="deliInfo-container">
         <form id="delivery-form">
             <div id="del"><h2>배송지 정보</h2></div>
-            <div class="del-nm"><span>수령인</span><input type="text" id="shipping_name"></div>
-            <div class="del-nm"><span>휴대폰</span><input type="text" id="shipping_telephone"></div>
-            <div class="del-nm"><span>배송주소</span><input type="text" id="shipping_zip"></div>
-            <div class="del-nm"><span>배송메모</span><input type="text" id="shipping_memo"></div>
+            <div class="del-nm"><span>수령인</span><input type="text" id="shipping_name" readonly></div>
+            <div class="del-nm"><span>휴대폰</span><input type="text" id="shipping_telephone" readonly></div>
+            <div class="del-nm"><span>배송주소</span><input type="text" id="shipping_zip" readonly></div>
+            <div class="del-nm"><span>배송메모</span><input type="text" id="shipping_memo" readonly></div>
         </form>
     </div>
 	<div id="delprice-container">
-        <div id="total"><h2>최종 결제금액</h2></div>
+        <div id="total"><h2>최종 결제 금액</h2></div>
         <div class="price">
             <div id="total-pr"><span>총 상품금액</span><span id="totalPrice">원</span></div>
             <div id="total-dp"><span>총 배송비</span><span id="totalDelPrice">원</span></div>
         </div>
-        <div id="prpr"><span>결제 예상 금액</span><span id="sum">원</span>         	
+        <div id="prpr"><span>결제 금액</span><span id="sum">원</span>         	
         </div>
     </div>
 	<div id="payment-container"></div>
@@ -66,8 +71,5 @@
 	<div id="footer">
 		<jsp:include page="../inc/footer.jsp"></jsp:include>
 	</div>
-	<script>
-	 	var contextPath = "${pageContext.request.contextPath}";
-	</script>
 </body>
 </html>

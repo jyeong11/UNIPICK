@@ -1,0 +1,246 @@
+@charset "UTF-8";
+.title h1{
+	font-weight: 400;
+    text-align: center;
+    font-size: 2.2em;
+}
+.title {
+    margin: 48px 0 63px;
+    padding: 40px 0 20px;
+}
+
+h2 {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    font-size: 1.8em;
+}
+#order-container{
+	max-width: 1160px;
+	margin: 40px auto;
+	border-bottom: 1px solid #e8e9eb;
+}
+.order-selnm {
+    top: 19px;
+    font-size: 20px;
+	padding-bottom: 10px;
+}
+.order-img img{
+	width: 120px;
+    height: 120px;
+    object-fit: cover;
+}
+.order-info {
+    display: flex;
+    padding-top: 15px;
+    padding-bottom: 25px;
+	border-bottom: 1px solid #e8e9eb;
+}
+.prd-nm {
+	padding-left: 25px;
+    font-size: 1.2em;
+    height: 35px;
+}
+.ord-title {
+	display: flex;
+	justify-content: space-between;
+}
+.pr {
+	font-size: 20px;
+    padding-top: 10px;
+}
+.prd{
+	display: flex;
+	justify-content: space-between;
+}
+.prd-sp{
+	padding-left: 583px;
+    font-size: 22px;
+}
+#orderInfo-container {
+	max-width: 1160px;
+	margin: 40px auto;
+}
+.ttpr {
+	display: flex;
+    justify-content: end;
+    font-size: 25px;
+    color: #f2a900;
+}
+#orderInfo-container h2 {
+	padding-bottom: 20px;
+}
+#deliInfo-container{
+	border-bottom: 1px solid #e8e9eb;
+	max-width: 1160px;
+	margin: 40px auto;
+}
+#del {
+	display: flex;
+	justify-content: space-between;
+	
+}
+a {
+	text-decoration: none;
+	text-decoration: none;
+    font-size: 20px;
+    padding-top: 5px;
+    color: #292b2b;
+}
+input[type=text] {
+	border-radius: 6px;
+	padding: 13px;
+	border: 1px solid #e6e6e6;
+	width: 80%;
+ }
+.del-nm span {
+	width: 80px;
+    font-size: 17px;
+    font-weight: 500;
+    padding-top: 6px;
+}
+.del-nm {
+	display: flex;
+    justify-content: space-between;
+    padding-bottom: 15px;
+}
+#delprice-container h2 {
+	padding-bottom: 20px;
+}
+#delprice-container, #term-container, #payment-container{
+    max-width: 1160px;
+    margin: 57px auto;
+}
+.total-pr span{
+    width: 80px;
+    font-size: 17px;
+    font-weight: 500;
+    padding-top: 6px;
+}
+#total-pr{
+	display: flex;
+	justify-content: space-between;
+	padding-bottom: 15px;
+}
+#total-dp{
+	display: flex;
+	justify-content: space-between;	
+}
+#prpr span{
+	 font-size: 26px;
+	 padding-top: 28px;
+}
+#prpr {
+	display: flex;
+	justify-content: space-between;
+	border-bottom: 1px solid #e8e9eb;
+	padding-bottom: 25px;
+}
+#sum {
+	color: #f2a900;	
+}
+.price span {
+    font-weight: normal !important;
+}  
+.price input, .price span {
+    display: block;
+}
+.price label {
+	display: flex;
+	padding-bottom: 30px;
+    font-size: 18px;
+}
+.price input {
+	width: 16px;
+}
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    appearance: none; /* 기본 체크박스 스타일을 제거 */
+    border: 2px solid #ccc; /* 기본 테두리 색상 */
+    border-radius: 4px;
+    background-color: white; /* 배경색은 기본 */
+    cursor: pointer;
+    position: relative; /* 체크 표시를 만들기 위한 위치 설정 */
+    transition: border-color 0.3s ease, background-color 0.3s ease; /* 색상 변경 효과 */
+}
+input[type="checkbox"]:checked {
+    border-color: #f2a900;
+    background-color: #f2a900;
+}
+/* 체크박스 안에 체크 표시 */
+input[type="checkbox"]:checked::before {
+    content: '\2713'; /* 체크 표시 (✔) */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* 체크 표시를 중앙에 배치 */
+    color: white; /* 체크 표시 색상 */
+    font-size: 14px; /* 체크 표시 크기 */
+}
+#price-button button {
+    padding: 25px;
+    width: 100%;
+    max-width: 260px;
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+    background: #ccc;
+    color: #fff;
+    font-size: 1.5em;
+    border: none; 
+    outline: none; 
+    cursor: not-allowed;
+    border-radius: 65px;
+    margin-bottom: 20px;
+}
+#price-button button.active {
+    background: black;
+    color: white;
+    cursor: pointer;
+}
+#payment span {
+    font-size: 18px;
+    line-height: 22px;
+}
+.card-first {
+	border: 1px solid #e4e6e9;
+	width: 300px;
+    height: 160px;
+    border-radius: 9px;
+    margin-top: 20px;
+    margin-left: 20px;
+    font-size: 20px;
+}
+.card-first button {
+	cursor: pointer;
+	background: none;
+	color: black;
+ 	border: 1px solid #e4e6e9;
+ 	width: 150px;
+    height: 64px;
+    border-radius: 55px;
+}
+#pmregister{
+    font-size: 23px;
+    color: #f2a900;
+    padding-bottom: 8px;
+    
+}
+.tie {
+	text-align: center;
+    padding-top: 22px;
+}
+.prd-1, .prd-2 {
+	display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+    font-size: 1.1em;
+}
+.prd-sf {
+	padding-left: 25px;
+}
+
+#reference {
+	display: flex;
+	flex-direction: row-reverse;
+}

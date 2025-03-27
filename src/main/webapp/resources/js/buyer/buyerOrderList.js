@@ -15,7 +15,7 @@ $(function() {
 	$(document).on('click', '#reviewBtn', function(event) {
 	    event.preventDefault();
 		let prdCd = $(this).closest('a').attr('href').split('prd_cd=')[1];
-	    window.location.href = 'review?prd_cd=' + prdCd;
+	    window.location.href = 'myReview?prd_cd=' + prdCd;
 	});
 	
 	$(document).on('click', '#questionBtn', function(event) {
@@ -92,7 +92,7 @@ function search() {
 									           		<div>${item.odd_st}</div>
 										       		<div>${item.prd_nm}</div>
 											   		<div>${item.clr_nm} / ${item.cod_nm} / ${item.odd_qt}개</div>
-										       		<div><b>${formatOddAm}원</b></div>
+										       		<div><b id="price">${formatOddAm}원</b></div>
 											   		<div>
 										           		<button id="reviewBtn" class="order-btn ${display}">리뷰쓰기</button>
 										           		<button id="questionBtn" class="order-btn">문의하기</button>

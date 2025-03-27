@@ -15,15 +15,15 @@ $(function() {
 				let sum = 0;
 				let sumDel = 0;
 				let ordPrd = res.map(item => {
-											   let seller = new Set();
-											   if(!seller.has(item.sel_nm)){
-											   	   sumDel += parseInt(item.prd_sf, 10);
-											   }
-								
-												debugger;
 											   sum += parseFloat(item.odd_am);
-											   const formatPrdSf = new Intl.NumberFormat().format(item.prd_sf);
+											   sumDel += parseFloat(item.prd_sf);
 											   const formatPrdSp = new Intl.NumberFormat().format(item.prd_sp);
+											   const formatPrdSf = new Intl.NumberFormat().format(item.prd_sf);
+											   
+											   optTotal = parseFloat(item.odd_qt) * parseFloat(item.prd_sp) + parseFloat(item.prd_sf);
+											   const formatOptTt = new Intl.NumberFormat().format(optTotal);
+								
+											   $('#optTotal').append(formatOptTt);
 											   return `<div class="ord-title">
 												           <div class="order-selnm">${item.sel_nm}</div>
 												           <div class="pr">주문금액</div>
@@ -37,18 +37,21 @@ $(function() {
 											                       <div class="prd-nm">${item.prd_nm}</div>
 											                       <div class="prd-sp">${formatPrdSp}원</div>
 											                   </div>
-											                   <div class="prd-1">
+															   <div class="prd-1">
+															       <div class="prd-nm">${item.cod_nm} / ${item.clr_nm} / ${item.odd_qt}</div>
+															   </div>
+											                   <div class="prd-2">
 											                       <div class="prd-sf">배송비</div>
 											                       <div class="prd-sf-wrap">${formatPrdSf}원</div>
 											                   </div>
 											               </div>
 											           </div>`})
 				$('#order-container').append(ordPrd);
-				const formatSumPrice = new Intl.NumberFormat().format(sum);
+				const formatSumPrice = new Intl.NumberFormat().format(sum - sumDel);
 				const formatSumDel = new Intl.NumberFormat().format(sumDel);
 				$('#totalPrice').prepend(formatSumPrice);
 				$('#totalDelPrice').prepend(formatSumDel);
-				const formatSumAll = new Intl.NumberFormat().format(sum + sumDel);
+				const formatSumAll = new Intl.NumberFormat().format(sum);
 				$('#sum').prepend(formatSumAll);
 				
 				let item = res[0];
