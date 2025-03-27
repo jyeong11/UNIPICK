@@ -141,22 +141,21 @@
       p.prd_cd,       <!-- 상품코드 -->
       p.prd_nm,       <!-- 상품명 -->
       p.prd_sp,       <!-- 판매가 -->
-      p.prd_ca,       <!-- 카테고리 -->
+      l.lev_nm,       <!-- 카테고리 -->
       GROUP_CONCAT(DISTINCT o.clr_nm ORDER BY o.clr_nm ASC SEPARATOR ', ') AS colors,  <!-- 컬러 리스트 -->
       GROUP_CONCAT(DISTINCT c.cod_nm ORDER BY c.cod_nm ASC SEPARATOR ', ') AS sizes,  <!-- 사이즈 리스트 -->
       SUM(o.prd_qt) AS total_stock,  <!-- 총 재고 수량 -->
       p.prd_dt        <!-- 등록일 -->
   FROM products p
-  INNER JOIN options o 
-      ON p.prd_cd = o.prd_cd
-  JOIN common_detailcode c
-  	ON o.siz_nm = c.cod_cd
+JOIN level l ON p.prd_ca = l.lev_cd
+INNER JOIN options o ON p.prd_cd = o.prd_cd
+JOIN common_detailcode c ON o.siz_nm = c.cod_cd
   WHERE 1=1
   <if test="map.prd_nm != null and !map.prd_nm.isEmpty()">
       AND p.prd_nm LIKE CONCAT('%', #{map.prd_nm}, '%')
   </if>
   <if test="map.prd_ca != null and !map.prd_ca.isEmpty()">
-      AND p.prd_ca LIKE CONCAT('%', #{map.prd_ca}, '%')
+      AND l.lev_nm LIKE CONCAT('%', #{map.lev_nm}, '%')
   </if>
   <if test="map.clr_nm != null and !map.clr_nm.isEmpty()">
       AND FIND_IN_SET(#{map.clr_nm}, GROUP_CONCAT(DISTINCT o.clr_nm))
@@ -164,7 +163,7 @@
   <if test="map.siz_nm != null and !map.siz_nm.isEmpty()">
       AND FIND_IN_SET(#{map.cod_nm}, GROUP_CONCAT(DISTINCT c.cod_nm))
   </if>
-  GROUP BY p.prd_cd, p.prd_nm, p.prd_sp, p.prd_ca, p.prd_dt
+  GROUP BY p.prd_cd, p.prd_nm, p.prd_sp, l.lev_nm, p.prd_dt
   ORDER BY p.prd_dt DESC
   <if test="pageList != null">
       LIMIT #{pageList[0]}, #{pageList[1]}

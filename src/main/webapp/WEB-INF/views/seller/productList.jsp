@@ -91,7 +91,7 @@
 											<select class="form-select" id="noticeSearchKind">
 												<option value="name">상품명</option>
 												<option value="category">카테고리</option>
-												<option value="code">상품코드</option>
+												<option value="color">컬러</option>
 											</select>
 										</div>
 										<div class="col-3">
@@ -122,6 +122,7 @@
 								        </tbody>
 								    </table>
 								</div>
+								<section id="pageList"></section>
 							</div>
 						</div>
 					</div>

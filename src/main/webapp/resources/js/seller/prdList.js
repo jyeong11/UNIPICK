@@ -42,7 +42,7 @@ $(document).ready(function() {
                     <td>${product.prd_cd || '-'}</td>
                     <td>${product.prd_nm || '-'}</td>
                     <td>${product.prd_sp || '-'}</td>
-                    <td>${product.prd_ca || '-'}</td>
+                    <td>${product.lev_nm || '-'}</td>
                     <td>${product.colors || '-'}</td>
                     <td>${product.sizes || '-'}</td>
                     <td>${product.total_stock || '-'}</td>
