@@ -177,6 +177,8 @@
 	</div>
 	<script>
     	var prdCd = "${prd.prd_cd}";
+        var contextPath = "${pageContext.request.contextPath}";
+    </script>
 	</script>
 </body>
 </html>

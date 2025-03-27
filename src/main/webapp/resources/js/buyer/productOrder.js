@@ -62,17 +62,23 @@ $(function() {
                 $("#payment-container").html(`
                     <div id="payment"><h2>결제수단</h2></div>
                     <div class="price">
+						<input type="radio" id="pay8">
                         <div id="payment"><span>빠른페이</span></div>
                     </div>
-                    <div class="card-fisst"></div>
                     <div class="card-first">
                         <div class="tie">
                             <div id="pmregister"><span>유니페이</span></div>
                             <button  id ="openButton" class="add_btn"> + 결제 수단 등록</button>
                         </div>
                     </div>
-					<button class="kakao-pay-btn">카카오페이 결제</button>
-                `);
+					<div class="anthor">
+						<input type="radio" id="pay9">
+						<div id="pay"><span>다른 결제 수단</span></div>
+						<div class="Other-Payment">
+							<img src="${contextPath}/resources/images/icon_pay_kakao.svg">
+						<div>
+                	</div>
+				`);
                 $("#term-container").html(`
                     <div id="total"><h2>주문내용 확인 및 결제 동의</h2></div>
                     <div class="price">

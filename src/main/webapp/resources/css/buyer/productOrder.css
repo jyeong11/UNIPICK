@@ -98,6 +98,14 @@ input[type=text] {
     font-weight: 500;
     padding-top: 6px;
 }
+.anthor {
+	border-top: 1px solid #e8e9eb;
+	padding-top: 25px;
+}
+#pay span {
+	font-size: 18px;
+    line-height: 22px;
+}
 .del-nm {
 	display: flex;
     justify-content: space-between;
@@ -135,6 +143,11 @@ input[type=text] {
 	border-bottom: 1px solid #e8e9eb;
 	padding-bottom: 25px;
 }
+input[type=radio] {
+	cursor: pointer;
+	width: 24px;
+    height: 24px;
+}
 #sum {
 	color: #f2a900;	
 }
@@ -144,13 +157,22 @@ input[type=text] {
 .price input, .price span {
     display: block;
 }
+.Other-Payment {
+    width: 188px;
+    height: 86px;
+    border: 1px solid #e4e6e9;
+}
 .price label {
 	display: flex;
 	padding-bottom: 30px;
     font-size: 18px;
 }
-.price input {
-	width: 16px;
+#pay span {
+    font-weight: normal;
+}
+.card-first{
+	border-bottom: 1px solid #e8e9eb;
+    margin-bottom: 25px;
 }
 input[type="checkbox"] {
     width: 20px;
