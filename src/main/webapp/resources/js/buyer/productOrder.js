@@ -2,14 +2,14 @@ $(function() {
     let query = window.location.search;
     let param = new URLSearchParams(query);
     let prd_cd = param.get('prd_cd');
+	let sum = 0;
+	let totalSf = 0;
     $.ajax({
         url: "productOrder",
         method: "POST",
         data: JSON.stringify({ prd_cd: prd_cd }),
         contentType: 'application/json',
         success: function(res){
-            let sum = 0;
-            let totalSf = 0;
     
             if (res.length > 0) {
                 res.forEach(function(item) {
@@ -70,7 +70,8 @@ $(function() {
                             <div id="pmregister"><span>유니페이</span></div>
                             <button  id ="openButton" class="add_btn"> + 결제 수단 등록</button>
                         </div>
-                    </div> 	
+                    </div>
+					<button class="kakao-pay-btn">카카오페이 결제</button>
                 `);
                 $("#term-container").html(`
                     <div id="total"><h2>주문내용 확인 및 결제 동의</h2></div>
@@ -97,7 +98,34 @@ $(function() {
             alert("주문 정보를 불러오는 데 실패했습니다.");
         }
     });
+	$(document).on("click", "#submit-btn", function() {
+        requestKakaoPay(sum);
+	 });
 
+	function requestKakaoPay(amount) {
+	    fetch("pay/ready", {
+	        method: "POST",
+	        headers: {
+	            "Content-Type": "application/json"
+	        },
+	        body: JSON.stringify({ amount: amount}) // 결제 금액을 서버로 전달
+	    })
+	    .then(response => response.json()) 
+	    .then(data => {
+		debugger;
+			 if (data.next_redirect_pc_url) {
+				const redirectUrl = data.next_redirect_pc_url;
+	            window.open(redirectUrl, "유니픽 카카오페이 결제창", "width=800px,height=700px;");
+	       debugger;
+	        } else {
+	            alert("결제 요청에 실패했습니다.");
+	        }
+	    })
+	    .catch(error => {
+	        console.error("결제 요청 오류:", error);
+	        alert("결제 요청 중 오류가 발생했습니다.");
+	    });
+	}
     function ButtonState() {
         if ($("#agree_all").prop("checked")) {
             $("#submit-btn").prop("disabled", false).addClass("active");

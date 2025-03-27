@@ -49,6 +49,9 @@ $(function() {
 //	document.querySelector(".npay").addEventListener("click", function () {
 //        window.location.href = `productOrder?prd_cd=${prdCd}`;
 //    });
+	document.getElementById('buyButton').addEventListener('click', function() {
+    	window.location.href = `productOrder?prd_cd=${prdCd}`;
+    });
 	
 });
 function updateSize(sizes) {
@@ -92,29 +95,5 @@ function updateSize(sizes) {
         error: function () {
             alert("가격 정보를 불러오는 데 실패했습니다.");
         }
-    });
-}
-function requestKakaoPay(amount, prdCd) {
-    fetch("pay/ready", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ amount: amount, prdCd: prdCd }) // 결제 금액을 서버로 전달
-    })
-    .then(response => response.json()) 
-    .then(data => {
-	debugger;
-		 if (data.next_redirect_pc_url) {
-			const redirectUrl = data.next_redirect_pc_url;
-            window.open(redirectUrl, "유니픽 카카오페이 결제창", "width=800px,height=700px;");
-       debugger;
-        } else {
-            alert("결제 요청에 실패했습니다.");
-        }
-    })
-    .catch(error => {
-        console.error("결제 요청 오류:", error);
-        alert("결제 요청 중 오류가 발생했습니다.");
     });
 }

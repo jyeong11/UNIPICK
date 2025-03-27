@@ -42,7 +42,7 @@ public class PayController {
     public ResponseEntity<Map<String, Object>> kakaoPayReady(HttpSession session, @RequestBody Map<String, Object> req) {
         int amount = (int)req.get("amount");
         String prdCd = (String)req.get("prdCd");
-        String referer = "http://localhost:8080/UNIPICK/orderSuccess?prd_cd=" + prdCd;
+        String referer = "http://localhost:8080/UNIPICK/orderSuccess" ;
 
         // 카카오페이 결제 요청 파라미터 설정
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
