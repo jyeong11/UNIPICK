@@ -35,14 +35,14 @@ $(function() {
 									
 			$('.category-data').append(firstCategory);
 									
-			let secondCategory = res.cate.filter(item => item.lev_cd.length === 12)
-										 .forEach(item => {
-													        let parentClass = item.lev_cd.substring(0, 10);
-													        let listItem = `<li>
-																				<a href="productList?lev_cd=${item.lev_cd}&category=${item.lev_nm}" class="cate-button">${item.lev_nm}</a>
-																			</li>`;
-													
-													        $(`.${parentClass}`).append(listItem)});	
+			res.cate.filter(item => item.lev_cd.length === 12)
+				    .forEach(item => {
+								        let parentClass = item.lev_cd.substring(0, 10);
+								        let listItem = `<li>
+															<a href="productList?lev_cd=${item.lev_cd}&category=${item.lev_nm}" class="cate-button">${item.lev_nm}</a>
+														</li>`;
+								
+								        $(`.${parentClass}`).append(listItem)});	
 			//
 			// 정렬 종류
 			let kindOption = res.kind.map(item => `<option value="${item.cod_cd}">${item.cod_nm}</option>`)

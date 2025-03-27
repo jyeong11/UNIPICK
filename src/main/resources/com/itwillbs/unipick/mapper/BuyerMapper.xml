@@ -235,12 +235,17 @@
 	<select id="OrderListInfo" parameterType="map">
 		SELECT o.ord_at,
 			   o.ord_id,
+			   o.ord_nm,
+			   o.ord_ph,
+			   o.ord_ad,
+			   o.ord_dm,
 		 	   od.odd_st,
 			   od.odd_qt,
 			   FORMAT(od.odd_am, 0) AS odd_am,
 			   c.cod_nm,
 			   p.prd_nm,
 			   p.prd_cd,
+			   p.prd_sf,
 			   s.sel_nm,
 			   op.clr_nm,
 			   pi.fil_pt
@@ -257,8 +262,11 @@
 		       AND DATE(o.ord_at) BETWEEN #{date} AND CURDATE()
 		   </if>
 		   <if test="searchData != null and !searchData.equals('')">
-		      AND (p.prd_nm like CONCAT ('%', #{searchData}, '%')
+		       AND (p.prd_nm like CONCAT ('%', #{searchData}, '%')
 		       OR  s.sel_nm like CONCAT ('%', #{searchData}, '%'))
+		   </if>
+		   <if test="ord_id != null and !ord_id.equals('')">
+		       AND o.ord_id = #{ord_id}
 		   </if>
 	</select>
 	

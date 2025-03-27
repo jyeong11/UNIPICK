@@ -275,4 +275,14 @@ public class BuyerController {
 		session.invalidate();
 	}
 	
+	// 주문 상세 정보
+	@ResponseBody
+	@PostMapping("myOrderDetail")
+	public List<Map<String, Object>> myOrderDetail(HttpSession session, @RequestBody Map<String, Object> buyer) {
+		// 임시 아이디
+		session.setAttribute("id", "sadsa@naver.com");
+		buyer.put("buy_em", session.getAttribute("id"));
+		
+		return buyService.OrderListInfo(buyer);
+	}
 }

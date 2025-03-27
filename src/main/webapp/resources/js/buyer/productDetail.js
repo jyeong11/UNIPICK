@@ -104,6 +104,7 @@ function requestKakaoPay(amount, prdCd) {
     })
     .then(response => response.json()) 
     .then(data => {
+	debugger;
 		 if (data.next_redirect_pc_url) {
 			const redirectUrl = data.next_redirect_pc_url;
             window.open(redirectUrl, "유니픽 카카오페이 결제창", "width=800px,height=700px;");

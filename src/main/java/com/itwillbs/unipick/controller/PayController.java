@@ -3,6 +3,8 @@ package com.itwillbs.unipick.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -37,10 +39,10 @@ public class PayController {
 
     // 1. 결제 준비 API - 결제 요청
     @PostMapping("/ready")
-    public ResponseEntity<Map<String, Object>> kakaoPayReady(@RequestBody Map<String, Object> req) {
+    public ResponseEntity<Map<String, Object>> kakaoPayReady(HttpSession session, @RequestBody Map<String, Object> req) {
         int amount = (int)req.get("amount");
         String prdCd = (String)req.get("prdCd");
-        String referer = "http://localhost:8080/UNIPICK/productDetail?prd_cd=" + prdCd;
+        String referer = "http://localhost:8080/UNIPICK/orderSuccess?prd_cd=" + prdCd;
 
         // 카카오페이 결제 요청 파라미터 설정
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
@@ -67,6 +69,9 @@ public class PayController {
             Map.class
         );
         Map<String, Object> responseBody = response.getBody();
+        session.setAttribute("tid", responseBody.get("tid"));
+        session.setAttribute("partner_order_id", params.getFirst("partner_order_id"));
+        session.setAttribute("partner_user_id", params.getFirst("partner_user_id"));
         
         return ResponseEntity.ok(responseBody);
     }
@@ -74,19 +79,23 @@ public class PayController {
  // 2. 결제 승인 처리 API
     @GetMapping("/success")
     public ResponseEntity<String> kakaoPaySuccess(@RequestParam("pg_token") String pgToken,
-                                                  @RequestParam("returnUrl") String returnUrl) {
+                                                  @RequestParam("returnUrl") String returnUrl,
+                                                  HttpSession session) {
         // 결제 승인 요청
-        Map<String, String> params = new HashMap<>();
-        params.put("cid", "TC0ONETIME");
-        params.put("tid", "tid"); // 결제 요청 때 저장된 tid
-        params.put("pg_token", pgToken);
+    	MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+    	params.add("cid", "TC0ONETIME");
+    	params.add("tid", (String)session.getAttribute("tid"));
+    	params.add("partner_order_id", (String)session.getAttribute("partner_order_id"));
+    	params.add("partner_user_id", (String)session.getAttribute("partner_user_id"));
+    	params.add("pg_token", pgToken);
+
         
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "KakaoAK " + adminKey);
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);  
 
         // 폼 데이터로 전송하기 위해 Map<String, String>을 사용
-        HttpEntity<Map<String, String>> requestEntity = new HttpEntity<>(params, headers);
+        HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(params, headers);
         
         // 카카오 API 호출
         ResponseEntity<Map> response = restTemplate.exchange(
@@ -100,9 +109,9 @@ public class PayController {
         System.out.println(response);
 
         if (response.getStatusCode() == HttpStatus.OK) {
-            return ResponseEntity.ok("<script>alert('결제가 완료되었습니다!'); window.location.href='" + returnUrl + "';</script>");
+        	return ResponseEntity.ok("<script>alert('결제가 완료되었습니다!'); window.opener.location.href='" + returnUrl + "'; window.close();</script>");
         } else {
-            return ResponseEntity.ok("<script>alert('결제 승인에 실패했습니다.'); window.location.href='" + returnUrl + "';</script>");
+        	return ResponseEntity.ok("<script>alert('결제 승인에 실패했습니다.'); window.close();</script>");
         }
     }
 
