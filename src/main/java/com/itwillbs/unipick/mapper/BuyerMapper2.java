@@ -12,7 +12,7 @@ public interface BuyerMapper2 {
 
     int BuyEmail(@Param("buy_em") String buyEm);
     
-    void insertBuyer(@Param("buyerData") Map<String, Object> buyerData);
+    int insertBuyer(@Param("buyerData") Map<String, Object> buyerData);
     
     int saveBuyerAgreement(@Param("acc_ta") boolean acc_ta,
                            @Param("acc_pa") boolean acc_pa,

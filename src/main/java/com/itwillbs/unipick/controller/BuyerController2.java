@@ -95,11 +95,17 @@ public class BuyerController2 {
             @RequestParam boolean acc_pa, 
             @RequestParam boolean acc_ma,
             HttpSession session) {
+    	
+    	
 
         // 세션에 약관 동의 정보 저장
         session.setAttribute("acc_ta", acc_ta);
         session.setAttribute("acc_pa", acc_pa);
         session.setAttribute("acc_ma", acc_ma);
+        
+        System.out.println(acc_ta);
+        System.out.println(acc_pa);
+        System.out.println(acc_ma);
 
         Map<String, Object> response = new HashMap<>();
         response.put("success", true);
@@ -115,16 +121,38 @@ public class BuyerController2 {
 	@ResponseBody
 	public Map<String, Object> saveBuyerPhone(@RequestParam("phone") String phone, HttpSession session) {
 	    // 세션에서 약관 동의 정보 가져오기
-	    Boolean acc_ta = (Boolean) session.getAttribute("acc_ta");
-	    Boolean acc_pa = (Boolean) session.getAttribute("acc_pa");
-	    Boolean acc_ma = (Boolean) session.getAttribute("acc_ma");
+		
+		Boolean acc_ta = (Boolean) session.getAttribute("acc_ta");
+		Boolean acc_pa = (Boolean) session.getAttribute("acc_pa");
+		Boolean acc_ma = (Boolean) session.getAttribute("acc_ma");
+		
+		  // 세션 값이 null이면 기본값 설정
+	    if (acc_ta == null) acc_ta = false;
+	    if (acc_pa == null) acc_pa = false;
+	    if (acc_ma == null) acc_ma = false;
+	    
+	    
+	    session.setAttribute("acc_ta", acc_ta);
+	    session.setAttribute("acc_pa", acc_pa);
+	    session.setAttribute("acc_ma", acc_ma);
+	    session.setAttribute("userPhone", phone);
 
+	    
 	    // 세션에 휴대폰 번호 저장
-	    System.out.println("tttttttt3242134124123123123");
 	    session.setAttribute("userPhone", phone);
 
 	    // 확인을 위한 로그 출력
 	    System.out.println("약관 동의 여부: " + acc_ta + ", " + acc_pa + ", " + acc_ma);
+	    
+	    // 확인을 위한 로그 출력
+	    System.out.println("userPhone: " + phone);
+	    System.out.println("acc_ta: " + session.getAttribute("acc_ta"));
+	    System.out.println("acc_pa: " + session.getAttribute("acc_pa"));
+	    System.out.println("acc_ma: " + session.getAttribute("acc_ma"));
+	    
+	    System.out.println("acc_ta: " + session.getAttribute("acc_ta") + " (" + session.getAttribute("acc_ta").getClass().getSimpleName() + ")");
+	    System.out.println("acc_pa: " + session.getAttribute("acc_pa") + " (" + session.getAttribute("acc_pa").getClass().getSimpleName() + ")");
+	    System.out.println("acc_ma: " + session.getAttribute("acc_ma") + " (" + session.getAttribute("acc_ma").getClass().getSimpleName() + ")");
 	    
 	    Map<String, Object> response = new HashMap<>();
 	    response.put("success", true);
@@ -158,24 +186,15 @@ public class BuyerController2 {
 	        HttpSession session) {
 
 	    // 세션에서 값을 가져옴
-	    String sessionPhone = (String) session.getAttribute("phone");
+	    String sessionPhone = (String) session.getAttribute("userPhone");
 	    Boolean sessionAccTa = (Boolean) session.getAttribute("acc_ta");
 	    Boolean sessionAccPa = (Boolean) session.getAttribute("acc_pa");
 	    Boolean sessionAccMa = (Boolean) session.getAttribute("acc_ma");
 
-	    // 세션 값이 없는 경우, 클라이언트에서 받은 값을 사용
-	    if (sessionPhone == null || sessionAccTa == null || sessionAccPa == null || sessionAccMa == null) {
-	        sessionPhone = phone;  // 클라이언트에서 받은 phone 값을 사용
-	        sessionAccTa = Boolean.parseBoolean(accTa);  // String을 Boolean으로 변환
-	        sessionAccPa = Boolean.parseBoolean(accPa);  // String을 Boolean으로 변환
-	        sessionAccMa = Boolean.parseBoolean(accMa);  // String을 Boolean으로 변환
-	    }
-
-	    // 로그 출력 - 세션 값 확인
-	    System.out.println("Session Phone: " + sessionPhone);
-	    System.out.println("Session acc_ta: " + sessionAccTa);
-	    System.out.println("Session acc_pa: " + sessionAccPa);
-	    System.out.println("Session acc_ma: " + sessionAccMa);
+	    // 세션 값이 null이면 기본값 false로 설정
+	    if (sessionAccTa == null) sessionAccTa = false;
+	    if (sessionAccPa == null) sessionAccPa = false;
+	    if (sessionAccMa == null) sessionAccMa = false;
 
 	    // 이메일 유효성 검사
 	    if (email == null || email.isEmpty() || !email.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
@@ -195,12 +214,12 @@ public class BuyerController2 {
 
 	    // 파라미터 준비
 	    Map<String, Object> param = new HashMap<>();
-	    param.put("email", email);
-	    param.put("password", password);
-	    param.put("phone", sessionPhone);
-	    param.put("acc_ta", sessionAccTa);
-	    param.put("acc_pa", sessionAccPa);
-	    param.put("acc_ma", sessionAccMa);
+	    param.put("buy_em", email);
+	    param.put("buy_pw", password);
+	    param.put("buy_ph", phone);
+	    param.put("acc_ta", accTa);
+	    param.put("acc_pa", accPa);
+	    param.put("acc_ma", accMa);
 
 	    // 서비스 호출
 	    boolean success = buyerService.registerBuyer(param);

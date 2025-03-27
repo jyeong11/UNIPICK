@@ -112,7 +112,7 @@ console.log({
     },
     success: function(response) {
         if (response.success) {
-            window.location.href = "/"; // 홈 페이지로 이동
+            window.location.href = "/UNIPICK"; // 홈 페이지로 이동
         } else {
 	console.log("서버 응답 실패:", response); // 서버 응답 실패 시 콘솔 로그
             alert("가입에 실패했습니다. 다시 시도해주세요.");
