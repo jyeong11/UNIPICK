@@ -51,13 +51,13 @@
 		<label class="lb1">
 		<input type="checkbox" id="terms_ta" name="terms" class="terms">
 		<span>(필수) 이용 약관 동의</span>
-		</label><a href="#" class="cssjoin">보기</a></div>
+		</label><a href="policy" class="cssjoin">보기</a></div>
 		
 		<div class="form8">
 		<label class="lb1">
 		<input type="checkbox" id="terms_pa" name="terms" class="terms">
 		<span>(필수) 개인 정보 처리 방침</span>
-		</label><a href="#" class="cssjoin">보기</a></div>
+		</label><a href="privacy" class="cssjoin">보기</a></div>
 		
 		<div class="form8">
 		<label class="lb1">
