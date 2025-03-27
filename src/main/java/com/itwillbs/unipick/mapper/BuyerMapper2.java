@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.http.ResponseEntity;
 
 @Mapper
 public interface BuyerMapper2 {
@@ -17,4 +18,14 @@ public interface BuyerMapper2 {
     int saveBuyerAgreement(@Param("acc_ta") boolean acc_ta,
                            @Param("acc_pa") boolean acc_pa,
                            @Param("acc_ma") boolean acc_ma);
+    
+    Map<String, Object> selectEmployeeByNameAndPhone(
+    		@Param("buy_nm") String buyNm,
+    		@Param("buy_ph") String buyPh);
+
+//    Map<String, Object> findEmployeeByNoAndEmail(
+//    		@Param("buy_nm") String buyNm,
+//    		@Param("buy_em") String buyEm);
+//    void updatePassword(
+//    		@Param("buy_em") String buyEm);
 }

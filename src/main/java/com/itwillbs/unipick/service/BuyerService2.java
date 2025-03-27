@@ -1,12 +1,16 @@
 package com.itwillbs.unipick.service;
 
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.itwillbs.unipick.handler.MailClient;
 import com.itwillbs.unipick.mapper.BuyerMapper2;
 
 @Service
@@ -14,6 +18,12 @@ public class BuyerService2 {
 
     @Autowired
     BuyerMapper2 mapper;
+    
+//    @Autowired
+//	private PasswordEncoder passwordEncoder;
+    
+    @Autowired
+	private MailClient mailClient;
     
     // 로그인 메서드
     public Map<String, Object> BuyerLogin(Map<String, Object> logindata) {
@@ -100,4 +110,58 @@ public class BuyerService2 {
         // 저장된 값 확인 후 반환
         return acc_ta && acc_pa && acc_ma;
     }
+    
+    public Map<String, Object> findEmployeeByNameAndPhone(String buyNm, String buyPh) {
+        // Call the mapper to get the employee data
+        Map<String, Object> employee = mapper.selectEmployeeByNameAndPhone(buyNm, buyPh);
+        
+        if (employee != null) {
+            return employee; // Return the found employee data
+        }
+        
+        return null; // Return null if not found
+    }
+    
+ // 이메일 비밀번호 보내기
+//    public Map<String, Object> resetPassword(String buyNm, String buyEm) {
+//        // Fetch the employee from the database
+//        Map<String, Object> employee = mapper.findEmployeeByNoAndEmail(buyNm, buyEm);
+//
+//        if (employee == null || employee.isEmpty()) {
+//            // Employee not found, return a failure map
+//            return Map.of("error", "사원번호 또는 이메일이 일치하지 않습니다.");
+//        }
+//
+//        // Extract the employee name safely
+//        String employeeName = (String) employee.get("buy_nm");
+//
+//        // Generate a temporary password and encrypt it
+//        String tempPassword = (String) employee.get("buy_pw");
+//
+//        // Update the password in the database
+//        mapper.updatePassword(buyNm);
+//
+//        // Send the email asynchronously
+//        String subject = "유니픽 임시 비밀번호 안내";
+//        String content = "임시 비밀번호: " + tempPassword + "<br>로그인 후 비밀번호를 변경해주세요.";
+//
+//        new Thread(() -> {
+//            try {
+//                mailClient.sendMail(employeeName, subject, content);
+//            } catch (Exception e) {
+//                // Log any error that occurs when sending the email
+//                e.printStackTrace();
+//            }
+//        }).start();
+//
+//        // Return a success message in the form of a Map
+//        return Map.of("message", "임시 비밀번호가 이메일로 전송되었습니다.");
+//    }
+
+
+// 	private String generateTempPassword() {
+// 	    String uuid = UUID.randomUUID().toString();
+// 	    String randomPassword = uuid.replace("-", "").substring(0, 8); // Consider adding more complexity
+// 	    return randomPassword;
+// 	}
 }

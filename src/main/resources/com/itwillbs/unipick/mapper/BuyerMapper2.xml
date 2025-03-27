@@ -24,23 +24,25 @@
    VALUES (#{buyerData.buy_em}, #{buyerData.buy_pw}, #{buyerData.buy_ph}, #{buyerData.acc_ta}, #{buyerData.acc_pa}, #{buyerData.acc_ma})
 </insert>
 
+<select id="selectEmployeeByNameAndPhone" parameterType="map" resultType="map">
+    SELECT buy_em
+    FROM buyers
+    WHERE buy_nm = #{buy_nm}
+    AND buy_ph = #{buy_ph}
+</select>
 
-<!--     <insert id="saveBuyerAgreement" parameterType="map"> -->
-<!--         INSERT INTO buyers (buy_em, acc_ta, acc_pa, acc_ma) -->
-<!--         VALUES ('example@email.com', #{acc_ta}, #{acc_pa}, #{acc_ma}) -->
-<!--     </insert> -->
-
-
-<!-- <select id="findEmployeeByNoAndEmail" resultType="employee"> -->
-<!--     SELECT * -->
-<!--     FROM employee -->
-<!--     WHERE emp_id = #{empNo} -->
-<!--     AND emp_em = #{empEm} -->
+<!-- <select id="findEmployeeByNoAndEmail" resultType="map"> -->
+<!--     SELECT buy_pw, buy_nm, buy_em  -->
+<!--     FROM buyers -->
+<!--     WHERE buy_nm = #{buyNm} -->
+<!--     AND buy_em = #{buyEm} -->
 <!-- </select> -->
 
-
-
-
+<!-- <update id="updatePassword" parameterType="map"> -->
+<!--     UPDATE buyers -->
+<!--     SET buy_pw = #{buyPw} -->
+<!--     WHERE buy_em = #{buyEm} -->
+<!-- </update> -->
 
 
 </mapper>

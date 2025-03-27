@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -240,35 +241,70 @@ public class BuyerController2 {
 	}
 
 
+	@GetMapping("buyerId")
+	public String buyerId() {
+		return "buyer/buyerId";
+	}
 
-
+	@ResponseBody
+	@PostMapping("buyerId")
+	public ResponseEntity<Map<String, Object>> findEmpId(
+	        @RequestParam("buy_nm") String buyEm,
+	        @RequestParam("buy_ph") String buyPh) {
+	    
+	    if (buyEm == null || buyEm.isBlank() || buyPh == null || buyPh.isBlank()) {
+	        return ResponseEntity.badRequest()
+	                .body(Map.of("error", "이름과 휴대폰 번호를 모두 입력해 주세요."));
+	    }
+	    
+	    Map<String, Object> result = buyerService.findEmployeeByNameAndPhone(buyEm, buyPh);
+	    
+	    if (result.containsKey("buy_em")) {
+	        // Success: Return the email
+	        return ResponseEntity.ok(Map.of("message", "아이디는 " + result.get("buy_em")));
+	    } else {
+	        // Error: No matching user found
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+	                .body(Map.of("error", "이름과 휴대폰 번호가 일치하는 계정이 없습니다."));
+	    }
+	}
+	
 	
 	// 비밀번호찾기 페이지 이동
-		@GetMapping("empPass")
-		public String empPass() {
-			return "login/login_pass";
+		@GetMapping("buyerPw")
+		public String buyerPw() {
+			return "buyer/buyerPw";
 		}
 		
 		
-		// 비밀번호 찾기
+ //비밀번호 찾기
 		
-//		@ResponseBody
-//		@PostMapping("rest")
-//		public ResponseEntity<Map<String, String>> resetPassword(
-//				@RequestParam String empNo, @RequestParam String empEm){
-//			
-//			if (empNo == null || empNo.isBlank() || empEm == null || empEm.isBlank()) {
-//		        return ResponseEntity.badRequest().body(Map.of("error", "사원번호와 이메일을 모두 입력해 주세요."));
-//		    }
-//			
-//			boolean success = buyerService.resetPassword(empNo, empEm);
-//			
-//			if (success) {
-//		        return ResponseEntity.ok(Map.of("message", "임시 비밀번호가 이메일로 전송되었습니다."));
-//		    } else {
-//		        return ResponseEntity.status(HttpStatus.NOT_FOUND)
-//		                .body(Map.of("error", "사원번호 또는 이메일이 일치하지 않습니다."));
-//		    }
-//		
-//		}
+//	@ResponseBody
+//	@PostMapping("rest")
+//	public ResponseEntity<Map<String, String>> resetPassword(
+//			@RequestParam String buyNm,
+//			@RequestParam String buyEm) {
+//
+//	    if (buyNm == null || buyNm.isBlank() || buyEm == null || buyEm.isBlank()) {
+//	        return ResponseEntity.badRequest().body(Map.of("error", "사원번호와 이메일을 모두 입력해 주세요."));
+//	    }
+//
+//	    if (!isValidEmail(buyEm)) {
+//	        return ResponseEntity.badRequest().body(Map.of("error", "올바른 이메일 형식이 아닙니다."));
+//	    }
+//
+//	    Map<String, Object> success = buyerService.resetPassword(buyNm, buyEm);
+//
+//	    if (success != null) {
+//	        return ResponseEntity.ok(Map.of("message", "임시 비밀번호가 이메일로 전송되었습니다."));
+//	    } else {
+//	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", "사원번호 또는 이메일이 일치하지 않습니다."));
+//	    }
+//	}
+//
+//	private boolean isValidEmail(String email) {
+//	    // Use a regular expression for basic email validation
+//	    String emailRegex = "^[A-Za-z0-9+_.-]+@(.+)$";
+//	    return email.matches(emailRegex);
+//	}
 }

@@ -31,28 +31,65 @@
 </head>
 <body>
 	<div class="login-container">
-		 <form action="" method="post" class="memberform" onsubmit="return false">
-		 	<a href=""><img src="${pageContext.request.contextPath}/resources/images/로고 가로.png" alt="로고" class="logo"></a>
-		 	<div class="sec01">
-		 	<div class="sec-span"><span>안녕하세요 유니픽입니다</span></div>
-			<div class="member-info">
-			<input type="text" id="buyerId" placeholder="아이디 입력" value="${savedBuyerId != null ? savedBuyerId : ''}"></div>
-			<div class="member-info">
-			<input type="password" id="buyerPw" placeholder="비밀번호 입력"></div>
-	        <button type="submit" class="buyerbutton">로그인</button>
-            </div>
-        <div class="btn-wrap">
-        <label class="buyer-btn"><input type="checkbox" id="rememberId">아이디 기억하기</label>
-        <input class="btn-wrap-btn" type="button" onclick="location.href ='buyerId'" value="아이디 찾기">
-        <input class="btn-wrap-btn" type="button" onclick="location.href ='buyerPw'" value="비밀번호 찾기">
-        <input class="btn-wrap-btn" type="button" onclick="location.href ='buyerJoin'" value="회원가입">
-        </div>
-<!--         <div><button type="submit" class="nbutton">네이버 로그인</button></div> -->
-<!--         <div><button type="submit" class="kbutton">카카오톡 로그인</button></div> -->
-        </form>
-    </div>
-<div class="ft">
+		<form action="" method="post" class="memberform" id="findEmpForm"
+			onsubmit="return false">
+			<a href=""><img src="${pageContext.request.contextPath}/resources/images/로고 가로.png"
+				alt="로고" class="logo"></a>
+			<div class="sec01">
+				<div class="sec-span">
+					<span>아이디 찾기</span>
+				</div>
+				<div class="member-info">
+					<input type="text" id="buyNm" placeholder="이름 입력">
+				</div>
+				<div class="member-info">
+					<input type="tel" id="buyPh" placeholder="휴대폰 입력">
+				</div>
+				<button type="submit" class="buyerbutton">아이디 찾기</button>
+			</div>
+			<div class="btn-wrap">
+				<input class="btn-wrap-btn" type="button"
+					onclick="history.back();" value="되돌아가기">
+				<input class="btn-wrap-btn" type="button"
+					onclick="location.href ='buyerPw'" value="비밀번호찾기">
+				<input class="btn-wrap-btn" type="button"
+					onclick="location.href ='buyerJoin'" value="회원가입">
+			</div>
+			<div id="result"></div>
+		</form>
+	</div>
+	<div class="ft">
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 </div>
+<script>
+$(document).ready(function(){
+	  $("#findEmpForm").on("submit", function(e){
+	    e.preventDefault(); // 폼 기본 제출 방지
+
+	    // 입력값 가져오기
+	    var buyNm = $("#buyNm").val();
+	    var buyPh = $("#buyPh").val();
+
+	    // Ajax 요청
+	    $.ajax({
+	      type: "POST",
+	      url: "buyerId",
+	      data: { buy_nm: buyNm, buy_ph: buyPh },
+	      dataType: "json",
+	      success: function(res){
+	        if (res.message) {
+	          $("#result").html("<div class='alert alert-success'>" + res.message + "</div>");
+	        } else if (res.error) {
+	          $("#result").html("<div class='alert alert-warning'>" + res.error + "</div>");
+	        }
+	      },
+	      error: function(xhr, status, error){
+	        var errorMessage = xhr.responseJSON ? xhr.responseJSON.error : "요청 실패";
+	        $("#result").html("<div class='alert alert-warning'>" + errorMessage + "</div>");
+	      }
+	    });
+	  });
+	});
+</script>
 </body>
 </html>
