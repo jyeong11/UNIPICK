@@ -106,7 +106,8 @@ public class BuyerService {
 	}
 	// 주문 등록
 	public void insertOrder (Map<String, Object> orderData) {
-			mapper.insertOrder(orderData);
+		mapper.insertOrder(orderData);
+		mapper.insertOrderDetail(orderData);
 	}
 	// 상품 썸네일, 이름
 	public Map<String, Object> prdInfo(Map<String, Object> prd) {
@@ -139,5 +140,9 @@ public class BuyerService {
                 e.printStackTrace();
             }
         }
+	}
+	// 옵션 id 들고옴
+	public Map<String, Object> getOptionId(String sizNm, String clrNm, String prdCd){
+		return mapper.getOptionId(sizNm, clrNm, prdCd);
 	}
 }

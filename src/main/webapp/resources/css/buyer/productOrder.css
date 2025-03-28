@@ -18,6 +18,14 @@
     margin-top: 18px;
     margin-left: 20px;
 }
+.prd-2 span  {
+    font-weight: normal; /* 볼드 효과 제거 */
+}
+.prd-2 {
+	padding-left: 25px;
+    font-size: 1.0em;
+    height: 50px;
+}
 #search-address{
 	border: none;
     border-radius: 10px;
@@ -73,7 +81,7 @@ h2 {
 .prd-nm {
 	padding-left: 25px;
     font-size: 1.2em;
-    height: 50px;	
+    height: 30px;	
 }
 .ord-title {
 	display: flex;
@@ -290,7 +298,6 @@ input[type="checkbox"]:checked::before {
 .prd-1 {
 	display: flex;
     justify-content: space-between;
-    padding-top: 48px;
     font-size: 1.1em;
 }
 .prd-sf {

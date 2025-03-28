@@ -2,8 +2,12 @@ $(function() {
     let query = window.location.search;
     let param = new URLSearchParams(query);
     let prd_cd = param.get('prd_cd');
+    const color = param.get("clr_nm");
+    const size = param.get("siz_nm");
 	let sum = 0;
 	let totalSf = 0;
+	sessionStorage.setItem("color", color);
+	sessionStorage.setItem("size", size);
 	
     $.ajax({
         url: "productOrder",
@@ -29,6 +33,9 @@ $(function() {
                                     <div class="prd-nm">${item.prd_nm}</div>
                                     <div class="prd-sp">${item.prd_sp}원</div>
                                 </div>
+								<div class="prd-2">
+									 <span>${color}</span> / <span>${size}</span>
+								</div>
                                 <div class="prd-1">
                                     <div class="prd-sf">배송비</div>
                                     <div class="prd-sf-wrap">${formatPrdSf}원</div>
@@ -131,6 +138,8 @@ $(function() {
 	    const shippingZipcode = sessionStorage.getItem("shipping_zipcode");
 	    const shippingAddress = sessionStorage.getItem("shipping_address");
 	    const shippingMemo = sessionStorage.getItem("shipping_memo");
+		const siz_nm = sessionStorage.getItem("size");
+		const clr_nm = sessionStorage.getItem("color");
 
 	    fetch("pay/ready", {
 	        method: "POST",
@@ -144,7 +153,9 @@ $(function() {
 	            shipping_telephone: shippingTelephone,
 	            shipping_zipcode: shippingZipcode,
 	            shipping_address: shippingAddress,
-	            shipping_memo: shippingMemo
+	            shipping_memo: shippingMemo,
+				siz_nm: siz_nm,
+				clr_nm: clr_nm
 			})
 	    })
 	    .then(response => response.json()) 
@@ -242,7 +253,6 @@ $(function() {
                     <div class="price">
                         <div id="payment"><span>빠른페이</span></div>
                     </div>
-                    <div class="card-fisst"></div> <!-- 여기서 계좌 정보를 삽입 -->
                     <div class="card-first">
                         <div class="tie">
                             <div id="pmregister"><span>유니페이</span></div>

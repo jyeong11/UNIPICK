@@ -59,7 +59,7 @@
 				</select>
 		
 		        <select id="size" disabled>
-				    <option selected>[사이즈]를 선택하세요.</option>
+				    <option>[사이즈]를 선택하세요.</option>
 				</select>
 				<div id="selected-option" class="option-box" style="display: none;">
 				    <span id="option-text">옵션을 선택하세요</span>
@@ -178,7 +178,6 @@
 	<script>
     	var prdCd = "${prd.prd_cd}";
         var contextPath = "${pageContext.request.contextPath}";
-    </script>
 	</script>
 </body>
 </html>

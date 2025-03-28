@@ -50,7 +50,11 @@ $(function() {
 //        window.location.href = `productOrder?prd_cd=${prdCd}`;
 //    });
 	document.getElementById('buyButton').addEventListener('click', function() {
-    	window.location.href = `productOrder?prd_cd=${prdCd}`;
+		
+		let color= $("#color").val() 
+		let size = $("#size").val();
+		
+    	window.location.href = `${contextPath}/productOrder?prd_cd=${prdCd}&clr_nm=${encodeURIComponent(color)}&siz_nm=${encodeURIComponent(size)}`;
     });
 	
 });

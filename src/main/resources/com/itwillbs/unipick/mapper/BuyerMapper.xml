@@ -134,7 +134,6 @@
   	</select>
   	
   	<!--   	상품 옵션 -->
-	<!--   	상품 옵션 -->
 	<select id="getColors" parameterType="map">
 	 SELECT c.cod_nm, o.prd_qt, 
 	 		FORMAT(p.prd_sp, 0) AS prd_sp
@@ -345,5 +344,18 @@
                   now(), 
                   '카카오')
 	</insert>
+<!-- 	주문 상세 등록 -->
+	<insert id="insertOrderDetail" parameterType="map">
+<!-- 	 INSERT INTO order_details () -->
+	</insert>	
+	<select id="getOptionId" parameterType="map">
+	 SELECT o.opt_id
+	   FROM options o
+       JOIN common_detailcode c
+         ON o.siz_nm = c.cod_cd
+	  WHERE o.prd_cd = #{prdCd}
+	  	AND o.clr_nm = #{clrNm}
+        AND c.cod_nm = #{sizNm};
+	</select>
 	
   </mapper>

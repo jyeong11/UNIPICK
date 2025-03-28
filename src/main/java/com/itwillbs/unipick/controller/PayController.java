@@ -47,7 +47,8 @@ public class PayController {
     // 1. 결제 준비 API - 결제 요청
     @PostMapping("/ready")
     public ResponseEntity<Map<String, Object>> kakaoPayReady(HttpSession session, @RequestBody Map<String, Object> req) {
-        int amount = (int)req.get("amount");
+        System.out.println("req" + req);
+    	int amount = (int)req.get("amount");
         String prd_cd = (String)req.get("prd_cd");
         String referer1 = "http://localhost:8080/UNIPICK/orderDetail" ;
         String referer2 = "http://localhost:8080/UNIPICK/productOrder" ;
@@ -57,12 +58,17 @@ public class PayController {
         String shipzipcode = (String)req.get("shipping_zipcode");
         String shipadd = (String)req.get("shipping_address");
         String shipmemo = (String)req.get("shipping_memo");
+        String siz_nm = (String)req.get("siz_nm");
+        String clr_nm = (String)req.get("clr_nm");
         
         session.setAttribute("shipping_name", shipName);
         session.setAttribute("shipping_telephone", shiptelephone);
         session.setAttribute("shipping_zipcode", shipzipcode);
         session.setAttribute("shipping_address", shipadd);
         session.setAttribute("shipping_memo", shipmemo);
+        session.setAttribute("siz_nm", siz_nm);
+        session.setAttribute("clr_nm", clr_nm);
+        session.setAttribute("prd_cd", prd_cd);
 
         
         // 카카오페이 결제 요청 파라미터 설정
@@ -137,10 +143,18 @@ public class PayController {
         orderData.put("shipping_address", (String)session.getAttribute("shipping_address"));
         orderData.put("shipping_memo", (String)session.getAttribute("shipping_memo"));
         orderData.put("buy_em", (String)session.getAttribute("buyEm"));
+        String sizNm = (String) session.getAttribute("siz_nm");
+        String clrNm = (String) session.getAttribute("clr_nm");
+        String prdCd = (String) session.getAttribute("prd_cd");
         
-        System.out.println("responseBody213312321" + orderData);
 
         if (response.getStatusCode() == HttpStatus.OK) {
+        	// 옵션 id 찾기
+        	Map<String, Object> otpId = buyService.getOptionId(sizNm, clrNm, prdCd);
+            orderData.put("otp_id", otpId.get("opt_id"));
+            System.out.println("responseBody213312321" + orderData);
+            // opt_id넘어옴
+        	// 주문 등록
         	buyService.insertOrder(orderData);
         	BigInteger ordIdBigInt = (BigInteger) orderData.get("ord_id");
         	long ordId = ordIdBigInt.longValue();

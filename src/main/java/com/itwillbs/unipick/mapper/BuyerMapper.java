@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface BuyerMapper {
@@ -45,12 +46,16 @@ public interface BuyerMapper {
 	public List<Map<String, Object>> OrderListInfo(Map<String, Object> buyer);
 	// 회원 탈퇴
 	public void Withdraw(Map<String, Object> buyer);
-	//주문 등록
+	// 주문 등록
 	public void insertOrder(Map<String, Object> orderData);
+	// 주문 상세 등록
+	public void insertOrderDetail(Map<String, Object> orderData);
 	// 상품 썸네일, 이미지
 	public Map<String, Object> prdInfo(Map<String, Object> prd);
 	// 리뷰 등록
 	public void registerReview(Map<String, Object> rev);
 	// 리뷰 이미지 등록
 	public void registerReviewImage(Map<String, Object> paramMap);
+	// 옵션 id 들고옴 
+	public Map<String, Object> getOptionId(@Param("sizNm") String sizNm,@Param("clrNm") String clrNm,@Param("prdCd") String prdCd);
 }
