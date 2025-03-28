@@ -4,6 +4,7 @@ $(function() {
     let prd_cd = param.get('prd_cd');
 	let sum = 0;
 	let totalSf = 0;
+	
     $.ajax({
         url: "productOrder",
         method: "POST",
@@ -41,53 +42,10 @@ $(function() {
                 $("#orderInfo-container").html(`
                     <div class="ttpr">총 주문금액:  ${sum.toLocaleString()}원</div>
                 `);
-                $("#deliInfo-container").html(`
-                    <form id="delivery-form">
-                        <div id="del"><h2>배송지 정보</h2></div>
-                        <div class="del-nm"><span>수령인</span><input type="text" id="shipping_name"></div>
-                        <div class="del-nm"><span>휴대폰</span><input type="text" id="shipping_telephone"></div>
-                        <div class="del-nm"><span>배송주소</span><input type="text" id="shipping_zip"></div>
-                        <div class="del-nm"><span>배송메모</span><input type="text" id="shipping_memo" placeholder="최대 100자까지 가능합니다"></div>
-                    </form>
-                `);
-                $("#delprice-container").html(`
-                    <div id="total"><h2>최종 결제금액</h2></div>
-                    <div class="price">
-                        <div id="total-pr"><span>총 상품금액</span><span>${sum.toLocaleString()}원</span></div>
-                        <div id="total-dp"><span>총 배송비</span><span>${totalSf.toLocaleString()}원</span></div>
-                    </div>
-                    <div id="prpr"><span>결제 예상 금액</span><span id="sum">${sum.toLocaleString()}원</span>            	
-                    </div>
-                `);
-                $("#payment-container").html(`
-                    <div id="payment"><h2>결제수단</h2></div>
-                    <div class="price">
-						<input type="radio" id="pay8">
-                        <div id="payment"><span>빠른페이</span></div>
-                    </div>
-                    <div class="card-first">
-                        <div class="tie">
-                            <div id="pmregister"><span>유니페이</span></div>
-                            <button  id ="openButton" class="add_btn"> + 결제 수단 등록</button>
-                        </div>
-                    </div>
-					<div class="anthor">
-						<input type="radio" id="pay9">
-						<div id="pay"><span>다른 결제 수단</span></div>
-						<div class="Other-Payment">
-							<img src="${contextPath}/resources/images/icon_pay_kakao.svg">
-						<div>
-                	</div>
-				`);
-                $("#term-container").html(`
-                    <div id="total"><h2>주문내용 확인 및 결제 동의</h2></div>
-                    <div class="price">
-                        <label><input type="checkbox" id="agree_all"> 전체 동의하기</label>
-                        <label><input type="checkbox" class="agree_chk"> 유니픽 약관 동의 (필수)</label>
-                        <label><input type="checkbox" class="agree_chk"> 개인정보수집 및 이용에 대한 안내 (필수)</label>
-                        <label><input type="checkbox" class="agree_chk"> 구매조건 및 개인정보 제3자 제공 (필수)</label>
-                    </div>
-                `);
+                renderDeliveryForm();
+			    renderPriceInfo(sum, totalSf);
+			    renderPaymentOptions();
+			    renderTerms();
     
                 $("#agree_all").change(function() {
                     $(".agree_chk").prop("checked", $(this).prop("checked"));
@@ -104,10 +62,51 @@ $(function() {
             alert("주문 정보를 불러오는 데 실패했습니다.");
         }
     });
-	$(document).on("click", "#submit-btn", function() {
-        requestKakaoPay(sum);
-	 });
 
+	// 카카오 주소창 띄우기 
+	$(document).on("click", "#search-address", function(e) {
+		e.preventDefault();
+	    new daum.Postcode({
+	        oncomplete: function(data) {
+	            $("#shipping_zipcode").val(data.zonecode);
+	            $("#shipping_address").val(data.address);
+	        }
+	    }).open();
+	});	
+	
+	// 결제하기 버튼 클릭시 카카오페이
+	$(document).on("click", "#submit-btn", function(e) {
+	    if (!checkShippingInfo()) {
+	        e.preventDefault();
+	    } else {
+	        requestKakaoPay(sum);
+	    }
+	});
+
+	// 배송지 유효성 
+	function checkShippingInfo() {
+	    const shippingName = $("#shipping_name").val().trim();
+	    const shippingTelephone = $("#shipping_telephone").val().trim();
+	    const shippingZipcode = $("#shipping_zipcode").val().trim();
+		const shippingadd = $("#shipping_address").val().trim();
+	
+	    if (!shippingName || !shippingTelephone || !shippingZipcode || !shippingadd) {
+	        alert("모든 배송지 정보를 입력해주세요.");
+	        return false;
+	    }
+	    return true;
+	}
+	
+	//이용약관 동의 유효성
+	function ButtonState() {
+		if ($("#agree_all").prop("checked")) {
+			$("#submit-btn").prop("disabled", false).addClass("active");
+		} else {
+			$("#submit-btn").prop("disabled", true).removeClass("active");
+		}
+	}
+	
+	// 카카오페이 api
 	function requestKakaoPay(amount) {
 	    fetch("pay/ready", {
 	        method: "POST",
@@ -118,11 +117,9 @@ $(function() {
 	    })
 	    .then(response => response.json()) 
 	    .then(data => {
-		debugger;
 			 if (data.next_redirect_pc_url) {
 				const redirectUrl = data.next_redirect_pc_url;
 	            window.open(redirectUrl, "유니픽 카카오페이 결제창", "width=800px,height=700px;");
-	       debugger;
 	        } else {
 	            alert("결제 요청에 실패했습니다.");
 	        }
@@ -132,15 +129,8 @@ $(function() {
 	        alert("결제 요청 중 오류가 발생했습니다.");
 	    });
 	}
-    function ButtonState() {
-        if ($("#agree_all").prop("checked")) {
-            $("#submit-btn").prop("disabled", false).addClass("active");
-        } else {
-            $("#submit-btn").prop("disabled", true).removeClass("active");
-        }
-    }
-
-    // 버튼 클릭시 금융원인증
+	
+    // 금융 결제원 api 
     $(document).on("click", "#openButton", function () {
         let url = "https://testapi.openbanking.or.kr/oauth/2.0/authorize?response_type=code&client_id=8bb0ac90-e493-4346-9f78-c97710692e4b&redirect_uri=http://localhost:8080/UNIPICK/close&state=1a5b3w2s5x9q7w8e4a5h6n2j1k8u6yfc&auth_type=0&scope=login inquiry transfer";
         const popup = window.open(url, "_blank", "width=380,height=670");
@@ -151,7 +141,6 @@ $(function() {
                 const urlParams = new URLSearchParams(popup.location.search);
                 const code = urlParams.get("code");
                 if (code) {
-	debugger;
                     getAccessToken(code); // 인증 코드로 액세스 토큰 요청
                 } else {
                     alert('인증에 실패했습니다.'); // 인증 실패 시 알림
@@ -160,7 +149,7 @@ $(function() {
         }, 100);
     });
 
-    // 서버에 인증 코드를 보내 Access Token을 요청
+    // 금융 결제원 api Access Token을 요청
     function getAccessToken(code) {
         fetch('/UNIPICK/getToken', {
             method: 'POST',
@@ -183,7 +172,7 @@ $(function() {
         });
     }
 
-    // 계좌 정보 요청
+    // 금융 결제원 api 계좌 정보 요청
     function accountInfo(accessToken) {
         fetch('https://testapi.openbanking.or.kr/v2.0/transfer/withdraw/fin_num', {
             method: 'POST',
@@ -207,7 +196,6 @@ $(function() {
         })
         .then(res => res.json())
         .then(data => {
-	debugger;
             if (data.success) {
                 const accInfoHTML = `
                     <div id="acc-info">
@@ -238,4 +226,75 @@ $(function() {
             alert('계좌 정보를 가져오는 데 오류가 발생했습니다.');
         });
     }
+
+	// 배송지 정보
+	function renderDeliveryForm() {
+	    $("#deliInfo-container").html(`
+	       <form id="delivery-form">
+                <div id="del"><h2>배송지 정보</h2></div>
+                <div class="del-nm"><span>수령인</span><input type="text" id="shipping_name"></div>
+                <div class="del-nm">
+					<span>휴대폰</span>
+					<input type="text" id="shipping_telephone">
+				</div>
+                <div class="del-nm"><span>우편번호</span><input type="text" id="shipping_zipcode" readonly></div>
+				<div class="del-nm">
+					<span>배송주소</span>
+					<input type="text" id="shipping_address" readonly> 
+					<button id="search-address">주소찾기</button>
+				</div>
+                <div class="del-nm"><span>배송메모</span><input type="text" id="shipping_memo" placeholder="최대 100자까지 가능합니다"></div>
+            </form>
+	    `);
+	}
+	
+	// 최종 결제금액
+	function renderPriceInfo(sum, totalSf) {
+	    $("#delprice-container").html(`
+	        <div id="total"><h2>최종 결제금액</h2></div>
+	        <div class="price">
+	            <div id="total-pr"><span>총 상품금액</span><span>${sum.toLocaleString()}원</span></div>
+	            <div id="total-dp"><span>총 배송비</span><span>${totalSf.toLocaleString()}원</span></div>
+	        </div>
+	        <div id="prpr"><span>결제 예상 금액</span><span id="sum">${sum.toLocaleString()}원</span>            
+	        </div>
+	    `);
+	}
+	
+	// 결제수단
+	function renderPaymentOptions() {
+	    $("#payment-container").html(`
+	        <div id="payment"><h2>결제수단</h2></div>
+	        <div id="ty" class="price">
+	            <input type="checkbox" id="pay8" onclick="toggleRadio(this)">
+	            <div id="payment"><span>빠른페이</span></div>
+	        </div>
+	        <div class="card-first">
+	            <div class="tie">
+	                <div id="pmregister"><span>유니페이</span></div>
+	                <button  id ="openButton" class="add_btn"> + 결제 수단 등록</button>
+	            </div>
+	        </div>
+	        <div id ="io" class="anthor">
+	            <input type="checkbox" id="pay9" onclick="toggleRadio(this)">
+	            <div id="pay"><span>다른 결제 수단</span></div>
+	        </div>
+	        <div class="Other-Payment" onclick="toggleBorder(this)">
+	            <img src="${contextPath}/resources/images/icon_pay_kakao.svg">
+	        </div>
+	    `);
+	}
+	
+	// 약관동의
+	function renderTerms() {
+	    $("#term-container").html(`
+	        <div id="total"><h2>주문내용 확인 및 결제 동의</h2></div>
+	        <div class="price">
+	            <label><input type="checkbox" id="agree_all"> 전체 동의하기</label>
+	            <label><input type="checkbox" class="agree_chk"> 유니픽 약관 동의 (필수)</label>
+	            <label><input type="checkbox" class="agree_chk"> 개인정보수집 및 이용에 대한 안내 (필수)</label>
+	            <label><input type="checkbox" class="agree_chk"> 구매조건 및 개인정보 제3자 제공 (필수)</label>
+	        </div>
+	    `);;
+	}
 });

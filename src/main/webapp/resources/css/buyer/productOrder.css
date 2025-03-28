@@ -8,7 +8,42 @@
     margin: 48px 0 63px;
     padding: 40px 0 20px;
 }
-
+.Other-Payment {
+    display: flex;
+    justify-content: center; /* 가로 중앙 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+    height: 100px; /* 적절한 높이 설정 */
+    border-radius: 13px;
+    cursor: pointer;
+    margin-top: 18px;
+    margin-left: 20px;
+}
+#search-address{
+	border: none;
+    border-radius: 10px;
+    width: 85px;
+    font-size: 14px;
+    cursor: pointer;
+}
+#shipping_address {
+	width: 62%;
+	background-color: #e8e9eb;
+}
+#shipping_zipcode{
+    width: 9%;
+    margin-right: 822px;
+    background-color: #e8e9eb;
+}
+#ty, #io {
+	display: flex;
+}
+.Other-Payment img {
+    width: 80px;
+    height: auto;
+}
+#pay9, #pay8{
+    border-radius: 26px;
+}
 h2 {
     margin-bottom: 10px;
     padding-bottom: 10px;
