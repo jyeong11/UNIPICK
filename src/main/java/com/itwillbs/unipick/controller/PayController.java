@@ -41,21 +41,36 @@ public class PayController {
     @PostMapping("/ready")
     public ResponseEntity<Map<String, Object>> kakaoPayReady(HttpSession session, @RequestBody Map<String, Object> req) {
         int amount = (int)req.get("amount");
-        String prdCd = (String)req.get("prdCd");
-        String referer = "http://localhost:8080/UNIPICK/orderSuccess" ;
-
+        String prd_cd = (String)req.get("prd_cd");
+        System.out.println("req" + req);
+        System.out.println("prdCd" + prd_cd);
+        String referer1 = "http://localhost:8080/UNIPICK/orderDetail" ;
+        String referer2 = "http://localhost:8080/UNIPICK/productOrder" ;
+        
+        String shipName = (String)req.get("shipping_name");
+        String shiptelephone = (String)req.get("shipping_telephone");
+        String shipzipcode = (String)req.get("shipping_zipcode");
+        String shipadd = (String)req.get("shipping_address");
+        String shipmemo = (String)req.get("shipping_memo");
+        
+        
+        System.out.println("shippingName" + shipName);
+        System.out.println("shippingTelephone" + shiptelephone);
+        System.out.println("shippingZipcode" + shipzipcode);
+        System.out.println("shippingAddress" + shipadd);
+        System.out.println("shippingMemo" + shipmemo);
         // 카카오페이 결제 요청 파라미터 설정
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("cid", "TC0ONETIME"); // 테스트 CID
         params.add("partner_order_id", "order_" + System.currentTimeMillis());
         params.add("partner_user_id", "user1234");
-        params.add("item_name", "상품명");
+        params.add("item_name", prd_cd);
         params.add("quantity", "1");
         params.add("total_amount", String.valueOf(amount));
         params.add("tax_free_amount", "0");
-        params.add("approval_url", "http://localhost:8080/UNIPICK/pay/success?returnUrl=" + referer);
-        params.add("cancel_url", "http://localhost:8080/UNIPICK/pay/cancel?returnUrl=" + referer);
-        params.add("fail_url", "http://localhost:8080/UNIPICK/pay/fail?returnUrl=" + referer);
+        params.add("approval_url", "http://localhost:8080/UNIPICK/pay/success?returnUrl=" + referer1);
+        params.add("cancel_url", "http://localhost:8080/UNIPICK/pay/cancel?returnUrl=" + referer2 + prd_cd);
+        params.add("fail_url", "http://localhost:8080/UNIPICK/pay/fail?returnUrl=" + referer2 + prd_cd);
         // 카카오페이 API 호출
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "KakaoAK " + adminKey);
@@ -88,8 +103,7 @@ public class PayController {
     	params.add("partner_order_id", (String)session.getAttribute("partner_order_id"));
     	params.add("partner_user_id", (String)session.getAttribute("partner_user_id"));
     	params.add("pg_token", pgToken);
-
-        
+    	
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "KakaoAK " + adminKey);
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);  
@@ -109,6 +123,7 @@ public class PayController {
         System.out.println(response);
 
         if (response.getStatusCode() == HttpStatus.OK) {
+        
         	return ResponseEntity.ok("<script>alert('결제가 완료되었습니다!'); window.opener.location.href='" + returnUrl + "'; window.close();</script>");
         } else {
         	return ResponseEntity.ok("<script>alert('결제 승인에 실패했습니다.'); window.close();</script>");

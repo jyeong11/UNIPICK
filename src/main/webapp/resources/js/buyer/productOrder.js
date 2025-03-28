@@ -79,7 +79,8 @@ $(function() {
 	    if (!checkShippingInfo()) {
 	        e.preventDefault();
 	    } else {
-	        requestKakaoPay(sum);
+			saveShippingInfo();
+	        requestKakaoPay(sum, prd_cd);
 	    }
 	});
 
@@ -97,6 +98,23 @@ $(function() {
 	    return true;
 	}
 	
+	// 배송지 입력된 값을 session에 저장
+	function saveShippingInfo() {
+	    const shippingInfo = {
+	        shipping_name: $("#shipping_name").val(),
+	        shipping_telephone: $("#shipping_telephone").val(),
+	        shipping_zipcode: $("#shipping_zipcode").val(),
+	        shipping_address: $("#shipping_address").val(),
+	        shipping_memo: $("#shipping_memo").val()
+	    };
+	
+	    for (const key in shippingInfo) {
+	        if (shippingInfo.hasOwnProperty(key)) {
+	            sessionStorage.setItem(key, shippingInfo[key]);
+	        }
+	    }
+	}
+	
 	//이용약관 동의 유효성
 	function ButtonState() {
 		if ($("#agree_all").prop("checked")) {
@@ -107,13 +125,27 @@ $(function() {
 	}
 	
 	// 카카오페이 api
-	function requestKakaoPay(amount) {
+	function requestKakaoPay(amount, prd_cd) {
+		const shippingName = sessionStorage.getItem("shipping_name");
+	    const shippingTelephone = sessionStorage.getItem("shipping_telephone");
+	    const shippingZipcode = sessionStorage.getItem("shipping_zipcode");
+	    const shippingAddress = sessionStorage.getItem("shipping_address");
+	    const shippingMemo = sessionStorage.getItem("shipping_memo");
+debugger;
 	    fetch("pay/ready", {
 	        method: "POST",
 	        headers: {
 	            "Content-Type": "application/json"
 	        },
-	        body: JSON.stringify({ amount: amount}) // 결제 금액을 서버로 전달
+	        body: JSON.stringify({ 
+				amount: amount,
+				prd_cd: prd_cd,
+				shipping_name: shippingName,
+	            shipping_telephone: shippingTelephone,
+	            shipping_zipcode: shippingZipcode,
+	            shipping_address: shippingAddress,
+	            shipping_memo: shippingMemo
+			})
 	    })
 	    .then(response => response.json()) 
 	    .then(data => {
@@ -266,7 +298,7 @@ $(function() {
 	    $("#payment-container").html(`
 	        <div id="payment"><h2>결제수단</h2></div>
 	        <div id="ty" class="price">
-	            <input type="checkbox" id="pay8" onclick="toggleRadio(this)">
+	            <input type="checkbox" id="pay8">
 	            <div id="payment"><span>빠른페이</span></div>
 	        </div>
 	        <div class="card-first">
@@ -276,10 +308,10 @@ $(function() {
 	            </div>
 	        </div>
 	        <div id ="io" class="anthor">
-	            <input type="checkbox" id="pay9" onclick="toggleRadio(this)">
+	            <input type="checkbox" id="pay9">
 	            <div id="pay"><span>다른 결제 수단</span></div>
 	        </div>
-	        <div class="Other-Payment" onclick="toggleBorder(this)">
+	        <div class="Other-Payment">
 	            <img src="${contextPath}/resources/images/icon_pay_kakao.svg">
 	        </div>
 	    `);
