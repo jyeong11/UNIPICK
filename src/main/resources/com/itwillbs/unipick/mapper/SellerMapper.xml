@@ -70,23 +70,7 @@
       	AND sel_id = #{sel_id}
 	</select>
 	
-<!-- 	주문 등록 -->
-	<insert id="insertOrder" parameterType="map">
-	 INSERT INTO orders (ord_nm, 
-	 					 ord_ph, 
-	 					 ord_pc, 
-	 					 ord_ad, 
-	 					 ord_dm, 
-	 					 ord_at, 
-	 					 ord_pm)
-          VALUES (#{shipping_name}, 
-          		  #{shipping_telephone}, 
-          		  #{shipping_zipcode}, 
-                  #{shipping_address}, 
-                  #{shipping_memo}, 
-                  now(), 
-                  '카카오')
-	</insert>
+
 
 
 </mapper>

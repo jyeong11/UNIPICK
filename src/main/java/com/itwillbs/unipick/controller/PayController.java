@@ -1,5 +1,6 @@
 package com.itwillbs.unipick.controller;
 
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,8 +49,6 @@ public class PayController {
     public ResponseEntity<Map<String, Object>> kakaoPayReady(HttpSession session, @RequestBody Map<String, Object> req) {
         int amount = (int)req.get("amount");
         String prd_cd = (String)req.get("prd_cd");
-        System.out.println("req" + req);
-        System.out.println("prdCd" + prd_cd);
         String referer1 = "http://localhost:8080/UNIPICK/orderDetail" ;
         String referer2 = "http://localhost:8080/UNIPICK/productOrder" ;
         
@@ -137,13 +136,16 @@ public class PayController {
         orderData.put("shipping_zipcode", (String)session.getAttribute("shipping_zipcode"));
         orderData.put("shipping_address", (String)session.getAttribute("shipping_address"));
         orderData.put("shipping_memo", (String)session.getAttribute("shipping_memo"));
-        
+        orderData.put("buy_em", (String)session.getAttribute("buyEm"));
         
         System.out.println("responseBody213312321" + orderData);
 
         if (response.getStatusCode() == HttpStatus.OK) {
         	buyService.insertOrder(orderData);
-        	return ResponseEntity.ok("<script>alert('결제가 완료되었습니다!'); window.opener.location.href='" + returnUrl + "'; window.close();</script>");
+        	BigInteger ordIdBigInt = (BigInteger) orderData.get("ord_id");
+        	long ordId = ordIdBigInt.longValue();
+        	String realreturnUrl = returnUrl + "?ord_id=" + ordId;
+        	return ResponseEntity.ok("<script>alert('결제가 완료되었습니다!'); window.opener.location.href='" + realreturnUrl + "'; window.close();</script>");
         } else {
         	return ResponseEntity.ok("<script>alert('결제 승인에 실패했습니다.'); window.close();</script>");
         }

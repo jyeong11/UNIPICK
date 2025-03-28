@@ -326,6 +326,24 @@
 			 		   #{rev_ct},
 			 		   default)
 	</insert>
-	
+	<!-- 	주문 등록 -->
+	<insert id="insertOrder" parameterType="map" useGeneratedKeys="true" keyProperty="ord_id">
+	 INSERT INTO orders (buy_em,
+	 					 ord_nm, 
+	 					 ord_ph, 
+	 					 ord_pc, 
+	 					 ord_ad, 
+	 					 ord_dm, 
+	 					 ord_at, 
+	 					 ord_pm)
+          VALUES (#{buy_em},
+          		  #{shipping_name}, 
+          		  #{shipping_telephone}, 
+          		  #{shipping_zipcode}, 
+                  #{shipping_address}, 
+                  #{shipping_memo}, 
+                  now(), 
+                  '카카오')
+	</insert>
 	
   </mapper>

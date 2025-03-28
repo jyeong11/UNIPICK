@@ -103,8 +103,8 @@ public class BuyerService {
 		mapper.Withdraw(buyer);
 	}
 	// 주문 등록
-	public Map<String, Object> insertOrder (Map<String, Object> orderData) {
-		return mapper.insertOrder(orderData);
+	public void insertOrder (Map<String, Object> orderData) {
+			mapper.insertOrder(orderData);
 	}
 	// 상품 썸네일, 이름
 	public Map<String, Object> prdInfo(Map<String, Object> prd) {
@@ -138,5 +138,4 @@ public class BuyerService {
             }
         }
 	}
-	
 }
