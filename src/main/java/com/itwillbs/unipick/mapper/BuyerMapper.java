@@ -47,5 +47,10 @@ public interface BuyerMapper {
 	public void Withdraw(Map<String, Object> buyer);
 	//주문 등록
 	public Map<String, Object> insertOrder(Map<String, Object> orderData);
-	
+	// 상품 썸네일, 이미지
+	public Map<String, Object> prdInfo(Map<String, Object> prd);
+	// 리뷰 등록
+	public void registerReview(Map<String, Object> rev);
+	// 리뷰 이미지 등록
+	public void registerReviewImage(Map<String, Object> paramMap);
 }

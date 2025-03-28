@@ -1,7 +1,5 @@
 @charset "UTF-8";
 
-
-
 .IconList-div, .two, .buyer-info {
 	width: 1200px;
 	margin: auto;
@@ -39,7 +37,7 @@
 	border-right: 1px solid black;
 }
 
-button {
+#modify, #logout {
 	height: 50px;
   	font-size: inherit;
   	border-radius: 8px;

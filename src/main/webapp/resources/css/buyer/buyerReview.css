@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 .content {
-	width: 1200px;
+	width: 800px;
 	margin: auto;
 }
 
@@ -13,4 +13,100 @@
 .card {
 	border: 1px solid black;
 	padding: 10px;
+}
+
+#prdImg {
+	width: 200px;
+	height: 200px;
+}
+
+#content-top, #content-middle, #content-bottom {
+	display: flex;
+	gap: 20px;
+	padding: 20px 0 20px 0;
+	border-bottom: 1px solid;
+}
+
+#prdNm {
+	font-size: 30px;
+}
+
+.stars {
+    display: flex;
+    font-size: 45px;	
+    cursor: pointer;
+    height: 50px;
+}
+
+.star {
+    color: lightgray;
+    transition: color 0.5s;
+}
+
+.star.selected {
+    color: gold;
+    text-shadow: 3px 3px 8px rgba(255, 215, 0, 0.7);
+}
+
+#options {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+.content-title {
+	width: 80px;
+    padding-left: 10px;
+}
+
+#reviewDetail {
+	resize: none;
+    border-radius: 10px;
+    padding: 20px;
+    font-size: 20px;
+    font-family: "Noto Sans KR", sans-serif;
+    outline: none;
+}
+
+#last-btn {
+	display: flex;
+	justify-content: flex-end;
+	gap: 10px;
+	padding: 20px 0 20px 0;
+}
+
+#checkChar {
+	text-align: right;
+}
+
+.item-regi-img {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.item-thumb-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.item-thumb {
+  position: relative;
+}
+.item-thumb-upload {
+  margin: 20px 10px 0 20px;
+  width: 128px;
+  height: 128px;
+  background: none;
+  cursor: pointer;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background-color: white;
+}
+.item-thumb-upload img {
+  width: 114px;
+  border-radius: 10px;
+  border: 0;
+}
+.item-thumb-upload-btn {
+  display: none;
 }

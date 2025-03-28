@@ -18,7 +18,6 @@ $(function(){
 
 
 function myPage() {
-	debugger;
     $.ajax({
         url: "checkLogin", // 로그인 상태를 확인하는 API
         method: "GET",

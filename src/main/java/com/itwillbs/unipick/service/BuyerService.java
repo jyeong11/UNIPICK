@@ -7,6 +7,8 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.itwillbs.unipick.mapper.BuyerMapper;
 
@@ -15,6 +17,8 @@ public class BuyerService {
 	
 	@Autowired
 	BuyerMapper mapper;
+	@Autowired
+	SellerService2 sellerservice2;
 	
 	// 방문자 수 증가
 	public void visitCount() {
@@ -101,6 +105,38 @@ public class BuyerService {
 	// 주문 등록
 	public Map<String, Object> insertOrder (Map<String, Object> orderData) {
 		return mapper.insertOrder(orderData);
+	}
+	// 상품 썸네일, 이름
+	public Map<String, Object> prdInfo(Map<String, Object> prd) {
+		return mapper.prdInfo(prd);
+	}
+	// 리뷰 등록
+	@Transactional
+	public void registerReview(Map<String, Object> rev, List<MultipartFile> imageFiles) {
+		// 1. 리뷰 저장
+		mapper.registerReview(rev);
+		
+		// 2. 리뷰 이미지 저장
+        for (MultipartFile imageFile : imageFiles) {
+            if (imageFile == null || imageFile.isEmpty()) {
+                continue;
+            }
+
+            // 이미지 업로드
+            Map<String, Object> imageData = sellerservice2.uploadImage(imageFile);
+            if (imageData.containsKey("error")) {
+                continue;
+            }
+            
+//            imageData.put("rev_id", )
+
+            try {
+//            	mapper.registerReviewImage(imageData);
+            } catch (Exception e) {
+                System.out.println("❌ 이미지 데이터 삽입 실패: " + e.getMessage());
+                e.printStackTrace();
+            }
+        }
 	}
 	
 }

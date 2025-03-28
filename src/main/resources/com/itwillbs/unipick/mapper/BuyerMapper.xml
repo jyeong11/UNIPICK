@@ -239,6 +239,7 @@
 			   o.ord_ph,
 			   o.ord_ad,
 			   o.ord_dm,
+			   od.odd_id,
 		 	   od.odd_st,
 			   od.odd_qt,
 			   od.odd_am,
@@ -249,16 +250,22 @@
 			   p.prd_sp,
 			   s.sel_nm,
 			   op.clr_nm,
-			   pi.fil_pt
+			   pi.fil_pt,
+			   r.rev_id
 		  FROM orders o
 		  JOIN order_details od ON o.ord_id = od.ord_id
 		  JOIN options op ON od.opt_id = op.opt_id
 		  JOIN common_detailcode c ON c.cod_cd = op.siz_nm
 		  JOIN products p ON op.prd_cd = p.prd_cd
 		  JOIN sellers s ON p.sel_id = s.sel_id
-		  JOIN (SELECT distinct fil_pt, prd_cd
+		  JOIN (SELECT distinct fil_pt,
+		  						prd_cd
 				  FROM product_images) pi ON p.prd_cd = pi.prd_cd
-		 WHERE buy_em = #{buy_em}
+		  LEFT JOIN (SELECT rev_id,
+		  					opt_id
+		  			   FROM reviews
+		  			  WHERE buy_em = #{buy_em}) r ON op.opt_id = r.opt_id
+		 WHERE o.buy_em = #{buy_em}
 		   <if test="date != null and !date.equals('')">
 		       AND DATE(o.ord_at) BETWEEN #{date} AND CURDATE()
 		   </if>
@@ -277,5 +284,68 @@
 		   SET acc_st = '탈퇴'
 		 WHERE buy_em = #{buy_em}
 	</update>
+	
+	<!-- 상품 썸네일, 이름 -->
+	<select id="prdInfo" parameterType="map">
+		WITH RankedImages AS (
+		SELECT prd_cd,
+			   fil_pt,
+			   ROW_NUMBER() OVER (PARTITION BY prd_cd) AS rn
+		  FROM product_images
+		)                
+		SELECT p.prd_nm,
+			   i.fil_pt,
+			   cd.cod_nm,
+			   od.odd_qt,
+			   o.clr_nm,
+			   o.opt_id
+		FROM order_details od
+		JOIN options o ON od.opt_id = o.opt_id
+		JOIN common_detailcode cd ON o.siz_nm = cd.cod_cd
+		JOIN products p ON o.prd_cd = p.prd_cd
+		JOIN (SELECT prd_cd,
+					 fil_pt
+				FROM RankedImages
+			   WHERE rn = 1) i ON p.prd_cd = i.prd_cd
+		WHERE odd_id = #{odd_id}
+	</select>
+	
+	<!-- 리뷰 등록 -->
+	<insert id="registerReview" parameterMap="map">
+		INSERT
+		  INTO reviews(rev_id,
+		  			   buy_em,
+		  			   opt_id,
+		  			   rev_rt,
+		  			   rev_ct,
+		  			   rev_ca)
+			 	VALUES(default,
+			 		   #{buy_em},
+			 		   #{opt_id},
+			 		   #{rev_rt},
+			 		   #{rev_ct},
+			 		   default)
+	</insert>
+	
+	<!-- 리뷰 이미지 등록 -->
+<!-- 	<insert id="registerReviewImage" parameterType="map"> -->
+<!-- 		INSERT -->
+<!-- 		  INTO product_images (rei_id, -->
+<!-- 								      rev_id, -->
+<!-- 								      rei_nm, -->
+<!-- 								      rei_pt, -->
+<!-- 								      rei_ca, -->
+<!-- 								    ) -->
+<!-- 								    VALUES ( -->
+<!-- 								      #{img_id}, -->
+<!-- 								      #{prd_cd}, -->
+<!-- 								      #{fil_nm}, -->
+<!-- 								      #{fil_pt}, -->
+<!-- 								      NOW(), -->
+<!-- 								    ) -->
+<!-- 	</insert> -->
+	
+	<!-- 리뷰 리스트 -->
+	
 	
   </mapper>

@@ -14,8 +14,14 @@ $(function() {
 	});
 	$(document).on('click', '#reviewBtn', function(event) {
 	    event.preventDefault();
-		let prdCd = $(this).closest('a').attr('href').split('prd_cd=')[1];
-	    window.location.href = 'myReview?prd_cd=' + prdCd;
+
+		if ($(this).hasClass('noneClick')) {
+			alert('이미 리뷰를 작성하였습니다.');
+	        return;
+    	}
+
+		let oddId = $(this).data('value');
+	    window.location.href = 'myReview?odd_id=' + oddId;
 	});
 	
 	$(document).on('click', '#questionBtn', function(event) {
@@ -83,6 +89,12 @@ function search() {
 					display = 'show';
 				}
 				const formatOddAm = new Intl.NumberFormat().format(item.odd_am);
+				let revName = "리뷰쓰기";
+				let revClass = " ";
+				if(item.rev_id){
+					revName = "리뷰완료";
+					revClass = " noneClick";
+				}
                 let cardContent = `<a href="productDetail?prd_cd=${item.prd_cd}" class="product-link">
 									   <div class="order-info">
 									   		<div><b>${item.sel_nm}</b></div>
@@ -94,7 +106,7 @@ function search() {
 											   		<div>${item.clr_nm} / ${item.cod_nm} / ${item.odd_qt}개</div>
 										       		<div><b id="price">${formatOddAm}원</b></div>
 											   		<div>
-										           		<button id="reviewBtn" class="order-btn ${display}">리뷰쓰기</button>
+										           		<button id="reviewBtn" data-value="${item.odd_id}" class="order-btn ${display}${revClass} " >${revName}</button>
 										           		<button id="questionBtn" class="order-btn">문의하기</button>
 									   	       		</div>
 										  		 </div>

@@ -1,19 +1,27 @@
 package com.itwillbs.unipick.controller;
 
+import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.itwillbs.unipick.mapper.BuyerMapper;
 import com.itwillbs.unipick.service.AdminService;
 import com.itwillbs.unipick.service.BuyerService;
 
@@ -95,8 +103,7 @@ public class BuyerController {
 	@GetMapping("withdraw")
 	public String withdraw() {
 		return "buyer/buyerWithdraw";
-	}
-	
+	}	
 	
 	// 상품 상세조회 (조회)
 	@GetMapping("productDetail")
@@ -119,15 +126,21 @@ public class BuyerController {
 	}
 	
 	// 리뷰 페이지 이동
-	@GetMapping("myReview")
-	public String myReview() {
-		return "buyer/buyerReview";
+	@GetMapping("myReviewList")
+	public String myReviewList() {
+		return "buyer/buyerReviewList";
 	}
 	
 	// 주문/배송 페이지 이동
 	@GetMapping("myOrderList")
 	public String myOrderList() {
 		return "buyer/buyerOrderList";
+	}
+	
+	// 리뷰 작성 페이지 이동
+	@GetMapping("myReview")
+	public String myReview() {
+		return "buyer/buyerReview";
 	}
 	
 	// 상단 메뉴바 공통코드
@@ -272,6 +285,7 @@ public class BuyerController {
 		return buyService.OrderListInfo(buyer);
 	}
 	
+	// 마이페이지 로그인 체크
 	@ResponseBody
 	@GetMapping("checkLogin")
 	public String checkLogin(HttpSession session) {
@@ -285,5 +299,43 @@ public class BuyerController {
 		
 		return url;
 	}
+	
+	// 상품 썸네일, 이름
+	@ResponseBody
+	@PostMapping("prdInfo")
+	public Map<String, Object> prdInfo(@RequestBody Map<String, Object> prd) {
+		return buyService.prdInfo(prd);
+	}
+	
+	// 리뷰 등록
+	@ResponseBody
+	@PostMapping("registerReview")
+	public ResponseEntity<?> registerReview(
+	        @RequestParam("opt_id") String optId,
+	        @RequestParam("rev_rt") String revRt,
+	        @RequestParam("rev_ct") String revCt,
+	        @RequestPart(value = "imageFiles", required = false) List<MultipartFile> imageFiles) {
+
+	    try {
+	        
+	    	Map<String, Object> map = new HashMap<String, Object>();
+	    	
+	    	map.put("opt_id", optId);
+	    	map.put("rev_rt", revRt);
+	    	map.put("rev_ct", revCt);
+	    	
+	    	if (imageFiles == null) {
+                imageFiles = List.of();
+            }
+	    	
+	        buyService.registerReview(map, imageFiles);
+
+	        return ResponseEntity.ok("리뷰 등록 성공");
+
+	    } catch (Exception e) {
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("서버 오류 발생");
+	    }
+	}
+	
 	
 }

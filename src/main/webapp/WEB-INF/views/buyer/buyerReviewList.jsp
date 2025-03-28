@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,15 +18,14 @@
 <link href="${pageContext.request.contextPath }/resources/css/top.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/footer.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/buyer/buyerMenuBar.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resources/css/buyer/buyerReview.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/buyer/buyerReviewList.css" rel="stylesheet" type="text/css">
 
 <!-- Favicon -->
 <link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
 
 <!-- script -->
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/buyer/buyerReview.js"></script>
-
+<script src="${pageContext.request.contextPath }/resources/js/buyer/buyerReviewList.js"></script>
 </head>
 <body>
 	<div id="topNav">
@@ -38,34 +36,21 @@
 	</div>
 	
 	<div class="content">
-		<div>이 상품 어떠셨나요?</div>
-		<div id="content-top">
-		</div>
-		<div id="content-middle">
-			<div><p class="content-title">리뷰상세</p></div>
-			<div>
-				<textarea rows="10" cols="63" id="reviewDetail" placeholder="다른 회원들이 도움을 받을 수 있게 상품에 대한 의견을 자세히 공유해 주세요."></textarea>
-				<p id="checkChar">현재 글자 수: <span id="charCount">0</span><span>/500</span></p>
+		<div>
+			<div class = "two">
+				<h2>나의 리뷰</h2>
 			</div>
-		</div>
-		<div id="content-bottom">
-			<p class="content-title">사진</p>
-			<div class="item-thumb-group">
-				<form id="uploadForm" action="" method="post" enctype="multipart/form-data">
-					<c:forEach var="i" begin="1" end="3">
-						<div class="item-thumb">
-							<button type="button" class="item-thumb-upload" data-index="${i}">
-								<img src="/resources/img/product-thumb-no.jpg"  id="item-thumb-preview${i}">
-							</button>
-							<input type="file" class="item-thumb-upload-btn" id="item-thumb-upload-btn${i}" name="imageFiles" multiple>
-						</div>
-					</c:forEach>
-				</form>
+			<div id="cards">
+				<div class="card">
+					<div id="nick">닉네임</div>
+					<div id="date" style="text-align: right">날짜</div>
+					<div id="star">별 평점</div>
+					<div id="prdName">상품명</div>
+					<div id="reviewImg">리뷰이미지</div>
+					<div id="options">옵션정보, 키, 몸무게</div>
+					<div id="reivewCon">리뷰내용</div>
+				</div>
 			</div>
-		</div>
-		<div id="last-btn">
-			<button id="registerReview">등록하기</button>
-			<button id="cancel">취소하기</button>
 		</div>
 	</div>
 	
