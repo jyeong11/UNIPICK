@@ -311,7 +311,7 @@
 	</select>
 	
 	<!-- 리뷰 등록 -->
-	<insert id="registerReview" parameterMap="map">
+	<insert id="registerReview" parameterType="map">
 		INSERT
 		  INTO reviews(rev_id,
 		  			   buy_em,
@@ -326,26 +326,6 @@
 			 		   #{rev_ct},
 			 		   default)
 	</insert>
-	
-	<!-- 리뷰 이미지 등록 -->
-<!-- 	<insert id="registerReviewImage" parameterType="map"> -->
-<!-- 		INSERT -->
-<!-- 		  INTO product_images (rei_id, -->
-<!-- 								      rev_id, -->
-<!-- 								      rei_nm, -->
-<!-- 								      rei_pt, -->
-<!-- 								      rei_ca, -->
-<!-- 								    ) -->
-<!-- 								    VALUES ( -->
-<!-- 								      #{img_id}, -->
-<!-- 								      #{prd_cd}, -->
-<!-- 								      #{fil_nm}, -->
-<!-- 								      #{fil_pt}, -->
-<!-- 								      NOW(), -->
-<!-- 								    ) -->
-<!-- 	</insert> -->
-	
-	<!-- 리뷰 리스트 -->
 	
 	
   </mapper>
