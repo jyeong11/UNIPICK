@@ -31,18 +31,18 @@
     AND buy_ph = #{buy_ph}
 </select>
 
-<!-- <select id="findEmployeeByNoAndEmail" resultType="map"> -->
-<!--     SELECT buy_pw, buy_nm, buy_em  -->
-<!--     FROM buyers -->
-<!--     WHERE buy_nm = #{buyNm} -->
-<!--     AND buy_em = #{buyEm} -->
-<!-- </select> -->
+<select id="findEmployeeByNoAndEmail" resultType="map">
+      SELECT buy_nm, buy_em
+    FROM buyers
+    WHERE buy_nm = #{buyNm} 
+      AND buy_em = #{buyEm}
+</select>
 
-<!-- <update id="updatePassword" parameterType="map"> -->
-<!--     UPDATE buyers -->
-<!--     SET buy_pw = #{buyPw} -->
-<!--     WHERE buy_em = #{buyEm} -->
-<!-- </update> -->
+<update id="updatePassword" parameterType="map">
+    UPDATE buyers
+    SET buy_pw = #{buyPw}
+    WHERE buy_em = #{buyEm}
+</update>
 
 
 </mapper>

@@ -62,6 +62,9 @@
 			<jsp:include page="./inc/newProduct.jsp"></jsp:include>
 		</div>
 	</section>
+	<section>
+	<input type="button" value="임시 비밀번호찾기" onclick="location.href='buyerPw'">
+	</section>
 	<div>
 		<jsp:include page="./inc/footer.jsp"></jsp:include>
 	</div>

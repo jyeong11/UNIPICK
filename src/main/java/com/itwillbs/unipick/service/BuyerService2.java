@@ -6,8 +6,7 @@ import java.util.UUID;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.itwillbs.unipick.handler.MailClient;
@@ -50,10 +49,7 @@ public class BuyerService2 {
     // 회원 등록 메서드
     public boolean registerBuyer(Map<String, Object> buyerData) {
     	
-    	System.out.println("✅ 회원가입 데이터: " + buyerData);
-    	
         if (buyerData == null || buyerData.isEmpty()) {
-        	  System.out.println("❌ buyerData가 비어 있음");
             return false; // buyerData가 null 또는 비어있으면 등록 실패
         }
 
@@ -62,15 +58,12 @@ public class BuyerService2 {
         
         // 비밀번호 유효성 검사
         if (password == null || !validatePassword(password)) {
-        	 System.out.println("❌ 비밀번호 검증 실패: " + password);
             return false; // 비밀번호가 null이거나 유효하지 않으면 등록 실패
         }
 
         // 추가적으로, 다른 필수 값들 (예: 이메일, 전화번호 등)이 null인지 체크
         String email = (String) buyerData.get("buy_em");
         if (email == null || email.isEmpty()) {
-        	
-        	 System.out.println("❌ 이메일 검증 실패: " + email);
             return false; // 이메일이 비어있으면 등록 실패
         }
         
@@ -83,18 +76,11 @@ public class BuyerService2 {
         buyerData.put("acc_pa", accPa);
         buyerData.put("acc_ma", accMa);
 
-        System.out.println("✅ 변환된 회원가입 데이터: " + buyerData);
-        System.out.println("✅ 회원가입 데이터: " + buyerData);
-        System.out.println("✅ 약관 동의 여부 - acc_ta: " + accTa + ", acc_pa: " + accPa + ", acc_ma: " + accMa);
-
-        
         // 비밀번호 및 기타 필수 정보들이 유효한 경우 DB에 사용자 정보를 삽입
         try {
             int result = mapper.insertBuyer(buyerData);
-            System.out.println("✅ INSERT 결과: " + result);
             return result > 0;
         } catch (Exception e) {
-            System.out.println("❌ INSERT 중 예외 발생");
             e.printStackTrace();
             return false;
         }
@@ -112,56 +98,53 @@ public class BuyerService2 {
     }
     
     public Map<String, Object> findEmployeeByNameAndPhone(String buyNm, String buyPh) {
-        // Call the mapper to get the employee data
         Map<String, Object> employee = mapper.selectEmployeeByNameAndPhone(buyNm, buyPh);
         
         if (employee != null) {
-            return employee; // Return the found employee data
+            return employee; 
         }
         
-        return null; // Return null if not found
+        return null; 
     }
-    
- // 이메일 비밀번호 보내기
-//    public Map<String, Object> resetPassword(String buyNm, String buyEm) {
-//        // Fetch the employee from the database
-//        Map<String, Object> employee = mapper.findEmployeeByNoAndEmail(buyNm, buyEm);
-//
-//        if (employee == null || employee.isEmpty()) {
-//            // Employee not found, return a failure map
-//            return Map.of("error", "사원번호 또는 이메일이 일치하지 않습니다.");
-//        }
-//
-//        // Extract the employee name safely
-//        String employeeName = (String) employee.get("buy_nm");
-//
-//        // Generate a temporary password and encrypt it
-//        String tempPassword = (String) employee.get("buy_pw");
-//
-//        // Update the password in the database
-//        mapper.updatePassword(buyNm);
-//
-//        // Send the email asynchronously
-//        String subject = "유니픽 임시 비밀번호 안내";
-//        String content = "임시 비밀번호: " + tempPassword + "<br>로그인 후 비밀번호를 변경해주세요.";
-//
-//        new Thread(() -> {
-//            try {
-//                mailClient.sendMail(employeeName, subject, content);
-//            } catch (Exception e) {
-//                // Log any error that occurs when sending the email
-//                e.printStackTrace();
-//            }
-//        }).start();
-//
-//        // Return a success message in the form of a Map
-//        return Map.of("message", "임시 비밀번호가 이메일로 전송되었습니다.");
-//    }
 
+ // 비밀번호 보내기
+    @Async  // 이메일 전송을 비동기 처리
+    public boolean resetPassword(String buyNm, String buyEm) {
+        Map<String, Object> user = mapper.findEmployeeByNoAndEmail(buyNm, buyEm);
+        if (user == null || user.isEmpty()) {
+            return false;
+        }
 
-// 	private String generateTempPassword() {
-// 	    String uuid = UUID.randomUUID().toString();
-// 	    String randomPassword = uuid.replace("-", "").substring(0, 8); // Consider adding more complexity
-// 	    return randomPassword;
-// 	}
+        // 임시 비밀번호 생성
+        String tempPassword = generateTempPassword();
+
+        // DB 업데이트
+        mapper.updatePassword(buyEm, tempPassword);
+
+        // 이메일 전송 (이름이 아닌 이메일 전달)
+        sendResetEmail((String) user.get("buy_em"), tempPassword);
+        return true;
+    }
+
+    private void sendResetEmail(String buyEm, String tempPassword) {
+        // 이메일이 null이거나 빈 값이면 전송하지 않음
+        if (buyEm == null || buyEm.trim().isEmpty()) {
+            System.out.println("🚨 오류: 이메일 주소가 비어 있음");
+            return;
+        }
+
+        String subject = "유니픽 임시 비밀번호 안내";
+        String content = "임시 비밀번호: " + tempPassword + "<br>로그인 후 비밀번호를 변경해주세요.";
+
+        try {
+            mailClient.sendMail(buyEm, subject, content); // ✅ 올바른 값 전달
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private String generateTempPassword() {
+        return UUID.randomUUID().toString().substring(0, 8);
+    }
+
 }

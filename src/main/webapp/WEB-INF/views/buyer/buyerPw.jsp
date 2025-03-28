@@ -26,12 +26,11 @@
 <link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
 
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/buyer/buyerLogin.js"></script>
 <title>UNIPICK</title>
 </head>
 <body>
 	<div class="login-container">
-		<form action="" method="post" class="memberform" id="rest-password-form"
+		<form action="rest" method="post" class="memberform" id="rest-password-form"
 			onsubmit="return false">
 			<a href=""><img src="${pageContext.request.contextPath}/resources/images/로고 가로.png"
 				alt="로고" class="logo"></a>
@@ -80,7 +79,7 @@ $("#rest-password-form").submit(function(event) {
     }
 
     $.ajax({
-        url: "rest",
+        url: "reset",
         method: "POST",
         contentType: "application/x-www-form-urlencoded; charset=UTF-8",
         dataType: "json",

@@ -1,7 +1,4 @@
-package com.itwillbs.hris.handler;
-
-import java.security.SecureRandom;
-import java.util.Random;
+package com.itwillbs.unipick.handler;
 
 import org.apache.commons.lang3.RandomStringUtils;
 

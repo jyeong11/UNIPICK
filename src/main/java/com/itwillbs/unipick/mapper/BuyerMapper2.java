@@ -23,9 +23,7 @@ public interface BuyerMapper2 {
     		@Param("buy_nm") String buyNm,
     		@Param("buy_ph") String buyPh);
 
-//    Map<String, Object> findEmployeeByNoAndEmail(
-//    		@Param("buy_nm") String buyNm,
-//    		@Param("buy_em") String buyEm);
-//    void updatePassword(
-//    		@Param("buy_em") String buyEm);
+    Map<String, Object> findEmployeeByNoAndEmail(@Param("buyNm") String buyNm, @Param("buyEm") String buyEm);
+
+    void updatePassword(@Param("buyEm") String buyEm, @Param("buyPw") String buyPw);
 }
