@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -112,7 +114,7 @@ public class BuyerService {
 	}
 	// 리뷰 등록
 	@Transactional
-	public void registerReview(Map<String, Object> rev, List<MultipartFile> imageFiles) {
+	public void registerReview(HttpServletRequest req, Map<String, Object> rev, List<MultipartFile> imageFiles) {
 		// 1. 리뷰 저장
 		mapper.registerReview(rev);
 		
@@ -123,7 +125,7 @@ public class BuyerService {
             }
 
             // 이미지 업로드
-            Map<String, Object> imageData = sellerservice2.uploadImage(imageFile);
+            Map<String, Object> imageData = sellerservice2.uploadImage(req, imageFile);
             if (imageData.containsKey("error")) {
                 continue;
             }
