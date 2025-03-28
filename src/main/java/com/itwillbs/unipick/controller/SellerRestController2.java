@@ -59,6 +59,60 @@ public class SellerRestController2 {
         return response;
     }
 
+    
+  //AJAX를 통한 상품 리스트 조회
+    @RequestMapping("/api/selOrderList")
+    public Map<String, Object> getOrderList(
+            @RequestParam(value = "ord_id", required = false, defaultValue = "") String ordId,
+            @RequestParam(value = "ord_at", required = false, defaultValue = "") String ordAt,
+            @RequestParam(value = "buy_nm", required = false, defaultValue = "") String buyNm,
+            @RequestParam(value = "buy_ph", required = false, defaultValue = "") String buyPh,
+            @RequestParam(value = "odd_qt", required = false, defaultValue = "") String oddPt,
+            @RequestParam(value = "odd_am", required = false, defaultValue = "") String oddAm,
+            /*@RequestParam(value = "odd_st", required = false, defaultValue = "") String oddSt,*/
+            @RequestParam(value = "orderStatus", required = false, defaultValue = "all") String orderStatus,
+            @RequestParam(value = "startRow", required = false, defaultValue = "0") int startRow,
+            @RequestParam(value = "listLimit", required = false, defaultValue = "10") int listLimit) {
+
+        // 검색 조건 Map 생성
+        Map<String, String> search = new HashMap<>();
+			if (!ordId.isEmpty()) search.put("ord_id", ordId);
+			if (!ordAt.isEmpty()) search.put("ord_at", ordAt);
+			if (!buyNm.isEmpty()) search.put("buy_nm", buyNm);
+			if (!buyPh.isEmpty()) search.put("buy_ph", buyPh);
+			if (!oddPt.isEmpty()) search.put("odd_qt", oddPt);
+			if (!oddAm.isEmpty()) search.put("odd_am", oddAm);
+			//if (!oddSt.isEmpty()) search.put("odd_st", oddSt);
+
+		    // orderStatus 값이 "all"이 아니라면, 이를 DB의 odd_st 값에 맞게 변환하여 조건에 추가
+		    if (!"all".equals(orderStatus)) {
+		        String mappedStatus = "";
+		        switch (orderStatus) {
+		            case "0": mappedStatus = "배송대기"; break;
+		            case "1": mappedStatus = "배송중"; break;
+		            case "2": mappedStatus = "배송완료"; break;
+		            case "3": mappedStatus = "취소접수"; break;
+		            case "4": mappedStatus = "반품접수"; break;
+		            default: mappedStatus = orderStatus; break;
+		        }
+		        search.put("odd_st", mappedStatus);
+		    }
+			
+        // 상품 리스트 조회
+        List<Map<String, Object>> orderList = sellerService.getOrderList(search, startRow, listLimit);
+        System.out.println(orderList);
+
+        // 상품 개수 조회
+        int totalCount = sellerService.getOrderListCount(search);
+
+        // 응답 데이터 구성
+        Map<String, Object> response = new HashMap<>();
+        response.put("orderList", orderList);
+        response.put("totalCount", totalCount);
+
+        return response;
+    }
+    
 
     
     // ✅ 상품 등록 (상품 정보 + 이미지 + 재고 + 색상 + 사이즈)

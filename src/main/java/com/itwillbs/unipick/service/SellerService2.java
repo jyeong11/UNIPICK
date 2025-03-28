@@ -39,6 +39,22 @@ public class SellerService2 {
         return mapper.getProductListCount(searchParams);  // 상품 개수 조회
     }
     
+ 
+    public List<Map<String, Object>> getOrderList(Map<String, String> search, int startRow, int listLimit) {
+    	List<Object> pageList = new ArrayList<>();
+    	pageList.add(startRow);
+    	pageList.add(listLimit);
+
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("map", search);  
+        paramMap.put("pageList", pageList); 
+
+        return mapper.getOrderList(paramMap);
+    }
+
+    public int getOrderListCount(Map<String, String> search) {
+        return mapper.getOrderListCount(search);
+    }
     
     
     

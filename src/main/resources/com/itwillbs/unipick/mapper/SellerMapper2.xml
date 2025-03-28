@@ -191,5 +191,67 @@ JOIN common_detailcode c ON o.siz_nm = c.cod_cd
   </if>
 </select>
 
+
+<select id="getOrderList" resultType="map">
+  SELECT o.ord_id, -- 주문ID
+		 o.ord_at, -- 주문일자 
+         b.buy_nm, -- 구매자명 
+         b.buy_ph, -- 연락처
+         d.odd_qt, -- 구매수량 
+         d.odd_am, -- 결제금액
+    CASE d.odd_st 
+            WHEN '0' THEN '배송대기'
+            WHEN '1' THEN '배송중'
+            WHEN '2' THEN '배송완료'
+            WHEN '3' THEN '취소접수'
+            WHEN '4' THEN '반품접수'
+            ELSE d.odd_st 
+      END AS odd_st  -- 변환된 주문상태
+	FROM orders o
+	JOIN buyers b ON o.buy_em = b.buy_em
+	JOIN order_details d ON o.ord_id = d.ord_id
+ WHERE 1=1
+  <if test="map.ord_id != null and !map.ord_id.isEmpty()">
+      AND o.ord_id LIKE CONCAT('%', #{map.ord_id}, '%')
+  </if>
+  <if test="map.ord_at != null and !map.ord_at.isEmpty()">
+      AND o.ord_at LIKE CONCAT('%', #{map.ord_at}, '%')
+  </if>
+  <if test="map.buy_nm != null and !map.buy_nm.isEmpty()">
+      AND b.buy_nm LIKE CONCAT('%', #{map.buy_nm}, '%')
+  </if>
+  <if test="map.buy_ph != null and !map.buy_ph.isEmpty()">
+      AND b.buy_ph LIKE CONCAT('%', #{map.buy_ph}, '%')
+  </if>
+  <if test="map.odd_qt != null and !map.odd_qt.isEmpty()">
+      AND d.odd_qt LIKE CONCAT('%', #{map.odd_qt}, '%')
+  </if>
+  <if test="map.odd_am != null and !map.odd_am.isEmpty()">
+      AND d.odd_am LIKE CONCAT('%', #{map.odd_am}, '%')
+  </if>
+  <if test="map.odd_st != null and !map.odd_st.isEmpty()">
+      AND d.odd_st LIKE CONCAT('%', #{map.odd_st}, '%')
+  </if>
+  ORDER BY o.ord_at DESC
+  <if test="pageList != null">
+      LIMIT #{pageList[0]}, #{pageList[1]}
+  </if>
+</select>
+
+<select id="getOrderListCount" resultType="int">
+ SELECT COUNT(*) 
+	FROM orders o
+	JOIN buyers b ON o.buy_em = b.buy_em
+	WHERE 1= 1
+  <if test="map.buy_nm != null and !map.buy_nm.isEmpty()">
+      AND b.buy_nm LIKE CONCAT('%', #{map.buy_nm}, '%')
+  </if>
+  <if test="map.buy_ph != null and !map.buy_ph.isEmpty()">
+      AND b.buy_ph LIKE CONCAT('%', #{map.buy_ph}, '%')
+  </if>
+  <if test="map.ord_id != null and !map.ord_id.isEmpty()">
+      AND o.ord_id LIKE CONCAT('%', #{map.ord_id}, '%')
+  </if>
+</select>
   
 </mapper>

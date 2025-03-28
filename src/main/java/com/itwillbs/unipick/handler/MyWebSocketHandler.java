@@ -1,8 +1,11 @@
 package com.itwillbs.unipick.handler;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -26,30 +29,90 @@ public class MyWebSocketHandler extends TextWebSocketHandler {
 
 
 	private Map<String, WebSocketSession> userSessionList = new ConcurrentHashMap<String, WebSocketSession>();
-
-	
-	
+				
 	//1. afterConnectionEstablished - 웹소켓 최초 연결 시 자동으로 호출되는 메서드
 	// 이 과정에서 스프링에서도 WebSocket 관련 객체가 자동으로 생성됨
 	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		System.out.println("웹소켓 최초연결(afterConnectionEstablished)");
-		System.out.println("웹소켓 세션 아이디" + session.getId());
-		System.out.println("웹소켓 세션 IP주소"+ session.getRemoteAddress());
+		
+		System.out.println("웹소켓 세션 아이디 " + session.getId());
+		System.out.println("웹소켓 세션 IP주소 "+ session.getRemoteAddress());
+		
+		// 사용자의 WebSocketSession 객체를 Map 객체에 저장 -> 클라이언트(웹소켓) 정보 관리 용도
+		userSessionList.put(session.getId(), session);
+		System.out.println("연결 후 세션 목록 : " + userSessionList);
+		
+		// HttpSession 객체에 저장된 정보 확인
+		// -> 웹소켓 설정 정보에서 HttpSessionHanShakeInterceptor 클래스 설정을 통한 인터셉터 설정 필수!
+		// -> 웹소켓 최초 연결 시 수행하는 HTTP 통신 과정에서 HTTPSession 객체 인터셉트 -> WebSocketSession 객체에 저장
+		System.out.println("세션(HttpSession) 아이디 : " + session.getAttributes().get("sId") );
+		
+		
+		session.getAttributes().get("sId");
+		
 	}
 	
 	//2. handleTextMessage - 클라이언트로부터 메세지를 수신할 경우 자동으로 호출되는 메서드
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		System.out.println("메세지 수신됨(handleTextMessage)");
+		
+		System.out.println("메세지 전송한 클라이언트 : " + session.getId());
+		System.out.println("전송된 메시지 : " + message.getPayload());
+		
+		String jsonMsg = message.getPayload();
+		
+		JSONObject json = new JSONObject(jsonMsg);
+		Map<String, Object> map = json.toMap();
+		sendMessage(session, map);
+		
 	}
 
+	//각 웹소켓 세션(채팅방 사용자)들에게 메세지를 전송하는 메서드
+	public void sendMessage(WebSocketSession session, Map<String, Object> map) throws IOException {
+
+		//메세지 발신자의 세션 아이디 가져오기
+		String sender_id = (String)session.getAttributes().get("sId");
+		map.put("sender_id", sender_id);
+		
+		//메세지 타입(type) 판별하여 "ENTER" 또는 "LEAVE"일 경우 입장/퇴장 메세지 설정
+		if (map.get("type").equals("ENTER")) {
+			map.put("message", ">>" + sender_id + "님이 입장하셨습니다. <<");
+		} else if (map.get("type").equals("LEAVE")) {
+			map.put("message", ">>" + sender_id + "님이 퇴장하셨습니다. <<");
+		}
+		
+		JSONObject json = new JSONObject(map);
+		String jsonStr = json.toString();
+		
+		for(WebSocketSession ws : userSessionList.values()) {
+			//본인은 제외하고 나머지 세션에 메세지 전송
+			if(ws.getId().equals(session.getId())) {
+				continue;
+			}
+			
+			ws.sendMessage(new TextMessage(jsonStr));
+		}
+	}
+	
 	
 	//3. afterConnectionClosed - 웹소캣 연결 해제 시 자동으로 호출되는 메서드
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+		
 		System.out.println("웹소켓 연결 해제됨(afterConnectionClosed)");
+		
+		userSessionList.remove(session.getId());
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("type", "LEAVE");
+		map.put("sender_id", "");
+		map.put("message", "");
+		
+		sendMessage(session, null);
+		
 	}
 	//4. handleTransportError - 웹소켓 통신 과정에서 오류 발생 시 자동으로 호출되는 메서드
 	@Override

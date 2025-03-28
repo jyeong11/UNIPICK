@@ -64,6 +64,28 @@ width: 300px;
 #btnSend{
 	widows: 80px;
 }
+
+.message {
+	font-size: 15px;
+}
+
+.message.center{
+	text-align: center;
+	font-size: 10px;
+	
+}
+
+.message.left{
+	text-align: left;
+	background-color: #cccccc88;
+}
+
+.message.right{
+	textr-align: right;
+	background-color: #ffff0088;
+}
+
+
 </style>
 
 </head>

@@ -24,5 +24,9 @@ public class SellerController2 {
     	return "seller/productList";
     }
     
+    @GetMapping("selOrderList")
+    public String getSelOrderList() {
+    	return "seller/sellerOrdList";
+    }
     
 }

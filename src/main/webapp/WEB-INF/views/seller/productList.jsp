@@ -26,6 +26,8 @@
 <link href="${pageContext.request.contextPath }/resources/css/seller/productRegister.css" rel="stylesheet">
 
 <script src="${pageContext.request.contextPath }/resources/js/seller/prdList.js"></script>
+
+  <link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
 </head>
 <body id="page-top">
 <div id="wrapper">

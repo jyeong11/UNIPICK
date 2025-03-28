@@ -15,7 +15,13 @@ public interface SellerMapper2 {
 
     // 검색 조건에 따른 전체 상품 건수 조회 (XML 매퍼의 <select id="getProductListCount">와 연동)
     int getProductListCount(Map<String, String> map);
+    
+    
+	List<Map<String, Object>> getOrderList(Map<String, Object> paramMap);
 
+    int getOrderListCount(Map<String, String> map);
+
+    
     public Map<String, Object> prdList(Map<String, Object> prdList);
 
     void insertProduct(Map<String, Object> product);
@@ -27,7 +33,6 @@ public interface SellerMapper2 {
     
     List<Map<String, Object>> selectDeliveryOptions(String comCd);
     
-    // 재고 관리 옵션을 위한 상세 공통코드 조회 (공통코드 그룹: STOCK_MANAGEMENT)
     List<Map<String, Object>> selectStockOptions(String comCd);
     
     List<Map<String, Object>>selectSizeOptions(String comCd);
