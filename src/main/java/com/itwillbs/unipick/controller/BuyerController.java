@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -311,6 +312,7 @@ public class BuyerController {
 	@ResponseBody
 	@PostMapping("registerReview")
 	public ResponseEntity<?> registerReview(
+			HttpServletRequest req,
 	        @RequestParam("opt_id") String optId,
 	        @RequestParam("rev_rt") String revRt,
 	        @RequestParam("rev_ct") String revCt,
@@ -328,7 +330,7 @@ public class BuyerController {
                 imageFiles = List.of();
             }
 	    	
-	        buyService.registerReview(map, imageFiles);
+	        buyService.registerReview(req, map, imageFiles);
 
 	        return ResponseEntity.ok("리뷰 등록 성공");
 
