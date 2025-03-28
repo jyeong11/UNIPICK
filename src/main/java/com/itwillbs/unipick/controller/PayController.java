@@ -22,6 +22,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.itwillbs.unipick.service.BuyerService;
+
+import kotlin.RequiresOptIn;
 import lombok.RequiredArgsConstructor;
 
 
@@ -34,6 +37,9 @@ public class PayController {
     public PayController(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
+    
+    @Autowired
+    BuyerService buyService;
     
     private final String adminKey = "3aa13e550703f35b24a4886d3254644d"; // 카카오페이 Admin 키
 
@@ -53,15 +59,16 @@ public class PayController {
         String shipadd = (String)req.get("shipping_address");
         String shipmemo = (String)req.get("shipping_memo");
         
+        session.setAttribute("shipping_name", shipName);
+        session.setAttribute("shipping_telephone", shiptelephone);
+        session.setAttribute("shipping_zipcode", shipzipcode);
+        session.setAttribute("shipping_address", shipadd);
+        session.setAttribute("shipping_memo", shipmemo);
+
         
-        System.out.println("shippingName" + shipName);
-        System.out.println("shippingTelephone" + shiptelephone);
-        System.out.println("shippingZipcode" + shipzipcode);
-        System.out.println("shippingAddress" + shipadd);
-        System.out.println("shippingMemo" + shipmemo);
         // 카카오페이 결제 요청 파라미터 설정
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        params.add("cid", "TC0ONETIME"); // 테스트 CID
+        params.add("cid", "TC0ONETIME");
         params.add("partner_order_id", "order_" + System.currentTimeMillis());
         params.add("partner_user_id", "user1234");
         params.add("item_name", prd_cd);
@@ -71,6 +78,7 @@ public class PayController {
         params.add("approval_url", "http://localhost:8080/UNIPICK/pay/success?returnUrl=" + referer1);
         params.add("cancel_url", "http://localhost:8080/UNIPICK/pay/cancel?returnUrl=" + referer2 + prd_cd);
         params.add("fail_url", "http://localhost:8080/UNIPICK/pay/fail?returnUrl=" + referer2 + prd_cd);
+        
         // 카카오페이 API 호출
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "KakaoAK " + adminKey);
@@ -88,14 +96,16 @@ public class PayController {
         session.setAttribute("partner_order_id", params.getFirst("partner_order_id"));
         session.setAttribute("partner_user_id", params.getFirst("partner_user_id"));
         
+        
         return ResponseEntity.ok(responseBody);
     }
 
  // 2. 결제 승인 처리 API
     @GetMapping("/success")
     public ResponseEntity<String> kakaoPaySuccess(@RequestParam("pg_token") String pgToken,
-                                                  @RequestParam("returnUrl") String returnUrl,
+									              @RequestParam("returnUrl") String returnUrl,
                                                   HttpSession session) {
+    	
         // 결제 승인 요청
     	MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
     	params.add("cid", "TC0ONETIME");
@@ -103,6 +113,8 @@ public class PayController {
     	params.add("partner_order_id", (String)session.getAttribute("partner_order_id"));
     	params.add("partner_user_id", (String)session.getAttribute("partner_user_id"));
     	params.add("pg_token", pgToken);
+    	
+    	
     	
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "KakaoAK " + adminKey);
@@ -119,11 +131,18 @@ public class PayController {
             Map.class
         );
 
-        System.out.println("!@#!@$!@");
-        System.out.println(response);
+        Map<String, Object> orderData = response.getBody();
+        orderData.put("shipping_name", (String)session.getAttribute("shipping_name"));
+        orderData.put("shipping_telephone", (String)session.getAttribute("shipping_telephone"));
+        orderData.put("shipping_zipcode", (String)session.getAttribute("shipping_zipcode"));
+        orderData.put("shipping_address", (String)session.getAttribute("shipping_address"));
+        orderData.put("shipping_memo", (String)session.getAttribute("shipping_memo"));
+        
+        
+        System.out.println("responseBody213312321" + orderData);
 
         if (response.getStatusCode() == HttpStatus.OK) {
-        
+        	buyService.insertOrder(orderData);
         	return ResponseEntity.ok("<script>alert('결제가 완료되었습니다!'); window.opener.location.href='" + returnUrl + "'; window.close();</script>");
         } else {
         	return ResponseEntity.ok("<script>alert('결제 승인에 실패했습니다.'); window.close();</script>");

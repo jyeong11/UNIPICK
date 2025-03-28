@@ -98,5 +98,9 @@ public class BuyerService {
 	public void Withdraw(Map<String, Object> buyer) {
 		mapper.Withdraw(buyer);
 	}
+	// 주문 등록
+	public Map<String, Object> insertOrder (Map<String, Object> orderData) {
+		return mapper.insertOrder(orderData);
+	}
 	
 }

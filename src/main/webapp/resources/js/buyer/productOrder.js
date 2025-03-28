@@ -131,7 +131,7 @@ $(function() {
 	    const shippingZipcode = sessionStorage.getItem("shipping_zipcode");
 	    const shippingAddress = sessionStorage.getItem("shipping_address");
 	    const shippingMemo = sessionStorage.getItem("shipping_memo");
-debugger;
+
 	    fetch("pay/ready", {
 	        method: "POST",
 	        headers: {
@@ -152,9 +152,10 @@ debugger;
 			 if (data.next_redirect_pc_url) {
 				const redirectUrl = data.next_redirect_pc_url;
 	            window.open(redirectUrl, "유니픽 카카오페이 결제창", "width=800px,height=700px;");
-	        } else {
-	            alert("결제 요청에 실패했습니다.");
-	        }
+	        }else {
+		        alert("결제 요청에 실패했습니다.");
+			}
+	        
 	    })
 	    .catch(error => {
 	        console.error("결제 요청 오류:", error);

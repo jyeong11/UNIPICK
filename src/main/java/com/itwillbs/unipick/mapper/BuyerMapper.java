@@ -45,5 +45,7 @@ public interface BuyerMapper {
 	public List<Map<String, Object>> OrderListInfo(Map<String, Object> buyer);
 	// 회원 탈퇴
 	public void Withdraw(Map<String, Object> buyer);
+	//주문 등록
+	public Map<String, Object> insertOrder(Map<String, Object> orderData);
 	
 }
