@@ -110,3 +110,16 @@
 .item-thumb-upload-btn {
   display: none;
 }
+
+#registerReview, #cancel {
+	height: 50px;
+    font-size: inherit;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#cancel {
+	background-color: #f5f6f8;
+	color: #4f5558;
+	
+}

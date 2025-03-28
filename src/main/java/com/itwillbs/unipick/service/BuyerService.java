@@ -93,8 +93,11 @@ public class BuyerService {
 		mapper.buyerModify(buyerInfo);
 	}
 	// 리뷰 정보
-	public List<Map<String,Object>> reviewInfo(Map<String, Object> buyer) {
-		return mapper.reviewInfo(buyer);
+	public Map<String,Object> reviewInfo(Map<String, Object> buyer) {
+		Map<String, Object> reviewData = new HashMap<String, Object>();
+		reviewData.put("data", mapper.reviewInfo(buyer));
+		reviewData.put("image", mapper.reviewImage(buyer));
+		return reviewData;
 	}
 	// 주문 정보
 	public List<Map<String,Object>> OrderListInfo(Map<String, Object> buyer) {

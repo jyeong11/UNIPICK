@@ -65,7 +65,7 @@
 		</div>
 		<div id="last-btn">
 			<button id="registerReview">등록하기</button>
-			<button id="cancel">취소하기</button>
+			<button id="cancel">뒤로가기</button>
 		</div>
 	</div>
 	

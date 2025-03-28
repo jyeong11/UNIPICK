@@ -310,7 +310,7 @@
 	</select>
 	
 	<!-- 리뷰 등록 -->
-	<insert id="registerReview" parameterType="map">
+	<insert id="registerReview" useGeneratedKeys="true" keyProperty="rev_id" parameterType="map">
 		INSERT
 		  INTO reviews(rev_id,
 		  			   buy_em,
@@ -325,6 +325,32 @@
 			 		   #{rev_ct},
 			 		   default)
 	</insert>
+	
+	<!-- ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇ -->
+	<!-- 리뷰 이미지 등록 -->
+	<select id="reviewImage" parameterType="map">
+		SELECT r.rev_id, rei_pt
+		  FROM reviews r
+		  JOIN review_images i ON r.rev_id = i.rev_id
+		 WHERE r.buy_em = #{buy_em}
+	</select>
+	
+	<!-- 이미지 정보 등록 -->
+	<insert id="registerReviewImage" parameterType="map">
+		INSERT
+		  INTO review_images (rei_id,
+		  					  rev_id,
+		  					  rei_nm,
+		  					  rei_pt,
+		  					  rei_ca)
+		  			  VALUES (default,
+		  			  		  #{rev_id},
+		  			   		  #{fil_nm},
+		  			   		  #{fil_pt},
+		  			   		  NOW())
+	</insert>
+	<!-- ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㄴㅁㅁㅇ -->
+	
 	<!-- 	주문 등록 -->
 	<insert id="insertOrder" parameterType="map" useGeneratedKeys="true" keyProperty="ord_id">
 	 INSERT INTO orders (buy_em,

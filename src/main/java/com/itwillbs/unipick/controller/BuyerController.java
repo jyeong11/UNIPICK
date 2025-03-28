@@ -252,7 +252,7 @@ public class BuyerController {
 	// 리뷰 정보
 	@ResponseBody
 	@GetMapping("reviewData")
-	public List<Map<String, Object>> reviewData(HttpSession session, Map<String, Object> buyer) {
+	public Map<String, Object> reviewData(HttpSession session, Map<String, Object> buyer) {
 		buyer.put("buy_em", session.getAttribute("buyEm"));
 		
 		return buyService.reviewInfo(buyer);
@@ -313,6 +313,7 @@ public class BuyerController {
 	@PostMapping("registerReview")
 	public ResponseEntity<?> registerReview(
 			HttpServletRequest req,
+			HttpSession session,
 	        @RequestParam("opt_id") String optId,
 	        @RequestParam("rev_rt") String revRt,
 	        @RequestParam("rev_ct") String revCt,
@@ -321,7 +322,7 @@ public class BuyerController {
 	    try {
 	        
 	    	Map<String, Object> map = new HashMap<String, Object>();
-	    	
+	    	map.put("buy_em", session.getAttribute("buyEm"));
 	    	map.put("opt_id", optId);
 	    	map.put("rev_rt", revRt);
 	    	map.put("rev_ct", revCt);
