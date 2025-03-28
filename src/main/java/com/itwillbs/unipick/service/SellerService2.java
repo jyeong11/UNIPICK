@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -60,8 +63,10 @@ public class SellerService2 {
     
 
     // 파일 업로드 및 검증
-    public Map<String, Object> uploadImage(MultipartFile imageFile) {
+    public Map<String, Object> uploadImage(HttpServletRequest req, MultipartFile imageFile) {
         Map<String, Object> imageData = new HashMap<>();
+     // HttpServletRequest에서 ServletContext 가져오기
+        ServletContext servletContext = req.getServletContext();
 
         if (imageFile == null || imageFile.isEmpty()) {
             imageData.put("error", "이미지 파일이 없습니다.");
@@ -82,7 +87,7 @@ public class SellerService2 {
             String uniqueFilename = UUID.randomUUID().toString() + "_" + originalFilename;
 
             // 실제 저장할 경로 (로컬 파일 시스템)
-            String uploadDir = "D:/UNIPICK/src/main/webapp/resources/productImg/";
+            String uploadDir = servletContext.getRealPath("/resources/productImg/");
             File folder = new File(uploadDir);
             if (!folder.exists()) {
                 folder.mkdirs(); // 폴더가 없으면 생성
@@ -94,7 +99,7 @@ public class SellerService2 {
             imageFile.transferTo(destFile); // 파일 저장
 
             // DB에 저장할 가상 경로
-            String filePath = "/productImg/" + uniqueFilename;
+            String filePath = "/resources/productImg/" + uniqueFilename;
 
             // 필수 데이터 저장
             imageData.put("fil_nm", uniqueFilename); // 파일명 추가
@@ -115,7 +120,7 @@ public class SellerService2 {
 
     // 트랜잭션 적용하여 상품, 이미지, 재고, 색상, 사이즈 한 번에 저장
     @Transactional
-    public void registerProduct(Map<String, Object> productData, List<MultipartFile> imageFiles) {
+    public void registerProduct(HttpServletRequest req, Map<String, Object> productData, List<MultipartFile> imageFiles) {
     	
     	
     	
@@ -136,7 +141,7 @@ public class SellerService2 {
             }
 
             // 이미지 업로드
-            Map<String, Object> imageData = uploadImage(imageFile);
+            Map<String, Object> imageData = uploadImage(req, imageFile);
             if (imageData.containsKey("error")) {
                 continue;
             }

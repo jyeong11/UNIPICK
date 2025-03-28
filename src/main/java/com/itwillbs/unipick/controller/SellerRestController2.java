@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -118,6 +120,7 @@ public class SellerRestController2 {
     // ✅ 상품 등록 (상품 정보 + 이미지 + 재고 + 색상 + 사이즈)
     @PostMapping("/registerProduct")
     public ResponseEntity<?> registerProduct(
+    		HttpServletRequest req,
             @RequestPart("productData") Map<String, Object> productData, // JSON 데이터
             @RequestPart(value = "imageFiles", required = false) List<MultipartFile> imageFiles) { // 이미지들
 
@@ -128,7 +131,7 @@ public class SellerRestController2 {
             }
 
             // 상품 등록 서비스 호출
-            sellerService.registerProduct(productData, imageFiles);
+            sellerService.registerProduct(req, productData, imageFiles);
 
             return ResponseEntity.ok(Map.of("message", "상품이 등록되었습니다."));
         } catch (Exception e) {

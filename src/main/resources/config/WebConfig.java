@@ -22,8 +22,8 @@ public class WebConfig implements WebMvcConfigurer {
         		.setCachePeriod(0);
         
         registry.addResourceHandler("/resources/upload/**")
-        .addResourceLocations("file:///D:/UNIPICK/src/main/webapp/resources/upload/")
-        .setCachePeriod(0);
+        		.addResourceLocations("file:///D:/UNIPICK/src/main/webapp/resources/upload/")
+        		.setCachePeriod(0);
         
         
     }
