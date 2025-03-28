@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -134,8 +135,9 @@ public class SellerController {
 										  @RequestParam("businessLicense") MultipartFile businessLicense,
 										  HttpServletRequest req) {
        
+		 ServletContext servletContext = req.getServletContext();
 		// 1. 실제 배포 경로 가져오기 (톰캣 내 실제 저장될 경로)
-	    String uploadDir = "D:/UNIPICK/src/main/webapp/resources/businessLicense";
+		String uploadDir = servletContext.getRealPath("/resources/businessLicense/");
 		
 	    String subDir = createDirectories(uploadDir);
 	    uploadDir += "/" + subDir;
