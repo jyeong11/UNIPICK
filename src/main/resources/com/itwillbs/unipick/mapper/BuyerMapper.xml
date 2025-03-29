@@ -349,31 +349,8 @@
 		  			   		  #{fil_pt},
 		  			   		  NOW())
 	</insert>
-	<!-- ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㄴㅁㅁㅇ -->
 	
-	<!-- 	주문 등록 -->
-	<insert id="insertOrder" parameterType="map" useGeneratedKeys="true" keyProperty="ord_id">
-	 INSERT INTO orders (buy_em,
-	 					 ord_nm, 
-	 					 ord_ph, 
-	 					 ord_pc, 
-	 					 ord_ad, 
-	 					 ord_dm, 
-	 					 ord_at, 
-	 					 ord_pm)
-          VALUES (#{buy_em},
-          		  #{shipping_name}, 
-          		  #{shipping_telephone}, 
-          		  #{shipping_zipcode}, 
-                  #{shipping_address}, 
-                  #{shipping_memo}, 
-                  now(), 
-                  '카카오')
-	</insert>
-<!-- 	주문 상세 등록 -->
-	<insert id="insertOrderDetail" parameterType="map">
-<!-- 	 INSERT INTO order_details () -->
-	</insert>	
+<!-- 	주문 등록시 옵션 id들고오기 -->
 	<select id="getOptionId" parameterType="map">
 	 SELECT o.opt_id
 	   FROM options o
@@ -381,7 +358,42 @@
          ON o.siz_nm = c.cod_cd
 	  WHERE o.prd_cd = #{prdCd}
 	  	AND o.clr_nm = #{clrNm}
-        AND c.cod_nm = #{sizNm};
+        AND c.cod_nm = #{sizNm}
 	</select>
+	
+	<!-- 	주문 등록 -->
+	<insert id="insertOrder" parameterType="map" useGeneratedKeys="true" keyProperty="ord_id">
+	 INSERT 
+	   INTO orders (buy_em,
+				    ord_nm, 
+					ord_ph, 
+					ord_pc, 
+					ord_ad, 
+					ord_dm, 
+					ord_at, 
+					ord_pm)
+     		VALUES (#{buy_em},
+          		 	#{shipping_name}, 
+          	 		#{shipping_telephone}, 
+          	 		#{shipping_zipcode}, 
+             		CONCAT(#{shipping_address}, ', ', #{shipping_addDetail}), 
+             		#{shipping_memo}, 
+             		now(), 
+             		'카카오')
+	</insert>
+<!-- 	주문 상세 등록 -->
+	<insert id="insertOrderDetail" parameterType="map">
+	 INSERT 
+	   INTO order_details (ord_id, 
+	   					   odd_qt,
+	   					   odd_st, 
+	   					   opt_id, 
+	   					   odd_am)
+	      		   VALUES(#{ord_id},
+	      		   		  #{quantity},
+	      		   		  DEFAULT,
+	      		   		  #{otp_id},
+	      		   		  #{amount.total})
+	</insert>	
 	
   </mapper>

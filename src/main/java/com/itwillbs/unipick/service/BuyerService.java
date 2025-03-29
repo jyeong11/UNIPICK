@@ -108,6 +108,7 @@ public class BuyerService {
 		mapper.Withdraw(buyer);
 	}
 	// 주문 등록
+	@Transactional
 	public void insertOrder (Map<String, Object> orderData) {
 		mapper.insertOrder(orderData);
 		mapper.insertOrderDetail(orderData);

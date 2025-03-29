@@ -47,7 +47,6 @@ public class PayController {
     // 1. 결제 준비 API - 결제 요청
     @PostMapping("/ready")
     public ResponseEntity<Map<String, Object>> kakaoPayReady(HttpSession session, @RequestBody Map<String, Object> req) {
-        System.out.println("req" + req);
     	int amount = (int)req.get("amount");
         String prd_cd = (String)req.get("prd_cd");
         String referer1 = "http://localhost:8080/UNIPICK/orderDetail" ;
@@ -57,6 +56,7 @@ public class PayController {
         String shiptelephone = (String)req.get("shipping_telephone");
         String shipzipcode = (String)req.get("shipping_zipcode");
         String shipadd = (String)req.get("shipping_address");
+        String shipaddDeatil = (String)req.get("shipping_addDetail");
         String shipmemo = (String)req.get("shipping_memo");
         String siz_nm = (String)req.get("siz_nm");
         String clr_nm = (String)req.get("clr_nm");
@@ -65,6 +65,7 @@ public class PayController {
         session.setAttribute("shipping_telephone", shiptelephone);
         session.setAttribute("shipping_zipcode", shipzipcode);
         session.setAttribute("shipping_address", shipadd);
+        session.setAttribute("shipping_addDetail", shipaddDeatil);
         session.setAttribute("shipping_memo", shipmemo);
         session.setAttribute("siz_nm", siz_nm);
         session.setAttribute("clr_nm", clr_nm);
@@ -141,6 +142,7 @@ public class PayController {
         orderData.put("shipping_telephone", (String)session.getAttribute("shipping_telephone"));
         orderData.put("shipping_zipcode", (String)session.getAttribute("shipping_zipcode"));
         orderData.put("shipping_address", (String)session.getAttribute("shipping_address"));
+        orderData.put("shipping_addDetail", (String)session.getAttribute("shipping_addDetail"));
         orderData.put("shipping_memo", (String)session.getAttribute("shipping_memo"));
         orderData.put("buy_em", (String)session.getAttribute("buyEm"));
         String sizNm = (String) session.getAttribute("siz_nm");
@@ -152,9 +154,8 @@ public class PayController {
         	// 옵션 id 찾기
         	Map<String, Object> otpId = buyService.getOptionId(sizNm, clrNm, prdCd);
             orderData.put("otp_id", otpId.get("opt_id"));
-            System.out.println("responseBody213312321" + orderData);
-            // opt_id넘어옴
-        	// 주문 등록
+            
+        	// 주문& 주문 상세등록
         	buyService.insertOrder(orderData);
         	BigInteger ordIdBigInt = (BigInteger) orderData.get("ord_id");
         	long ordId = ordIdBigInt.longValue();

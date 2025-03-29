@@ -97,8 +97,9 @@ $(function() {
 	    const shippingTelephone = $("#shipping_telephone").val().trim();
 	    const shippingZipcode = $("#shipping_zipcode").val().trim();
 		const shippingadd = $("#shipping_address").val().trim();
-	
-	    if (!shippingName || !shippingTelephone || !shippingZipcode || !shippingadd) {
+		const shippingaddDetail = $("#shipping_addDetail").val().trim();
+		
+	    if (!shippingName || !shippingTelephone || !shippingZipcode || !shippingadd ||!shippingaddDetail) {
 	        alert("모든 배송지 정보를 입력해주세요.");
 	        return false;
 	    }
@@ -112,6 +113,7 @@ $(function() {
 	        shipping_telephone: $("#shipping_telephone").val(),
 	        shipping_zipcode: $("#shipping_zipcode").val(),
 	        shipping_address: $("#shipping_address").val(),
+			shipping_addDetail: $("#shipping_addDetail").val(),
 	        shipping_memo: $("#shipping_memo").val()
 	    };
 	
@@ -137,6 +139,7 @@ $(function() {
 	    const shippingTelephone = sessionStorage.getItem("shipping_telephone");
 	    const shippingZipcode = sessionStorage.getItem("shipping_zipcode");
 	    const shippingAddress = sessionStorage.getItem("shipping_address");
+		const shippingAddDetail = sessionStorage.getItem("shipping_addDetail");
 	    const shippingMemo = sessionStorage.getItem("shipping_memo");
 		const siz_nm = sessionStorage.getItem("size");
 		const clr_nm = sessionStorage.getItem("color");
@@ -153,6 +156,7 @@ $(function() {
 	            shipping_telephone: shippingTelephone,
 	            shipping_zipcode: shippingZipcode,
 	            shipping_address: shippingAddress,
+				shipping_addDetail: shippingAddDetail,
 	            shipping_memo: shippingMemo,
 				siz_nm: siz_nm,
 				clr_nm: clr_nm
@@ -286,6 +290,7 @@ $(function() {
 					<input type="text" id="shipping_address" readonly> 
 					<button id="search-address">주소찾기</button>
 				</div>
+				<div class="del-nm"><span>상세주소</span><input type="text" id="shipping_addDetail"></div>
                 <div class="del-nm"><span>배송메모</span><input type="text" id="shipping_memo" placeholder="최대 100자까지 가능합니다"></div>
             </form>
 	    `);
