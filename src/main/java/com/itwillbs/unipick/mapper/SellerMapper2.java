@@ -37,6 +37,7 @@ public interface SellerMapper2 {
     
     List<Map<String, Object>>selectSizeOptions(String comCd);
 
+	public Map<String, Object> selModifyForm(Map<String, Object> buy);
 	
     
 }

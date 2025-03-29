@@ -210,4 +210,8 @@ public class SellerService2 {
         return mapper.selectSizeOptions("SIZE");
     }
     
+    
+	public Map<String, Object> selModifyForm(Map<String, Object> buy) {
+		return mapper.selModifyForm(buy);
+	}
 }

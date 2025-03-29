@@ -1,0 +1,212 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>UNIPICK</title>
+<!-- default -->
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
+
+<!-- font-awesome -->
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/public/fontawesome/all.min.css" />
+<script src="${pageContext.request.contextPath }/resources/public/fontawesome/all.min.js"></script>
+
+<!-- font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Nunito:wght@200..1000&display=swap" rel="stylesheet">
+
+<!-- CSS for Page -->
+<link href="${pageContext.request.contextPath }/resources/public/css/sb-admin-2.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath }/resources/public/css/adm.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath }/resources/public/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath }/resources/public/vendor/datatables/datatables.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath }/resources/css/seller/sellerModifyForm.css" rel="stylesheet">
+
+<script src="${pageContext.request.contextPath }/resources/js/seller/sellerModifyForm.js"></script>
+
+<link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
+</head>
+<body id="page-top">
+	<div id="wrapper">
+		<div><jsp:include page="../inc/sellerSidebar.jsp"></jsp:include></div>
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
+			<!-- Main Content -->
+			<div id="content">
+				<!-- Topbar -->
+				<nav
+					class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+					<!-- Sidebar Toggle (Mobile Topbar) -->
+					<button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+						<i class="fa fa-bars"></i>
+					</button>
+					<!-- Title -->
+					<h4 class="m-0 text-gray-900">마이페이지</h4>
+					<!-- Topbar Navbar -->
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item dropdown no-arrow">
+							<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<span class="mr-2 d-none d-lg-inline text-gray-600 small">관리자</span>
+								<img class="img-profile rounded-circle" src="../../resources/adm/img/admin_profile.png"></a>
+								<!-- Dropdown - User Information -->
+							<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+								<a class="dropdown-item" href="/." target="_blank"> <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>사용자 화면</a>
+								<a class="dropdown-item" href="AdmLogList"> <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>로그 기록</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal"> <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>로그아웃</a>
+							</div>
+						</li>
+					</ul>
+				</nav>
+				<!-- Logout Modal-->
+				<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">로그아웃 하시겠습니까?</h5>
+								<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">×</span>
+								</button>
+							</div>
+							<div class="modal-body">로그아웃 후에는 관리자 사이트 접근이 불가능합니다.</div>
+							<div class="modal-footer">
+								<button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
+								<a class="btn btn-primary" href="MemberLogout">로그아웃</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End of Topbar -->
+			<!-- Begin Page Content -->
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card shadow mb-4">
+							<div class="card-header py-3">
+								<h5 class="m-0 font-weight-bold text-primary">마이페이지</h5>
+							</div>
+							<div class="card-body">
+								<section class="item-regi">
+									<form id="storeSignupForm" action="joinSucess" method="post" enctype="multipart/form-data">
+									<div class="content-tilte">비밀번호 수정</div>
+									<div class="input-group">
+										<label for="storeId">아이디</label>
+											<input type="text" id="storeId" name="storeId" placeholder="6자리 이상 입력해주세요" readonly>
+									</div>
+									<div class="input-group">
+										<label for="storePw">비밀번호</label>
+											<input type="password" id="storePw" name="storePw" placeholder="대문자, 특수문자 포함 6자리 이상 입력해주세요">
+									</div>
+									
+									<hr>
+									<div class="content-tilte">쇼핑몰 정보 입력</div>
+									
+									<div class="input-group">
+										<label for="storeNm">쇼핑몰 이름</label>
+										<input type="text" id="storeNm" name="storeNm">
+									</div>
+
+									<div class="input-group">
+										<label for="ceoNm">대표자 명</label>
+										<input type="text" id="ceoNm" name="ceoNm">
+									</div>
+
+									<div class="input-group">
+										<label for="brn">사업자등록번호</label>
+										<input type="text" id="brn" name="brn">
+									</div>
+									
+									<div class="input-group">
+										<label for="storead">사업장주소</label>
+										<input type="text" id="storead" name="storead">
+									</div>
+									
+									<div class="input-group">
+										<label for="businessLicense">사업자 등록증</label>
+										<input type="file" id="businessLicense" name="businessLicense">
+									</div>
+
+									<div class="input-group">
+										<label for="storeNumber">고객센터 번호</label>
+										<input type="text" id="storeNumber" name="storeNumber">
+									</div>
+									
+									<hr>
+									<div class="content-tilte">쇼핑몰 담당자 정보 입력</div>
+									<div class="input-group">
+										<label for="phNm">이름</label>
+										<input type="text" id="phNm" name="phNm">
+									</div>
+
+									<div class="input-group">
+										<label for="phNumber">휴대전화</label>
+										<input type="text" id="phNumber" name="phNumber" placeholder="010-xxxx-xxxx">
+									</div>
+									<div class="input-group">
+										<button type=submit>회원가입</button>
+									</div>
+								</form>
+								</section>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Footer -->
+				<footer class="sticky-footer bg-white">
+					<div class="container my-auto">
+						<div class="copyright text-center my-auto">
+							<span>Copyright &copy; UNIPICK SELLER 2025</span>
+						</div>
+					</div>
+				</footer>
+				<!-- End of Footer -->
+			</div>
+			<!-- End of Page Wrapper -->
+		</div>
+	</div>
+	<script>
+		let btnSearchAddress = document.querySelector('#btnSearchAddress');
+		btnSearchAddress.onclick = function() {
+
+			new daum.Postcode({
+
+				// 주소 검색 창에서 주소 검색 후 검색된 주소를 사용자가 클릭 시
+				// oncomplete 이벤트에 의해 이벤트 뒤의 익명함수가 자동으로 호출됨
+				// 사용자가 클릭한 주소 정보가 익명함수 파라미터 data 로 전달됨
+				// => 주의! 이 익명함수는 개발자가 호출하는 것이 아니라
+				//    API에 의해 자동으로 호출됨
+				//    (어떤 동작 수행 후 자동으로 호출되는 함수를 콜백(callback) 함수라고 함)
+
+				oncomplete : function(data) {
+					document.querySelector('#post_code').value = data.zonecode
+
+					let addr = data.address;
+					if (data.buildingName != "") {
+						addr += " (" + data.buildingName + ")";
+					}
+					document.querySelector('#storead').value = addr;
+				}
+			}).open();
+		}
+	</script>
+	<!-- Bootstrap core JavaScript-->
+    <script src="${pageContext.request.contextPath }/resources/public/vendor/jquery/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="${pageContext.request.contextPath }/resources/public/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="${pageContext.request.contextPath }/resources/public/js/sb-admin-2.min.js"></script>
+    
+    <!-- Page level plugins -->
+    <script src="${pageContext.request.contextPath }/resources/public/vendor/chart.js/Chart.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/public/vendor/datepicker/moment.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/public/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/public/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+	
+    <!-- Page level custom scripts -->
+    <script src="${pageContext.request.contextPath }/resources/public/js/index.js"></script>

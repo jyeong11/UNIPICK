@@ -68,6 +68,7 @@
                 <a class="collapse-item" href="#" data-sub-page="AdmNoticeModify" data-sub-page2="AdmNoticeRegist">가이드리스트</a>
                 <a class="collapse-item" href="#">공지사항리스트</a>
                 <a class="collapse-item" href="#">관리자문의</a>
+                <a class="collapse-item" href="selModifyForm">마이페이지</a>
             </div>
         </div>
     </li>
