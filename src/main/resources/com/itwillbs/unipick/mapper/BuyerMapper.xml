@@ -326,7 +326,6 @@
 			 		   default)
 	</insert>
 	
-	<!-- ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇ -->
 	<!-- 리뷰 이미지 등록 -->
 	<select id="reviewImage" parameterType="map">
 		SELECT r.rev_id, rei_pt
@@ -390,7 +389,7 @@
 	   					   opt_id, 
 	   					   odd_am)
 	      		   VALUES(#{ord_id},
-	      		   		  #{quantity},
+	      		   		  #{qty},
 	      		   		  DEFAULT,
 	      		   		  #{otp_id},
 	      		   		  #{amount.total})

@@ -2,12 +2,14 @@ $(function() {
     let query = window.location.search;
     let param = new URLSearchParams(query);
     let prd_cd = param.get('prd_cd');
-    const color = param.get("clr_nm");
-    const size = param.get("siz_nm");
+    let color = param.get("clr_nm");
+    let size = param.get("siz_nm");
+	let qty = param.get("qty");
 	let sum = 0;
 	let totalSf = 0;
 	sessionStorage.setItem("color", color);
 	sessionStorage.setItem("size", size);
+	sessionStorage.setItem("qty", qty);
 	
     $.ajax({
         url: "productOrder",
@@ -18,7 +20,7 @@ $(function() {
     
             if (res.length > 0) {
                 res.forEach(function(item) {
-                    let formatPrdSf = new Intl.NumberFormat().format(item.prd_sf);
+                    let totalPrdPrice = parseInt(item.prd_sp.replace(/,/g, '')) * parseInt(qty);
                     $("#order-container").append(`
                         <div class="ord-title">
                             <div class="order-selnm">${item.sel_nm}</div>
@@ -31,24 +33,24 @@ $(function() {
                             <div>
                                 <div class="prd">
                                     <div class="prd-nm">${item.prd_nm}</div>
-                                    <div class="prd-sp">${item.prd_sp}원</div>
+                                    <div class="prd-sp"> ${(parseInt(item.prd_sp.replace(/,/g, '')) * parseInt(qty)).toLocaleString()}원</div>
                                 </div>
 								<div class="prd-2">
 									 <span>${color}</span> / <span>${size}</span>
 								</div>
                                 <div class="prd-1">
                                     <div class="prd-sf">배송비</div>
-                                    <div class="prd-sf-wrap">${formatPrdSf}원</div>
+                                    <div class="prd-sf-wrap">${item.prd_sf.toLocaleString()}원</div>
                                 </div>
                             </div>
                         </div>
                     `);
-                    sum += parseInt(item.prd_sp.replace(',', ''));
-                    totalSf += item.prd_sf;
+                    sum += totalPrdPrice + item.prd_sf;
+        			totalSf += item.prd_sf;
                 });
-                $("#orderInfo-container").html(`
-                    <div class="ttpr">총 주문금액:  ${sum.toLocaleString()}원</div>
-                `);
+                 $("#orderInfo-container").html(`
+			        <div class="ttpr">총 주문금액:  ${sum.toLocaleString()}원</div>
+			    `);
                 renderDeliveryForm();
 			    renderPriceInfo(sum, totalSf);
 			    renderPaymentOptions();
@@ -143,6 +145,7 @@ $(function() {
 	    const shippingMemo = sessionStorage.getItem("shipping_memo");
 		const siz_nm = sessionStorage.getItem("size");
 		const clr_nm = sessionStorage.getItem("color");
+		const qty = sessionStorage.getItem("qty");
 
 	    fetch("pay/ready", {
 	        method: "POST",
@@ -159,7 +162,8 @@ $(function() {
 				shipping_addDetail: shippingAddDetail,
 	            shipping_memo: shippingMemo,
 				siz_nm: siz_nm,
-				clr_nm: clr_nm
+				clr_nm: clr_nm,
+				qty: qty
 			})
 	    })
 	    .then(response => response.json()) 

@@ -62,8 +62,7 @@
 				    <option>[사이즈]를 선택하세요.</option>
 				</select>
 				<div id="selected-option" class="option-box" style="display: none;">
-				    <span id="option-text">옵션을 선택하세요</span>
-				    <span id="option-price"></span>
+				    <span id="option-text"></span>
 				</div>
 				<div id="total-price" class="option-box" style="display: none;">
 				    <span class="buy-total">결제 예상 금액:</span>

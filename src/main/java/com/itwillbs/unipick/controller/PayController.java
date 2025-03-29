@@ -52,24 +52,21 @@ public class PayController {
         String referer1 = "http://localhost:8080/UNIPICK/orderDetail" ;
         String referer2 = "http://localhost:8080/UNIPICK/productOrder" ;
         
-        String shipName = (String)req.get("shipping_name");
-        String shiptelephone = (String)req.get("shipping_telephone");
-        String shipzipcode = (String)req.get("shipping_zipcode");
-        String shipadd = (String)req.get("shipping_address");
-        String shipaddDeatil = (String)req.get("shipping_addDetail");
-        String shipmemo = (String)req.get("shipping_memo");
-        String siz_nm = (String)req.get("siz_nm");
-        String clr_nm = (String)req.get("clr_nm");
+        Map<String, String> shippingDetails = new HashMap<>();
+        shippingDetails.put("shipping_name", (String) req.get("shipping_name"));
+        shippingDetails.put("shipping_telephone", (String) req.get("shipping_telephone"));
+        shippingDetails.put("shipping_zipcode", (String) req.get("shipping_zipcode"));
+        shippingDetails.put("shipping_address", (String) req.get("shipping_address"));
+        shippingDetails.put("shipping_addDetail", (String) req.get("shipping_addDetail"));
+        shippingDetails.put("shipping_memo", (String) req.get("shipping_memo"));
+        shippingDetails.put("siz_nm", (String) req.get("siz_nm"));
+        shippingDetails.put("clr_nm", (String) req.get("clr_nm"));
+        shippingDetails.put("qty", (String) req.get("qty"));
         
-        session.setAttribute("shipping_name", shipName);
-        session.setAttribute("shipping_telephone", shiptelephone);
-        session.setAttribute("shipping_zipcode", shipzipcode);
-        session.setAttribute("shipping_address", shipadd);
-        session.setAttribute("shipping_addDetail", shipaddDeatil);
-        session.setAttribute("shipping_memo", shipmemo);
-        session.setAttribute("siz_nm", siz_nm);
-        session.setAttribute("clr_nm", clr_nm);
-        session.setAttribute("prd_cd", prd_cd);
+        // 들고온 값들을 세션에 저장하는 for문
+        for (Map.Entry<String, String> entry : shippingDetails.entrySet()) {
+            session.setAttribute(entry.getKey(), entry.getValue());
+        }
 
         
         // 카카오페이 결제 요청 파라미터 설정
@@ -145,11 +142,12 @@ public class PayController {
         orderData.put("shipping_addDetail", (String)session.getAttribute("shipping_addDetail"));
         orderData.put("shipping_memo", (String)session.getAttribute("shipping_memo"));
         orderData.put("buy_em", (String)session.getAttribute("buyEm"));
+        orderData.put("qty", (String)session.getAttribute("qty"));
+        
         String sizNm = (String) session.getAttribute("siz_nm");
         String clrNm = (String) session.getAttribute("clr_nm");
         String prdCd = (String) session.getAttribute("prd_cd");
         
-
         if (response.getStatusCode() == HttpStatus.OK) {
         	// 옵션 id 찾기
         	Map<String, Object> otpId = buyService.getOptionId(sizNm, clrNm, prdCd);
