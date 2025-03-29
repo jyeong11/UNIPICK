@@ -391,8 +391,14 @@
 	      		   VALUES(#{ord_id},
 	      		   		  #{qty},
 	      		   		  DEFAULT,
-	      		   		  #{otp_id},
+	      		   		  #{opt_id},
 	      		   		  #{amount.total})
 	</insert>	
+<!-- 	주문시 상품 재고 빼기 -->
+	<update id="minusPrdqt" parameterType="map">
+	 UPDATE options
+	    SET prd_qt = prd_qt - #{qty}
+	  WHERE opt_id = #{opt_id}
+	</update>
 	
   </mapper>

@@ -49,10 +49,12 @@ public class PayController {
     public ResponseEntity<Map<String, Object>> kakaoPayReady(HttpSession session, @RequestBody Map<String, Object> req) {
     	int amount = (int)req.get("amount");
         String prd_cd = (String)req.get("prd_cd");
+        String qty = (String)req.get("qty");
         String referer1 = "http://localhost:8080/UNIPICK/orderDetail" ;
         String referer2 = "http://localhost:8080/UNIPICK/productOrder" ;
         
         Map<String, String> shippingDetails = new HashMap<>();
+        shippingDetails.put("prd_cd", (String) req.get("prd_cd"));
         shippingDetails.put("shipping_name", (String) req.get("shipping_name"));
         shippingDetails.put("shipping_telephone", (String) req.get("shipping_telephone"));
         shippingDetails.put("shipping_zipcode", (String) req.get("shipping_zipcode"));
@@ -75,7 +77,7 @@ public class PayController {
         params.add("partner_order_id", "order_" + System.currentTimeMillis());
         params.add("partner_user_id", "user1234");
         params.add("item_name", prd_cd);
-        params.add("quantity", "1");
+        params.add("quantity", qty);
         params.add("total_amount", String.valueOf(amount));
         params.add("tax_free_amount", "0");
         params.add("approval_url", "http://localhost:8080/UNIPICK/pay/success?returnUrl=" + referer1);
@@ -144,14 +146,16 @@ public class PayController {
         orderData.put("buy_em", (String)session.getAttribute("buyEm"));
         orderData.put("qty", (String)session.getAttribute("qty"));
         
+        
+        System.out.println("orderData"+orderData);
         String sizNm = (String) session.getAttribute("siz_nm");
         String clrNm = (String) session.getAttribute("clr_nm");
         String prdCd = (String) session.getAttribute("prd_cd");
         
         if (response.getStatusCode() == HttpStatus.OK) {
         	// 옵션 id 찾기
-        	Map<String, Object> otpId = buyService.getOptionId(sizNm, clrNm, prdCd);
-            orderData.put("otp_id", otpId.get("opt_id"));
+        	Map<String, Object> optId = buyService.getOptionId(sizNm, clrNm, prdCd);
+            orderData.put("opt_id", optId.get("opt_id"));
             
         	// 주문& 주문 상세등록
         	buyService.insertOrder(orderData);

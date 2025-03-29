@@ -52,6 +52,8 @@ public interface BuyerMapper {
 	public void insertOrder(Map<String, Object> orderData);
 	// 주문 상세 등록
 	public void insertOrderDetail(Map<String, Object> orderData);
+	// 주문시 상품 재고 빼기
+	public void minusPrdqt(Map<String, Object> orderData);
 	// 상품 썸네일, 이미지
 	public Map<String, Object> prdInfo(Map<String, Object> prd);
 	// 리뷰 등록

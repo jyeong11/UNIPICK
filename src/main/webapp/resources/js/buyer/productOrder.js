@@ -335,6 +335,14 @@ $(function() {
 	            <img src="${contextPath}/resources/images/icon_pay_kakao.svg">
 	        </div>
 	    `);
+		// 체크박스 하나만 선택가능
+	  	$("#pay8, #pay9").change(function() {
+	        if (this.id === "pay8" && this.checked) {
+	            $("#pay9").prop("checked", false);
+	        } else if (this.id === "pay9" && this.checked) {
+	            $("#pay8").prop("checked", false);
+	        }
+	    });
 	}
 	
 	// 약관동의

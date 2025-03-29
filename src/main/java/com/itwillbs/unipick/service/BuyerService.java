@@ -112,6 +112,11 @@ public class BuyerService {
 	public void insertOrder (Map<String, Object> orderData) {
 		mapper.insertOrder(orderData);
 		mapper.insertOrderDetail(orderData);
+		mapper.minusPrdqt(orderData);
+	}
+	// 옵션 id 들고옴
+	public Map<String, Object> getOptionId(String sizNm, String clrNm, String prdCd){
+		return mapper.getOptionId(sizNm, clrNm, prdCd);
 	}
 	// 상품 썸네일, 이름
 	public Map<String, Object> prdInfo(Map<String, Object> prd) {
@@ -145,8 +150,5 @@ public class BuyerService {
             }
         }
 	}
-	// 옵션 id 들고옴
-	public Map<String, Object> getOptionId(String sizNm, String clrNm, String prdCd){
-		return mapper.getOptionId(sizNm, clrNm, prdCd);
-	}
+	
 }
