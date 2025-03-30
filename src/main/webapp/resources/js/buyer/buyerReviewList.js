@@ -25,7 +25,7 @@ $(function() {
 														<span>${star}</span>
 											        </div>
 													<div class="prdName">${item.prd_nm}</div>
-													<div class="reviewImg">리뷰이미지</div>
+													<div class="reviewImg" id="${item.rev_id}"></div>
 													<div class="options">${item.cod_nm} / ${item.clr_nm}</div>
 													<div class="bodySize">${item.buy_ht}cm / ${item.buy_wt}kg</div>
 													<div class="reivewCon">${item.rev_ct}</div>
@@ -34,6 +34,14 @@ $(function() {
 								.join('');
 								
 				$('#cards').append(card);
+				
+				
+				const contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2));
+				
+				res.image.forEach(item => {
+				    let img = `<img src="${contextPath}${item.rei_pt}" class="review-img" >`;
+				    $(`#${item.rev_id}`).append(img);
+				});
 				
         	},
 			error: function(xhr, status, error) {

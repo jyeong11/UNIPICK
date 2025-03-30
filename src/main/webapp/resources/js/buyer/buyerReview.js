@@ -85,35 +85,6 @@ $(function() {
 	        	alert("서버 오류가 발생했습니다.");
 	        }
 		});
-		
-		
-//		function registerReview() {
-//			/* 이메일, 옵션아이디, 평점, 내용 */
-//			// 옵션 : opt_id
-//			// 평점 : rev_rt
-//			// 내용 : $('#reviewDetail').val()
-//			
-//			let data = {
-//				opt_id : opt_id,
-//				rev_rt : rev_rt,
-//				rev_ct : $('#reviewDetail').val()
-//			};
-//		
-//			$.ajax({
-//			url: "regiseterReview",
-//			method: "POST",
-//			data: JSON.stringify(data),
-//			contentType: "application/json",
-//			success: function(res) {
-//				alert('완룡');
-//        	},
-//			error: function(xhr, status, error) {
-//	        	alert("서버 오류가 발생했습니다.");
-//	        }
-//		});
-//			
-//			
-//		}
 
 		function registerReview() {
 			let formData = new FormData();
