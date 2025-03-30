@@ -52,9 +52,10 @@ public class SellerController {
 	
 	// 메인
 	@GetMapping("seller")
-	public String sellerMain(HttpSession sellerid) {
-//		map.put("sellerId",(String)sellerid.getAttribute("id"));
-//		Map<String, Object> sellerinfo = loginService.SellerLogin(sellerid);
+	public String sellerMain(HttpSession session, Model model) {
+		String sel_id = (String) session.getAttribute("selId");
+		String sellerName = selService.getSellerNameById(sel_id);
+		model.addAttribute("sel_nm", sellerName);
 		return "seller/sellerMain";
 	}
 	
@@ -178,17 +179,6 @@ public class SellerController {
 		return response;
 	}
 	
-	//마이페이지
-	@ResponseBody
-	@GetMapping("selMypage")
-	public Map<String, Object> sellerMypage(@RequestBody Map<String, Object> seldata,
-											HttpSession ses){
-		System.out.println(ses.getAttribute("selId"));
-//		selService.selinfo();
-		
-		return seldata;
-	}
-	
 	// 상품 상세 조회
 	@ResponseBody
 	@PostMapping("productDetail")
@@ -201,8 +191,6 @@ public class SellerController {
 	@ResponseBody
 	@PostMapping("sellerOrdDetail")
 	public List<Map<String, Object>> sellerOrdPrdDetail(@RequestBody Map<String, Object> ord_id) {
-		selService.sellerOrdPrdDetail(ord_id);
-		System.out.println("@!#!@#!" + selService.sellerOrdPrdDetail(ord_id));
 		return selService.sellerOrdPrdDetail(ord_id);
 	}
 	
@@ -226,7 +214,5 @@ public class SellerController {
 		
 		return subDir;
 	}
-	
-	
 }
 

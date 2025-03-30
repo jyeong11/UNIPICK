@@ -45,4 +45,8 @@ public class SellerService {
 	public Map<String, Object> otpSellerInfo(String userPhone, String sel_id) {
 	    return mapper.otpSellerInfo(userPhone, sel_id);
 	}
+	// 로그인시 셀러 이름 가져옴
+	public String getSellerNameById(String sel_id) {
+		return mapper.getSellerNameById(sel_id);
+	}
 }

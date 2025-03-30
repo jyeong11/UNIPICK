@@ -72,6 +72,12 @@
       	AND sel_id = #{sel_id}
 	</select>
 	
+<!-- 	로그인시 셀러 이름 -->
+	<select id="getSellerNameById">
+	 SELECT sel_nm
+	   FROM sellers
+	  WHERE sel_id = #{sel_id}
+	</select>
 
 
 
