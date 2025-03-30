@@ -213,7 +213,7 @@
 	
 	<!-- 리뷰 정보 -->
 	<select id="reviewInfo" parameterType="map">
-		SELECT DATE(r.rev_ca) as rev_ca,
+		SELECT r.rev_ca as rev_ca,
 			   r.rev_id,
 			   r.rev_rt,
 			   r.rev_ct,
@@ -230,6 +230,7 @@
 		  JOIN products p ON o.prd_cd = p.prd_cd
 		  JOIN common_detailcode c ON o.siz_nm = c.cod_cd
 		 WHERE r.buy_em = #{buy_em}
+		 ORDER BY rev_ca DESC
 	</select>
 	
 	<!-- 주문 정보 -->
@@ -277,6 +278,7 @@
 		   <if test="ord_id != null and !ord_id.equals('')">
 		       AND o.ord_id = #{ord_id}
 		   </if>
+		 ORDER BY o.ord_at DESC
 	</select>
 	
 	<!-- 회원 탈퇴 -->
@@ -402,5 +404,16 @@
 	    SET prd_qt = prd_qt - #{qty}
 	  WHERE opt_id = #{opt_id}
 	</update>
+	
+	<!-- 최근 본 상품 등록 -->
+	<insert id="registerRecentlyPrd" parameterType="map">
+		INSERT
+		  INTO recently_products(buy_em,
+		  						 prd_cd,
+		  						 vie_tm)
+		  				  VALUES(#{buy_em},
+		  				  		 #{prd_cd},
+		  				  		 default)
+	</insert>
 	
   </mapper>

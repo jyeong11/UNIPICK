@@ -151,4 +151,10 @@ public class BuyerService {
         }
 	}
 	
+	// 최근 본 상품 등록
+	public void registerRecentlyPrd(Map<String, Object> prd) {
+		mapper.registerRecentlyPrd(prd);
+	}
+	
+	
 }

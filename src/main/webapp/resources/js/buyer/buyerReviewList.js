@@ -33,6 +33,7 @@ $(function() {
 											</div>`})
 								.join('');
 								
+								
 				$('#cards').append(card);
 				
 				

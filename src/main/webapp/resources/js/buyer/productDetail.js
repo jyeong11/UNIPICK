@@ -1,4 +1,7 @@
 $(function() {
+	// 최근 본 상품 저장
+	recentlyProduct();
+	
 	window.loadSize = function() {
         var selectedColor = $("#color").val();
 		var sizeSelect = $("#size");
@@ -160,4 +163,19 @@ function updateSize(sizes) {
 function updateTotalPrice(price) {
     let qty = parseInt($("#qty-input").val()) || 1;
 	$("#price-text").text((price * qty).toLocaleString() + "원");
+}
+
+function recentlyProduct() {
+	
+	let data = {prd_cd : prdCd};
+	
+	$.ajax({
+		url: "registerRecentlyPrd",
+		method: "POST",
+		data: JSON.stringify(data),
+		contentType: "application/json",
+		error: function(xhr, status, error) {
+			alert("서버 오류가 발생했습니다.");
+		}
+	});
 }

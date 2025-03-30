@@ -62,4 +62,6 @@ public interface BuyerMapper {
 	public void registerReviewImage(Map<String, Object> paramMap);
 	// 옵션 id 들고옴 
 	public Map<String, Object> getOptionId(@Param("sizNm") String sizNm,@Param("clrNm") String clrNm,@Param("prdCd") String prdCd);
+	// 최근 본 상품 등록
+	public void registerRecentlyPrd(Map<String, Object> prd);
 }

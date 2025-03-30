@@ -317,7 +317,7 @@ public class BuyerController {
 	// 리뷰 등록
 	@ResponseBody
 	@PostMapping("registerReview")
-	public ResponseEntity<?> registerReview(
+	public String registerReview(
 			HttpServletRequest req,
 			HttpSession session,
 	        @RequestParam("opt_id") String optId,
@@ -339,12 +339,19 @@ public class BuyerController {
 	    	
 	        buyService.registerReview(req, map, imageFiles);
 
-	        return ResponseEntity.ok("리뷰 등록 성공");
+	        return "리뷰 등록 성공";
 
 	    } catch (Exception e) {
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("서버 오류 발생");
+	        return "서버 오류 발생";
 	    }
 	}
 	
+	// 최근 본 상품 등록
+	@ResponseBody
+	@PostMapping("registerRecentlyPrd")
+	public void registerRecentlyPrd(HttpSession session, @RequestBody Map<String, Object> prd) {
+		prd.put("buy_em", session.getAttribute("buyEm"));
+		buyService.registerRecentlyPrd(prd);
+	}
 	
 }

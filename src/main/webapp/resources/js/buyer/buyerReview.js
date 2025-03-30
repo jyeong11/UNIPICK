@@ -32,8 +32,8 @@ $(function() {
 	
 	
 	$(".item-thumb-upload").on("click", function() {
-        var index = $(this).data("index"); // 버튼에 설정된 data-index 값 가져오기
-        $("#item-thumb-upload-btn" + index).click(); // 해당하는 파일 업로드 버튼 클릭
+        var index = $(this).data("index");
+        $("#item-thumb-upload-btn" + index).click();
     });
     
     // 파일 업로드 후, 미리보기 이미지 표시
@@ -106,6 +106,7 @@ $(function() {
 				contentType: false,
 				success: function(res) {
 					alert(res);
+					window.location.href="myReviewList";
 				},
 				error: function(xhr, status, error) {
 					alert("서버 오류가 발생했습니다.");
