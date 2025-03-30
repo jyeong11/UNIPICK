@@ -140,9 +140,10 @@ public class BuyerService {
                 continue;
             }
             
-            imageData.put("rev_id", rev.get("rev_id"));
+//            imageData.put("rev_id", )
+
             try {
-            	mapper.registerReviewImage(imageData);
+//            	mapper.registerReviewImage(imageData);
             } catch (Exception e) {
                 System.out.println("❌ 이미지 데이터 삽입 실패: " + e.getMessage());
                 e.printStackTrace();
