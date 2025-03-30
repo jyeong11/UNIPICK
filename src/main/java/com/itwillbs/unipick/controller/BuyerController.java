@@ -144,6 +144,12 @@ public class BuyerController {
 		return "buyer/buyerReview";
 	}
 	
+	// 최근 본 상품 페이지 이동
+	@GetMapping("myRecentlyProduct")
+	public String myRecentlyProduct() {
+		return "buyer/buyerRecentlyProduct";
+	}
+	
 	// 상단 메뉴바 공통코드
 	@ResponseBody
 	@GetMapping("menu")

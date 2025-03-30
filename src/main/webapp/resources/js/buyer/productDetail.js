@@ -7,7 +7,7 @@ $(function() {
             sizeSelect.prop("disabled", true);
 			return;
         }
-		sizeSelect.prop("disabled", false);
+
         $.ajax({
             url: 'getSizeByColor',
             method: 'POST',
@@ -67,11 +67,20 @@ function updateSize(sizes) {
     var sizeSelect = $('#size');
     
 	sizeSelect.empty();
-
     sizeSelect.append('<option>[사이즈]를 선택하세요.</option>');
-
-    $.each(sizes, function(index, size) {
-        sizeSelect.append('<option value="' + size.cod_nm + '">' + size.cod_nm);
+	
+	if (sizes.length === 0) {
+        sizeSelect.prop("disabled", true);
+        return;
+    }
+	sizeSelect.prop("disabled", false);
+	
+ 	$.each(sizes, function(index, size) {
+	    if (size.prd_qt == 0) {
+	        sizeSelect.append('<option value="' + size.cod_nm + '" disabled>' + size.cod_nm + ' (품절)</option>');
+	    } else {
+	        sizeSelect.append('<option value="' + size.cod_nm + '">' + size.cod_nm + '</option>');
+	    }
     });
 	// 옵션 전부 클릭시 이벤트 발생
 	 sizeSelect.off("change").on("change", function () {

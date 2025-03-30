@@ -47,18 +47,20 @@
 	
 <!-- 	주문 상세 조회 -->
 	<select id="sellerOrdPrdDetail" parameterType="map">
-	 SELECT pd.prd_cd, pd.prd_nm, ot.siz_nm, ot.clr_nm, odd.odd_qt,
-		    bu.buy_em, bu.buy_nm, bu.buy_ph, od.ord_dm, 
-	        odd.odd_am, od.ord_pm
+	 SELECT pd.prd_cd, pd.prd_nm, cd.cod_nm, ot.clr_nm, odd.odd_qt,
+		    bu.buy_em, bu.buy_nm, bu.buy_ph, od.ord_ad, od.ord_dm, 
+	        od.ord_nm, od.ord_ph, odd.odd_am, od.ord_pm
 	   FROM products pd 
 	   JOIN options ot
 		 ON pd.prd_cd = ot.prd_cd
 	   JOIN order_details odd
 		 ON ot.opt_id = odd.opt_id
 	   JOIN orders od 
-		 ON pd.prd_cd = od.prd_cd
+		 ON odd.ord_id = od.ord_id
 	   JOIN buyers bu
 		 ON od.buy_em = bu.buy_em
+	   JOIN common_detailcode cd
+         ON ot.siz_nm = cd.cod_cd
       WHERE od.ord_id = #{ord_id}
 	</select>
 	

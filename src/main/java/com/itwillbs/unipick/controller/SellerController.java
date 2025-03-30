@@ -202,7 +202,7 @@ public class SellerController {
 	@PostMapping("sellerOrdDetail")
 	public List<Map<String, Object>> sellerOrdPrdDetail(@RequestBody Map<String, Object> ord_id) {
 		selService.sellerOrdPrdDetail(ord_id);
-		System.out.println(selService.sellerOrdPrdDetail(ord_id));
+		System.out.println("@!#!@#!" + selService.sellerOrdPrdDetail(ord_id));
 		return selService.sellerOrdPrdDetail(ord_id);
 	}
 	

@@ -85,7 +85,7 @@ function getStatusLabel(status) {
         $.each(orderList, function(index, order) {
             html += `
                 <tr>
-                    <td>${order.ord_id || '-'}</td>
+                    <td><a href="sellerOrdDetail?ord_id=${order.ord_id || ''}">${order.ord_id || '-'}</a></td>
  					<td>${formatDate(order.ord_at)}</td>
                     <td>${order.buy_nm || '-'}</td>
                     <td>${order.buy_ph || '-'}</td>
