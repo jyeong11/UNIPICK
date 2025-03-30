@@ -51,17 +51,7 @@
 				<button id="ordSearch">검색</button>
 			</div>
 		</div>
-		<div id="cards">
-			<div class="card">
-				<div class="nick">닉네임</div>
-				<div class="date" style="text-align: right">날짜</div>
-				<div class="star">별 평점</div>
-				<div class="prdName">상품명</div>
-				<div class="reviewImg">리뷰이미지</div>
-				<div class="options">옵션정보, 키, 몸무게</div>
-				<div class="reivewCon">리뷰내용</div>
-			</div>
-		</div>
+		<div id="cards"></div>
 	</div>
 	
 	<div id="footer">

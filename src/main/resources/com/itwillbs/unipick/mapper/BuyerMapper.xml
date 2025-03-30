@@ -213,15 +213,17 @@
 	
 	<!-- 리뷰 정보 -->
 	<select id="reviewInfo" parameterType="map">
-		SELECT b.buy_nn,
-			   DATE(r.rev_ca) as rev_ca,
+		SELECT DATE(r.rev_ca) as rev_ca,
+			   r.rev_id,
 			   r.rev_rt,
+			   r.rev_ct,
 			   p.prd_nm,
 			   c.cod_nm,
 			   o.clr_nm,
+			   b.buy_em,
+			   b.buy_nn,
 			   b.buy_ht,
-			   b.buy_wt,
-			   r.rev_ct
+			   b.buy_wt
 		  FROM reviews r
 		  JOIN buyers b ON r.buy_em = b.buy_em
 		  JOIN options o ON r.opt_id = o.opt_id
@@ -326,7 +328,7 @@
 			 		   default)
 	</insert>
 	
-	<!-- 리뷰 이미지 등록 -->
+	<!-- 리뷰 이미지 -->
 	<select id="reviewImage" parameterType="map">
 		SELECT r.rev_id, rei_pt
 		  FROM reviews r
