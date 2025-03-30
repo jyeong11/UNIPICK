@@ -272,4 +272,16 @@ JOIN common_detailcode c ON o.siz_nm = c.cod_cd
 		 WHERE sel_id = #{sel_id};
 	</select>
   
+  	<!-- 구매자 정보 수정 -->
+	<update id="sellerModify" parameterType="map">
+		UPDATE sellers SET sel_pw = #{sel_pw},
+						  sel_nm = #{sel_nm},
+						  sel_rn = #{sel_rn},
+						  sel_br = #{sel_br},
+						  sel_ad = #{sel_ad},
+						  sel_cs = #{sel_cs},
+						  sel_mn = #{sel_mn},
+						  sel_mp = #{sel_mp}
+					WHERE sel_id = #{sel_id}
+	</update>
 </mapper>

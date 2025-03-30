@@ -39,5 +39,11 @@ public interface SellerMapper2 {
 
 	public Map<String, Object> selModifyForm(Map<String, Object> buy);
 	
+	// 구매자 정보 수정
+	public void sellerModify(Map<String, Object> selModifyForm);
+	
+	// 회원 탈퇴
+	public void Withdraw(Map<String, Object> seller);
+	
     
 }

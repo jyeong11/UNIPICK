@@ -1,6 +1,5 @@
 $(function() {
 	
-	let gen = '';
 	let effectiveness = true;
 	
 	// 초기 데이터
@@ -8,7 +7,6 @@ $(function() {
 			url: "selModifyForm",
 			method: "GET",
 			success: function(res) {
-				$('#storeId').append(res.sel_id);
 				$('#storePw').append(res.sel_pw);
 				$('#storeNm').val(res.sel_nm);
 				$('#ceoNm').val(res.sel_rn);
@@ -25,61 +23,59 @@ $(function() {
 	
 
 	// 유효성 검사
-	// 이름
-	$('#name').on('input', function() {
-    	checkName($(this));
-	});
-	// 닉네임
-	$('#nickname').on('input', function() {
-    	checkNick($(this));
-	});
 	// 비밀번호
-	$('#password').on('input', function() {
-		checkPasswd($(this));
-	})
-	// 휴대폰번호
-	$('#phoneNumber').on('input', function() {
-		checkPhone($(this));
-	})
-	// 생년월일
-	$('#birthDate').on('input', function() {
-		checkBirth($(this));
-	})
-	// 키
-	$('#heightSize').on('input', function() {
-		checkHeight($(this));
-	})
-	// 몸무게
-	$('#weightSize').on('input', function() {
-		checkWeight($(this));
-	})
-	
+	$('#storePw').on('input', function() {
+		checkstorePw($(this));
+	});
+	// 상호명
+	$('#storeNm').on('input', function() {
+		checkstoreNm($(this));
+	});
+	// 대표자명
+	$('#ceoNm').on('input', function() {
+		checkceoNm($(this));
+	});
+	// 사업자등록번호
+	$('#brn').on('input', function() {
+		checkbrn($(this));
+	});
+	// 사업자 주소
+	$('#storead').on('input', function() {
+		checkstoread($(this));
+	});
+	// 고객센터 번호
+	$('#storeNumber').on('input', function() {
+		checkstoreNumber($(this));
+	});
+	// 담당자 이름
+	$('#phNm').on('input', function() {
+		checkphNm($(this));
+	});
+	// 담당자 번호
+	$('#phNumber').on('input', function() {
+		checkstorephNumber($(this));
+	});
 	// 수정하기 클릭시
-	$('#modify').on('click', function() {
+	$('#sellermodify').on('click', function() {
 		modify();
-	})
-	
+	});
 	// 탈퇴하기 클릭시
-	$('#withdraw').on('click', function(){
-		window.location.href = 'withdraw';
+	$('#sellerWithdraw').on('click', function(){
+		window.location.href = 'sellerwithdraw';
 	});
 	
-
-		
 	// 수정
 	function modify() {
 		
 		data = {
-			buy_em : $('#email').text(),
-			buy_nm : $('#name').val(),
-			buy_nn : $('#nickname').val(),
-			buy_pw : $('#password').val(),
-			buy_ph : $('#phoneNumber').val(),
-			buy_bd : $('#birthDate').val(),
-			buy_gn : gen,
-			buy_ht : $('#heightSize').val(),
-			buy_wt : $('#weightSize').val(),
-			acc_pa : $('#agreement').prop('checked')
+			sel_pw : $('#storePw').val(),
+			sel_nm : $('#storeNm').val(),
+			sel_rn : $('#ceoNm').val(),
+			sel_br : $('#brn').val(),
+			sel_ad : $('#storead').val(),
+			sel_cs : $('#storeNumber').val(),
+			sel_mn : $('#phNm').val(),
+			sel_mp : $('#phNumber').val(),
 		};
 		debugger;
 		
@@ -90,7 +86,7 @@ $(function() {
 		
 		$.ajax({
 			type: "POST",
-	        url: "buyermodify",
+	        url: "sellermodify",
 			data: JSON.stringify(data),
 			contentType: "application/json",
 	        success: function() {
@@ -105,8 +101,123 @@ $(function() {
 	}
 	
 	// 유효성 검사
-	// 이름
-	function checkName(name) {
+	// 패스워드
+	function checkstorePw(pw) {
+		let pwValue = pw.val().trim();
+		let errorMsg = '';
+		effectiveness = false;
+
+		const passwordRegex = /^(?=.*[A-Z])(?=.*[\W_]).{6,}$/;
+		if (!passwordRegex.test(pwValue)) {
+			if(pwValue !== "") {
+	        	errorMsg = "조건을 만족하는 비밀번호를 입력해주세요.";
+			}
+	    }
+
+		if (errorMsg) {
+	        $('#passwdError').text(errorMsg).css('color', 'red');
+	    } else {
+			effectiveness = true;
+	        $('#passwdError').text('');
+	    }
+	}
+	// 상호명
+	function checkstoreNm(nick) {
+		let nickValue = nick.val().trim();
+		let errorMsg = '';
+		effectiveness = false;
+		
+		if (nickValue.length > 10) {
+	        nick.val(nickValue.substring(0, 10));
+	    }
+		
+		if (!nickValue) {
+	        errorMsg = '상호명을 입력해주세요.';
+	    } else if (nickValue.length < 1 || nickValue.length > 10) {
+	        errorMsg = '상호명은 1글자 이상 10글자 이하로 입력해주세요.';
+	    }
+
+	    if (errorMsg) {
+	        $('#nickError').text(errorMsg).css('color', 'red');
+	    } else {
+			effectiveness = true;
+	        $('#nickError').text('');
+	    }
+	}	
+	
+	// 대표자명
+	function checkceoNm(name) {
+		let nameValue = name.val().trim();
+	    let errorMsg = '';
+		effectiveness = false;
+		
+		if (nameValue.length > 5) {
+	        name.val(nameValue.substring(0, 5));
+	    }
+
+	    if (!nameValue) {
+	        errorMsg = '이름을 입력해주세요.';
+	    } else if (nameValue.length < 2 || nameValue.length > 5) {
+	        errorMsg = '이름은 2글자 이상 5글자 이하로 입력해주세요.';
+	    } else if (!/^[가-힣]+$/.test(nameValue)) {
+	        errorMsg = '이름은 한글만 입력 가능합니다.';
+	    }
+	
+	    if (errorMsg) {
+	        $('#nameError').text(errorMsg).css('color', 'red');
+	    } else {
+			effectiveness = true;
+	        $('#nameError').text('');
+	    }
+	}
+	//사업자번호
+	function checkbrn(brn) {
+    let brnValue = brn.val().trim();
+    let errorMsg = '';
+    effectiveness = false;
+
+    const brnRegex = /^\d{3}-\d{2}-\d{5}$/;
+    if (!brnRegex.test(brnValue)) {
+        errorMsg = '올바른 사업자 등록번호(예: 123-45-67890)를 입력해주세요.';
+    }
+
+    if (errorMsg) {
+        $('#brnError').text(errorMsg).css('color', 'red');
+    } else {
+        effectiveness = true;
+        $('#brnError').text('');
+    }
+}
+	
+	// 고객센터 번호
+	function checkstoreNumber(cs) {
+	    let csValue = cs.val().trim();
+	    let errorMsg = '';
+		effectiveness = false;
+		
+		if (csValue.length > 13) {
+	        cs.val(csValue.substring(0, 13));
+	    }
+	
+	    if (!csValue) {
+	        errorMsg = '고객센터 번호를 입력해주세요.';
+	    } else {
+	        const csRegex = /^(01[016789])-?(\d{3,4})-?(\d{4})$/;
+	        if (!csRegex.test(csValue)) {
+	            errorMsg = '유효한 고객센터 번호를 입력해주세요.';
+	        }
+	    }
+	
+	    if (errorMsg) {
+	        $('#phoneError').text(errorMsg).css('color', 'red');
+	    } else {
+			effectiveness = true;
+	        $('#phoneError').text('');
+	    }
+	}
+	
+	// 담당자 이름
+	function checkphNm(name) {
 		let nameValue = name.val().trim();
 	    let errorMsg = '';
 		effectiveness = false;
@@ -131,53 +242,9 @@ $(function() {
 	    }
 	}
 	
-	// 닉네임
-	function checkNick(nick) {
-		let nickValue = nick.val().trim();
-		let errorMsg = '';
-		effectiveness = false;
-		
-		if (nickValue.length > 10) {
-	        nick.val(nickValue.substring(0, 10));
-	    }
-		
-		if (!nickValue) {
-	        errorMsg = '닉네임을 입력해주세요.';
-	    } else if (nickValue.length < 2 || nickValue.length > 10) {
-	        errorMsg = '닉네임은 2글자 이상 10글자 이하로 입력해주세요.';
-	    }
 
-	    if (errorMsg) {
-	        $('#nickError').text(errorMsg).css('color', 'red');
-	    } else {
-			effectiveness = true;
-	        $('#nickError').text('');
-	    }
-	}
-	
-	// 패스워드
-	function checkPasswd(pw) {
-		let pwValue = pw.val().trim();
-		let errorMsg = '';
-		effectiveness = false;
-
-		const passwordRegex = /^(?=.*[A-Z])(?=.*[\W_]).{6,}$/;
-		if (!passwordRegex.test(pwValue)) {
-			if(pwValue !== "") {
-	        	errorMsg = "조건을 만족하는 비밀번호를 입력해주세요.";
-			}
-	    }
-
-		if (errorMsg) {
-	        $('#passwdError').text(errorMsg).css('color', 'red');
-	    } else {
-			effectiveness = true;
-	        $('#passwdError').text('');
-	    }
-	}
-	
-	// 핸드폰
-	function checkPhone(phone) {
+	// 담당자 핸드폰
+	function checkstorephNumber(phone) {
 	    let phoneValue = phone.val().trim();
 	    let errorMsg = '';
 		effectiveness = false;
@@ -202,94 +269,8 @@ $(function() {
 	        $('#phoneError').text('');
 	    }
 	}
-	
-	// 생년월일	
-	function checkBirth(birthDate) {
-	    let birthDateValue = birthDate.val().trim();
-	    let errorMsg = '';
-		effectiveness = false;
-		
-		if (birthDateValue.length > 6) {
-	        birthDate.val(birthDateValue.substring(0, 6));
-	    }
-	
-	    if (!birthDateValue) {
-	        errorMsg = '생년월일을 입력해주세요.';
-	    } else {
-	        const birthDateRegex = /^[0-9]{6}$/;
-	        if (!birthDateRegex.test(birthDateValue)) {
-	            errorMsg = '유효한 생년월일(YYMMDD)을 입력해주세요.';
-	        } else {
-	            // 날짜가 실제로 존재하는 유효한 날짜인지 확인
-	            const year = parseInt(birthDateValue.substr(0, 2), 10);
-	            const month = parseInt(birthDateValue.substr(2, 2), 10);
-	            const day = parseInt(birthDateValue.substr(4, 2), 10);
-	
-	            const fullYear = (year < 30 ? year + 2000 : year + 1900);
-	
-	            const date = new Date(fullYear, month - 1, day);
-	            if (date.getFullYear() !== fullYear || date.getMonth() + 1 !== month || date.getDate() !== day) {
-	                errorMsg = '유효한 날짜가 아닙니다.';
-	            }
-	        }
-	    }
-	
-	    if (errorMsg) {
-	        $('#birthError').text(errorMsg).css('color', 'red');
-	    } else {
-			effectiveness = true;
-	        $('#birthError').text('');
-	    }
-	}
 
-	// 키
-	function checkHeight(height) {
-	    let heightValue = height.val().trim();
-	    let errorMsg = '';
-	    effectiveness = false;
 
-		if (heightValue.length > 3) {
-	        height.val(heightValue.substring(0, 3));
-	    }
-	
-	    const numberRegex = /^[0-9]{3}$/;
 
-        const number = parseInt(heightValue, 10);
-        if (!numberRegex.test(heightValue) || number < 100 || number > 250) {
-            errorMsg = '키 또는 몸무게의 범위가 벗어났습니다.';
-        }
-
-	    if (errorMsg) {
-	        $('#sizeError').text(errorMsg).css('color', 'red');
-	    } else {
-			effectiveness = true;
-	        $('#sizeError').text('');
-	    }
-	}
-
-	// 몸무게
-	function checkWeight(weight) {
-	    let weightValue = weight.val().trim();
-	    let errorMsg = '';
-	    effectiveness = false;
-
-		if (weightValue.length > 3) {
-	        weight.val(weightValue.substring(0, 3));
-	    }
-	
-	    const numberRegex = /^[0-9]{2,3}$/;  
-
-        const number = parseInt(weightValue, 10);
-        if (!numberRegex.test(weightValue) || number < 40 || number > 150) {
-            errorMsg = '키 또는 몸무게의 범위가 벗어났습니다.';
-        }
-	    
-	    if (errorMsg) {
-	        $('#sizeError').text(errorMsg).css('color', 'red');
-	    } else {
-	        effectiveness = true;
-	        $('#sizeError').text('');
-	    }
-	}
 	
 });

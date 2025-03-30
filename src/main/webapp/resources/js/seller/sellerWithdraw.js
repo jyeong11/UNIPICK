@@ -26,7 +26,7 @@ $(function() {
 		if(confirm('정말 탈퇴하고 계정을 삭제할까요?')){
 			$.ajax({
 				type: "GET",
-		        url: "buyerWithdraw",
+		        url: "sellerWithdraw",
 		        success: function() {
 					alert('회원탈퇴 정상적으로 처리되었습니다.')
 					window.location.href="main";

@@ -146,7 +146,8 @@
 										<input type="text" id="phNumber" name="phNumber" placeholder="010-xxxx-xxxx">
 									</div>
 									<div class="input-group">
-										<button type=submit>회원가입</button>
+										<button type=button id="sellermodify">수정하기</button>
+										<button type=submit id="sellerWithdraw">탈퇴하기</button>
 									</div>
 								</form>
 								</section>

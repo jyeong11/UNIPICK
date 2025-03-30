@@ -214,4 +214,14 @@ public class SellerService2 {
 	public Map<String, Object> selModifyForm(Map<String, Object> buy) {
 		return mapper.selModifyForm(buy);
 	}
+	
+	// 구매자 정보수정
+	public void sellerModify(Map<String, Object> selModifyForm) {
+		mapper.sellerModify(selModifyForm);
+	}
+	
+	// 회원 탈퇴
+	public void Withdraw(Map<String, Object> seller) {
+		mapper.Withdraw(seller);
+	}
 }
