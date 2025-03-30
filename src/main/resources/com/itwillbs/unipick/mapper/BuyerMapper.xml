@@ -322,12 +322,12 @@
 		  			   rev_rt,
 		  			   rev_ct,
 		  			   rev_ca)
-			 	VALUES(default,
+			 	VALUES(DEFAULT,
 			 		   #{buy_em},
 			 		   #{opt_id},
 			 		   #{rev_rt},
 			 		   #{rev_ct},
-			 		   default)
+			 		   DEFAULT)
 	</insert>
 	
 	<!-- 리뷰 이미지 -->
@@ -407,13 +407,36 @@
 	
 	<!-- 최근 본 상품 등록 -->
 	<insert id="registerRecentlyPrd" parameterType="map">
-		INSERT
-		  INTO recently_products(buy_em,
-		  						 prd_cd,
-		  						 vie_tm)
-		  				  VALUES(#{buy_em},
-		  				  		 #{prd_cd},
-		  				  		 default)
+		INSERT INTO recently_products (buy_em, prd_cd, vie_tm)
+							   VALUES (#{buy_em}, #{prd_cd}, DEFAULT)
+			  ON DUPLICATE KEY UPDATE vie_tm = DEFAULT;
 	</insert>
+	
+	<!-- 최근 본 상품 리스트 -->
+	<select id="myRecentlyPrd" parameterType="map">
+		WITH RankedImages AS (
+			SELECT prd_cd,
+				   fil_pt,
+				   ROW_NUMBER() OVER (PARTITION BY prd_cd) AS rn
+			  FROM product_images
+			)    
+		SELECT rp.vie_tm,
+			   p.prd_cd,
+			   p.prd_nm,
+			   p.prd_sp,
+			   p.prd_op,
+			   s.sel_nm,
+			   i.fil_pt
+		  FROM recently_products rp
+		  JOIN products p ON rp.prd_cd = p.prd_cd
+		  JOIN sellers s ON p.sel_id = s.sel_id
+		  JOIN (SELECT prd_cd,
+					   fil_pt
+				  FROM RankedImages
+			     WHERE rn = 1) i ON p.prd_cd = i.prd_cd
+		 WHERE buy_em = #{buy_em}
+		 ORDER BY vie_tm DESC
+		 LIMIT 6
+	</select>
 	
   </mapper>

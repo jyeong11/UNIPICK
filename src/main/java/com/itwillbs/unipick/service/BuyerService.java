@@ -156,5 +156,9 @@ public class BuyerService {
 		mapper.registerRecentlyPrd(prd);
 	}
 	
+	// 최근 본 상품 리스트
+	public List<Map<String, Object>> myRecentlyPrd(Map<String, Object> buy) {
+		return mapper.myRecentlyPrd(buy);
+	}
 	
 }

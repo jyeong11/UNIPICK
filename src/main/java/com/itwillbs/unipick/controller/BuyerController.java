@@ -354,4 +354,13 @@ public class BuyerController {
 		buyService.registerRecentlyPrd(prd);
 	}
 	
+	// 최근 본 상품 리스트
+	@ResponseBody
+	@PostMapping("myRecentlyPrd")
+	public List<Map<String, Object>> myRecentlyPrd(HttpSession session, Map<String, Object> buy) {
+		buy.put("buy_em", session.getAttribute("buyEm"));
+		return buyService.myRecentlyPrd(buy);
+	}
+	
+	
 }

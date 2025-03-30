@@ -1,0 +1,76 @@
+@charset "UTF-8";
+
+.content {
+	width: 1200px;
+	margin: auto;
+}
+
+#cards {
+	display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(3, 1fr);
+    padding-bottom: 30px;
+}
+
+.card {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	border: 1px solid #ddd;
+	padding: 16px;
+	border-radius: 16px;
+	background: #fff;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+	transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+#prd-img {
+	width: 180px;
+    height: 180px;
+}
+
+.order-btn {
+	height: 39px;
+    font-size: inherit;
+    border-radius: 8px;
+    cursor: pointer;
+	width: 82px;
+}
+
+#prd-link {
+	color: #292b2b;
+	text-decoration: none;
+}
+
+.price {
+	display: flex;
+	gap: 10px;
+}
+
+.original {
+	text-decoration: line-through;
+	color: #808893;
+	font-size: 13px;
+}
+
+.salePrice {
+	color: #f2a900;
+}
+
+.date {
+	text-align: right;
+}
+
+.store {
+	font-weight: bold;
+}
+
+sup {
+	vertical-align: super;
+	font-size: 15px;
+}

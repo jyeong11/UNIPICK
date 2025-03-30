@@ -64,4 +64,7 @@ public interface BuyerMapper {
 	public Map<String, Object> getOptionId(@Param("sizNm") String sizNm,@Param("clrNm") String clrNm,@Param("prdCd") String prdCd);
 	// 최근 본 상품 등록
 	public void registerRecentlyPrd(Map<String, Object> prd);
+	// 최근 본 상품 리스트
+	public List<Map<String, Object>> myRecentlyPrd(Map<String, Object> buy);
+	
 }
