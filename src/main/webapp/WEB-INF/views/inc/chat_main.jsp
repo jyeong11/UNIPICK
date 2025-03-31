@@ -80,9 +80,9 @@ width: 300px;
 	background-color: #cccccc88;
 }
 
-.message.right{
-	textr-align: right;
-	background-color: #ffff0088;
+.message.right {
+	text-align: right;
+	background-color: #FFFF0088
 }
 
 

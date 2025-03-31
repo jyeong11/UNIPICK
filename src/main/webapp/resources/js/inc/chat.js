@@ -15,6 +15,16 @@ const ALIGN_RIGHT = "right";
 //페이지 로딩 완료 시 채팅 시작
 $(function(){
 	connect();
+	// 전송 버튼 클릭 시
+	$("#btnSend").on("click", function(){
+		sendInputMessage();
+	});
+	// 엔터키 판별
+	$("#chatMessage").on("keypress", function(event){
+		if (event.keyCode == 13) {
+			sendInputMessage();
+		}
+	});
 	
 })
 
@@ -39,7 +49,7 @@ function onOpen(){
 	//채팅방에 입장 메세지 출력 => appendMessage() 함수 호출하여 메세지 전달
 	appendMessage(">> 채팅방에 입장하였습니다. <<", ALIGN_CENTER);
 	//채팅방 입장 정보를 다른 사용자에게 전송(-> 서버측으로 입장 정보 전송)
-	sendMessage(TYPE_ENTER, "안뇽하세요");	
+	sendMessage(TYPE_ENTER, "");	
 }
 
 function appendMessage(message, align){
@@ -54,7 +64,20 @@ function sendMessage(type, message){
 }
 
 function sendInputMessage(){
-	sendMessage(TYPE_TALK, "테스트");	
+	//sendMessage(TYPE_TALK, "테스트");
+	
+	//채팅 메세지 입력창 내용 가져오기
+	let message = $('#chatMessage').val();	
+	
+	if(message == ""){
+		return;
+	}
+	
+	sendMessage(TYPE_TALK, message);
+	appendMessage(message, ALIGN_RIGHT);
+	//메세지 전송 요청 후 입력창 초기화 및 입력창 커서 요청
+	$('#chatMessage').val("");
+	$('#chatMessage').focus();
 }
 
 
@@ -65,7 +88,7 @@ function onMessage(event){
 	if(data.type == TYPE_ENTER || data.type == TYPE_LEAVE){
 		//시스템 메세지의 경우 두번째 파라미터로 "center" 값 전달 (가운데 정렬)
 		appendMessage(data.message, ALIGN_CENTER);
-	} else if(data.type== TYPE_TALK){
+	} else if(data.type == TYPE_TALK){
 		//사용자 메세제의 경우 appendMessage() 함수 두번째 파라미터로 "left" 값 전달
 		//-> 자신의 메세지는 전송되지 않으므로 항상 좌측 정렬(다른 사용자의 메세지)
 		appendMessage(data.sender_id + " : " + data.message, ALIGN_LEFT);

@@ -168,31 +168,6 @@
 			<!-- End of Page Wrapper -->
 		</div>
 	</div>
-	<script>
-		let btnSearchAddress = document.querySelector('#btnSearchAddress');
-		btnSearchAddress.onclick = function() {
-
-			new daum.Postcode({
-
-				// 주소 검색 창에서 주소 검색 후 검색된 주소를 사용자가 클릭 시
-				// oncomplete 이벤트에 의해 이벤트 뒤의 익명함수가 자동으로 호출됨
-				// 사용자가 클릭한 주소 정보가 익명함수 파라미터 data 로 전달됨
-				// => 주의! 이 익명함수는 개발자가 호출하는 것이 아니라
-				//    API에 의해 자동으로 호출됨
-				//    (어떤 동작 수행 후 자동으로 호출되는 함수를 콜백(callback) 함수라고 함)
-
-				oncomplete : function(data) {
-					document.querySelector('#post_code').value = data.zonecode
-
-					let addr = data.address;
-					if (data.buildingName != "") {
-						addr += " (" + data.buildingName + ")";
-					}
-					document.querySelector('#storead').value = addr;
-				}
-			}).open();
-		}
-	</script>
 	<!-- Bootstrap core JavaScript-->
     <script src="${pageContext.request.contextPath }/resources/public/vendor/jquery/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath }/resources/public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -208,6 +183,3 @@
 	<script src="${pageContext.request.contextPath }/resources/public/vendor/datepicker/moment.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/public/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="${pageContext.request.contextPath }/resources/public/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-	
-    <!-- Page level custom scripts -->
-    <script src="${pageContext.request.contextPath }/resources/public/js/index.js"></script>

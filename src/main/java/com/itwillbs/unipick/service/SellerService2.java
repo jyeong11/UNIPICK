@@ -211,8 +211,8 @@ public class SellerService2 {
     }
     
     
-	public Map<String, Object> selModifyForm(Map<String, Object> buy) {
-		return mapper.selModifyForm(buy);
+	public Map<String, Object> selModifyForm(Map<String, Object> sell) {
+		return mapper.selModifyForm(sell);
 	}
 	
 	// 구매자 정보수정
