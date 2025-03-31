@@ -108,7 +108,13 @@ public class BuyerController {
 	
 	// 판매자 상세 페이지 이동
 	@GetMapping("sellerShopDetail")
-	public String sellerShopDetail() {
+	public String sellerShopDetail(@RequestParam("sel_nm") String sel_nm, Model model) {
+		List<Map<String, Object>> selList = buyService.getselDetail(sel_nm);
+		List<String> selImgList = buyService.getselImg(sel_nm);
+		model.addAttribute("selList", selList);
+		model.addAttribute("selImgList", selImgList);
+		System.out.println("!@#@!#!@#@!2" + selList);
+		System.out.println("!@#@!#!@#@!2" + selImgList);
 		return "buyer/sellerShopDetail";
 	}
 	// 상품 상세조회 (조회)

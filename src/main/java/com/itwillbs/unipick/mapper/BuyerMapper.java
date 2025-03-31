@@ -20,6 +20,10 @@ public interface BuyerMapper {
 	public List<String> getPrdImg(String prdCd);
 	// 상품 옵션조회
 	public List<Map<String, Object>> getPrdOption(String prdCd);
+	// 판매자 상세페이지
+	public List<Map<String, Object>> getselDetail(String sel_nm);
+	// 판매자 상세 이미지
+	public List<String> getselImg(String sel_nm);
 	// 카테고리 메뉴
 	public List<Map<String, Object>> getCategory();
 	// 상품 정렬 종류 

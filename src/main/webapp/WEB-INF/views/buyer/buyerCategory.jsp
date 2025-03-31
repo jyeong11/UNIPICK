@@ -39,7 +39,7 @@
 	
 	<div class="content">
 		<div class = "two">
-			<h2>카테고리</h2>
+			<h2>CATEGORIES</h2>
 		</div>
 		<section class="all">
 			<section class="first-category">

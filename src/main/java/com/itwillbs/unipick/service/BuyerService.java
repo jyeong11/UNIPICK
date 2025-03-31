@@ -42,6 +42,14 @@ public class BuyerService {
 	public List<String> getPrdImg(String prdCd) {
 		return mapper.getPrdImg(prdCd);
 	}
+	// 판매자 상세 페이지
+	public List<Map<String, Object>> getselDetail(String sel_nm) {
+		return mapper.getselDetail(sel_nm);
+	}
+	// 판매자 상세 이미지
+	public List<String> getselImg(String sel_nm) {
+		return mapper.getselImg(sel_nm);
+	}
 	//상품 상세 옵션 
 	public List<Map<String, Object>> getPrdOption(String prdCd) {
 		return mapper.getPrdOption(prdCd);

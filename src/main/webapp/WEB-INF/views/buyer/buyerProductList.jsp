@@ -39,6 +39,7 @@
 	
 	<div class="content">
 		<div class="left-category">
+			<h2>CATEGORIES</h2>
 			<ul class="category-data">
 				<div class="first-cate">
 					<a href="productList?lev_cd=All&category=전체">전체</a>
