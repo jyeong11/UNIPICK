@@ -44,7 +44,7 @@
 		</div>
 		<div id="product">
 		    <div class="product-info">
-		        <div><a href=""><i class="fa-solid fa-house"></i>${prd.sel_nm}</a></div>
+		        <div><a href="sellerShopDetail?sel_nm=${prd.sel_nm}"><i class="fa-solid fa-house"></i>${prd.sel_nm}</a></div>
 		        <h2>${prd.prd_nm}</h2>
 		        <div id="price">
 		        	<p><span class="dc">${prd.dc}</span></p>

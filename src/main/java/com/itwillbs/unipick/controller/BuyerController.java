@@ -106,6 +106,11 @@ public class BuyerController {
 		return "buyer/buyerWithdraw";
 	}	
 	
+	// 판매자 상세 페이지 이동
+	@GetMapping("sellerShopDetail")
+	public String sellerShopDetail() {
+		return "buyer/sellerShopDetail";
+	}
 	// 상품 상세조회 (조회)
 	@GetMapping("productDetail")
 	public String productDetail(@RequestParam("prd_cd") String prdCd, Model model) {

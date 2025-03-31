@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+.background {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#content {
+	margin-bottom: 180px;
+	border: 1px solid #ecedee;
+}
+.background img {
+	width: 500px;
+    height: 445px;
+}
