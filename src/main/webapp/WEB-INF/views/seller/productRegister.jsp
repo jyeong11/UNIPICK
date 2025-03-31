@@ -175,10 +175,12 @@
                       	<section class="item-regi-stock">
                         <h6 class="item-regi-name">옵션 설정</h6>
                         <div id="option-container">
-							<input type="color" name="color_number[]" class="color-picker" required>
-							<input type="text" name="color_name[]" class="color-name" id="color_name" required>
-							<select name="size_option[]" class="size-select" id="product_size"></select>
-                          	<input type="number" name="stock_number[]" class="stock-number" id="stock_number" placeholder="재고 수량을 입력해주세요." required>
+                        	<div class="option-row" style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+								<input type="color" name="color_number[]" class="color-picker" required>
+								<input type="text" name="color_name[]" class="color-name" id="color_name" required>
+								<select name="size_option[]" class="size-select" id="product_size"></select>
+	                          	<input type="number" name="stock_number[]" class="stock-number" id="stock_number" placeholder="재고 수량을 입력해주세요." required>
+                          	</div>
                          </div>
 							<button type="button" id="add-option" class="btn btn-sm btn-outline-primary">추가</button>
                       	</section>

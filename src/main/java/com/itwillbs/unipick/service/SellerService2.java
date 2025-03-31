@@ -59,9 +59,6 @@ public class SellerService2 {
     public int getOrderListCount(Map<String, String> search) {
         return mapper.getOrderListCount(search);
     }
-    
-    
-    
 
     // 파일 업로드 및 검증
     public Map<String, Object> uploadImage(HttpServletRequest req, MultipartFile imageFile) {

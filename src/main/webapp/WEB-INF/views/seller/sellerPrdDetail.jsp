@@ -92,7 +92,7 @@
                 </div>
                 <div class="card-body">
                   <section class="item-regi">
-                    <form action="productInsert" id="productRegist" method="post" enctype="multipart/form-data">
+                    <form action="productInsert" id="productUpdate" method="post" enctype="multipart/form-data">
                       <!-- 상품 이미지 업로드 영역 -->
                       <section class="item-regi-img">
                         <div class="card_head">
@@ -114,21 +114,20 @@
                       <section class="item-regi-section">
                         <h2 class="item-regi-name">상품명</h2>
                         <div class="item-regi-box">
-                          <input type="text" name="product_title" class="item-regi-title-text" id="item-regi-title-text" maxlength="50">
+                          <input type="text" name="product_title" class="item-regi-title-text" id="item-regi-title-text" maxlength="100">
                         </div>
-                        <h6 class="item-regi-name-byte" id="item-regi-name-byte">(0 / 50)</h6>
+                        <h6 class="item-regi-name-byte" id="item-regi-name-byte">(0 / 100)</h6>
                       </section>
                       <section class="item-regi-section">
                         <h2 class="item-regi-name">상품코드</h2>
                         <div class="item-regi-box">
-                          <input type="text" name="product_code" class="item-regi-title-text" id="item-regi-code-text" maxlength="20">
+                          <input type="text" name="product_code" class="item-regi-title-text" id="item-regi-code-text" maxlength="50">
                         </div>
-                        <h6 class="item-regi-name-byte" id="item-regi-name-byte">(0 / 20)</h6>
+                        <h6 class="item-regi-code-byte" id="item-regi-code-byte">(0 / 50)</h6>
                       </section>
                       <section class="item-regi-section">
                         <h2 class="item-regi-name">상품설명</h2>
                         <div id="editor"></div>
-                        <h6 class="item-regi-description-byte" id="item-regi-description-byte">(0 / 2000)</h6>
                       </section>
                       <!-- 카테고리 선택 영역 -->
                       <section class="item-regi-category">
@@ -159,20 +158,28 @@
                           </div>
                         </div>
                       </section>
+                      <section class="item-regi-price">
+                        <h6 class="item-regi-name">뱃지 설정</h6>
+                        <div class="item-regi-badge-box">
+                             <select class="item-regi-badge-box" name="product_badge[]" id="product_badge"></select>
+                          </div>
+                      </section>
 					  <section class="item-regi-stock">
                         <h6 class="item-regi-name">옵션 설정</h6>
                         <div id="option-container">
-							<input type="color" name="color_number[]" class="color-picker" required>
-							<input type="text" name="color_name[]" class="color-name" id="color_name" required>
-							<select name="size_option[]" class="size-select" id="product_size"></select>
-                          	<input type="number" name="stock_number[]" class="stock-number" id="stock_number" placeholder="재고 수량을 입력해주세요." required>
+                        	<div class="option-row" style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+								<input type="color" name="color_number[]" class="color-picker">
+								<input type="text" name="color_name[]" class="color-name" id="color_name" >
+								<select name="size_option[]" class="size-select" id="product_size"></select>
+	                          	<input type="number" name="stock_number[]" class="stock-number" id="stock_number" placeholder="재고 수량 입력" >
+                          	</div>
                         </div>
 						<button type="button" id="add-option" class="btn btn-sm btn-outline-primary">추가</button>
                       </section>
 						<!-- 제출 버튼 -->
                       <div class="item-regi-submit-group">
                         <input type="button" class="item-backpage" onclick="history.back()" value="뒤로 가기">
-                        <input type="submit" class="item-submit" value="상품 등록">
+                        <input type="submit" class="item-submit" id="update" value="상품 수정">
                       </div>
                     </form>
                   </section>
@@ -193,7 +200,6 @@
     </div>
   </div>
   <!-- Bootstrap 및 기타 플러그인 JS -->
-  <script src="${pageContext.request.contextPath}/resources/public/vendor/jquery/jquery.min.js"></script>
   <script src="${pageContext.request.contextPath}/resources/public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="${pageContext.request.contextPath}/resources/public/vendor/jquery-easing/jquery.easing.min.js"></script>
   <script src="${pageContext.request.contextPath}/resources/public/js/sb-admin-2.min.js"></script>
@@ -201,5 +207,3 @@
   <script src="${pageContext.request.contextPath}/resources/public/vendor/datepicker/moment.min.js"></script>
   <script src="${pageContext.request.contextPath}/resources/public/vendor/datatables/jquery.dataTables.min.js"></script>
   <script src="${pageContext.request.contextPath}/resources/public/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/public/js/index.js"></script>
-  
