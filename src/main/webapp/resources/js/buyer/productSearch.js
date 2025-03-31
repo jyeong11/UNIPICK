@@ -17,7 +17,7 @@ $(function() {
 				                    	<div class="dc">${prd.dc}</div>
 				                    	<div class="prd_sp">${prd.prd_sp}원</div>
 				                    </div>
-									<div>${prd.prd_bd} 산품뱃지 들어옴</div>
+									<div class="bd">${prd.cod_nm}</div>
 				                </div>
 	                        `;
 	                    });

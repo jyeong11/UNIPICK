@@ -82,7 +82,7 @@
            	   ROW_NUMBER() OVER (PARTITION BY prd_cd) AS rn
     	  FROM product_images
 		)
-  	 SELECT pd.prd_nm, pd.sel_id, pd.prd_cd, 
+  	 SELECT pd.prd_nm, pd.sel_id, pd.prd_cd, cd.cod_nm,
   	 		CONCAT(ROUND(((pd.prd_op - pd.prd_sp) / pd.prd_op) * 100, 0), '%') AS dc,
 			FORMAT(pd.prd_sp, 0) AS prd_sp, 
 			pd.prd_bd, pi.fil_nm, pi.fil_pt
@@ -91,7 +91,10 @@
 					fil_pt,
 					fil_nm
 			   FROM RankedImages
-			  WHERE rn = 1) pi ON pd.prd_cd = pi.prd_cd
+			  WHERE rn = 1) pi 
+	     ON pd.prd_cd = pi.prd_cd
+	   JOIN common_detailcode cd
+	   	 ON  pd.prd_bd= cd.cod_cd
       WHERE prd_nm LIKE CONCAT('%',#{query},'%')
       	AND prd_st = '승인'; 
   	</select>

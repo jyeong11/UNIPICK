@@ -10,6 +10,14 @@
     height: 300px;
     object-fit: cover;
 }
+.bd {
+	background-color: #f2a900;
+    width: 67px;
+    height: 25px;
+    color: white;
+    text-align: center;
+    font-size: 15px;
+}
 .prdInfo {
 	color: #292b2b;
     font-weight: 600;
