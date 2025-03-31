@@ -182,8 +182,8 @@ public class SellerController {
 	
 	// 상품 상세 조회
 	@ResponseBody
-	@PostMapping("productDetail")
-	public Map<String, Object> productDetail(@RequestBody Map<String, Object> prdData){
+	@PostMapping("selproductDetail")
+	public Map<String, Object> selproductDetail(@RequestBody Map<String, Object> prdData){
 		
 		return selService.productDetail(prdData);
 	}

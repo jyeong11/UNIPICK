@@ -40,9 +40,33 @@
 	
 	<!-- 상품 상세 조회 -->
 	<select id="productDetail" parameterType="map">
-		select prd_nm, prd_cd, prd_op, prd_sp, prd_ca
-		  from products
-		 where prd_cd = #{prd_cd}
+		SELECT p.prd_nm,
+			   p.prd_cd,
+			   p.prd_op,
+			   p.prd_sp,
+			   p.prd_ca,
+			   p.prd_sf
+		  FROM products p
+		 WHERE p.prd_cd = #{prd_cd}
+	</select>
+	
+	<!-- 상품 상세 조회 옵션 -->
+	<select id="productOption" parameterType="map">
+		SELECT o.clr_cd,
+			   o.clr_nm,
+			   o.prd_qt,
+			   cd.cod_nm
+		  FROM options o
+		  JOIN common_detailcode cd ON o.siz_nm = cd.cod_cd
+		 WHERE prd_cd = #{prd_cd}
+	</select>
+	
+	<!-- 상품 이미지 -->
+	<select id="productImage" parameterType="map">
+		SELECT fil_nm,
+			   fil_pt
+		  FROM product_images
+		 WHERE prd_cd = #{prd_cd}
 	</select>
 	
 <!-- 	주문 상세 조회 -->

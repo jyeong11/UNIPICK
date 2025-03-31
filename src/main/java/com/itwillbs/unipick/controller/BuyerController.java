@@ -355,8 +355,13 @@ public class BuyerController {
 	@ResponseBody
 	@PostMapping("registerRecentlyPrd")
 	public void registerRecentlyPrd(HttpSession session, @RequestBody Map<String, Object> prd) {
-		prd.put("buy_em", session.getAttribute("buyEm"));
-		buyService.registerRecentlyPrd(prd);
+		Object buyEm = session.getAttribute("buyEm");
+	    
+	    if (buyEm != null) {
+	        prd.put("buy_em", buyEm);
+	        buyService.registerRecentlyPrd(prd);
+	    }
+
 	}
 	
 	// 최근 본 상품 리스트

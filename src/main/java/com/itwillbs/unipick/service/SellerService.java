@@ -31,6 +31,8 @@ public class SellerService {
 		Map<String, Object> productDetail = new HashMap<String, Object>();
 		
 		productDetail.put("prdData", mapper.productDetail(prdData));
+		productDetail.put("prdImg", mapper.productImage(prdData));
+		productDetail.put("prdOpt", mapper.productOption(prdData));
 		productDetail.put("cate", buyerMapper.getCategory());
 		
 		return productDetail;
