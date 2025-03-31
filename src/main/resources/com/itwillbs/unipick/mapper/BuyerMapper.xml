@@ -22,16 +22,14 @@
   	
   	<!--   	상품상세조회 -->
 	<select id="getPrdDetail" parameterType="map">
-	 SELECT p.prd_cd, s.sel_nm, p.prd_nm, 
+	 SELECT p.prd_cd, s.sel_nm, p.prd_nm, p.prd_ct,
 	  		CONCAT(ROUND(((p.prd_op - p.prd_sp) / p.prd_op) * 100, 0), '%') AS dc,
 	  		FORMAT(p.prd_op, 0) AS prd_op, 
-	  		FORMAT(p.prd_sp, 0) AS prd_sp 
+	  		FORMAT(p.prd_sp, 0) AS prd_sp
 	    FROM products p 
 	    JOIN sellers s
           ON p.sel_id = s.sel_id
-       <if test="prd_cd != null">
 	   WHERE prd_cd = #{prdCd};
-	   </if>
 	</select>
 	
 <!-- 	상품 상세 이미지 -->
@@ -77,13 +75,23 @@
 	</select>
   	<!--   	상품검색 -->
   	<select id="getSearchPrd" parameterType="map">
+  	WITH RankedImages AS (
+    	SELECT prd_cd,
+           	   fil_nm,
+           	   fil_pt,
+           	   ROW_NUMBER() OVER (PARTITION BY prd_cd) AS rn
+    	  FROM product_images
+		)
   	 SELECT pd.prd_nm, pd.sel_id, pd.prd_cd, 
   	 		CONCAT(ROUND(((pd.prd_op - pd.prd_sp) / pd.prd_op) * 100, 0), '%') AS dc,
 			FORMAT(pd.prd_sp, 0) AS prd_sp, 
 			pd.prd_bd, pi.fil_nm, pi.fil_pt
   	   FROM products pd
-       JOIN product_images pi
-         ON pd.prd_cd = pi.prd_cd
+       JOIN (SELECT prd_cd,
+					fil_pt,
+					fil_nm
+			   FROM RankedImages
+			  WHERE rn = 1) pi ON pd.prd_cd = pi.prd_cd
       WHERE prd_nm LIKE CONCAT('%',#{query},'%')
       	AND prd_st = '승인'; 
   	</select>

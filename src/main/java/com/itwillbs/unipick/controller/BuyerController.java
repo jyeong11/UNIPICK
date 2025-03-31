@@ -121,6 +121,7 @@ public class BuyerController {
 	@GetMapping("productDetail")
 	public String productDetail(@RequestParam("prd_cd") String prdCd, Model model) {
 		Map<String, Object> prdList = buyService.getPrdDetail(prdCd);
+		System.out.println("prdList" + prdList);
 		List<String> prdImg = buyService.getPrdImg(prdCd);
 		List<Map<String, Object>> optionList = buyService.getPrdOption(prdCd); 
 		

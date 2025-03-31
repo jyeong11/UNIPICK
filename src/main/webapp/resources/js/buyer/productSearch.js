@@ -11,7 +11,7 @@ $(function() {
 	                    res.forEach(function(prd) {
 	                        resultHtml += `
 	                            <div class="prd-item" data-id="${prd.prd_cd}" style="cursor: pointer;">
-				                    <img src="${contextPath}/resources/${prd.fil_pt}" class="prd-img">
+				                    <img src="${contextPath}${prd.fil_pt}" class="prd-img">
 									<div class="prdInfo">${prd.prd_nm}</div>
 				                    <div class="prd_pr">
 				                    	<div class="dc">${prd.dc}</div>

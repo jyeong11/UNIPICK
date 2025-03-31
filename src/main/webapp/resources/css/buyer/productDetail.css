@@ -1,17 +1,37 @@
 @charset "UTF-8";
 .product-container {
     display: flex;
+    justify-content: center;
     align-items: flex-start;
-    gap: 40px;
+    flex-direction: row;
     max-width: 1160px;
     margin: 40px auto;
-    padding: 20px;
+}
+
+#product{
+	margin-left: 51px;
+}
+.image-container img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+#prev-btn, #next-btn{
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#prev-btn:hover, #next-btn:hover  {
+    background-color: #0056b3;
 }
 #product,.product-container {
 	display: flex;
 	justify-content: space-between;
     align-items: flex-start;
-
 }
 #qty-input{
 	height: 28px;
@@ -20,12 +40,6 @@
     text-align: center;
     border: none;
 }
-/* .product-container img { */
-/*     width: 400px; */
-/*     height: auto; */
-/*     border-radius: 10px; */
-/*     object-fit: cover; */
-/* } */
 .kakao-pay-btn {
 	background-color: #FFCD00;
 }
@@ -210,8 +224,12 @@ div > a > i {
 	text-align: center;
 	margin-bottom: 10px;
 }
+#detailEp p {
+	max-width: 800px; 
+    margin: 0 auto;
+}
 #loadMoreBtn {
-    display: block;
+    display: block; 
     margin: 20px auto;
     padding: 10px 20px;
     font-size: 16px;

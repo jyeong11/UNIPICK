@@ -24,6 +24,7 @@
 <link href="${pageContext.request.contextPath }/resources/css/top.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/footer.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/buyer/productDetail.css" rel="stylesheet" type="text/css">
+
 <!-- favicon -->
 <link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
 </head>
@@ -37,11 +38,14 @@
 	</div>
 	 <div class="product-container">
     <!-- 왼쪽 상품 이미지 -->
-	    <div class="product-image">
-			<c:forEach var="image" items="${prdImg}">
-				<img src="${pageContext.request.contextPath}/resources/${image}" class="product-img">
-			</c:forEach>
-		</div>
+	     <div class="product-image">
+	        <div class="image-container">
+	             <img id="product-image" src="${pageContext.request.contextPath}${prdImg[0]}" class="product-img">
+	        </div>
+	        <!-- 다음/이전 버튼 -->
+	        <button id="prev-btn" class="swiper-button-prev">이전</button>
+	        <button id="next-btn" class="swiper-button-next">다음</button>
+	    </div>
 		<div id="product">
 		    <div class="product-info">
 		        <div><a href="sellerShopDetail?sel_nm=${prd.sel_nm}"><i class="fa-solid fa-house"></i>${prd.sel_nm}</a></div>
@@ -94,16 +98,10 @@
 				</ul>
 		 	</div>
 		 	<div id="detailEp">
-		 		<c:forEach begin="1" end="5">
-		    		<img src="${pageContext.request.contextPath }/resources/images/favicon_b.png" alt="1">
-				</c:forEach>
+		 		<div id="prdCt">${prd.prd_ct }</div>
 			</div>
-			<div id="moreItems" style="display: none;">
-		        <c:forEach begin="6" end="10">
-		            <img src="${pageContext.request.contextPath }/resources/images/favicon_b.png" alt="1">
-		        </c:forEach>
-    		</div>
-	    	<button id="loadMoreBtn">상품 더보기 ↓</button>
+	    	<button id="loadMoreBtn" style="display: none;">상품 더보기 ↓</button>
+	    	<div id="moreItems" style="display: none;"></div> 
 	    	<section>
 	    		<div id="selAnthor">
 	    			<div id="selAnthorTitle">
@@ -174,9 +172,10 @@
 	<div id="footer">
 		<jsp:include page="../inc/footer.jsp"></jsp:include>
 	</div>
-	<script>
-    	var prdCd = "${prd.prd_cd}";
-        var contextPath = "${pageContext.request.contextPath}";
+	<script type="text/javascript">
+	    var prdCd = "${prd.prd_cd}";
+	    var contextPath = "${pageContext.request.contextPath}";
+	    var images = ${selImgList != null ? selImgList : '[]'};
 	</script>
 </body>
 </html>
