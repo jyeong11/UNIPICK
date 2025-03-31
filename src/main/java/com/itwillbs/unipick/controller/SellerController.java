@@ -215,5 +215,12 @@ public class SellerController {
 		
 		return subDir;
 	}
+	
+	// 상품 수정
+	@ResponseBody
+	@PostMapping("productUpdate")
+	public void productUpdate() {
+		
+	}
 }
 

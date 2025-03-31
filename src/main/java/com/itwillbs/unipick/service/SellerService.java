@@ -9,11 +9,14 @@ import org.springframework.stereotype.Service;
 
 import com.itwillbs.unipick.mapper.BuyerMapper;
 import com.itwillbs.unipick.mapper.SellerMapper;
+import com.itwillbs.unipick.mapper.SellerMapper2;
 
 @Service
 public class SellerService {
 	@Autowired
 	SellerMapper mapper;
+	@Autowired
+	SellerMapper2 mapper2;
 	@Autowired
 	BuyerMapper buyerMapper;
 	
@@ -33,6 +36,7 @@ public class SellerService {
 		productDetail.put("prdData", mapper.productDetail(prdData));
 		productDetail.put("prdImg", mapper.productImage(prdData));
 		productDetail.put("prdOpt", mapper.productOption(prdData));
+		productDetail.put("size", mapper2.selectSizeOptions("SIZE"));
 		productDetail.put("cate", buyerMapper.getCategory());
 		
 		return productDetail;

@@ -41,11 +41,13 @@
 	<!-- 상품 상세 조회 -->
 	<select id="productDetail" parameterType="map">
 		SELECT p.prd_nm,
+			   p.prd_ct,
 			   p.prd_cd,
 			   p.prd_op,
 			   p.prd_sp,
 			   p.prd_ca,
-			   p.prd_sf
+			   p.prd_sf,
+			   p.prd_bd
 		  FROM products p
 		 WHERE p.prd_cd = #{prd_cd}
 	</select>
