@@ -38,15 +38,23 @@ public class SellerController2 {
     	return "seller/sellerOrdList";
     }
     
-    @GetMapping("selModifyForm")
-    public String getSelModifyForm(HttpSession session, Model model) {
-        Map<String, Object> sell = new HashMap<>();
+	// 회원수정페이지 이동
+	@GetMapping("selModifyForm")
+	public String modify() {
+		return "seller/sellerModifyForm";
+	}
+    
+	@ResponseBody
+    @PostMapping("selModifyForm")
+    public Map<String, Object> getSelModifyForm(HttpSession session) {
+           	
+    	Map<String, Object> sell = new HashMap<>();
         sell.put("sel_id", session.getAttribute("storeId"));
-        Map<String, Object> sellerInfo = service.selModifyForm(sell);
         
-        model.addAttribute("sellerInfo", sellerInfo);
+        //Map<String, Object> sellerInfo = service.selModifyForm(sell);
         
-        return "seller/sellerModifyForm";  // myPage.jsp 또는 myPage.html 등으로 이동
+       
+        return service.selModifyForm(sell); 
     }
     
 	// 구매자 정보 수정

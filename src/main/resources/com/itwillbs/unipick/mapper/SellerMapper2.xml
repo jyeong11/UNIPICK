@@ -58,6 +58,7 @@
       NOW()
     )
   </insert>
+  
 <insert id="insertProductOptions" parameterType="map">
 	INSERT INTO options (prd_cd, siz_nm, clr_cd, clr_nm, prd_qt) VALUES
     <foreach collection="options" item="opt" separator=",">
@@ -110,6 +111,11 @@
     VALUES (#{product_category}, #{product_category1}, #{product_category2})
   </insert>
   
+  <insert id="insertBadgeSelection" parameterType="map">
+  	INSERT INTO badge_selection(product_badge, product_badge2, product_badge3, product_badge4)
+  	VALUES (#{product_badge}, #{product_badge1}, #{product_badge2}, #{product_badge3}, #{product_badge4})
+  </insert>
+  
   <!-- 배송 옵션 조회 쿼리 (단순 문자열 파라미터는 기본 이름 'value'로 사용) -->
   <select id="selectDeliveryOptions" parameterType="String" resultType="map">
 	SELECT cod_cd, cod_nm, cod_pr, cod_so, cod_yn
@@ -129,6 +135,15 @@
 
  
  <select id="selectSizeOptions" parameterType="String" resultType="map">
+	SELECT cod_cd, cod_nm, cod_pr, cod_so, cod_yn
+	FROM common_detailcode
+	WHERE com_cd LIKE CONCAT(#{value}, '%')
+	AND cod_yn = 'Y'
+	ORDER BY cod_so
+</select>
+
+
+ <select id="selectBadgeOptions" parameterType="String" resultType="map">
 	SELECT cod_cd, cod_nm, cod_pr, cod_so, cod_yn
 	FROM common_detailcode
 	WHERE com_cd LIKE CONCAT(#{value}, '%')

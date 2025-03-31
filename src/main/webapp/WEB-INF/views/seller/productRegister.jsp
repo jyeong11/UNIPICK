@@ -165,6 +165,12 @@
                           </div>
                         </div>
                       </section>
+                      <section class="item-regi-price">
+                        <h6 class="item-regi-name">뱃지 설정</h6>
+                        <div class="item-regi-badge-box">
+                             <select class="item-regi-badge-box" name="product_badge[]" id="product_badge"></select>
+                          </div>
+                      </section>
                       	<section class="item-regi-stock">
                         <h6 class="item-regi-name">옵션 설정</h6>
                         <div id="option-container">

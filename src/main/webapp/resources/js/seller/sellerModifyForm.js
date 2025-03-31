@@ -2,24 +2,37 @@ $(function() {
 	
 	let effectiveness = true;
 	
+	// 카카오 주소창 띄우기 
+	$(document).on("click", "#search-address", function(e) {
+		e.preventDefault();
+	    new daum.Postcode({
+	        oncomplete: function(data) {
+	            $("#shipping_zipcode").val(data.zonecode);
+	            $("#shipping_address").val(data.address);
+	        }
+	    }).open();
+	});	
+	
 	// 초기 데이터
 	$.ajax({
-			url: "selModifyForm",
-			method: "GET",
-			success: function(res) {
-				$('#storePw').append(res.sel_pw);
-				$('#storeNm').val(res.sel_nm);
-				$('#ceoNm').val(res.sel_rn);
-				$('#brn').val(res.sel_br);
-				$('#storead').val(res.sel_ad);
-				$('#storeNumber').val(res.sel_cs);
-				$('#phNm').val(res.sel_mn);
-				$('#phNumber').val(res.sel_mp);
-        	},
-			error: function(xhr, status, error) {
-	        	alert("서버 오류가 발생했습니다.");
-	        }
-		});
+    url: "selModifyForm",
+    method: "POST",
+    success: function(res) {
+        console.log(res); // 🔍 확인용 콘솔 출력
+		$('#storeId').val(res.sel_id);
+        $('#storePw').val(res.sel_pw);
+        $('#storeNm').val(res.sel_nm);
+        $('#ceoNm').val(res.sel_rn);
+        $('#brn').val(res.sel_br);
+        $('#storead').val(res.sel_ad);
+        $('#storeNumber').val(res.sel_cs);
+        $('#phNm').val(res.sel_mn);
+        $('#phNumber').val(res.sel_mp);
+    },
+    error: function(xhr, status, error) {
+        alert("서버 오류가 발생했습니다.");
+    }
+});
 	
 
 	// 유효성 검사

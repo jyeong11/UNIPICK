@@ -144,6 +144,7 @@ public class SellerRestController2 {
     public List<Map<String, Object>> getProductCategory(@RequestParam(required = false) String parentCode) {
         return sellerService.getCategories(parentCode);
     }
+ 
 
 //    // 배송 옵션 조회 API
 //    @GetMapping("/deliveryOptions")
@@ -161,6 +162,11 @@ public class SellerRestController2 {
     @GetMapping("/sizeOptions")
     public List<Map<String, Object>> getSizeOptions(){
     	return sellerService.getSizeOptions();
+    }
+    
+    @GetMapping("/badgeOptions")
+    public List<Map<String, Object>> getBadgeOptions(){
+    	return sellerService.getBadgeOptions();
     }
     
     

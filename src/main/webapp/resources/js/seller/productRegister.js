@@ -13,6 +13,17 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // 3. 뱃지 옵션 select 요소를 채우는 공통 함수
+  function BadgeSelect(selectElement, options) {
+    selectElement.innerHTML = '<option value="">선택하세요</option>';
+    options.forEach(option => {
+      const opt = document.createElement('option');
+      opt.value = option.cod_cd;      
+      opt.textContent = option.cod_nm;  
+      selectElement.appendChild(opt);
+    });
+  }
+
   // 3. 서버에서 사이즈 옵션 데이터를 가져와 전역 변수에 할당 후 메인 드롭다운에 옵션 채우기
   fetch(contextPath + '/seller/sizeOptions')
     .then(response => {
@@ -31,6 +42,52 @@ document.addEventListener("DOMContentLoaded", function () {
       console.error("사이즈 옵션 로딩 오류:", error);
       alert("사이즈 옵션 데이터를 불러오지 못했습니다.");
     });
+
+
+ fetch(contextPath + '/seller/badgeOptions')
+    .then(response => {
+      if (!response.ok) throw new Error("네트워크 오류");
+      return response.json();
+    })
+    .then(data => {
+      globalSizeOptions = data;
+      console.log("뱃지 옵션 로딩 완료:", globalSizeOptions);
+  // 컨테이너는 클래스가 "item-regi-price-box"인 요소
+    const badgeContainer = document.querySelector('.item-regi-price-box');
+    // 최초 select 요소는 id "product_badge"로 지정되어 있음
+    const initialSelect = document.getElementById("product_badge");
+    if (initialSelect) {
+      BadgeSelect(initialSelect, globalSizeOptions);
+      // 이벤트 리스너 등록
+      //initialSelect.addEventListener("change", handleBadgeChange);
+		}
+    })
+    .catch(error => {
+      console.error("뱃지 옵션 로딩 오류:", error);
+      alert("뱃지 옵션 데이터를 불러오지 못했습니다.");
+    });
+
+// 뱃지 select 요소 변경 시 처리 함수
+//function handleBadgeChange(event) {
+//  const select = event.target;
+//  // 선택 값이 있을 때만 처리
+//  if (select.value.trim() !== "") {
+//    const badgeContainer = document.querySelector('.item-regi-badge-box');
+//    // 컨테이너 내부의 모든 select 요소 선택
+//    const selects = badgeContainer.querySelectorAll("select[name='product_badge[]']");
+//    // 현재 변경된 요소가 마지막 select 요소일 경우에만 새 select 추가
+//    if (select === selects[selects.length - 1]) {
+//      const newSelect = document.createElement("select");
+//      newSelect.name = "product_badge[]";
+//	 newSelect.id = "product_badge";
+//      // 기존 select와 동일한 클래스를 부여
+//      newSelect.className = "item-regi-badge-box";
+//      BadgeSelect(newSelect, globalSizeOptions);
+//      newSelect.addEventListener("change", handleBadgeChange);
+//      badgeContainer.appendChild(newSelect);
+//    }
+//  }
+//}
 
   // 4. 유효성 검사 함수
   function validateForm() {
@@ -75,6 +132,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return [];
       }
     }
+
     async function initCategory() {
       populateDropdown(cat1, await fetchCategories());
       cat1.addEventListener('change', async function () {
@@ -84,7 +142,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     await initCategory();
-
   }
 
   // 6. 썸네일 미리보기 (이벤트 위임)
@@ -185,7 +242,7 @@ document.addEventListener("DOMContentLoaded", function () {
       prd_ca: $("#product_category_detail").val() || $("#product_category_sub").val() || $("#product_category").val(),
       prd_qt: $("#stock_number").val() || 0,  // null 처리 (기본값 0)
       prd_ds: $("#prd_ds_checkbox").is(":checked") ? 1 : 0,
-      prd_bd: $("#some_element").val(),
+      prd_bd: $("#product_badge").val(),
 	  prd_sf: $("#delivery_price").val()|| 0,
 	  prd_ct: content,
 	  sizes: [],   // 사이즈 배열
@@ -198,6 +255,13 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("색상 배열:", productData.colors);  // 색상 배열 출력
 	console.log("재고 배열:", productData.stocks);  // 색상 배열 출력
 
+
+    document.querySelectorAll("select[name='product_badge[]']").forEach(select => {
+      if (select.value.trim() !== "") {
+       // productData.prd_bd.push(select.value);
+      }
+    });
+
     // 색상 추가 (빈 값 제외)
     document.querySelectorAll("#option-container input[name='color_number[]']").forEach(input => {
       if (input.value.trim() !== "") {
@@ -205,7 +269,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
-	// 색상 추가 (빈 값 제외)
     document.querySelectorAll("#option-container input[name='color_name[]']").forEach(input => {
       if (input.value.trim() !== "") {
         productData.colorsnm.push(input.value); // 각 색상 값을 개별적으로 처리

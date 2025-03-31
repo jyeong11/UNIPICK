@@ -191,7 +191,7 @@ public class SellerService2 {
     public List<Map<String, Object>> getCategories(String parentCode) {
         return mapper.selectCategories(parentCode);
     }
-
+    
     public void saveCategorySelection(Map<String, Object> selection) {
         mapper.insertCategorySelection(selection);
     }
@@ -210,6 +210,13 @@ public class SellerService2 {
         return mapper.selectSizeOptions("SIZE");
     }
     
+    public List<Map<String,Object>> getBadgeOptions(){
+    	return mapper.selectBadgeOptions("BADGE");
+    }
+    
+    public void saveBadgeSelection(Map<String, Object> selection) {
+        mapper.insertBadgeSelection(selection);
+    }
     
 	public Map<String, Object> selModifyForm(Map<String, Object> sell) {
 		return mapper.selModifyForm(sell);

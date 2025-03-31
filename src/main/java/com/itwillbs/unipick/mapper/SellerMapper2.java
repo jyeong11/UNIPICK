@@ -27,7 +27,7 @@ public interface SellerMapper2 {
     void insertProduct(Map<String, Object> product);
     void insertProductImage(Map<String, Object> paramMap);
     void insertProductOptions(Map<String, Object> productData);
-    List<Map<String, Object>> selectCategories(String parentCode);
+    List<Map<String, Object>> selectCategories(String parentCode);  
 
     public void insertCategorySelection(Map<String, Object> selection);
     
@@ -37,6 +37,10 @@ public interface SellerMapper2 {
     
     List<Map<String, Object>>selectSizeOptions(String comCd);
 
+    List<Map<String, Object>>selectBadgeOptions(String comCd);
+    public void insertBadgeSelection(Map<String, Object> selection);
+    
+    
 	public Map<String, Object> selModifyForm(Map<String, Object> sell);
 	
 	// 구매자 정보 수정
