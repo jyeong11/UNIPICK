@@ -100,16 +100,24 @@
 										<label for="storePw">비밀번호</label>
 											<input type="password" id="storePw" name="storePw" placeholder="대문자, 특수문자 포함 6자리 이상 입력해주세요">
 									</div>
-									
+									<img src="/resources${storePpPath}" alt="Profile Image">
+<img src="/resources${storeBpPath}" alt="Background Image">
 									<hr>
 									<div class="content-tilte">쇼핑몰 정보 입력</div>
 									<div class="input-group">
-										<label for="storePp">스토어 프로필</label>
-										<input type="file" id="storePp" name="storePp">
+									    <label for="storePp">스토어 프로필</label>
+									    <input type="file" id="storePp" name="storePp" accept="image/*">
+									    <img id="previewStorePp" src="" alt="미리보기" style="max-width: 150px; display: none;">
+									    <input type="hidden" id="existingStorePp" value="${existingStorePpValue}">
+									    <button type="button" id="removeStorePp">삭제</button>
 									</div>
+									
 									<div class="input-group">
-										<label for="storeBp">스토어 프로필</label>
-										<input type="file" id="storeBp" name="storeBp">
+									    <label for="storeBp">스토어 배경</label>
+									    <input type="file" id="storeBp" name="storeBp" accept="image/*">
+									    <img id="previewStoreBp" src="" alt="미리보기" style="max-width: 150px; display: none;">
+									    <input type="hidden" id="existingStoreBp" value="${existingStoreBpValue}">
+									    <button type="button" id="removeStoreBp">삭제</button>
 									</div>
 									<div class="input-group">
 										<label for="storeNm">쇼핑몰 이름</label>
@@ -117,7 +125,7 @@
 									</div>
 
 									<div class="input-group">
-										<label for="ceoNm">대표자 명</label>
+										<label for="ceoNm">대표자명</label>
 										<input type="text" id="ceoNm" name="ceoNm">
 									</div>
 
@@ -190,3 +198,7 @@
 	<script src="${pageContext.request.contextPath }/resources/public/vendor/datepicker/moment.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/public/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="${pageContext.request.contextPath }/resources/public/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    
+    </body>
+    </html>

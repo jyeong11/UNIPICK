@@ -40,6 +40,7 @@ public interface SellerMapper2 {
     List<Map<String, Object>>selectBadgeOptions(String comCd);
     public void insertBadgeSelection(Map<String, Object> selection);
     
+    //public Map<String, Object> getSellerInfo(String sellerId);
     
 	public Map<String, Object> selModifyForm(Map<String, Object> sell);
 	

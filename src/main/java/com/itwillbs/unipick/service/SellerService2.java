@@ -1,6 +1,10 @@
 package com.itwillbs.unipick.service;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -223,13 +227,129 @@ public class SellerService2 {
 		return mapper.selModifyForm(sell);
 	}
 	
-	// 구매자 정보수정
 	public void sellerModify(Map<String, Object> selModifyForm) {
-		mapper.sellerModify(selModifyForm);
+	    // 파일과 관련된 추가 로직이 필요한 경우 여기서 처리 가능
+	    mapper.sellerModify(selModifyForm);
 	}
 	
 	// 회원 탈퇴
 	public void Withdraw(Map<String, Object> seller) {
 		mapper.Withdraw(seller);
 	}
-}
+
+	// 파일 업로드 및 검증
+	public Map<String, Object> uploadProfileImage(HttpServletRequest req, MultipartFile profileImageFile) {
+	    Map<String, Object> imageData = new HashMap<>();
+	    ServletContext servletContext = req.getServletContext();
+
+	    if (profileImageFile == null || profileImageFile.isEmpty()) {
+	        imageData.put("error", "프로필 이미지 파일이 없습니다.");
+	        return imageData;
+	    }
+
+	    try {
+	        // 파일 원본 이름 가져오기
+	        String originalFilename = profileImageFile.getOriginalFilename();
+	        System.out.println("✅ 프로필 원본 파일명: " + originalFilename);
+
+	        if (originalFilename == null || originalFilename.trim().isEmpty()) {
+	            imageData.put("error", "파일명이 올바르지 않습니다.");
+	            return imageData;
+	        }
+
+	        // 고유한 파일명 생성 (중복 방지)
+	        String uniqueFilename = UUID.randomUUID().toString() + "_" + originalFilename;
+
+	        // 실제 저장할 경로 (로컬 파일 시스템)
+	        String uploadDir = req.getServletContext().getRealPath("/resources/profile/");
+	        File folder = new File(uploadDir);
+	        if (!folder.exists()) {
+	            folder.mkdirs(); // 폴더가 없으면 생성
+	        }
+
+	        // 파일 저장 경로 설정
+	        String fullPath = uploadDir + uniqueFilename;
+	        File destFile = new File(fullPath);
+	        profileImageFile.transferTo(destFile); // 파일 저장
+
+	        // DB에 저장할 가상 경로
+	        String filePath = "/resources/upload/profile/" + uniqueFilename;
+
+	        // 필수 데이터 저장
+	        imageData.put("sel_pp", uniqueFilename); // 파일명 추가
+	        imageData.put("sel_pp", filePath); // 가상 경로 추가
+
+	        System.out.println("📂 프로필 이미지 저장된 파일명: " + uniqueFilename);
+	        System.out.println("📂 프로필 이미지 실제 저장 경로: " + fullPath);
+	        System.out.println("📂 프로필 이미지 DB 저장 경로: " + filePath);
+
+	    } catch (Exception e) {
+	        System.out.println("❌ 프로필 이미지 업로드 중 오류 발생: " + e.getMessage());
+	        imageData.put("error", "파일 업로드 실패");
+	        e.printStackTrace();
+	    }
+
+	    return imageData;
+	}
+
+	// 파일 업로드 및 검증
+	public Map<String, Object> uploadBackgroundImage(HttpServletRequest req, MultipartFile backgroundImageFile) {
+	    Map<String, Object> imageData = new HashMap<>();
+	    ServletContext servletContext = req.getServletContext();
+
+	    if (backgroundImageFile == null || backgroundImageFile.isEmpty()) {
+	        imageData.put("error", "배경 이미지 파일이 없습니다.");
+	        return imageData;
+	    }
+
+	    try {
+	        // 파일 원본 이름 가져오기
+	        String originalFilename = backgroundImageFile.getOriginalFilename();
+	        System.out.println("✅ 배경 원본 파일명: " + originalFilename);
+
+	        if (originalFilename == null || originalFilename.trim().isEmpty()) {
+	            imageData.put("error", "파일명이 올바르지 않습니다.");
+	            return imageData;
+	        }
+
+	        // 고유한 파일명 생성 (중복 방지)
+	        String uniqueFilename = UUID.randomUUID().toString() + "_" + originalFilename;
+
+	        // 실제 저장할 경로 (로컬 파일 시스템)
+	        String uploadDir = req.getServletContext().getRealPath("/resources/background/");
+	        File folder = new File(uploadDir);
+	        if (!folder.exists()) {
+	            folder.mkdirs(); // 폴더가 없으면 생성
+	        }
+
+	        // 파일 저장 경로 설정
+	        String fullPath = uploadDir + uniqueFilename;
+	        File destFile = new File(fullPath);
+	        backgroundImageFile.transferTo(destFile); // 파일 저장
+
+	        // DB에 저장할 가상 경로
+	        String filePath = "/resources/upload/background/" + uniqueFilename;
+
+	        // 필수 데이터 저장
+	        imageData.put("sel_bp", uniqueFilename); // 파일명 추가
+	        imageData.put("sel_bp", filePath); // 가상 경로 추가
+
+	        System.out.println("📂 배경 이미지 저장된 파일명: " + uniqueFilename);
+	        System.out.println("📂 배경 이미지 실제 저장 경로: " + fullPath);
+	        System.out.println("📂 배경 이미지 DB 저장 경로: " + filePath);
+
+	    } catch (Exception e) {
+	        System.out.println("❌ 배경 이미지 업로드 중 오류 발생: " + e.getMessage());
+	        imageData.put("error", "파일 업로드 실패");
+	        e.printStackTrace();
+	    }
+
+	    return imageData;
+	}
+	
+//    public Map<String, Object> getSellerInfo(String sellerId) {
+//        return mapper.getSellerInfo(sellerId);
+//    }
+
+
+	}
