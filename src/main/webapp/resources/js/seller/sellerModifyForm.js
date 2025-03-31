@@ -90,7 +90,7 @@ $(function() {
 			sel_mn : $('#phNm').val(),
 			sel_mp : $('#phNumber').val(),
 		};
-		debugger;
+		console.log(data);
 		
 		if(!effectiveness){
 			alert('정보를 올바르게 입력 후 수정하기를 눌러주세요.');
@@ -105,6 +105,7 @@ $(function() {
 	        success: function() {
 				alert('회원정보가 수정되었습니다.');
 				window.location.href="main";
+				console.log(data);
 			},
 			error: function(xhr, status, error) {
 	        	alert("서버 오류가 발생했습니다.");

@@ -50,10 +50,6 @@ public class SellerController2 {
            	
     	Map<String, Object> sell = new HashMap<>();
         sell.put("sel_id", session.getAttribute("storeId"));
-        
-        //Map<String, Object> sellerInfo = service.selModifyForm(sell);
-        
-       
         return service.selModifyForm(sell); 
     }
     
@@ -65,7 +61,7 @@ public class SellerController2 {
 		Map<String, Object> sell = new HashMap<>();
 		sell.put("sel_id", session.getAttribute("storeId"));
 		
-		service.sellerModify(selModifyForm);
+		service.sellerModify(sell);
 	}
     
 	// 회원 탈퇴

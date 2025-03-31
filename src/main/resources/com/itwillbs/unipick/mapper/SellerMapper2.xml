@@ -272,6 +272,7 @@ JOIN common_detailcode c ON o.siz_nm = c.cod_cd
 
 	<select id="selModifyForm" parameterType="map">
 		SELECT sel_id,
+			   sel_pw,
 			   sel_nm,
 			   sel_rn,
 			   sel_mn,

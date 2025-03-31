@@ -116,7 +116,7 @@
 
 									<div class="input-group">
 										<label for="brn">사업자등록번호</label>
-										<input type="text" id="brn" name="brn">
+										<input type="text" id="brn" name="brn" readOnly>
 									</div>
 									
 									<div class="input-group">
@@ -124,10 +124,10 @@
 										<input type="text" id="storead" name="storead">
 									</div>
 									
-									<div class="input-group">
-										<label for="businessLicense">사업자 등록증</label>
-										<input type="file" id="businessLicense" name="businessLicense">
-									</div>
+<!-- 									<div class="input-group"> -->
+<!-- 										<label for="businessLicense">사업자 등록증</label> -->
+<!-- 										<input type="file" id="businessLicense" name="businessLicense"> -->
+<!-- 									</div> -->
 
 									<div class="input-group">
 										<label for="storeNumber">고객센터 번호</label>

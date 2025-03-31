@@ -9,6 +9,7 @@ import java.util.UUID;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -120,9 +121,12 @@ public class SellerService2 {
 
     // 트랜잭션 적용하여 상품, 이미지, 재고, 색상, 사이즈 한 번에 저장
     @Transactional
-    public void registerProduct(HttpServletRequest req, Map<String, Object> productData, List<MultipartFile> imageFiles) {
+    public void registerProduct(HttpSession session, HttpServletRequest req, Map<String, Object> productData, List<MultipartFile> imageFiles) {
     	
-    	
+    	   String selId = (String) session.getAttribute("selId");  // 세션 키 확인 필요
+
+    	    // productData에 sel_id 추가
+    	    productData.put("sel_id", selId);
     	
     	// 1. 상품 정보 저장
         mapper.insertProduct(productData);

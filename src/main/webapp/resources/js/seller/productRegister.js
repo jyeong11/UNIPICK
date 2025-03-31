@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   // 1. 전역 사이즈 옵션 데이터 변수 (초기값은 빈 배열)
   let globalSizeOptions = [];
+	let globalBadgeOptions = [];
 
   // 2. 사이즈 옵션 select 요소를 채우는 공통 함수
   function populateSizeSelect(selectElement, options) {
@@ -44,22 +45,18 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
- fetch(contextPath + '/seller/badgeOptions')
+	 fetch(contextPath + '/seller/badgeOptions')
     .then(response => {
       if (!response.ok) throw new Error("네트워크 오류");
       return response.json();
     })
     .then(data => {
-      globalSizeOptions = data;
-      console.log("뱃지 옵션 로딩 완료:", globalSizeOptions);
-  // 컨테이너는 클래스가 "item-regi-price-box"인 요소
+      globalBadgeOptions = data;
+      console.log("뱃지 옵션 로딩 완료:", globalBadgeOptions);
     const badgeContainer = document.querySelector('.item-regi-price-box');
-    // 최초 select 요소는 id "product_badge"로 지정되어 있음
     const initialSelect = document.getElementById("product_badge");
     if (initialSelect) {
-      BadgeSelect(initialSelect, globalSizeOptions);
-      // 이벤트 리스너 등록
-      //initialSelect.addEventListener("change", handleBadgeChange);
+      BadgeSelect(initialSelect, globalBadgeOptions);
 		}
     })
     .catch(error => {
@@ -231,14 +228,14 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("prd_ct").value = content;
 
     let formData = new FormData();
-
     // 상품 데이터 객체 생성
     let productData = {
+	
       prd_nm: $("#item-regi-title-text").val(),
       prd_cd: $("#item-regi-code-text").val(),
       prd_op: $("#list_price").val(),
       prd_sp: $("#sale_price").val(),
-      sel_id: "TEST_SELLER_ID", // 실제 로그인한 사용자의 ID 사용
+      sel_id: $("").val(),
       prd_ca: $("#product_category_detail").val() || $("#product_category_sub").val() || $("#product_category").val(),
       prd_qt: $("#stock_number").val() || 0,  // null 처리 (기본값 0)
       prd_ds: $("#prd_ds_checkbox").is(":checked") ? 1 : 0,
