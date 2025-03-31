@@ -33,7 +33,7 @@
       #{prd_bd},
       default,
       default,
-      prd_sf
+      #{prd_sf}
     )
   </insert>
   

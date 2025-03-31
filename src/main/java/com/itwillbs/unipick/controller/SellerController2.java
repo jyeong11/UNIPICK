@@ -60,7 +60,11 @@ public class SellerController2 {
 	// 구매자 정보 수정
 	@ResponseBody
 	@PostMapping("sellermodify")
-	public void sellermodify(@RequestBody Map<String, Object> selModifyForm) {
+	public void sellermodify(HttpSession session, @RequestBody Map<String, Object> selModifyForm) {
+		
+		Map<String, Object> sell = new HashMap<>();
+		sell.put("sel_id", session.getAttribute("storeId"));
+		
 		service.sellerModify(selModifyForm);
 	}
     
