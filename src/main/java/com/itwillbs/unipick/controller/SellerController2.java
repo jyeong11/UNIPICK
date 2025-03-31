@@ -58,10 +58,9 @@ public class SellerController2 {
 	@PostMapping("sellermodify")
 	public void sellermodify(HttpSession session, @RequestBody Map<String, Object> selModifyForm) {
 		
-		Map<String, Object> sell = new HashMap<>();
-		sell.put("sel_id", session.getAttribute("storeId"));
+		selModifyForm.put("sel_id", session.getAttribute("storeId"));
 		
-		service.sellerModify(sell);
+		service.sellerModify(selModifyForm);
 	}
     
 	// 회원 탈퇴

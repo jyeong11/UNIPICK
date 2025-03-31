@@ -103,7 +103,14 @@
 									
 									<hr>
 									<div class="content-tilte">쇼핑몰 정보 입력</div>
-									
+									<div class="input-group">
+										<label for="storePp">스토어 프로필</label>
+										<input type="file" id="storePp" name="storePp">
+									</div>
+									<div class="input-group">
+										<label for="storeBp">스토어 프로필</label>
+										<input type="file" id="storeBp" name="storeBp">
+									</div>
 									<div class="input-group">
 										<label for="storeNm">쇼핑몰 이름</label>
 										<input type="text" id="storeNm" name="storeNm">

@@ -80,39 +80,48 @@ $(function() {
 	// 수정
 	function modify() {
 		
-		data = {
-			sel_pw : $('#storePw').val(),
-			sel_nm : $('#storeNm').val(),
-			sel_rn : $('#ceoNm').val(),
-			sel_br : $('#brn').val(),
-			sel_ad : $('#storead').val(),
-			sel_cs : $('#storeNumber').val(),
-			sel_mn : $('#phNm').val(),
-			sel_mp : $('#phNumber').val(),
-		};
-		console.log(data);
+		 var formData = new FormData();
+        formData.append('sel_pw', $('#storePw').val());
+        formData.append('sel_nm', $('#storeNm').val());
+
+        // 파일이 선택된 경우에만 FormData에 파일을 추가
+        var storePrFile = $('#storePr')[0].files[0];
+        var storeBgFile = $('#storeBg')[0].files[0];
+
+        formData.append('storePrFile', storePrFile ? storePrFile : null); // 파일이 있으면 추가, 없으면 null
+        formData.append('storeBgFile', storeBgFile ? storeBgFile : null); // 파일이 있으면 추가, 없으면 null
+
+        // 기존 파일 경로를 보내는 부분은 그대로 유지
+        formData.append('existingStorePr', existingStorePr || ''); // 기존 프로필 경로
+        formData.append('existingStoreBg', existingStoreBg || ''); // 기존 배경 경로
+
+        formData.append('sel_rn', $("#ceoNm").val());
+        formData.append('sel_br', $('#brn').val());
+        formData.append('sel_ad', $('#storead').val());
+        formData.append('sel_cs', $('#storeNumber').val());
+        formData.append('sel_mn', $('#phNm').val());
+        formData.append('sel_mp', $('#phNumber').val());
 		
 		if(!effectiveness){
 			alert('정보를 올바르게 입력 후 수정하기를 눌러주세요.');
 			return;
 		}
 		
-		$.ajax({
-			type: "POST",
-	        url: "sellermodify",
-			data: JSON.stringify(data),
-			contentType: "application/json",
-	        success: function() {
-				alert('회원정보가 수정되었습니다.');
-				window.location.href="main";
-				console.log(data);
-			},
-			error: function(xhr, status, error) {
-	        	alert("서버 오류가 발생했습니다.");
-	        }
-			
-		});
-	}
+	        $.ajax({
+            type: "POST",
+            url: "sellermodify",
+            data: formData,
+            processData: false, // 자동으로 데이터를 처리하지 않음
+            contentType: false, // jQuery가 자동으로 content-type을 설정하지 않음
+            success: function() {
+                alert('회원정보가 수정되었습니다.');
+                window.location.href = "seller";
+            },
+            error: function(xhr, status, error) {
+                alert("서버 오류가 발생했습니다.");
+            }
+        });
+    }
 	
 	// 유효성 검사
 	// 패스워드

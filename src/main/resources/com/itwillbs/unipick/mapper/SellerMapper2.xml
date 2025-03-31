@@ -283,7 +283,8 @@ JOIN common_detailcode c ON o.siz_nm = c.cod_cd
 			   sel_pp,
 			   sel_st,
 			   sel_at,
-			   sel_mp
+			   sel_mp,
+			   sel_bp
 		  FROM sellers
 		 WHERE sel_id = #{sel_id};
 	</select>
@@ -297,7 +298,9 @@ JOIN common_detailcode c ON o.siz_nm = c.cod_cd
 						  sel_ad = #{sel_ad},
 						  sel_cs = #{sel_cs},
 						  sel_mn = #{sel_mn},
-						  sel_mp = #{sel_mp}
+						  sel_mp = #{sel_mp},
+						  sel_bp = #{sel_bp},
+						  sel_pp = #{sel_pp}
 					WHERE sel_id = #{sel_id}
 	</update>
 </mapper>
