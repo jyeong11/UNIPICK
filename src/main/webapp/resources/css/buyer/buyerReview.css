@@ -44,7 +44,7 @@
 }
 
 .star.selected {
-    color: gold;
+    color: #f2a900;
     text-shadow: 3px 3px 8px rgba(255, 215, 0, 0.7);
 }
 

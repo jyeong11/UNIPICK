@@ -20,8 +20,10 @@ public interface BuyerMapper {
 	public List<Map<String, Object>> getselanother(String selNm);
 	//상품 상세이미지
 	public List<String> getPrdImg(String prdCd);
-	// 상품 옵션조회
+	// 상품 옵션 조회
 	public List<Map<String, Object>> getPrdOption(String prdCd);
+	// 상품 리뷰 조회
+	public List<Map<String, Object>> getPrdReviews(Map<String, Object> prd_cd);
 	// 판매자 상세페이지
 	public List<Map<String, Object>> getselDetail(String sel_nm);
 	// 판매자 상세 이미지

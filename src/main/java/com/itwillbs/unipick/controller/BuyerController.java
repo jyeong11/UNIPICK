@@ -386,4 +386,11 @@ public class BuyerController {
 	public List<Map<String, Object>> selPrdsearch(@RequestBody Map<String, Object> data) {
 		return buyService.selPrdsearch(data);
 	}
+	
+	//리뷰 조회
+	@ResponseBody
+	@PostMapping("getReviews")
+	public List<Map<String, Object>> getReviews(@RequestBody Map<String, Object> prd_cd) {
+		return buyService.getPrdReviews(prd_cd);
+	}
 }

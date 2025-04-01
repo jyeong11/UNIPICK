@@ -1,4 +1,55 @@
 @charset "UTF-8";
+.rev-ema {
+	font-weight: 700;
+	font-size: 15px;
+}
+.st{
+	margin-left: 10px;
+}
+.star-ema{
+	display: flex;
+    align-items: center;
+}
+.star-filled{
+	color: #f2a900;
+	font-size: 25px;
+}
+.rev{
+	background-color: rgb(250, 250, 251);	
+}
+.rev-opt{
+	display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 10px;
+    height: 30px;
+    
+}
+.rev-opt p {
+    margin-left: 10px; /* 위아래 간격을 10px로 설정 */
+}
+.info{
+	display: flex;
+    align-items: baseline;
+    gap: 10px; 
+}
+.rev-optTitle,
+.buy-info {
+    display: flex;
+    flex-direction: column;
+}
+.rev-ct{
+	margin-top: 10px;
+	overflow-wrap: break-word;
+}
+#rev div p {
+	font-size: 15px !important;
+}
+.review-img{
+	width: 300px;
+    height: 300px;
+    object-fit: cover;
+}
 .prdInfo {
 	color: #292b2b;
     font-weight: 600;
@@ -17,7 +68,7 @@
 	display: flex;
 }
 .dc {
-    font-size: 23px;
+    font-size: 29px;
     font-weight: bold;
     color: #f2a900;
     padding-right: 15px;
@@ -40,9 +91,10 @@
 	margin-left: 51px;
 }
 .image-container img {
-    max-width: 100%;
-    height: auto;
+	width: 540px;
+    height: 560px;
     display: block;
+    object-fit: cover;
 }
 #prev-btn, #next-btn{
     margin-top: 10px;
@@ -58,7 +110,7 @@
 }
 #product,.product-container {
 	display: flex;
-	justify-content: space-between;
+/* 	justify-content: space-between; */
     align-items: flex-start;
 }
 #qty-input{
@@ -95,11 +147,6 @@
     color: #333;
     margin-right: 16px;
     
-}
-.dc {
-	font-size: 22px;
-	color : #f2a900;
-	padding-right: 17px;
 }
 .button-container {
     display: flex;
@@ -158,7 +205,7 @@ select {
     font-size: 16px;
     line-height: 50px;
     border-radius: 6px;
-    width: 85%;
+    width: 450px;
     height: 50px;
     padding: 10px;
     border: 1px solid #e6e6e6;
@@ -299,6 +346,7 @@ div > a > i {
 	justify-content: space-between; 
 	border-top: 1px solid #e8e9eb;
 	padding-top: 10px;
+	align-items: center;
 }
 #selAnthorTitle a {
 	align-items: center;

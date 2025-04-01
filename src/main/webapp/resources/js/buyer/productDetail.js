@@ -1,7 +1,9 @@
 $(function() {
 	// 최근 본 상품 저장
 	// recentlyProduct();
-
+	// 리뷰
+	loadReviews();
+	
     // 상품 더보기 버튼
 	var prdCt = document.getElementById("prdCt");
 	var loadMoreBtn = document.getElementById("loadMoreBtn");
@@ -180,6 +182,60 @@ function updateTotalPrice(price) {
 	$("#price-text").text((price * qty).toLocaleString() + "원");
 }
 
+// 리뷰
+function loadReviews() {
+	let query = window.location.search;
+	let param = new URLSearchParams(query);
+	let prd_cd = param.get('prd_cd');
+	
+    $.ajax({
+        type: 'POST', 
+        url: 'getReviews',
+		contentType: "application/json",
+		data: JSON.stringify({prd_cd: prd_cd}),
+        success: function(res) {
+			var reviewsHtml = '';
+            if (res && res.length > 0) {
+                res.forEach(function(review) {
+					// 별 채우기
+					var starHtml = '';
+		            var rating = review.rev_rt;
+		            for (var i = 1; i <= 5; i++) {
+		                if (i <= rating) {
+		                    starHtml += `<span class="star-filled">★</span>`;  // 채워진 별
+						}
+					}
+                    reviewsHtml += `<div class="review">
+										<div class="star-ema">
+											<div class="rev-ema">${review.buy_nm}</div>
+											<div class="st">${starHtml}</div>	
+										</div> 
+										<img src="${contextPath}${review.rei_pt}" class="review-img">
+                                         <div class="rev">
+											<div class="rev-opt">
+												<div class="rev-optTitle">옵션</div>
+												<p>${review.clr_nm}</p>
+												<p>${review.cod_nm}</p>
+											</div>
+											<div class="info">
+												<div class="buy-info">정보</div>
+												<p>${review.buy_wt}kg</p>
+												<p>${review.buy_ht}cm</p>
+											</div>
+										</div>
+										<div class="rev-ct">${review.rev_ct}</div>
+									</div>`;
+                });
+            } else {
+                reviewsHtml = '<p>리뷰가 없습니다.</p>';
+            }
+            $('#rev').html(reviewsHtml); // #reviews 요소에 리뷰 표시
+        },
+        error: function(xhr, status, error) {
+            console.error("리뷰 데이터를 불러오는 데 실패했습니다:", error);
+      	}
+	});
+}
 //function recentlyProduct() {
 //	
 //	let data = {prd_cd : prdCd};

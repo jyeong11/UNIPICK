@@ -82,7 +82,7 @@
 		<div class="content">
 			<div id="imageGallery" class="image-gallery">
 			    <c:forEach var="sel" items="${selList}">
-			        <div class="image-item">
+			        <div class="image-item" data-id="${sel['prd_cd']}" data-sel="${sel['sel_nm']}">
 			            <img src="${pageContext.request.contextPath}${sel['fil_pt']}" alt="${sel['prd_nm']}"/>
 			            <div class="sel-nm">${sel['sel_nm']}</div>
 			            <div class="prd-nm">${sel['prd_nm']}</div>

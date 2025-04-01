@@ -135,8 +135,9 @@
 		    		<div id="reviews">
 		    			<div id="reviewsTitle">
 							<p>리뷰</p>
-							<a href=""><span class="small-text">전체보기 ></span></a>		    			
+							<a href=""><span class="small-text">전체보기 ></span></a>
 		    			</div>
+						<div id="rev"></div>		    			
 		    		</div>
 		    		<div id="qa">
 		    			<div id="qaTitle">

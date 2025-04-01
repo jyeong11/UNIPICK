@@ -32,7 +32,6 @@ $(function() {
                     `;
                     gallery.append(item);
                 });
-debugger;
             },
             error: function () {
                 alert("검색 중 오류가 발생했습니다.");
@@ -49,7 +48,6 @@ debugger;
 	$(document).on("click", ".image-item", function() {
         let prdCd = $(this).data("id");
 		let selNm = $(this).data("sel");
-		debugger;
     	window.location.href = `productDetail?prd_cd=${prdCd}&sel_nm=${encodeURIComponent(selNm)}`;
     });
 });
