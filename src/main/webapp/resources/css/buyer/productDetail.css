@@ -1,4 +1,25 @@
 @charset "UTF-8";
+.prdInfo {
+	color: #292b2b;
+    font-weight: 600;
+    line-height: 16px;
+    font-size: 16px;
+    padding-bottom: 5px;
+}
+.prd_pr {
+	display: flex;
+}
+.dc {
+    font-size: 23px;
+    font-weight: bold;
+    color: #f2a900;
+    padding-right: 15px;
+}
+.prd_sp{
+	font-size: 18px;
+    padding-top: 4px;
+    font-weight: bold;
+}
 .product-container {
     display: flex;
     justify-content: center;

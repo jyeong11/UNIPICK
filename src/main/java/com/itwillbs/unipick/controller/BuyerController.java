@@ -124,12 +124,13 @@ public class BuyerController {
 								Model model) {
 		Map<String, Object> prdList = buyService.getPrdDetail(prdCd);
 		List<String> prdImg = buyService.getPrdImg(prdCd);
-		List<String> selImg = buyService.getselImg(selNm);
+		List<Map<String, Object>> selImg = buyService.getselanother(selNm);
  		System.out.println("selImg" + selImg);
 		List<Map<String, Object>> optionList = buyService.getPrdOption(prdCd); 
 		
 		model.addAttribute("prd", prdList);
 		model.addAttribute("prdImg", prdImg);
+		model.addAttribute("selImg", selImg);
 		model.addAttribute("optionList", optionList);
 		
 		return "buyer/productDetail";

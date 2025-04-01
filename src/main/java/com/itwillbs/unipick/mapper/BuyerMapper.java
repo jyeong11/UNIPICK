@@ -16,8 +16,8 @@ public interface BuyerMapper {
 	public List<Map<String, Object>> getSearchPrd(String query);
 	//상품 상세 조회
 	public Map<String, Object> getPrdDetail(String prdCd);
-	// 판매자 상품 이미지 조회
-//	public Lisy
+	// 상품 상세 판매자 다른 상품
+	public List<Map<String, Object>> getselanother(String selNm);
 	//상품 상세이미지
 	public List<String> getPrdImg(String prdCd);
 	// 상품 옵션조회

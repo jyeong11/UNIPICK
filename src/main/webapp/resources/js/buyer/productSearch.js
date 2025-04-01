@@ -9,7 +9,6 @@ $(function() {
 	                let resultHtml = "";
 	                if (res.length > 0) {
 	                    res.forEach(function(prd) {
-		debugger;
 	                        resultHtml += `
 	                            <div class="prd-item" data-id="${prd.prd_cd}" data-sel="${prd.sel_nm}" style="cursor: pointer;">
 				                    <img src="${contextPath}${prd.fil_pt}" class="prd-img">

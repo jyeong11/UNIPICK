@@ -85,7 +85,7 @@
 				</ul>
 			</div>
 			<div class="image-gallery">
-			    <c:forEach var="img" items="${selImgList}">
+			    <c:forEach var="img" items="${selImgList.fil_pt}">
 			        <div class="image-item">
 			            <img src="${pageContext.request.contextPath }/resources/productImg/${img}"/>
 			        </div>

@@ -54,6 +54,10 @@ public class BuyerService {
 	public List<Map<String, Object>> getPrdOption(String prdCd) {
 		return mapper.getPrdOption(prdCd);
 	}
+	// 상품 상세 판매자 다른 상품
+	public List<Map<String, Object>> getselanother(String selNm) {
+		return mapper.getselanother(selNm);
+	}
 	// 카테고리 메뉴
 	public List<Map<String, Object>> getCategory() {
 		return mapper.getCategory();

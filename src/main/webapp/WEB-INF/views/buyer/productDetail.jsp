@@ -109,10 +109,18 @@
 	    				<a href="sellerShopDetail?sel_nm=${prd.sel_nm}"><span class="small-text">더보기 ></span></a>
 	    			</div>
 		    		<div id="selAnthorprd">
-		    			<c:forEach begin="6" end="10">
-			            	<img src="${pageContext.request.contextPath }/resources/images/favicon_b.png" alt="1">
-			        	</c:forEach>
-		    		</div>
+					    <c:forEach var="sel" items="${selImg}" begin="1" end="6">
+						    <div class="prd-item" style="cursor: pointer;">
+						        <img src="${pageContext.request.contextPath}${sel.fil_pt}" alt="상품 이미지">
+						        <div class="prdInfo">${sel.sel_nm}</div>
+									<div class="prdInfo">${prd.prd_nm}</div>
+				                    <div class="prd_pr">
+				                    	<div class="dc">${sel.dc}</div>
+				                    	<div class="prd_sp">${sel.prd_sp}원</div>
+				                </div>
+				             </div>
+					    </c:forEach>
+					</div>
 		    		<div id="picks">
 		    			<div id="pickTitle">
 		    				<p>당신을 위한 추천상품</p>
