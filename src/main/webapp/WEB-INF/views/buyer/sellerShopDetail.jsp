@@ -74,17 +74,13 @@
 		<div class="selIfo">
 			<div class="sel_nm">${selList[0].sel_nm }</div>
 			<div class="sel_if">${selList[0].sel_if }</div>
+			<div class="sel-search">
+				<input type="text" id="searchInput" placeholder="검색어 입력">
+				<i class="fa fa-solid fa-magnifying-glass" id="searchBtn"></i>
+			</div>
 		</div>
 		<div class="content">
-			<div class="left-category">
-				<h2>CATEGORIES</h2>
-				<ul class="category-data">
-					<div class="first-cate">
-						<a href="sellerShopDetail?lev_cd=All&category=전체&sel_nm=${selList[0].sel_nm }">전체</a>
-					</div>
-				</ul>
-			</div>
-			<div class="image-gallery">
+			<div id="imageGallery" class="image-gallery">
 			    <c:forEach var="sel" items="${selList}">
 			        <div class="image-item">
 			            <img src="${pageContext.request.contextPath}${sel['fil_pt']}" alt="${sel['prd_nm']}"/>
@@ -102,5 +98,8 @@
 	<div id="footer">
 		<jsp:include page="../inc/footer.jsp"></jsp:include>
 	</div>
+	<script>
+    	let contextPath = "${pageContext.request.contextPath}";
+	</script>
 </body>
 </html>

@@ -25,7 +25,7 @@ public interface BuyerMapper {
 	// 판매자 상세페이지
 	public List<Map<String, Object>> getselDetail(String sel_nm);
 	// 판매자 상세 이미지
-	public List<Map<String , Object>> getselImg(String sel_nm);
+//	public List<Map<String , Object>> getselImg(String sel_nm);
 	// 카테고리 메뉴
 	public List<Map<String, Object>> getCategory();
 	// 상품 정렬 종류 
@@ -72,5 +72,7 @@ public interface BuyerMapper {
 	public void registerRecentlyPrd(Map<String, Object> prd);
 	// 최근 본 상품 리스트
 	public List<Map<String, Object>> myRecentlyPrd(Map<String, Object> buy);
+	// 판매자 페이지 내에 검색
+	public List<Map<String, Object>> selPrdsearch(Map<String, Object> data);
 	
 }

@@ -1,45 +1,55 @@
 $(function() {
+	let query = window.location.search;
+	let param = new URLSearchParams(query);
+	let sel_nm = param.get('sel_nm');
 	
-	$.ajax({
-		type: "POST",
-        url: "sellerShopCategory",
-        success: function(res) {
-			let firstCategory = res.cate.filter(item => item.lev_cd.length === 10)
-										 .map(item => `<div data-value="${item.lev_cd}" class="first-cate">
-													   		${item.lev_nm}
-															<i class="fa-solid fa-angle-down" data-id="${item.lev_cd}"></i>
-													   </div>
-													   <ul class="${item.lev_cd} cate-ul"> 
-													   </ul>`)
-										 .join('');
-									
-			$('.category-data').append(firstCategory);
-			
-			res.cate.filter(item => item.lev_cd.length === 12)
-				    .forEach(item => {
-								        let parentClass = item.lev_cd.substring(0, 10);
-								        let listItem = `<li>
-															<a href="productList?lev_cd=${item.lev_cd}&category=${item.lev_nm}" class="cate-button">${item.lev_nm}</a>
-														</li>`;
-								
-								        $(`.${parentClass}`).append(listItem)});	
-		}
-	});
-	$(document).on('click', '.first-cate', function(){
-		categorySelect($(this));
-	});
-	// 카테고리 선택
-	function categorySelect(cate) {
-		let selectCate = $(`.${cate.data("value")}`);
-		let icon = cate.find('i');
+	$("#searchBtn").click(function () {
+    	let keyword = $("#searchInput").val().trim();
 		
-		if (selectCate.is(":visible")) {
-			icon.removeClass('fa-angle-up').addClass('fa-angle-down');
-        	selectCate.hide(200);
-	    } else {
-			icon.removeClass('fa-angle-down').addClass('fa-angle-up');
-	        selectCate.show(200);
-	    }
+		$.ajax({
+            type: "POST",
+            url: "selPrdsearch",
+			contentType: "application/json",
+            data:JSON.stringify({
+				keyword: keyword,
+				sel_nm: sel_nm
+			}),
+            success: function (res) {
+                let gallery = $("#imageGallery");
+                gallery.empty();
 
-	}
+                res.forEach(sel => {
+                    let item = `
+                        <div class="image-item" data-id="${sel.prd_cd}" data-sel="${sel.sel_nm}">
+                            <img src="${contextPath}${sel.fil_pt}" alt="${sel.prd_nm}"/>
+                            <div class="sel-nm">${sel.sel_nm}</div>
+                            <div class="prd-nm">${sel.prd_nm}</div>
+                            <div class="pr">
+                                <div class="dc">${sel.dc}</div>
+                                <div class="prd-sp">${sel.prd_sp}원</div>
+                            </div>
+                        </div>
+                    `;
+                    gallery.append(item);
+                });
+debugger;
+            },
+            error: function () {
+                alert("검색 중 오류가 발생했습니다.");
+            }
+        });
+	});
+	 // 엔터 키 입력 시 검색 실행
+    $("#searchInput").keypress(function (e) {
+        if (e.which === 13) { // 엔터 키 코드 = 13
+            $("#searchBtn").click();
+        }
+    });
+	
+	$(document).on("click", ".image-item", function() {
+        let prdCd = $(this).data("id");
+		let selNm = $(this).data("sel");
+		debugger;
+    	window.location.href = `productDetail?prd_cd=${prdCd}&sel_nm=${encodeURIComponent(selNm)}`;
+    });
 });

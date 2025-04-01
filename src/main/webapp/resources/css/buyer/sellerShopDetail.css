@@ -7,6 +7,7 @@
     height: 230px;
     object-fit: cover;
 /*     padding-left: 27px; */
+	cursor: pointer;
     
 }
 .image-item{
@@ -119,6 +120,20 @@
 }
 .selIfo {
 	border-bottom: 1px solid #ecedee;
+	padding-bottom: 30px;
+}
+.sel-search{
+	margin-left: 1199px;
+    border-bottom: 2px solid;
+    width: 262px;
+    display: flex
+;
+}
+.sel-search input {
+	border: none;
+	outline: none;	
+    height: 28px;
+    font-size: 18px;
 }
 #img12 div a, .two > a {
 	text-decoration: none;

@@ -498,4 +498,22 @@
 		 LIMIT 6
 	</select>
 	
+<!-- 	판매자 페이지내에 검색 -->
+	<select id="selPrdsearch" parameterType="map">
+	 SELECT pd.prd_nm, sl.sel_nm, pd.prd_cd, cd.cod_nm,
+  	 		CONCAT(ROUND(((pd.prd_op - pd.prd_sp) / pd.prd_op) * 100, 0), '%') AS dc,
+			FORMAT(pd.prd_sp, 0) AS prd_sp, 
+			pd.prd_bd, pi.fil_nm, pi.fil_pt
+  	   FROM products pd
+       JOIN  product_images pi 
+	     ON pd.prd_cd = pi.prd_cd
+	   JOIN common_detailcode cd
+	   	 ON  pd.prd_bd = cd.cod_cd
+	   JOIN sellers sl
+	     ON pd.sel_id = sl.sel_id
+      WHERE pd.prd_nm LIKE CONCAT('%',#{keyword},'%')
+        AND sl.sel_nm = #{sel_nm}
+      	AND pd.prd_st = '승인'
+        AND fil_nb = 1;  
+	</select>
   </mapper>

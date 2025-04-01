@@ -185,7 +185,7 @@ public class BuyerController {
 	public List<Map<String, Object>> searchProduct(@RequestParam("query") String query) {
 		return buyService.getSearchPrd(query);
 	}
-	
+
 	// 상품 리스트(카테고리, 정렬종류)
 	@ResponseBody
 	@GetMapping("productListData")
@@ -382,8 +382,8 @@ public class BuyerController {
 	
 	// 판매자 상세 페이지 카테고리 
 	@ResponseBody
-	@PostMapping("sellerShopCategory")
-	public List<Map<String, Object>> sellerShopCategory() {
-		return buyService.productListData();
+	@PostMapping("selPrdsearch")
+	public List<Map<String, Object>> selPrdsearch(@RequestBody Map<String, Object> data) {
+		return buyService.selPrdsearch(data);
 	}
 }

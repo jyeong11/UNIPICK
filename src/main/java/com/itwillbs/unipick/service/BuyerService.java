@@ -173,4 +173,8 @@ public class BuyerService {
 		return mapper.myRecentlyPrd(buy);
 	}
 	
+	// 판매자 페이지 내에 검색
+	public List<Map<String, Object>> selPrdsearch(Map<String, Object> data) {
+		return mapper.selPrdsearch(data);
+	}
 }
