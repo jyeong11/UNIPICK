@@ -49,29 +49,11 @@ public class SellerController2 {
 		return "seller/sellerModifyForm";
 	}
 	
-//    // ✅ 판매자 정보 조회 (JSON 반환)
-//    @PostMapping("/getSellerInfo")
-//    public ResponseEntity<Map<String, Object>> getSellerInfo(HttpSession session) {
-//        String sellerId = (String) session.getAttribute("selId");
-//        
-//        // sellerId 값 확인
-//        System.out.println("✅ 현재 로그인된 판매자 ID: " + sellerId);
-//        
-//        Map<String, Object> sellerInfo = service.getSellerInfo(sellerId);
-//
-//        if (sellerInfo == null) {
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-//        }
-//
-//        // 기존 이미지 경로 추가
-//        sellerInfo.put("storePpPath", sellerInfo.get("sel_pp")); // 프로필 이미지 경로
-//        sellerInfo.put("storeBpPath", sellerInfo.get("sel_bp")); // 배경 이미지 경로
-//
-//        System.out.println("✅ 프로필 이미지 경로: " + sellerInfo.get("storePpPath"));
-//        System.out.println("✅ 배경 이미지 경로: " + sellerInfo.get("storeBpPath"));
-//
-//        return ResponseEntity.ok(sellerInfo);
-//    }
+	@GetMapping("selAccount")
+	public String accout() {
+		return "seller/SellerAccount";
+	}
+	
     
 	@ResponseBody
     @PostMapping("selModifyForm")

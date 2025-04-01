@@ -30,7 +30,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
             	<h6 class="collapse-header">주문관리</h6>
                 <a class="collapse-item" href="selOrderList" data-sub-page="#">주문조회</a>
-<!--                 <a class="collapse-item" href="#" data-sub-page="#">판매자회원</a> -->
+                <a class="collapse-item" href="selAccount" data-sub-page="#">정산관리</a>
 <!--                 <a class="collapse-item" href="#" data-sub-page="#">관리자</a> -->
             </div>
         </div>
