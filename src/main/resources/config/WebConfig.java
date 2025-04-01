@@ -1,5 +1,9 @@
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import com.itwillbs.unipick.handler.ProductViewInterceptor;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
@@ -27,4 +31,16 @@ public class WebConfig implements WebMvcConfigurer {
         
         
     }
+	
+	  @Override
+	    public void addInterceptors(InterceptorRegistry registry) {
+		  
+		  @Autowired
+		    private ProductViewInterceptor productViewInterceptor;
+	    	
+	        System.out.println("인터셉터 등록됨");
+	        registry.addInterceptor(productViewInterceptor)
+	                .addPathPatterns("productDetail") // 특정 경로에만 적용
+	                .excludePathPatterns("/static/**", "/api/**"); // 정적 리소스 및 API 제외
+	    }
 }
