@@ -1,99 +1,118 @@
 $(document).ready(function() {
-    // 기간 타입 변경 시 날짜 입력 필드 표시/숨김 처리
-    $('#periodType').change(function() {
-        var periodType = $(this).val();
-        if (periodType === 'daily') {
-            $('.date-input').show();
-        } else {
-            $('.date-input').hide();
-        }
-    });
+    // 초기 데이터 로드
+    loadSettlementData();
 
     // 검색 버튼 클릭 이벤트
     $('#searchBtn').click(function() {
-        var periodType = $('#periodType').val();
-        var startDate = $('#startDate').val();
-        var endDate = $('#endDate').val();
+        loadSettlementData();
+    });
 
-        if (periodType === 'daily' && (!startDate || !endDate)) {
-            alert('시작일과 종료일을 선택해주세요.');
-            return;
-        }
+    // Excel 다운로드 버튼 클릭 이벤트
+    $('#excelBtn').click(function() {
+        downloadExcel();
+    });
 
-        // AJAX 요청으로 데이터 조회
+    function loadSettlementData() {
+        const periodType = $('#periodType').val();
+        const startDate = $('#startDate').val();
+        const endDate = $('#endDate').val();
+
         $.ajax({
-            url: contextPath + '/seller/account/search',
-            type: 'GET',
+            url: `${contextPath}/account/search`,
+            type: "GET",
             data: {
                 periodType: periodType,
                 startDate: startDate,
                 endDate: endDate
             },
+            dataType: "json",
             success: function(response) {
+                console.log('받은 데이터:', response); // 디버깅용 로그
                 updateSettlementTable(response);
                 updateSummary(response);
             },
             error: function(xhr, status, error) {
-                alert('데이터 조회 중 오류가 발생했습니다.');
-                console.error(error);
+                console.error('데이터 로드 실패:', error);
+                console.error('상태:', status);
+                console.error('응답:', xhr.responseText);
             }
         });
-    });
+    }
 
-    // 엑셀 다운로드 버튼 클릭 이벤트
-    $('#excelBtn').click(function() {
-        var periodType = $('#periodType').val();
-        var startDate = $('#startDate').val();
-        var endDate = $('#endDate').val();
+    function downloadExcel() {
+        const periodType = $('#periodType').val();
+        const startDate = $('#startDate').val();
+        const endDate = $('#endDate').val();
 
-        // 엑셀 다운로드 요청
-        window.location.href = contextPath + '/seller/account/excel?periodType=' + periodType + 
-                             '&startDate=' + startDate + '&endDate=' + endDate;
-    });
+        window.location.href = `${contextPath}/account/excel?periodType=${periodType}&startDate=${startDate}&endDate=${endDate}`;
+    }
 
-    // 정산 테이블 업데이트 함수
     function updateSettlementTable(data) {
-        var tbody = $('#settlementTable tbody');
+        const tbody = $('#settlementTable tbody');
         tbody.empty();
 
-        data.forEach(function(item) {
-            var row = '<tr>' +
-                     '<td>' + item.period + '</td>' +
-                     '<td>' + item.order_count + '</td>' +
-                     '<td>' + item.sales_quantity + '</td>' +
-                     '<td>' + item.exchange_count + '</td>' +
-                     '<td>' + item.return_count + '</td>' +
-                     '<td>' + formatNumber(item.revenue) + '원</td>' +
-                     '<td>' + formatNumber(item.commission) + '원</td>' +
-                     '<td>' + formatNumber(item.profit) + '원</td>' +
-                     '<td>' + item.settlement_date + '</td>' +
-                     '</tr>';
+        if (!Array.isArray(data) || data.length === 0) {
+            tbody.append('<tr><td colspan="9" class="text-center">데이터가 없습니다.</td></tr>');
+            return;
+        }
+
+        data.forEach(item => {
+            const row = `
+                <tr>
+                    <td>${item.기간 || '-'}</td>
+                    <td>${formatNumber(item.주문수 || 0)}</td>
+                    <td>${formatNumber(item.판매수량 || 0)}</td>
+                    <td>${formatNumber(item.교환건수 || 0)}</td>
+                    <td>${formatNumber(item.반품건수 || 0)}</td>
+                    <td>${formatNumber(item.매출액 || 0)}</td>
+                    <td>${formatNumber(item.수수료 || 0)}</td>
+                    <td>${formatNumber(item.순이익 || 0)}</td>
+                    <td>${item.정산일자 || '-'}</td>
+                </tr>
+            `;
             tbody.append(row);
         });
+
+        // DataTables 새로고침
+        if ($.fn.DataTable.isDataTable('#settlementTable')) {
+            $('#settlementTable').DataTable().destroy();
+        }
+        $('#settlementTable').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Korean.json"
+            },
+            "order": [[0, "desc"]],
+            "pageLength": 10
+        });
     }
 
-    // 요약 정보 업데이트 함수
     function updateSummary(data) {
-        var totalOrders = 0;
-        var totalSales = 0;
-        var totalCommission = 0;
-        var totalProfit = 0;
+        if (!Array.isArray(data)) {
+            data = [];
+        }
 
-        data.forEach(function(item) {
-            totalOrders += item.order_count;
-            totalSales += item.sales_quantity;
-            totalCommission += item.commission;
-            totalProfit += item.profit;
+        let totalOrders = 0;
+        let totalSales = 0;
+        let totalCommission = 0;
+        let totalProfit = 0;
+
+        data.forEach(item => {
+            totalOrders += parseInt(item.주문수 || 0);
+            totalSales += parseInt(item.판매수량 || 0);
+            totalCommission += parseInt(item.수수료 || 0);
+            totalProfit += parseInt(item.순이익 || 0);
         });
 
-        $('#totalOrders').text(totalOrders);
-        $('#totalSales').text(totalSales);
-        $('#totalCommission').text(formatNumber(totalCommission) + '원');
-        $('#totalProfit').text(formatNumber(totalProfit) + '원');
+        $('#totalOrders').text(formatNumber(totalOrders));
+        $('#totalSales').text(formatNumber(totalSales));
+        $('#totalCommission').text(formatNumber(totalCommission));
+        $('#totalProfit').text(formatNumber(totalProfit));
     }
 
-    // 숫자 포맷팅 함수
     function formatNumber(num) {
+        if (num === null || num === undefined) {
+            return '0';
+        }
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
-}); 
+});

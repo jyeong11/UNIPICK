@@ -328,37 +328,41 @@
 	</update>
 
 	<select id="getSettlementList" parameterType="map" resultType="map">
-	    SELECT 
-	        CASE 
-	            WHEN #{periodType} = 'daily' THEN DATE_FORMAT(o.ord_at, '%Y-%m-%d')
-	            WHEN #{periodType} = 'weekly' THEN DATE_FORMAT(o.ord_at, '%Y-W%u')
-	            WHEN #{periodType} = 'monthly' THEN DATE_FORMAT(o.ord_at, '%Y-%m')
-	            WHEN #{periodType} = 'yearly' THEN DATE_FORMAT(o.ord_at, '%Y')
-	        END as period,
-	        COUNT(DISTINCT o.ord_id) as order_count,
-	        SUM(od.odd_qt) as sales_quantity,
-	        SUM(CASE WHEN od.odd_st = 'exchange' THEN 1 ELSE 0 END) as exchange_count,
-	        SUM(CASE WHEN od.odd_st = 'return' THEN 1 ELSE 0 END) as return_count,
-	        SUM(od.odd_am) as revenue,
-	        ROUND(SUM(od.odd_am) * 0.085, 0) as commission,
-	        ROUND(SUM(od.odd_am) * 0.915, 0) as profit,
-	        DATE_FORMAT(o.ord_at, '%Y-%m-%d') as settlement_date
-	    FROM orders o
-	    JOIN order_details od ON o.ord_id = od.ord_id
-	    JOIN products p ON od.prd_cd = p.prd_cd
-	    WHERE p.sel_id = #{sellerId}
-	    <if test="periodType == 'daily' and startDate != null and endDate != null">
-	        AND o.ord_at BETWEEN #{startDate} AND #{endDate}
-	    </if>
-	    GROUP BY 
-	        CASE 
-	            WHEN #{periodType} = 'daily' THEN DATE_FORMAT(o.ord_at, '%Y-%m-%d')
-	            WHEN #{periodType} = 'weekly' THEN DATE_FORMAT(o.ord_at, '%Y-W%u')
-	            WHEN #{periodType} = 'monthly' THEN DATE_FORMAT(o.ord_at, '%Y-%m')
-	            WHEN #{periodType} = 'yearly' THEN DATE_FORMAT(o.ord_at, '%Y')
-	        END
-	    ORDER BY settlement_date DESC
-	</select>
+    SELECT 
+        CASE 
+            WHEN #{periodType} = 'daily' THEN DATE_FORMAT(o.ord_at, '%Y-%m-%d')
+            WHEN #{periodType} = 'weekly' THEN DATE_FORMAT(o.ord_at, '%Y-W%u')
+            WHEN #{periodType} = 'monthly' THEN DATE_FORMAT(o.ord_at, '%Y-%m')
+            WHEN #{periodType} = 'yearly' THEN DATE_FORMAT(o.ord_at, '%Y')
+        END as 기간,
+        COUNT(DISTINCT o.ord_id) as 주문수,
+        SUM(od.odd_qt) as 판매수량,
+        SUM(CASE WHEN od.odd_st = '교환' THEN 1 ELSE 0 END) as 교환건수,
+        SUM(CASE WHEN od.odd_st = '반품' THEN 1 ELSE 0 END) as 반품건수,
+        SUM(od.odd_am) as 매출액,
+        ROUND(SUM(od.odd_am) * 0.085) as 수수료,
+        ROUND(SUM(od.odd_am) * 0.915) as 순이익,
+        MAX(DATE_FORMAT(o.ord_at, '%Y-%m-%d')) as 정산일자
+    FROM orders o
+    JOIN order_details od ON o.ord_id = od.ord_id
+    JOIN options op ON od.opt_id = op.opt_id
+    JOIN products p ON op.prd_cd = p.prd_cd
+    WHERE p.sel_id = #{sellerId}  <!-- selId를 sellerId로 수정 -->
+    <if test="startDate != null and startDate != ''">
+        AND DATE(o.ord_at) >= #{startDate}
+    </if>
+    <if test="endDate != null and endDate != ''">
+        AND DATE(o.ord_at) &lt;= #{endDate}
+    </if>
+    GROUP BY 
+        CASE 
+            WHEN #{periodType} = 'daily' THEN DATE_FORMAT(o.ord_at, '%Y-%m-%d')
+            WHEN #{periodType} = 'weekly' THEN DATE_FORMAT(o.ord_at, '%Y-W%u')
+            WHEN #{periodType} = 'monthly' THEN DATE_FORMAT(o.ord_at, '%Y-%m')
+            WHEN #{periodType} = 'yearly' THEN DATE_FORMAT(o.ord_at, '%Y')
+        END
+    ORDER BY 기간 DESC;
+</select>
 
 	<!-- 날짜별 방문자 수 조회 -->
 <select id="getDailyVisits" parameterType="string" resultType="map">

@@ -13,6 +13,15 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -329,6 +338,53 @@ public class SellerService2 {
     }
 
     public void generateExcel(List<Map<String, Object>> settlementList, OutputStream outputStream) throws IOException {
+        // Apache POI 라이브러리를 사용하여 Excel 파일 생성
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFSheet sheet = workbook.createSheet("정산내역");
+
+        // 헤더 스타일 설정
+        CellStyle headerStyle = workbook.createCellStyle();
+        headerStyle.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
+        headerStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        headerStyle.setAlignment(HorizontalAlignment.CENTER);
+        headerStyle.setBorderTop(BorderStyle.THIN);
+        headerStyle.setBorderBottom(BorderStyle.THIN);
+        headerStyle.setBorderLeft(BorderStyle.THIN);
+        headerStyle.setBorderRight(BorderStyle.THIN);
+
+        // 헤더 생성
+        Row headerRow = sheet.createRow(0);
+        String[] headers = {"기간", "주문수", "판매수량", "교환건수", "반품건수", "매출액", "수수료", "순이익", "정산일자"};
+        for (int i = 0; i < headers.length; i++) {
+            Cell cell = headerRow.createCell(i);
+            cell.setCellValue(headers[i]);
+            cell.setCellStyle(headerStyle);
+        }
+
+        // 데이터 입력
+        int rowNum = 1;
+        for (Map<String, Object> data : settlementList) {
+            Row row = sheet.createRow(rowNum++);
+            
+            row.createCell(0).setCellValue(String.valueOf(data.get("기간")));
+            row.createCell(1).setCellValue(String.valueOf(data.get("주문수")));
+            row.createCell(2).setCellValue(String.valueOf(data.get("판매수량")));
+            row.createCell(3).setCellValue(String.valueOf(data.get("교환건수")));
+            row.createCell(4).setCellValue(String.valueOf(data.get("반품건수")));
+            row.createCell(5).setCellValue(String.valueOf(data.get("매출액")));
+            row.createCell(6).setCellValue(String.valueOf(data.get("수수료")));
+            row.createCell(7).setCellValue(String.valueOf(data.get("순이익")));
+            row.createCell(8).setCellValue(String.valueOf(data.get("정산일자")));
+        }
+
+        // 열 너비 자동 조정
+        for (int i = 0; i < headers.length; i++) {
+            sheet.autoSizeColumn(i);
+        }
+
+        // 파일 저장
+        workbook.write(outputStream);
+        workbook.close();
     }
     
 

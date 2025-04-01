@@ -26,6 +26,16 @@
 		Maven Repository 웹사이트에서 필요한 라이브러리 검색 가능
 		추가된 모든 라이브러리는 [프로젝트 - Maven Dependencies] 항목에서 확인
 		 -->
+		 <dependency>
+    <groupId>org.apache.poi</groupId>
+    <artifactId>poi</artifactId>
+    <version>5.2.3</version>
+</dependency>
+<dependency>
+    <groupId>org.apache.poi</groupId>
+    <artifactId>poi-ooxml</artifactId>
+    <version>5.2.3</version>
+</dependency>
 		 
 		 <dependency>
     <groupId>org.springframework</groupId>
