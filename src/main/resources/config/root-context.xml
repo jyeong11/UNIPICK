@@ -30,7 +30,7 @@
 		<!-- 드라이버클래스를 log4jdbc 라이브러리의 DriverSpy 클래스로 변경 -->
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
 		<!-- DB 주소 정보의 프로토콜 부분도 jdbc:log4jdbc:mysql 형태로 변경 -->
-		<property name="jdbcUrl"         value="jdbc:log4jdbc:mysql://itwillbs.com:3306/c2d2410t2p2"></property>
+		<property name="jdbcUrl"         value="jdbc:log4jdbc:mysql://itwillbs.com:3306/c2d2410t2p2?allowMultiQueries=true"></property>
 		<property name="username"        value="c2d2410t2p2"></property>
 		<property name="password"        value="1234"></property>
 	</bean>

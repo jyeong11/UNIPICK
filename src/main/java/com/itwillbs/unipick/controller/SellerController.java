@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -219,8 +220,17 @@ public class SellerController {
 	// 상품 수정
 	@ResponseBody
 	@PostMapping("productUpdate")
-	public void productUpdate() {
-		
+	public void productUpdate(HttpServletRequest req,
+							  @RequestParam Map<String, String> formData,  // 텍스트 데이터를 Map으로 받기
+							  @RequestPart(value = "updateFiles", required = false) List<MultipartFile> files,
+							  @RequestParam(value = "imageIndexes", required = false) List<String> imageIndexes,
+							  @RequestParam(value = "opt_id", required = false) List<String> opt_id,
+							  @RequestParam(value = "color_number", required = false) List<String> colorNumbers,
+							  @RequestParam(value = "color_name", required = false) List<String> colorNames,
+							  @RequestParam(value = "size_option", required = false) List<String> sizeOptions,
+							  @RequestParam(value = "stock_number", required = false) List<Integer> stockNumbers,
+							  @RequestParam(value = "opt_id_del", required = false) List<Integer> delOption) {
+		selService.productUpdate(req, formData, files, imageIndexes, opt_id, colorNumbers, colorNames, sizeOptions, stockNumbers, delOption);
 	}
 }
 

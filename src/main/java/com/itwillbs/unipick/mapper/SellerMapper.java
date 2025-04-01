@@ -24,5 +24,15 @@ public interface SellerMapper {
 	public Map<String, Object> otpSellerInfo(@Param("userPhone") String userPhone, @Param("sel_id") String sel_id);
 	// 로그인시 셀러 이름 들고옴
 	public String getSellerNameById(String sel_id);
+	// 상품 업데이트
+	public void productUpdate(Map<String, String> formData);
+	// 상품 옵션 삭제
+	public void productOptionDelete(List<Integer> delOption);
+	// 상품 옵션 등록
+	public void productOptionInsert(List<Map<String, Object>> InsertList);
+	// 상품 옵션 업데이트
+	public void productOptionUpdate(List<Map<String, Object>> UpdateList);
+	// 상품 이미지 업데이트
+	public void productImageUpdate(Map<String, Object> image);
 	
 }

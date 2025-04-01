@@ -1,4 +1,5 @@
-let noteditor
+let noteditor;		// 토스트 에디터
+let deletedOptions = [];	// 삭제할 옵션id
 
 $(function(){
 	
@@ -72,7 +73,7 @@ $(function(){
 
 				// 상품 옵션
 				let option = res.prdOpt.map(item =>
-				`<div class="option-row" style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+				`<div class="option-row" data-value="${item.opt_id}" style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
 					<input type="color" name="color_number[]" class="color-picker" value="${item.clr_cd}" required>
 					<input type="text" name="color_name[]" class="color-name" id="color_name" value="${item.clr_nm}" required>
 					 <select name="size_option[]" class="size-select">
@@ -115,7 +116,12 @@ $(function(){
     });
 
 	$('#option-container').on('click', '.remove-option', function() {
-    	$(this).closest('.option-row').remove();
+    	let optionRow = $(this).closest('.option-row');
+	    let optionId = optionRow.data('value');
+	    if (optionId) {
+	        deletedOptions.push(optionId);
+	    }
+	    optionRow.remove();
 	});
 
     // 카테고리 선택
@@ -211,8 +217,11 @@ $(function(){
             `<option value="${option.cod_cd}">${option.cod_nm}</option>`).join(""));
         const newStockInput = $('<input>', { type: 'number', name: 'stock_number[]', class: 'stock-number', placeholder: '재고 수량 입력' });
         const removeBtn = $('<button>', { type: 'button', class: 'btn btn-sm btn-outline-danger' }).text('삭제').on('click', function() {
-            optionRow.remove();
+		    optionRow.remove();
         });
+
+
+
 
         optionRow.append(newColorInput, newColorText, newSizeSelect, newStockInput, removeBtn);
         container.append(optionRow);
@@ -291,12 +300,12 @@ function productUpdate() {
 	formData.append('prd_nm', $('#item-regi-title-text').val());
 	formData.append('prd_cd', $('#item-regi-code-text').val());
 	formData.append('prd_ct', noteditor.getHTML());
-	formData.append('first_cate', $('#product_category').val());
-	formData.append('second_cate', $('#product_category_sub').val());
+	formData.append('prd_ca', $('#product_category_sub').val());
 	formData.append('prd_sf', $('#delivery_price').val());
 	formData.append('prd_op', $('#list_price').val());
 	formData.append('prd_sp', $('#sale_price').val());
 	formData.append('prd_bd', $('#product_badge').val());
+	formData.append('opt_id_del', deletedOptions);
 	
 	// 이미지
     $('.item-thumb-upload-btn').each(function(index) {
@@ -305,28 +314,28 @@ function productUpdate() {
 
         if (file) {  // 파일이 존재하면 무조건 추가
             formData.append('updateFiles', file);
-            formData.append('imageIndexes', index);
+            formData.append('imageIndexes', index + 1);
         }
     });
 
 	// 옵션
 	$('.option-row').each(function() {
+		let optionId = $(this).data('value');	// 옵션 아이디
 	    let colorNumber = $(this).find('.color-picker').val(); // 색상 코드
 	    let colorName = $(this).find('.color-name').val(); // 색상 이름
 	    let sizeOption = $(this).find('.size-select').val(); // 사이즈 선택
 	    let stockNumber = $(this).find('.stock-number').val(); // 재고 수량
-	
+
 	    // FormData에 옵션 추가
-	    formData.append('color_number[]', colorNumber);
-	    formData.append('color_name[]', colorName);
-	    formData.append('size_option[]', sizeOption);
-	    formData.append('stock_number[]', stockNumber);
+		formData.append('opt_id', optionId);
+	    formData.append('color_number', colorNumber);
+	    formData.append('color_name', colorName);
+	    formData.append('size_option', sizeOption);
+	    formData.append('stock_number', stockNumber);
 	});
 
-	debugger;
-	
     $.ajax({
-        url: 'updatePrd',
+        url: 'productUpdate',
         type: 'POST',
         data: formData,
         contentType: false,

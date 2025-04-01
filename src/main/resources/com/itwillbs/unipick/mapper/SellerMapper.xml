@@ -54,13 +54,15 @@
 	
 	<!-- 상품 상세 조회 옵션 -->
 	<select id="productOption" parameterType="map">
-		SELECT o.clr_cd,
+		SELECT o.opt_id,
+			   o.clr_cd,
 			   o.clr_nm,
 			   o.prd_qt,
 			   cd.cod_nm
 		  FROM options o
 		  JOIN common_detailcode cd ON o.siz_nm = cd.cod_cd
 		 WHERE prd_cd = #{prd_cd}
+		 ORDER BY opt_id
 	</select>
 	
 	<!-- 상품 이미지 -->
@@ -105,6 +107,74 @@
 	  WHERE sel_id = #{sel_id}
 	</select>
 
+	<!-- 상품 업데이트 -->
+	<update id="productUpdate" parameterType="map">
+		UPDATE products
+		   SET prd_nm = #{prd_nm},
+		   	   prd_ct = #{prd_ct},
+		   	   prd_ca = #{prd_ca},
+		   	   prd_sf = #{prd_sf},
+		   	   prd_op = #{prd_op},
+		   	   prd_sp = #{prd_sp},
+		   	   prd_bd = #{prd_bd}
+		 WHERE prd_cd = #{prd_cd}
+	</update>
+	
+	<!-- 상품 옵션 삭제 -->
+	<delete id="productOptionDelete" parameterType="list">
+		DELETE FROM options
+	    WHERE opt_id IN
+	    <foreach collection="list" item="opt_id" open="(" separator="," close=")">
+	        #{opt_id}
+	    </foreach>
+	</delete>
+	
+	<!-- 상품 옵션 저장 -->
+	<insert id="productOptionInsert" parameterType="list">
+	    INSERT INTO options (opt_id,
+	    					 prd_cd,
+	    					 siz_nm,
+	    					 clr_cd,
+	    					 clr_nm,
+	    					 prd_qt)
+	    			VALUES
+	    <foreach collection="list" item="option" separator=",">
+	        (default, #{option.prd_cd}, #{option.siz_nm}, #{option.clr_cd}, #{option.clr_nm}, #{option.prd_qt})
+	    </foreach>
+	</insert>
 
+	<!-- 상품 옵션 업데이트 -->
+    <update id="productOptionUpdate" parameterType="list">
+    	<foreach collection="list" item="option" separator=";">
+	    	UPDATE options
+	    	   SET prd_cd = #{option.prd_cd},
+	    	   	   siz_nm = #{option.siz_nm},
+	    	   	   clr_cd = #{option.clr_cd},
+	    	   	   clr_nm = #{option.clr_nm},
+	    	   	   prd_qt = #{option.prd_qt}
+	    	 WHERE opt_id = #{option.opt_id}
+    	 </foreach>
+    </update>
+	
+	<!-- 상품 이미지 업데이트 -->
+	<insert id="productImageUpdate" parameterType="map">
+	    INSERT INTO product_images(
+	        prd_cd,
+	        fil_nm,
+	        fil_pt,
+	        ntc_ca,
+	        ntc_ua,
+	        fil_nb)
+	    VALUES(
+	        #{prd_cd}, 
+	        #{fil_nm}, 
+	        #{fil_pt}, 
+	        default,
+	        default, 
+	        #{fil_nb})
+	    ON DUPLICATE KEY UPDATE
+	        fil_nm = #{fil_nm},
+	        fil_pt = #{fil_pt}
+	</insert>
 
 </mapper>
