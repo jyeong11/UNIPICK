@@ -5,6 +5,13 @@
     line-height: 16px;
     font-size: 16px;
     padding-bottom: 5px;
+    word-wrap: break-word;
+    width: 250px;
+}
+.prd-item img{
+    width: 278px;
+    height: 280px;
+    object-fit: cover;
 }
 .prd_pr {
 	display: flex;
@@ -90,7 +97,7 @@
     
 }
 .dc {
-	font-size: 30px;
+	font-size: 22px;
 	color : #f2a900;
 	padding-right: 17px;
 }
@@ -282,8 +289,8 @@ div > a > i {
 	flex-wrap: wrap;  /* 줄 바꿈 허용 */
     gap: 20px;
 }
-#selAnthorprd img , #pickPrd img{
-    width: calc(33.33% - 10px); /* 3개씩 배치 (여백 고려) */
+#pickPrd img{
+/*     width: calc(33.33% - 10px); 3개씩 배치 (여백 고려) */
     max-width: 278px;
     height: auto;
 }

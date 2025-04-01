@@ -77,7 +77,7 @@ $(function() {
 	        event.preventDefault();
 	        return;
     	}
-    	window.location.href = `${contextPath}/productOrder?prd_cd=${prdCd}&clr_nm=${encodeURIComponent(color)}&siz_nm=${encodeURIComponent(size)}&qty=${encodeURIComponent(qty)}`;
+    	window.location.href = `productOrder?prd_cd=${prdCd}&clr_nm=${encodeURIComponent(color)}&siz_nm=${encodeURIComponent(size)}&qty=${encodeURIComponent(qty)}`;
     });
 	
 });

@@ -25,7 +25,7 @@ public interface BuyerMapper {
 	// 판매자 상세페이지
 	public List<Map<String, Object>> getselDetail(String sel_nm);
 	// 판매자 상세 이미지
-	public List<String> getselImg(String sel_nm);
+	public List<Map<String , Object>> getselImg(String sel_nm);
 	// 카테고리 메뉴
 	public List<Map<String, Object>> getCategory();
 	// 상품 정렬 종류 

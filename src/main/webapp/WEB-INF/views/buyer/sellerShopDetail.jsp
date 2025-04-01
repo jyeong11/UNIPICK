@@ -80,14 +80,20 @@
 				<h2>CATEGORIES</h2>
 				<ul class="category-data">
 					<div class="first-cate">
-						<a href="productList?lev_cd=All&category=전체">전체</a>
+						<a href="sellerShopDetail?lev_cd=All&category=전체&sel_nm=${selList[0].sel_nm }">전체</a>
 					</div>
 				</ul>
 			</div>
 			<div class="image-gallery">
-			    <c:forEach var="img" items="${selImgList.fil_pt}">
+			    <c:forEach var="sel" items="${selList}">
 			        <div class="image-item">
-			            <img src="${pageContext.request.contextPath }/resources/productImg/${img}"/>
+			            <img src="${pageContext.request.contextPath}${sel['fil_pt']}" alt="${sel['prd_nm']}"/>
+			            <div class="sel-nm">${sel['sel_nm']}</div>
+			            <div class="prd-nm">${sel['prd_nm']}</div>
+			            <div class="pr">
+			            	<div class="dc">${sel['dc']}</div>
+			            	<div class="prd-sp">${sel['prd_sp']}원</div>
+			        	</div>
 			        </div>
 			    </c:forEach>
 			</div>

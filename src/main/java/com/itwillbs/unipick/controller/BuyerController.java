@@ -110,11 +110,9 @@ public class BuyerController {
 	@GetMapping("sellerShopDetail")
 	public String sellerShopDetail(@RequestParam("sel_nm") String sel_nm, Model model) {
 		List<Map<String, Object>> selList = buyService.getselDetail(sel_nm);
-		List<String> selImgList = buyService.getselImg(sel_nm);
+//		List<Map<String , Object>> selImgList = buyService.getselImg(sel_nm);
 		model.addAttribute("selList", selList);
-		model.addAttribute("selImgList", selImgList);
 		System.out.println("!@#@!#!@#@!2" + selList);
-		System.out.println("!@#@!#!@#@!2" + selImgList);
 		return "buyer/sellerShopDetail";
 	}
 	// 상품 상세조회 (조회)
@@ -122,10 +120,10 @@ public class BuyerController {
 	public String productDetail(@RequestParam("prd_cd") String prdCd,
 								@RequestParam("sel_nm") String selNm,
 								Model model) {
+
 		Map<String, Object> prdList = buyService.getPrdDetail(prdCd);
 		List<String> prdImg = buyService.getPrdImg(prdCd);
 		List<Map<String, Object>> selImg = buyService.getselanother(selNm);
- 		System.out.println("selImg" + selImg);
 		List<Map<String, Object>> optionList = buyService.getPrdOption(prdCd); 
 		
 		model.addAttribute("prd", prdList);
@@ -382,5 +380,10 @@ public class BuyerController {
 		return buyService.myRecentlyPrd(buy);
 	}
 	
-	
+	// 판매자 상세 페이지 카테고리 
+	@ResponseBody
+	@PostMapping("sellerShopCategory")
+	public List<Map<String, Object>> sellerShopCategory() {
+		return buyService.productListData();
+	}
 }

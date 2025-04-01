@@ -1,8 +1,8 @@
 $(function() {
 	
 	$.ajax({
-		type: "GET",
-        url: "productListData",
+		type: "POST",
+        url: "sellerShopCategory",
         success: function(res) {
 			let firstCategory = res.cate.filter(item => item.lev_cd.length === 10)
 										 .map(item => `<div data-value="${item.lev_cd}" class="first-cate">

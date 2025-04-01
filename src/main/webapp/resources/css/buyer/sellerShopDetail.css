@@ -1,5 +1,36 @@
 @charset "UTF-8";
-
+.image-gallery {
+	display: flex;
+}
+.image-item img {
+	width: 230px;
+    height: 230px;
+    object-fit: cover;
+/*     padding-left: 27px; */
+    
+}
+.image-item{
+	width: 300px;
+    height: 400px;
+}
+.prd-sp {
+	font-weight: bold;
+	font-size: 18px;
+}
+.pr{
+	display: flex;
+    align-items: center;
+}
+.dc{
+	font-size: 23px;
+    font-weight: bold;
+    color: #f2a900;
+    padding-right: 15px;
+}
+.prd-nm {
+	width: 230px;
+  	word-wrap: break-word;
+}
 .background {
 	display: flex;
     justify-content: center;
