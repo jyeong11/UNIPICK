@@ -51,4 +51,17 @@ public interface SellerMapper2 {
 	public void Withdraw(Map<String, Object> seller);
 	
     List<Map<String, Object>> getSettlementList(Map<String, Object> params);
+    
+    // 날짜별 방문자 수 조회
+    List<Map<String, Object>> getDailyVisits(@Param("sellerId") String sellerId);
+
+    // 인기 상품 조회
+    List<Map<String, Object>> getPopularProducts(@Param("sellerId") String sellerId);
+    
+    int countBySellerAndProduct(Map<String, Object> params); // 판매자의 상품인지 확인
+    void insertProductVisitLog(Map<String, Object> params); // 방문 로그 저장
+    List<Map<String, Object>> getDetailedVisits(@Param("sellerId") String sellerId);
+    
+    List<Map<String, Object>> getVisitsByPeriod(Map<String, Object> params);
+    List<Map<String, Object>> getPopularProductsByPeriod(Map<String, Object> params);
 }

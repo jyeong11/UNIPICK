@@ -3,9 +3,6 @@ package com.itwillbs.unipick.service;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -332,5 +329,38 @@ public class SellerService2 {
     }
 
     public void generateExcel(List<Map<String, Object>> settlementList, OutputStream outputStream) throws IOException {
+    }
+    
+
+    // 날짜별 방문자 수 조회
+    public List<Map<String, Object>> getDailyVisits(String sellerId) {
+        return mapper.getDailyVisits(sellerId);
+    }
+
+    // 인기 상품 조회
+    public List<Map<String, Object>> getPopularProducts(String sellerId) {
+        return mapper.getPopularProducts(sellerId);
+    }
+    
+    // 상품이 해당 판매자의 것인지 확인
+    public boolean isSellerProduct(Map<String, Object> params) {
+        return mapper.countBySellerAndProduct(params) > 0;
+    }
+
+    // 방문자 로그 저장
+    public void logProductVisit(Map<String, Object> params) {
+        mapper.insertProductVisitLog(params);
+    }
+    
+    public List<Map<String, Object>> getDetailedVisits(String sellerId) {
+        return mapper.getDetailedVisits(sellerId);
+    }
+    
+    public List<Map<String, Object>> getVisitsByPeriod(Map<String, Object> params) {
+        return mapper.getVisitsByPeriod(params);
+    }
+
+    public List<Map<String, Object>> getPopularProductsByPeriod(Map<String, Object> params) {
+        return mapper.getPopularProductsByPeriod(params);
     }
 }

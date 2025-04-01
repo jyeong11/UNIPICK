@@ -4,272 +4,293 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itwillbs.unipick.mapper.SellerMapper2">
 
-
-  <!-- 상품 등록 쿼리 -->
-  <insert id="insertProduct" parameterType="map">
-    INSERT INTO products (
-     	prd_nm,
-     	prd_ct,
-		sel_id,
-		prd_cd,
-		prd_op,
-		prd_sp,
-		prd_ca,
-		prd_ds,
-		prd_bd,
-		prd_st,
-		prd_dt,
-		prd_sf
-    )
-    VALUES (
-      #{prd_nm},
-      #{prd_ct},
-      #{sel_id},
-      #{prd_cd},
-      #{prd_op},
-      #{prd_sp},
-      #{prd_ca},
-      #{prd_ds},
-      #{prd_bd},
-      default,
-      default,
-      #{prd_sf}
-    )
-  </insert>
+		<!-- 상품 등록 쿼리 -->
+	  <insert id="insertProduct" parameterType="map">
+	    INSERT INTO products (
+	     			prd_nm,
+			     	prd_ct,
+					sel_id,
+					prd_cd,
+					prd_op,
+					prd_sp,
+					prd_ca,
+					prd_ds,
+					prd_bd,
+					prd_st,
+					prd_dt,
+					prd_sf
+	    				    )
+	    	VALUES (
+			      #{prd_nm},
+			      #{prd_ct},
+			      #{sel_id},
+			      #{prd_cd},
+			      #{prd_op},
+			      #{prd_sp},
+			      #{prd_ca},
+			      #{prd_ds},
+			      #{prd_bd},
+			      default,
+			      default,
+			      #{prd_sf}
+			    			)
+	  </insert>
   
-
-
-  <!-- 이미지 정보 등록 -->
-  <insert id="insertProductImage" parameterType="map">
-    INSERT INTO product_images (
-      img_id,
-      prd_cd,
-      fil_nm,
-      fil_pt,
-      ntc_ca,
-      ntc_ua,
-      fil_nb
-    )
-    VALUES (
-      #{img_id},
-      #{prd_cd},
-      #{fil_nm},
-      #{fil_pt},
-      NOW(),
-      NOW(),
-      #{fil_nb}
-    )
-  </insert>
+	  <!-- 이미지 정보 등록 -->
+	  <insert id="insertProductImage" parameterType="map">
+	    INSERT INTO product_images (
+	      			img_id,
+				    prd_cd,
+				    fil_nm,
+				    fil_pt,
+				    ntc_ca,
+				    ntc_ua,
+				    fil_nb
+	    					)
+	    	VALUES (
+				    #{img_id},
+				    #{prd_cd},
+				    #{fil_nm},
+				    #{fil_pt},
+				    NOW(),
+				    NOW(),
+				    #{fil_nb}
+				    		)
+	  </insert>
   
-<insert id="insertProductOptions" parameterType="map">
-	INSERT INTO options (prd_cd, siz_nm, clr_cd, clr_nm, prd_qt) VALUES
-    <foreach collection="options" item="opt" separator=",">
-        (#{opt.prd_cd}, #{opt.siz_nm}, #{opt.clr_cd}, '${opt.clr_nm}', #{opt.prd_qt})
-    </foreach>
-</insert>
+	  <insert id="insertProductOptions" parameterType="map">
+		INSERT INTO options (
+					prd_cd,
+					siz_nm,
+					clr_cd,
+					clr_nm,
+					prd_qt
+							)
+			VALUES <foreach collection="options" item="opt" separator=",">
+	        		(#{opt.prd_cd},
+	        		 #{opt.siz_nm},
+	        		 #{opt.clr_cd},
+	        		 '${opt.clr_nm}',
+	        		 #{opt.prd_qt}
+	        		 		)
+	    		  </foreach>
+	  </insert>
+
+	  <!-- 이미지 정보 삭제 -->
+	  <delete id="deleteProductImage" parameterType="map">
+	    DELETE FROM product_images
+	    WHERE prd_id = #{productId}
+	      AND fil_nm = #{fileName}
+	  </delete>
+	
+	  <!-- 이미지 정보 조회 (존재 여부 확인) -->
+	  <select id="selectProductImage" parameterType="map" resultType="map">
+	    SELECT * FROM product_images
+	    WHERE prd_id = #{productId}
+	      AND fil_nm = #{fileName}
+	  </select>
+	
+	  <!-- 계층형 카테고리 조회 쿼리 -->
+	  <select id="selectCategories" resultType="HashMap" parameterType="String">
+	    SELECT lev_cd, lev_nm, lev_ul, lev_so, lev_yn
+	    FROM level
+	    <where>
+	      <choose>
+	        <!-- 부모 코드가 없으면 기본 부모 코드 'CATEGORY'의 자식 반환 -->
+	        <when test="_parameter == null or _parameter == ''">
+	          lev_cd LIKE CONCAT('CATEGORY', '%')
+	          AND LENGTH(lev_cd) = LENGTH('CATEGORY') + 2
+	        </when>
+	        <!-- 부모 코드가 있으면 해당 코드의 자식 반환 -->
+	        <otherwise>
+	          lev_cd LIKE CONCAT(#{_parameter}, '%')
+	          AND LENGTH(lev_cd) = LENGTH(#{_parameter}) + 2
+	        </otherwise>
+	      </choose>
+	    </where>
+	    ORDER BY lev_so
+	  </select>
+
+	  <!-- Map 기반으로 사용자가 선택한 카테고리 정보 저장 -->
+	  <insert id="insertCategorySelection" parameterType="Map">
+	    INSERT INTO category_selection (
+	    			product_category,
+	    			product_category1,
+	    			product_category2
+	    								)
+	    	VALUES (#{product_category},
+	    	 		#{product_category1},
+	    	 		#{product_category2}
+	    	 							)
+	  </insert>
   
+	  <insert id="insertBadgeSelection" parameterType="map">
+	  	INSERT INTO badge_selection(
+	  				product_badge,
+	  				product_badge2,
+	  				product_badge3,
+	  				product_badge4
+	  								)
+	  		VALUES (#{product_badge},
+	  		 		#{product_badge1},
+	  		 		#{product_badge2},
+	  		 		#{product_badge3},
+	  		 		#{product_badge4}
+	  		 						)
+	  </insert>
   
+	  <!-- 배송 옵션 조회 쿼리 (단순 문자열 파라미터는 기본 이름 'value'로 사용) -->
+	  <select id="selectDeliveryOptions" parameterType="String" resultType="map">
+		SELECT cod_cd, cod_nm, cod_pr, cod_so, cod_yn
+		FROM common_detailcode
+		WHERE cod_cd LIKE CONCAT(#{value}, '%')
+		AND cod_yn = 'Y'
+		ORDER BY cod_so
+	</select>
 
-
-  <!-- 이미지 정보 삭제 -->
-  <delete id="deleteProductImage" parameterType="map">
-    DELETE FROM product_images
-    WHERE prd_id = #{productId}
-      AND fil_nm = #{fileName}
-  </delete>
-
-  <!-- 이미지 정보 조회 (존재 여부 확인) -->
-  <select id="selectProductImage" parameterType="map" resultType="map">
-    SELECT * FROM product_images
-    WHERE prd_id = #{productId}
-      AND fil_nm = #{fileName}
-  </select>
-
-
-  <!-- 계층형 카테고리 조회 쿼리 -->
-  <select id="selectCategories" resultType="HashMap" parameterType="String">
-    SELECT lev_cd, lev_nm, lev_ul, lev_so, lev_yn
-    FROM level
-    <where>
-      <choose>
-        <!-- 부모 코드가 없으면 기본 부모 코드 'CATEGORY'의 자식 반환 -->
-        <when test="_parameter == null or _parameter == ''">
-          lev_cd LIKE CONCAT('CATEGORY', '%')
-          AND LENGTH(lev_cd) = LENGTH('CATEGORY') + 2
-        </when>
-        <!-- 부모 코드가 있으면 해당 코드의 자식 반환 -->
-        <otherwise>
-          lev_cd LIKE CONCAT(#{_parameter}, '%')
-          AND LENGTH(lev_cd) = LENGTH(#{_parameter}) + 2
-        </otherwise>
-      </choose>
-    </where>
-    ORDER BY lev_so
-  </select>
-
-  <!-- Map 기반으로 사용자가 선택한 카테고리 정보 저장 -->
-  <insert id="insertCategorySelection" parameterType="Map">
-    INSERT INTO category_selection (product_category, product_category1, product_category2)
-    VALUES (#{product_category}, #{product_category1}, #{product_category2})
-  </insert>
-  
-  <insert id="insertBadgeSelection" parameterType="map">
-  	INSERT INTO badge_selection(product_badge, product_badge2, product_badge3, product_badge4)
-  	VALUES (#{product_badge}, #{product_badge1}, #{product_badge2}, #{product_badge3}, #{product_badge4})
-  </insert>
-  
-  <!-- 배송 옵션 조회 쿼리 (단순 문자열 파라미터는 기본 이름 'value'로 사용) -->
-  <select id="selectDeliveryOptions" parameterType="String" resultType="map">
-	SELECT cod_cd, cod_nm, cod_pr, cod_so, cod_yn
-	FROM common_detailcode
-	WHERE cod_cd LIKE CONCAT(#{value}, '%')
-	AND cod_yn = 'Y'
-	ORDER BY cod_so
-</select>
-
-<select id="selectStockOptions" parameterType="String" resultType="map">
-  SELECT cod_cd, cod_nm, cod_pr, cod_so, cod_yn
-	FROM common_detailcode
-	WHERE com_cd = #{comCd}
- 	 AND cod_yn = 'y'
-	ORDER BY cod_so
-</select>
+	 <select id="selectStockOptions" parameterType="String" resultType="map">
+	    SELECT cod_cd, cod_nm, cod_pr, cod_so, cod_yn
+		FROM common_detailcode
+		WHERE com_cd = #{comCd}
+	 	 AND cod_yn = 'y'
+		ORDER BY cod_so
+	 </select>
 
  
- <select id="selectSizeOptions" parameterType="String" resultType="map">
-	SELECT cod_cd, cod_nm, cod_pr, cod_so, cod_yn
-	FROM common_detailcode
-	WHERE com_cd LIKE CONCAT(#{value}, '%')
-	AND cod_yn = 'Y'
-	ORDER BY cod_so
-</select>
+	 <select id="selectSizeOptions" parameterType="String" resultType="map">
+		SELECT cod_cd, cod_nm, cod_pr, cod_so, cod_yn
+		FROM common_detailcode
+		WHERE com_cd LIKE CONCAT(#{value}, '%')
+		AND cod_yn = 'Y'
+		ORDER BY cod_so
+	</select>
 
 
- <select id="selectBadgeOptions" parameterType="String" resultType="map">
-	SELECT cod_cd, cod_nm, cod_pr, cod_so, cod_yn
-	FROM common_detailcode
-	WHERE com_cd LIKE CONCAT(#{value}, '%')
-	AND cod_yn = 'Y'
-	ORDER BY cod_so
-</select>
+	 <select id="selectBadgeOptions" parameterType="String" resultType="map">
+		SELECT cod_cd, cod_nm, cod_pr, cod_so, cod_yn
+		FROM common_detailcode
+		WHERE com_cd LIKE CONCAT(#{value}, '%')
+		AND cod_yn = 'Y'
+		ORDER BY cod_so
+	 </select>
 
-<select id="getProductList" resultType="map">
-  SELECT 
-      p.prd_cd,       <!-- 상품코드 -->
-      p.prd_nm,       <!-- 상품명 -->
-      p.prd_sp,       <!-- 판매가 -->
-      l.lev_nm,       <!-- 카테고리 -->
-      GROUP_CONCAT(DISTINCT o.clr_nm ORDER BY o.clr_nm ASC SEPARATOR ', ') AS colors,  <!-- 컬러 리스트 -->
-      GROUP_CONCAT(DISTINCT c.cod_nm ORDER BY c.cod_nm ASC SEPARATOR ', ') AS sizes,  <!-- 사이즈 리스트 -->
-      SUM(o.prd_qt) AS total_stock,  <!-- 총 재고 수량 -->
-      p.prd_dt        <!-- 등록일 -->
-  FROM products p
-JOIN level l ON p.prd_ca = l.lev_cd
-INNER JOIN options o ON p.prd_cd = o.prd_cd
-JOIN common_detailcode c ON o.siz_nm = c.cod_cd
-  WHERE 1=1
-  <if test="map.prd_nm != null and !map.prd_nm.isEmpty()">
-      AND p.prd_nm LIKE CONCAT('%', #{map.prd_nm}, '%')
-  </if>
-  <if test="map.prd_ca != null and !map.prd_ca.isEmpty()">
-      AND l.lev_nm LIKE CONCAT('%', #{map.prd_ca}, '%')
-  </if>
-  <if test="map.clr_nm != null and !map.clr_nm.isEmpty()">
-      AND o.clr_nm LIKE CONCAT('%', #{map.clr_nm}, '%')
-  </if>
-  <if test="map.siz_nm != null and !map.siz_nm.isEmpty()">
-      AND o.siz_nm LIKE CONCAT('%', #{map.siz_nm}, '%')
-  </if>
-  GROUP BY p.prd_cd, p.prd_nm, p.prd_sp, l.lev_nm, p.prd_dt
-  ORDER BY p.prd_dt DESC
-  <if test="pageList != null">
-      LIMIT #{pageList[0]}, #{pageList[1]}
-  </if>
-</select>
-
-
-<!-- 상품 개수 조회 -->
-<select id="getProductListCount" resultType="int">
-  SELECT COUNT(*) 
-  FROM products p
-  INNER JOIN options o ON p.prd_cd = o.prd_cd
-  WHERE 1=1
-  <if test="map.prd_nm != null and !map.prd_nm.isEmpty()">
-      AND p.prd_nm LIKE CONCAT('%', #{map.prd_nm}, '%')
-  </if>
-  <if test="map.prd_ca != null and !map.prd_ca.isEmpty()">
-      AND p.prd_ca LIKE CONCAT('%', #{map.prd_ca}, '%')
-  </if>
-  <if test="map.clr_nm != null and !map.clr_nm.isEmpty()">
-      AND o.clr_nm LIKE CONCAT('%', #{map.clr_nm}, '%')
-  </if>
-  <if test="map.siz_nm != null and !map.siz_nm.isEmpty()">
-      AND o.siz_nm LIKE CONCAT('%', #{map.siz_nm}, '%')
-  </if>
-</select>
+	 <select id="getProductList" resultType="map">
+	  	SELECT 
+	      p.prd_cd,       <!-- 상품코드 -->
+	      p.prd_nm,       <!-- 상품명 -->
+	      p.prd_sp,       <!-- 판매가 -->
+	      l.lev_nm,       <!-- 카테고리 -->
+	      GROUP_CONCAT(DISTINCT o.clr_nm ORDER BY o.clr_nm ASC SEPARATOR ', ') AS colors,  <!-- 컬러 리스트 -->
+	      GROUP_CONCAT(DISTINCT c.cod_nm ORDER BY c.cod_nm ASC SEPARATOR ', ') AS sizes,  <!-- 사이즈 리스트 -->
+	      SUM(o.prd_qt) AS total_stock,  <!-- 총 재고 수량 -->
+	      p.prd_dt        <!-- 등록일 -->
+	  FROM products p
+	  JOIN level l ON p.prd_ca = l.lev_cd
+	  INNER JOIN options o ON p.prd_cd = o.prd_cd
+	  JOIN common_detailcode c ON o.siz_nm = c.cod_cd
+	  WHERE 1=1
+	  <if test="map.prd_nm != null and !map.prd_nm.isEmpty()">
+	      AND p.prd_nm LIKE CONCAT('%', #{map.prd_nm}, '%')
+	  </if>
+	  <if test="map.prd_ca != null and !map.prd_ca.isEmpty()">
+	      AND l.lev_nm LIKE CONCAT('%', #{map.prd_ca}, '%')
+	  </if>
+	  <if test="map.clr_nm != null and !map.clr_nm.isEmpty()">
+	      AND o.clr_nm LIKE CONCAT('%', #{map.clr_nm}, '%')
+	  </if>
+	  <if test="map.siz_nm != null and !map.siz_nm.isEmpty()">
+	      AND o.siz_nm LIKE CONCAT('%', #{map.siz_nm}, '%')
+	  </if>
+	  GROUP BY p.prd_cd, p.prd_nm, p.prd_sp, l.lev_nm, p.prd_dt
+	  ORDER BY p.prd_dt DESC
+	  <if test="pageList != null">
+	      LIMIT #{pageList[0]}, #{pageList[1]}
+	  </if>
+	</select>
 
 
-<select id="getOrderList" resultType="map">
-  SELECT o.ord_id, -- 주문ID
-		 o.ord_at, -- 주문일자 
-         b.buy_nm, -- 구매자명 
-         b.buy_ph, -- 연락처
-         d.odd_qt, -- 구매수량 
-         d.odd_am, -- 결제금액
-    CASE d.odd_st 
-            WHEN '0' THEN '배송대기'
-            WHEN '1' THEN '배송중'
-            WHEN '2' THEN '배송완료'
-            WHEN '3' THEN '취소접수'
-            WHEN '4' THEN '반품접수'
-            ELSE d.odd_st 
-      END AS odd_st  -- 변환된 주문상태
-	FROM orders o
-	JOIN buyers b ON o.buy_em = b.buy_em
-	JOIN order_details d ON o.ord_id = d.ord_id
- WHERE 1=1
-  <if test="map.ord_id != null and !map.ord_id.isEmpty()">
-      AND o.ord_id LIKE CONCAT('%', #{map.ord_id}, '%')
-  </if>
-  <if test="map.ord_at != null and !map.ord_at.isEmpty()">
-      AND o.ord_at LIKE CONCAT('%', #{map.ord_at}, '%')
-  </if>
-  <if test="map.buy_nm != null and !map.buy_nm.isEmpty()">
-      AND b.buy_nm LIKE CONCAT('%', #{map.buy_nm}, '%')
-  </if>
-  <if test="map.buy_ph != null and !map.buy_ph.isEmpty()">
-      AND b.buy_ph LIKE CONCAT('%', #{map.buy_ph}, '%')
-  </if>
-  <if test="map.odd_qt != null and !map.odd_qt.isEmpty()">
-      AND d.odd_qt LIKE CONCAT('%', #{map.odd_qt}, '%')
-  </if>
-  <if test="map.odd_am != null and !map.odd_am.isEmpty()">
-      AND d.odd_am LIKE CONCAT('%', #{map.odd_am}, '%')
-  </if>
-  <if test="map.odd_st != null and !map.odd_st.isEmpty()">
-      AND d.odd_st LIKE CONCAT('%', #{map.odd_st}, '%')
-  </if>
-  ORDER BY o.ord_at DESC
-  <if test="pageList != null">
-      LIMIT #{pageList[0]}, #{pageList[1]}
-  </if>
-</select>
+	<!-- 상품 개수 조회 -->
+	 <select id="getProductListCount" resultType="int">
+	  SELECT COUNT(*) 
+	  FROM products p
+	  INNER JOIN options o ON p.prd_cd = o.prd_cd
+	  WHERE 1=1
+	  <if test="map.prd_nm != null and !map.prd_nm.isEmpty()">
+	      AND p.prd_nm LIKE CONCAT('%', #{map.prd_nm}, '%')
+	  </if>
+	  <if test="map.prd_ca != null and !map.prd_ca.isEmpty()">
+	      AND p.prd_ca LIKE CONCAT('%', #{map.prd_ca}, '%')
+	  </if>
+	  <if test="map.clr_nm != null and !map.clr_nm.isEmpty()">
+	      AND o.clr_nm LIKE CONCAT('%', #{map.clr_nm}, '%')
+	  </if>
+	  <if test="map.siz_nm != null and !map.siz_nm.isEmpty()">
+	      AND o.siz_nm LIKE CONCAT('%', #{map.siz_nm}, '%')
+	  </if>
+	 </select>
 
-<select id="getOrderListCount" resultType="int">
- SELECT COUNT(*) 
-	FROM orders o
-	JOIN buyers b ON o.buy_em = b.buy_em
-	WHERE 1= 1
-  <if test="map.buy_nm != null and !map.buy_nm.isEmpty()">
-      AND b.buy_nm LIKE CONCAT('%', #{map.buy_nm}, '%')
-  </if>
-  <if test="map.buy_ph != null and !map.buy_ph.isEmpty()">
-      AND b.buy_ph LIKE CONCAT('%', #{map.buy_ph}, '%')
-  </if>
-  <if test="map.ord_id != null and !map.ord_id.isEmpty()">
-      AND o.ord_id LIKE CONCAT('%', #{map.ord_id}, '%')
-  </if>
-</select>
+
+	 <select id="getOrderList" resultType="map">
+	  SELECT o.ord_id, -- 주문ID
+			 o.ord_at, -- 주문일자 
+	         b.buy_nm, -- 구매자명 
+	         b.buy_ph, -- 연락처
+	         d.odd_qt, -- 구매수량 
+	         d.odd_am, -- 결제금액
+	    CASE d.odd_st 
+	            WHEN '0' THEN '배송대기'
+	            WHEN '1' THEN '배송중'
+	            WHEN '2' THEN '배송완료'
+	            WHEN '3' THEN '취소접수'
+	            WHEN '4' THEN '반품접수'
+	            ELSE d.odd_st 
+	      END AS odd_st  -- 변환된 주문상태
+		FROM orders o
+		JOIN buyers b ON o.buy_em = b.buy_em
+		JOIN order_details d ON o.ord_id = d.ord_id
+	 WHERE 1=1
+	  <if test="map.ord_id != null and !map.ord_id.isEmpty()">
+	      AND o.ord_id LIKE CONCAT('%', #{map.ord_id}, '%')
+	  </if>
+	  <if test="map.ord_at != null and !map.ord_at.isEmpty()">
+	      AND o.ord_at LIKE CONCAT('%', #{map.ord_at}, '%')
+	  </if>
+	  <if test="map.buy_nm != null and !map.buy_nm.isEmpty()">
+	      AND b.buy_nm LIKE CONCAT('%', #{map.buy_nm}, '%')
+	  </if>
+	  <if test="map.buy_ph != null and !map.buy_ph.isEmpty()">
+	      AND b.buy_ph LIKE CONCAT('%', #{map.buy_ph}, '%')
+	  </if>
+	  <if test="map.odd_qt != null and !map.odd_qt.isEmpty()">
+	      AND d.odd_qt LIKE CONCAT('%', #{map.odd_qt}, '%')
+	  </if>
+	  <if test="map.odd_am != null and !map.odd_am.isEmpty()">
+	      AND d.odd_am LIKE CONCAT('%', #{map.odd_am}, '%')
+	  </if>
+	  <if test="map.odd_st != null and !map.odd_st.isEmpty()">
+	      AND d.odd_st LIKE CONCAT('%', #{map.odd_st}, '%')
+	  </if>
+	  ORDER BY o.ord_at DESC
+	  <if test="pageList != null">
+	      LIMIT #{pageList[0]}, #{pageList[1]}
+	  </if>
+	</select>
+
+	<select id="getOrderListCount" resultType="int">
+	 SELECT COUNT(*) 
+		FROM orders o
+		JOIN buyers b ON o.buy_em = b.buy_em
+		WHERE 1= 1
+	  <if test="map.buy_nm != null and !map.buy_nm.isEmpty()">
+	      AND b.buy_nm LIKE CONCAT('%', #{map.buy_nm}, '%')
+	  </if>
+	  <if test="map.buy_ph != null and !map.buy_ph.isEmpty()">
+	      AND b.buy_ph LIKE CONCAT('%', #{map.buy_ph}, '%')
+	  </if>
+	  <if test="map.ord_id != null and !map.ord_id.isEmpty()">
+	      AND o.ord_id LIKE CONCAT('%', #{map.ord_id}, '%')
+	  </if>
+	</select>
 
 	<select id="selModifyForm" parameterType="map">
 		SELECT sel_id,
@@ -290,53 +311,146 @@ JOIN common_detailcode c ON o.siz_nm = c.cod_cd
 		 WHERE sel_id = #{sel_id};
 	</select>
   
-  	<!-- 구매자 정보 수정 -->
-<update id="sellerModify" parameterType="map">
-    UPDATE sellers SET
-        sel_pw = #{sel_pw},
-        sel_nm = #{sel_nm},
-        sel_rn = #{sel_rn},
-        sel_br = #{sel_br},
-        sel_ad = #{sel_ad},
-        sel_cs = #{sel_cs},
-        sel_mn = #{sel_mn},
-        sel_mp = #{sel_mp},
-        sel_bp = #{storeBpFile, jdbcType=VARCHAR},
-        sel_pp = #{storePpFile, jdbcType=VARCHAR}
-    WHERE sel_id = #{sel_id}
-</update>
+	  	<!-- 구매자 정보 수정 -->
+	<update id="sellerModify" parameterType="map">
+	    UPDATE sellers SET
+	        sel_pw = #{sel_pw},
+	        sel_nm = #{sel_nm},
+	        sel_rn = #{sel_rn},
+	        sel_br = #{sel_br},
+	        sel_ad = #{sel_ad},
+	        sel_cs = #{sel_cs},
+	        sel_mn = #{sel_mn},
+	        sel_mp = #{sel_mp},
+	        sel_bp = #{storeBpFile, jdbcType=VARCHAR},
+	        sel_pp = #{storePpFile, jdbcType=VARCHAR}
+	    WHERE sel_id = #{sel_id}
+	</update>
 
-<select id="getSettlementList" parameterType="map" resultType="map">
+	<select id="getSettlementList" parameterType="map" resultType="map">
+	    SELECT 
+	        CASE 
+	            WHEN #{periodType} = 'daily' THEN DATE_FORMAT(o.ord_at, '%Y-%m-%d')
+	            WHEN #{periodType} = 'weekly' THEN DATE_FORMAT(o.ord_at, '%Y-W%u')
+	            WHEN #{periodType} = 'monthly' THEN DATE_FORMAT(o.ord_at, '%Y-%m')
+	            WHEN #{periodType} = 'yearly' THEN DATE_FORMAT(o.ord_at, '%Y')
+	        END as period,
+	        COUNT(DISTINCT o.ord_id) as order_count,
+	        SUM(od.odd_qt) as sales_quantity,
+	        SUM(CASE WHEN od.odd_st = 'exchange' THEN 1 ELSE 0 END) as exchange_count,
+	        SUM(CASE WHEN od.odd_st = 'return' THEN 1 ELSE 0 END) as return_count,
+	        SUM(od.odd_am) as revenue,
+	        ROUND(SUM(od.odd_am) * 0.085, 0) as commission,
+	        ROUND(SUM(od.odd_am) * 0.915, 0) as profit,
+	        DATE_FORMAT(o.ord_at, '%Y-%m-%d') as settlement_date
+	    FROM orders o
+	    JOIN order_details od ON o.ord_id = od.ord_id
+	    JOIN products p ON od.prd_cd = p.prd_cd
+	    WHERE p.sel_id = #{sellerId}
+	    <if test="periodType == 'daily' and startDate != null and endDate != null">
+	        AND o.ord_at BETWEEN #{startDate} AND #{endDate}
+	    </if>
+	    GROUP BY 
+	        CASE 
+	            WHEN #{periodType} = 'daily' THEN DATE_FORMAT(o.ord_at, '%Y-%m-%d')
+	            WHEN #{periodType} = 'weekly' THEN DATE_FORMAT(o.ord_at, '%Y-W%u')
+	            WHEN #{periodType} = 'monthly' THEN DATE_FORMAT(o.ord_at, '%Y-%m')
+	            WHEN #{periodType} = 'yearly' THEN DATE_FORMAT(o.ord_at, '%Y')
+	        END
+	    ORDER BY settlement_date DESC
+	</select>
+
+	<!-- 날짜별 방문자 수 조회 -->
+<select id="getDailyVisits" parameterType="string" resultType="map">
+    SELECT 
+        vis_dt as visitDate,
+        vis_ct as visitCount
+    FROM seller_visit
+    WHERE sel_id = #{sellerId}
+    ORDER BY vis_dt DESC
+    LIMIT 30;
+</select>
+
+<!-- 인기 상품 조회 (조회수 높은 순으로 TOP 5) -->
+<select id="getPopularProducts" parameterType="string" resultType="map">
+    SELECT 
+        p.prd_nm as productName,
+        sv.vis_ct as visitCount
+    FROM seller_visit sv
+    JOIN products p ON sv.prd_cd = p.prd_cd
+    WHERE sv.sel_id = #{sellerId}
+    GROUP BY sv.prd_cd, p.prd_nm
+    ORDER BY CAST(sv.vis_ct AS UNSIGNED) DESC
+    LIMIT 5;
+</select>
+
+<!-- 방문 기록 삽입 -->
+<insert id="insertProductVisitLog" parameterType="map">
+    INSERT INTO seller_visit (sel_id, prd_cd, vis_dt, vis_ct)
+    VALUES (#{sellerId}, #{productId}, DATE_FORMAT(NOW(), '%Y-%m-%d'), '1')
+    ON DUPLICATE KEY UPDATE vis_ct = CAST(vis_ct AS UNSIGNED) + 1;
+</insert>
+
+<!-- 상세 방문자 통계 조회 -->
+<select id="getDetailedVisits" parameterType="string" resultType="map">
+    SELECT 
+        sv.vis_dt as visitDate,
+        sv.vis_ct as visitCount,
+        p.prd_nm as productName,
+        sv.prd_cd as productId
+    FROM seller_visit sv
+    JOIN products p ON sv.prd_cd = p.prd_cd
+    WHERE sv.sel_id = #{sellerId}
+    ORDER BY sv.vis_dt DESC, CAST(sv.vis_ct AS UNSIGNED) DESC;
+</select>
+
+
+<!-- 기간별 방문자 통계 조회 -->
+<select id="getVisitsByPeriod" parameterType="map" resultType="map">
     SELECT 
         CASE 
-            WHEN #{periodType} = 'daily' THEN DATE_FORMAT(o.ord_at, '%Y-%m-%d')
-            WHEN #{periodType} = 'weekly' THEN DATE_FORMAT(o.ord_at, '%Y-W%u')
-            WHEN #{periodType} = 'monthly' THEN DATE_FORMAT(o.ord_at, '%Y-%m')
-            WHEN #{periodType} = 'yearly' THEN DATE_FORMAT(o.ord_at, '%Y')
-        END as period,
-        COUNT(DISTINCT o.ord_id) as order_count,
-        SUM(od.odd_qt) as sales_quantity,
-        SUM(CASE WHEN od.odd_st = 'exchange' THEN 1 ELSE 0 END) as exchange_count,
-        SUM(CASE WHEN od.odd_st = 'return' THEN 1 ELSE 0 END) as return_count,
-        SUM(od.odd_am) as revenue,
-        ROUND(SUM(od.odd_am) * 0.085, 0) as commission,
-        ROUND(SUM(od.odd_am) * 0.915, 0) as profit,
-        DATE_FORMAT(o.ord_at, '%Y-%m-%d') as settlement_date
-    FROM orders o
-    JOIN order_details od ON o.ord_id = od.ord_id
-    JOIN products p ON od.prd_cd = p.prd_cd
-    WHERE p.sel_id = #{sellerId}
-    <if test="periodType == 'daily' and startDate != null and endDate != null">
-        AND o.ord_at BETWEEN #{startDate} AND #{endDate}
+            WHEN #{periodType} = 'daily' THEN vis_dt
+            WHEN #{periodType} = 'weekly' THEN DATE_FORMAT(STR_TO_DATE(vis_dt, '%Y-%m-%d'), '%Y-%U')
+            WHEN #{periodType} = 'monthly' THEN DATE_FORMAT(STR_TO_DATE(vis_dt, '%Y-%m-%d'), '%Y-%m')
+            WHEN #{periodType} = 'yearly' THEN DATE_FORMAT(STR_TO_DATE(vis_dt, '%Y-%m-%d'), '%Y')
+        END as visitDate,
+        SUM(CAST(vis_ct AS UNSIGNED)) as visitCount
+    FROM seller_visit
+    WHERE sel_id = #{sellerId}
+    <if test="startDate != null and startDate != ''">
+        AND vis_dt >= #{startDate}
+    </if>
+    <if test="endDate != null and endDate != ''">
+        AND vis_dt &lt;= #{endDate}
     </if>
     GROUP BY 
         CASE 
-            WHEN #{periodType} = 'daily' THEN DATE_FORMAT(o.ord_at, '%Y-%m-%d')
-            WHEN #{periodType} = 'weekly' THEN DATE_FORMAT(o.ord_at, '%Y-W%u')
-            WHEN #{periodType} = 'monthly' THEN DATE_FORMAT(o.ord_at, '%Y-%m')
-            WHEN #{periodType} = 'yearly' THEN DATE_FORMAT(o.ord_at, '%Y')
+            WHEN #{periodType} = 'daily' THEN vis_dt
+            WHEN #{periodType} = 'weekly' THEN DATE_FORMAT(STR_TO_DATE(vis_dt, '%Y-%m-%d'), '%Y-%U')
+            WHEN #{periodType} = 'monthly' THEN DATE_FORMAT(STR_TO_DATE(vis_dt, '%Y-%m-%d'), '%Y-%m')
+            WHEN #{periodType} = 'yearly' THEN DATE_FORMAT(STR_TO_DATE(vis_dt, '%Y-%m-%d'), '%Y')
         END
-    ORDER BY settlement_date DESC
+    ORDER BY visitDate DESC
+    LIMIT 30;
 </select>
- 
+
+<!-- 기간별 인기 상품 조회 -->
+<select id="getPopularProductsByPeriod" parameterType="map" resultType="map">
+    SELECT 
+        p.prd_nm as productName,
+        SUM(CAST(sv.vis_ct AS UNSIGNED)) as visitCount
+    FROM seller_visit sv
+    JOIN products p ON sv.prd_cd = p.prd_cd
+    WHERE sv.sel_id = #{sellerId}
+    <if test="startDate != null and startDate != ''">
+        AND sv.vis_dt >= #{startDate}
+    </if>
+    <if test="endDate != null and endDate != ''">
+        AND sv.vis_dt &lt;= #{endDate}
+    </if>
+    GROUP BY p.prd_cd, p.prd_nm
+    ORDER BY visitCount DESC
+    LIMIT 5;
+</select>
+
 </mapper>
