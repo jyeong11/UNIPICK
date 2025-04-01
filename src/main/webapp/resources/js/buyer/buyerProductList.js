@@ -93,7 +93,7 @@ $(function() {
 										 return `<div class="product-posting">
 													<a href="productDetail?prd_cd=${prd.prd_cd}">
 														<div class="prdImg-div">
-															<img src="${contextPath}/resources${prd.fil_pt}" alt="${prd.fil_nm}" class="prd-img">
+															<img src="${contextPath}${prd.fil_pt}" alt="${prd.fil_nm}" class="prd-img">
 															<i class="${heartClass} fa-heart heart"></i>
 														</div>
 														<div class="prdInfo-div">

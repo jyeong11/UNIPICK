@@ -79,7 +79,9 @@ $(function(){
 			            ).join("")}
 			        </select>
                     <input type="number" name="stock_number[]" class="stock-number" id="stock_number" value="${item.prd_qt}" placeholder="재고 수량을 입력해주세요." required>
-				<div>`)
+					<button type="button" class="btn btn-sm btn-outline-danger remove-option">삭제</button>
+				<div>
+				`)
 
 				$('#option-container').prepend(option);
 				
@@ -109,6 +111,10 @@ $(function(){
             }
         });
     });
+
+	$('#option-container').on('click', '.remove-option', function() {
+    	$(this).closest('.option-row').remove();
+	});
 
     // 카테고리 선택
     $('#product_category').on('change', function(){ changeCate(); });
@@ -275,7 +281,6 @@ $(function(){
 	
 });
 
-
 function productUpdate() {
 	// 상품명, 코드, 카테1, 카테2, 배송비
 	let prd_nm = $('#item-regi-title-text').val();
@@ -287,4 +292,36 @@ function productUpdate() {
 	let prd_sp = $('#sale_price').val();
 	
 	alert(prd_nm + prd_cd + first_cate + second_cate + prd_sf + prd_op + prd_sp);
+	
+    let formData = new FormData();
+
+    // 수정된 이미지 업로드
+    $('.item-thumb-upload-btn').each(function(index) {
+        let input = $(this)[0];
+        let file = input.files[0];
+        let previewImg = $(`#item-thumb-preview${index}`);
+
+        if (file && previewImg.attr('data-updated') === 'true') {
+            formData.append('updateFiles', file);
+            formData.append('imageIndexes', index);  // 서버에서 업데이트할 이미지 인덱스
+        }
+    });
+
+    formData.append('prd_cd', prd_cd);
+	debugger;
+//    $.ajax({
+//        url: 'updateProductImages',
+//        type: 'POST',
+//        data: formData,
+//        contentType: false,
+//        processData: false,
+//        success: function(response) {
+//            alert('이미지가 성공적으로 업데이트되었습니다.');
+//            location.reload();  // 페이지 새로고침
+//        },
+//        error: function(xhr, status, error) {
+//            alert('이미지 업데이트 중 오류가 발생했습니다.');
+//        }
+//    });
+	
 }

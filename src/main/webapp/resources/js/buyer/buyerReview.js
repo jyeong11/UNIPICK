@@ -63,7 +63,7 @@ $(function() {
 				opt_id = res.opt_id;
 				const contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2));
 				let prdData = `
-							       <img src="${contextPath}/resources${res.fil_pt}" id="prdImg">
+							       <img src="${contextPath}${res.fil_pt}" id="prdImg">
 								   <div>
 									   <div id="options">
 								           <p id="prdNm">${res.prd_nm}</p>

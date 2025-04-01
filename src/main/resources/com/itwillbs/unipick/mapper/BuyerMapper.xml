@@ -96,7 +96,7 @@
 	   JOIN common_detailcode cd
 	   	 ON  pd.prd_bd= cd.cod_cd
       WHERE prd_nm LIKE CONCAT('%',#{query},'%')
-      	AND prd_st = '승인'; 
+      	AND prd_st = '승인';
   	</select>
   	
   	<!-- 카테고리 메뉴 -->
@@ -147,7 +147,7 @@
 		 LEFT JOIN (SELECT w.buy_em, w.prd_cd
 					  FROM wishlist w JOIN buyers b ON w.buy_em = b.buy_em
 					 WHERE w.buy_em = #{buy_em}) w on p.prd_cd = w.prd_cd
-		 WHERE 1 = 1
+		 WHERE prd_st = '승인'
   		 <if test="lev_cd != 'All'">
   		 	AND p.prd_ca = #{lev_cd}
   		 </if>
@@ -348,6 +348,7 @@
 				FROM RankedImages
 			   WHERE rn = 1) i ON p.prd_cd = i.prd_cd
 		WHERE odd_id = #{odd_id}
+		  AND prd_st = '승인';
 	</select>
 	
 	<!-- 리뷰 등록 -->

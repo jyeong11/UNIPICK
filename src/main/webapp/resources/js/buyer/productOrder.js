@@ -28,7 +28,7 @@ $(function() {
                         </div>
                         <div class="order-info">
                             <div class="order-img">
-                                <img src="${contextPath}/resources${item.fil_pt}">
+                                <img src="${contextPath}${item.fil_pt}">
                             </div>
                             <div>
                                 <div class="prd">
@@ -332,7 +332,7 @@ $(function() {
 	            <div id="pay"><span>다른 결제 수단</span></div>
 	        </div>
 	        <div class="Other-Payment">
-	            <img src="${contextPath}/resources/images/icon_pay_kakao.svg">
+	            <img src="${contextPath}/images/icon_pay_kakao.svg">
 	        </div>
 	    `);
 		// 체크박스 하나만 선택가능

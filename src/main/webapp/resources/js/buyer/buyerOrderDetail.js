@@ -30,7 +30,7 @@ $(function() {
 												       </div>
 												       <div class="order-info">
 												           <div class="order-img">
-											                   <img src="${contextPath}/resources${item.fil_pt}">
+											                   <img src="${contextPath}${item.fil_pt}">
 											               </div>
 											               <div>
 											                   <div class="prd">

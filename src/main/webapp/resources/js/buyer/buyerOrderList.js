@@ -99,7 +99,7 @@ function search() {
 									   <div class="order-info">
 									   		<div><b>${item.sel_nm}</b></div>
 									   		<div class="left-info">
-									   	   		<div><img src="${contextPath}/resources${item.fil_pt}" class="prd-img"></div>
+									   	   		<div><img src="${contextPath}${item.fil_pt}" class="prd-img"></div>
 										   		<div class="right-info">
 									           		<div>${item.odd_st}</div>
 										       		<div>${item.prd_nm}</div>
