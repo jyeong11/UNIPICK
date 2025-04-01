@@ -119,10 +119,13 @@ public class BuyerController {
 	}
 	// 상품 상세조회 (조회)
 	@GetMapping("productDetail")
-	public String productDetail(@RequestParam("prd_cd") String prdCd, Model model) {
+	public String productDetail(@RequestParam("prd_cd") String prdCd,
+								@RequestParam("sel_nm") String selNm,
+								Model model) {
 		Map<String, Object> prdList = buyService.getPrdDetail(prdCd);
-		System.out.println("prdList" + prdList);
 		List<String> prdImg = buyService.getPrdImg(prdCd);
+		List<String> selImg = buyService.getselImg(selNm);
+ 		System.out.println("selImg" + selImg);
 		List<Map<String, Object>> optionList = buyService.getPrdOption(prdCd); 
 		
 		model.addAttribute("prd", prdList);
@@ -181,8 +184,7 @@ public class BuyerController {
 	@ResponseBody
 	@GetMapping("searchProduct")
 	public List<Map<String, Object>> searchProduct(@RequestParam("query") String query) {
-		List<Map<String, Object>> selectPrd = buyService.getSearchPrd(query);
-		return selectPrd;
+		return buyService.getSearchPrd(query);
 	}
 	
 	// 상품 리스트(카테고리, 정렬종류)

@@ -9,9 +9,11 @@ $(function() {
 	                let resultHtml = "";
 	                if (res.length > 0) {
 	                    res.forEach(function(prd) {
+		debugger;
 	                        resultHtml += `
-	                            <div class="prd-item" data-id="${prd.prd_cd}" style="cursor: pointer;">
+	                            <div class="prd-item" data-id="${prd.prd_cd}" data-sel="${prd.sel_nm}" style="cursor: pointer;">
 				                    <img src="${contextPath}${prd.fil_pt}" class="prd-img">
+									<div class="prdInfo">${prd.sel_nm}</div>
 									<div class="prdInfo">${prd.prd_nm}</div>
 				                    <div class="prd_pr">
 				                    	<div class="dc">${prd.dc}</div>
@@ -36,6 +38,7 @@ $(function() {
 	});
 	$(document).on("click", ".prd-item", function() {
         let prdCd = $(this).data("id");
-        window.location.href = `productDetail?prd_cd=${prdCd}`;
+		let selNm = $(this).data("sel");
+    	window.location.href = `productDetail?prd_cd=${prdCd}&sel_nm=${encodeURIComponent(selNm)}`;
     });
 });

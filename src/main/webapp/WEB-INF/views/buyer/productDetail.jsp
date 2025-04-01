@@ -106,7 +106,7 @@
 	    		<div id="selAnthor">
 	    			<div id="selAnthorTitle">
 	    				<p>${prd.sel_nm}의 다른 상품</p>
-	    				<a href=""><span class="small-text">더보기 ></span></a>
+	    				<a href="sellerShopDetail?sel_nm=${prd.sel_nm}"><span class="small-text">더보기 ></span></a>
 	    			</div>
 		    		<div id="selAnthorprd">
 		    			<c:forEach begin="6" end="10">

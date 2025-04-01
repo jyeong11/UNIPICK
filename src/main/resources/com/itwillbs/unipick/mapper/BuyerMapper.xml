@@ -73,7 +73,7 @@
 	  WHERE sel_nm = #{sel_nm} 
 	    AND prd_st  = '승인';
 	</select>
-  	<!--   	상품검색 -->
+  	 	<!--   	상품검색 -->
   	<select id="getSearchPrd" parameterType="map">
   	WITH RankedImages AS (
     	SELECT prd_cd,
@@ -82,7 +82,7 @@
            	   ROW_NUMBER() OVER (PARTITION BY prd_cd) AS rn
     	  FROM product_images
 		)
-  	 SELECT pd.prd_nm, pd.sel_id, pd.prd_cd, cd.cod_nm,
+  	 SELECT pd.prd_nm, sl.sel_nm, pd.prd_cd, cd.cod_nm,
   	 		CONCAT(ROUND(((pd.prd_op - pd.prd_sp) / pd.prd_op) * 100, 0), '%') AS dc,
 			FORMAT(pd.prd_sp, 0) AS prd_sp, 
 			pd.prd_bd, pi.fil_nm, pi.fil_pt
@@ -95,8 +95,10 @@
 	     ON pd.prd_cd = pi.prd_cd
 	   JOIN common_detailcode cd
 	   	 ON  pd.prd_bd= cd.cod_cd
+	   JOIN sellers sl
+	     ON pd.sel_id = sl.sel_id
       WHERE prd_nm LIKE CONCAT('%',#{query},'%')
-      	AND prd_st = '승인';
+      	AND prd_st = '승인'; 
   	</select>
   	
   	<!-- 카테고리 메뉴 -->

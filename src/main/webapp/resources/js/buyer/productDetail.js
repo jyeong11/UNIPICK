@@ -1,27 +1,27 @@
 $(function() {
 	// 최근 본 상품 저장
-//	recentlyProduct();
+	// recentlyProduct();
 
     // 상품 더보기 버튼
-    var prdCt = document.getElementById("prdCt");
-    var loadMoreBtn = document.getElementById("loadMoreBtn");
-    var moreItems = document.getElementById("moreItems");
-    var prdCtContent = prdCt.innerHTML.trim(); // prdCt의 내용
-    console.log("prdCt 내용 길이: ", prdCtContent.length); // 내용 길이 확인
-
-    if (prdCtContent.length > 100) {
-        loadMoreBtn.style.display = "block"; // '상품 더보기' 버튼 보이게
-    } else {
-        loadMoreBtn.style.display = "none"; // 버튼 숨김
-    }
-
-    // '상품 더보기' 버튼 클릭 시 추가 항목 보이게
-    loadMoreBtn.addEventListener("click", function() {
-        moreItems.style.display = "block";  // 추가 항목을 보이게 함
-        this.style.display = "none";  // '상품 더보기' 버튼 숨김
-    });
-  
- 
+	var prdCt = document.getElementById("prdCt");
+	var loadMoreBtn = document.getElementById("loadMoreBtn");
+	var moreItems = document.getElementById("moreItems");
+	var prdCtContent = prdCt.innerHTML.trim();
+	
+	if (prdCtContent.length > 1000) {
+	    prdCt.innerHTML = prdCtContent.substring(0, 1000) + "...";
+	    moreItems.innerHTML = prdCtContent.substring(1000);
+	    moreItems.style.display = "none";
+	    loadMoreBtn.style.display = "block";
+	    
+	    loadMoreBtn.addEventListener("click", function() {
+	        prdCt.innerHTML += moreItems.innerHTML;
+	        moreItems.style.display = "none";
+	        this.style.display = "none";
+	    });
+	}
+ 	
+	// 사이즈 로드
 	window.loadSize = function() {
         var selectedColor = $("#color").val();
 		var sizeSelect = $("#size");
