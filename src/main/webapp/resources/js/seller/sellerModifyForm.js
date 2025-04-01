@@ -32,52 +32,55 @@ $(function() {
             $('#storeNumber').val(res.sel_cs);
             $('#phNm').val(res.sel_mn);
             $('#phNumber').val(res.sel_mp);
+            
+            // 기존 이미지가 있다면 표시
+            if(res.sel_pp) {
+                $('#existingStorePp').val(res.sel_pp);
+                $("#previewStorePp").attr("src", contextPath + res.sel_pp).show();
+            }
+            if(res.sel_bp) {
+                $('#existingStoreBp').val(res.sel_bp);
+                $("#previewStoreBp").attr("src", contextPath + res.sel_bp).show();
+            }
         },
         error: function(xhr, status, error) {
             alert("서버 오류가 발생했습니다.");
         }
     });
     
-    // 스토어 프로필 미리보기
-    $('#storePp').on('change', function(){
+    // 프로필 이미지 미리보기
+    $('#storePp').change(function() {
         const file = this.files[0];
-        if(file){
+        if (file) {
             const reader = new FileReader();
             reader.onload = function(e) {
                 $('#previewStorePp').attr('src', e.target.result).show();
             }
             reader.readAsDataURL(file);
-        } else {
-            $('#previewStorePp').hide();
         }
     });
-    
-    // 스토어 배경 미리보기
-    $('#storeBp').on('change', function(){
+
+    // 배경 이미지 미리보기
+    $('#storeBp').change(function() {
         const file = this.files[0];
-        if(file){
+        if (file) {
             const reader = new FileReader();
             reader.onload = function(e) {
                 $('#previewStoreBp').attr('src', e.target.result).show();
             }
             reader.readAsDataURL(file);
-        } else {
-            $('#previewStoreBp').hide();
         }
     });
-    
-    // 스토어 프로필 삭제
-    $('#removeStorePp').on('click', function(){
+
+    // 이미지 삭제 버튼
+    $('#removeStorePp').click(function() {
         $('#storePp').val('');
         $('#previewStorePp').attr('src', '').hide();
-        // 필요시 서버에 기존 파일 삭제 요청을 추가할 수 있습니다.
-        // 삭제 시 히든 필드의 값도 초기화할 수 있습니다.
         existingStorePp = "";
         $('#existingStorePp').val("");
     });
-    
-    // 스토어 배경 삭제
-    $('#removeStoreBp').on('click', function(){
+
+    $('#removeStoreBp').click(function() {
         $('#storeBp').val('');
         $('#previewStoreBp').attr('src', '').hide();
         existingStoreBp = "";

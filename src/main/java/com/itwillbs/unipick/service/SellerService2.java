@@ -248,36 +248,24 @@ public class SellerService2 {
 	    }
 
 	    try {
-	        // 파일 원본 이름 가져오기
 	        String originalFilename = profileImageFile.getOriginalFilename();
 	        System.out.println("✅ 프로필 원본 파일명: " + originalFilename);
 
-	        if (originalFilename == null || originalFilename.trim().isEmpty()) {
-	            imageData.put("error", "파일명이 올바르지 않습니다.");
-	            return imageData;
-	        }
-
-	        // 고유한 파일명 생성 (중복 방지)
 	        String uniqueFilename = UUID.randomUUID().toString() + "_" + originalFilename;
 
-	        // 실제 저장할 경로 (로컬 파일 시스템)
-	        String uploadDir = req.getServletContext().getRealPath("/resources/profile/");
+	        String uploadDir = servletContext.getRealPath("/resources/profile/");
 	        File folder = new File(uploadDir);
 	        if (!folder.exists()) {
-	            folder.mkdirs(); // 폴더가 없으면 생성
+	            folder.mkdirs();
 	        }
 
-	        // 파일 저장 경로 설정
 	        String fullPath = uploadDir + uniqueFilename;
 	        File destFile = new File(fullPath);
-	        profileImageFile.transferTo(destFile); // 파일 저장
+	        profileImageFile.transferTo(destFile);
 
-	        // DB에 저장할 가상 경로
-	        String filePath = "/resources/upload/profile/" + uniqueFilename;
+	        String filePath = "/resources/profile/" + uniqueFilename;
 
-	        // 필수 데이터 저장
-	        imageData.put("sel_pp", uniqueFilename); // 파일명 추가
-	        imageData.put("sel_pp", filePath); // 가상 경로 추가
+	        imageData.put("sel_pp", filePath);
 
 	        System.out.println("📂 프로필 이미지 저장된 파일명: " + uniqueFilename);
 	        System.out.println("📂 프로필 이미지 실제 저장 경로: " + fullPath);
@@ -285,14 +273,13 @@ public class SellerService2 {
 
 	    } catch (Exception e) {
 	        System.out.println("❌ 프로필 이미지 업로드 중 오류 발생: " + e.getMessage());
-	        imageData.put("error", "파일 업로드 실패");
+	        imageData.put("error", "프로필 이미지 업로드 실패");
 	        e.printStackTrace();
 	    }
 
 	    return imageData;
 	}
 
-	// 파일 업로드 및 검증
 	public Map<String, Object> uploadBackgroundImage(HttpServletRequest req, MultipartFile backgroundImageFile) {
 	    Map<String, Object> imageData = new HashMap<>();
 	    ServletContext servletContext = req.getServletContext();
@@ -303,36 +290,24 @@ public class SellerService2 {
 	    }
 
 	    try {
-	        // 파일 원본 이름 가져오기
 	        String originalFilename = backgroundImageFile.getOriginalFilename();
 	        System.out.println("✅ 배경 원본 파일명: " + originalFilename);
 
-	        if (originalFilename == null || originalFilename.trim().isEmpty()) {
-	            imageData.put("error", "파일명이 올바르지 않습니다.");
-	            return imageData;
-	        }
-
-	        // 고유한 파일명 생성 (중복 방지)
 	        String uniqueFilename = UUID.randomUUID().toString() + "_" + originalFilename;
 
-	        // 실제 저장할 경로 (로컬 파일 시스템)
-	        String uploadDir = req.getServletContext().getRealPath("/resources/background/");
+	        String uploadDir = servletContext.getRealPath("/resources/background/");
 	        File folder = new File(uploadDir);
 	        if (!folder.exists()) {
-	            folder.mkdirs(); // 폴더가 없으면 생성
+	            folder.mkdirs();
 	        }
 
-	        // 파일 저장 경로 설정
 	        String fullPath = uploadDir + uniqueFilename;
 	        File destFile = new File(fullPath);
-	        backgroundImageFile.transferTo(destFile); // 파일 저장
+	        backgroundImageFile.transferTo(destFile);
 
-	        // DB에 저장할 가상 경로
-	        String filePath = "/resources/upload/background/" + uniqueFilename;
+	        String filePath = "/resources/background/" + uniqueFilename;
 
-	        // 필수 데이터 저장
-	        imageData.put("sel_bp", uniqueFilename); // 파일명 추가
-	        imageData.put("sel_bp", filePath); // 가상 경로 추가
+	        imageData.put("sel_bp", filePath);
 
 	        System.out.println("📂 배경 이미지 저장된 파일명: " + uniqueFilename);
 	        System.out.println("📂 배경 이미지 실제 저장 경로: " + fullPath);
@@ -340,7 +315,7 @@ public class SellerService2 {
 
 	    } catch (Exception e) {
 	        System.out.println("❌ 배경 이미지 업로드 중 오류 발생: " + e.getMessage());
-	        imageData.put("error", "파일 업로드 실패");
+	        imageData.put("error", "배경 이미지 업로드 실패");
 	        e.printStackTrace();
 	    }
 

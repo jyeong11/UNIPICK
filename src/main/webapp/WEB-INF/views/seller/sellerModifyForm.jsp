@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +8,11 @@
 <title>UNIPICK</title>
 <!-- default -->
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
+
+<!-- contextPath 변수 추가 -->
+<script>
+    const contextPath = "${pageContext.request.contextPath}";
+</script>
 
 <!-- font-awesome -->
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/public/fontawesome/all.min.css" />
@@ -100,23 +106,25 @@
 										<label for="storePw">비밀번호</label>
 											<input type="password" id="storePw" name="storePw" placeholder="대문자, 특수문자 포함 6자리 이상 입력해주세요">
 									</div>
-									<img src="/resources${storePpPath}" alt="Profile Image">
-<img src="/resources${storeBpPath}" alt="Background Image">
 									<hr>
 									<div class="content-tilte">쇼핑몰 정보 입력</div>
 									<div class="input-group">
 									    <label for="storePp">스토어 프로필</label>
 									    <input type="file" id="storePp" name="storePp" accept="image/*">
-									    <img id="previewStorePp" src="" alt="미리보기" style="max-width: 150px; display: none;">
-									    <input type="hidden" id="existingStorePp" value="${existingStorePpValue}">
+									    <div class="image-preview">
+									        <img id="previewStorePp" src="" alt="프로필 이미지 미리보기" style="max-width: 150px; display: none;">
+									    </div>
+									    <input type="hidden" id="existingStorePp" value="${storePpPath}">
 									    <button type="button" id="removeStorePp">삭제</button>
 									</div>
 									
 									<div class="input-group">
 									    <label for="storeBp">스토어 배경</label>
 									    <input type="file" id="storeBp" name="storeBp" accept="image/*">
-									    <img id="previewStoreBp" src="" alt="미리보기" style="max-width: 150px; display: none;">
-									    <input type="hidden" id="existingStoreBp" value="${existingStoreBpValue}">
+									    <div class="image-preview">
+									        <img id="previewStoreBp" src="" alt="배경 이미지 미리보기" style="max-width: 150px; display: none;">
+									    </div>
+									    <input type="hidden" id="existingStoreBp" value="${storeBpPath}">
 									    <button type="button" id="removeStoreBp">삭제</button>
 									</div>
 									<div class="input-group">
