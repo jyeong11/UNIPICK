@@ -123,7 +123,7 @@ public class SellerService2 {
 
     // 트랜잭션 적용하여 상품, 이미지, 재고, 색상, 사이즈 한 번에 저장
     @Transactional
-    public void registerProduct(HttpSession session, HttpServletRequest req, Map<String, Object> productData, List<MultipartFile> imageFiles) {
+    public void registerProduct(HttpSession session, HttpServletRequest req, Map<String, Object> productData, List<MultipartFile> imageFiles, List<String> imageIndexs) {
     	
     	   String selId = (String) session.getAttribute("selId");  // 세션 키 확인 필요
 
@@ -141,11 +141,13 @@ public class SellerService2 {
         }
 
         // 2. 상품 이미지 저장
-        for (MultipartFile imageFile : imageFiles) {
+        for (int i = 0; i < imageFiles.size(); i++) {
+        	MultipartFile imageFile = imageFiles.get(i);
+        	String fil_nb = imageIndexs.get(i);
             if (imageFile == null || imageFile.isEmpty()) {
                 continue;
             }
-
+            	
             // 이미지 업로드
             Map<String, Object> imageData = uploadImage(req, imageFile);
             if (imageData.containsKey("error")) {
@@ -154,6 +156,7 @@ public class SellerService2 {
 
             imageData.put("prd_cd", productData.get("prd_cd"));
             imageData.put("sel_id", productData.get("sel_id"));
+            imageData.put("fil_nb", fil_nb);
 
             try {
                 mapper.insertProductImage(imageData);

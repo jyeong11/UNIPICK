@@ -124,16 +124,19 @@ public class SellerRestController2 {
     		HttpSession session,
     		HttpServletRequest req,
             @RequestPart("productData") Map<String, Object> productData, // JSON 데이터
-            @RequestPart(value = "imageFiles", required = false) List<MultipartFile> imageFiles) { // 이미지들
+            @RequestPart(value = "imageFiles", required = false) List<MultipartFile> imageFiles,
+            @RequestParam(value = "imageIndexs", required = false) List<String> imageIndexs) { // 이미지들
 
         try {
             // null 체크: 이미지 리스트가 없을 경우 빈 리스트로 처리
             if (imageFiles == null) {
                 imageFiles = List.of();
             }
+            
+            System.out.println(imageIndexs);
 
             // 상품 등록 서비스 호출
-            sellerService.registerProduct(session, req, productData, imageFiles);
+            sellerService.registerProduct(session, req, productData, imageFiles, imageIndexs);
 
             return ResponseEntity.ok(Map.of("message", "상품이 등록되었습니다."));
         } catch (Exception e) {

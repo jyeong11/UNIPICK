@@ -292,12 +292,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 이미지 파일 추가
     document.querySelectorAll(".item-thumb-upload-btn").forEach(input => {
-      if (input.files.length > 0) {
-        for (let i = 0; i < input.files.length; i++) {
-          formData.append("imageFiles", input.files[i]);
-        }
-      }
-    });
+	  if (input.files.length > 0) {
+	    let index = input.closest(".item-thumb").querySelector(".item-thumb-upload").getAttribute("data-index");  
+	    for (let i = 0; i < input.files.length; i++) {
+	      formData.append("imageFiles", input.files[i]);
+	      formData.append("imageIndexs", index);  // 해당 인덱스도 추가
+	    }
+	  }
+	});
+	debugger;
     try {
       const response = await fetch(contextPath + "/seller/registerProduct", {
         method: "POST",
@@ -305,7 +308,7 @@ document.addEventListener("DOMContentLoaded", function () {
 //        headers: {
 //          "Accept": "application/json" // JSON 응답을 받기 위해 추가
 //        }
-		contentType:"application/json" 
+//		contentType:"application/json" 
       });
 
       if (!response.ok) {

@@ -1,3 +1,5 @@
+let noteditor
+
 $(function(){
 	
 	// 상품 수정
@@ -218,7 +220,7 @@ $(function(){
 
     // 토스트 UI 추가
     const { colorSyntax } = toastui.Editor.plugin;
-    const noteditor = new toastui.Editor({
+    noteditor = new toastui.Editor({
         el: document.querySelector('#editor'),
         height: '300px',
         initialEditType: 'wysiwyg',
@@ -282,46 +284,59 @@ $(function(){
 });
 
 function productUpdate() {
-	// 상품명, 코드, 카테1, 카테2, 배송비
-	let prd_nm = $('#item-regi-title-text').val();
-	let prd_cd = $('#item-regi-code-text').val();
-	let first_cate = $('#product_category').val();
-	let second_cate = $('#product_category_sub').val();
-	let prd_sf = $('#delivery_price').val();
-	let prd_op = $('#list_price').val();
-	let prd_sp = $('#sale_price').val();
 	
-	alert(prd_nm + prd_cd + first_cate + second_cate + prd_sf + prd_op + prd_sp);
+	let formData = new FormData();
 	
-    let formData = new FormData();
-
-    // 수정된 이미지 업로드
+	// 상품명, 코드, 카테1, 카테2, 배송비, 옵션 가격, 판매 가격, 상품설명, 뱃지
+	formData.append('prd_nm', $('#item-regi-title-text').val());
+	formData.append('prd_cd', $('#item-regi-code-text').val());
+	formData.append('prd_ct', noteditor.getHTML());
+	formData.append('first_cate', $('#product_category').val());
+	formData.append('second_cate', $('#product_category_sub').val());
+	formData.append('prd_sf', $('#delivery_price').val());
+	formData.append('prd_op', $('#list_price').val());
+	formData.append('prd_sp', $('#sale_price').val());
+	formData.append('prd_bd', $('#product_badge').val());
+	
+	// 이미지
     $('.item-thumb-upload-btn').each(function(index) {
         let input = $(this)[0];
         let file = input.files[0];
-        let previewImg = $(`#item-thumb-preview${index}`);
 
-        if (file && previewImg.attr('data-updated') === 'true') {
+        if (file) {  // 파일이 존재하면 무조건 추가
             formData.append('updateFiles', file);
-            formData.append('imageIndexes', index);  // 서버에서 업데이트할 이미지 인덱스
+            formData.append('imageIndexes', index);
         }
     });
 
-    formData.append('prd_cd', prd_cd);
+	// 옵션
+	$('.option-row').each(function() {
+	    let colorNumber = $(this).find('.color-picker').val(); // 색상 코드
+	    let colorName = $(this).find('.color-name').val(); // 색상 이름
+	    let sizeOption = $(this).find('.size-select').val(); // 사이즈 선택
+	    let stockNumber = $(this).find('.stock-number').val(); // 재고 수량
+	
+	    // FormData에 옵션 추가
+	    formData.append('color_number[]', colorNumber);
+	    formData.append('color_name[]', colorName);
+	    formData.append('size_option[]', sizeOption);
+	    formData.append('stock_number[]', stockNumber);
+	});
+
 	debugger;
-//    $.ajax({
-//        url: 'updateProductImages',
-//        type: 'POST',
-//        data: formData,
-//        contentType: false,
-//        processData: false,
-//        success: function(response) {
-//            alert('이미지가 성공적으로 업데이트되었습니다.');
-//            location.reload();  // 페이지 새로고침
-//        },
-//        error: function(xhr, status, error) {
-//            alert('이미지 업데이트 중 오류가 발생했습니다.');
-//        }
-//    });
+	
+    $.ajax({
+        url: 'updatePrd',
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response) {
+            alert('이미지가 성공적으로 업데이트되었습니다.');
+        },
+        error: function(xhr, status, error) {
+            alert('이미지 업데이트 중 오류가 발생했습니다.');
+        }
+    });
 	
 }

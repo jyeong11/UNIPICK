@@ -47,7 +47,8 @@
       fil_nm,
       fil_pt,
       ntc_ca,
-      ntc_ua
+      ntc_ua,
+      fil_nb
     )
     VALUES (
       #{img_id},
@@ -55,7 +56,8 @@
       #{fil_nm},
       #{fil_pt},
       NOW(),
-      NOW()
+      NOW(),
+      #{fil_nb}
     )
   </insert>
   
