@@ -2,6 +2,7 @@ package com.itwillbs.unipick.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -322,9 +323,11 @@ public class SellerService2 {
 	    return imageData;
 	}
 	
-//    public Map<String, Object> getSellerInfo(String sellerId) {
-//        return mapper.getSellerInfo(sellerId);
-//    }
 
+    public List<Map<String, Object>> getSettlementList(Map<String, Object> params) {
+        return mapper.getSettlementList(params);
+    }
 
-	}
+    public void generateExcel(List<Map<String, Object>> settlementList, OutputStream outputStream) throws IOException {
+    }
+}

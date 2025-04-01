@@ -50,5 +50,5 @@ public interface SellerMapper2 {
 	// 회원 탈퇴
 	public void Withdraw(Map<String, Object> seller);
 	
-    
+    List<Map<String, Object>> getSettlementList(Map<String, Object> params);
 }

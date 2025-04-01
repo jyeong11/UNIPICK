@@ -303,4 +303,38 @@ JOIN common_detailcode c ON o.siz_nm = c.cod_cd
         sel_pp = #{storePpFile, jdbcType=VARCHAR}
     WHERE sel_id = #{sel_id}
 </update>
+
+<select id="getSettlementList" parameterType="map" resultType="map">
+    SELECT 
+        CASE 
+            WHEN #{periodType} = 'daily' THEN DATE_FORMAT(o.ord_at, '%Y-%m-%d')
+            WHEN #{periodType} = 'weekly' THEN DATE_FORMAT(o.ord_at, '%Y-W%u')
+            WHEN #{periodType} = 'monthly' THEN DATE_FORMAT(o.ord_at, '%Y-%m')
+            WHEN #{periodType} = 'yearly' THEN DATE_FORMAT(o.ord_at, '%Y')
+        END as period,
+        COUNT(DISTINCT o.ord_id) as order_count,
+        SUM(od.odd_qt) as sales_quantity,
+        SUM(CASE WHEN od.odd_st = 'exchange' THEN 1 ELSE 0 END) as exchange_count,
+        SUM(CASE WHEN od.odd_st = 'return' THEN 1 ELSE 0 END) as return_count,
+        SUM(od.odd_am) as revenue,
+        ROUND(SUM(od.odd_am) * 0.085, 0) as commission,
+        ROUND(SUM(od.odd_am) * 0.915, 0) as profit,
+        DATE_FORMAT(o.ord_at, '%Y-%m-%d') as settlement_date
+    FROM orders o
+    JOIN order_details od ON o.ord_id = od.ord_id
+    JOIN products p ON od.prd_cd = p.prd_cd
+    WHERE p.sel_id = #{sellerId}
+    <if test="periodType == 'daily' and startDate != null and endDate != null">
+        AND o.ord_at BETWEEN #{startDate} AND #{endDate}
+    </if>
+    GROUP BY 
+        CASE 
+            WHEN #{periodType} = 'daily' THEN DATE_FORMAT(o.ord_at, '%Y-%m-%d')
+            WHEN #{periodType} = 'weekly' THEN DATE_FORMAT(o.ord_at, '%Y-W%u')
+            WHEN #{periodType} = 'monthly' THEN DATE_FORMAT(o.ord_at, '%Y-%m')
+            WHEN #{periodType} = 'yearly' THEN DATE_FORMAT(o.ord_at, '%Y')
+        END
+    ORDER BY settlement_date DESC
+</select>
+ 
 </mapper>
