@@ -26,6 +26,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/admin/adminList.js"></script>
 
     <title>관리자 등록</title>
 
@@ -57,7 +58,7 @@
 </head>
 <body id="page-top">
     <!-- Page Wrapper -->
-    <div id="wrapper"><div>
+    <div id="wrapper">
 	<jsp:include page="../inc/adminSidebar.jsp"></jsp:include>
 	</div>
 
@@ -138,17 +139,16 @@
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
-    <div class="copyright text-center my-auto">
-        <span>Copyright &copy; UNIPICK Admin 2025</span>
-    </div>
-</div>
+			   	 	<div class="copyright text-center my-auto">
+			        	<span>Copyright &copy; UNIPICK Admin 2025</span>
+			    	</div>
+				</div>
             </footer>
             <!-- End of Footer -->
 
         </div>
         <!-- End of Content Wrapper -->
 
-    </div>
     <!-- End of Page Wrapper -->
 
     <!-- Scroll to Top Button-->
@@ -158,7 +158,6 @@
 
     <!-- Bootstrap core JavaScript-->
     <script src="${pageContext.request.contextPath }/resources/public/vendor/jquery/jquery.min.js"></script>
-    <script src="${pageContext.request.contextPath }/resources/public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
     <script src="${pageContext.request.contextPath }/resources/public/vendor/jquery-easing/jquery.easing.min.js"></script>
