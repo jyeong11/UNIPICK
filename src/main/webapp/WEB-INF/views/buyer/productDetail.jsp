@@ -39,9 +39,7 @@
 	 <div class="product-container">
     <!-- 왼쪽 상품 이미지 -->
 	     <div class="product-image">
-	        <div class="image-container">
-	             <img id="product-image" src="${pageContext.request.contextPath}${prdImg[0]}" class="product-img">
-	        </div>
+	        <div class="image-container"></div>
 	        <!-- 다음/이전 버튼 -->
 	        <button id="prev-btn" class="swiper-button-prev">이전</button>
 	        <button id="next-btn" class="swiper-button-next">다음</button>
@@ -124,13 +122,9 @@
 		    		<div id="picks">
 		    			<div id="pickTitle">
 		    				<p>당신을 위한 추천상품</p>
-		    				<a href=""><span class="small-text">더보기 ></span></a>
+<!-- 		    				<a href=""><span class="small-text">더보기 ></span></a> -->
 		    			</div>
-		    			<div id="pickPrd">
-			    			<c:forEach begin="6" end="10">
-				            	<img src="${pageContext.request.contextPath }/resources/images/favicon_b.png" alt="1">
-				        	</c:forEach>
-		    			</div>
+		    			<div id="pickPrd"></div>
 		    		</div>
 		    		<div id="reviews">
 		    			<div id="reviewsTitle">
@@ -166,11 +160,11 @@
 		    			<div>
 			    			<div>
 			    				<span class="tie">운영시간</span>
-			    				<span>10~12</span>
+			    				<span id="time">10시 ~ 18시 &nbsp; 점심시간: 12시 ~ 13시 </span>
 			    			</div>
 			    			<div>
 			    				<span class="tie">고객센터번호</span>
-			    				<span>10</span>
+			    				<span id="cs">070-1234-5678</span>
 			    			</div>
 		    			</div>
 	    			</div>

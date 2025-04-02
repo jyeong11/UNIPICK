@@ -533,4 +533,19 @@
       	AND pd.prd_st = '승인'
         AND fil_nb = 1;  
 	</select>
+<!-- 	추천상품 -->
+	<select id="getRecommendPrd" parameterType="map">
+	 SELECT p.prd_nm, p.prd_sp, s.sel_nm, pi.fil_pt,
+		    CONCAT(ROUND(((p.prd_op - p.prd_sp) / p.prd_op) * 100, 0), '%') AS dc
+	   FROM products p
+	   JOIN product_images pi 
+	     ON p.prd_cd = pi.prd_cd
+	   JOIN sellers s
+	     ON p.sel_id = s.sel_id
+	  WHERE p.prd_ca = (SELECT prd_ca
+						  FROM products 
+						 WHERE prd_cd = #{prd_cd})
+	    AND p.prd_st = '승인'
+	    AND pi.fil_nb = 1;
+	</select>
   </mapper>

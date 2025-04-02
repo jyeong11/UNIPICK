@@ -122,7 +122,7 @@ public class BuyerController {
 								Model model) {
 
 		Map<String, Object> prdList = buyService.getPrdDetail(prdCd);
-		List<String> prdImg = buyService.getPrdImg(prdCd);
+		List<Map<String, Object>> prdImg = buyService.getPrdImg(prdCd);
 		List<Map<String, Object>> selImg = buyService.getselanother(selNm);
 		List<Map<String, Object>> optionList = buyService.getPrdOption(prdCd); 
 		
@@ -393,4 +393,11 @@ public class BuyerController {
 	public List<Map<String, Object>> getReviews(@RequestBody Map<String, Object> prd_cd) {
 		return buyService.getPrdReviews(prd_cd);
 	}
+	// 추천상품
+	@ResponseBody
+	@PostMapping("getRecommendPrd")
+	public List<Map<String, Object>> getRecommendPrd(@RequestBody Map<String, Object> prd_cd) {
+		return buyService.getRecommendPrd(prd_cd);
+	}
+	
 }

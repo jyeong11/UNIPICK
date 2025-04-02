@@ -39,7 +39,7 @@ public class BuyerService {
 		return mapper.getPrdDetail(prdCd);
 	}
 	// 상품 상세 이미지
-	public List<String> getPrdImg(String prdCd) {
+	public List<Map<String, Object>> getPrdImg(String prdCd) {
 		return mapper.getPrdImg(prdCd);
 	}
 	// 판매자 상세 페이지
@@ -180,5 +180,10 @@ public class BuyerService {
 	// 판매자 페이지 내에 검색
 	public List<Map<String, Object>> selPrdsearch(Map<String, Object> data) {
 		return mapper.selPrdsearch(data);
+	}
+	
+	// 추천 상품
+	public List<Map<String, Object>> getRecommendPrd(Map<String, Object> prd_cd) {
+		return mapper.getRecommendPrd(prd_cd);
 	}
 }

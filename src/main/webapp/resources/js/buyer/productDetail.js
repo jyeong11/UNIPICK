@@ -1,27 +1,129 @@
+
 $(function() {
 	// 최근 본 상품 저장
 	// recentlyProduct();
 	// 리뷰
 	loadReviews();
+	// 추천상품
+	RecommendPrd();
 	
     // 상품 더보기 버튼
-	var prdCt = document.getElementById("prdCt");
-	var loadMoreBtn = document.getElementById("loadMoreBtn");
-	var moreItems = document.getElementById("moreItems");
-	var prdCtContent = prdCt.innerHTML.trim();
-	
-	if (prdCtContent.length > 1000) {
-	    prdCt.innerHTML = prdCtContent.substring(0, 1000) + "...";
-	    moreItems.innerHTML = prdCtContent.substring(1000);
-	    moreItems.style.display = "none";
-	    loadMoreBtn.style.display = "block";
-	    
-	    loadMoreBtn.addEventListener("click", function() {
-	        prdCt.innerHTML += moreItems.innerHTML;
-	        moreItems.style.display = "none";
-	        this.style.display = "none";
-	    });
-	}
+var prdCt = document.getElementById("prdCt");
+var loadMoreBtn = document.getElementById("loadMoreBtn");
+
+var prdCtContent = prdCt.innerHTML.trim(); // 원본 HTML
+var maxLength = 250; // 최대 글자 수
+
+function truncateHtml(html, maxLength) {
+    var tempDiv = document.createElement("div");
+    tempDiv.innerHTML = html;
+    var totalTextLength = 0;
+    var truncatedHtml = "";
+    var stack = [];
+    var stopTruncate = false; // 이미지에서 중단하기 위한 플래그
+
+    function traverseNodes(node) {
+        if (totalTextLength >= maxLength || stopTruncate) return;
+
+        if (node.nodeType === Node.TEXT_NODE) {
+            var remainingLength = maxLength - totalTextLength;
+            if (node.textContent.length > remainingLength) {
+                truncatedHtml += node.textContent.substring(0, remainingLength) + "...";
+                totalTextLength = maxLength;
+            } else {
+                truncatedHtml += node.textContent;
+                totalTextLength += node.textContent.length;
+            }
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+            var tagName = node.nodeName.toLowerCase();
+
+            // 이미지 태그를 만나면 그 전까지만 출력
+            if (tagName === "img" && totalTextLength >= maxLength) {
+                stopTruncate = true;
+                return;
+            }
+
+            var openTag = `<${tagName}`;
+            if (node.attributes.length > 0) {
+                Array.from(node.attributes).forEach(attr => {
+                    openTag += ` ${attr.name}="${attr.value}"`;
+                });
+            }
+            openTag += ">";
+
+            if (totalTextLength < maxLength) {
+                truncatedHtml += openTag;
+                stack.push(tagName);
+            }
+
+            Array.from(node.childNodes).forEach(child => traverseNodes(child));
+
+            if (stack.length > 0 && totalTextLength >= maxLength) {
+                while (stack.length > 0) {
+                    truncatedHtml += `</${stack.pop()}>`;
+                }
+            } else {
+                truncatedHtml += `</${tagName}>`;
+            }
+        }
+    }
+
+    traverseNodes(tempDiv);
+    return truncatedHtml;
+}
+
+// 잘린 내용 적용
+var truncatedContent = truncateHtml(prdCtContent, maxLength);
+prdCt.innerHTML = truncatedContent;
+
+// 원본과 잘린 내용이 같으면 더보기 버튼 숨김
+if (prdCtContent === truncatedContent) {
+    loadMoreBtn.style.display = "none";
+} else {
+    loadMoreBtn.style.display = "block";
+}
+
+// 더보기 버튼 클릭 시 전체 내용 보이기
+loadMoreBtn.addEventListener("click", function () {
+    prdCt.innerHTML = prdCtContent;
+    loadMoreBtn.style.display = "none"; // 버튼 숨기기
+});
+
+
+// 처음에는 자른 HTML만 보이도록 설정
+prdCt.innerHTML = truncateHtml(prdCtContent, maxLength);
+
+// 더보기 버튼 클릭 시 전체 내용 보이기
+loadMoreBtn.addEventListener("click", function () {
+    prdCt.innerHTML = prdCtContent;
+    loadMoreBtn.style.display = "none"; // 버튼 숨기기
+});
+
+
+// 처음에는 자른 HTML만 보이도록 설정
+prdCt.innerHTML = truncateHtml(prdCtContent, maxLength);
+
+// 더보기 버튼 클릭 시 전체 내용 보이기
+loadMoreBtn.addEventListener("click", function () {
+    prdCt.innerHTML = prdCtContent;
+    loadMoreBtn.style.display = "none"; // 버튼 숨기기
+});
+
+
+    if (prdCtContent.length > 100) {
+        var truncatedContent = truncateHtml(prdCtContent, 100);
+
+        prdCt.innerHTML = truncatedContent;
+        moreItems.innerHTML = prdCtContent.substring(truncatedContent.length);
+        moreItems.style.display = "none";
+        loadMoreBtn.style.display = "block";
+
+        loadMoreBtn.addEventListener("click", function () {
+            prdCt.innerHTML += moreItems.innerHTML;
+            moreItems.style.display = "none";
+            this.style.display = "none";
+        });
+    }
  	
 	// 사이즈 로드
 	window.loadSize = function() {
@@ -236,17 +338,50 @@ function loadReviews() {
       	}
 	});
 }
-function recentlyProduct() {
+function RecommendPrd() {
+	let query = window.location.search;
+	let param = new URLSearchParams(query);
+	let prd_cd = param.get('prd_cd');
 	
-	let data = {prd_cd : prdCd};
-	
-	$.ajax({
-		url: "registerRecentlyPrd",
-		method: "POST",
-		data: JSON.stringify(data),
+    $.ajax({
+        type: 'POST', 
+        url: 'getRecommendPrd',
 		contentType: "application/json",
-		error: function(xhr, status, error) {
-			alert("서버 오류가 발생했습니다.");
-		}
+		data: JSON.stringify({prd_cd: prd_cd}),
+        success: function(res) {
+			let pickPrd = $("#pickPrd");
+            let productHtml = "";
+
+            res.forEach(prd => {
+                productHtml += `
+                    <div class="product">
+                        <img src="${contextPath}${prd.fil_pt}" alt="${prd.prd_nm} class="pick-img">
+                        <p class="pick-nm">${prd.prd_nm}</p>
+						<div class="pick-pc">
+                    		<p class="pick-dc">${prd.dc}</p>
+                        	<p class="pick-sp">${prd.prd_sp.toLocaleString()}원</p>
+						</div>
+					</div>
+                `;
+            });
+            pickPrd.html(productHtml);
+        },
+        error: function(xhr, status, error) {
+            console.error("리뷰 데이터를 불러오는 데 실패했습니다:", error);
+      	}
 	});
 }
+//function recentlyProduct() {
+//	
+//	let data = {prd_cd : prdCd};
+//	
+//	$.ajax({
+//		url: "registerRecentlyPrd",
+//		method: "POST",
+//		data: JSON.stringify(data),
+//		contentType: "application/json",
+//		error: function(xhr, status, error) {
+//			alert("서버 오류가 발생했습니다.");
+//		}
+//	});
+//}

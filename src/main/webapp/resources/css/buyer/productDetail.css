@@ -1,4 +1,10 @@
 @charset "UTF-8";
+#time{
+	padding-left: 23px;
+}
+#cs {
+	padding-left: 15px;	
+}
 .rev-ema {
 	font-weight: 700;
 	font-size: 15px;
@@ -50,33 +56,37 @@
     height: 300px;
     object-fit: cover;
 }
-.prdInfo {
+.prdInfo, .pick-nm {
 	color: #292b2b;
     font-weight: 600;
     line-height: 16px;
-    font-size: 16px;
-    padding-bottom: 5px;
+    font-size: 16px !important;
+    padding-bottom: 5px !important;
     word-wrap: break-word;
     width: 250px;
+    padding-top: 0px !important;
 }
 .prd-item img{
     width: 278px;
     height: 280px;
     object-fit: cover;
 }
-.prd_pr {
+.prd_pr, .pick-pc {
 	display: flex;
+	align-items: center;
 }
-.dc {
+.dc, .pick-dc {
     font-size: 29px;
     font-weight: bold;
-    color: #f2a900;
+    color: #f2a900 !important;
     padding-right: 15px;
+    padding-top: 0px !important;
 }
-.prd_sp{
-	font-size: 18px;
+.prd_sp, .pick-sp{
+	font-size: 18px !important;
     padding-top: 4px;
-    font-weight: bold;
+    font-weight: bold !important;
+    padding-top: 0px !important;
 }
 .product-container {
     display: flex;
@@ -337,9 +347,10 @@ div > a > i {
     gap: 20px;
 }
 #pickPrd img{
-/*     width: calc(33.33% - 10px); 3개씩 배치 (여백 고려) */
-    max-width: 278px;
-    height: auto;
+    width: calc(33.33% - 10px); /* 3개씩 배치 (여백 고려) */
+    width: 278px;
+    height: 280px;
+    object-fit: cover;
 }
 #selAnthorTitle, #pickTitle, #reviewsTitle, #qaTitle{
 	display: flex;	

@@ -19,7 +19,7 @@ public interface BuyerMapper {
 	// 상품 상세 판매자 다른 상품
 	public List<Map<String, Object>> getselanother(String selNm);
 	//상품 상세이미지
-	public List<String> getPrdImg(String prdCd);
+	public List<Map<String, Object>> getPrdImg(String prdCd);
 	// 상품 옵션 조회
 	public List<Map<String, Object>> getPrdOption(String prdCd);
 	// 상품 리뷰 조회
@@ -76,5 +76,6 @@ public interface BuyerMapper {
 	public List<Map<String, Object>> myRecentlyPrd(Map<String, Object> buy);
 	// 판매자 페이지 내에 검색
 	public List<Map<String, Object>> selPrdsearch(Map<String, Object> data);
-	
+	// 추천 상품
+	public List<Map<String, Object>> getRecommendPrd(Map<String, Object> prd_cd);
 }

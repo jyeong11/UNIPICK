@@ -1,13 +1,20 @@
 @charset "UTF-8";
 
 #content {
+	display: flex;
+    justify-content: center;
     max-width: 1200px;
     margin: 0 auto;
     padding-top: 50px;
 }
+#search_results {
+	display: grid;
+    gap: 60px;
+    grid-template-columns: repeat(4, 1fr);
+}
 .prd-img {
-    width: 300px;
-    height: 300px;
+    width: 270px;
+    height: 270px;
     object-fit: cover;
 }
 .bd {
@@ -24,6 +31,7 @@
     line-height: 16px;
     font-size: 16px;
     padding-bottom: 5px;
+    height: 25px;
 }
 .dc {
     font-size: 23px;
