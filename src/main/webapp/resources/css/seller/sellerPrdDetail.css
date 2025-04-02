@@ -1,0 +1,276 @@
+@charset "UTF-8";
+
+/* ================= Global Styles ================= */
+body {
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+/* ================== Item Registration Page ================== */
+.item-regi {
+  margin: 20px;
+}
+
+/* 제목 및 구분선 */
+.item-regi .item-regi-name {
+  font-size: 1.2em;
+  font-weight: bold;
+  /* margin: 30px 0 20px; */
+  width: 200px;
+  text-align: left;
+}
+.item-regi-name-byte,
+.item-regi-description-byte {
+  margin: 0 0 20px 10px;
+}
+
+/* 썸네일 이미지 영역 */
+.item-regi-img {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.item-thumb-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.item-thumb {
+  position: relative;
+}
+.item-thumb-upload {
+  margin: 20px 10px 0 20px;
+  width: 128px;
+  height: 128px;
+  background: none;
+  cursor: pointer;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background-color: white;
+}
+.item-thumb-upload img {
+  width: 114px;
+  border-radius: 10px;
+  border: 0;
+}
+.item-thumb-upload-btn {
+  display: none;
+}
+
+/* 입력 섹션 */
+.item-regi-section {
+  display: flex;
+  align-items: center;
+  border-top: 1px solid lightgray;
+  padding: 20px 0;
+}
+.item-regi-box {
+  margin: 30px 0;
+  width: 950px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.item-regi-title-text {
+  height: 40px;
+  width: 950px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 0 10px;
+}
+.item-regi-description-text {
+  width: 950px;
+  resize: none;
+  height: 100px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+/* input과 select 내부 텍스트 왼쪽 정렬 */
+.item-regi input[type="text"],
+.item-regi input[type="number"],
+.item-regi select {
+  text-align: left;
+}
+
+/* 부모 컨테이너 내에서 왼쪽 정렬 */
+.item-regi-box,
+.item-regi-category,
+.item-regi-price-box {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/* ================= 공통 설정 영역 레이아웃 ================= */
+/* 상품명, 카테고리, 상품가격설정, 배송설정, 재고설정, 색상설정, 사이즈설정 공통 레이아웃 */
+.item-regi-category,
+.item-regi-price,
+.item-regi-trade-adr,
+.item-regi-stock,
+.item-regi-color,
+.item-regi-size {
+  display: flex;
+  align-items: center;
+  border-top: 1px solid lightgray;
+  padding: 20px 0;
+}
+
+/* 각 섹션의 좌측 레이블 */
+.item-regi-category .item-regi-category-name,
+.item-regi-price .item-regi-name,
+.item-regi-trade-adr .item-regi-name,
+.item-regi-stock .item-regi-name,
+.item-regi-color .item-regi-name,
+.item-regi-size .item-regi-name {
+  width: 200px;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: left;
+}
+
+/* 각 섹션의 우측 입력영역 (select, input) */
+.item-regi-category select,
+.item-regi-price input[type="number"],
+.item-regi-trade-adr select,
+.item-regi-stock input[type="number"],
+.item-regi-color select,
+.item-regi-size select,
+.item-regi-stock select,
+.item-regi-color input[type="color"] {
+  margin-left: 10px;
+  width: 200px;  /* 필요에 따라 조정 가능 */
+  height: 40px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 0 14px;
+  text-align: left;
+}
+
+/* 제출 버튼 영역 */
+.item-regi-submit-group {
+  display: flex;
+  margin: 80px 0 0 0;
+  gap: 20px;
+}
+.item-regi-submit-group input {
+  width: 100px;
+  height: 50px;
+  padding: 8px 15px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  background-color: black;
+  border: 2px solid black;
+  color: #ffffff;
+}
+.item-regi-submit-group .item-backpage {
+  margin-left: auto;
+  background-color: #757575;
+  border: 2px solid #757575;
+  cursor: pointer;
+}
+
+/* 카드 헤더 (등록폼 상단) */
+.card_head {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  width: 100%;
+}
+
+/* =================== Responsive Styles =================== */
+@media screen and (max-width:1024px) {
+  .item-detail .item-detail-content {
+    flex-direction: column;
+  }
+  .item-detail .item-detail-description {
+    width: 100%;
+    height: auto;
+    min-height: 100px;
+  }
+  .item-detail .item-detail-seller-info {
+    width: 100%;
+  }
+  .item-detail .item-detail-pic .thumb-slide div img {
+    width: 100%;
+    height: auto;
+    min-height: 70vw;
+  }
+}
+
+@media screen and (max-width:768px) {
+  .item-sch-area .sch-inner .sch-box {
+    gap: 0;
+    font-size: 12px;
+    flex-wrap: wrap;
+  }
+  .item-sch-area .sch-inner .sch-box h2 {
+    font-size: 16px;
+  }
+  .item-sch-area .sch-inner .sch-box .ip-tt {
+    width: 60%;
+  }
+}
+
+/* ============ 제품 목록, 상세, 쇼핑몰 등 공통 스타일 ============ */
+
+/* 제품 목록 관련 */
+.product-item-wrap #cateTitle {
+  font-weight: 900;
+  font-size: 30px;
+  padding-left: 20px;
+}
+.item-list-area .no-data {
+  text-align: center;
+  font-size: 20px;
+}
+
+/* 제품 카드 */
+.product-card .product-thumb,
+.item-detail .item-detail-pic,
+.item-shop-section .item-shop-seller-info .item-shop-seller-pic {
+  position: relative;
+}
+.product-card .status {
+  position: absolute;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.29);
+  color: #fff;
+  border-radius: 1rem;
+}
+
+/* 제품 상세페이지 */
+.item-detail .item-detail-title {
+  font-weight: 900;
+  font-size: 30px;
+}
+.item-detail .item-detail-view {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 18px;
+}
+.item-detail .item-detail-price-setting {
+  display: flex;
+  margin-left: auto;
+}
+.item-detail .item-detail-price-setting .item-detail-price {
+  font-size: 30px;
+  font-weight: 900;
+}
+
+.readonly {
+	background-color: #f5f5f5;
+    color: #a1a1a1;
+    cursor: not-allowed;
+    outline: none;
+}
+
+#delete {
+	background-color: #8B0000;
+	border-color: #8B0000;
+}

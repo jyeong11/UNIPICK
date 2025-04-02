@@ -34,5 +34,7 @@ public interface SellerMapper {
 	public void productOptionUpdate(List<Map<String, Object>> UpdateList);
 	// 상품 이미지 업데이트
 	public void productImageUpdate(Map<String, Object> image);
+	// 상품 삭제
+	public void productDelete(Map<String, Object> prd);
 	
 }

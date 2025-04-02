@@ -232,5 +232,12 @@ public class SellerController {
 							  @RequestParam(value = "opt_id_del", required = false) List<Integer> delOption) {
 		selService.productUpdate(req, formData, files, imageIndexes, opt_id, colorNumbers, colorNames, sizeOptions, stockNumbers, delOption);
 	}
+	
+	// 상품 삭제
+	@ResponseBody
+	@PostMapping("productDelete")
+	public void productDelete(@RequestBody Map<String, Object> prd) {
+		selService.productDelete(prd);
+	}
 }
 

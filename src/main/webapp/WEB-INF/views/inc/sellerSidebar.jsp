@@ -16,7 +16,6 @@
             	<h6 class="collapse-header">상품관리</h6>
             	<a class="collapse-item" href="prdRegister">상품등록</a>
                 <a class="collapse-item" href="selProductList">상품조회</a>
-                <a class="collapse-item" href="sellerPrdDetail?prd_cd=pant1">상품상세조회(임시)</a>
             </div>
         </div>
     </li>

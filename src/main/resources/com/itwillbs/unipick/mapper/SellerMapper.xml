@@ -176,5 +176,12 @@
 	        fil_nm = #{fil_nm},
 	        fil_pt = #{fil_pt}
 	</insert>
+	
+	<!-- 상품 삭제 -->
+	<delete id="productDelete" parameterType="map">
+		DELETE
+		  FROM products
+		 WHERE prd_cd = #{prd_cd}
+	</delete>
 
 </mapper>

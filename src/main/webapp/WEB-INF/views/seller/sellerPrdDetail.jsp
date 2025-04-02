@@ -18,7 +18,7 @@
   <link href="${pageContext.request.contextPath}/resources/public/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
   <link href="${pageContext.request.contextPath}/resources/public/vendor/datatables/datatables.min.css" rel="stylesheet">
   <link href="${pageContext.request.contextPath}/resources/css/seller/productRegister.css" rel="stylesheet">
-  <link href="${pageContext.request.contextPath}/resources/css/seller/product.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/resources/css/seller/sellerPrdDetail.css" rel="stylesheet">
   <!-- TOAST UI Editor -->
   <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
   <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
@@ -174,6 +174,7 @@
                       <div class="item-regi-submit-group">
                         <input type="button" class="item-backpage" onclick="history.back()" value="뒤로 가기">
                         <input type="submit" class="item-submit" id="update" value="상품 수정">
+                        <input type="button" class="item-delete" id="delete" value="상품 삭제">
                       </div>
                     </form>
                   </section>

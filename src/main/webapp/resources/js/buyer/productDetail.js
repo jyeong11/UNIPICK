@@ -6,6 +6,30 @@ $(function() {
 	loadReviews();
 	// 추천상품
 	RecommendPrd();
+
+	// 다음 버튼
+	let currentIndex = 0; // 현재 이미지의 인덱스
+
+	$('#next-btn').on("click", function () {
+	    if (prdImg.length === 0) return; // 이미지 배열이 비어있다면 실행하지 않음
+	
+	    // 다음 이미지로 인덱스 변경
+	    currentIndex = (currentIndex + 1) % prdImg.length;
+	
+	    // 이미지 변경
+	    $('#product-image').attr("src", contextPath + prdImg[currentIndex].slice(8,-1));
+	});
+	// 이전 버튼
+	$('#prev-btn').on("click", function () {
+	    if (prdImg.length === 0) return; // 이미지 배열이 비어있다면 실행하지 않음
+	
+	    // 이전 이미지로 인덱스 변경 (음수 방지)
+	    currentIndex = (currentIndex - 1 + prdImg.length) % prdImg.length;
+	
+	    // 이미지 변경
+	    $('#product-image').attr("src", contextPath + prdImg[currentIndex].slice(8, -1));
+	});
+	
 	
     // 상품 더보기 버튼
 var prdCt = document.getElementById("prdCt");

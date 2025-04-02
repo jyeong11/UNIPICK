@@ -172,7 +172,6 @@
 	    			</div>
 	    		</div>
 	    	</section>
-	    	
 	
 	<div id="footer">
 		<jsp:include page="../inc/footer.jsp"></jsp:include>
@@ -181,6 +180,11 @@
 	    var prdCd = "${prd.prd_cd}";
 	    var contextPath = "${pageContext.request.contextPath}";
 	    var images = ${selImgList != null ? selImgList : '[]'};
+	    var prdImg = [
+	        <c:forEach var="img" items="${prdImg}" varStatus="status">
+	            "${img}"<c:if test="${!status.last}">,</c:if>
+	        </c:forEach>
+	    ];
 	</script>
 </body>
 </html>

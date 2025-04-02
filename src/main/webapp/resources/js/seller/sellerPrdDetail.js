@@ -9,6 +9,11 @@ $(function(){
 		productUpdate();
 	});
 	
+	// 상품 삭제
+	$('#delete').on('click', function() {
+		productDelete();
+	});
+	
 	///////
 	// 상품 정보
 	
@@ -300,6 +305,7 @@ $(function(){
 	
 });
 
+// 상품 수정
 function productUpdate() {
 	
 	let formData = new FormData();
@@ -353,8 +359,31 @@ function productUpdate() {
 			window.location.href="selProductList";
         },
         error: function(xhr, status, error) {
-            alert('상품 정보가 업데이트 중 오류가 발생했습니다.');
+            alert('상품 정보 업데이트 중 오류가 발생했습니다.');
         }
     });
 	
 }
+
+// 상품 삭제
+function productDelete() {
+	let data = { prd_cd : $('#item-regi-code-text').val()}
+	
+	$.ajax({
+		url: 'productDelete',
+		type: 'POST',
+		data: JSON.stringify(data),
+		contentType: "application/json",
+		success: function() {
+			alert('상품 삭제가 완료되었습니다.');
+			window.location.href = "selProductList";
+		},
+		error: function(xhr, status, error) {
+            alert('상품 삭제중 오류가 발생했습니다.');
+        }
+		
+	});
+}
+
+
+

@@ -97,11 +97,14 @@ $(function() {
 															<i class="${heartClass} fa-heart heart"></i>
 														</div>
 														<div class="prdInfo-div">
-															<div>${prd.sel_nm}</div>
-															<div>${prd.prd_nm}</div>
-															<div>${prd.prd_op}</div>
-															<div>${prd.prd_sp}</div>
-															<div>뱃지 : ${prd.prd_bd}</div>
+															<div class="selNm">${prd.sel_nm}</div>
+															<div class="prdNm">${prd.prd_nm}</div>
+															<div class="price">
+																<div class="dc">${prd.dc}</div>
+																<div class="prdOp">${prd.prd_op}</div>
+																<div class="prdSp">${prd.prd_sp}</div>
+															</div>
+															<div class="prdBd">${prd.cod_nm}</div>
 															<input type="hidden" value="${prd.prd_cd}">
 														</div>
 													</a>
@@ -121,7 +124,6 @@ $(function() {
 	function wish(heart) {
 		heartIcon = heart[0];
 		let prd_cd = heart.closest(".product-posting").find("input[type='hidden']").val();
-		alert(prd_cd);
 		heartIcon.classList.toggle("fa-regular");
 		heartIcon.classList.toggle("fa-solid");
 		heartIcon.classList.toggle("red");
