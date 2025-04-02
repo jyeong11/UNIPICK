@@ -1,5 +1,10 @@
 $(document).ready(function() {
 	
+	$(document).on("click", "tbody > tr > td:nth-child(2)", function() {
+	    let prd_cd = $(this).closest("tr").find("td:first-child").text().trim();
+    	window.location.href="sellerPrdDetail?prd_cd=" + prd_cd;
+	});
+	
 	console.log("prdList.js 로드됨");
     let currentPage = 1;
     const listLimit = 10;
