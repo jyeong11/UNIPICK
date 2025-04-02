@@ -213,23 +213,16 @@ public class BuyerController {
 	// 찜
 	@ResponseBody
 	@PostMapping("wishList")
-	public String wishList(@RequestBody Map<String, Object> wish, HttpSession session) {
+	public void wishList(@RequestBody Map<String, Object> wish, HttpSession session) {
 		
 		wish.put("buy_em", session.getAttribute("buyEm"));
 		
-		String msg = "";
-		
-		System.out.println(wish.get("action"));
-		
 		if(wish.get("action").equals("insert")) {
 			buyService.wishInsert(wish);
-			msg = "insert";
-		} else {
+		} else if(wish.get("action").equals("delete")) {
 			buyService.wishDelete(wish);
-			msg = "delete";
 		}
 		
-		return msg;
 	}
 	
 	// 마이페이지 데이터

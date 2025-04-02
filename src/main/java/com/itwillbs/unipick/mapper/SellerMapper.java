@@ -36,5 +36,7 @@ public interface SellerMapper {
 	public void productImageUpdate(Map<String, Object> image);
 	// 상품 삭제
 	public void productDelete(Map<String, Object> prd);
+	// 상품 이미지 삭제
+	public void productImgDelete(Map<String, Object> prd);
 	
 }

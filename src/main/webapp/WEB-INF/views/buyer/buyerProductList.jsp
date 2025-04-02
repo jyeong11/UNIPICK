@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>UNIPICK</title>
 
@@ -56,7 +57,7 @@
 			</section>
 		</div>
 	</div>
-	
+
 	<div id="footer">
 		<jsp:include page="../inc/footer.jsp"></jsp:include>
 	</div>

@@ -183,5 +183,12 @@
 		  FROM products
 		 WHERE prd_cd = #{prd_cd}
 	</delete>
+	
+	<!-- 상품 이미지 삭제 -->
+	<delete id="productImgDelete" parameterType="map">
+		DELETE
+		  FROM product_images
+		 WHERE prd_cd = #{prd_cd}
+	</delete>
 
 </mapper>

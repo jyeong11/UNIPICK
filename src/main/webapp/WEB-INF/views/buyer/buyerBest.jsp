@@ -23,6 +23,10 @@
 <!-- Favicon -->
 <link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
 
+<!-- script -->
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/buyer/buyerBest.js"></script>
+
 </head>
 <body>
 	<div id="topNav">

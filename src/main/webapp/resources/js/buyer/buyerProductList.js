@@ -141,9 +141,6 @@ $(function() {
 	        url: "wishList",
 			data: JSON.stringify(data),
 			contentType: "application/json",
-	        success: function(msg) {
-				alert(msg);
-			},
 	        error: function(xhr, status, error) {
 	        	alert("서버 오류가 발생했습니다.");
 	        }

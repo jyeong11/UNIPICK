@@ -142,6 +142,7 @@ public class SellerService {
 	// 상품 삭제
 	public void productDelete(Map<String, Object> prd) {
 		mapper.productDelete(prd);
+		mapper.productImgDelete(prd);
 	}
 	
 }
