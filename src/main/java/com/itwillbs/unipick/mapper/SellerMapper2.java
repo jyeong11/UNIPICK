@@ -64,4 +64,10 @@ public interface SellerMapper2 {
     
     List<Map<String, Object>> getVisitsByPeriod(Map<String, Object> params);
     List<Map<String, Object>> getPopularProductsByPeriod(Map<String, Object> params);
+    
+    // 공통코드 조회 (ex: DELIVERY)
+    List<Map<String, Object>> getCommonCode(String comCd);
+    
+    // 주문상태 업데이트
+    void updateOrderStatus(Map<String, Object> params);
 }

@@ -392,6 +392,10 @@ public class SellerService2 {
     public List<Map<String, Object>> getDailyVisits(String sellerId) {
         return mapper.getDailyVisits(sellerId);
     }
+    
+//  public List<Map<String, Object>> getDetailedVisits(String sellerId) {
+//  return mapper.getDetailedVisits(sellerId);
+//}
 
     // 인기 상품 조회
     public List<Map<String, Object>> getPopularProducts(String sellerId) {
@@ -408,9 +412,7 @@ public class SellerService2 {
         mapper.insertProductVisitLog(params);
     }
     
-    public List<Map<String, Object>> getDetailedVisits(String sellerId) {
-        return mapper.getDetailedVisits(sellerId);
-    }
+
     
     public List<Map<String, Object>> getVisitsByPeriod(Map<String, Object> params) {
         return mapper.getVisitsByPeriod(params);
@@ -418,5 +420,15 @@ public class SellerService2 {
 
     public List<Map<String, Object>> getPopularProductsByPeriod(Map<String, Object> params) {
         return mapper.getPopularProductsByPeriod(params);
+    }
+    
+    // 공통코드 조회
+    public List<Map<String, Object>> getCommonCode(String comCd) {
+        return mapper.getCommonCode(comCd);
+    }
+    
+    // 주문상태 업데이트
+    public void updateOrderStatus(Map<String, Object> params) {
+        mapper.updateOrderStatus(params);
     }
 }

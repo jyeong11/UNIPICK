@@ -235,14 +235,7 @@
 	         b.buy_ph, -- 연락처
 	         d.odd_qt, -- 구매수량 
 	         d.odd_am, -- 결제금액
-	    CASE d.odd_st 
-	            WHEN '0' THEN '배송대기'
-	            WHEN '1' THEN '배송중'
-	            WHEN '2' THEN '배송완료'
-	            WHEN '3' THEN '취소접수'
-	            WHEN '4' THEN '반품접수'
-	            ELSE d.odd_st 
-	      END AS odd_st  -- 변환된 주문상태
+	         d.odd_st  -- 주문상태 (원래 값 그대로 반환)
 		FROM orders o
 		JOIN buyers b ON o.buy_em = b.buy_em
 		JOIN order_details d ON o.ord_id = d.ord_id
@@ -454,5 +447,20 @@
     ORDER BY visitCount DESC
     LIMIT 5;
 </select>
+
+     <!-- 공통 코드 조회 -->
+    <select id="getCommonCode" resultType="java.util.Map">
+        SELECT com_cd, com_cd_nm
+        FROM common_detail_code
+        WHERE com_cd_grp = #{comCd}
+        ORDER BY com_cd ASC
+    </select>
+    
+    <!-- 주문상태 업데이트 -->
+    <update id="updateOrderStatus" parameterType="java.util.Map">
+        UPDATE order_details
+        SET odd_st = #{odd_st}
+        WHERE ord_id = #{ord_id}
+    </update>
 
 </mapper>

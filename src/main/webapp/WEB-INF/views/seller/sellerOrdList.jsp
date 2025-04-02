@@ -105,11 +105,11 @@
 										<div class="row">
 											<div class="my-tabs">
 												<button class="filter-btn active" data-status="all">전체</button>
-												<button class="filter-btn" data-status="0">배송대기</button>
-												<button class="filter-btn" data-status="1">배송중</button>
-												<button class="filter-btn" data-status="2">배송완료</button>
-												<button class="filter-btn" data-status="3">취소접수</button>
-												<button class="filter-btn" data-status="4">반품접수</button>
+												<button class="filter-btn" data-status="배송대기">배송대기</button>
+												<button class="filter-btn" data-status="배송중">배송중</button>
+												<button class="filter-btn" data-status="배송완료">배송완료</button>
+												<button class="filter-btn" data-status="취소접수">취소접수</button>
+												<button class="filter-btn" data-status="반품접수">반품접수</button>
 											</div>
 											<div class="col-2">
 												<select class="form-select" id="noticeSearchKind">
@@ -138,6 +138,7 @@
 													<th>구매수량</th>
 													<th>결제금액</th>
 													<th>주문상태</th>
+													<th>상태변경</th>
 												</tr>
 											</thead>
 											<tbody id="noticeListTable">

@@ -635,6 +635,30 @@ textarea {
   transition: opacity 0.3s ease-in-out;
 }
 
+/* 주문상태 변경 드롭다운 스타일 */
+.status-select {
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    font-size: 14px;
+    width: 100%;
+    min-width: 120px;
+    color: #333;
+    cursor: pointer;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.status-select:hover, .status-select:focus {
+    border-color: #4e73df;
+    box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+    outline: none;
+}
+
+.status-select option {
+    padding: 8px;
+}
+
 .icon-container:hover .tooltip {
   visibility: visible; /* 마우스 오버 시 보이기 */
   opacity: 1; /* 투명도 1 */

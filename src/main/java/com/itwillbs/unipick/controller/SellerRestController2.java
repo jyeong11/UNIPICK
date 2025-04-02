@@ -89,16 +89,7 @@ public class SellerRestController2 {
 
 		    // orderStatus 값이 "all"이 아니라면, 이를 DB의 odd_st 값에 맞게 변환하여 조건에 추가
 		    if (!"all".equals(orderStatus)) {
-		        String mappedStatus = "";
-		        switch (orderStatus) {
-		            case "0": mappedStatus = "배송대기"; break;
-		            case "1": mappedStatus = "배송중"; break;
-		            case "2": mappedStatus = "배송완료"; break;
-		            case "3": mappedStatus = "취소접수"; break;
-		            case "4": mappedStatus = "반품접수"; break;
-		            default: mappedStatus = orderStatus; break;
-		        }
-		        search.put("odd_st", mappedStatus);
+		        search.put("odd_st", orderStatus);
 		    }
 			
         // 상품 리스트 조회
@@ -172,6 +163,27 @@ public class SellerRestController2 {
     @GetMapping("/badgeOptions")
     public List<Map<String, Object>> getBadgeOptions(){
     	return sellerService.getBadgeOptions();
+    }
+    
+    
+    // 공통코드 조회 API
+    @GetMapping("/commonCode")
+    public List<Map<String, Object>> getCommonCode(@RequestParam String comCd) {
+        return sellerService.getCommonCode(comCd);
+    }
+    
+    // 주문상태 업데이트 API
+    @PostMapping("/updateOrderStatus")
+    public ResponseEntity<?> updateOrderStatus(@RequestParam String ordId, @RequestParam String statusCode) {
+        try {
+            Map<String, Object> params = new HashMap<>();
+            params.put("ord_id", ordId);
+            params.put("odd_st", statusCode);
+            sellerService.updateOrderStatus(params);
+            return ResponseEntity.ok(Map.of("message", "주문상태가 업데이트 되었습니다."));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("주문상태 업데이트 중 오류 발생: " + e.getMessage());
+        }
     }
     
     
