@@ -117,6 +117,7 @@
 								                <th>사이즈이름</th>
 								                <th>재고수량</th>
 								                <th>등록일</th>
+								                <th>상태</th>
 								            </tr>
 								        </thead>
 								        <tbody id="noticeListTable">

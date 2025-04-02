@@ -181,7 +181,8 @@
 	      GROUP_CONCAT(DISTINCT o.clr_nm ORDER BY o.clr_nm ASC SEPARATOR ', ') AS colors,  <!-- 컬러 리스트 -->
 	      GROUP_CONCAT(DISTINCT c.cod_nm ORDER BY c.cod_nm ASC SEPARATOR ', ') AS sizes,  <!-- 사이즈 리스트 -->
 	      SUM(o.prd_qt) AS total_stock,  <!-- 총 재고 수량 -->
-	      p.prd_dt        <!-- 등록일 -->
+	      p.prd_dt,        <!-- 등록일 -->
+	      p.prd_st
 	  FROM products p
 	  JOIN level l ON p.prd_ca = l.lev_cd
 	  INNER JOIN options o ON p.prd_cd = o.prd_cd
