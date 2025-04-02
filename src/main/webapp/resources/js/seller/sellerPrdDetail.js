@@ -341,10 +341,11 @@ function productUpdate() {
         contentType: false,
         processData: false,
         success: function(response) {
-            alert('이미지가 성공적으로 업데이트되었습니다.');
+            alert('상품 정보가 업데이트되었습니다.');
+			window.location.href="selProductList";
         },
         error: function(xhr, status, error) {
-            alert('이미지 업데이트 중 오류가 발생했습니다.');
+            alert('상품 정보가 업데이트 중 오류가 발생했습니다.');
         }
     });
 	

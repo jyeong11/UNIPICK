@@ -236,17 +236,17 @@ function loadReviews() {
       	}
 	});
 }
-//function recentlyProduct() {
-//	
-//	let data = {prd_cd : prdCd};
-//	
-//	$.ajax({
-//		url: "registerRecentlyPrd",
-//		method: "POST",
-//		data: JSON.stringify(data),
-//		contentType: "application/json",
-//		error: function(xhr, status, error) {
-//			alert("서버 오류가 발생했습니다.");
-//		}
-//	});
-//}
+function recentlyProduct() {
+	
+	let data = {prd_cd : prdCd};
+	
+	$.ajax({
+		url: "registerRecentlyPrd",
+		method: "POST",
+		data: JSON.stringify(data),
+		contentType: "application/json",
+		error: function(xhr, status, error) {
+			alert("서버 오류가 발생했습니다.");
+		}
+	});
+}

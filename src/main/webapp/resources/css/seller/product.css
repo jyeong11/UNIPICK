@@ -264,3 +264,10 @@ body {
   font-size: 30px;
   font-weight: 900;
 }
+
+.readonly {
+	background-color: #f5f5f5;
+    color: #a1a1a1;
+    cursor: not-allowed;
+    outline: none;
+}

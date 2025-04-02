@@ -121,7 +121,7 @@
                       <section class="item-regi-section">
                         <h2 class="item-regi-name">상품코드</h2>
                         <div class="item-regi-box">
-                          <input type="text" name="product_code" class="item-regi-title-text" id="item-regi-code-text" maxlength="50">
+                          <input type="text" name="product_code" class="item-regi-title-text readonly" id="item-regi-code-text" maxlength="50" readonly>
                         </div>
                         <h6 class="item-regi-code-byte" id="item-regi-code-byte">(0 / 50)</h6>
                       </section>

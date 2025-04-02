@@ -111,28 +111,30 @@ public class SellerService {
         
         
 		// 상품 이미지 업데이트
-        for (int i = 0; i < files.size(); i++) {
-        	MultipartFile imageFile = files.get(i);
-        	String fil_nb = imageIndexes.get(i);
-            if (imageFile == null || imageFile.isEmpty()) {
-                continue;
-            }
-            	
-            // 이미지 업로드
-            Map<String, Object> imageData = service2.uploadImage(req, imageFile);
-            if (imageData.containsKey("error")) {
-                continue;
-            }
-
-            imageData.put("prd_cd", formData.get("prd_cd"));
-            imageData.put("fil_nb", fil_nb);
-
-            try {
-            	mapper.productImageUpdate(imageData);
-            } catch (Exception e) {
-                System.out.println("❌ 이미지 데이터 삽입 실패: " + e.getMessage());
-                e.printStackTrace();
-            }
+        if(files != null) {
+	        for (int i = 0; i < files.size(); i++) {
+	        	MultipartFile imageFile = files.get(i);
+	        	String fil_nb = imageIndexes.get(i);
+	            if (imageFile == null || imageFile.isEmpty()) {
+	                continue;
+	            }
+	            	
+	            // 이미지 업로드
+	            Map<String, Object> imageData = service2.uploadImage(req, imageFile);
+	            if (imageData.containsKey("error")) {
+	                continue;
+	            }
+	
+	            imageData.put("prd_cd", formData.get("prd_cd"));
+	            imageData.put("fil_nb", fil_nb);
+	
+	            try {
+	            	mapper.productImageUpdate(imageData);
+	            } catch (Exception e) {
+	                System.out.println("❌ 이미지 데이터 삽입 실패: " + e.getMessage());
+	                e.printStackTrace();
+	            }
+	        }
         }
        
 	}
