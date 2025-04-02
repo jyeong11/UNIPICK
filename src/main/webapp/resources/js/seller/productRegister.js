@@ -300,7 +300,6 @@ document.addEventListener("DOMContentLoaded", function () {
 	    }
 	  }
 	});
-	debugger;
     try {
       const response = await fetch(contextPath + "/seller/registerProduct", {
         method: "POST",

@@ -91,7 +91,7 @@ $(function() {
 				
 				let row = res.map(prd => {let heartClass = prd.buy_em ? 'fa-solid red' : 'fa-regular';
 										 return `<div class="product-posting">
-													<a href="productDetail?prd_cd=${prd.prd_cd}">
+													<a href="productDetail?prd_cd=${prd.prd_cd}&sel_nm=${prd.sel_nm}">
 														<div class="prdImg-div">
 															<img src="${contextPath}${prd.fil_pt}" alt="${prd.fil_nm}" class="prd-img">
 															<i class="${heartClass} fa-heart heart"></i>

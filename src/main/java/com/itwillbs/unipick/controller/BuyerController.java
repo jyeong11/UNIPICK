@@ -330,7 +330,7 @@ public class BuyerController {
 	// 리뷰 등록
 	@ResponseBody
 	@PostMapping("registerReview")
-	public String registerReview(
+	public boolean registerReview(
 			HttpServletRequest req,
 			HttpSession session,
 	        @RequestParam("opt_id") String optId,
@@ -352,10 +352,10 @@ public class BuyerController {
 	    	
 	        buyService.registerReview(req, map, imageFiles);
 
-	        return "리뷰 등록 성공";
+	        return true;
 
 	    } catch (Exception e) {
-	        return "서버 오류 발생";
+	        return false;
 	    }
 	}
 	

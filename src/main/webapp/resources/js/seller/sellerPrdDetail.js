@@ -1,4 +1,4 @@
-let noteditor;		// 토스트 에디터
+let prdeditor;		// 토스트 에디터
 let deletedOptions = [];	// 삭제할 옵션id
 
 $(function(){
@@ -69,7 +69,7 @@ $(function(){
                 $('#list_price').val(res.prdData.prd_op);
                 $('#sale_price').val(res.prdData.prd_sp);
                 $('#delivery_price').val(res.prdData.prd_sf);
-				noteditor.setHTML(res.prdData.prd_ct);
+				prdeditor.setHTML(res.prdData.prd_ct);
 
 				// 상품 옵션
 				let option = res.prdOpt.map(item =>
@@ -227,41 +227,49 @@ $(function(){
         container.append(optionRow);
     });
 
-    // 토스트 UI 추가
-    const { colorSyntax } = toastui.Editor.plugin;
-    noteditor = new toastui.Editor({
-        el: document.querySelector('#editor'),
-        height: '300px',
-        initialEditType: 'wysiwyg',
-        initialValue: '',
-        previewStyle: 'tab',
-        plugins: [colorSyntax],
-        toolbarItems: [
-            ['heading', 'bold', 'italic', 'strike'],
-            ['hr', 'quote'],
-            ['ul', 'ol', 'task'],
-            ['code', 'codeblock'],
-            ['image'],
-        ],
-        hooks: {
-            addImageBlobHook: async (blob, callback) => {
-                const formData = new FormData();
-                formData.append('image', blob);
-                try {
-                    const response = await fetch(contextPath + '/upload', {
-                        method: 'POST',
-                        body: formData
-                    });
-                    const result = await response.json();
-                    callback(result.url, '이미지 설명');
-                } catch (error) {
-                    console.error('이미지 업로드 실패:', error);
-                    alert('이미지 업로드 중 오류가 발생했습니다.');
-                }
-            }
+    // 8. TOAST UI Editor 초기화
+  const { colorSyntax } = toastui.Editor.plugin;
+  prdeditor = new toastui.Editor({
+    el: document.querySelector('#editor'),
+    height: '300px',
+    initialEditType: 'wysiwyg',
+    initialValue: '',
+    previewStyle: 'tab',
+    plugins: [colorSyntax],
+    toolbarItems: [
+      ['heading', 'bold', 'italic', 'strike'],
+      ['hr', 'quote'],
+      ['ul', 'ol', 'task'],
+      ['code', 'codeblock'],
+      ['image'],
+    ],
+    hooks: {
+      addImageBlobHook: async (blob, callback) => {
+		debugger;
+        const formData = new FormData();
+        formData.append('file', blob);
+        try {
+			const response = await fetch(contextPath + '/upload', {
+				method: 'POST',
+				body: formData
+			});
+			const result = await response.json();
+			console.log('이미지 업로드 응답:', result); 
+			if(result.url){
+	        	callback(contextPath + result.url, '이미지 설명');
+				console.log(contextPath + result.url);
+			} else {
+				console.error('이미지 URL이 없음:', result);
+		        alert('이미지 업로드 중 문제가 발생했습니다.');
+			}
+        } catch (error) {
+        	console.error('이미지 업로드 실패:', error);
+        	alert('이미지 업로드 중 오류가 발생했습니다.');
         }
-    });
-    document.querySelector('.toastui-editor-defaultUI').style.width = '950px';
+      }
+    }
+  });
+  document.querySelector('.toastui-editor-defaultUI').style.width = '950px';
 
 
 
@@ -299,7 +307,7 @@ function productUpdate() {
 	// 상품명, 코드, 카테1, 카테2, 배송비, 옵션 가격, 판매 가격, 상품설명, 뱃지
 	formData.append('prd_nm', $('#item-regi-title-text').val());
 	formData.append('prd_cd', $('#item-regi-code-text').val());
-	formData.append('prd_ct', noteditor.getHTML());
+	formData.append('prd_ct', prdeditor.getHTML());
 	formData.append('prd_ca', $('#product_category_sub').val());
 	formData.append('prd_sf', $('#delivery_price').val());
 	formData.append('prd_op', $('#list_price').val());

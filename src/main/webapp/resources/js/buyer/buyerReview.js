@@ -105,7 +105,7 @@ $(function() {
 				processData: false,
 				contentType: false,
 				success: function(res) {
-					alert(res);
+					alert("리뷰가 성공적으로 등록되었습니다.");
 					window.location.href="myReviewList";
 				},
 				error: function(xhr, status, error) {
