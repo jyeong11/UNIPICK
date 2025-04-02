@@ -19,13 +19,13 @@
 <link href="${pageContext.request.contextPath }/resources/css/top.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/footer.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/buyer/buyerMenuBar.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resources/css/buyer/buyerbest.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/buyer/buyerNewBest.css" rel="stylesheet" type="text/css">
 <!-- Favicon -->
 <link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
 
 <!-- script -->
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/buyer/buyerNew.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/buyer/buyerNewBest.js"></script>
 
 </head>
 <body>

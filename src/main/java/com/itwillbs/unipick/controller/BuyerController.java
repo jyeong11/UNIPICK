@@ -193,8 +193,7 @@ public class BuyerController {
 	@ResponseBody
 	@PostMapping("productSort")
 	public List<Map<String, Object>> productSort(@RequestBody Map<String,Object> option, HttpSession session) {
-		session.setAttribute("id", "dol12@naver.com");
-		option.put("buy_em", session.getAttribute("id"));
+		option.put("buy_em", session.getAttribute("buyEm"));
 		
 		return buyService.productSort(option);
 	}
@@ -398,7 +397,8 @@ public class BuyerController {
 	// 신상, 베스트 상품 리스트
 	@ResponseBody
 	@PostMapping("productBestNew")
-	public Map<String, Object> productBestNew(@RequestBody Map<String, Object> prd) {
+	public Map<String, Object> productBestNew(HttpSession session, @RequestBody Map<String, Object> prd) {
+		prd.put("buy_em", session.getAttribute("buyEm"));
 		return buyService.productBestNew(prd);
 	}
 }

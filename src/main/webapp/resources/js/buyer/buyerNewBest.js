@@ -37,22 +37,25 @@ $(function() {
 							$('#category').append(category);
 			
 					// 상품
-					let product = res.prd.map(item =>
-						`<div class="product_posting">
-							<a href="productDetail?prd_cd=${item.prd_cd}&sel_nm=${item.sel_nm}">
-								<img src="${contextPath}${item.fil_pt}" class="prdImg">
-								<div>
-									<div>${item.sel_nm}</div>
-									<div>${item.prd_nm}</div>
-									<div class="price">
-										<div class='dc'>${item.dc}</div>
-										<div class="prdOp">${item.prd_op}</div>
-										<div class="prdSp">${item.prd_sp}</div>
-									</div>
-									<div class="prdBd">${item.cod_nm}</div>
-								</div>
-							</a>
-						</div>`)
+					let product = res.prd.map(item =>{ let heartClass = item.buy_em ? 'fa-solid red' : 'fa-regular';
+						return `<div class="product_posting">
+									<a href="productDetail?prd_cd=${item.prd_cd}&sel_nm=${item.sel_nm}">
+											<div class="prdImg-div">
+												<img src="${contextPath}${item.fil_pt}" class="prdImg">
+												<i class="${heartClass} fa-heart heart"></i>
+											</div>
+										<div>
+											<div>${item.sel_nm}</div>
+											<div>${item.prd_nm}</div>
+											<div class="price">
+												<div class='dc'>${item.dc}</div>
+												<div class="prdOp">${item.prd_op}</div>
+												<div class="prdSp">${item.prd_sp}</div>
+											</div>
+											<div class="prdBd">${item.cod_nm}</div>
+										</div>
+									</a>
+								</div>`})
 								.join('');
 					$('#img12').append(product);
 				
