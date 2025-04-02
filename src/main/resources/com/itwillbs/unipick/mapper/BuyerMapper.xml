@@ -159,8 +159,8 @@
                p.prd_ca,
                p.prd_dt,
   			   r.count,
-               w.buy_em,
-               cd.cod_nm
+               cd.cod_nm,
+               od.cnt
   		  FROM products p 
 		  LEFT JOIN (SELECT prd_cd, fil_nm, fil_pt
 						FROM product_images
@@ -169,17 +169,19 @@
 		  LEFT JOIN (SELECT prd_cd, COUNT(*) AS 'count'
 				  	   FROM options o JOIN reviews r ON o.opt_id = r.opt_id
 				 	  GROUP by prd_cd) r ON p.prd_cd = r.prd_cd
-		 LEFT JOIN (SELECT w.buy_em, w.prd_cd
-					  FROM wishlist w JOIN buyers b ON w.buy_em = b.buy_em
-					 WHERE w.buy_em = #{buy_em}) w on p.prd_cd = w.prd_cd
-		 LEFT JOIN common_detailcode cd ON p.prd_bd = cd.cod_cd
+		  LEFT JOIN common_detailcode cd ON p.prd_bd = cd.cod_cd
+          LEFT JOIN (select prd_cd, count(odd_qt) as cnt
+					from order_details od
+					join options o on od.opt_id = o.opt_id
+					where odd_st = '배송완료'
+					group by prd_cd) od on p.prd_cd = od.prd_cd
 		 WHERE prd_st = '승인'
   		 <if test="lev_cd != 'All'">
-  		 	AND p.prd_ca = #{lev_cd}
+  		 	AND p.prd_ca LIKE CONCAT(#{lev_cd}, '%')
   		 </if>
   		 <choose>
   		 	<when test="kind == 'PST01'">
-  		 		ORDER BY 1
+  		 		ORDER BY od.cnt DESC
   		 	</when>
   		 	<when test="kind == 'PST02'">
   		 		ORDER BY r.count DESC
@@ -194,6 +196,9 @@
   		 		ORDER BY prd_sp
   		 	</when>
   		 </choose>
+  		 <if test="limit != null and !limit.equals('')">
+  		 	LIMIT ${limit}
+  		 </if>
   	</select>
   	
   	<!--   	상품 옵션 -->

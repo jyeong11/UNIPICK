@@ -1,58 +1,93 @@
 @charset "UTF-8";
 
-#best, #new {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding-top: 50px;
-}
-
-#new {
-    padding-bottom: 50px;
+#content {
+	width: 1200px;
+	margin: auto;
+	padding-bottom: 20px;
 }
 
 .two {
-    display: flex;
-    justify-content: space-between; /* 자식 요소들을 양쪽 끝으로 배치 */
-    align-items: center; /* 수직 가운데 정렬 */
-    padding-right: 15px;
+	margin-bottom: 20px;
 }
 
-.top_view, .bottom_view {
+#best, #new {
 	display: flex;
-} 
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 30px;
+}
+
+#category {
+	display: flex;
+	flex-direction: column;
+	width: 200px;
+	padding-top: 10px;
+	gap: 10px;
+}
+
+#category li {
+	height: auto;
+    box-sizing: border-box;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    list-style: none;
+}
+
+#category li:hover {
+	cursor: pointer;
+	background-color: #f2a900;
+}
 
 #img12 {
 	display: flex;
-	flex-wrap: wrap;
+    flex-wrap: wrap;
+    gap: 30px;
 }
 
-#img12 div img {
-	/*width: 300px; 
-	max-width: 100%;
-    max-height: 100%;
-	height: 300px ;*/
-	 width: 100%;
-    height: auto;
-    aspect-ratio: 1;
+.prdImg {
+	width: 280px;
+	height: auto;
 }
 
 .product_posting {
-	padding: 5px;
+	width: 280px;
+	font-weight: 600;
 }
 
-#img12 div {
-	flex: 1 1 calc(100%);
-}
-
-#img12 .first, .second, .third {
-	display: flex;
-}
-
-#img12 div div a, .two > a {
+.product_posting > a {
 	text-decoration: none;
-	color: #292b2b;
+    color: #292b2b;
 }
 
+.price {
+	display: flex;
+	align-items: center;
+    gap: 15px;
+}
+
+.dc {
+	color: #f2a900;
+	font-size: 23px;
+}
+
+.prdOp, .prdSp {
+	font-size: 18px;
+}
+
+.prdOp {
+	color: #808893;
+    text-decoration: line-through;
+}
+
+.prdBd {
+	background-color: #f2a900;
+    width: 67px;
+    height: 25px;
+    color: white;
+    text-align: center;
+    font-size: 15px;
+}
 
 /* 노트북 & 테블릿 가로 (해상도 1024px ~ 1279px) */
 @media all and (min-width:1024px) and (max-width:1279px) {

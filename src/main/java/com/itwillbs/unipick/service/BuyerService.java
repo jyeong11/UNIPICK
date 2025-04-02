@@ -191,4 +191,12 @@ public class BuyerService {
 	public List<Map<String, Object>> getCatePrd(Map<String, Object> cate) {
 		return mapper.getCatePrd(cate);
 	}
+	
+	// 베스트 상품 리스트
+	public Map<String, Object> productBestNew(Map<String, Object> prd) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("prd", mapper.productSort(prd));
+		map.put("cate", mapper.getCategory());
+		return map;
+	}
 }

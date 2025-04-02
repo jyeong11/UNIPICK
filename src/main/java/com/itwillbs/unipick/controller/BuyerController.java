@@ -394,4 +394,11 @@ public class BuyerController {
 	public List<Map<String, Object>> getCatePrd(@RequestBody Map<String, Object> cate) {
 		return buyService.getCatePrd(cate);
 	}
+	
+	// 신상, 베스트 상품 리스트
+	@ResponseBody
+	@PostMapping("productBestNew")
+	public Map<String, Object> productBestNew(@RequestBody Map<String, Object> prd) {
+		return buyService.productBestNew(prd);
+	}
 }
