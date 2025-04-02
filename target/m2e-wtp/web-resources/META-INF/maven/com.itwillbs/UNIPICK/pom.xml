@@ -26,22 +26,23 @@
 		Maven Repository 웹사이트에서 필요한 라이브러리 검색 가능
 		추가된 모든 라이브러리는 [프로젝트 - Maven Dependencies] 항목에서 확인
 		 -->
-		 <dependency>
-    <groupId>org.apache.poi</groupId>
-    <artifactId>poi</artifactId>
-    <version>5.2.3</version>
-</dependency>
-<dependency>
-    <groupId>org.apache.poi</groupId>
-    <artifactId>poi-ooxml</artifactId>
-    <version>5.2.3</version>
-</dependency>
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi</artifactId>
+		    <version>5.2.3</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi-ooxml</artifactId>
+		    <version>5.2.3</version>
+		</dependency>
+		
 		 
 		 <dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-web</artifactId>
-    <version>5.3.30</version> <!-- 버전은 프로젝트에 맞게 조정 -->
-</dependency>
+    		<groupId>org.springframework</groupId>
+    		<artifactId>spring-web</artifactId>
+    		<version>5.3.30</version> <!-- 버전은 프로젝트에 맞게 조정 -->
+		</dependency>
 		 
 		<!-- 1. DTO(VO) 클래스 작성을 자동화 해주는 Lombok(롬복) -->		
 		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->

@@ -20,25 +20,19 @@ public class ProductViewInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        System.out.println("인터셉터 동작 시작");
+        System.out.println("인터셉터 동작 테스트");
         String productId = request.getParameter("prd_cd");
-        String sellerId = request.getParameter("sel_nm");
         
-        System.out.println("상품 ID: " + productId);
-        System.out.println("판매자 ID: " + sellerId);
-
-        if (productId != null && sellerId != null) {
+        if (productId != null) {
+            // 상품 코드로 판매자 ID 조회
             Map<String, Object> params = new HashMap<>();
-            params.put("sellerId", sellerId);
             params.put("productId", productId);
-            params.put("ipAddress", request.getRemoteAddr());
-
-            System.out.println("방문 로그 저장 시작");
-            // 방문 로그 저장
+            
+            // 로그용 출력
+            System.out.println("상품코드: " + productId);
+            
+            // 서비스를 통해 판매자 ID 조회 및 방문 기록
             service.logProductVisit(params);
-            System.out.println("방문 로그 저장 완료");
-        } else {
-            System.out.println("필수 파라미터 누락");
         }
         return true;
     }
