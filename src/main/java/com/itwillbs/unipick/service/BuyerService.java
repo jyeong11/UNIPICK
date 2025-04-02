@@ -46,10 +46,10 @@ public class BuyerService {
 	public List<Map<String, Object>> getselDetail(String sel_nm) {
 		return mapper.getselDetail(sel_nm);
 	}
-	// 판매자 상세 이미지
-//	public List<Map<String , Object>> getselImg(String sel_nm) {
-//		return mapper.getselImg(sel_nm);
-//	}
+	// 판매자 카테고리 
+	public List<Map<String, Object>> categoryList() {
+		return mapper.categoryList();
+	}
 	//상품 상세 옵션 
 	public List<Map<String, Object>> getPrdOption(String prdCd) {
 		return mapper.getPrdOption(prdCd);
@@ -185,5 +185,10 @@ public class BuyerService {
 	// 추천 상품
 	public List<Map<String, Object>> getRecommendPrd(Map<String, Object> prd_cd) {
 		return mapper.getRecommendPrd(prd_cd);
+	}
+	
+	// 판매자 상세 카테고리 클릭시
+	public List<Map<String, Object>> getCatePrd(Map<String, Object> cate) {
+		return mapper.getCatePrd(cate);
 	}
 }

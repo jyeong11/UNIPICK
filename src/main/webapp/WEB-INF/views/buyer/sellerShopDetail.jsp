@@ -80,6 +80,21 @@
 			</div>
 		</div>
 		<div class="content">
+			<div class="category-menu">
+				<h2>CATEGORIES</h2>
+			    <ul>
+			    	<li class="categories">
+			                <a href="#" class="category" data-category="All">전체</a>
+			            </li>
+			        <c:forEach var="code" items="${cateList}">
+			            <li class="categories">
+			                <a href="#" class="category" data-category="${code.lev_cd}">
+			                    ${code.lev_nm}
+			                </a>
+			            </li>
+			        </c:forEach>
+			    </ul>
+			</div>
 			<div id="imageGallery" class="image-gallery">
 			    <c:forEach var="sel" items="${selList}">
 			        <div class="image-item" data-id="${sel['prd_cd']}" data-sel="${sel['sel_nm']}">

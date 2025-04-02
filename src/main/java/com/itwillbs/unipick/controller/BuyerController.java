@@ -1,17 +1,13 @@
 package com.itwillbs.unipick.controller;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.itwillbs.unipick.mapper.BuyerMapper;
 import com.itwillbs.unipick.service.AdminService;
 import com.itwillbs.unipick.service.BuyerService;
 
@@ -110,9 +105,10 @@ public class BuyerController {
 	@GetMapping("sellerShopDetail")
 	public String sellerShopDetail(@RequestParam("sel_nm") String sel_nm, Model model) {
 		List<Map<String, Object>> selList = buyService.getselDetail(sel_nm);
-//		List<Map<String , Object>> selImgList = buyService.getselImg(sel_nm);
+		List<Map<String, Object>> cateList = buyService.categoryList();
+		
+		model.addAttribute("cateList", cateList);
 		model.addAttribute("selList", selList);
-		System.out.println("!@#@!#!@#@!2" + selList);
 		return "buyer/sellerShopDetail";
 	}
 	// 상품 상세조회 (조회)
@@ -392,5 +388,10 @@ public class BuyerController {
 	public List<Map<String, Object>> getRecommendPrd(@RequestBody Map<String, Object> prd_cd) {
 		return buyService.getRecommendPrd(prd_cd);
 	}
-	
+	// 판매자 상세 카테고리 클릭시
+	@ResponseBody
+	@PostMapping("getCatePrd")
+	public List<Map<String, Object>> getCatePrd(@RequestBody Map<String, Object> cate) {
+		return buyService.getCatePrd(cate);
+	}
 }

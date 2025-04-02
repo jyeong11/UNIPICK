@@ -26,8 +26,8 @@ public interface BuyerMapper {
 	public List<Map<String, Object>> getPrdReviews(Map<String, Object> prd_cd);
 	// 판매자 상세페이지
 	public List<Map<String, Object>> getselDetail(String sel_nm);
-	// 판매자 상세 이미지
-//	public List<Map<String , Object>> getselImg(String sel_nm);
+	// 판매자 상세 카테고리
+	public List<Map<String, Object>> categoryList();
 	// 카테고리 메뉴
 	public List<Map<String, Object>> getCategory();
 	// 상품 정렬 종류 
@@ -78,4 +78,6 @@ public interface BuyerMapper {
 	public List<Map<String, Object>> selPrdsearch(Map<String, Object> data);
 	// 추천 상품
 	public List<Map<String, Object>> getRecommendPrd(Map<String, Object> prd_cd);
+	// 판매자 상세 카테고리 클릭시 
+	public List<Map<String, Object>> getCatePrd(Map<String, Object> cate);
 }
