@@ -39,7 +39,9 @@
 	 <div class="product-container">
     <!-- 왼쪽 상품 이미지 -->
 	     <div class="product-image">
-	        <div class="image-container"></div>
+	        <div class="image-container">
+	        	<img id="product-image" src="${pageContext.request.contextPath}${prdImg[0].fil_pt}" class="product-img">
+	        </div>
 	        <!-- 다음/이전 버튼 -->
 	        <button id="prev-btn" class="swiper-button-prev">이전</button>
 	        <button id="next-btn" class="swiper-button-next">다음</button>
