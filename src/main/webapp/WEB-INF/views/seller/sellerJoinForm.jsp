@@ -86,7 +86,7 @@
 
             <div class="input-group">
                 <label for="phNumber">휴대전화  *</label>
-                <input type="text" id="phNumber" name="phNumber" placeholder="010-xxxx-xxxx">
+                <input type="text" id="phNumber" name="phNumber" placeholder="010xxxxxxxx">
             </div>
             <div class="join-message">
             	"입점 신청 후 10일 내에 입점 가능 여부를 입력하신 번호로 안내드립니다."

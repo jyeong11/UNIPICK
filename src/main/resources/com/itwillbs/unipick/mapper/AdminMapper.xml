@@ -280,5 +280,21 @@
 		  FROM report
 		 ORDER BY rpt_dt DESC
 	</select>
+	
+<!-- 	판매자 회원 조회 -->
+	<select id="getSellerInfo" parameterType="map">
+	 SELECT sel_id, sel_nm, sel_mn, sel_cs
+	   FROM sellers;
+	</select>
+	
+<!-- 	판매자 회원 상세 조회 -->
+	<select id="getSellerInfoDeatil" parameterType="map">
+	 SELECT s.sel_id, s.sel_nm, s.sel_rn, s.sel_mn,
+		    s.sel_mp, s.sel_cs, s.sel_br, s.sel_ad, cd.cod_nm
+	   FROM sellers s
+	   JOIN common_detailcode cd
+	     ON s.sel_st = cd.cod_cd 
+	  WHERE sel_nm = #{sel_nm};
+	</select>
   	
 </mapper>

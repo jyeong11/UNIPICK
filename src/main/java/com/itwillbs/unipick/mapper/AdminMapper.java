@@ -54,4 +54,8 @@ public interface AdminMapper {
 	public List<Map<String, Object>> joinList();
 	// 신고내역 리스트
 	public List<Map<String,Object>> reportList();
+	// 판매자 회원 조회
+	public List<Map<String, Object>> getSellerInfo();
+	// 판매자 회원 상세 조회
+	public List<Map<String, Object>> getSellerInfoDeatil(Map<String, Object> sel_nm);
 }

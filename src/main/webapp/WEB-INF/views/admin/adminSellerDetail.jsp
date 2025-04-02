@@ -47,17 +47,14 @@
 	href="https://uicdn.toast.com/tui-color-picker/latest/tui-color-picker.min.css" />
 <link rel="stylesheet"
 	href="https://uicdn.toast.com/editor-plugin-color-syntax/latest/toastui-editor-plugin-color-syntax.min.css" />
-<script
-	src="https://uicdn.toast.com/tui-color-picker/latest/tui-color-picker.min.js"></script>
-<script
-	src="https://uicdn.toast.com/editor-plugin-color-syntax/latest/toastui-editor-plugin-color-syntax.min.js"></script>
+<script src="https://uicdn.toast.com/tui-color-picker/latest/tui-color-picker.min.js"></script>
+<script src="https://uicdn.toast.com/editor-plugin-color-syntax/latest/toastui-editor-plugin-color-syntax.min.js"></script>
 
 <!-- favicon -->
-<link rel="icon"
-	href="${pageContext.request.contextPath }/resources/images/favicon.png">
+<link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
+
 <!-- 페이지 전용 JS (외부 파일로 분리) -->
-<script
-	src="${pageContext.request.contextPath}/resources/js/seller/sellerOrdDetail.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/admin/adminSellerDetail.js"></script>
 </head>
 <body id="page-top">
 	<div id="wrapper">
@@ -122,54 +119,37 @@
 						<div class="col-lg-12">
 							<div class="card shadow mb-4">
 								<div class="card-header py-3">
-									<h5 class="m-0 font-weight-bold sel">상품 상세조회</h5>
+									<h5 class="m-0 font-weight-bold sel">판매자 상세조회</h5>
 								</div>
 								<div>
 									<div class="buyerOrdInfo">
 										<div class="section">
 											<div class="item-regi-name">상품 정보</div>
-											<div class="label">상품코드:</div>
-											<input type="text" class="input-box" id="prd_cd" readonly>
-											<div class="label">상품명:</div>
-											<input type="text" class="input-box" id="prd_nm" readonly>
-											<div class="label">주문 사이즈:</div>
-											<input type="text" class="input-box" id="siz_nm" readonly>
-											<div class="label">주문 컬러:</div>
-											<input type="text" class="input-box" id="clr_nm" readonly>
-											<div class="label">주문 갯수:</div>
-											<input type="text" class="input-box" id="odd_qt" readonly>
-										</div>
-										<div class="section">
-											<div class="item-regi-name">구매자 정보</div>
-											<div class="label">이메일:</div>
-											<input type="text" class="input-box" id="buy_em" readonly>
-											<div class="label">구매자명:</div>
-											<input type="text" class="input-box" id="buy_nm" readonly>
-											<div class="label">연락처:</div>
-											<input type="text" class="input-box" id="buy_ph" readonly>
-										</div>
-										<div class="section">
-											<div class="item-regi-name">수령 정보</div>
-											<div class="label">수령자 명</div>
-											<input type="text" class="input-box" id="rec_nm" readonly>
-											<div class="label">수령자 연락처</div>
-											<input type="text" class="input-box" id="rec_ph" readonly>
-											<div class="label"> 수령주소:</div>
-											<input type="text" class="input-box" id="address" readonly>
-											<div class="label">배송메모:</div>
-											<input type="text" class="input-box" id="delivery_note"
-												readonly>
-										</div>
-										<div class="section">
-											<div class="item-regi-name">결제 정보</div>
-											<div class="label">상품금액:</div>
-											<input type="text" class="input-box" id="odd_am" readonly>
-											<div class="label">결제방식:</div>
-											<input type="text" class="input-box" id="payment"
-												readonly>
-										</div>
-										<div class="button-container">
-											<button class="button">결제 요청 취소</button>
+											<div class="label">ID:</div>
+											<input type="text" class="input-box" id="sel_id" readonly>
+											<div class="label">스토어 명:</div>
+											<input type="text" class="input-box" id="sel_nm" readonly>
+											<div class="label">대표자 명:</div>
+											<input type="text" class="input-box" id="sel_rn" readonly>
+											<div class="label">담당자 명:</div>
+											<input type="text" class="input-box" id="sel_mn" readonly>
+											<div class="label">담당자 번호:</div>
+											<input type="text" class="input-box" id="sel_mp" readonly>
+											<div class="label">고객센터 번호:</div>
+											<input type="text" class="input-box" id="sel_cs" readonly>
+											<div class="label">사업자등록번호:</div>
+											<input type="text" class="input-box" id="sel_br" readonly>
+											<div class="label">사업장주소:</div>
+											<input type="text" class="input-box" id="sel_ad" readonly>
+											<div class="label">계정상태:</div>
+											<select class="input-box" id="sel_st">
+											    <option value="정상">활성</option>
+											    <option value="ss02">비활성</option>
+											    <option value="ss03">정지</option>
+											</select>
+											<div class="button-container">
+												<button class="button">수정</button>
+											</div>
 										</div>
 									</div>
 								</div>

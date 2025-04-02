@@ -1,7 +1,7 @@
 $(function() {
 	let query = window.location.search;
     let param = new URLSearchParams(query);
-	let data = {ord_id : param.get('ord_id')}
+	let data = {ord_id : param.get('ord_id')};
 	
 	let sum = 0;
 	

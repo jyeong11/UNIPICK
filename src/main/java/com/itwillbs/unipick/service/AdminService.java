@@ -123,5 +123,14 @@ public class AdminService {
 		
 		return mainData;
 	}
-		
+	
+	// 판매자 회원 조회
+	public List<Map<String, Object>> getSellerInfo() {
+		return mapper.getSellerInfo();
+	}
+	
+	// 판매자 회원 상세 조회
+	public List<Map<String, Object>> getSellerInfoDeatil(Map<String, Object> sel_nm){
+		return mapper.getSellerInfoDeatil(sel_nm);
+	}
 }

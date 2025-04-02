@@ -66,6 +66,18 @@ public class AdminController {
 		return "admin/commonCodeLevel";
 	}
 	
+	// 판매자 회원 화면
+	@GetMapping("adminSellerList")
+	public String adminSellerList() {
+		return "admin/adminSellerList";
+	}
+	
+	// 판매자 회원 상세조회
+	@GetMapping("adminSellerDetail")
+	public String adminSellerDetail() {
+		return "admin/adminSellerDetail";
+	}
+	
 	// 공통코드 화면 List 
 	@ResponseBody
 	@GetMapping("cmCodeList")
@@ -274,5 +286,18 @@ public class AdminController {
 	public Map<String, Object> mainPrint() {
 		return adminservice.mainPrint();
 	}
-
+	
+	// 판매자 회원 조회
+	@ResponseBody
+	@PostMapping("getSellerInfo")
+	public List<Map<String, Object>> getSellerInfo() {
+		return adminservice.getSellerInfo();
+	}
+	
+	// 판매자 회원 상세 조회
+	@ResponseBody
+	@PostMapping("getSellerInfoDeatil")
+	public List<Map<String, Object>> getSellerInfoDeatil(@RequestParam Map<String, Object> sel_nm) {
+		return adminservice.getSellerInfoDeatil(sel_nm);
+	}
 }
