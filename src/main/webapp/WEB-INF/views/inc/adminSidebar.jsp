@@ -31,8 +31,8 @@
             	<h6 class="collapse-header">회원관리</h6>
                 <a class="collapse-item" href="#" data-sub-page="AdmMemberDetailForm">구매자회원</a>
                 <a class="collapse-item" href="adminSellerList" >판매자회원</a>
-                <a class="collapse-item" href="adminRegister" data-sub-page="AdmMemberDetailForm">관리자 등록(임시)</a>
-                <a class="collapse-item" href="adminList" data-sub-page="AdmMemberDetailForm">관리자 조회(임시)</a>
+<!--                 <a class="collapse-item" href="adminRegister" data-sub-page="AdmMemberDetailForm">관리자 등록(임시)</a> -->
+                <a class="collapse-item" href="adminList" data-sub-page="AdmMemberDetailForm">관리자</a>
             </div>
         </div>
     </li>

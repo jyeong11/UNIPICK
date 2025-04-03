@@ -59,7 +59,7 @@
 	</update>
 	
 	<!-- 스토어(판매자) 검색 -->
-	<select id="searchSellers" parameterType="map" resultType="map">
+	<select id="searchSellers" parameterType="string" resultType="map">
 		SELECT sel_id,
 			   sel_nm,
 			   sel_rn,
@@ -77,9 +77,6 @@
 				OR sel_rn LIKE CONCAT('%', #{keyword}, '%')
 				OR sel_br LIKE CONCAT('%', #{keyword}, '%')
 			   )
-		</if>
-		<if test="status != null and status != '' and (status == '활성' or status == '대기' or status == '정지' or status == '삭제')">
-		   AND sel_st = #{status}
 		</if>
 		 ORDER BY sel_nm
 	</select>
