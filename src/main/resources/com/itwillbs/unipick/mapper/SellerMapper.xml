@@ -75,9 +75,20 @@
 	
 <!-- 	주문 상세 조회 -->
 	<select id="sellerOrdPrdDetail" parameterType="map">
-	 SELECT pd.prd_cd, pd.prd_nm, cd.cod_nm, ot.clr_nm, odd.odd_qt,
-		    bu.buy_em, bu.buy_nm, bu.buy_ph, od.ord_ad, od.ord_dm, 
-	        od.ord_nm, od.ord_ph, odd.odd_am, od.ord_pm
+	 SELECT pd.prd_cd,
+	 		pd.prd_nm,
+	 		cd.cod_nm,
+	 		ot.clr_nm,
+	 		odd.odd_qt,
+		    bu.buy_em,
+		    bu.buy_nm,
+		    bu.buy_ph,
+		    od.ord_ad,
+		    od.ord_dm, 
+	        od.ord_nm,
+	        od.ord_ph,
+	        odd.odd_am,
+	        od.ord_pm
 	   FROM products pd 
 	   JOIN options ot
 		 ON pd.prd_cd = ot.prd_cd
@@ -94,7 +105,8 @@
 	
 <!-- 	셀러 계정 찾기 -->
 	<select id="otpSellerInfo" parameterType="String">
-     SELECT sel_id, sel_pw
+     SELECT sel_id,
+     		sel_pw
        FROM sellers
       WHERE sel_cs = #{userPhone}
       	AND sel_id = #{sel_id}
@@ -190,5 +202,21 @@
 		  FROM product_images
 		 WHERE prd_cd = #{prd_cd}
 	</delete>
+	
+<!-- 	판매자 메인 신규주문  -->
+	<select id="newOrdCount" parameterType="map">
+	 SELECT count(o.ord_id)
+	   FROM orders o
+	   LEFT JOIN order_details d
+		 ON o.ord_id = d.ord_id
+	   LEFT JOIN options t
+	     ON d.opt_id = t.opt_id
+	   LEFT JOIN products p
+	     ON t.prd_cd = p.prd_cd
+	   LEFT JOIN sellers s 
+	     ON  p.sel_id = s.sel_id
+	  WHERE d.odd_st = '결제완료'
+	    AND s.sel_id = #{sel_id};
+	</select>
 
 </mapper>

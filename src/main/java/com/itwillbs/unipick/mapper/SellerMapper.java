@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Param;
 public interface SellerMapper {
 	// 셀러 회원가입
 	public int sellerjoin(Map<String, Object> sellerinfo);
-	
+	// 셀러 정보 조회
 	public Map<String, Object> sellerselect(Map<String, Object> seldata);
 	// 상품 상세 조회
 	public Map<String, Object> productDetail(Map<String, Object> prdData);
@@ -38,5 +38,7 @@ public interface SellerMapper {
 	public void productDelete(Map<String, Object> prd);
 	// 상품 이미지 삭제
 	public void productImgDelete(Map<String, Object> prd);
+	// 판매자 메인 신규주문
+	public int newOrdCount(String sel_id);
 	
 }

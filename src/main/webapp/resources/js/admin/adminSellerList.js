@@ -20,13 +20,8 @@ $(function() {
 		let kind = kindElement ? kindElement.value : null;
 		let word = wordElement ? wordElement.value : null;
 		
-		if(kind == "sel_id" && word != ''){
-			data.sel_id = word;
-		} else if(kind == "sel_nm"){
-			data.sel_nm = word;
-		} else if(kind == "sel_mn") {
-			data.sel_mn = word
-		}
+		data[kind] = word;
+		
 		$.ajax({
 		url: "getSellerInfo",
 		method: "POST",

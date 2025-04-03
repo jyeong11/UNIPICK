@@ -18,12 +18,13 @@
 <link href="${pageContext.request.contextPath }/resources/public/css/adm.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath }/resources/public/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath }/resources/public/vendor/datatables/datatables.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath }/resources/css/seller/sellerMain.css" rel="stylesheet">
 
 <!-- favicon -->
 <link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
 <!-- js -->
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/seller/sellerLogin.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/seller/sellerMain.js"></script>
 </head>
 <body id="page-top">
  	<div id="wrapper"><div>
@@ -133,21 +134,22 @@ document.addEventListener("DOMContentLoaded", function () {
                     <!-- Content Row 메인 상단 -->
                     <div class="row">
                     	
-                    	<!-- 상단1) 등록된 전체 상품 수 -->
                         <div class="col-xl-4 col-md-6 mb-4">
                             <div class="card border-left-primary shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="font-weight-bold text-primary text-uppercase mb-1">신규 주문</div>
-<!--                                             신규 주문 동적으로 채움 -->
-                                            <div class="h3 mb-0 font-weight-bold text-gray-800 counter-text" id="totalProducts"></div>
-                                        </div>
-                                        <div class="col-auto">
-                                        	<i class="fa-solid fa-box fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
+                            	<a href="selOrderList">
+	                                <div class="card-body">
+	                                    <div class="row no-gutters align-items-center">
+	                                        <div class="col mr-2">
+	                                            <div class="font-weight-bold text-primary text-uppercase mb-1">신규 주문</div>
+	<!--                                             신규 주문 동적으로 채움 -->
+	                                            <div class="h3 mb-0 font-weight-bold text-gray-800 counter-text" id="totalProducts"></div>
+	                                        </div>
+	                                        <div class="col-auto">
+	                                        	<i class="fa-solid fa-box fa-2x text-gray-300"></i>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                            </a> 
                             </div>
                         </div>
                         

@@ -239,5 +239,14 @@ public class SellerController {
 	public void productDelete(@RequestBody Map<String, Object> prd) {
 		selService.productDelete(prd);
 	}
+	
+	// 판매자 메인 신규 주문 
+	@ResponseBody
+	@PostMapping("newOrdCount")
+	public int newOrdCount(HttpSession session){
+		String sel_id = (String) session.getAttribute("selId");
+		int cnt = selService.newOrdCount(sel_id);
+		return cnt;
+	}
 }
 

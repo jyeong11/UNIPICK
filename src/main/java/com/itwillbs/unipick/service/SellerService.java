@@ -145,4 +145,8 @@ public class SellerService {
 		mapper.productImgDelete(prd);
 	}
 	
+	// 판매자 메인 신규주문
+	public int newOrdCount(String sel_id){
+		return mapper.newOrdCount(sel_id);
+	}
 }

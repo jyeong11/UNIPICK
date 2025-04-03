@@ -174,7 +174,6 @@ function idChecked() {
             // 중복이 없고 사용 가능한 경우 플래그 true 설정 (res.msg에 따른 조건 추가 가능)
             if (res.success) {
                 isIdChecked = true;
-debugger;
             } else {
                 isIdChecked = false;
             }
