@@ -218,5 +218,22 @@
 	  WHERE d.odd_st = '결제완료'
 	    AND s.sel_id = #{sel_id};
 	</select>
+	
+<!-- 	판매자 메인 이번달 매출액 -->
+	<select id="revenue" parameterType="String">
+	 SELECT IFNULL(FORMAT(SUM(d.odd_am), 0), 0) AS acc
+	   FROM orders o
+	   LEFT JOIN order_details d
+		 ON o.ord_id = d.ord_id
+	   LEFT JOIN options t
+	     ON d.opt_id = t.opt_id
+	   LEFT JOIN products p
+	     ON t.prd_cd = p.prd_cd
+	   LEFT JOIN sellers s 
+	     ON  p.sel_id = s.sel_id
+	  WHERE d.odd_st = '결제완료'
+	    AND s.sel_id = #{sel_id}
+	    AND DATE_FORMAT(o.ord_at, '%Y-%m') = DATE_FORMAT(NOW(), '%Y-%m');
+	</select>
 
 </mapper>

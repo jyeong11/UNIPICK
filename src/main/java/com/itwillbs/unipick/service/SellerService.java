@@ -149,4 +149,9 @@ public class SellerService {
 	public int newOrdCount(String sel_id){
 		return mapper.newOrdCount(sel_id);
 	}
+	
+	// 판매자 메인 이번달 매출액
+	public Map<String, Object> revenue(String sel_id) {
+		return mapper.revenue(sel_id);
+	}
 }

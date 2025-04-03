@@ -40,5 +40,6 @@ public interface SellerMapper {
 	public void productImgDelete(Map<String, Object> prd);
 	// 판매자 메인 신규주문
 	public int newOrdCount(String sel_id);
-	
+	// 판매자 메인 이번달 매출액
+	public Map<String, Object> revenue(String sel_id);
 }

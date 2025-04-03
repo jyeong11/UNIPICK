@@ -41,7 +41,9 @@
 	
 <!-- 	상품 상세 옵션 -->
 	<select id="getPrdOption" parameterType="map">
-	 SELECT c.cod_nm, o.clr_nm, o.prd_qt
+	 SELECT c.cod_nm, 
+	 		o.clr_nm,
+	 		o.prd_qt
        FROM options o
        JOIN common_detailcode c
          ON o.siz_nm = c.cod_cd

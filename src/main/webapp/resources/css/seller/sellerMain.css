@@ -9,6 +9,10 @@ body {
 .card-body{
 	cursor: pointer;
 }
+#orderCnt {
+	text-decoration: none;
+    color: white !important;
+}
 #seller-container{
 	max-width: 1200px;
 /* 	margin: 0 auto; */
@@ -56,18 +60,6 @@ ul li a {
     order: -1;
     width: 180px;
 }
-/* .sidebar { */
-/*     width: 180px; */
-/*     height: 97%; */
-/*     background-color: white; */
-/*     color: #4f5558; */
-/*     padding: 20px; */
-/*     top: 0; */
-/*     left: 0; */
-/*     overflow-y: auto; */
-/*     transition: transform 0.3s ease; */
-/*     border-radius: 20px; */
-/* } */
 
 .sidebar.hidden {
     transform: translateX(-100%);

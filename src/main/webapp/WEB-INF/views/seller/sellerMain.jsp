@@ -136,7 +136,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     	
                         <div class="col-xl-4 col-md-6 mb-4">
                             <div class="card border-left-primary shadow h-100 py-2">
-                            	<a href="selOrderList">
+                            	<a id= "orderCnt" href="selOrderList">
 	                                <div class="card-body">
 	                                    <div class="row no-gutters align-items-center">
 	                                        <div class="col mr-2">
@@ -153,96 +153,40 @@ document.addEventListener("DOMContentLoaded", function () {
                             </div>
                         </div>
                         
-                         <!-- 상단2) 현재 거래 진행중인 상품 건수 -->
-                        <div class="col-xl-4 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="font-weight-bold text-success text-uppercase mb-1">진행중인 거래 수</div>
-                                            <div class="h3 mb-0 font-weight-bold text-gray-800 counter-text" id="activeTrades">49</div>
-                                        </div>
-                                        <div class="col-auto">
-                                        	<i class="fa-solid fa-tag fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- 상단3) 완료된 거래 건수 -->
-                        <div class="col-xl-4 col-md-6 mb-4">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="font-weight-bold text-warning text-uppercase mb-1">완료된 거래 수</div>
-                                            <div class="h3 mb-0 font-weight-bold text-gray-800 counter-text" id="completeTrades">5</div>
-                                        </div>
-                                        <div class="col-auto">
-                                        	<i class="fa-solid fa-clipboard-list fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> <!-- /.row -->
-                    
-                    <!-- Content Row 메인 상단2 -->
-                    <div class="row">
-                    	
-                    	<!-- 상단4) 미처리 신고 -->
-                        <div class="col-xl-4 col-md-6 mb-4">
-                            <div class="card border-left-danger shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="font-weight-bold text-danger text-uppercase mb-1">미처리 신고 향후 지울수도</div>
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col-auto">
-                                                    <div class="h3 mb-0 mr-3 font-weight-bold text-gray-800 counter-text" id="pendingReports">17</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fa-solid fa-flag fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                         <!-- 상단5) 신규 가입자 수 -->
-                        <div class="col-xl-4 col-md-6 mb-4">
-                            <div class="card border-left-info shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="font-weight-bold text-info text-uppercase mb-1">신규 가입자 수 향후 지울수도</div>
-                                            <div class="h3 mb-0 font-weight-bold text-gray-800 counter-text" id="newUsers">0</div>
-                                        </div>
-                                        <div class="col-auto">
-                                        	<i class="fa-solid fa-user-plus fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
                         <!-- 상단6) 전체 회원 수 -->
                         <div class="col-xl-4 col-md-6 mb-4">
                             <div class="card border-left-secondary shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="font-weight-bold text-secondary text-uppercase mb-1">전체 회원 수</div>
-                                            <div class="h3 mb-0 font-weight-bold text-gray-800 counter-text"  id="totalUsers">59</div>
-                                        </div>
-                                        <div class="col-auto">
-                                        	<i class="fa-solid fa-users fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
+	                            <a href="account">
+	                                <div class="card-body">
+	                                    <div class="row no-gutters align-items-center">
+	                                        <div class="col mr-2">
+	                                            <div class="font-weight-bold text-secondary text-uppercase mb-1">이번달 매출액</div>
+	                                            <div class="h3 mb-0 font-weight-bold text-gray-800 counter-text"  id="totalUsers"></div>
+	                                        </div>
+	                                        <div class="col-auto">
+	                                        	<i class="fa-solid fa-users fa-2x text-gray-300"></i>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                             </a>
+                            </div>
+                        </div>
+                        
+                        <div class="col-xl-4 col-md-6 mb-4">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                            	<a href="sellerVisit">
+	                                <div class="card-body">
+	                                    <div class="row no-gutters align-items-center">
+	                                        <div class="col mr-2">
+	                                            <div class="font-weight-bold text-warning text-uppercase mb-1">일자별 방문내역 수</div>
+	                                            <div class="h3 mb-0 font-weight-bold text-gray-800 counter-text" id="completeTrades">5</div>
+	                                        </div>
+	                                        <div class="col-auto">
+	                                        	<i class="fa-solid fa-clipboard-list fa-2x text-gray-300"></i>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                             </a>
                             </div>
                         </div>
                     </div> <!-- /.row -->

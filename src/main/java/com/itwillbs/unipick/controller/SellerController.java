@@ -78,6 +78,11 @@ public class SellerController {
 		return "seller/sellerFindAcc";
 	}
 	
+	// 판매자 기간별 분석
+	@GetMapping("sellerTemporal")
+	public String sellerTemporal() {
+		return "seller/sellerTemporal";
+	}
 	@GetMapping("sellerlogin")
 	public String Login(HttpServletRequest request, Model model) {
 	    // 저장된 쿠키 확인
@@ -248,5 +253,14 @@ public class SellerController {
 		int cnt = selService.newOrdCount(sel_id);
 		return cnt;
 	}
+	
+	// 판매자 메인 이번달 매출액
+	@ResponseBody
+	@PostMapping("Revenue")
+	public Map<String, Object> Revenue(HttpSession session) {
+		String sel_id = (String) session.getAttribute("selId");
+		return selService.revenue(sel_id);
+	}
 }
+
 

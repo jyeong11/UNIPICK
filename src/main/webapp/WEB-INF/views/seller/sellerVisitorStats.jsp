@@ -105,7 +105,6 @@
 					                            <option value="daily">일별</option>
 					                            <option value="weekly">주간별</option>
 					                            <option value="monthly">월별</option>
-					                            <option value="yearly">연도별</option>
 					                        </select>
 					                    </div>
 					                    <div class="form-group mr-3">
