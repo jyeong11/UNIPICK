@@ -58,8 +58,16 @@
     }
     
     .chart-area, .chart-pie {
-      height: 350px !important;
+      height: 400px !important;
       padding: 15px;
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+    
+    .chart-area canvas, .chart-pie canvas {
+      max-width: 100%;
+      height: auto !important;
     }
     
     .search-card {
@@ -179,6 +187,21 @@
       .chart-area, .chart-pie {
         height: 250px !important;
       }
+    }
+      .dataTables_length select {
+      width: 50px !important;
+      height: auto !important;
+      padding: 0.25rem 0.5rem;
+    }
+    
+        .dataTables_paginate {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+    
+    .pagination {
+      margin: 0;
     }
   </style>
 </head>
