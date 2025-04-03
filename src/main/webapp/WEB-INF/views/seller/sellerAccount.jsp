@@ -35,6 +35,12 @@
     </style>
 </head>
 <body>
+<!-- Main Content -->
+	<div id="content">
+		<div>
+			<jsp:include page="../inc/sellerTopbar.jsp"></jsp:include>
+		</div>
+	</div>
     <div class="container mt-4">
         <h2 class="mb-4">정산관리</h2>
         
