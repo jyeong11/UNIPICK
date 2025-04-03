@@ -57,105 +57,110 @@
     </style>
 </head>
 <body id="page-top">
-    <!-- Page Wrapper -->
-    <div id="wrapper">
-	<jsp:include page="../inc/adminSidebar.jsp"></jsp:include>
+
+	<div id="wrapper">
+		<div>
+			<jsp:include page="../inc/adminSidebar.jsp"></jsp:include>
+		</div>
+	<!-- Page Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
+		<div id="content">
+			<div>
+				<jsp:include page="../inc/adminTopbar.jsp"></jsp:include>
+			</div>
+			<!-- Begin Page Content -->
+			<section class="section">
+				<!-- Content Wrapper -->
+				<div id="content-wrapper" class="d-flex flex-column">
+					<!-- Main Content -->
+					<div id="content">
+						<!-- Begin Page Content -->
+						<div class="container-fluid">
+							<!-- Page Heading -->
+							<div
+								class="d-sm-flex align-items-center justify-content-center mb-4">
+								<h5 class="mb-0 text-gray-800" id="todayText"></h5>
+							</div>
+
+							<!-- Content Row 메인 상단 -->
+							<div class="row">
+								<div class="container mt-5">
+									<div class="col-md-8 offset-md-2">
+										<div class="card">
+											<div class="card-header py-3">
+												<h3 class="mb-0">관리자 등록</h3>
+											</div>
+											<div class="card-body">
+												<form id="adminRegisterForm">
+													<div class="mb-3">
+														<label for="adm_id" class="form-label">관리자 ID</label> <input
+															type="text" class="form-control" id="adm_id"
+															name="adm_id" required>
+													</div>
+													<div class="mb-3">
+														<label for="adm_pw" class="form-label">비밀번호</label> <input
+															type="password" class="form-control" id="adm_pw"
+															name="adm_pw" required>
+													</div>
+													<div class="mb-3">
+														<label for="adm_nm" class="form-label">관리자명</label> <input
+															type="text" class="form-control" id="adm_nm"
+															name="adm_nm" required>
+													</div>
+													<div class="mb-3">
+														<label for="adm_sl" class="form-label">보안등급</label> <select
+															class="form-select" id="adm_sl" name="adm_sl" required>
+															<option value="1">총괄관리자</option>
+															<option value="2">스토어관리자</option>
+														</select>
+													</div>
+													<div class="mb-3">
+														<label class="form-label">관리 스토어</label>
+														<div class="input-group">
+															<input type="text" class="form-control" id="storeSearch"
+																placeholder="스토어명 검색">
+															<button class="btn btn-outline-secondary" type="button"
+																id="searchBtn">검색</button>
+														</div>
+														<div class="dropdown-menu w-100" id="storeDropdown"></div>
+														<div class="tag-container mt-2" id="selectedStores"></div>
+													</div>
+													<div class="text-center">
+														<button type="submit" class="btn btn-primary">등록하기</button>
+														<a href="adminList" class="btn btn-secondary">목록으로</a>
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /.row -->
+				</div>
+				<!-- /.container-fluid -->
+						<footer class="sticky-footer bg-white">
+			<div class="container my-auto">
+				<div class="copyright text-center my-auto">
+					<span>Copyright &copy; UNIPICK Admin 2025</span>
+				</div>
+			</div>
+		</footer>	
+			</section>
+		</div>
+		<!-- End of Main Content -->
+	
+</div>
+		<!-- Footer -->
+
+		<!-- End of Footer -->
 	</div>
-
-
-		<!-- // Sidebar -->
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-            <!-- Main Content -->
-            <div id="content">
-				<div>
-					<jsp:include page="../inc/adminTopbar.jsp"></jsp:include>
-				</div>
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
-                   <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-center mb-4">
-                        <h5 class="mb-0 text-gray-800" id="todayText"></h5>
-                    </div>
-
-                    <!-- Content Row 메인 상단 -->
-                    <div class="row">
-                    	   <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-8 offset-md-2">
-                <div class="card">
-                    <div class="card-header py-3">
-                        <h3 class="mb-0">관리자 등록</h3>
-                    </div>
-                    <div class="card-body">
-                        <form id="adminRegisterForm">
-                            <div class="mb-3">
-                                <label for="adm_id" class="form-label">관리자 ID</label>
-                                <input type="text" class="form-control" id="adm_id" name="adm_id" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="adm_pw" class="form-label">비밀번호</label>
-                                <input type="password" class="form-control" id="adm_pw" name="adm_pw" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="adm_nm" class="form-label">관리자명</label>
-                                <input type="text" class="form-control" id="adm_nm" name="adm_nm" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="adm_sl" class="form-label">보안등급</label>
-                                <select class="form-select" id="adm_sl" name="adm_sl" required>
-                                    <option value="1">총괄관리자</option>
-                                    <option value="2">스토어관리자</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">관리 스토어</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="storeSearch" placeholder="스토어명 검색">
-                                    <button class="btn btn-outline-secondary" type="button" id="searchBtn">검색</button>
-                                </div>
-                                <div class="dropdown-menu w-100" id="storeDropdown"></div>
-                                <div class="tag-container mt-2" id="selectedStores"></div>
-                            </div>
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-primary">등록하기</button>
-                                <a href="adminList" class="btn btn-secondary">목록으로</a>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-                    </div> <!-- /.row -->
-
-                </div>
-                <!-- /.container-fluid -->
-
-            </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-			   	 	<div class="copyright text-center my-auto">
-			        	<span>Copyright &copy; UNIPICK Admin 2025</span>
-			    	</div>
-				</div>
-            </footer>
-            <!-- End of Footer -->
-
-        </div>
-        <!-- End of Content Wrapper -->
-
-    <!-- End of Page Wrapper -->
-
+	<!-- End of Content Wrapper -->
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-
     <!-- Bootstrap core JavaScript-->
     <script src="${pageContext.request.contextPath }/resources/public/vendor/jquery/jquery.min.js"></script>
 

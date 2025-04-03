@@ -33,6 +33,15 @@
 		<beans:property name="maxUploadSize" value="10485760"/>
 		<!--  defaultEncoding 속성 : 파일명에 한글 등의 아스키코드 외의 문자 인코딩 방식 설정(UTF-8)  -->
 		<beans:property name="defaultEncoding" value="UTF-8"/>
-	</beans:bean> 
+	</beans:bean>
+	
+	<interceptors>
+		<interceptor>
+			<mapping path="/productDetail/**"/>
+			<beans:bean class="com.itwillbs.unipick.handler.ProductViewInterceptor" />
+		</interceptor>
+	</interceptors>
+	
+	 
 </beans:beans>
 
