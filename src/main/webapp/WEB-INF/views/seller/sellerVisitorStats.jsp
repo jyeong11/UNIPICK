@@ -33,6 +33,8 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   
+  <script src="${pageContext.request.contextPath}/resources/js/seller/sellerVisitorStats.js"></script>
+  
   <link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
   
   <style>
@@ -188,13 +190,14 @@
         height: 250px !important;
       }
     }
-      .dataTables_length select {
-      width: 50px !important;
+    
+    .dataTables_length select {
+      width: 60px !important;
       height: auto !important;
       padding: 0.25rem 0.5rem;
     }
     
-        .dataTables_paginate {
+    .dataTables_paginate {
       display: flex;
       justify-content: center;
       margin-top: 1rem;
@@ -202,6 +205,34 @@
     
     .pagination {
       margin: 0;
+    }
+    
+    /* 차트 레이블을 위한 스타일 */
+    .chart-legend {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      max-height: 100%;
+      overflow-y: auto;
+    }
+    
+    .chart-legend-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+      font-size: 12px;
+    }
+    
+    .chart-legend-color {
+      width: 12px;
+      height: 12px;
+      margin-right: 5px;
+      border-radius: 3px;
     }
   </style>
 </head>
@@ -411,51 +442,5 @@
   <script src="${pageContext.request.contextPath}/resources/public/vendor/datatables/jquery.dataTables.min.js"></script>
   <script src="${pageContext.request.contextPath}/resources/public/vendor/datatables/dataTables.bootstrap4.min.js"></script>
   <script src="${pageContext.request.contextPath}/resources/public/js/index.js"></script>
-  
-  <script>
-    $(document).ready(function() {
-      // 기간 선택 버튼 클릭 이벤트
-      $('.period-selector').click(function() {
-        $('.period-selector').removeClass('active');
-        $(this).addClass('active');
-        $('#periodType').val($(this).data('period'));
-      });
-      
-      // 날짜 기본값 설정 (오늘부터 30일 전)
-      const today = new Date();
-      const thirtyDaysAgo = new Date(today);
-      thirtyDaysAgo.setDate(today.getDate() - 30);
-      
-      $('#endDate').val(today.toISOString().split('T')[0]);
-      $('#startDate').val(thirtyDaysAgo.toISOString().split('T')[0]);
-      
-      // 초기 데이터 로드 후 요약 통계 업데이트 함수 호출
-      const originalLoadData = loadData;
-      loadData = function() {
-        originalLoadData.call(this);
-        updateSummaryStats();
-      };
-      
-      // 요약 통계 업데이트 함수
-      function updateSummaryStats() {
-        // 예시 데이터 - 실제로는 API에서 가져온 데이터로 대체해야 함
-        $('#totalVisits').text(Math.floor(Math.random() * 10000));
-        $('#todayVisits').text(Math.floor(Math.random() * 100));
-        $('#totalProducts').text(Math.floor(Math.random() * 500));
-        $('#conversionRate').text(Math.floor(Math.random() * 15) + '%');
-      }
-      
-      // 내보내기 기능
-      $('#exportExcel').click(function(e) {
-        e.preventDefault();
-        alert('Excel 내보내기 기능이 준비 중입니다.');
-      });
-      
-      $('#exportPDF').click(function(e) {
-        e.preventDefault();
-        alert('PDF 내보내기 기능이 준비 중입니다.');
-      });
-    });
-  </script>
 </body>
 </html>
