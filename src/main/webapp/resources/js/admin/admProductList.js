@@ -106,7 +106,7 @@ function renderPrdTbody(prd) {
 	});
 }
 function renderPrdDetail(res) {
-    let statusOptions = ["승인", "반려", "접수"];
+    let statusOptions = ["PEDR01", "PEDR02", "접수"];
 
     // 0번 인덱스 값만 사용
     let firstRes = res[0];  // 0번째 항목만 사용
@@ -127,12 +127,6 @@ function renderPrdDetail(res) {
             <label class="col-sm-2 col-form-label">스토어 명 : </label>
             <div class="col-sm-8">
                 <span id="codeNameSelect" class="col-sm-4 form-control-plaintext">${firstRes.sel_nm}</span>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label class="col-sm-2 col-form-label">상품설명 : </label>
-            <div class="col-sm-8">
-                <span id="productDescription" class="col-sm-4 form-control-plaintext">${firstRes.prd_desc || '상품설명 값없음'}</span>
             </div>
         </div>
         <div class="row mb-3">

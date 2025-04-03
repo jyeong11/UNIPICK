@@ -144,11 +144,11 @@
 											<div class="label">계정상태:</div>
 											<select class="input-box" id="sel_st">
 											    <option value="정상">활성</option>
-											    <option value="ss02">비활성</option>
+											    <option value="ss02">휴먼</option>
 											    <option value="ss03">정지</option>
 											</select>
 											<div class="button-container">
-												<button class="button">수정</button>
+												<button id="updateBtn" class="button">수정</button>
 											</div>
 										</div>
 									</div>
