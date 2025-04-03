@@ -154,13 +154,7 @@
 				</section>
 			</main>
 			<!-- Footer -->
-			<footer class="sticky-footer bg-white">
-				<div class="container my-auto">
-					<div class="copyright text-center my-auto">
-						<span>Copyright &copy; UNIPICK SELLER 2025</span>
-					</div>
-				</div>
-			</footer>
+			<jsp:include page="../inc/sellerfooter.jsp"></jsp:include>
 			<!-- End of Footer -->
 		</div>
 		<!-- End of Page Wrapper -->

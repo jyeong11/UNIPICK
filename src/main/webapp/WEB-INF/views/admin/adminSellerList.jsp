@@ -42,7 +42,7 @@
 						<i class="fa fa-bars"></i>
 					</button>
 					<!-- Title -->
-					<h4 class="m-0 text-gray-900">판매자 리스트</h4>
+					<h4 class="m-0 text-gray-900">UNIPICK 관리자 대시보드</h4>
 					<!-- Topbar Navbar -->
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item dropdown no-arrow"><a
@@ -105,9 +105,9 @@
 									<div class="row align-items-start justify-content-end">
 										<div class="col-2">
 											<select class="form-select" id="noticeSearchKind">
-												<option value="name">ID</option>
-												<option value="category">스토어 명</option>
-												<option value="color">담당자 명</option>
+												<option value="sel_id">ID</option>
+												<option value="sel_nm">스토어 명</option>
+												<option value="sel_mn">담당자 명</option>
 											</select>
 										</div>
 										<div class="col-3">

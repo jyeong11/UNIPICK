@@ -125,8 +125,8 @@ public class AdminService {
 	}
 	
 	// 판매자 회원 조회
-	public List<Map<String, Object>> getSellerInfo() {
-		return mapper.getSellerInfo();
+	public List<Map<String, Object>> getSellerInfo(Map<String, Object> data) {
+		return mapper.getSellerInfo(data);
 	}
 	
 	// 판매자 회원 상세 조회

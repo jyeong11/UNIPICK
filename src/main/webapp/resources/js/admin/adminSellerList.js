@@ -1,7 +1,36 @@
 $(function() {
-	$.ajax({
+	sellerList();
+	
+	$('#noticeSearch').on('click',function(){
+		sellerList();
+	}); 
+	$('#noticeSearchWord').on('keydown', function(event){	
+		if (event.key === "Enter"){
+			$('#noticeSearch').click();
+
+		}
+	});
+	
+	function sellerList() {
+		let data = {};
+		
+		let kindElement = document.getElementById('noticeSearchKind');
+		let wordElement = document.getElementById('noticeSearchWord');
+		
+		let kind = kindElement ? kindElement.value : null;
+		let word = wordElement ? wordElement.value : null;
+		
+		if(kind == "sel_id" && word != ''){
+			data.sel_id = word;
+		} else if(kind == "sel_nm"){
+			data.sel_nm = word;
+		} else if(kind == "sel_mn") {
+			data.sel_mn = word
+		}
+		$.ajax({
 		url: "getSellerInfo",
 		method: "POST",
+		data: data,
 		success: function (res) {
 			let tableBody = $("#sellerListTable");
             tableBody.empty();
@@ -29,4 +58,5 @@ $(function() {
         }
 		
 	});
+	}
 });

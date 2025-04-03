@@ -290,8 +290,8 @@ public class AdminController {
 	// 판매자 회원 조회
 	@ResponseBody
 	@PostMapping("getSellerInfo")
-	public List<Map<String, Object>> getSellerInfo() {
-		return adminservice.getSellerInfo();
+	public List<Map<String, Object>> getSellerInfo(@RequestParam Map<String, Object> data) {
+		return adminservice.getSellerInfo(data);
 	}
 	
 	// 판매자 회원 상세 조회

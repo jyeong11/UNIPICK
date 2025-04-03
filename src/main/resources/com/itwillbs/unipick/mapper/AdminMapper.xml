@@ -284,7 +284,19 @@
 <!-- 	판매자 회원 조회 -->
 	<select id="getSellerInfo" parameterType="map">
 	 SELECT sel_id, sel_nm, sel_mn, sel_cs
-	   FROM sellers;
+	   FROM sellers
+	  WHERE 1 = 1
+	   <choose>
+		   	<when test="sel_id != null and !sel_id.equals('')">
+		   		AND sel_id LIKE CONCAT(#{sel_id}, '%')
+		   	</when>
+		   	<when test="sel_nm != null and !sel_nm.equals('')">
+		   		AND sel_nm LIKE CONCAT(#{sel_nm}, '%')
+		   	</when>
+		   	<when test="sel_mn != null and !sel_mn.equals('')">
+		   		AND sel_mn LIKE CONCAT(#{sel_mn}, '%')
+		   	</when>
+	     </choose>;
 	</select>
 	
 <!-- 	판매자 회원 상세 조회 -->

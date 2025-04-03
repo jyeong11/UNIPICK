@@ -104,6 +104,9 @@ body {
     font-weight: bold;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
+.container {
+	margin: 10px 0px 15px 500px;
+}
 
 .my-frm button:hover {
     background-color: var(--dark-primary);
@@ -218,10 +221,29 @@ body {
 	width: 100%;
 	margin-top: 20px;
 }
+.col-2 {
+	max-width: 124px;
+}
 .my-frm button:hover {
 	background-color: #05b94d;
 }
-
+.form-select {
+	height: 42px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    width: 100%;
+}
+.form-control{
+	height: 43px !important;	
+}
+#noticeSearch {
+	color: white;
+    background-color: black;
+    height: 41px;
+    width: 75px;
+}
 /* 회원탈퇴 */
 .withdraw-link {font-size: 0.875rem; color: var(--gray); text-align:right; display: block; margin-top: 2rem; margin-left: auto; width: 100px;}
 

@@ -3,8 +3,9 @@ $(function() {
 	
 	$('#codeSearch').on('click',function(){
 		codeList();
-	}); // 검색 이벤트
-	$('#codeSearchWord').on('keydown', function(event){	// att 엔터 이벤트
+	}); 
+	// 검색 이벤트
+	$('#codeSearchWord').on('keydown', function(event){
 		if (event.key === 'Enter'){
 			$('#codeSearch').click();
 		}

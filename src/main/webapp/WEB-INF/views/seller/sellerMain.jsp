@@ -6,9 +6,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>UNIPICK</title>
 
-<!-- default -->
-<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
-
 <!-- font-awesome -->
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/public/fontawesome/all.min.css" />
 <script src="${pageContext.request.contextPath }/resources/public/fontawesome/all.min.js"></script>
@@ -22,6 +19,11 @@
 <link href="${pageContext.request.contextPath }/resources/public/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath }/resources/public/vendor/datatables/datatables.min.css" rel="stylesheet">
 
+<!-- favicon -->
+<link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
+<!-- js -->
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/seller/sellerLogin.js"></script>
 </head>
 <body id="page-top">
  	<div id="wrapper"><div>
@@ -137,8 +139,9 @@ document.addEventListener("DOMContentLoaded", function () {
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="font-weight-bold text-primary text-uppercase mb-1">오늘의 할일</div>
-                                            <div class="h3 mb-0 font-weight-bold text-gray-800 counter-text" id="totalProducts">75</div>
+                                            <div class="font-weight-bold text-primary text-uppercase mb-1">신규 주문</div>
+<!--                                             신규 주문 동적으로 채움 -->
+                                            <div class="h3 mb-0 font-weight-bold text-gray-800 counter-text" id="totalProducts"></div>
                                         </div>
                                         <div class="col-auto">
                                         	<i class="fa-solid fa-box fa-2x text-gray-300"></i>
@@ -307,13 +310,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-    <div class="copyright text-center my-auto">
-        <span>Copyright &copy; GoodBuy Admin 2024-2025</span>
-    </div>
-</div>
-            </footer>
+ 			<jsp:include page="../inc/sellerfooter.jsp"></jsp:include>
             <!-- End of Footer -->
 
         </div>
