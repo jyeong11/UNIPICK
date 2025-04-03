@@ -27,3 +27,6 @@
 	color: white !important;
     background: black !important;
 }
+.form-control-plaintext {
+	color: black;
+}

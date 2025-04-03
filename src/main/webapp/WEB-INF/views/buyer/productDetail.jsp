@@ -43,8 +43,8 @@
 	        	<img id="product-image" src="${pageContext.request.contextPath}${prdImg[0].fil_pt}" class="product-img">
 	        </div>
 	        <!-- 다음/이전 버튼 -->
-	        <button id="prev-btn" class="swiper-button-prev">이전</button>
-	        <button id="next-btn" class="swiper-button-next">다음</button>
+	        <button id="prev-btn" class="swiper-button-prev">&lt;</button>
+	        <button id="next-btn" class="swiper-button-next">></button>
 	    </div>
 		<div id="product">
 		    <div class="product-info">

@@ -24,6 +24,9 @@ $(function() {
 		error: function () {
                 alert("상품을 불러오는 데 실패했습니다.");
         }
-		
+	});
+	$("#updateBtn").click(function () {
+    	let targetId = $(this).data("id");
+	
 	});
 });

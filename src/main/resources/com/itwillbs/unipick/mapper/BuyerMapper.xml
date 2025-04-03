@@ -69,7 +69,11 @@
 	
 <!-- 	판매자 상세 페이지 -->
 	<select id="getselDetail" parameterType="map">
-	 SELECT sl.sel_nm, sl.sel_if, pi.fil_pt, pd.prd_nm, pd.prd_cd,
+	 SELECT sl.sel_nm,
+	 		sl.sel_if,
+	 		pi.fil_pt,
+	 		pd.prd_nm,
+	 		pd.prd_cd,
 	 		CONCAT(ROUND(((pd.prd_op - pd.prd_sp) / pd.prd_op) * 100, 0), '%') AS dc,
 		    FORMAT(pd.prd_sp, 0) AS prd_sp
 	   FROM sellers sl 
@@ -77,29 +81,19 @@
 	     ON sl.sel_id = pd.sel_id 
 	  RIGHT join product_images pi
 	     ON pd.prd_cd = pi.prd_cd
-	  WHERE pd.prd_st = '승인'
+	  WHERE pd.prd_st = (SELECT cod_cd
+				           FROM common_detailcode 
+				          WHERE com_cd = 'PRD_REGISTERSTATUS' 
+				            AND cod_nm = '승인')
 	    AND sl.sel_nm = #{sel_nm}
 	    AND pi.fil_nb = 1;
 	</select>
 	
-<!-- 	판매자 상세 이미지 -->
-<!-- 	<select id="getselImg" parameterType="map"> -->
-<!-- 	 SELECT pd.prd_nm ,pi.fil_pt, pd.prd_op, -->
-<!-- 		    CONCAT(ROUND(((pd.prd_op - pd.prd_sp) / pd.prd_op) * 100, 0), '%') AS dc, -->
-<!-- 		    FORMAT(pd.prd_sp, 0) AS prd_sp -->
-<!-- 	   FROM products pd -->
-<!-- 	   JOIN sellers sl -->
-<!-- 	     ON pd.sel_id = sl.sel_id -->
-<!-- 	   JOIN product_images pi -->
-<!-- 	     ON pd.prd_cd = pi.prd_cd -->
-<!-- 	  WHERE sl.sel_nm = #{sel_nm} -->
-<!-- 	    AND pd.prd_st  = '승인' -->
-<!--         AND pi.fil_nb = 1; -->
-<!-- 	</select> -->
-	
 <!-- 	상품 상세 판매자 다른 상품 -->
 	<select id="getselanother" parameterType="map">
-	 SELECT pd.prd_nm ,pi.fil_pt, pd.prd_op,
+	 SELECT pd.prd_nm,
+	 		pi.fil_pt,
+	 		pd.prd_op,
 		    CONCAT(ROUND(((pd.prd_op - pd.prd_sp) / pd.prd_op) * 100, 0), '%') AS dc,
 		    FORMAT(pd.prd_sp, 0) AS prd_sp
 	   FROM products pd
@@ -108,15 +102,23 @@
 	   JOIN product_images pi
 	     ON pd.prd_cd = pi.prd_cd
 	  WHERE sel_nm = #{selNm}
-	    AND prd_st  = '승인'
+	    AND prd_st  = (SELECT cod_cd
+				         FROM common_detailcode 
+				        WHERE com_cd = 'PRD_REGISTERSTATUS' 
+				          AND cod_nm = '승인')
         AND fil_nb = 1;
 	</select>
 <!--   	상품검색  -->
   	<select id="getSearchPrd" parameterType="map">
-  	 SELECT pd.prd_nm, sl.sel_nm, pd.prd_cd, cd.cod_nm,
+  	 SELECT pd.prd_nm,
+  	 		sl.sel_nm,
+  	 		pd.prd_cd,
+  	 		cd.cod_nm,
   	 		CONCAT(ROUND(((pd.prd_op - pd.prd_sp) / pd.prd_op) * 100, 0), '%') AS dc,
 			FORMAT(pd.prd_sp, 0) AS prd_sp, 
-			pd.prd_bd, pi.fil_nm, pi.fil_pt
+			pd.prd_bd,
+			pi.fil_nm,
+			pi.fil_pt
   	   FROM products pd
        JOIN (SELECT prd_cd,
 					fil_pt,
@@ -129,7 +131,10 @@
 	   JOIN sellers sl
 	     ON pd.sel_id = sl.sel_id
       WHERE prd_nm LIKE CONCAT('%',#{query},'%')
-      	AND prd_st = '승인'; 
+      	AND prd_st = (SELECT cod_cd
+				        FROM common_detailcode 
+				       WHERE com_cd = 'PRD_REGISTERSTATUS' 
+				         AND cod_nm = '승인'); 
   	</select>
   	
   	<!-- 카테고리 메뉴 -->
@@ -205,7 +210,8 @@
   	
   	<!--   	상품 옵션 -->
 	<select id="getColors" parameterType="map">
-	 SELECT c.cod_nm, o.prd_qt, 
+	 SELECT c.cod_nm,
+	 		o.prd_qt, 
 	 		FORMAT(p.prd_sp, 0) AS prd_sp
 	   FROM options o 
 	   JOIN products p 
@@ -256,7 +262,10 @@
 	
 <!-- 	상품 주문 -->
 	<select id="getPrdOrder" parameterType="map">
-	 SELECT p.prd_cd, s.sel_nm, p.prd_nm, p.prd_sf,
+	 SELECT p.prd_cd,
+	 		s.sel_nm,
+	 		p.prd_nm,
+	 		p.prd_sf,
 	  		CONCAT(ROUND(((p.prd_op - p.prd_sp) / p.prd_op) * 100, 0), '%') AS dc,
 	  		FORMAT(p.prd_op, 0) AS prd_op, 
 	  		FORMAT(p.prd_sp, 0) AS prd_sp,
@@ -398,7 +407,8 @@
 	
 	<!-- 리뷰 이미지 -->
 	<select id="reviewImage" parameterType="map">
-		SELECT r.rev_id, rei_pt
+		SELECT r.rev_id,
+			   rei_pt
 		  FROM reviews r
 		  JOIN review_images i ON r.rev_id = i.rev_id
 		 WHERE r.buy_em = #{buy_em}
@@ -501,10 +511,15 @@
 	
 <!-- 	판매자 페이지내에 검색 -->
 	<select id="selPrdsearch" parameterType="map">
-	 SELECT pd.prd_nm, sl.sel_nm, pd.prd_cd, cd.cod_nm,
+	 SELECT pd.prd_nm,
+	 		sl.sel_nm,
+	 		pd.prd_cd,
+	 		cd.cod_nm,
   	 		CONCAT(ROUND(((pd.prd_op - pd.prd_sp) / pd.prd_op) * 100, 0), '%') AS dc,
 			FORMAT(pd.prd_sp, 0) AS prd_sp, 
-			pd.prd_bd, pi.fil_nm, pi.fil_pt
+			pd.prd_bd,
+			pi.fil_nm,
+			pi.fil_pt
   	   FROM products pd
        JOIN  product_images pi 
 	     ON pd.prd_cd = pi.prd_cd
@@ -514,12 +529,18 @@
 	     ON pd.sel_id = sl.sel_id
       WHERE pd.prd_nm LIKE CONCAT('%',#{keyword},'%')
         AND sl.sel_nm = #{sel_nm}
-      	AND pd.prd_st = '승인'
+      	AND pd.prd_st = (SELECT cod_cd
+				           FROM common_detailcode 
+				          WHERE com_cd = 'PRD_REGISTERSTATUS' 
+				            AND cod_nm = '승인')
         AND fil_nb = 1;  
 	</select>
 <!-- 	추천상품 -->
 	<select id="getRecommendPrd" parameterType="map">
-	 SELECT p.prd_nm, p.prd_sp, s.sel_nm, pi.fil_pt,
+	 SELECT p.prd_nm,
+	 		p.prd_sp,
+	 		s.sel_nm,
+	 		pi.fil_pt,
 		    CONCAT(ROUND(((p.prd_op - p.prd_sp) / p.prd_op) * 100, 0), '%') AS dc
 	   FROM products p
 	   JOIN product_images pi 
@@ -529,7 +550,10 @@
 	  WHERE p.prd_ca = (SELECT prd_ca
 						  FROM products 
 						 WHERE prd_cd = #{prd_cd})
-	    AND p.prd_st = '승인'
+	    AND p.prd_st = (SELECT cod_cd
+				          FROM common_detailcode 
+				         WHERE com_cd = 'PRD_REGISTERSTATUS' 
+				           AND cod_nm = '승인')
 	    AND pi.fil_nb = 1;
 	</select>
 	
@@ -544,7 +568,11 @@
 
 <!-- 	판매자 상세 카테고리 클릭시 -->
 	<select id="getCatePrd" parameterType="map">
-	SELECT p.prd_nm, p.prd_sp, p.prd_bd, s.sel_nm, pi.fil_pt,
+	SELECT p.prd_nm,
+		   p.prd_sp,
+		   p.prd_bd,
+		   s.sel_nm,
+		   pi.fil_pt,
 		   CONCAT(ROUND(((p.prd_op - p.prd_sp) / p.prd_op) * 100, 0), '%') AS dc
 	  FROM products p
 	  JOIN sellers s
@@ -557,7 +585,10 @@
 		      ELSE p.prd_ca LIKE CONCAT(#{category}, '%') 
 		  END)
 	   AND s.sel_nm = #{sel_nm}
-	   AND p.prd_st = '승인'
+	   AND p.prd_st = (SELECT cod_cd
+				         FROM common_detailcode 
+				        WHERE com_cd = 'PRD_REGISTERSTATUS' 
+				          AND cod_nm = '승인')
 	   AND pi.fil_nb = 1;
 	</select>
   </mapper>
