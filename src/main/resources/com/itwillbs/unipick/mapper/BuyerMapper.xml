@@ -215,7 +215,8 @@
   	
   	<!--   	상품 옵션 -->
 	<select id="getColors" parameterType="map">
-	 SELECT c.cod_nm,
+	 SELECT c.cod_cd,
+	 		c.cod_nm,
 	 		o.prd_qt, 
 	 		FORMAT(p.prd_sp, 0) AS prd_sp
 	   FROM options o 
@@ -607,12 +608,9 @@
 	 				  opt_id)
 		 	   VALUES(#{buy_em},
 		 	  		  #{qty},
-		 	  		  (SELECT o.opt_id 
-	                    FROM options o 
-	                    JOIN common_detailcode c 
-	                      ON o.siz_nm = c.cod_cd 
-	                   WHERE o.clr_nm = #{color}
-	                     AND c.com_cd = 'SIZE' 
-	                     AND c.cod_nm = #{size}));
+		 	  		  (SELECT opt_id 
+	                     FROM options 
+	                    WHERE clr_nm = #{color}
+	                      AND siz_nm = #{size}));
 	</insert>
   </mapper>

@@ -138,9 +138,9 @@ function updateSize(sizes) {
 	
  	$.each(sizes, function(index, size) {
 	    if (size.prd_qt == 0) {
-	        sizeSelect.append('<option value="' + size.cod_nm + '" disabled>' + size.cod_nm + ' (품절)</option>');
+	        sizeSelect.append('<option value="' + size.cod_cd + '" disabled>' + size.cod_nm + ' (품절)</option>');
 	    } else {
-	        sizeSelect.append('<option value="' + size.cod_nm + '">' + size.cod_nm + '</option>');
+	        sizeSelect.append('<option value="' + size.cod_cd + '">' + size.cod_nm + '</option>');
 	    }
     });
 	// 옵션 전부 클릭시 이벤트 발생
@@ -150,7 +150,7 @@ function updateSize(sizes) {
 }
  function showSelectedOption() {
     var selectedColor = $("#color").val();
-    var selectedSize = $("#size").val();
+    var selectedSize = $("#size option:selected").text();
 
     if (!selectedColor || !selectedSize) {
         $("#selected-option").hide();
