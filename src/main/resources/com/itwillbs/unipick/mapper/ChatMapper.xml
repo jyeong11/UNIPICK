@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.itwillbs.unipick.mapper.ChatMapper">
+
+    
+    <!-- 채팅방 목록 조회 (구매자용) -->
+    <select id="getBuyerChatList" parameterType="String" resultType="map">
+        SELECT c.cht_id, c.buy_em, c.sel_id, 
+               cd.chd_ms as last_message, cd.chd_st as last_date, cd.sender as last_sender,
+               b.buy_nm, s.sel_nm
+        FROM chats c
+        LEFT JOIN (
+            SELECT cht_id, chd_ms, chd_st, sender
+            FROM chat_details
+            WHERE (cht_id, chd_id) IN (
+                SELECT cht_id, MAX(chd_id)
+                FROM chat_details
+                GROUP BY cht_id
+            )
+        ) cd ON c.cht_id = cd.cht_id
+        LEFT JOIN buyers b ON c.buy_em = b.buy_em
+        LEFT JOIN sellers s ON c.sel_id = s.sel_id
+        WHERE c.buy_em = #{buy_em}
+        ORDER BY cd.chd_st DESC
+    </select>
+    
+    <!-- 채팅방 목록 조회 (판매자용) -->
+    <select id="getSellerChatList" parameterType="String" resultType="map">
+        SELECT c.cht_id, c.buy_em, c.sel_id, 
+               cd.chd_ms as last_message, cd.chd_st as last_date, cd.sender as last_sender,
+               b.buy_nm, s.sel_nm
+        FROM chats c
+        LEFT JOIN (
+            SELECT cht_id, chd_ms, chd_st, sender
+            FROM chat_details
+            WHERE (cht_id, chd_id) IN (
+                SELECT cht_id, MAX(chd_id)
+                FROM chat_details
+                GROUP BY cht_id
+            )
+        ) cd ON c.cht_id = cd.cht_id
+        LEFT JOIN buyers b ON c.buy_em = b.buy_em
+        LEFT JOIN sellers s ON c.sel_id = s.sel_id
+        WHERE c.sel_id = #{sel_id}
+        ORDER BY cd.chd_st DESC
+    </select>
+    
+    <!-- 채팅방 상세 정보 조회 -->
+    <select id="getChatRoom" parameterType="int" resultType="map">
+        SELECT c.cht_id, c.buy_em, c.sel_id,
+               b.buy_nm, s.sel_nm
+        FROM chats c
+        LEFT JOIN buyers b ON c.buy_em = b.buy_em
+        LEFT JOIN sellers s ON c.sel_id = s.sel_id
+        WHERE c.cht_id = #{cht_id}
+    </select>
+    
+    <!-- 채팅방 존재 여부 확인 -->
+    <select id="checkChatRoom" parameterType="map" resultType="int">
+        SELECT COUNT(*)
+        FROM chats
+        WHERE buy_em = #{buy_em} AND sel_id = #{sel_id}
+    </select>
+    
+    <!-- 채팅방 생성 -->
+    <insert id="createChatRoom" parameterType="map">
+        INSERT INTO chats (buy_em, sel_id)
+        VALUES (#{buy_em}, #{sel_id})
+    </insert>
+    
+    <!-- 채팅방 ID 조회 -->
+    <select id="getChatRoomId" parameterType="map" resultType="int">
+        SELECT cht_id
+        FROM chats
+        WHERE buy_em = #{buy_em} AND sel_id = #{sel_id}
+    </select>
+    
+    <!-- 메시지 목록 조회 -->
+    <select id="getChatMessages" parameterType="int" resultType="map">
+        SELECT chd_id, cht_id, chd_ms, chd_st, sender
+        FROM chat_details
+        WHERE cht_id = #{cht_id}
+        ORDER BY chd_st ASC
+    </select>
+    
+    <!-- 메시지 전송 -->
+    <insert id="sendMessage" parameterType="map">
+        INSERT INTO chat_details (cht_id, chd_ms, sender)
+        VALUES (#{cht_id}, #{chd_ms}, #{sender})
+    </insert>
+</mapper> 

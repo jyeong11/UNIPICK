@@ -1,0 +1,34 @@
+package com.itwillbs.unipick.mapper;
+
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Mapper;
+
+@Mapper
+public interface ChatMapper {
+    
+    // 채팅방 목록 조회 (구매자용)
+    public List<Map<String, Object>> getBuyerChatList(String buy_em);
+    
+    // 채팅방 목록 조회 (판매자용)
+    public List<Map<String, Object>> getSellerChatList(String sel_id);
+    
+    // 채팅방 상세 정보 조회
+    public Map<String, Object> getChatRoom(int cht_id);
+    
+    // 채팅방 존재 여부 확인
+    public int checkChatRoom(Map<String, Object> params);
+    
+    // 채팅방 생성
+    public void createChatRoom(Map<String, Object> params);
+    
+    // 채팅방 ID 조회
+    public int getChatRoomId(Map<String, Object> params);
+    
+    // 메시지 목록 조회
+    public List<Map<String, Object>> getChatMessages(int cht_id);
+    
+    // 메시지 전송
+    public void sendMessage(Map<String, Object> chatDetail);
+} 
