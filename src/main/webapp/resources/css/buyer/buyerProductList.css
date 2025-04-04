@@ -9,6 +9,7 @@
     max-width: 1200px;
     margin: 0 auto;
     padding-top: 30px;
+    gap: 20px;
 }
 h2{
 	border-bottom: 1px solid #e7e7e7;
@@ -22,6 +23,10 @@ h2{
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 14px;
+}
+
+#productList {
+	width: 1000px;
 }
 
 .two {
@@ -55,7 +60,7 @@ h2{
 }
 
 .product-posting {
-	width: 320px;
+	width: 310px;
 }
 
 .left-category {
@@ -114,18 +119,18 @@ h2{
 }
 
 .prd-img {
-	width: 320px;
-	height: 320px;
+	width: 310px;
+	height: 310px;
     object-fit: cover;
 }
 
 .heart {
 	position: absolute;
     cursor: pointer;
-    right: 20px;
+    right: 10px;
     bottom: 10px;
     font-size: 32px;
-    z-index: 10px;
+    z-index: 10;
     color: white;
 }
 

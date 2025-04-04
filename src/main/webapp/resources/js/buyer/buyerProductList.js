@@ -94,7 +94,7 @@ $(function() {
 													<a href="productDetail?prd_cd=${prd.prd_cd}&sel_nm=${prd.sel_nm}">
 														<div class="prdImg-div">
 															<img src="${contextPath}${prd.fil_pt}" alt="${prd.fil_nm}" class="prd-img">
-															<i class="${heartClass} fa-heart heart"></i>
+															<i class="${heartClass} fa-heart heart" data-value="${prd.prd_cd}"></i>
 														</div>
 														<div class="prdInfo-div">
 															<div class="selNm">${prd.sel_nm}</div>
@@ -105,7 +105,6 @@ $(function() {
 																<div class="prdSp">${prd.prd_sp}</div>
 															</div>
 															<div class="prdBd">${prd.cod_nm}</div>
-															<input type="hidden" value="${prd.prd_cd}">
 														</div>
 													</a>
 												</div>`
@@ -123,7 +122,7 @@ $(function() {
 	// 찜 버튼
 	function wish(heart) {
 		heartIcon = heart[0];
-		let prd_cd = heart.closest(".product-posting").find("input[type='hidden']").val();
+		let prd_cd = heart.data('value');
 		heartIcon.classList.toggle("fa-regular");
 		heartIcon.classList.toggle("fa-solid");
 		heartIcon.classList.toggle("red");

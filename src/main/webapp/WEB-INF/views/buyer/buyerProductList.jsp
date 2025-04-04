@@ -47,7 +47,7 @@
 				</div>
 			</ul>
 		</div>
-		<div>
+		<div id="productList">
 			<div class = "two">
 				<h2 id="category"></h2>
 				<select id="product-sort"></select>

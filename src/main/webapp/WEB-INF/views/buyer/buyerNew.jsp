@@ -39,8 +39,8 @@
 	
 	<div id="content">
 		<div class = "two">
-			<h2>오늘의 신상</h2>
-			<p id="selectCate">전체</p>
+			<h2 id="title">오늘의 신상</h2>
+			<h2 id="selectCate">전체</h2>
 		</div>
 		<div id = "new">
 			<section class="category-section">
