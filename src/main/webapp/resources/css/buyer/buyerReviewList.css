@@ -29,16 +29,17 @@
 	box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
-.date {
-	text-align: right;
-}
-
 .filled {
 	color: #f2a900;
 }
 
 .empty {
 	color: lightgray;
+}
+
+.top {
+	display: flex;
+	justify-content: space-between;
 }
 
 .star {
@@ -48,4 +49,23 @@
 .review-img {
 	width: 120px;
 	height: 120px;
+}
+
+.prdName {
+	font-weight: 600;
+}
+
+.options, .bodySize {
+	color: #808893
+}
+
+.nick, .reivewCon {
+	font-weight: 500;
+}
+
+#radio-search {
+	display: flex;
+	flex-direction: column;
+	padding: 20px 0 20px 0;
+	gap: 10px;
 }

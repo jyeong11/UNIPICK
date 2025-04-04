@@ -95,7 +95,7 @@ function search() {
 					revName = "리뷰완료";
 					revClass = " noneClick";
 				}
-                let cardContent = `<a href="productDetail?prd_cd=${item.prd_cd}" class="product-link">
+                let cardContent = `<a href="productDetail?prd_cd=${item.prd_cd}&sel_nm=${item.sel_nm}" class="product-link">
 									   <div class="order-info">
 									   		<div><b>${item.sel_nm}</b></div>
 									   		<div class="left-info">

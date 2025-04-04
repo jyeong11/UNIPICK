@@ -22,13 +22,13 @@ $(function() {
 		            "MyPage03": "fa-coins",
 		            "MyPage04": "fa-comment-dots",
 		            "MyPage05": "fa-box-open",
-					"MyPage06": "fa-headset"
-
+					"MyPage06": "fa-headset",
+					"MyPage07": "fa-heart"
 		        };
 				
 				let icon = res.myIcon.map(item => {
 													let className = classMap[item.lev_cd];
-										            return `<li data-value="${item.lev_ul}"><i class="fa-solid ${className}"></i>${item.lev_nm}</li>`;
+										            return `<li data-value="${item.lev_ul}"><i class="fa-solid ${className}"></i>&nbsp;${item.lev_nm}</li>`;
 										        })
 									.join('');
 								

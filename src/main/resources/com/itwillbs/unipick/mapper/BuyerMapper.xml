@@ -315,6 +315,9 @@
 		  JOIN products p ON o.prd_cd = p.prd_cd
 		  JOIN common_detailcode c ON o.siz_nm = c.cod_cd
 		 WHERE r.buy_em = #{buy_em}
+		 <if test="date != null and !date.equals('')">
+		     AND DATE(r.rev_ca) BETWEEN #{date} AND CURDATE()
+		 </if>
 		 ORDER BY rev_ca DESC
 	</select>
 	
@@ -494,7 +497,7 @@
 	<!-- 최근 본 상품 등록 -->
 	<insert id="registerRecentlyPrd" parameterType="map">
 		INSERT INTO recently_products (buy_em, prd_cd, vie_tm)
-							   VALUES (#{buy_em}, #{prd_cd}, DEFAULT)
+							   VALUES (#{buy_em}, #{productId}, DEFAULT)
 			  ON DUPLICATE KEY UPDATE vie_tm = DEFAULT;
 	</insert>
 	
@@ -505,6 +508,7 @@
 			   p.prd_nm,
 			   p.prd_sp,
 			   p.prd_op,
+			   CONCAT(ROUND(((p.prd_op - p.prd_sp) / p.prd_op) * 100, 0), '%') AS dc,
 			   s.sel_nm,
 			   i.fil_pt
 		  FROM recently_products rp
@@ -516,7 +520,7 @@
 			     WHERE fil_nb = 1) i ON p.prd_cd = i.prd_cd
 		 WHERE buy_em = #{buy_em}
 		 ORDER BY vie_tm DESC
-		 LIMIT 6
+		 LIMIT 9
 	</select>
 	
 <!-- 	판매자 페이지내에 검색 -->

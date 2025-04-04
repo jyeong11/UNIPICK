@@ -5,11 +5,13 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import com.itwillbs.unipick.service.BuyerService;
 import com.itwillbs.unipick.service.SellerService2;
 
 @Component
@@ -17,6 +19,8 @@ public class ProductViewInterceptor implements HandlerInterceptor {
 
     @Autowired
     private SellerService2 service;
+    @Autowired
+    private BuyerService buyservice;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -33,6 +37,10 @@ public class ProductViewInterceptor implements HandlerInterceptor {
             
             // 서비스를 통해 판매자 ID 조회 및 방문 기록
             service.logProductVisit(params);
+            
+            // 최근 본 상품 저장
+            buyservice.registerRecentlyPrd(request, params);
+            
         }
         return true;
     }

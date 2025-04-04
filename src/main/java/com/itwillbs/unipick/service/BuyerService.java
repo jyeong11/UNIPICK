@@ -4,7 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -168,8 +170,17 @@ public class BuyerService {
 	}
 	
 	// 최근 본 상품 등록
-	public void registerRecentlyPrd(Map<String, Object> prd) {
-		mapper.registerRecentlyPrd(prd);
+	public void registerRecentlyPrd(HttpServletRequest req, Map<String, Object> prd) {
+		HttpSession session = req.getSession(false);
+
+		if (session != null) {
+		    Object buyEm = session.getAttribute("buyEm");
+		    if (buyEm != null) {
+		        // buyEm 값이 존재할 때만 처리
+		        prd.put("buy_em", buyEm.toString());
+		        mapper.registerRecentlyPrd(prd);
+		    }
+		}
 	}
 	
 	// 최근 본 상품 리스트

@@ -258,8 +258,8 @@ public class BuyerController {
 	
 	// 리뷰 정보
 	@ResponseBody
-	@GetMapping("reviewData")
-	public Map<String, Object> reviewData(HttpSession session, Map<String, Object> buyer) {
+	@PostMapping("reviewData")
+	public Map<String, Object> reviewData(HttpSession session, @RequestBody Map<String, Object> buyer) {
 		buyer.put("buy_em", session.getAttribute("buyEm"));
 		
 		return buyService.reviewInfo(buyer);
@@ -345,19 +345,6 @@ public class BuyerController {
 	    } catch (Exception e) {
 	        return false;
 	    }
-	}
-	
-	// 최근 본 상품 등록
-	@ResponseBody
-	@PostMapping("registerRecentlyPrd")
-	public void registerRecentlyPrd(HttpSession session, @RequestBody Map<String, Object> prd) {
-		Object buyEm = session.getAttribute("buyEm");
-	    
-	    if (buyEm != null) {
-	        prd.put("buy_em", buyEm);
-	        buyService.registerRecentlyPrd(prd);
-	    }
-
 	}
 	
 	// 최근 본 상품 리스트

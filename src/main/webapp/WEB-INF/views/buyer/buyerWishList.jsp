@@ -18,14 +18,14 @@
 <link href="${pageContext.request.contextPath }/resources/css/top.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/footer.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/buyer/buyerMenuBar.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resources/css/buyer/buyerReviewList.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/buyer/buyerRecentlyProduct.css" rel="stylesheet" type="text/css">
 
 <!-- Favicon -->
 <link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
 
 <!-- script -->
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/buyer/buyerReviewList.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/buyer/buyerRecentlyProduct.js"></script>
 
 </head>
 <body>
@@ -38,14 +38,7 @@
 	
 	<div class="content">
 		<div class = "two">
-			<h2>나의 리뷰</h2>
-		</div>
-		<div id="radio-search">	<!-- 검색, 정렬기준 -->
-			<div id="ord-radio">
-				<label class="search-radio"><input type="radio" name="choice" value="option1" checked> 최근 3개월</label>
-			    <label class="search-radio"><input type="radio" name="choice" value="option2"> 최근 1년</label>
-			    <label class="search-radio"><input type="radio" name="choice" value="option3"> 전체</label>
-		    </div>
+			<h2>찜 목록</h2>
 		</div>
 		<div id="cards"></div>
 	</div>

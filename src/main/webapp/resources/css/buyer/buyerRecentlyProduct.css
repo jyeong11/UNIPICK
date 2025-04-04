@@ -8,6 +8,12 @@
     flex-direction: column;
 }
 
+.card-body {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
 #cards {
 	display: grid;
     gap: 10px;
@@ -32,7 +38,17 @@
 	box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
-#prd-img {
+.top {
+	display: flex;
+	justify-content: space-between;
+}
+
+.prd-info {
+	display: flex;
+	gap: 10px;
+}
+
+.prd-img {
 	width: 180px;
     height: 180px;
 }
@@ -50,9 +66,15 @@
 	text-decoration: none;
 }
 
+.right-info {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
 .price {
 	display: flex;
-	gap: 10px;
+	flex-direction: column;
 }
 
 .original {
@@ -63,14 +85,16 @@
 
 .salePrice {
 	color: #f2a900;
+	font-weight: 600;
+    font-size: 22px;
 }
 
 .date {
 	text-align: right;
 }
 
-.store {
-	font-weight: bold;
+.store, .prdName {
+	font-weight: 600;
 }
 
 sup {

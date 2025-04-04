@@ -1,6 +1,4 @@
 $(function() {
-	// 최근 본 상품 저장
-	// recentlyProduct();
 	// 리뷰
 	loadReviews();
 	// 추천상품
@@ -310,17 +308,3 @@ function RecommendPrd() {
       	}
 	});
 }
-//function recentlyProduct() {
-//	
-//	let data = {prd_cd : prdCd};
-//	
-//	$.ajax({
-//		url: "registerRecentlyPrd",
-//		method: "POST",
-//		data: JSON.stringify(data),
-//		contentType: "application/json",
-//		error: function(xhr, status, error) {
-//			alert("서버 오류가 발생했습니다.");
-//		}
-//	});
-//}
