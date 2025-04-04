@@ -52,8 +52,7 @@
         <div id="menu04" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
             	<h6 class="collapse-header">통계관리</h6>
-                <a class="collapse-item" href="sellerVisit">방문자</a>
-                <a class="collapse-item" href="sellerTemporal">기간별 분석</a>
+                <a class="collapse-item" href="sellerVisit">통계</a>
             </div>
         </div>
     </li>

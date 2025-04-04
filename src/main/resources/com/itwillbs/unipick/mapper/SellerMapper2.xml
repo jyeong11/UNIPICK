@@ -434,7 +434,8 @@
 <select id="getPopularProductsByPeriod" parameterType="map" resultType="map">
     SELECT 
         p.prd_nm as productName,
-        SUM(CAST(sv.vis_ct AS UNSIGNED)) as visitCount
+        SUM(CAST(sv.vis_ct AS UNSIGNED)) as visitCount,
+        sv.vis_dt as visitDate
     FROM seller_visit sv
     JOIN products p ON sv.prd_cd = p.prd_cd
     WHERE sv.sel_id = #{sellerId}
@@ -444,9 +445,8 @@
     <if test="endDate != null and endDate != ''">
         AND sv.vis_dt &lt;= #{endDate}
     </if>
-    GROUP BY p.prd_cd, p.prd_nm
+    GROUP BY p.prd_cd, p.prd_nm, sv.vis_dt
     ORDER BY visitCount DESC
-    LIMIT 5;
 </select>
 
      <!-- 공통 코드 조회 -->

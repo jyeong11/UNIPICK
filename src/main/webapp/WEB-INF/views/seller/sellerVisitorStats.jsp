@@ -33,7 +33,6 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   
-  <script src="${pageContext.request.contextPath}/resources/js/seller/sellerVisitorStats.js"></script>
   
   <link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
   
@@ -334,18 +333,18 @@
                       <button type="button" class="period-selector" data-period="yearly">연간</button>
                       <input type="hidden" id="periodType" value="daily">
                     </div>
-                    <div class="d-flex align-items-center">
-                      <div class="form-group mr-3">
-                        <input type="date" class="form-control" id="startDate">
-                      </div>
-                      <span class="mx-2">~</span>
-                      <div class="form-group mr-3">
-                        <input type="date" class="form-control" id="endDate">
-                      </div>
-                      <button type="button" class="btn btn-primary" id="searchBtn">
-                        <i class="fas fa-search mr-1"></i> 검색
-                      </button>
-                    </div>
+<!--                     <div class="d-flex align-items-center"> -->
+<!--                       <div class="form-group mr-3"> -->
+<!--                         <input type="date" class="form-control" id="startDate"> -->
+<!--                       </div> -->
+<!--                       <span class="mx-2">~</span> -->
+<!--                       <div class="form-group mr-3"> -->
+<!--                         <input type="date" class="form-control" id="endDate"> -->
+<!--                       </div> -->
+<!--                       <button type="button" class="btn btn-primary" id="searchBtn"> -->
+<!--                         <i class="fas fa-search mr-1"></i> 검색 -->
+<!--                       </button> -->
+<!--                     </div> -->
                   </form>
                 </div>
               </div>

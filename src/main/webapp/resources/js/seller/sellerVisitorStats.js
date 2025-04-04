@@ -66,17 +66,15 @@ $(document).ready(function () {
             data: { periodType, startDate, endDate },
             dataType: "json",
             success: function(data) {
-                console.log("받은 데이터:", data); // 디버깅용 로그
+                console.log("API 응답 데이터:", data);
+                console.log("일별 방문 데이터 수:", data.dailyVisits ? data.dailyVisits.length : 0);
+                console.log("인기 상품 데이터 수:", data.popularProducts ? data.popularProducts.length : 0);
                 
                 // 데이터 유효성 검사
-                if (!data || !data.dailyVisits || !data.popularProducts) {
+                if (!data || !data.dailyVisits) {
                     console.error("API에서 필요한 데이터를 받지 못했습니다:", data);
                     return;
                 }
-                
-                // 데이터 길이 확인
-                console.log("방문 데이터 개수:", data.dailyVisits.length);
-                console.log("인기 상품 데이터 개수:", data.popularProducts.length);
                 
                 updateCharts(data);
                 updateTable(data);
@@ -106,22 +104,186 @@ $(document).ready(function () {
         newCanvas.id = "dailyVisitChart";
         chartContainer.appendChild(newCanvas);
 
+        // 데이터 유효성 검사
+        if (!data.dailyVisits || data.dailyVisits.length === 0) {
+            console.warn("차트를 그릴 방문 데이터가 없습니다.");
+            const ctx = document.getElementById("dailyVisitChart").getContext('2d');
+            new Chart(ctx, {
+                type: "line",
+                data: {
+                    labels: ["데이터 없음"],
+                    datasets: [{
+                        label: "방문자 수",
+                        data: [0],
+                        borderColor: "#3b82f6",
+                        backgroundColor: "rgba(59, 130, 246, 0.2)",
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+            return;
+        }
+
         // 데이터를 날짜순으로 정렬 (과거 -> 현재)
         const sortedData = [...data.dailyVisits].sort((a, b) => {
             return new Date(a.visitDate) - new Date(b.visitDate);
         });
 
+        console.log("차트 데이터 (정렬 후):", sortedData);
+        
+        // 현재 선택된 기간 유형 확인
+        const periodType = $('#periodType').val();
+        console.log("현재 선택된 기간 유형:", periodType);
+        
+        // 기간 유형에 따른 라벨 포맷 함수 설정
+        let labelFormatter;
+        switch (periodType) {
+            case 'weekly':
+                labelFormatter = (dateString) => {
+                    try {
+                        // 날짜 문자열 디버깅
+                        console.log('주간 날짜 형식:', dateString);
+                        
+                        // 날짜 형식 분석 (YYYY-WW 형식 확인)
+                        if (dateString && dateString.includes('-')) {
+                            // 2025-13 형식일 경우: 연도-주차
+                            const parts = dateString.split('-');
+                            if (parts.length === 2) {
+                                const year = parseInt(parts[0]);
+                                const weekNum = parseInt(parts[1]);
+                                
+                                if (!isNaN(year) && !isNaN(weekNum)) {
+                                    // 해당 연도의 첫 날
+                                    const firstDayOfYear = new Date(year, 0, 1);
+                                    
+                                    // 해당 주차의 날짜 계산 (각 주는 7일)
+                                    const daysToAdd = (weekNum - 1) * 7;
+                                    const weekDate = new Date(firstDayOfYear);
+                                    weekDate.setDate(firstDayOfYear.getDate() + daysToAdd);
+                                    
+                                    // 월 및 월별 주차 계산
+                                    const month = weekDate.getMonth() + 1;
+                                    
+                                    // 해당 월의 첫 날
+                                    const firstDayOfMonth = new Date(year, weekDate.getMonth(), 1);
+                                    
+                                    // 첫 날의 요일 (0: 일요일, 1: 월요일, ..., 6: 토요일)
+                                    const firstDayOfWeek = firstDayOfMonth.getDay();
+                                    
+                                    // 첫 주의 날짜 수 계산
+                                    const daysInFirstWeek = 7 - firstDayOfWeek;
+                                    
+                                    // 현재 날짜가 월의 몇 번째 주인지 계산
+                                    const dayOfMonth = weekDate.getDate();
+                                    let weekOfMonth;
+                                    
+                                    if (dayOfMonth <= daysInFirstWeek) {
+                                        weekOfMonth = 1;
+                                    } else {
+                                        weekOfMonth = Math.ceil((dayOfMonth - daysInFirstWeek) / 7) + 1;
+                                    }
+                                    
+                                    return `${month}월 ${weekOfMonth}주차`;
+                                }
+                            }
+                        }
+                        
+                        // 일반 날짜 형식 처리 (백업)
+                        const date = new Date(dateString);
+                        if (!isNaN(date.getTime())) {
+                            const month = date.getMonth() + 1;
+                            // 월별 주차 계산 (해당 월의 첫째 주부터 1주차)
+                            const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
+                            const firstDayOfWeek = firstDayOfMonth.getDay();
+                            const daysInFirstWeek = 7 - firstDayOfWeek;
+                            const dayOfMonth = date.getDate();
+                            
+                            let weekOfMonth;
+                            if (dayOfMonth <= daysInFirstWeek) {
+                                weekOfMonth = 1;
+                            } else {
+                                weekOfMonth = Math.ceil((dayOfMonth - daysInFirstWeek) / 7) + 1;
+                            }
+                            
+                            return `${month}월 ${weekOfMonth}주차`;
+                        }
+                        
+                        return dateString; // 원본 반환
+                    } catch (e) {
+                        console.error('주간 날짜 변환 오류:', e, dateString);
+                        return dateString; // 원본 반환
+                    }
+                };
+                break;
+            case 'monthly':
+                labelFormatter = (dateString) => {
+                    try {
+                        const date = new Date(dateString);
+                        // 유효한 날짜인지 검사
+                        if (isNaN(date.getTime())) {
+                            return dateString; 
+                        }
+                        return `${date.getMonth() + 1}월`;
+                    } catch (e) {
+                        console.error('월별 날짜 변환 오류:', e);
+                        return dateString;
+                    }
+                };
+                break;
+            case 'yearly':
+                labelFormatter = (dateString) => {
+                    try {
+                        const date = new Date(dateString);
+                        // 유효한 날짜인지 검사
+                        if (isNaN(date.getTime())) {
+                            return dateString;
+                        }
+                        return `${date.getFullYear()}년`;
+                    } catch (e) {
+                        console.error('연간 날짜 변환 오류:', e);
+                        return dateString;
+                    }
+                };
+                break;
+            default: // daily 또는 기타
+                labelFormatter = (dateString) => {
+                    try {
+                        const date = new Date(dateString);
+                        // 유효한 날짜인지 검사
+                        if (isNaN(date.getTime())) {
+                            return dateString;
+                        }
+                        return `${date.getMonth() + 1}/${date.getDate()}`; 
+                    } catch (e) {
+                        console.error('일별 날짜 변환 오류:', e);
+                        return dateString;
+                    }
+                };
+        }
+        
+        // 차트 데이터 준비
+        const labels = sortedData.map(d => labelFormatter(d.visitDate));
+        const visitCounts = sortedData.map(d => d.visitCount);
+        
         const ctx = document.getElementById("dailyVisitChart").getContext('2d');
         new Chart(ctx, {
             type: "line",
             data: {
-                labels: sortedData.map(d => formatDate(d.visitDate)),
+                labels: labels,
                 datasets: [{
                     label: "방문자 수",
-                    data: sortedData.map(d => d.visitCount),
+                    data: visitCounts,
                     borderColor: "#3b82f6",
                     backgroundColor: "rgba(59, 130, 246, 0.2)",
-                    fill: true
+                    fill: true,
+                    tension: 0.1 // 곡선 부드럽게
                 }]
             },
             options: {
@@ -130,19 +292,13 @@ $(document).ready(function () {
                 scales: {
                     x: {
                         display: true,
-                        title: {
-                            display: false
-                        },
                         grid: {
                             display: false
                         },
                         ticks: {
-                            maxRotation: 0,
+                            maxRotation: 45, // 라벨 회전 각도 조정
                             autoSkip: true,
-                            maxTicksLimit: 10,
-                            callback: function(value, index, values) {
-                                return value; // 날짜만 표시 (이미 formatDate 함수에서 처리됨)
-                            }
+                            maxTicksLimit: 20, // 최대 표시 라벨 수 증가
                         }
                     },
                     y: {
@@ -162,9 +318,6 @@ $(document).ready(function () {
                         callbacks: {
                             label: function(context) {
                                 return `방문자 수: ${context.raw}명`;
-                            },
-                            title: function(tooltipItems) {
-                                return tooltipItems[0].label; // 날짜 표시
                             }
                         }
                     }
@@ -183,17 +336,36 @@ $(document).ready(function () {
         newCanvas.id = "popularProductsChart";
         chartContainer.appendChild(newCanvas);
 
+        // 이름이 너무 긴 상품을 짧게 만드는 함수
+        const shortenProductName = (name) => {
+            if (!name) return '';
+            // 특수 문자 및 괄호 제거
+            let shortName = name.replace(/[\[\](){}]/g, '');
+            // 이모지 제거
+            shortName = shortName.replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, '');
+            // 길이 제한
+            if (shortName.length > 15) {
+                return shortName.substring(0, 15) + '...';
+            }
+            return shortName;
+        };
+
+        // 차트 데이터 준비
+        const chartLabels = data.popularProducts.map(p => shortenProductName(p.productName));
+        const chartData = data.popularProducts.map(p => p.visitCount);
+        const backgroundColor = [
+            '#4e73df', '#1cc88a', '#36b9cc', '#f6c23e',
+            '#e74a3b', '#5a5c69', '#858796', '#6f42c1'
+        ];
+
         const ctx = document.getElementById("popularProductsChart").getContext('2d');
         new Chart(ctx, {
             type: "doughnut",
             data: {
-                labels: data.popularProducts.map(p => p.productName),
+                labels: chartLabels,
                 datasets: [{
-                    data: data.popularProducts.map(p => p.visitCount),
-                    backgroundColor: [
-                        '#4e73df', '#1cc88a', '#36b9cc', '#f6c23e',
-                        '#e74a3b', '#5a5c69', '#858796', '#6f42c1'
-                    ],
+                    data: chartData,
+                    backgroundColor: backgroundColor,
                     borderWidth: 1
                 }]
             },
@@ -202,12 +374,20 @@ $(document).ready(function () {
                 maintainAspectRatio: false,
                 plugins: {
                     legend: {
-                        display: false
+                        position: 'right',
+                        labels: {
+                            boxWidth: 12,
+                            padding: 10,
+                            font: {
+                                size: 10
+                            }
+                        }
                     },
                     tooltip: {
                         callbacks: {
                             label: function(context) {
-                                return `${context.label}: ${context.raw}회`;
+                                const product = data.popularProducts[context.dataIndex];
+                                return `${product.productName}: ${product.visitCount}회`;
                             }
                         }
                     }
@@ -217,125 +397,74 @@ $(document).ready(function () {
         });
     }
 
-    // 테이블 업데이트
+    // 테이블 업데이트 - 완전히 새로운 접근 방식
     function updateTable(data) {
-        console.log("테이블 업데이트 시작");
+        console.log("테이블 업데이트 시작 - 완전히 새로운 방식");
+        console.log("데이터:", data);
         
-        // 기본 테이블 참조 가져오기
-        const visitorTable = document.getElementById('visitorTable');
-        if (!visitorTable) {
-            console.error('테이블을 찾을 수 없습니다.');
+        // 인기 상품과 방문 데이터 확인
+        if (!data.dailyVisits || data.dailyVisits.length === 0) {
+            $('#visitorTable tbody').html('<tr><td colspan="3" class="text-center">방문 데이터가 없습니다.</td></tr>');
             return;
         }
-        
-        const tbody = visitorTable.querySelector('tbody');
-        if (!tbody) {
-            console.error('테이블 본문을 찾을 수 없습니다.');
-            return;
-        }
-        
-        // 기존 DataTable 인스턴스 제거 (간소화된 방식)
-        try {
-            if ($.fn.DataTable.isDataTable('#visitorTable')) {
-                console.log("기존 DataTable 인스턴스 제거");
-                const dt = $('#visitorTable').DataTable();
-                dt.destroy();
-                
-                // DataTable 관련 DOM 요소 제거
-                $('#visitorTable_wrapper').remove();
-            }
-        } catch (err) {
-            console.warn('DataTable 제거 중 오류:', err);
-        }
-        
-        // tbody 비우기
-        tbody.innerHTML = '';
 
-        // 날짜별로 정렬된 데이터 사용 (최신 날짜순)
+        // 데이터 로깅 - 디버깅 용도
+        console.log("방문 데이터 수:", data.dailyVisits.length);
+        console.log("인기 상품 데이터 수:", data.popularProducts ? data.popularProducts.length : 0);
+        console.log("인기 상품 데이터:", data.popularProducts);
+        
+        // 기존 테이블 초기화
+        $('#visitorTable tbody').empty();
+        
+        // 1. 인기 상품 섹션 만들기 (모든 인기 상품 표시)
+        if (data.popularProducts && data.popularProducts.length > 0) {
+            // 인기 상품 헤더 추가
+            $('#visitorTable tbody').append(
+                '<tr class="table-info"><td colspan="3" class="text-center font-weight-bold">인기 상품 (방문 횟수순)</td></tr>'
+            );
+            
+            // 모든 인기 상품 추가 (데이터베이스에서 가져온 그대로)
+            data.popularProducts.forEach(function(product, index) {
+                $('#visitorTable tbody').append(`
+                    <tr class="product-row">
+                        <td colspan="2" class="font-weight-bold">
+                            ${index + 1}. ${product.productName}
+                        </td>
+                        <td class="text-right">
+                            ${product.visitCount}회 방문
+                        </td>
+                    </tr>
+                `);
+            });
+            
+            // 구분선 추가
+            $('#visitorTable tbody').append(
+                '<tr><td colspan="3" class="text-center text-muted">---</td></tr>'
+            );
+        }
+        
+        // 2. 날짜별 방문자 데이터 추가 (최신 날짜순)
         const sortedVisits = [...data.dailyVisits].sort((a, b) => {
             return new Date(b.visitDate) - new Date(a.visitDate);
         });
-
-        console.log("정렬된 방문 데이터:", sortedVisits);
-
-        // 데이터가 없는 경우 처리
-        if (sortedVisits.length === 0) {
-            console.log("방문 데이터가 없습니다");
-            tbody.innerHTML = `<tr><td colspan="4" class="text-center">방문 데이터가 없습니다.</td></tr>`;
-            return;
-        }
         
-        // 방문 데이터 표시 (인기 상품 데이터 없어도 방문 데이터만 표시)
-        let tableContent = '';
+        // 방문 데이터 헤더 추가
+        $('#visitorTable tbody').append(
+            '<tr class="table-primary"><td colspan="3" class="text-center font-weight-bold">날짜별 방문자 수</td></tr>'
+        );
         
-        sortedVisits.forEach((daily, index) => {
-            let productName = '-';
-            let productVisits = '-';
-            
-            // 인기 상품 데이터가 있으면 표시
-            if (data.popularProducts && data.popularProducts.length > 0) {
-                const popularIndex = index % data.popularProducts.length;
-                const popularProduct = data.popularProducts[popularIndex];
-                
-                productName = popularProduct ? popularProduct.productName : '-';
-                //productVisits = popularProduct ? popularProduct.visitCount : '-';
-            }
-            
-            // 날짜 형식을 MM/DD로 변환
-            const formattedDate = formatDate(daily.visitDate);
-            
-            tableContent += `
+        // 모든 방문 데이터 추가
+        sortedVisits.forEach(function(visit) {
+            const formattedDate = formatDate(visit.visitDate);
+            $('#visitorTable tbody').append(`
                 <tr>
                     <td>${formattedDate}</td>
-                    <td>${daily.visitCount}</td>
-                    <td>${productName}</td>
+                    <td colspan="2">${visit.visitCount}명 방문</td>
                 </tr>
-            `;
+            `);
         });
         
-        tbody.innerHTML = tableContent;
-
-        // 테이블 초기화 (간소화된 방식)
-        try {
-            console.log("새 DataTable 인스턴스 생성");
-            $('#visitorTable').DataTable({
-                destroy: true,
-                searching: true,
-                ordering: true,
-                order: [[0, "desc"]],
-                pageLength: 10,
-                // CORS 문제 해결을 위해 직접 언어 설정
-                language: {
-                    "decimal": "",
-                    "emptyTable": "데이터가 없습니다",
-                    "info": "_START_ - _END_ / _TOTAL_",
-                    "infoEmpty": "0 - 0 / 0",
-                    "infoFiltered": "(전체 _MAX_ 개 항목에서 필터링됨)",
-                    "infoPostFix": "",
-                    "thousands": ",",
-                    "lengthMenu": "페이지당 _MENU_ 개씩 보기",
-                    "loadingRecords": "로딩중...",
-                    "processing": "처리중...",
-                    "search": "검색:",
-                    "zeroRecords": "검색 결과가 없습니다",
-                    "paginate": {
-                        "first": "처음",
-                        "last": "마지막",
-                        "next": "다음",
-                        "previous": "이전"
-                    },
-                    "aria": {
-                        "sortAscending": ": 오름차순 정렬",
-                        "sortDescending": ": 내림차순 정렬"
-                    }
-                }
-            });
-            console.log("테이블 업데이트 완료");
-        } catch (error) {
-            console.error('DataTables 초기화 중 오류 발생:', error);
-            // 오류 발생 시 기본 테이블만 표시
-            console.log("기본 테이블만 표시합니다");
-        }
+        console.log("테이블 업데이트 완료");
     }
 
     // 요약 통계 업데이트
