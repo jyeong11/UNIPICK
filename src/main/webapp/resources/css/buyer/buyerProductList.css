@@ -38,7 +38,7 @@ h2{
 #img12 {
 	display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 20px;
 }
 
 .prdImg-div {
@@ -52,6 +52,10 @@ h2{
 #img12 div a, .two > a {
 	text-decoration: none;
 	color: #292b2b;
+}
+
+.product-posting {
+	width: 320px;
 }
 
 .left-category {
@@ -110,8 +114,9 @@ h2{
 }
 
 .prd-img {
-	width: 280px;
-	height: auto;
+	width: 320px;
+	height: 320px;
+    object-fit: cover;
 }
 
 .heart {

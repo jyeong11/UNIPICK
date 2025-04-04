@@ -68,6 +68,7 @@ $(function() {
 	
 })
 
+// 카테고리에 해당하는 상품 출력
 function categoryPrd(select) {
 	
 	let data = {lev_cd : select.data('value'),

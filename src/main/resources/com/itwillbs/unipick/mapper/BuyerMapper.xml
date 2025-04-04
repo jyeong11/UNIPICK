@@ -83,7 +83,7 @@
 	     ON pd.prd_cd = pi.prd_cd
 	  WHERE pd.prd_st = (SELECT cod_cd
 				           FROM common_detailcode 
-				          WHERE com_cd = 'PRD_REGISTERSTATUS' 
+				          WHERE com_cd = 'PRD_REGISTERSTATUS'
 				            AND cod_nm = '승인')
 	    AND sl.sel_nm = #{sel_nm}
 	    AND pi.fil_nb = 1;
@@ -166,6 +166,7 @@
                p.prd_ca,
                p.prd_dt,
   			   r.count,
+  			   w.buy_em,
                cd.cod_nm,
                od.cnt
   		  FROM products p 
@@ -177,12 +178,16 @@
 				  	   FROM options o JOIN reviews r ON o.opt_id = r.opt_id
 				 	  GROUP by prd_cd) r ON p.prd_cd = r.prd_cd
 		  LEFT JOIN common_detailcode cd ON p.prd_bd = cd.cod_cd
+		  LEFT JOIN wishlist w on p.prd_cd = w.prd_cd
           LEFT JOIN (select prd_cd, count(odd_qt) as cnt
 					from order_details od
 					join options o on od.opt_id = o.opt_id
 					where odd_st = '배송완료'
 					group by prd_cd) od on p.prd_cd = od.prd_cd
-		 WHERE prd_st = '승인'
+		 WHERE prd_st = (SELECT cod_cd
+		 				   FROM common_detailcode 
+		 				  WHERE com_cd = 'PRD_REGISTERSTATUS' 
+		 				    AND cod_nm = '승인')
   		 <if test="lev_cd != 'All'">
   		 	AND p.prd_ca LIKE CONCAT(#{lev_cd}, '%')
   		 </if>
@@ -385,7 +390,10 @@
 				FROM product_images
 			   WHERE fil_nm = 1) i ON p.prd_cd = i.prd_cd
 		WHERE odd_id = #{odd_id}
-		  AND prd_st = '승인';
+		  AND prd_st = (SELECT cod_cd
+		 				  FROM common_detailcode 
+		 				 WHERE com_cd = 'PRD_REGISTERSTATUS' 
+		 				   AND cod_nm = '승인');
 	</select>
 	
 	<!-- 리뷰 등록 -->
