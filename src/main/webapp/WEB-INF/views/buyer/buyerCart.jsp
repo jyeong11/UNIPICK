@@ -42,8 +42,11 @@
 			<div class = "two">
 				<h2>장바구니</h2>
 			</div>
+			<div class="all">
+				<input type="checkbox">전체선택
+				<button id="cartDelete"><i class="fa-regular fa-trash-can"></i></button>
+			</div>
 			<div id = "img12">
-				<!-- 1번 줄 -->
 				<div class="first">
 					<div class="top_view">
 						<div class="product_posting"></div>

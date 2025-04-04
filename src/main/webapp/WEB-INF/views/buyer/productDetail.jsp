@@ -100,8 +100,6 @@
 		 	<div id="detailEp">
 		 		<div id="prdCt">${prd.prd_ct }</div>
 			</div>
-	    	<button id="loadMoreBtn" style="display: none;">상품 더보기 ↓</button>
-	    	<div id="moreItems" style="display: none;"></div> 
 	    	<section>
 	    		<div id="selAnthor">
 	    			<div id="selAnthorTitle">

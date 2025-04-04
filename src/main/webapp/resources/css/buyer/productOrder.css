@@ -95,8 +95,9 @@ h2 {
 	display: flex;
 	justify-content: space-between;
 }
+
 .prd-sp{
-	padding-left: 583px;
+	padding-left: 628px;
     font-size: 22px;
 }
 #orderInfo-container {
