@@ -415,7 +415,6 @@
                           <th>날짜</th>
                           <th>방문자 수</th>
                           <th>인기 상품</th>
-                          <th>상품 방문자 수</th>
                         </tr>
                       </thead>
                       <tbody>
