@@ -86,4 +86,8 @@ public interface BuyerMapper {
 	public List<Map<String, Object>> cartSelect(String buy_em);
 	// 찜 목록
 	public List<Map<String, Object>> myWishPrd(Map<String, Object> buyer);
+	// 장바구니 삭제
+	void deleteCart(@Param("crt_id") int crt_id, @Param("buy_em") String buy_em);
+	// 장바구니 수정
+	public void updateCart(@Param("updataData") Map<String, Object> updataData, @Param("buy_em") String buy_em);
 }

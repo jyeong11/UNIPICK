@@ -41,9 +41,7 @@
 	
 <!-- 	상품 상세 옵션 -->
 	<select id="getPrdOption" parameterType="map">
-	 SELECT c.cod_nm, 
-	 		o.clr_nm,
-	 		o.prd_qt
+	 SELECT DISTINCT o.clr_nm
        FROM options o
        JOIN common_detailcode c
          ON o.siz_nm = c.cod_cd
@@ -656,4 +654,18 @@
 		  			  WHERE fil_nb = 1) pi ON p.prd_cd = pi.prd_cd
 		  LEFT JOIN sellers s ON p.sel_id = s.sel_id;
 	</select>
+<!-- 	장바구니 삭제 -->
+	<delete id="deleteCart">
+	  DELETE FROM cart
+       WHERE crt_id = #{crt_id}
+         AND buy_em = #{buy_em}
+	</delete>
+	
+<!-- 	장바구니 수정 -->
+	<update id="updateCart">
+	 update cart 
+	 	set crt_qt = crt_qt + #{updataData.qty}
+	  where crt_id = #{updataData.crt_id}
+	    AND buy_em = #{buy_em}; 
+	</update>
   </mapper>

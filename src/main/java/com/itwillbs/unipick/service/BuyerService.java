@@ -225,4 +225,18 @@ public class BuyerService {
 	public List<Map<String, Object>> myWishPrd(Map<String, Object> buyer) {
 		return mapper.myWishPrd(buyer);
 	}
+	
+	// 장바구니 삭제
+	public void deleteCart(List<Map<String, Object>> deleteData, String buy_em) {
+		
+	    for (Map<String, Object> item : deleteData) {
+	        Integer crt_id = Integer.parseInt(item.get("crt_id").toString());
+	        mapper.deleteCart(crt_id, buy_em);
+	    }
+	}
+	
+	// 장바구니 수정
+	public void updateCart(Map<String, Object> updataData, String buy_em) {
+		mapper.updateCart(updataData, buy_em);
+	}
 }

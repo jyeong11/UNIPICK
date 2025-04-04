@@ -423,4 +423,22 @@ public class BuyerController {
 		buyer.put("buy_em", session.getAttribute("buyEm"));
 		return buyService.myWishPrd(buyer);
 	}
+	
+	// 장바구니 삭제 
+	@ResponseBody
+	@PostMapping("deleteCart")
+	public void deleteCart(@RequestBody List<Map<String, Object>> deleteData,
+						 	HttpSession session) {
+		String buy_em = (String)session.getAttribute("buyEm");
+		buyService.deleteCart(deleteData, buy_em);
+	}
+	
+	// 장바구니 수정
+	@ResponseBody
+	@PostMapping("updateCart")
+	public void updateCart(@RequestBody Map<String, Object> updataData,
+							HttpSession session) {
+		String buy_em = (String)session.getAttribute("buyEm");
+		buyService.updateCart(updataData, buy_em);
+	}
 }
