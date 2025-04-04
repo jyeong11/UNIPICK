@@ -611,6 +611,24 @@
 		 	  		  (SELECT opt_id 
 	                     FROM options 
 	                    WHERE clr_nm = #{color}
-	                      AND siz_nm = #{size}));
+	                      AND siz_nm = #{size}
+	                      AND prd_cd = #{prd_cd}));
 	</insert>
+	
+<!-- 	장바구니 조회 -->
+	<select id="cartSelect" parameterType="map">
+	 SELECT *
+	   FROM cart c
+	   JOIN options o 
+	     ON c.opt_id = o.opt_id
+	   JOIN common_detailcode d
+	     ON o.siz_nm = d.cod_cd
+	   JOIN products p
+	     ON o.prd_cd = p.prd_cd
+	   JOIN sellers s
+	     ON p.sel_id = s.sel_id
+	   LEFT JOIN product_images i
+	     ON p.prd_cd = i.prd_cd
+	  WHERE i.fil_nb = 1;
+	</select>
   </mapper>

@@ -81,7 +81,7 @@ public interface BuyerMapper {
 	// 판매자 상세 카테고리 클릭시 
 	public List<Map<String, Object>> getCatePrd(Map<String, Object> cate);
 	// 장바구니 
-	public Map<String, Object> cartInsert(Map<String, Object> data);
+	public void cartInsert(Map<String, Object> data);
 	// 장바구니 조회
 	public List<Map<String, Object>> cartSelect(String buy_em);
 }

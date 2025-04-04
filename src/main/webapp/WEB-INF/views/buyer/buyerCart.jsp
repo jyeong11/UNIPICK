@@ -46,52 +46,7 @@
 				<!-- 1번 줄 -->
 				<div class="first">
 					<div class="top_view">
-						<div class="product_posting">
-							<a href="#">
-								<img src="${pageContext.request.contextPath }/resources/images/favicon_b.png" alt="1">
-								<div>
-									<div>스토어명</div>
-									<div>상품명</div>
-									<div>가격</div>
-									<div>뱃지 등등</div>
-								</div>
-							</a>
-						</div>
-						<div class="product_posting">
-							<a href="#">
-								<img src="${pageContext.request.contextPath }/resources/images/favicon.png" alt="2">
-								<div>
-									<div>스토어명</div>
-									<div>상품명</div>
-									<div>가격</div>
-									<div>뱃지 등등</div>
-								</div>
-							</a>
-						</div>
-					</div>
-					<div class="bottom_view">
-						<div class="product_posting">
-							<a href="#">
-								<img src="${pageContext.request.contextPath }/resources/images/favicon_b.png" alt="3">
-								<div>
-									<div>스토어명</div>
-									<div>상품명</div>
-									<div>가격</div>
-									<div>뱃지 등등</div>
-								</div>
-							</a>
-						</div>
-						<div class="product_posting">
-							<a href="#">
-								<img src="${pageContext.request.contextPath }/resources/images/favicon.png" alt="4">
-								<div>
-									<div>스토어명</div>
-									<div>상품명</div>
-									<div>가격</div>
-									<div>뱃지 등등</div>
-								</div>
-							</a>
-						</div>
+						<div class="product_posting"></div>
 					</div>
 				</div>
 			</div>
@@ -100,5 +55,8 @@
 	<div id="footer">
 		<jsp:include page="../inc/footer.jsp"></jsp:include>
 	</div>
+	<script>
+		var contextPath = "${pageContext.request.contextPath}";
+	</script>
 </body>
 </html>

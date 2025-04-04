@@ -201,8 +201,8 @@ public class BuyerService {
 	}
 	
 	// 장바구니
-	public Map<String, Object> cartInsert(Map<String, Object> data) {
-		return mapper.cartInsert(data);
+	public void cartInsert(Map<String, Object> data) {
+		mapper.cartInsert(data);
 	}
 	
 	// 장바구니 조회
