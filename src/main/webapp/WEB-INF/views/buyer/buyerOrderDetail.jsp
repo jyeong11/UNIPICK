@@ -61,12 +61,15 @@
         <div class="price">
             <div id="total-pr"><span>총 상품금액</span><span id="totalPrice">원</span></div>
             <div id="total-dp"><span>총 배송비</span><span id="totalDelPrice">원</span></div>
+            <div id="payment-pm"><span>결제수단</span><span id="payment"></span></div>
         </div>
         <div id="prpr"><span>결제 금액</span><span id="sum">원</span>         	
         </div>
     </div>
-	<div id="payment-container"></div>
-	<div id="term-container"></div>
+	<div id="button-container">
+		<button id="home">홈으로 이동</button>
+		<button id="orderList">배송 / 주문 조회로 이동</button>
+	</div>
 	
 	<div id="footer">
 		<jsp:include page="../inc/footer.jsp"></jsp:include>

@@ -3,7 +3,13 @@ $(function() {
     let param = new URLSearchParams(query);
 	let data = {ord_id : param.get('ord_id')};
 	
-	let sum = 0;
+	$('#home').on('click', function() {
+		window.location.href="main";
+	});
+	
+	$('#orderList').on('click', function() {
+		window.location.href="myOrderList";
+	});
 	
 	$.ajax({
 			url: "myOrderDetail",
@@ -14,6 +20,7 @@ $(function() {
 				const contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2));
 				let sum = 0;
 				let sumDel = 0;
+				let payment = res[0].ord_pm
 				let ordPrd = res.map(item => {
 											   sum += parseFloat(item.odd_am);
 											   sumDel += parseFloat(item.prd_sf);
@@ -32,7 +39,7 @@ $(function() {
 												           <div class="order-img">
 											                   <img src="${contextPath}${item.fil_pt}">
 											               </div>
-											               <div>
+											               <div class="price-info">
 											                   <div class="prd">
 											                       <div class="prd-nm">${item.prd_nm}</div>
 											                       <div class="prd-sp">${formatPrdSp}원</div>
@@ -53,6 +60,7 @@ $(function() {
 				$('#totalDelPrice').prepend(formatSumDel);
 				const formatSumAll = new Intl.NumberFormat().format(sum);
 				$('#sum').prepend(formatSumAll);
+				$('#payment').append(payment);
 				
 				let item = res[0];
 				$('#shipping_name').val(item.ord_nm);

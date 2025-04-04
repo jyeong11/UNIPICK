@@ -47,13 +47,32 @@ h2 {
 	font-size: 20px;
     padding-top: 10px;
 }
+.price-info {
+	width: 1100px;
+}
 .prd{
 	display: flex;
 	justify-content: space-between;
 }
 .prd-sp{
-	padding-left: 583px;
     font-size: 22px;
+}
+#home, #orderList {
+	height: 50px;
+    width: 400px;
+    font-size: inherit;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#button-container {
+	display: flex;
+    height: 150px;
+    width: 1200px;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
 }
 #orderInfo-container {
 	max-width: 1160px;
@@ -115,12 +134,13 @@ input[type=text] {
     font-weight: 500;
     padding-top: 6px;
 }
-#total-pr{
+#total-pr, #total-dp{
 	display: flex;
 	justify-content: space-between;
 	padding-bottom: 15px;
 }
-#total-dp{
+
+#payment-pm {
 	display: flex;
 	justify-content: space-between;	
 }

@@ -326,6 +326,7 @@
 			   o.ord_ph,
 			   o.ord_ad,
 			   o.ord_dm,
+			   o.ord_pm,
 			   od.odd_id,
 		 	   od.odd_st,
 			   od.odd_qt,
