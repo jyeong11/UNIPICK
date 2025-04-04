@@ -160,6 +160,12 @@ public class BuyerController {
 		return "buyer/buyerRecentlyProduct";
 	}
 	
+	// 리뷰 목록 이동
+	@GetMapping("myWishList")
+	public String myWishList() {
+		return "buyer/buyerWishList";
+	}
+	
 	// 상단 메뉴바 공통코드
 	@ResponseBody
 	@GetMapping("menu")
@@ -408,5 +414,13 @@ public class BuyerController {
 		String buy_em = (String)session.getAttribute("buyEm");
 		List<Map<String, Object>> cartList =  buyService.cartSelect(buy_em);
 		return cartList;
+	}
+	
+	// 찜 목록
+	@ResponseBody
+	@PostMapping("myWishPrd")
+	public List<Map<String, Object>> myWishPrd(HttpSession session, Map<String, Object> buyer) {
+		buyer.put("buy_em", session.getAttribute("buyEm"));
+		return buyService.myWishPrd(buyer);
 	}
 }

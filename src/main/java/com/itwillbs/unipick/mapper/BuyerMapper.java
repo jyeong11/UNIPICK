@@ -84,4 +84,6 @@ public interface BuyerMapper {
 	public void cartInsert(Map<String, Object> data);
 	// 장바구니 조회
 	public List<Map<String, Object>> cartSelect(String buy_em);
+	// 찜 목록
+	public List<Map<String, Object>> myWishPrd(Map<String, Object> buyer);
 }

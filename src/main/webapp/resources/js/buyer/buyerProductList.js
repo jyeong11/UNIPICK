@@ -89,7 +89,7 @@ $(function() {
 			contentType: "application/json",
 	        success: function(res) {
 				
-				let row = res.map(prd => {let heartClass = prd.buy_em ? 'fa-solid red' : 'fa-regular';
+				let row = res.map(prd => {let heartClass = prd.buy_em ? 'fa-solid yellow' : 'fa-regular';
 										 return `<div class="product-posting">
 													<a href="productDetail?prd_cd=${prd.prd_cd}&sel_nm=${prd.sel_nm}">
 														<div class="prdImg-div">
@@ -125,7 +125,7 @@ $(function() {
 		let prd_cd = heart.data('value');
 		heartIcon.classList.toggle("fa-regular");
 		heartIcon.classList.toggle("fa-solid");
-		heartIcon.classList.toggle("red");
+		heartIcon.classList.toggle("yellow");
 		
 		let action = "insert";
 		

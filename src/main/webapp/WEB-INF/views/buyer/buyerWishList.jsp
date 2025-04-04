@@ -25,7 +25,7 @@
 
 <!-- script -->
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/buyer/buyerRecentlyProduct.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/buyer/buyerWishList.js"></script>
 
 </head>
 <body>

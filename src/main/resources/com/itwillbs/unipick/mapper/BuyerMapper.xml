@@ -506,8 +506,8 @@
 		SELECT rp.vie_tm,
 			   p.prd_cd,
 			   p.prd_nm,
-			   p.prd_sp,
-			   p.prd_op,
+			   FORMAT(p.prd_op, 0) AS prd_op,
+			   FORMAT(p.prd_sp, 0) AS prd_sp,
 			   CONCAT(ROUND(((p.prd_op - p.prd_sp) / p.prd_op) * 100, 0), '%') AS dc,
 			   s.sel_nm,
 			   i.fil_pt
@@ -635,5 +635,25 @@
 	   LEFT JOIN product_images i
 	     ON p.prd_cd = i.prd_cd
 	  WHERE i.fil_nb = 1;
+	</select>
+	
+	<!-- 찜 목록 -->
+	<select id="myWishPrd">
+		SELECT w.buy_em,
+			   s.sel_nm,
+			   pi.fil_pt,
+			   p.prd_cd,
+			   p.prd_nm,
+			   FORMAT(p.prd_op, 0) AS prd_op,
+			   FORMAT(p.prd_sp, 0) AS prd_sp,
+			   CONCAT(ROUND(((p.prd_op - p.prd_sp) / p.prd_op) * 100, 0), '%') AS dc
+		  FROM (SELECT buy_em, prd_cd
+				  FROM wishlist
+			     WHERE buy_em = #{buy_em}) w
+		  LEFT JOIN products p ON w.prd_cd = p.prd_cd
+		  LEFT JOIN (SELECT prd_cd, fil_pt
+		  			   FROM product_images
+		  			  WHERE fil_nb = 1) pi ON p.prd_cd = pi.prd_cd
+		  LEFT JOIN sellers s ON p.sel_id = s.sel_id;
 	</select>
   </mapper>

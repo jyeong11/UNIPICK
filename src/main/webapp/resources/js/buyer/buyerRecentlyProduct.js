@@ -1,15 +1,7 @@
 $(function() {
-	let query = window.location.search;
-    let param = new URLSearchParams(query);
-	let data = {ord_id : param.get('ord_id')}
-	
-	let sum = 0;
-	
 	$.ajax({
 		url: "myRecentlyPrd",
 		method: "POST",
-		data: JSON.stringify(data),
-		contentType: "application/json",
 		success: function(res) {
 			const contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2));
 			

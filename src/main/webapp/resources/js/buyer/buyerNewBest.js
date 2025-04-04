@@ -42,7 +42,7 @@ $(function() {
 							$('#category').append(category);
 			
 					// 상품
-					let product = res.prd.map(item =>{ let heartClass = item.buy_em ? 'fa-solid red' : 'fa-regular';
+					let product = res.prd.map(item =>{ let heartClass = item.buy_em ? 'fa-solid yellow' : 'fa-regular';
 						return `<div class="product_posting">
 									<a href="productDetail?prd_cd=${item.prd_cd}&sel_nm=${item.sel_nm}">
 											<div class="prdImg-div">
@@ -87,7 +87,7 @@ function categoryPrd(select) {
 		contentType: "application/json",
 	    success: function(res) {
 			$('#img12').html("");
-			let product = res.map(item =>{ let heartClass = item.buy_em ? 'fa-solid red' : 'fa-regular';
+			let product = res.map(item =>{ let heartClass = item.buy_em ? 'fa-solid yellow' : 'fa-regular';
 						return `<div class="product_posting">
 									<a href="productDetail?prd_cd=${item.prd_cd}&sel_nm=${item.sel_nm}">
 											<div class="prdImg-div">
@@ -126,7 +126,7 @@ function wish(heart) {
 	let prd_cd = heart.data('value');
 	heartIcon.classList.toggle("fa-regular");
 	heartIcon.classList.toggle("fa-solid");
-	heartIcon.classList.toggle("red");
+	heartIcon.classList.toggle("yellow");
 	let action = "insert";
 	
 	if(heartIcon.classList.contains("fa-regular")) {

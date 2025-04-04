@@ -220,4 +220,9 @@ public class BuyerService {
 	public List<Map<String, Object>> cartSelect(String buy_em) {
 		return mapper.cartSelect(buy_em);
 	}
+	
+	// 찜 목록
+	public List<Map<String, Object>> myWishPrd(Map<String, Object> buyer) {
+		return mapper.myWishPrd(buyer);
+	}
 }
