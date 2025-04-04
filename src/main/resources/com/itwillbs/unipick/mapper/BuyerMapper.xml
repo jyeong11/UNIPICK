@@ -599,4 +599,20 @@
 				          AND cod_nm = '승인')
 	   AND pi.fil_nb = 1;
 	</select>
+		
+	<!-- 	장바구니  -->
+	<insert id="cartInsert" parameterType="map">
+	 INSERT INTO cart(buy_em,
+	 				  crt_qt,
+	 				  opt_id)
+		 	   VALUES(#{buy_em},
+		 	  		  #{qty},
+		 	  		  (SELECT o.opt_id 
+	                    FROM options o 
+	                    JOIN common_detailcode c 
+	                      ON o.siz_nm = c.cod_cd 
+	                   WHERE o.clr_nm = #{color}
+	                     AND c.com_cd = 'SIZE' 
+	                     AND c.cod_nm = #{size}));
+	</insert>
   </mapper>

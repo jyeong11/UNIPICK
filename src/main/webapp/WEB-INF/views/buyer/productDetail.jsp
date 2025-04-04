@@ -178,6 +178,7 @@
 	</div>
 	<script type="text/javascript">
 	    var prdCd = "${prd.prd_cd}";
+	    var sel_nm = "${prd.sel_nm}";
 	    var contextPath = "${pageContext.request.contextPath}";
 	    var images = ${selImgList != null ? selImgList : '[]'};
 	    var prdImg = [

@@ -21,6 +21,10 @@
 <link href="${pageContext.request.contextPath }/resources/css/footer.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/buyer/buyerCart.css" rel="stylesheet" type="text/css">
 
+<!-- js -->
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/buyer/buyerCart.js"></script>
+
 <!-- Favicon -->
 <link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
 </head>

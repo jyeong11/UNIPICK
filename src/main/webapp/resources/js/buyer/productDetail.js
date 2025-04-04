@@ -1,4 +1,3 @@
-
 $(function() {
 	// 최근 본 상품 저장
 	// recentlyProduct();
@@ -53,6 +52,41 @@ $(function() {
             }
         });
 	}
+	
+	// 장바구니
+	$('.cart-btn').on("click", function (e) {
+		var color = $("#color").val();
+		var size = $("#size").val();
+		let qty = $("#qty-input").val();
+		
+		if (!color || !size || size.trim() === "" || size === "[사이즈]를 선택하세요.") {
+	        alert("색상과 사이즈를 모두 선택해주세요!");
+	        e.preventDefault();
+	        return;
+    	}
+		
+		$.ajax({
+			url: "cartInsert",
+			method: "POST",
+			data: JSON.stringify({
+				prd_cd: prdCd,
+				sel_nm: sel_nm,
+				color: color,
+				size: size,
+				qty: qty
+			}),
+			contentType: "application/json",
+			success: function(){
+				let result = confirm("선택하신 상품들이 정상적으로 장바구니에 담겼습니다.\n 지금 장바구니로 이동하시겠습니까?");
+				if (result) {
+					window.location.href = "cart";
+			    }
+			},
+			error: function() {
+                alert("다시 시도해주세요.");
+            }
+		});
+	});
 
     // 컬러 변경 시 사이즈 초기화 및 선택 이벤트 등록
     $("#color").change(function() {

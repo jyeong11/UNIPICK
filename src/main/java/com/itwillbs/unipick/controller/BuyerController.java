@@ -381,12 +381,14 @@ public class BuyerController {
 	public List<Map<String, Object>> getReviews(@RequestBody Map<String, Object> prd_cd) {
 		return buyService.getPrdReviews(prd_cd);
 	}
+	
 	// 추천상품
 	@ResponseBody
 	@PostMapping("getRecommendPrd")
 	public List<Map<String, Object>> getRecommendPrd(@RequestBody Map<String, Object> prd_cd) {
 		return buyService.getRecommendPrd(prd_cd);
 	}
+	
 	// 판매자 상세 카테고리 클릭시
 	@ResponseBody
 	@PostMapping("getCatePrd")
@@ -400,5 +402,24 @@ public class BuyerController {
 	public Map<String, Object> productBestNew(HttpSession session, @RequestBody Map<String, Object> prd) {
 		prd.put("buy_em", session.getAttribute("buyEm"));
 		return buyService.productBestNew(prd);
+	}
+	
+	// 장바구니
+	@ResponseBody
+	@PostMapping("cartInsert")
+	public void cartinsert(@RequestBody Map<String, Object> data,
+										  HttpSession session) {
+		
+		data.put("buy_em", session.getAttribute("buyEm"));
+		buyService.cartInsert(data);
+	}
+	
+	// 장바구니 조회
+	@ResponseBody
+	@PostMapping("cartSelect")
+	public List<Map<String, Object>> cartSelect(HttpSession session) {
+		String buy_em = (String)session.getAttribute("buyEm");
+		List<Map<String, Object>> cartList =  buyService.cartSelect(buy_em);
+		return cartList;
 	}
 }

@@ -199,4 +199,14 @@ public class BuyerService {
 		map.put("cate", mapper.getCategory());
 		return map;
 	}
+	
+	// 장바구니
+	public Map<String, Object> cartInsert(Map<String, Object> data) {
+		return mapper.cartInsert(data);
+	}
+	
+	// 장바구니 조회
+	public List<Map<String, Object>> cartSelect(String buy_em) {
+		return mapper.cartSelect(buy_em);
+	}
 }
