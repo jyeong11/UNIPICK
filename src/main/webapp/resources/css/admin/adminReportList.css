@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+#buyerStatus {
+	display: flex;
+	justify-content: flex-end;
+	gap: 15px;
+}
+
+.selectStatus {
+	display: inline-flex; /* 또는 inline-block */
+	align-items: center; 
+}
+
+
+#reportListTable tr td:nth-child(1):hover {
+	font-weight: bold;
+    cursor: pointer;	
+}
+
+#rptRs {
+	resize: none;
+    background-color: #eaecf4;
+    color: #6e707e;
+    border-radius: 0.35rem;
+}

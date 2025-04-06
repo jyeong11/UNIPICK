@@ -36,8 +36,8 @@
 <link href="${pageContext.request.contextPath }/resources/public/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath }/resources/public/vendor/datatables/datatables.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath }/resources/css/admin/adminSellerList.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath }/resources/css/admin/adminBuyerList.css" rel="stylesheet">
-<script src="${pageContext.request.contextPath }/resources/js/admin/adminBuyerList.js"></script>
+<link href="${pageContext.request.contextPath }/resources/css/admin/adminReportList.css" rel="stylesheet">
+<script src="${pageContext.request.contextPath }/resources/js/admin/adminReportList.js"></script>
 <link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
 </head>
 <body>
@@ -60,50 +60,49 @@
 							<div class="col-lg-12">
 							<div class="card shadow mb-4">
 								<div class="card-header py-3">
-									<h5 class="m-0 font-weight-bold text-primary">구매자 목록</h5>
+									<h5 class="m-0 font-weight-bold text-primary">신고 목록</h5>
 								</div>
 								<div class="container">
 									<div class="row align-items-start justify-content-end" id="searchList">
 										<div class="col-2">
-											<select class="form-select" id="buyerSearchKind">
-												<option value="buy_em">이메일</option>
-												<option value="buy_nm">이름</option>
-												<option value="buy_nn">닉네임</option>
+											<select class="form-select" id="reportSearchKind">
+												<option value="rpr">신고자ID</option>
+												<option value="rpd">신고대상자ID</option>
 											</select>
 										</div>
 										<div class="col-3">
-											<input type="text" id="buyerSearchWord" class="form-control" placeholder="검색어 입력">
+											<input type="text" id="reportSearchWord" class="form-control" placeholder="검색어 입력">
 										</div>
 										<div class="col-1">
-											<button id="buyerSearch" class="btn btn_main_color" type="button">조회</button>
+											<button id="reportSearch" class="btn btn_main_color" type="button">조회</button>
 										</div>
 									</div>
 								</div>
 									<!-- 상품 목록 테이블 -->
 									<div class="table-responsive">
-										<table class="table table-bordered" id="buyerList">
+										<table class="table table-bordered" id="reportList">
 											<thead>
 												<tr>
 													<th>순번</th>
-													<th>ID</th>
-													<th>이름</th>
-													<th>닉네임</th>
-													<th>가입일시</th>
-													<th>계정상태</th>
+													<th>신고자ID</th>
+													<th>신고대상자ID</th>
+													<th>신고대상</th>
+													<th>신고일시</th>
+													<th>신고상태</th>
 												</tr>
 											</thead>
-											<tbody id="buyerListTable"></tbody>
+											<tbody id="reportListTable"></tbody>
 										</table>
 									</div>
 									<section id="pageList"></section>
 								</div>
 								<div class="modal fade" id="exampleModal" tabindex="-1"
 									role="dialog" aria-labelledby="exampleModalLabel"
-									aria-hidden="true">
+									data-bs-focus="true" data-bs-backdrop="static" data-bs-keyboard="false">
 									<div id="modal" class="modal-dialog modal-xl"
 										role="document">
 										<div class="modal-content">
-											<div class="modal-header">구매자 상세 정보</div>
+											<div class="modal-header">신고 상세 정보</div>
 											<div class="modal-body">
 												<div id="modal-con"></div>
 											</div>

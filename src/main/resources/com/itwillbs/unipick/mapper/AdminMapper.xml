@@ -272,12 +272,24 @@
 	
 	<!-- 신고내역 리스트 -->
 	<select id="reportList">
-		SELECT buy_em,
-			   sel_id,
-	    	   rpt_tg,
-	    	   DATE_FORMAT(rpt_dt, '%Y-%m-%d %H:%i:%s') AS rpt_dt,
-	    	   rpt_st
-		  FROM report
+		SELECT rpt_id,
+			   CASE 
+			   	   WHEN rpt_tg = '판매자' THEN buy_em 
+			   	   ELSE sel_id 
+			   END AS rpr_id,
+			   CASE
+			   	   WHEN rpt_tg = '판매자' THEN sel_id
+			   	   ELSE buy_em
+			   END AS rpd_id,
+			   rpt_tg,
+			   rpt_rs,
+			   rpt_dt,
+			   cd.cod_nm
+		  FROM report r
+		  JOIN common_detailcode cd ON r.rpt_st = cd.cod_cd
+		  <if test="rpt_id != null and !rpt_id.equals('')">
+		  	WHERE rpt_id = #{rpt_id}
+		  </if>
 		 ORDER BY rpt_dt DESC
 	</select>
 	
@@ -348,12 +360,19 @@
 	</select>
 	
 	<!-- 구매자 상태 -->
-	<select id="getBuyerStatus" parameterType="String">
+	<select id="getStatus" parameterType="String">
 		SELECT cod_cd, cod_nm
 		  FROM common_detailcode
 		 WHERE cod_yn = 'y'
 		   AND com_cd = #{com_cd}
 		 ORDER by cod_so
 	</select>
+	
+	<!-- 신고 상태 변경 -->
+	<update id="updateReportStatus" parameterType="map">
+		UPDATE report
+		   SET rpt_st = #{rpt_st}
+		 WHERE rpt_id = #{rpt_id}
+	</update>
   	
 </mapper>

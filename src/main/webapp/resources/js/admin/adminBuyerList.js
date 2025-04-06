@@ -74,67 +74,67 @@ $(function() {
 				return `<div class="row mb-3">
                     <label class="col-sm-3 col-form-label">이메일 : </label>
                     <div class="col-sm-8">
-                        <input type="text" id="code" class="col-sm-12 form-control" value="${buy.buy_em}" disabled>
+                        <input type="text" id="buyEm" class="col-sm-12 form-control" value="${buy.buy_em}" disabled>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label class="col-sm-3 col-form-label">이름 : </label>
                     <div class="col-sm-8">
-                        <input type="text" id="codeName" class="col-sm-12 form-control" value="${buy.buy_nm}" disabled>
+                        <input type="text" id="buyNm" class="col-sm-12 form-control" value="${buy.buy_nm}" disabled>
                     </div>
                 </div>
 				<div class="row mb-3">
                     <label class="col-sm-3 col-form-label">닉네임 : </label>
                     <div class="col-sm-8">
-                        <input type="text" id="codeName" class="col-sm-12 form-control" value="${buy.buy_nn}" disabled>
+                        <input type="text" id="buyNN" class="col-sm-12 form-control" value="${buy.buy_nn}" disabled>
                     </div>
                 </div>
 				<div class="row mb-3">
                     <label class="col-sm-3 col-form-label">성별 : </label>
                     <div class="col-sm-8">
-                        <input type="text" id="codeName" class="col-sm-12 form-control" value="${buy.buy_gn}" disabled>
+                        <input type="text" id="buyGn" class="col-sm-12 form-control" value="${buy.buy_gn}" disabled>
                     </div>
                 </div>
 				<div class="row mb-3">
                     <label class="col-sm-3 col-form-label">전화번호 : </label>
                     <div class="col-sm-8">
-                        <input type="text" id="codeName" class="col-sm-12 form-control" value="${buy.buy_ph}" disabled>
+                        <input type="text" id="buyPh" class="col-sm-12 form-control" value="${buy.buy_ph}" disabled>
                     </div>
                 </div>
 				<div class="row mb-3">
                     <label class="col-sm-3 col-form-label">주소 : </label>
                     <div class="col-sm-8">
-                        <input type="text" id="codeName" class="col-sm-12 form-control" value="${buy.buy_ad}" disabled>
+                        <input type="text" id="buyAd" class="col-sm-12 form-control" value="${buy.buy_ad}" disabled>
                     </div>
                 </div>
 				<div class="row mb-3">
                     <label class="col-sm-3 col-form-label">가입일시 : </label>
                     <div class="col-sm-8">
-                        <input type="text" id="codeName" class="col-sm-12 form-control" value="${date}" disabled>
+                        <input type="text" id="date" class="col-sm-12 form-control" value="${date}" disabled>
                     </div>
                 </div>
 				<div class="row mb-3">
                     <label class="col-sm-3 col-form-label">이용약관 : </label>
                     <div class="col-sm-8">
-                        <input type="text" id="codeName" class="col-sm-12 form-control" value="${buy.acc_ta === 1 ? "동의" : "미동의"}" disabled>
+                        <input type="text" id="accTa" class="col-sm-12 form-control" value="${buy.acc_ta === 1 ? "동의" : "미동의"}" disabled>
                     </div>
                 </div>
 				<div class="row mb-3">
                     <label class="col-sm-3 col-form-label">개인정보 처리 : </label>
                     <div class="col-sm-8">
-                        <input type="text" id="codeName" class="col-sm-12 form-control" value="${buy.acc_pa === 1 ? "동의" : "미동의"}" disabled>
+                        <input type="text" id="accPa" class="col-sm-12 form-control" value="${buy.acc_pa === 1 ? "동의" : "미동의"}" disabled>
                     </div>
                 </div>
 				<div class="row mb-3">
                     <label class="col-sm-3 col-form-label">마케팅 : </label>
                     <div class="col-sm-8">
-                        <input type="text" id="codeName" class="col-sm-12 form-control" value="${buy.acc_ma === 1 ? "동의" : "미동의"}" disabled>
+                        <input type="text" id="accMa" class="col-sm-12 form-control" value="${buy.acc_ma === 1 ? "동의" : "미동의"}" disabled>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label class="col-sm-3 col-form-label">계정상태 : </label>
                     <div class="col-sm-8">
-                        <input type="text" id="codeName" class="col-sm-12 form-control" value="${buy.cod_nm}" disabled>
+                        <input type="text" id="buySt" class="col-sm-12 form-control" value="${buy.cod_nm}" disabled>
                     </div>
                 </div>
 				<div align="right">

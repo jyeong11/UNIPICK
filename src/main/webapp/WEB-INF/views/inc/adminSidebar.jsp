@@ -79,9 +79,7 @@
         <div id="menu06" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
             	<h6 class="collapse-header">신고관리</h6>
-                <a class="collapse-item" href="#">신고</a>
-                <a class="collapse-item" href="#">#</a>
-                <a class="collapse-item" href="#">#</a>
+                <a class="collapse-item" href="adminReportList">신고</a>
             </div>
         </div>
     </li>

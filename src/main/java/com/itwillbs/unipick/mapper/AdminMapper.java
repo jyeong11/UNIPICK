@@ -53,7 +53,7 @@ public interface AdminMapper {
 	// 가입 리스트
 	public List<Map<String, Object>> joinList();
 	// 신고내역 리스트
-	public List<Map<String,Object>> reportList();
+	public List<Map<String,Object>> reportList(Map<String, Object> report);
 	// 판매자 회원 조회
 	public List<Map<String, Object>> getSellerInfo(Map<String, Object> data);
 	// 판매자 회원 상세 조회
@@ -61,5 +61,7 @@ public interface AdminMapper {
 	// 구매자 회원 조회
 	public List<Map<String, Object>> getBuyerInfo(Map<String, Object> data);
 	// 구매자 상태
-	public List<Map<String, Object>> getBuyerStatus(String com_cd);
+	public List<Map<String, Object>> getStatus(String com_cd);
+	// 신고 상태 업데이트
+	public void updateReportStatus(Map<String, Object> report);
 }

@@ -7,7 +7,6 @@ $(function () {
 		url:"mainPrint",
 		success: function(res){
 //			 방문자 수 출력
-//			visitCnt = res.visCnt?.vis_ct ?? 0;
 			if (res.visCnt && res.visCnt.vis_ct !== undefined) {
 			    visitCnt = res.visCnt.vis_ct;
 			}
@@ -17,25 +16,27 @@ $(function () {
 			//
 			
 			// 최근가입 출력
-			let joinInfo = res.joinList.map(item => `<tr>
+			let joinInfo = res.joinList.map(item => {const date = new Date(item.buy_at).toLocaleString();
+										return `<tr>
 													 <td>${item.buy_st}</td>
 										 			 <td>${item.buy_nm}</td>
 										  			 <td>${item.buy_em}</td>
-										  			 <td>${item.buy_at}</td>
-												 </tr>`)
+										  			 <td>${date}</td>
+												 </tr>`})
 								   .join('');
 			$('.join-tbody').append(joinInfo);
 			//
 			
 			// 신고내역 출력
 			
-			let reportInfo = res.reportList.map(item =>`<tr>
-													 	<td>${item.rpt_tg}</td>
-										 			 	<td>${item.rpt_tg === '구매자' ? '❗' : ''}${item.buy_em}</td>
-										  			 	<td>${item.rpt_tg === '판매자' ? '❗' : ''}${item.sel_id}</td>
-													 	<td>${item.rpt_dt}</td>
-													 	<td>${item.rpt_st}</td>
-												 		</tr>`)
+			let reportInfo = res.reportList.map(item =>{ const date = new Date(item.rpt_dt).toLocaleString();
+												return `<tr>
+											 			 	<td>${item.rpr_id}</td>
+											  			 	<td>${item.rpd_id}</td>
+															<td>${item.rpt_tg}</td>
+														 	<td>${date}</td>
+														 	<td>${item.cod_nm}</td>
+												 		</tr>`})
 								   		   .join('');
 			$('.report-tbody').append(reportInfo);
 			//

@@ -82,6 +82,12 @@ public class AdminController {
 		return "admin/adminBuyerList";
 	}
 	
+	// 신고현황 리스트 화면
+	@GetMapping("adminReportList")
+	public String adminReportList() {
+		return "admin/adminReportList";
+	}
+	
 	// 공통코드 화면 List 
 	@ResponseBody
 	@GetMapping("cmCodeList")
@@ -311,5 +317,22 @@ public class AdminController {
 	public Map<String, Object> getBuyerInfo(@RequestParam Map<String, Object> data) {
 		return adminservice.getBuyerInfo(data);
 	}
+	
+	// 신고현황 리스트
+	@ResponseBody
+	@PostMapping("getReportInfo")
+	public Map<String, Object> getReportInfo(@RequestParam Map<String, Object> report) {
+		return adminservice.getReportInfo(report);
+	}
+	
+	// 신고 상태 업데이트
+	@ResponseBody
+	@PostMapping("updateReportStatus")
+	public void updateReportStatus(@RequestBody Map<String, Object> report) {
+		System.out.println("123!@#!@#!@#!@");
+		System.out.println(report);
+		adminservice.updateReportStatus(report);
+	}
+	
 	
 }

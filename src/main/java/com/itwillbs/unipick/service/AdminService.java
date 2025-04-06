@@ -117,9 +117,9 @@ public class AdminService {
 	// 메인 페이지 출력
 	public Map<String, Object> mainPrint() {
 		Map<String, Object> mainData = new HashMap<String, Object>();
+		mainData.put("reportList", mapper.reportList(mainData));
 		mainData.put("visCnt", mapper.visitCount());
 		mainData.put("joinList", mapper.joinList());
-		mainData.put("reportList", mapper.reportList());
 		
 		return mainData;
 	}
@@ -138,9 +138,21 @@ public class AdminService {
 	public Map<String, Object> getBuyerInfo(Map<String, Object> data) {
 		Map<String, Object> info = new HashMap<String, Object>();
 		info.put("buyer", mapper.getBuyerInfo(data));
-		info.put("status", mapper.getBuyerStatus("BUY_STATUS"));
+		info.put("status", mapper.getStatus("BUY_STATUS"));
 		
 		return info;
 	}
 	
+	// 신고현황 리스트
+	public Map<String, Object> getReportInfo(Map<String, Object> report) {
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("report", mapper.reportList(report));
+		data.put("rptSt", mapper.getStatus("REPORT_STATUS"));
+		return data;
+	}
+	
+	// 신고 상태 업데이트
+	public void updateReportStatus(Map<String, Object> report) {
+		mapper.updateReportStatus(report);
+	}
 }
