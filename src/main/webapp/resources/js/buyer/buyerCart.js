@@ -14,7 +14,7 @@ $(function() {
 				const html = `
 					<div class="cart-item" data-cart-id="${prd.crt_id}" data-unit-price="${prd.prd_sp}">
 						<div class="check">
-							<div><input type="checkbox" class="item-checkbox"></div>
+							<div><input type="checkbox" class="item-checkbox" checked></div>
 							<div class="info">
 								<div class="prd-info">상품정보</div>
 								<div>옵션</div>
@@ -52,9 +52,12 @@ $(function() {
 					</div>
 				`;
 				sum += totalPrdPrice + prd.prd_sf;
-        		totalSf += prd.prd_sf;
 				
 				container.insertAdjacentHTML("beforeend", html);
+				
+				 $("#orderInfo-container").html(`
+			        <div class="ttpr">총 주문금액:  ${sum.toLocaleString()}원</div>
+			    `);
 				
             });
 		},

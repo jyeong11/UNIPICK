@@ -43,7 +43,7 @@
 				<h2>장바구니</h2>
 			</div>
 			<div class="all">
-				<input type="checkbox" id="selectAll">전체선택
+				<input type="checkbox" id="selectAll" checked>전체선택
 				<button id="cartDelete"><i class="fa-regular fa-trash-can"></i></button>
 			</div>
 			<div id = "img12">
@@ -53,6 +53,7 @@
 						<div class="product_posting"></div>
 					</div>
 				</div>
+				<div id="orderInfo-container"></div>
 			</div>
 		</div>
 	</div>

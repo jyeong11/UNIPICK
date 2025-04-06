@@ -274,12 +274,14 @@
 	  		FORMAT(p.prd_op, 0) AS prd_op, 
 	  		FORMAT(p.prd_sp, 0) AS prd_sp,
 	  		pi.fil_pt
-	    FROM products p 
-	    JOIN sellers s
-          ON p.sel_id = s.sel_id
-        JOIN product_images pi
-          ON p.prd_cd = pi.prd_cd
-	   WHERE p.prd_cd = #{prd_cd};
+	   FROM products p 
+	   JOIN sellers s
+         ON p.sel_id = s.sel_id
+       JOIN (SELECT prd_cd, fil_pt 
+               FROM product_images
+              WHERE fil_nb = 1) pi
+         ON p.prd_cd = pi.prd_cd
+	  WHERE p.prd_cd = #{prd_cd};
 	</select>
 	
 	<!-- 구매자 정보 수정 -->
