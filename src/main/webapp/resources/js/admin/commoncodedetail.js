@@ -132,7 +132,10 @@ $(function() {
 	
 	// 상세공통코드 등록 화면 등록 클릭시
 	 $(document).on('click', '#codeDetailRegister', function(){
-		confirm("등록하시겠습니까?") ? alert("등록이 완료되었습니다.") : alert("등록이 취소되었습니다.");
+		if(!confirm("등록하시겠습니까?")){
+			alert("등록이 취소되었습니다.");	
+		}
+		alert("등록이 완료되었습니다.");
 		let data = {};
 		data.com_cd = $('#code').val();
 		data.cod_cd = $('#codeDetail').val();

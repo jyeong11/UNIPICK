@@ -133,4 +133,14 @@ public class AdminService {
 	public List<Map<String, Object>> getSellerInfoDeatil(Map<String, Object> sel_nm){
 		return mapper.getSellerInfoDeatil(sel_nm);
 	}
+	
+	// 구매자 회원 조회
+	public Map<String, Object> getBuyerInfo(Map<String, Object> data) {
+		Map<String, Object> info = new HashMap<String, Object>();
+		info.put("buyer", mapper.getBuyerInfo(data));
+		info.put("status", mapper.getBuyerStatus("BUY_STATUS"));
+		
+		return info;
+	}
+	
 }

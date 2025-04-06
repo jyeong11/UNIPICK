@@ -76,6 +76,12 @@ public class AdminController {
 		return "admin/adminSellerDetail";
 	}
 	
+	// 구매자 회원 화면
+	@GetMapping("adminBuyerList")
+	public String adminBuyerList() {
+		return "admin/adminBuyerList";
+	}
+	
 	// 공통코드 화면 List 
 	@ResponseBody
 	@GetMapping("cmCodeList")
@@ -298,4 +304,12 @@ public class AdminController {
 	public List<Map<String, Object>> getSellerInfoDeatil(@RequestParam Map<String, Object> sel_nm) {
 		return adminservice.getSellerInfoDeatil(sel_nm);
 	}
+	
+	// 구매자 회원 조회
+	@ResponseBody
+	@PostMapping("getBuyerInfo")
+	public Map<String, Object> getBuyerInfo(@RequestParam Map<String, Object> data) {
+		return adminservice.getBuyerInfo(data);
+	}
+	
 }

@@ -58,4 +58,8 @@ public interface AdminMapper {
 	public List<Map<String, Object>> getSellerInfo(Map<String, Object> data);
 	// 판매자 회원 상세 조회
 	public List<Map<String, Object>> getSellerInfoDeatil(Map<String, Object> sel_nm);
+	// 구매자 회원 조회
+	public List<Map<String, Object>> getBuyerInfo(Map<String, Object> data);
+	// 구매자 상태
+	public List<Map<String, Object>> getBuyerStatus(String com_cd);
 }

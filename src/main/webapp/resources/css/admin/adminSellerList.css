@@ -238,7 +238,7 @@ body {
 .form-control{
 	height: 43px !important;	
 }
-#noticeSearch {
+#noticeSearch, #buyerSearch {
 	color: white;
     background-color: black;
     height: 41px;

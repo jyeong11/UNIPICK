@@ -308,5 +308,52 @@
 	     ON s.sel_st = cd.cod_cd 
 	  WHERE sel_nm = #{sel_nm};
 	</select>
+	
+	<!-- 구매자 회원 조회 -->
+	<select id="getBuyerInfo" parameterType="map">
+		SELECT ROW_NUMBER() OVER (ORDER BY b.acc_at) AS rn,
+			   b.buy_em,
+			   b.buy_nm,
+			   b.buy_ad,
+			   b.buy_ph,
+			   b.buy_bd,
+			   b.buy_nn,
+			   b.buy_gn,
+			   b.buy_ht,
+			   b.buy_wt,
+			   b.buy_pc,
+			   b.acc_at,
+			   b.acc_ta,
+			   b.acc_pa,
+			   b.acc_ma,
+			   cd.cod_nm
+		  FROM buyers b
+		  join common_detailcode cd on b.acc_st = cd.cod_cd 
+		 WHERE 1 = 1
+		  <choose>
+		   	<when test="buy_em != null and !buy_em.equals('')">
+		   		AND buy_em LIKE CONCAT(#{buy_em}, '%')
+		   	</when>
+		   	<when test="buy_nm != null and !buy_nm.equals('')">
+		   		AND buy_nm LIKE CONCAT(#{buy_nm}, '%')
+		   	</when>
+		   	<when test="buy_nn != null and !buy_nn.equals('')">
+		   		AND buy_nn LIKE CONCAT(#{buy_nn}, '%')
+		   	</when>
+	     </choose>
+	     <if test="acc_st != null and !acc_st.equals('')">
+	     	AND acc_st = #{acc_st}
+	     </if>
+		 ORDER BY acc_at DESC
+	</select>
+	
+	<!-- 구매자 상태 -->
+	<select id="getBuyerStatus" parameterType="String">
+		SELECT cod_cd, cod_nm
+		  FROM common_detailcode
+		 WHERE cod_yn = 'y'
+		   AND com_cd = #{com_cd}
+		 ORDER by cod_so
+	</select>
   	
 </mapper>
