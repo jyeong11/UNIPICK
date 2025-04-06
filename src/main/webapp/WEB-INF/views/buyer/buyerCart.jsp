@@ -49,6 +49,7 @@
 			<div id = "img12">
 				<div class="first">
 					<div class="top_view">
+<!-- 					동적으로 만듬 -->
 						<div class="product_posting"></div>
 					</div>
 				</div>

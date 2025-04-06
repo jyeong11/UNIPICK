@@ -1,22 +1,39 @@
 @charset "UTF-8";
-
+.prd {
+	height: 66px;
+	flex: 1 0 120px; /* 고정 너비로 설정 */
+	align-items: center;
+}
+.product-line {
+	display: flex;
+	align-items: center; /* 세로 가운데 정렬 */
+}
+.prd-sp{
+	margin-left: 112px;
+    font-size: 1.2em;
+}
 #best, #new {
     max-width: 1200px;
     margin: 0 auto;
     padding-top: 50px;
 }
 .opt{
-	background-color: #f5f5f5;
+	flex: 1;
+    background-color: #f5f5f5;
     padding: 10px;
     border-radius: 8px;
-    width: 350px;
+    width: 321px;
+    height: 46px;
     display: flex;
+    align-items: center;
+    justify-content: space-between; /* 양쪽 끝으로 정렬 */
+    gap: 10px;
 }
 .check{
 	display: flex;
 	
 }
-.all{
+.all, .check{
 	padding-bottom: 20px;
     border-bottom: 1px solid #e8e9eb;
 }
@@ -28,13 +45,12 @@
 	cursor: pointer; 
 	margin-left: 1000px;
 }
-.prd-info {
-	margin-left: -160px;
-}
 .info {
 	display: flex;
     height: 20px;
     font-size: 20px;
+    margin-left: 420px;
+    gap: 248px;
 }
 .qty-btn {
     border: none;
@@ -64,7 +80,6 @@
 }
 .prd, .del{
 	display: flex;
-	justify-content: space-between;
 }
 .two {
     display: flex;
@@ -120,9 +135,6 @@ input[type="checkbox"]:checked {
 	padding: 5px;
 }
 
-#img12 div {
-	flex: 1 1 calc(100%);
-}
 
 #img12 .first, .second, .third {
 	display: flex;

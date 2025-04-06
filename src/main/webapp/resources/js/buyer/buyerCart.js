@@ -12,7 +12,7 @@ $(function() {
 			res.forEach(prd => {
 				let totalPrdPrice = parseInt(prd.prd_sp * parseInt(prd.crt_qt));
 				const html = `
-					<div class="cart-item" data-cart-id="${prd.crt_id}">
+					<div class="cart-item" data-cart-id="${prd.crt_id}" data-unit-price="${prd.prd_sp}">
 						<div class="check">
 							<div><input type="checkbox" class="item-checkbox"></div>
 							<div class="info">
@@ -29,20 +29,20 @@ $(function() {
 								<a href="sellerShopDetail?sel_nm=${prd.sel_nm}">
 									<div class="sel_nm">${prd.sel_nm}</div>
 								</a>
-								<div class="prd">
-									<div class="prd_nm">${prd.prd_nm}</div>
-								</div>
-								<div class="opt">
-									<div>${prd.clr_nm} / ${prd.cod_nm}</div>
-									<div class="crt-qt">${prd.crt_qt}</div>
-									<div class="quantity-box">
-										<button type="button" class="qty-btn minus">-</button>
-										<input type="text" class="qty-input" value="${prd.crt_qt}" min="1">
-										<button type="button" class="qty-btn plus">+</button>
+								<div class="product-line">
+									<div class="prd">
+										<div class="prd_nm">${prd.prd_nm}</div>
 									</div>
+									<div class="opt">
+										<div>${prd.clr_nm} / ${prd.cod_nm}</div>
+										<div class="quantity-box">
+											<button type="button" class="qty-btn minus">-</button>
+											<input type="text" class="qty-input" value="${prd.crt_qt}" min="1">
+											<button type="button" class="qty-btn plus">+</button>
+										</div>
+									</div>
+									<div class="prd-sp">${prd.prd_sp.toLocaleString()}원</div>
 								</div>
-								<div>${prd.prd_op.toLocaleString()}원</div>
-								<div>${prd.prd_sp}</div>
 								<div class="del">
 									<div class="prd-sf">배송비</div>
 									<div>${prd.prd_sf.toLocaleString()}원</div>
@@ -120,6 +120,10 @@ $(function() {
 	            qty: qty
 	        }),
 			success: function () {
+				const unitPrice = parseInt(cartItem.data("unit-price")); // 단가 가져옴
+	            const newTotal = unitPrice * qty;
+
+				cartItem.find(".prd-sp").text(newTotal.toLocaleString() + "원");
 			},
 	        error: function (xhr, status, error) {
 	            console.error("수량 업데이트 실패:", error);
