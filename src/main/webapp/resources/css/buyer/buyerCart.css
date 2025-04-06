@@ -9,7 +9,7 @@
 	align-items: center; /* 세로 가운데 정렬 */
 }
 .prd-sp{
-	margin-left: 112px;
+	margin-left: 68px;
     font-size: 1.2em;
 }
 #best, #new {
@@ -80,6 +80,8 @@
 }
 .prd, .del{
 	display: flex;
+	justify-content: space-between;
+	font-size: 1.2em;
 }
 .two {
     display: flex;
@@ -115,6 +117,7 @@ input[type="checkbox"]:checked {
 .all {
 	display: flex;
 	font-size: 20px;
+	width: 1139px;
 }
 .top_view, .bottom_view {
 	display: flex;

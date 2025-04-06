@@ -663,9 +663,9 @@
 	
 <!-- 	장바구니 수정 -->
 	<update id="updateCart">
-	 update cart 
-	 	set crt_qt = crt_qt + #{updataData.qty}
-	  where crt_id = #{updataData.crt_id}
-	    AND buy_em = #{buy_em}; 
+	 UPDATE cart 
+	    SET crt_qt = #{updataData.qty}
+	  WHERE crt_id = #{updataData.crt_id}
+        AND buy_em = #{buy_em};
 	</update>
   </mapper>

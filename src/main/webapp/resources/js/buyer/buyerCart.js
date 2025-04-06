@@ -108,7 +108,7 @@ $(function() {
 	    } else {
 	        if (qty > 1) qty -= 1;
 	    }
-		
+		debugger;
 	    qtyInput.val(qty);
 		
 	    $.ajax({
