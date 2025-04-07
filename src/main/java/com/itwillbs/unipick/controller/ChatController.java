@@ -98,48 +98,11 @@ public class ChatController {
     // 채팅방 페이지
     @GetMapping("/room/{cht_id}")
     public String chatRoom(@PathVariable("cht_id") String cht_id, HttpSession session, Model model) {
-        // 세션에서 사용자 정보 가져오기 (다양한 키 확인)
-        String buy_em = (String) session.getAttribute("buyEm");
-        String sel_id = (String) session.getAttribute("sel_id");
-        
-        
-        if (buy_em == null && sel_id == null) {
-            // 로그인되지 않은 경우
-            return "redirect:/buyerlogin";  // 경로 수정
-        }
-        
-        try {
-            // 채팅방 ID를 정수로 변환
-            int chatRoomId = Integer.parseInt(cht_id);
-            
-            // 채팅방 정보 조회
-            Map<String, Object> chatRoom = chatService.getChatRoom(chatRoomId);
-            
-            if (chatRoom == null) {
-                // 채팅방을 찾을 수 없는 경우
-                return "redirect:/chat/buyer/list";
-            }
-            
-            model.addAttribute("chatRoom", chatRoom);
-            
-            // 현재 사용자가 구매자인지 판매자인지 확인
-            String userType = (buy_em != null) ? "buyer" : "seller";
-            model.addAttribute("userType", userType);
-            model.addAttribute("userId", (buy_em != null) ? buy_em : sel_id);
-            
-            return "chat/ChatRoom";
-        } catch (NumberFormatException e) {
-            // 채팅방 ID가 유효한 정수가 아닌 경우
-            return "redirect:/chat/buyer/list";
-        }
-    }
-    
-    // 팝업 채팅방 페이지
-    @GetMapping("/popup/{cht_id}")
-    public String chatPopup(@PathVariable("cht_id") String cht_id, HttpSession session, Model model) {
         // 세션에서 사용자 정보 가져오기
         String buy_em = (String) session.getAttribute("buyEm");
+        String buy_nm = (String) session.getAttribute("buyNm"); // 이름 가져오기
         String sel_id = (String) session.getAttribute("sel_id");
+        String sel_nm = (String) session.getAttribute("sel_nm"); // 판매자 이름 가져오기
         
         if (buy_em == null && sel_id == null) {
             // 로그인되지 않은 경우
@@ -164,6 +127,60 @@ public class ChatController {
             String userType = (buy_em != null) ? "buyer" : "seller";
             model.addAttribute("userType", userType);
             model.addAttribute("userId", (buy_em != null) ? buy_em : sel_id);
+            
+            // 사용자 아이디를 세션에 저장 (웹소켓 핸들러에서 사용)
+            // 이메일 대신 이름을 사용 (이름이 없는 경우 이메일 사용)
+            String displayName = (buy_em != null) ? 
+                (buy_nm != null ? buy_nm : buy_em) : 
+                (sel_nm != null ? sel_nm : sel_id);
+            session.setAttribute("sId", displayName);
+            
+            return "chat/ChatRoom";
+        } catch (NumberFormatException e) {
+            // 채팅방 ID가 유효한 정수가 아닌 경우
+            return "redirect:/chat/buyer/list";
+        }
+    }
+    
+    // 팝업 채팅방 페이지
+    @GetMapping("/popup/{cht_id}")
+    public String chatPopup(@PathVariable("cht_id") String cht_id, HttpSession session, Model model) {
+        // 세션에서 사용자 정보 가져오기
+        String buy_em = (String) session.getAttribute("buyEm");
+        String buy_nm = (String) session.getAttribute("buyNm"); // 이름 가져오기
+        String sel_id = (String) session.getAttribute("sel_id");
+        String sel_nm = (String) session.getAttribute("sel_nm"); // 판매자 이름 가져오기
+        
+        if (buy_em == null && sel_id == null) {
+            // 로그인되지 않은 경우
+            return "redirect:/buyerlogin";
+        }
+        
+        try {
+            // 채팅방 ID를 정수로 변환
+            int chatRoomId = Integer.parseInt(cht_id);
+            
+            // 채팅방 정보 조회
+            Map<String, Object> chatRoom = chatService.getChatRoom(chatRoomId);
+            
+            if (chatRoom == null) {
+                // 채팅방을 찾을 수 없는 경우
+                return "redirect:/chat/buyer/list";
+            }
+            
+            model.addAttribute("chatRoom", chatRoom);
+            
+            // 현재 사용자가 구매자인지 판매자인지 확인
+            String userType = (buy_em != null) ? "buyer" : "seller";
+            model.addAttribute("userType", userType);
+            model.addAttribute("userId", (buy_em != null) ? buy_em : sel_id);
+            
+            // 사용자 아이디를 세션에 저장 (웹소켓 핸들러에서 사용)
+            // 이메일 대신 이름을 사용 (이름이 없는 경우 이메일 사용)
+            String displayName = (buy_em != null) ? 
+                (buy_nm != null ? buy_nm : buy_em) : 
+                (sel_nm != null ? sel_nm : sel_id);
+            session.setAttribute("sId", displayName);
             
             return "chat/popUp";
         } catch (NumberFormatException e) {
@@ -335,5 +352,29 @@ public class ChatController {
         }
         
         return result;
+    }
+    
+    // 웹소켓 채팅 페이지
+    @GetMapping("/websocket")
+    public String websocketChat(HttpSession session) {
+        // 세션에서 사용자 정보 가져오기
+        String buy_em = (String) session.getAttribute("buyEm");
+        String buy_nm = (String) session.getAttribute("buyNm"); // 이름 가져오기
+        String sel_id = (String) session.getAttribute("sel_id");
+        String sel_nm = (String) session.getAttribute("sel_nm"); // 판매자 이름 가져오기
+        
+        if (buy_em == null && sel_id == null) {
+            // 로그인되지 않은 경우
+            return "redirect:/buyerlogin";
+        }
+        
+        // 사용자 아이디를 세션에 저장 (웹소켓 핸들러에서 사용)
+        // 이메일 대신 이름을 사용 (이름이 없는 경우 이메일 사용)
+        String displayName = (buy_em != null) ? 
+            (buy_nm != null ? buy_nm : buy_em) : 
+            (sel_nm != null ? sel_nm : sel_id);
+        session.setAttribute("sId", displayName);
+        
+        return "chat/WebSocketChat";
     }
 }

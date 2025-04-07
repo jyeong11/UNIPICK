@@ -112,6 +112,7 @@ public class SellerController {
 			success = true;
 	        session.setAttribute("selId", sellerinfo.get("sel_id"));
 	        session.setAttribute("storeId", sellerinfo.get("sel_id")); 
+	        session.setAttribute("sel_nm", sellerinfo.get("sel_nm"));
 	        boolean rememberMe = (boolean) logindata.getOrDefault("rememberMe", false);
 
 	        if (rememberMe) {

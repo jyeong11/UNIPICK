@@ -51,7 +51,11 @@ public class BuyerController2 {
 	public Map<String, Object> buyerLogin(@RequestBody Map<String, Object> logindata,
 										   HttpSession session,
 										   HttpServletResponse res) {
+		System.out.println("로그인 요청 데이터: " + logindata); // 요청 데이터 출력
+		
 		Map<String, Object> buyerinfo = buyerService.BuyerLogin(logindata);
+		
+		System.out.println("로그인 결과 데이터: " + buyerinfo); // 결과 데이터 출력
 		
 		boolean success = false;
 		String msg = "아이디 또는 비밀번호가 틀렸습니다.";
@@ -59,6 +63,10 @@ public class BuyerController2 {
 		if (buyerinfo != null) {
 			success = true;
 	        session.setAttribute("buyEm", buyerinfo.get("buy_em"));
+	        session.setAttribute("buyNm", buyerinfo.get("buy_nm"));
+	        System.out.println("세션에 저장된 buyEm: " + session.getAttribute("buyEm"));
+	        System.out.println("세션에 저장된 buyNm: " + session.getAttribute("buyNm"));
+	        
 	        boolean rememberMe = (boolean) logindata.getOrDefault("rememberMe", false);
 
 	        if (rememberMe) {

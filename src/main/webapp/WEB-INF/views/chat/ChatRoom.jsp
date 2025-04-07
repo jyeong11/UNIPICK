@@ -13,6 +13,51 @@
         display: flex;
         flex-direction: column;
     }
+    
+    /* 메시지 정렬 스타일 추가 */
+    .message {
+        margin-bottom: 15px;
+        max-width: 80%;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .message.left {
+        align-self: flex-start;
+        margin-right: auto;
+        margin-left: 0;
+    }
+    
+    .message.right {
+        align-self: flex-end;
+        margin-left: auto;
+        margin-right: 0;
+    }
+    
+    .message.center {
+        align-self: center;
+        margin: 5px auto;
+    }
+    
+    .message.left .message-content {
+        background-color: #e0e0e0;
+        color: #333;
+        border-top-left-radius: 0;
+    }
+    
+    .message.right .message-content {
+        background-color: #ffa726;
+        color: #fff;
+        border-top-right-radius: 0;
+    }
+    
+    .message.center .message-content {
+        background-color: #e0e0e0;
+        color: #333;
+        font-size: 12px;
+        padding: 5px 10px;
+        border-radius: 12px;
+    }
 </style>
 </head>
 <body>
@@ -47,12 +92,12 @@
     </div>
     <script>
         $(document).ready(function() {
-            const cht_id = ${chatRoom.cht_id};
-            const userType = "${userType}";
-            const currentUserId = "${userId}";
+            var cht_id = ${chatRoom.cht_id};
+            var userType = "${userType}";
+            var currentUserId = "${userId}";
             
             // 자바스크립트 WebSocket 객체를 저장할 변수 선언
-            let ws;
+            var ws;
             
             // 채팅 메세지 타입을 구분하기 위한 상수 설정
             const TYPE_ENTER = "ENTER"; // 입장
@@ -94,9 +139,16 @@
                 const $messages = $("#messages");
                 $messages.empty();
                 
+                console.log("현재 사용자 ID:", currentUserId);
+                
                 messages.forEach(function(message) {
                     // 정확한 비교를 위해 문자열로 변환
-                    const isMine = String(message.sender).trim() === String(currentUserId).trim();
+                    console.log("메시지 발신자:", message.sender, "현재 사용자:", currentUserId);
+                    
+                    // sender 필드가 현재 사용자 ID와 일치하는지 확인 (대소문자 무시)
+                    const isMine = String(message.sender).trim().toLowerCase() === String(currentUserId).trim().toLowerCase();
+                    
+                    console.log("내 메시지 여부:", isMine);
                     
                     // 메시지 HTML 구성
                     const $messageDiv = $("<div>").addClass("message " + (isMine ? "right" : "left"));
@@ -153,6 +205,15 @@
                     // 입장/퇴장 메시지 (중앙 정렬)
                     appendMessage(data.message, ALIGN_CENTER);
                 } else if (data.type === TYPE_TALK) {
+                    // 발신자 ID와 현재 사용자 ID 비교
+                    console.log("발신자:", data.sender_id, "현재 사용자:", currentUserId);
+                    const isMine = String(data.sender_id).trim() === String(currentUserId).trim();
+                    
+                    if (isMine) {
+                        // 내가 보낸 메시지는 표시하지 않음 (이미 즉시 표시됨)
+                        return;
+                    }
+                    
                     // 대화 메시지 (항상 왼쪽 정렬 - 다른 사람의 메시지)
                     appendMessage(data.sender_id + ": " + data.message, ALIGN_LEFT);
                 }
