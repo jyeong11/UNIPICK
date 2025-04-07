@@ -249,14 +249,20 @@
     flex-direction: column;
 }
 
-.message.mine {
+.message.mine,
+.message.right {
     align-self: flex-end;
     margin-left: auto;
+    margin-right: 0;
+    max-width: 80%;
 }
 
-.message.other {
+.message.other,
+.message.left {
     align-self: flex-start;
     margin-right: auto;
+    margin-left: 0;
+    max-width: 80%;
 }
 
 .message-content {
@@ -266,14 +272,16 @@
     word-break: break-word;
 }
 
-.message.mine .message-content {
-    background-color: #2979ff;
+.message.mine .message-content,
+.message.right .message-content {
+    background-color: #ffa726;
     color: #fff;
     border-top-right-radius: 0;
 }
 
-.message.other .message-content {
-    background-color: #e6e6e6;
+.message.other .message-content,
+.message.left .message-content {
+    background-color: #e0e0e0;
     color: #333;
     border-top-left-radius: 0;
 }
@@ -318,4 +326,20 @@
 
 .chat-input button:hover {
     background-color: #2563eb;
+}
+
+/* 웹소켓 채팅 메시지 스타일 */
+.message.center {
+    align-self: center;
+    margin: 5px auto;
+    max-width: 80%;
+}
+
+.message.center .message-content {
+    background-color: #e0e0e0;
+    color: #333;
+    padding: 8px 12px;
+    border-radius: 18px;
+    font-size: 14px;
+    text-align: center;
 } 

@@ -101,7 +101,6 @@
                     
                     // 판매자 프로필 및 정보
                     var $sellerInfo = $("<div class='seller-info'>" +
-                                        "<img src='${pageContext.request.contextPath}/resources/images/profile.png' alt='판매자 프로필'>" +
                                         "<div class='seller-details'>" +
                                         "<h4>" + seller.sel_nm + "</h4>" +
                                         "<span>" + seller.sel_id + "</span>" +

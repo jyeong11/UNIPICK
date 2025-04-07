@@ -102,18 +102,6 @@ public class ChatController {
         String buy_em = (String) session.getAttribute("buyEm");
         String sel_id = (String) session.getAttribute("sel_id");
         
-        // 다른 세션 키 시도
-        if (buy_em == null) {
-            buy_em = (String) session.getAttribute("buyerEm");
-            buy_em = (String) session.getAttribute("buyer_em");
-            buy_em = (String) session.getAttribute("buyerEmail");
-        }
-        
-        if (sel_id == null) {
-            sel_id = (String) session.getAttribute("sellerId");
-            sel_id = (String) session.getAttribute("seller_id");
-            sel_id = (String) session.getAttribute("selId");
-        }
         
         if (buy_em == null && sel_id == null) {
             // 로그인되지 않은 경우

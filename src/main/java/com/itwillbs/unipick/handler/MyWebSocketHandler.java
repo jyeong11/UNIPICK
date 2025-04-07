@@ -98,7 +98,7 @@ public class MyWebSocketHandler extends TextWebSocketHandler {
 	}
 	
 	
-	//3. afterConnectionClosed - 웹소캣 연결 해제 시 자동으로 호출되는 메서드
+	//3. afterConnectionClosed - 웹소켓 연결 해제 시 자동으로 호출되는 메서드
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		
@@ -111,7 +111,7 @@ public class MyWebSocketHandler extends TextWebSocketHandler {
 		map.put("sender_id", "");
 		map.put("message", "");
 		
-		sendMessage(session, null);
+		sendMessage(session, map);
 		
 	}
 	//4. handleTransportError - 웹소켓 통신 과정에서 오류 발생 시 자동으로 호출되는 메서드

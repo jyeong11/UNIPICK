@@ -8,6 +8,12 @@
 <title>채팅</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/chat/chat.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+    .chat-messages {
+        display: flex;
+        flex-direction: column;
+    }
+</style>
 </head>
 <body>
     
@@ -22,8 +28,8 @@
                 <div class="chat-title">
                     <h3>
                         <c:choose>
-                            <c:when test="${userType eq 'buyer'}">${chatRoom.sel_name}</c:when>
-                            <c:otherwise>${chatRoom.buy_name}</c:otherwise>
+                            <c:when test="${userType eq 'buyer'}">${chatRoom.sel_nm}</c:when>
+                            <c:otherwise>${chatRoom.buy_nm}</c:otherwise>
                         </c:choose>
                     </h3>
                 </div>
@@ -43,8 +49,28 @@
         $(document).ready(function() {
             const cht_id = ${chatRoom.cht_id};
             const userType = "${userType}";
+            const currentUserId = "${userId}";
             
-            // 메시지 불러오기
+            // 자바스크립트 WebSocket 객체를 저장할 변수 선언
+            let ws;
+            
+            // 채팅 메세지 타입을 구분하기 위한 상수 설정
+            const TYPE_ENTER = "ENTER"; // 입장
+            const TYPE_LEAVE = "LEAVE"; // 퇴장
+            const TYPE_TALK = "TALK";   // 대화메세지
+            
+            // 채팅 메시지 정렬 위치 상수
+            const ALIGN_RIGHT = "right";
+            const ALIGN_LEFT = "left";
+            const ALIGN_CENTER = "center";
+            
+            // 최초 메시지 로드 (이전 대화 내역)
+            loadMessages();
+            
+            // 웹소켓 연결
+            connectWebSocket();
+            
+            // 메시지 불러오기 (이전 대화 내역)
             function loadMessages() {
                 $.ajax({
                     url: "${pageContext.request.contextPath}/chat/messages/" + cht_id,
@@ -69,17 +95,11 @@
                 $messages.empty();
                 
                 messages.forEach(function(message) {
-                    // 메시지 발신자 타입 판단
-                    let isMine = false;
-                    
-                    if (userType === 'buyer' && message.sender_type === 'buyer') {
-                        isMine = true;
-                    } else if (userType === 'seller' && message.sender_type === 'seller') {
-                        isMine = true;
-                    }
+                    // 정확한 비교를 위해 문자열로 변환
+                    const isMine = String(message.sender).trim() === String(currentUserId).trim();
                     
                     // 메시지 HTML 구성
-                    const $messageDiv = $("<div>").addClass(isMine ? "message mine" : "message other");
+                    const $messageDiv = $("<div>").addClass("message " + (isMine ? "right" : "left"));
                     
                     const $messageContent = $("<div>").addClass("message-content");
                     $messageContent.text(message.chd_ms);
@@ -96,6 +116,60 @@
                 $messages.scrollTop($messages[0].scrollHeight);
             }
             
+            // 웹소켓 연결 함수
+            function connectWebSocket() {
+                // 요청 주소 생성(웹소켓 기본 프로토콜은 ws, 보안 프로토콜은 wss)
+                let ws_base_url = "ws://localhost:8080/UNIPICK";
+                
+                ws = new WebSocket(ws_base_url + "/echo");
+                
+                ws.onopen = onOpen;
+                ws.onclose = onClose;
+                ws.onmessage = onMessage;
+                ws.onerror = onError;
+            }
+            
+            // 웹소켓 이벤트 핸들러
+            function onOpen() {
+                console.log("웹소켓 연결됨");
+                // 채팅방 입장 메시지는 표시하지 않고 서버에만 알림
+                sendSocketMessage(TYPE_ENTER, "");
+            }
+            
+            function onClose() {
+                console.log("웹소켓 연결 종료");
+            }
+            
+            function onError() {
+                console.log("웹소켓 오류 발생");
+            }
+            
+            function onMessage(event) {
+                console.log("메시지 수신: ", event.data);
+                
+                const data = JSON.parse(event.data);
+                
+                if (data.type === TYPE_ENTER || data.type === TYPE_LEAVE) {
+                    // 입장/퇴장 메시지 (중앙 정렬)
+                    appendMessage(data.message, ALIGN_CENTER);
+                } else if (data.type === TYPE_TALK) {
+                    // 대화 메시지 (항상 왼쪽 정렬 - 다른 사람의 메시지)
+                    appendMessage(data.sender_id + ": " + data.message, ALIGN_LEFT);
+                }
+            }
+            
+            // 메시지 추가 함수
+            function appendMessage(message, align) {
+                const $messageDiv = $("<div>").addClass("message " + align);
+                const $messageContent = $("<div>").addClass("message-content").text(message);
+                
+                $messageDiv.append($messageContent);
+                $("#messages").append($messageDiv);
+                
+                // 스크롤을 맨 아래로 이동
+                $("#messages").scrollTop($("#messages")[0].scrollHeight);
+            }
+            
             // 시간 포맷팅 함수
             function formatTime(date) {
                 const hours = date.getHours().toString().padStart(2, '0');
@@ -103,9 +177,20 @@
                 return hours + ":" + minutes;
             }
             
-            // 메시지 전송
+            // 웹소켓으로 메시지 전송
+            function sendSocketMessage(type, message) {
+                if (ws.readyState === WebSocket.OPEN) {
+                    let param = {type, message};
+                    ws.send(JSON.stringify(param));
+                } else {
+                    console.log("웹소켓이 연결되지 않았습니다.");
+                }
+            }
+            
+            // 메시지 전송 (버튼 클릭)
             $("#sendBtn").click(sendMessage);
             
+            // 메시지 전송 (엔터키)
             $("#messageInput").keypress(function(e) {
                 if (e.which === 13) {  // Enter 키
                     sendMessage();
@@ -113,6 +198,7 @@
                 }
             });
             
+            // 메시지 전송 함수
             function sendMessage() {
                 const message = $("#messageInput").val().trim();
                 
@@ -120,6 +206,7 @@
                     return;
                 }
                 
+                // DB에 메시지 저장 (기존 AJAX 방식)
                 $.ajax({
                     url: "${pageContext.request.contextPath}/chat/send",
                     type: "POST",
@@ -130,8 +217,14 @@
                     dataType: "json",
                     success: function(response) {
                         if (response.success) {
+                            // 메시지 입력창 초기화
                             $("#messageInput").val("");
-                            loadMessages();  // 메시지 다시 로드
+                            
+                            // 내 메시지는 오른쪽에 즉시 표시
+                            appendMessage(message, ALIGN_RIGHT);
+                            
+                            // 웹소켓으로 다른 사용자에게 메시지 전송
+                            sendSocketMessage(TYPE_TALK, message);
                         } else {
                             alert(response.message);
                         }
@@ -141,12 +234,6 @@
                     }
                 });
             }
-            
-            // 페이지 로드 시 메시지 로드
-            loadMessages();
-            
-            // 주기적으로 메시지 갱신 (5초마다)
-            setInterval(loadMessages, 5000);
         });
     </script>
 </body>
