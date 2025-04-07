@@ -102,7 +102,23 @@ public class ChatController {
         String buy_em = (String) session.getAttribute("buyEm");
         String buy_nm = (String) session.getAttribute("buyNm"); // 이름 가져오기
         String sel_id = (String) session.getAttribute("sel_id");
+        
+        // 다른 판매자 세션 키 시도
+        if (sel_id == null) {
+            sel_id = (String) session.getAttribute("sellerId");
+        }
+        if (sel_id == null) {
+            sel_id = (String) session.getAttribute("seller_id");
+        }
+        if (sel_id == null) {
+            sel_id = (String) session.getAttribute("selId");
+        }
+        
         String sel_nm = (String) session.getAttribute("sel_nm"); // 판매자 이름 가져오기
+        
+        // 디버깅용 출력
+        System.out.println("채팅방 판매자 세션 ID: " + sel_id);
+        System.out.println("채팅방 구매자 세션 이메일: " + buy_em);
         
         if (buy_em == null && sel_id == null) {
             // 로그인되지 않은 경우
@@ -149,7 +165,23 @@ public class ChatController {
         String buy_em = (String) session.getAttribute("buyEm");
         String buy_nm = (String) session.getAttribute("buyNm"); // 이름 가져오기
         String sel_id = (String) session.getAttribute("sel_id");
+        
+        // 다른 판매자 세션 키 시도
+        if (sel_id == null) {
+            sel_id = (String) session.getAttribute("sellerId");
+        }
+        if (sel_id == null) {
+            sel_id = (String) session.getAttribute("seller_id");
+        }
+        if (sel_id == null) {
+            sel_id = (String) session.getAttribute("selId");
+        }
+        
         String sel_nm = (String) session.getAttribute("sel_nm"); // 판매자 이름 가져오기
+        
+        // 디버깅용 출력
+        System.out.println("채팅방 판매자 세션 ID: " + sel_id);
+        System.out.println("채팅방 구매자 세션 이메일: " + buy_em);
         
         if (buy_em == null && sel_id == null) {
             // 로그인되지 않은 경우
@@ -257,6 +289,21 @@ public class ChatController {
         String buy_em = (String) session.getAttribute("buyEm");
         String sel_id = (String) session.getAttribute("sel_id");
         
+        // 다른 판매자 세션 키 시도
+        if (sel_id == null) {
+            sel_id = (String) session.getAttribute("sellerId");
+        }
+        if (sel_id == null) {
+            sel_id = (String) session.getAttribute("seller_id");
+        }
+        if (sel_id == null) {
+            sel_id = (String) session.getAttribute("selId");
+        }
+        
+        // 디버깅용 출력
+        System.out.println("메시지 조회 - 판매자 세션 ID: " + sel_id);
+        System.out.println("메시지 조회 - 구매자 세션 이메일: " + buy_em);
+        
         if (buy_em == null && sel_id == null) {
             // 로그인되지 않은 경우
             result.put("success", false);
@@ -315,6 +362,21 @@ public class ChatController {
         String buy_em = (String) session.getAttribute("buyEm");
         String sel_id = (String) session.getAttribute("sel_id");
         
+        // 다른 판매자 세션 키 시도
+        if (sel_id == null) {
+            sel_id = (String) session.getAttribute("sellerId");
+        }
+        if (sel_id == null) {
+            sel_id = (String) session.getAttribute("seller_id");
+        }
+        if (sel_id == null) {
+            sel_id = (String) session.getAttribute("selId");
+        }
+        
+        // 디버깅용 출력
+        System.out.println("메시지 전송 - 판매자 세션 ID: " + sel_id);
+        System.out.println("메시지 전송 - 구매자 세션 이메일: " + buy_em);
+        
         if (buy_em == null && sel_id == null) {
             // 로그인되지 않은 경우
             result.put("success", false);
@@ -361,7 +423,23 @@ public class ChatController {
         String buy_em = (String) session.getAttribute("buyEm");
         String buy_nm = (String) session.getAttribute("buyNm"); // 이름 가져오기
         String sel_id = (String) session.getAttribute("sel_id");
+        
+        // 다른 판매자 세션 키 시도
+        if (sel_id == null) {
+            sel_id = (String) session.getAttribute("sellerId");
+        }
+        if (sel_id == null) {
+            sel_id = (String) session.getAttribute("seller_id");
+        }
+        if (sel_id == null) {
+            sel_id = (String) session.getAttribute("selId");
+        }
+        
         String sel_nm = (String) session.getAttribute("sel_nm"); // 판매자 이름 가져오기
+        
+        // 디버깅용 출력
+        System.out.println("웹소켓 판매자 세션 ID: " + sel_id);
+        System.out.println("웹소켓 구매자 세션 이메일: " + buy_em);
         
         if (buy_em == null && sel_id == null) {
             // 로그인되지 않은 경우

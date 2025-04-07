@@ -131,6 +131,22 @@
             var userType = "${userType}";
             var currentUserId = "${userId}";
             
+            // 로그인 상태 확인
+            if (!currentUserId) {
+                console.error("사용자 ID가 없습니다. 세션에서 다른 ID 키로 확인을 시도합니다.");
+                // 이 부분은 서버에서 이미 처리되었지만, 클라이언트 측에서 추가 확인
+                if (userType === "seller" && "${chatRoom.sel_id}") {
+                    currentUserId = "${chatRoom.sel_id}";
+                    console.log("채팅방 정보에서 판매자 ID를 가져왔습니다:", currentUserId);
+                } else if (userType === "buyer" && "${chatRoom.buy_em}") {
+                    currentUserId = "${chatRoom.buy_em}";
+                    console.log("채팅방 정보에서 구매자 이메일을 가져왔습니다:", currentUserId);
+                }
+            }
+            
+            console.log("현재 사용자 유형:", userType);
+            console.log("현재 사용자 ID:", currentUserId);
+            
             // 자바스크립트 WebSocket 객체를 저장할 변수 선언
             var ws;
             
