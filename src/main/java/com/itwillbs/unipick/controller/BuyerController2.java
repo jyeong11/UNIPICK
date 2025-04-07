@@ -45,10 +45,22 @@ public class BuyerController2 {
 		return "buyer/buyerLogin";
 	}
 	
+	// 로그인 상태 확인 API
+	@GetMapping("/check-login")
+	@ResponseBody
+	public Map<String, Object> checkLogin(HttpSession session) {
+	    Map<String, Object> result = new HashMap<>();
+	    String buyEm = (String) session.getAttribute("buyEm");
+	    result.put("loggedIn", buyEm != null);
+	    return result;
+	}
+	
+	
 	//바이어 로그인
 	@ResponseBody
 	@PostMapping("buyerlogin")
 	public Map<String, Object> buyerLogin(@RequestBody Map<String, Object> logindata,
+			@RequestParam(value = "returnUrl", required = false) String returnUrl,
 										   HttpSession session,
 										   HttpServletResponse res) {
 		System.out.println("로그인 요청 데이터: " + logindata); // 요청 데이터 출력
@@ -87,6 +99,12 @@ public class BuyerController2 {
 		Map<String, Object> response = new HashMap<String, Object>();
 		response.put("success", success);
 		response.put("msg", msg);
+		
+		 if (success) {
+		        if (returnUrl != null && !returnUrl.isEmpty()) {
+		            response.put("returnUrl", returnUrl);
+		        }
+		    }
 		
 		return response;
 	}

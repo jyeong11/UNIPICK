@@ -40,6 +40,7 @@
 			<div class="member-info">
 			<input type="password" id="buyerPw" placeholder="비밀번호 입력"></div>
 	        <button type="submit" class="buyerbutton">로그인</button>
+	        <input type="hidden" id="contextPathHolder" value="${pageContext.request.contextPath}">
             </div>
         <div class="btn-wrap">
         <label class="buyer-btn"><input type="checkbox" id="rememberId">아이디 기억하기</label>
@@ -54,5 +55,10 @@
 <div class="ft">
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 </div>
+
+<!-- buyerLogin.jsp 파일 상단 script 태그 안에 추가 -->
+<script>
+    var contextPath = "${pageContext.request.contextPath}";
+</script>
 </body>
 </html>

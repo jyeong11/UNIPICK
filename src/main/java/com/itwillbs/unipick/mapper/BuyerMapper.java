@@ -91,4 +91,6 @@ public interface BuyerMapper {
 	void deleteCart(@Param("crt_id") int crt_id, @Param("buy_em") String buy_em);
 	// 장바구니 수정
 	public void updateCart(@Param("updataData") Map<String, Object> updataData, @Param("buy_em") String buy_em);
+	// 상품 코드로 판매자 ID 조회
+	public String getSellerIdByProductId(String prd_cd);
 }

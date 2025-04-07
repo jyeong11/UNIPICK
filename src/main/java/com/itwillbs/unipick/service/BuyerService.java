@@ -245,4 +245,9 @@ public class BuyerService {
 	public void updateCart(Map<String, Object> updataData, String buy_em) {
 		mapper.updateCart(updataData, buy_em);
 	}
+	
+	// 상품 코드로 판매자 ID 조회
+	public String getSellerIdByProductId(String prd_cd) {
+		return mapper.getSellerIdByProductId(prd_cd);
+	}
 }

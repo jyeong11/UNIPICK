@@ -150,7 +150,7 @@
 			    				<br>
 			    				답변은 앱의 마이페이지 > 문의 내역 에서 확인하실 수 있습니다.
 			    			</p>
-			    			<button class="qaBtn">
+			    			<button class="qaBtn" id="inquiryBtn">
 			    				<span>상품 문의하기</span>
 			    			</button>
 		    			</div>
@@ -179,6 +179,7 @@
 	<script type="text/javascript">
 	    var prdCd = "${prd.prd_cd}";
 	    var sel_nm = "${prd.sel_nm}";
+	    var sel_id = "${prd.sel_id}";
 	    var contextPath = "${pageContext.request.contextPath}";
 	    var images = ${selImgList != null ? selImgList : '[]'};
 	    var prdImg = [
@@ -186,6 +187,30 @@
 	            "${img}"<c:if test="${!status.last}">,</c:if>
 	        </c:forEach>
 	    ];
+	    
+	    // 상품 문의하기 버튼 클릭 이벤트
+	   // 상품 문의하기 버튼 클릭 이벤트
+		$(document).ready(function() {
+			$("#inquiryBtn").click(function() {
+			    $.ajax({
+			        url: contextPath + "/check-login",
+			        type: "GET",
+			        success: function(response) {
+			            if (response.loggedIn) {
+			                // 로그인된 경우 상품 문의 팝업 열기
+			                var popupUrl = contextPath + "/chat/product-inquiry?prd_cd=" + prdCd + "&prd_nm=" + encodeURIComponent("${prd.prd_nm}");
+			                window.open(popupUrl, "상품문의", "width=500,height=700");
+			            } else {
+			                // 로그인되지 않은 경우 알림 후 로그인 페이지로 이동
+			                alert("로그인이 필요한 서비스입니다.");
+			                // 현재 페이지 URL을 returnUrl로 저장
+			                sessionStorage.setItem("prevPage", window.location.href);
+			                location.href = contextPath + "/buyerlogin";
+			            }
+			        }
+			    });
+			});
+		});
 	</script>
 </body>
 </html>

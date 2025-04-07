@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import com.itwillbs.unipick.service.ChatService;
+import com.itwillbs.unipick.service.BuyerService;
 
 @Controller
 @RequestMapping("/chat")
@@ -26,6 +27,9 @@ public class ChatController {
     
     @Autowired
     private ChatService chatService;
+    
+    @Autowired
+    private BuyerService buyerService;
     
     // 타입변환 예외 처리
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
@@ -815,5 +819,60 @@ public class ChatController {
         }
         
         return result;
+    }
+    
+    // 상품 문의 채팅 시작 (팝업 창)
+    @GetMapping("/product-inquiry")
+    public String startProductInquiry(
+            @RequestParam(value = "sel_id", required = false) String sel_id,
+            @RequestParam("prd_cd") String prd_cd,
+            @RequestParam("prd_nm") String prd_nm,
+            HttpSession session, Model model) {
+        
+        // 세션에서 구매자 이메일 가져오기
+        String buy_em = (String) session.getAttribute("buyEm");
+        
+        if (buy_em == null) {
+            // 다른 세션 키 시도
+            buy_em = (String) session.getAttribute("buyerEm");
+        }
+        
+        if (buy_em == null) {
+            // 로그인되지 않은 경우
+            return "redirect:/buyerlogin";
+        }
+        
+        // 판매자 ID가 전달되지 않은 경우 상품 코드로 조회
+        if (sel_id == null || sel_id.isEmpty()) {
+            try {
+                // BuyerService를 통해 판매자 ID 조회
+                sel_id = buyerService.getSellerIdByProductId(prd_cd);
+                
+                if (sel_id == null || sel_id.isEmpty()) {
+                    // 판매자 ID를 찾을 수 없음
+                    return "redirect:/";
+                }
+            } catch (Exception e) {
+                System.err.println("판매자 ID 조회 중 오류: " + e.getMessage());
+                return "redirect:/";
+            }
+        }
+        
+        // 채팅방 가져오기 (없으면 생성)
+        int cht_id = chatService.getOrCreateChatRoom(buy_em, sel_id);
+        
+        // 첫 메시지로 상품 문의 내용 전송
+        Map<String, Object> chatDetail = new HashMap<>();
+        chatDetail.put("cht_id", cht_id);
+        chatDetail.put("chd_ms", "[상품문의] 상품코드: " + prd_cd + ", 상품명: " + prd_nm);
+        chatDetail.put("sender", buy_em);
+        
+        try {
+            chatService.sendMessage(chatDetail);
+        } catch (Exception e) {
+            System.err.println("상품 문의 메시지 전송 중 오류: " + e.getMessage());
+        }
+        
+        return "redirect:/chat/popup/" + cht_id;
     }
 }

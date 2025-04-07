@@ -108,6 +108,13 @@
         border-radius: 12px;
     }
     
+    /* 상품 문의 메시지 스타일 */
+    .message .message-content[data-product-inquiry="true"] {
+        background-color: #e8f5e9;
+        border: 1px solid #c8e6c9;
+        font-weight: bold;
+    }
+    
     /* 신고 모달 스타일 */
     .modal {
         display: none;
@@ -429,6 +436,11 @@
                     
                     const $messageContent = $("<div>").addClass("message-content");
                     $messageContent.text(message.chd_ms);
+                    
+                    // 상품 문의 메시지인지 확인하고 스타일 적용
+                    if (message.chd_ms && message.chd_ms.indexOf("[상품문의]") === 0) {
+                        $messageContent.attr("data-product-inquiry", "true");
+                    }
                     
                     const $messageTime = $("<div>").addClass("message-time");
                     const messageDate = new Date(message.chd_st);

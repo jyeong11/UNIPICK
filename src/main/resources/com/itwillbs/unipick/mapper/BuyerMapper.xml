@@ -686,4 +686,11 @@
 	  WHERE crt_id = #{updataData.crt_id}
         AND buy_em = #{buy_em};
 	</update>
+	
+	<!-- 상품 코드로 판매자 ID 조회 -->
+	<select id="getSellerIdByProductId" parameterType="String" resultType="String">
+		SELECT sel_id
+		FROM products
+		WHERE prd_cd = #{prd_cd}
+	</select>
   </mapper>

@@ -1,4 +1,6 @@
 $(function () {
+	
+	 contextPath = $("#contextPathHolder").val();
 	// 페이지 로드 시 쿠키에서 저장된 아이디 불러오기
     let savedBuyerId = getCookie("rememberedBuyerId");
     if (savedBuyerId) {
@@ -39,14 +41,18 @@ function login() {
         data: JSON.stringify(loginData),
         contentType: "application/json; charset=UTF-8",
         dataType: "json",
-        success: function(res) {
-			if(res.success){
-				window.location.href = "main";
-			} else {
-				alert(res.msg);
+       	success: function(response) {
+		   if (response.success) {
+			    // 이전 페이지 URL 가져오기
+			    var prevPage = sessionStorage.getItem("prevPage");
+			    if (prevPage) {
+			        sessionStorage.removeItem("prevPage"); // 사용 후 삭제
+			        window.location.href = prevPage;
+			    } else {
+			        window.location.href = contextPath + "/";
+			    }
 			}
-
-        },
+		},
         error: function(xhr, status, error) {
             console.error("로그인 요청 실패", error);
             alert("서버 오류가 발생했습니다.");
