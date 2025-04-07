@@ -18,7 +18,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 // 서버에서는 단 하나의 유일한 객체(싱글톤)로 관리됨
 // 클래스 내에서 TextWebSocketHandler 클래스의 메서드를 오버라이딩 해서 각 요청에 대한 처리 구현
 
-@Component
+
 public class MyWebSocketHandler extends TextWebSocketHandler {
 
 	//접속한 클라리언트(사용자)들에 대한 정보를 저장할 용도의 Map객체 생성

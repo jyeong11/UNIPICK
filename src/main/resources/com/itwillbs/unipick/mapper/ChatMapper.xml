@@ -66,16 +66,20 @@
     </select>
     
     <!-- 채팅방 생성 -->
-    <insert id="createChatRoom" parameterType="map">
+    <insert id="createChatRoom" parameterType="map" useGeneratedKeys="true" keyProperty="cht_id" keyColumn="cht_id">
+        <selectKey keyProperty="cht_id" resultType="int" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
         INSERT INTO chats (buy_em, sel_id)
         VALUES (#{buy_em}, #{sel_id})
     </insert>
     
     <!-- 채팅방 ID 조회 -->
     <select id="getChatRoomId" parameterType="map" resultType="int">
-        SELECT cht_id
+        SELECT IFNULL(cht_id, 0)
         FROM chats
         WHERE buy_em = #{buy_em} AND sel_id = #{sel_id}
+        LIMIT 1
     </select>
     
     <!-- 메시지 목록 조회 -->
@@ -91,4 +95,14 @@
         INSERT INTO chat_details (cht_id, chd_ms, sender)
         VALUES (#{cht_id}, #{chd_ms}, #{sender})
     </insert>
+    
+    <!-- 판매자 검색 -->
+    <select id="searchSellers" parameterType="String" resultType="map">
+        SELECT sel_id, sel_nm, sel_st
+        FROM sellers
+        WHERE sel_nm LIKE CONCAT('%', #{searchTerm}, '%')
+           OR sel_id LIKE CONCAT('%', #{searchTerm}, '%')
+        ORDER BY sel_nm ASC
+        LIMIT 10
+    </select>
 </mapper> 

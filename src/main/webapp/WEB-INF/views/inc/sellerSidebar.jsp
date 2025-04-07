@@ -78,10 +78,10 @@
         <div id="menu06" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
             	<h6 class="collapse-header">채팅</h6>
-                <a class="collapse-item" href="">실시간채팅</a>
+                <a class="collapse-item" href="${pageContext.request.contextPath}/chat/seller/list">실시간채팅</a>
                 <a class="collapse-item" href="#">채팅신고</a>
             </div>
-        </div>
+        </div> 
     </li>
     <hr class="sidebar-divider d-none d-md-block">
     <div class="text-center d-none d-md-inline">

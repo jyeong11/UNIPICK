@@ -31,4 +31,7 @@ public interface ChatMapper {
     
     // 메시지 전송
     public void sendMessage(Map<String, Object> chatDetail);
+    
+    // 판매자 검색
+    public List<Map<String, Object>> searchSellers(String searchTerm);
 } 

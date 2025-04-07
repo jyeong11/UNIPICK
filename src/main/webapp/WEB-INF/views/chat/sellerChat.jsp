@@ -41,9 +41,9 @@
             
             <c:forEach var="chat" items="${chatList}">
                 <a href="javascript:void(0);" onclick="return openChatPopup(${chat.cht_id});" class="chat-item">
-                    <div class="chat-profile">
-                        <img src="${pageContext.request.contextPath}/resources/images/profile.png" alt="구매자 프로필">
-                    </div>
+<!--                     <div class="chat-profile"> -->
+<%--                         <img src="${pageContext.request.contextPath}/resources/images/profile.png" alt="구매자 프로필"> --%>
+<!--                     </div> -->
                     <div class="chat-info">
                         <div class="chat-header">
                             <h3>${chat.buy_name}</h3>
