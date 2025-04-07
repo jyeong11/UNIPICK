@@ -40,12 +40,20 @@
 			<mapping path="/productDetail/**"/>
 			<beans:bean class="com.itwillbs.unipick.handler.ProductViewInterceptor" />
 		</interceptor>
+		<!-- 판매자 로그인 인터셉터 -->
 	    <interceptor>
 	        <mapping path="/seller**" />
 	        <exclude-mapping path="/sellerlogin" />
 	        <exclude-mapping path="/sellerjoin" />
 	        <exclude-mapping path="/sellerFindAcc" />
 	        <beans:bean class="com.itwillbs.unipick.handler.SellerInterceptor" />
+	    </interceptor>
+	    <!-- 구매자 로그인 인터셉터 -->
+	    <interceptor>
+	    	<mapping path="/myPage" />
+	    	<mapping path="/cart" />
+	        <mapping path="/productOrder" />
+	        <beans:bean class="com.itwillbs.unipick.handler.BuyerLoginIntercepter" />
 	    </interceptor>
 	</interceptors>
 	

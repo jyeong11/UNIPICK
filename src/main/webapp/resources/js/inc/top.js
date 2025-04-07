@@ -15,17 +15,3 @@ $(function(){
     });
 	
 });
-
-
-function myPage() {
-    $.ajax({
-        url: "checkLogin", // 로그인 상태를 확인하는 API
-        method: "GET",
-        success: function(res) {
-			window.location.href = res;
-        },
-        error: function() {
-            alert("로그인 상태를 확인하는 중 오류가 발생했습니다.");
-        }
-    });
-}

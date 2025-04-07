@@ -299,21 +299,6 @@ public class BuyerController {
 		return buyService.OrderListInfo(buyer);
 	}
 	
-	// 마이페이지 로그인 체크
-	@ResponseBody
-	@GetMapping("checkLogin")
-	public String checkLogin(HttpSession session) {
-		
-	    String userId = (String) session.getAttribute("buyEm");
-	    String url = "buyerlogin";
-	    
-	    if (userId != null && !userId.isEmpty()) {
-	        url = "myPage";
-	    }
-		
-		return url;
-	}
-	
 	// 상품 썸네일, 이름
 	@ResponseBody
 	@PostMapping("prdInfo")
