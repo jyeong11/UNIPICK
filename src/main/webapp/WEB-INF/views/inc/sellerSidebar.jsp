@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<!-- Font Awesome CDN 추가 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="seller">
@@ -71,7 +74,7 @@
         </div>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#" data-toggle="collapse" data-target="#menu06" aria-expanded="true" aria-controls="menu06">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu06" aria-expanded="true" aria-controls="menu06">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>채팅</span><span id="chatNotificationBadge" class="notification-badge" style="display: none;">0</span>
         </a>
@@ -151,6 +154,31 @@
 
 .nav-link span:last-child {
     margin-left: 8px;
+}
+
+/* 사이드바 메뉴 화살표 스타일 */
+.sidebar .nav-item .nav-link[data-toggle="collapse"] {
+    position: relative;
+}
+
+.sidebar .nav-item .nav-link[data-toggle="collapse"]::after {
+/*     content: '\f104'; */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: transform 0.3s;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.sidebar .nav-item .nav-link[data-toggle="collapse"].collapsed::after {
+    transform: translateY(-50%) rotate(0deg);
+}
+
+.sidebar .nav-item .nav-link[data-toggle="collapse"]:not(.collapsed)::after {
+/*     transform: translateY(-50%) rotate(270deg); */
 }
 </style>
 
