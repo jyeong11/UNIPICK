@@ -158,4 +158,46 @@
         WHERE ch.cht_id = #{cht_id}
         ORDER BY r.rpt_dt DESC
     </select>
+    
+    <!-- 새 메시지 개수 확인 (구매자용) -->
+    <select id="getNewMessageCountForBuyer" parameterType="String" resultType="int">
+        SELECT COUNT(*) 
+        FROM chat_details cd
+        JOIN chats c ON cd.cht_id = c.cht_id
+        WHERE c.buy_em = #{buy_em}
+          AND cd.sender != #{buy_em}
+          AND cd.chd_st > (
+              SELECT IFNULL(last_checked_time, '2000-01-01 00:00:00')
+              FROM buyer_last_checked 
+              WHERE buy_em = #{buy_em}
+          )
+    </select>
+    
+    <!-- 마지막 확인 시간 업데이트 (구매자용) -->
+    <insert id="updateLastCheckedTime" parameterType="String">
+        INSERT INTO buyer_last_checked (buy_em, last_checked_time)
+        VALUES (#{buy_em}, NOW())
+        ON DUPLICATE KEY UPDATE last_checked_time = NOW()
+    </insert>
+    
+    <!-- 새 메시지 개수 확인 (판매자용) -->
+    <select id="getNewMessageCountForSeller" parameterType="String" resultType="int">
+        SELECT COUNT(*) 
+        FROM chat_details cd
+        JOIN chats c ON cd.cht_id = c.cht_id
+        WHERE c.sel_id = #{sel_id}
+          AND cd.sender != #{sel_id}
+          AND cd.chd_st > (
+              SELECT IFNULL(last_checked_time, '2000-01-01 00:00:00')
+              FROM seller_last_checked 
+              WHERE sel_id = #{sel_id}
+          )
+    </select>
+    
+    <!-- 마지막 확인 시간 업데이트 (판매자용) -->
+    <insert id="updateSellerLastCheckedTime" parameterType="String">
+        INSERT INTO seller_last_checked (sel_id, last_checked_time)
+        VALUES (#{sel_id}, NOW())
+        ON DUPLICATE KEY UPDATE last_checked_time = NOW()
+    </insert>
 </mapper> 

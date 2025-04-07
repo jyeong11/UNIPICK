@@ -73,7 +73,7 @@
     <li class="nav-item">
         <a class="nav-link" href="#" data-toggle="collapse" data-target="#menu06" aria-expanded="true" aria-controls="menu06">
             <i class="fas fa-fw fa-chart-area"></i>
-            <span>채팅</span>
+            <span>채팅</span><span id="chatNotificationBadge" class="notification-badge" style="display: none;">0</span>
         </a>
         <div id="menu06" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
@@ -122,5 +122,79 @@
 			
 		});
 	});
+</script>
+
+<!-- 채팅 알림 스타일 -->
+<style>
+.notification-badge {
+    display: inline-block;
+    background-color: #f2a900;
+    color: white;
+/*     border-radius: 50%; */
+    width: 20px !important;
+    height: 20px !important;
+    text-align: center;
+    line-height: 20px !important;
+    font-size: 11px;
+    font-weight: bold;
+    margin-left: 8px;
+    position: relative;
+    top: -1px;
+    vertical-align: middle;
+}
+
+#chatNotificationBadge {
+    min-width: 20px !important;
+    min-height: 20px !important;
+    padding: 5px !important;
+}
+
+.nav-link span:last-child {
+    margin-left: 8px;
+}
+</style>
+
+<!-- 채팅 알림 스크립트 -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    // 새 메시지 개수 확인 함수
+    function checkNewMessages() {
+        $.ajax({
+            url: "${pageContext.request.contextPath}/chat/seller/new-messages/count",
+            type: "GET",
+            dataType: "json",
+            success: function(response) {
+                if (response.success && response.count > 0) {
+                    // 새 메시지가 있으면 배지 표시
+                    $("#chatNotificationBadge").text(response.count).show();
+                } else {
+                    // 새 메시지가 없으면 배지 숨김
+                    $("#chatNotificationBadge").hide();
+                }
+            },
+            error: function() {
+                console.error("메시지 알림 확인 중 오류가 발생했습니다.");
+            }
+        });
+    }
+    
+    // 채팅 링크 클릭 시 확인 시간 업데이트
+    $(".collapse-item").click(function() {
+        if($(this).attr("href").includes("/chat/seller/list")) {
+            $.ajax({
+                url: "${pageContext.request.contextPath}/chat/seller/update-last-checked",
+                type: "POST",
+                dataType: "json"
+            });
+        }
+    });
+    
+    // 페이지 로드 시 최초 확인
+    checkNewMessages();
+    
+    // 30초마다 새 메시지 확인
+    setInterval(checkNewMessages, 30000);
+});
 </script>
 

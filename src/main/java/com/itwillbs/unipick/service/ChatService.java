@@ -170,4 +170,36 @@ public class ChatService {
     public List<Map<String, Object>> getChatReports(int cht_id) {
         return chatMapper.getChatReports(cht_id);
     }
+    
+    // 새 메시지 개수 확인 (구매자용)
+    public int getNewMessageCountForBuyer(String buy_em) {
+        if (buy_em == null || buy_em.trim().isEmpty()) {
+            return 0;
+        }
+        
+        return chatMapper.getNewMessageCountForBuyer(buy_em);
+    }
+    
+    // 마지막 확인 시간 업데이트 (구매자용)
+    public void updateLastCheckedTime(String buy_em) {
+        if (buy_em != null && !buy_em.trim().isEmpty()) {
+            chatMapper.updateLastCheckedTime(buy_em);
+        }
+    }
+    
+    // 새 메시지 개수 확인 (판매자용)
+    public int getNewMessageCountForSeller(String sel_id) {
+        if (sel_id == null || sel_id.trim().isEmpty()) {
+            return 0;
+        }
+        
+        return chatMapper.getNewMessageCountForSeller(sel_id);
+    }
+    
+    // 마지막 확인 시간 업데이트 (판매자용)
+    public void updateSellerLastCheckedTime(String sel_id) {
+        if (sel_id != null && !sel_id.trim().isEmpty()) {
+            chatMapper.updateSellerLastCheckedTime(sel_id);
+        }
+    }
 } 

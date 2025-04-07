@@ -60,16 +60,19 @@ public class ChatController {
         List<Map<String, Object>> chatList = chatService.getBuyerChatList(buy_em);
         model.addAttribute("chatList", chatList);
         
+        // 마지막 확인 시간 업데이트
+        chatService.updateLastCheckedTime(buy_em);
+        
         return "chat/buyerChat";
     }
     
     // 판매자 채팅 목록 페이지
     @GetMapping("/seller/list")
     public String sellerChatList(HttpSession session, Model model) {
-        // 세션에서 판매자 ID 가져오기 (다양한 키 확인)
+        // 세션에서 판매자 ID 가져오기
         String sel_id = (String) session.getAttribute("sel_id");
         
-        // 다른 세션 키 시도
+        // 다른 세션 키도 확인
         if (sel_id == null) {
             sel_id = (String) session.getAttribute("sellerId");
         }
@@ -80,17 +83,19 @@ public class ChatController {
             sel_id = (String) session.getAttribute("selId");
         }
         
-        // 디버깅용 출력
         System.out.println("판매자 세션 ID: " + sel_id);
         
         if (sel_id == null) {
             // 로그인되지 않은 경우
-            return "redirect:/sellerlogin";  // 경로 수정
+            return "redirect:/sellerlogin";
         }
         
         // 채팅방 목록 조회
         List<Map<String, Object>> chatList = chatService.getSellerChatList(sel_id);
         model.addAttribute("chatList", chatList);
+        
+        // 마지막 확인 시간 업데이트
+        chatService.updateSellerLastCheckedTime(sel_id);
         
         return "chat/sellerChat";
     }
@@ -658,6 +663,154 @@ public class ChatController {
         } catch (Exception e) {
             result.put("success", false);
             result.put("message", "신고 내역 조회 중 오류가 발생했습니다: " + e.getMessage());
+            e.printStackTrace();
+        }
+        
+        return result;
+    }
+    
+    // 새 메시지 개수 확인 (구매자용) (AJAX)
+    @GetMapping("/new-messages/count")
+    @ResponseBody
+    public Map<String, Object> getNewMessageCount(HttpSession session) {
+        Map<String, Object> result = new HashMap<>();
+        
+        // 세션에서 구매자 이메일 가져오기
+        String buy_em = (String) session.getAttribute("buyEm");
+        
+        // 다른 세션 키 시도
+        if (buy_em == null) {
+            buy_em = (String) session.getAttribute("buyerEm");
+        }
+        
+        if (buy_em == null) {
+            result.put("success", false);
+            result.put("message", "로그인이 필요합니다.");
+            result.put("count", 0);
+            return result;
+        }
+        
+        try {
+            int newMessageCount = chatService.getNewMessageCountForBuyer(buy_em);
+            
+            result.put("success", true);
+            result.put("count", newMessageCount);
+        } catch (Exception e) {
+            result.put("success", false);
+            result.put("message", "메시지 개수 조회 중 오류가 발생했습니다.");
+            result.put("count", 0);
+            e.printStackTrace();
+        }
+        
+        return result;
+    }
+    
+    // 마지막 확인 시간 업데이트 (구매자용) (AJAX)
+    @PostMapping("/update-last-checked")
+    @ResponseBody
+    public Map<String, Object> updateLastCheckedTime(HttpSession session) {
+        Map<String, Object> result = new HashMap<>();
+        
+        // 세션에서 구매자 이메일 가져오기
+        String buy_em = (String) session.getAttribute("buyEm");
+        
+        // 다른 세션 키 시도
+        if (buy_em == null) {
+            buy_em = (String) session.getAttribute("buyerEm");
+        }
+        
+        if (buy_em == null) {
+            result.put("success", false);
+            result.put("message", "로그인이 필요합니다.");
+            return result;
+        }
+        
+        try {
+            chatService.updateLastCheckedTime(buy_em);
+            result.put("success", true);
+        } catch (Exception e) {
+            result.put("success", false);
+            result.put("message", "마지막 확인 시간 업데이트 중 오류가 발생했습니다.");
+            e.printStackTrace();
+        }
+        
+        return result;
+    }
+    
+    // 새 메시지 개수 확인 (판매자용) (AJAX)
+    @GetMapping("/seller/new-messages/count")
+    @ResponseBody
+    public Map<String, Object> getNewMessageCountForSeller(HttpSession session) {
+        Map<String, Object> result = new HashMap<>();
+        
+        // 세션에서 판매자 ID 가져오기
+        String sel_id = (String) session.getAttribute("sel_id");
+        
+        // 다른 세션 키도 확인
+        if (sel_id == null) {
+            sel_id = (String) session.getAttribute("sellerId");
+        }
+        if (sel_id == null) {
+            sel_id = (String) session.getAttribute("seller_id");
+        }
+        if (sel_id == null) {
+            sel_id = (String) session.getAttribute("selId");
+        }
+        
+        if (sel_id == null) {
+            result.put("success", false);
+            result.put("message", "로그인이 필요합니다.");
+            result.put("count", 0);
+            return result;
+        }
+        
+        try {
+            int newMessageCount = chatService.getNewMessageCountForSeller(sel_id);
+            
+            result.put("success", true);
+            result.put("count", newMessageCount);
+        } catch (Exception e) {
+            result.put("success", false);
+            result.put("message", "메시지 개수 조회 중 오류가 발생했습니다.");
+            result.put("count", 0);
+            e.printStackTrace();
+        }
+        
+        return result;
+    }
+    
+    // 마지막 확인 시간 업데이트 (판매자용) (AJAX)
+    @PostMapping("/seller/update-last-checked")
+    @ResponseBody
+    public Map<String, Object> updateSellerLastCheckedTime(HttpSession session) {
+        Map<String, Object> result = new HashMap<>();
+        
+        // 세션에서 판매자 ID 가져오기
+        String sel_id = (String) session.getAttribute("sel_id");
+        
+        // 다른 세션 키도 확인
+        if (sel_id == null) {
+            sel_id = (String) session.getAttribute("sellerId");
+        }
+        if (sel_id == null) {
+            sel_id = (String) session.getAttribute("seller_id");
+        }
+        if (sel_id == null) {
+            sel_id = (String) session.getAttribute("selId");
+        }
+        
+        if (sel_id == null) {
+            result.put("success", false);
+            result.put("message", "로그인이 필요합니다.");
+            return result;
+        }
+        
+        try {
+            chatService.updateSellerLastCheckedTime(sel_id);
+            result.put("success", true);
+        } catch (Exception e) {
+            result.put("success", false);
+            result.put("message", "마지막 확인 시간 업데이트 중 오류가 발생했습니다.");
             e.printStackTrace();
         }
         
