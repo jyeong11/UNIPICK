@@ -11,7 +11,6 @@ function newOrdCount() {
 		url: "newOrdCount",
 		method: "POST",
 		success: function(res){
-			debugger;
 			$("#totalProducts").text(res);
 		},	
 		error: function (xhr, textStatus, errorThrown) {

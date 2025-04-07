@@ -22,10 +22,10 @@
 		<li class="nav-item dropdown no-arrow"><a
 			class="nav-link dropdown-toggle" href="#" id="userDropdown"
 			role="button" data-toggle="dropdown" aria-haspopup="true"
-			aria-expanded="false"> <span
-				class="mr-2 d-none d-lg-inline text-gray-600 small">${sel_nm }님
-					환영합니다</span> <img class="img-profile rounded-circle"
-				src="../../resources/adm/img/admin_profile.png"> <!--                <img class="img-profile rounded-circle" src="../../resources/adm/img/undraw_profile.svg"> -->
+			aria-expanded="false"> 
+			<span class="mr-2 d-none d-lg-inline text-gray-600 small" style="font-size: 1.0rem">${sel_nm }님 환영합니다</span> 
+<!-- 					<img class="img-profile rounded-circle" -->
+<!-- 				src="../../resources/adm/img/admin_profile.png">                <img class="img-profile rounded-circle" src="../../resources/adm/img/undraw_profile.svg"> -->
 		</a> <!-- Dropdown - User Information -->
 			<div
 				class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -71,7 +71,7 @@
 			<div class="modal-body">로그아웃 후에는 판매자 사이트 접근이 불가능합니다.</div>
 			<div class="modal-footer">
 				<button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
-				<a class="btn btn-primary" href="MemberLogout">로그아웃</a>
+				<a class="btn btn-primary" href="sellerLogout">로그아웃</a>
 			</div>
 		</div>
 	</div>

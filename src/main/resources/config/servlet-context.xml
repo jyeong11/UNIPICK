@@ -40,7 +40,15 @@
 			<mapping path="/productDetail/**"/>
 			<beans:bean class="com.itwillbs.unipick.handler.ProductViewInterceptor" />
 		</interceptor>
+	    <interceptor>
+	        <mapping path="/seller**" />
+	        <exclude-mapping path="/sellerlogin" />
+	        <exclude-mapping path="/sellerjoin" />
+	        <exclude-mapping path="/sellerFindAcc" />
+	        <beans:bean class="com.itwillbs.unipick.handler.SellerInterceptor" />
+	    </interceptor>
 	</interceptors>
+	
 	
 	 
 </beans:beans>

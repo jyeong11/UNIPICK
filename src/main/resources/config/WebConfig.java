@@ -6,6 +6,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.itwillbs.unipick.handler.ProductViewInterceptor;
+import com.itwillbs.unipick.handler.SellerInterceptor;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {

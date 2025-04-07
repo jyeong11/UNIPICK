@@ -3,9 +3,7 @@ body {
 	 background-color: #f5f5f5;
 	 font-family: "Noto Sans KR", sans-serif;
 }
-#logo {
-	width: 180px;
-}
+
 .card-body{
 	cursor: pointer;
 }

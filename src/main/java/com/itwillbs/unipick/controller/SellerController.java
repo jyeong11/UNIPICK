@@ -83,6 +83,8 @@ public class SellerController {
 	public String sellerTemporal() {
 		return "seller/sellerTemporal";
 	}
+	
+	// 셀러 로그인
 	@GetMapping("sellerlogin")
 	public String Login(HttpServletRequest request, Model model) {
 	    // 저장된 쿠키 확인
@@ -96,6 +98,13 @@ public class SellerController {
 	    } 
 		return "seller/sellerLogin";
 	}
+	
+	// 셀러 로그아웃
+	 @GetMapping("sellerLogout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/sellerlogin";
+    }
 	
 	//셀러 로그인
 	@ResponseBody

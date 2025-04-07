@@ -7,6 +7,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.itwillbs.unipick.handler.ProductViewInterceptor;
+import com.itwillbs.unipick.handler.SellerInterceptor;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
@@ -37,6 +38,8 @@ public class WebConfig implements WebMvcConfigurer {
 	
 	@Autowired
 	private ProductViewInterceptor productViewInterceptor;
+
+	
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
@@ -44,6 +47,9 @@ public class WebConfig implements WebMvcConfigurer {
 		registry.addInterceptor(productViewInterceptor)
 				.addPathPatterns("/productDetail")
 				.excludePathPatterns("/static/**", "/api/**");
+		
 	}
+	
+	
 }
 
