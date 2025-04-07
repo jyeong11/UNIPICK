@@ -10,6 +10,7 @@ $(function() {
 			$('#search').click();
 		}
 	});
+	
 	$(document).on('click', '.prdList', function(){
 		let row = $(this).closest("tr");
 		
@@ -47,21 +48,46 @@ $(function() {
 			} 
 		});
 	});
+	
+	// 모달 닫기
 	$(document).on("click", "#commonDetailColse", function() {
-	    $('#exampleModal').modal('hide'); // 모달 닫기
+    	$('#exampleModal').modal('hide'); 
+	});
+	
+	// 검색시 페이징
+	$('#noticeSearch').on('click', function() {
+	    currentPage = 1;
+	    prdLoad();
+	});
+
+	// 페이징 버튼 클릭시
+	$('#pageList').on('click', '.page-link', function(e) {
+	    e.preventDefault();
+	    let selectedPage = parseInt($(this).data('page'));
+	console.log("클릭된 페이지:", $(this).data('page')); 
+	    if (selectedPage && selectedPage !== currentPage) {
+	        currentPage = selectedPage;
+	        prdLoad(); 
+	    }
 	});
 });
+let currentPage = 1;
+const listLimit = 10;
 
 function prdLoad(){
-	let data = {};
+	let kind = $('#searchKind').val();
+	let word = $('#ListSearchWord').val();
 	
-	let kindElement = document.getElementById('searchKind');
-	let wordElement = document.getElementById('ListSearchWord');
+	let offset = (currentPage - 1) * listLimit;
 	
-	let kind = kindElement ? kindElement.value : null;
-	let word = wordElement ? wordElement.value : null;
+	let data = {
+		limit: listLimit,
+		offset: offset
+	};
+	if (kind && word) {
+		data[kind] = word;
+	}
 	
-	data[kind] = word;
 	
 	$.ajax({
 		url: "admproductList",
@@ -69,7 +95,8 @@ function prdLoad(){
 		data: data,
 		dataType: "json",
 		success: function(res) {
-			renderPrdTbody(res);
+			renderPrdTbody(res.list);
+			renderPagination(res.totalCount, currentPage);
 		},
 		error: function(xhr, status, error) {
 				alert("오류가 발생했습니다! 다시 접속해주세요.");
@@ -79,8 +106,8 @@ function prdLoad(){
 function renderPrdTbody(prd) {
 	const Tbody = $("#prdTableBody");
 	Tbody.empty();
-	if (prd.length === 0) {
-        tableBody.append(`<tr><td colspan="4" class="text-center">접수된 상품이 없습니다.</td></tr>`);
+	if (!prd || prd.length === 0) {
+        Tbody.append(`<tr><td colspan="9" class="text-center">접수된 상품이 없습니다.</td></tr>`);
         return;
     }
 	
@@ -88,7 +115,7 @@ function renderPrdTbody(prd) {
 		const row =  `
 			<tr>
 				<td class="prdList"" data-bs-toggle="modal" 
-                    data-bs-target="#exampleModal">${idx + 1}</td>
+                    data-bs-target="#exampleModal"> ${(currentPage - 1) * listLimit + idx + 1}</td>
 				<td>${prd.prd_cd}</td>
 				<td>${prd.prd_nm}</td>
 				<td>${prd.prd_sp}</td>
@@ -99,6 +126,7 @@ function renderPrdTbody(prd) {
 		$("#prdTableBody").append(row);
 	});
 }
+
 function renderPrdDetail(res) {
  	let statusOptions = res.statusList;
     // 0번 인덱스 값만 사용
@@ -170,5 +198,27 @@ function renderPrdDetail(res) {
     $('#modal-con').empty().append(bodydata);
 
 }
+
+function renderPagination(totalCount, currentPage) {
+        let totalPages = Math.ceil(totalCount / listLimit);
+        let $pagination = $('#pageList');
+        $pagination.empty();
+
+        let startPage = Math.max(1, currentPage - 2);
+        let endPage = Math.min(totalPages, currentPage + 2);
+        if (currentPage > 1) {
+            $pagination.append(`<a href="#" class="page-link" data-page="${currentPage - 1}">이전</a>`);
+        }
+
+        for (let i = startPage; i <= endPage; i++) {
+            let activeClass = (i === currentPage) ? "active" : "";
+            $pagination.append(`<a href="#" class="page-link ${activeClass}" data-page="${i}">${i}</a>`);
+        }
+
+        if (currentPage < totalPages) {
+            $pagination.append(`<a href="#" class="page-link" data-page="${currentPage + 1}">다음</a>`);
+        }
+}
+
 
 

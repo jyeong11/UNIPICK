@@ -262,10 +262,19 @@ public class AdminController {
 	// 관리자 상품관리
 	@ResponseBody
 	@PostMapping("admproductList")
-	public List<Map<String, Object>> admproductList(@RequestParam Map<String, Object> map) {
-		return adminservice.getPrdList(map);
+	public Map<String, Object> admproductList(@RequestParam Map<String, Object> map) {
+		// map으로 받으면 String 형태로 db에 전달되어 Integer로 변경후 전달
+		map.put("limit", Integer.parseInt((String) map.get("limit")));
+	    map.put("offset", Integer.parseInt((String) map.get("offset")));
+
+	    List<Map<String, Object>> list = adminservice.getPrdList(map);
+	    int totalCount = adminservice.getPrdTotalCount(map);
+
+	    Map<String, Object> result = new HashMap<>();
+	    result.put("list", list);
+	    result.put("totalCount", totalCount);
+	    return result;
 	}
-	
 	// 상품 상세조회
 	@ResponseBody
 	@PostMapping("admprdListDetail")

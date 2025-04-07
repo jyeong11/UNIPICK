@@ -42,9 +42,11 @@ public interface AdminMapper {
 	public List<Map<String, Object>> sideMainMenuList(Map<String, Object> map);
 	// 사이드 서브 메뉴
 	public List<Map<String, Object>> sideSubMenuList(Map<String, Object> map);
-	//상품관리
+	// 상품관리
 	public List<Map<String, Object>> getPrdList(Map<String, Object> map);
-	//상품 상세조회
+	// 상품관리 페이징에 필요한 전체 횟수 조회
+	public int getPrdTotalCount(Map<String, Object> map);
+	// 상품 상세조회
 	public List<Map<String, Object>> getprdListDetail(Map<String, Object> prdCd);
 	// 상품 상태 상세코드
 	public List<Map<String, Object>> getCommonStatus();

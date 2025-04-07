@@ -178,6 +178,7 @@ document.addEventListener("DOMContentLoaded", function () {
 										<tbody id="prdTableBody"></tbody>
 									</table>
 								</div>
+								<div id="pageList" class="mt-3 d-flex justify-content-center"></div>
 							</div>
 							<!-- 						조회버튼 클릭시 모달창 뜸 -->
 							<div class="modal fade" id="exampleModal" tabindex="-1"

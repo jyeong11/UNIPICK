@@ -215,8 +215,35 @@
 	   JOIN sellers s
 	     ON p.sel_id = s.sel_id
 	   LEFT JOIN common_detailcode cd 
-		ON p.prd_st = cd.cod_cd 
-	   AND cd.com_cd = 'PRD_REGISTERSTATUS'
+		 ON p.prd_st = cd.cod_cd 
+	    AND cd.com_cd = 'PRD_REGISTERSTATUS'
+	  WHERE 1 = 1
+	 <choose>
+	   	<when test="prd_cd != null and !prd_cd.equals('')">
+	   		AND p.prd_cd LIKE CONCAT(#{prd_cd}, '%')
+	   	</when>
+	   	<when test="prd_nm != null and !prd_nm.equals('')">
+	   		AND p.prd_nm LIKE CONCAT(#{prd_nm}, '%')
+	   	</when>
+	   	<when test="store_nm != null and !store_nm.equals('')">
+	   		AND s.sel_nm LIKE CONCAT(#{store_nm}, '%')
+	   	</when>
+	   	<when test="store_st != null and !store_st.equals('')">
+	   		AND p.prd_st LIKE CONCAT(#{store_st}, '%')
+	   	</when>
+     </choose>
+      LIMIT #{limit} OFFSET #{offset}
+	</select>
+	
+<!-- 	상품관리 페이징에 필요한 전채 갯수 조회 -->
+	<select id="getPrdTotalCount" parameterType="map" resultType="int">
+	 SELECT COUNT(*)
+	   FROM products p 
+	   JOIN sellers s
+	     ON p.sel_id = s.sel_id
+	   LEFT JOIN common_detailcode cd 
+		 ON p.prd_st = cd.cod_cd 
+	    AND cd.com_cd = 'PRD_REGISTERSTATUS'
 	  WHERE 1 = 1
 	 <choose>
 	   	<when test="prd_cd != null and !prd_cd.equals('')">

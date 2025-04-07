@@ -99,7 +99,10 @@ public class AdminService {
 	public List<Map<String, Object>> getPrdList(Map<String, Object> map) {
 		return mapper.getPrdList(map);
 	}
-	
+	// 상품관리에 페이징에 필요한 전체 갯수 조회
+	public int getPrdTotalCount(Map<String, Object> map) {
+		return mapper.getPrdTotalCount(map);
+	}
 	// 상품 상세조회
 	public List<Map<String, Object>> getprdListDetail(Map<String, Object> prdCd) {
 		return mapper.getprdListDetail(prdCd);
