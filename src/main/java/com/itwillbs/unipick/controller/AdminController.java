@@ -269,15 +269,15 @@ public class AdminController {
 	// 상품 상세조회
 	@ResponseBody
 	@PostMapping("admprdListDetail")
-	public List<Map<String, Object>> admprdListDetail(@RequestParam Map<String, Object> prdCd) {
-		List<Map<String, Object>> responseList = new ArrayList<>();
+	public Map<String, Object> admprdListDetail(@RequestParam Map<String, Object> prdCd) {
+		Map<String, Object> result = new HashMap<>();
 
 		List<Map<String, Object>> prdList = adminservice.getprdListDetail(prdCd);
 		List<Map<String, Object>> commonStatus = adminservice.getCommonStatus();
-
+	
 		result.put("prdList", prdList);
 		result.put("statusList", commonStatus);
-		System.out.println("result"+result);
+		System.out.println("result@!#@!#!@" + result);
 		return result;
 	}
 	

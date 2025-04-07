@@ -5,7 +5,7 @@ $(function() {
 		prdLoad();
 	});
 	// 검색 이벤트
-	$('#ListSearchWord').on('keydown', function(event){	// att 엔터 이벤트
+	$('#ListSearchWord').on('keydown', function(event){
 		if (event.key === 'Enter'){
 			$('#search').click();
 		}
@@ -20,6 +20,7 @@ $(function() {
 			data: data,
 			success: function(res) {
 				renderPrdDetail(res);
+				debugger;
 			},
 			error: function(xhr, status, error) {
 				alert("오류가 발생했습니다! 다시 접속해주세요.");
@@ -69,7 +70,6 @@ function prdLoad(){
 		dataType: "json",
 		success: function(res) {
 			renderPrdTbody(res);
-			debugger;
 		},
 		error: function(xhr, status, error) {
 				alert("오류가 발생했습니다! 다시 접속해주세요.");
@@ -100,15 +100,14 @@ function renderPrdTbody(prd) {
 	});
 }
 function renderPrdDetail(res) {
-    let statusOptions = ["PEDR01", "PEDR02", "접수"];
-
+ 	let statusOptions = res.statusList;
     // 0번 인덱스 값만 사용
-    let firstRes = res[0];  // 0번째 항목만 사용
+    let firstRes = res.prdList[0];
 
     // 사이즈, 색상, 재고수량을 순회하면서 표시할 값 준비
-    let sizes = res.map(item => item.cod_nm).join(', ') || '사이즈 없음';
-    let colors = res.map(item => item.clr_nm).join(', ') || '색상 없음';
-    let stockQty = res.map(item => item.prd_qt).join(', ') || '재고수량 없음';
+    let sizes = res.prdList.map(item => item.cod_nm).join(', ') || '사이즈 없음';
+    let colors = res.prdList.map(item => item.clr_nm).join(', ') || '색상 없음';
+    let stockQty = res.prdList.map(item => item.prd_qt).join(', ') || '재고수량 없음';
 
     let bodydata = `
         <div class="row mb-3">
@@ -156,10 +155,10 @@ function renderPrdDetail(res) {
         <div class="row mb-1">
             <label class="col-sm-2 col-form-label">상태 : </label>
             <div class="col-sm-8">
-                <select id="useYN" class="col-sm-4 form-select">
+                 <select id="useYN" class="col-sm-4 form-select">
                     ${statusOptions.map(status => 
-                    `<option value="${status}" ${firstRes.prd_st === status ? 'selected' : ''}>${status}</option>`
-                ).join('')}
+                        `<option value="${status.cod_cd}" ${firstRes.prd_st === status.cod_cd ? 'selected' : ''}>${status.cod_nm}</option>`
+                    ).join('')}
                 </select>
             </div>
         </div>
