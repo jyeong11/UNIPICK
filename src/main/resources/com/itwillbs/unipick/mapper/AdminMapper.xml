@@ -237,6 +237,13 @@
 		 ON o.siz_nm = c.cod_cd 
 	  WHERE o.prd_cd = #{prd_cd};
 	</select>
+<!-- 	상품 상태 조회 -->
+	<select id="getCommonStatus" parameterType="map">
+	 SELECT cod_cd,
+		    cod_nm
+	   FROM common_detailcode
+	  WHERE com_cd = 'PRD_REGISTERSTATUS';
+	</select>
 	
 	<!-- 방문자 수 -->
 	<select id="visitCount" parameterType="map">

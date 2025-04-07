@@ -269,8 +269,16 @@ public class AdminController {
 	// 상품 상세조회
 	@ResponseBody
 	@PostMapping("admprdListDetail")
-	public List<Map<String, Object>> admprdListDetail(@RequestParam Map<String, Object> prdCd) {
-		return adminservice.getprdListDetail(prdCd);
+	public Map<String, Object> admprdListDetail(@RequestParam Map<String, Object> prdCd) {
+		Map<String, Object> result = new HashMap<>();
+
+		Map<String, Object> prdList = adminservice.getprdListDetail(prdCd);
+		Map<String, Object> commonStatus = adminservice.getCommonStatus();
+
+		result.put("prdList", prdList);
+		result.put("statusList", commonStatus);
+		System.out.println("result"+result);
+		return result;
 	}
 	
 	// 방문자 수 증가
@@ -285,8 +293,6 @@ public class AdminController {
 	@PostMapping("selectPrdstatus")
 	public void selectPrdstatus(@RequestParam("status") String status,
 	        					@RequestParam("prd_cd") String prdCd) {
-		System.out.println("status!@#$%^&*(" + status);
-		System.out.println("status!@#$%^&*(" + prdCd);
 		adminservice.updateStatus(status, prdCd);
 	}
 	
@@ -329,8 +335,6 @@ public class AdminController {
 	@ResponseBody
 	@PostMapping("updateReportStatus")
 	public void updateReportStatus(@RequestBody Map<String, Object> report) {
-		System.out.println("123!@#!@#!@#!@");
-		System.out.println(report);
 		adminservice.updateReportStatus(report);
 	}
 	

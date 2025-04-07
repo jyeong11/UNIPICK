@@ -60,15 +60,8 @@ function prdLoad(){
 	let kind = kindElement ? kindElement.value : null;
 	let word = wordElement ? wordElement.value : null;
 	
-	if(kind == "prd_cd" && word != ''){
-		data.prd_cd = word;
-	} else if(kind == "prd_nm"){
-		data.prd_nm = word;
-	} else if(kind == "store_nm"){
-		data.store_nm = word;
-	} else if(kind == "store_st"){
-		data.store_st = word;
-	}
+	data[kind] = word;
+	
 	$.ajax({
 		url: "admproductList",
 		method: "POST",
@@ -76,6 +69,7 @@ function prdLoad(){
 		dataType: "json",
 		success: function(res) {
 			renderPrdTbody(res);
+			debugger;
 		},
 		error: function(xhr, status, error) {
 				alert("오류가 발생했습니다! 다시 접속해주세요.");

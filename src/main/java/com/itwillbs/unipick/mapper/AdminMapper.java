@@ -45,7 +45,9 @@ public interface AdminMapper {
 	//상품관리
 	public List<Map<String, Object>> getPrdList(Map<String, Object> map);
 	//상품 상세조회
-	public List<Map<String, Object>> getprdListDetail(Map<String, Object> prdCd);
+	public Map<String, Object> getprdListDetail(Map<String, Object> prdCd);
+	// 상품 상태 상세코드
+	public Map<String, Object> getCommonStatus();
 	// 방문자 수
 	public Map<String, Object> visitCount();
 	// 상품 접수 상태변경

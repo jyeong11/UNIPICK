@@ -48,11 +48,8 @@ $(function() {
 		let kind = kindElement ? kindElement.value : null;
 		let word = wordElement ? wordElement.value : null;
 		
-		if(kind == "option1" && word != ''){
-			data.com_cd = word;
-		} else if(kind == "option2"){
-			data.com_nm = word;
-		}
+		data[kind] = word;
+		
         $.ajax({
             type: "GET",
             url: "cmCodeList",

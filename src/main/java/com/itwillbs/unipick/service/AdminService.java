@@ -101,10 +101,13 @@ public class AdminService {
 	}
 	
 	// 상품 상세조회
-	public List<Map<String, Object>> getprdListDetail(Map<String, Object> prdCd) {
+	public Map<String, Object> getprdListDetail(Map<String, Object> prdCd) {
 		return mapper.getprdListDetail(prdCd);
 	}
-	
+	// 상태 공통코드
+	public Map<String, Object> getCommonStatus() {
+		return mapper.getCommonStatus();
+	}
 	// 방문자 수
 	public Map<String, Object> visitCount() {
 		return mapper.visitCount();
