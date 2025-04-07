@@ -41,11 +41,7 @@
 	
 	<div id="order-container">
 		<div><h2>주문 상품 정보</h2></div>
-	</div>
-	<div id="orderInfo-container">
-    	<div class="ttpr">
-    		<span id="optTotal">상품 주문금액: </span><span>원</span>
-    	</div>
+		<div id="product-info"></div>
 	</div>
 	<div id="deliInfo-container">
         <form id="delivery-form">

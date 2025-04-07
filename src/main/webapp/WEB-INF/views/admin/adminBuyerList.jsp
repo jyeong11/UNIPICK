@@ -65,6 +65,11 @@
 								<div class="container">
 									<div class="row align-items-start justify-content-end" id="searchList">
 										<div class="col-2">
+											<select class="form-select" id="buyerStatusKind">
+												<option value="all">전체</option>
+											</select>
+										</div>
+										<div class="col-2">
 											<select class="form-select" id="buyerSearchKind">
 												<option value="buy_em">이메일</option>
 												<option value="buy_nm">이름</option>
@@ -89,6 +94,7 @@
 													<th>이름</th>
 													<th>닉네임</th>
 													<th>가입일시</th>
+													<th>총 신고수</th>
 													<th>계정상태</th>
 												</tr>
 											</thead>

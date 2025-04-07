@@ -344,14 +344,14 @@
 			   pi.fil_pt,
 			   r.rev_id
 		  FROM orders o
-		  JOIN order_details od ON o.ord_id = od.ord_id
-		  JOIN options op ON od.opt_id = op.opt_id
-		  JOIN common_detailcode c ON c.cod_cd = op.siz_nm
-		  JOIN products p ON op.prd_cd = p.prd_cd
-		  JOIN sellers s ON p.sel_id = s.sel_id
-		  JOIN (SELECT distinct fil_pt,
-		  						prd_cd
-				  FROM product_images) pi ON p.prd_cd = pi.prd_cd
+		  LEFT JOIN order_details od ON o.ord_id = od.ord_id
+		  LEFT JOIN options op ON od.opt_id = op.opt_id
+		  LEFT JOIN common_detailcode c ON c.cod_cd = op.siz_nm
+		  LEFT JOIN products p ON op.prd_cd = p.prd_cd
+		  LEFT JOIN sellers s ON p.sel_id = s.sel_id
+		  LEFT JOIN (SELECT prd_cd, fil_pt 
+		               FROM product_images
+		              WHERE fil_nb = 1) pi ON p.prd_cd = pi.prd_cd
 		  LEFT JOIN (SELECT rev_id,
 		  					opt_id
 		  			   FROM reviews

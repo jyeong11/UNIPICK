@@ -1,4 +1,5 @@
 let dtModal;
+let first = true;
 
 $(function() {
 	buyerList();
@@ -28,17 +29,27 @@ $(function() {
 		
 		let kindElement = document.getElementById('buyerSearchKind');
 		let wordElement = document.getElementById('buyerSearchWord');
+		let stKindElement = document.getElementById('buyerStatusKind');
 		
 		let kind = kindElement ? kindElement.value : null;
 		let word = wordElement ? wordElement.value : null;
+		let stKind = stKindElement ? stKindElement.value : null;
 		
 		data[kind] = word;
+		data["cod_cd"] = stKind;
 		
 		$.ajax({
 		url: "getBuyerInfo",
 		method: "POST",
 		data: data,
 		success: function (res) {
+			
+			if(first){
+				let buyerStatus = res.status.map(item => `<option value="${item.cod_cd}">${item.cod_nm}</option>`)
+											.join('')
+				$('#buyerStatusKind').append(buyerStatus);
+				first = false;
+			}
 			
 			let tableBody = $("#buyerListTable");
             tableBody.empty();
@@ -49,6 +60,7 @@ $(function() {
 												<td>${buyer.buy_nm}</td>
 												<td>${buyer.buy_nn}</td>
 												<td>${date}</td>
+												<td>${buyer.cnt_rp}</td>
 												<td>${buyer.cod_nm}</td>
 											</tr>`})
 							.join('');
@@ -129,6 +141,12 @@ $(function() {
                     <label class="col-sm-3 col-form-label">마케팅 : </label>
                     <div class="col-sm-8">
                         <input type="text" id="accMa" class="col-sm-12 form-control" value="${buy.acc_ma === 1 ? "동의" : "미동의"}" disabled>
+                    </div>
+                </div>
+				<div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">총 신고수 : </label>
+                    <div class="col-sm-8">
+                        <input type="text" id="buySt" class="col-sm-12 form-control" value="${buy.cnt_rp}" disabled>
                     </div>
                 </div>
                 <div class="row mb-3">

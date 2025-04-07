@@ -359,25 +359,34 @@
 			   b.acc_ta,
 			   b.acc_pa,
 			   b.acc_ma,
-			   cd.cod_nm
+			   cd.cod_nm,
+			   IFNULL(r.cnt, 0) as cnt_rp
 		  FROM buyers b
-		  join common_detailcode cd on b.acc_st = cd.cod_cd 
+		  JOIN common_detailcode cd ON b.acc_st = cd.cod_cd
+		  LEFT JOIN (SELECT buy_em, count(*) AS cnt
+				  	   FROM report r
+                       JOIN common_detailcode cd ON r.rpt_st = cd.cod_cd
+					  WHERE cod_nm = '처리' AND rpt_tg = '구매자'
+				 	  GROUP BY buy_em) r ON b.buy_em = r.buy_em
 		 WHERE 1 = 1
 		  <choose>
 		   	<when test="buy_em != null and !buy_em.equals('')">
-		   		AND buy_em LIKE CONCAT(#{buy_em}, '%')
+		   		AND b.buy_em LIKE CONCAT(#{buy_em}, '%')
 		   	</when>
 		   	<when test="buy_nm != null and !buy_nm.equals('')">
-		   		AND buy_nm LIKE CONCAT(#{buy_nm}, '%')
+		   		AND b.buy_nm LIKE CONCAT(#{buy_nm}, '%')
 		   	</when>
 		   	<when test="buy_nn != null and !buy_nn.equals('')">
-		   		AND buy_nn LIKE CONCAT(#{buy_nn}, '%')
+		   		AND b.buy_nn LIKE CONCAT(#{buy_nn}, '%')
 		   	</when>
 	     </choose>
 	     <if test="acc_st != null and !acc_st.equals('')">
-	     	AND acc_st = #{acc_st}
+	     	AND b.acc_st = #{acc_st}
 	     </if>
-		 ORDER BY acc_at DESC
+	     <if test="cod_cd != all and !cod_cd.equals('all')">
+	     	AND cod_cd = #{cod_cd}
+	     </if>
+		 ORDER BY b.acc_at DESC
 	</select>
 	
 	<!-- 구매자 상태 -->

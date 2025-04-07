@@ -1,5 +1,5 @@
 let dtModal;
-let first = false;
+let first = true;
 
 $(function() {
 	reportList();
@@ -44,10 +44,10 @@ $(function() {
 		method: "POST",
 		data: data,
 		success: function (res) {
-			if(!first){
+			if(first){
 				let status = res.rptSt.map(item => `<option value="${item.cod_cd}">${item.cod_nm}</option>`);
 				$('#reportStatusKind').append(status);
-				first = true;
+				first = false;
 			}
 			
 			let tableBody = $("#reportListTable");
@@ -151,8 +151,6 @@ $(function() {
 	$(document).on('change', '#rpt_st', function () {
 	    const rptId = $('#rptId').val();
 	    const newStatus = $(this).val();
-
-		alert(newStatus);
 
 		let data = {rpt_id : rptId,
 					rpt_st : newStatus}
