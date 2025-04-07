@@ -1,42 +1,139 @@
 @charset "UTF-8";
+
 body {
-  font-family: "Noto Sans KR", sans-serif;
-}
-
-.image-preview {
-    margin: 10px 0;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background-color: #f9f9f9;
-    min-height: 150px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.image-preview img {
-    max-width: 150px;
-    max-height: 150px;
-    object-fit: contain;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    font-family: "Noto Sans KR", sans-serif;
+    background-color: #f8f9fc;
 }
 
 .input-group {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #4e73df;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.input-group input[type="text"],
+.input-group input[type="password"],
+.input-group input[type="file"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #e3e6f0;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.input-group input[type="text"]:focus,
+.input-group input[type="password"]:focus {
+    border-color: #4e73df;
+    box-shadow: 0 0 0 2px rgba(78, 115, 223, 0.1);
+    outline: none;
+}
+
+.image-preview {
+    margin: 15px 0;
+    padding: 20px;
+    border: 2px dashed #e3e6f0;
+    border-radius: 10px;
+    background-color: #ffffff;
+    min-height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.image-preview:hover {
+    border-color: #4e73df;
+}
+
+.image-preview img {
+    max-width: 180px;
+    max-height: 180px;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
 #removeStorePp, #removeStoreBp {
     margin-left: 10px;
-    padding: 5px 10px;
-    background-color: #dc3545;
+    padding: 8px 16px;
+    background-color: #e74a3b;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
 }
 
 #removeStorePp:hover, #removeStoreBp:hover {
-    background-color: #c82333;
+    background-color: #d52a1a;
+    transform: translateY(-1px);
+}
+
+.content-tilte {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #2e59d9;
+    margin: 30px 0 20px 0;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e3e6f0;
+}
+
+#sellermodify, #sellerWithdraw {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#sellermodify {
+    background-color: gray;
+    color: white;
+    margin-right: 10px;
+}
+
+#sellerWithdraw {
+    background-color: black;
+    color: white;
+}
+
+#sellermodify:hover {
+    background-color: #2e59d9;
+    transform: translateY(-2px);
+}
+
+#sellerWithdraw:hover {
+    background-color: #d52a1a;
+    transform: translateY(-2px);
+}
+
+/* 읽기 전용 입력 필드 스타일 */
+input[readonly] {
+    background-color: #f8f9fc;
+    cursor: not-allowed;
+}
+
+/* 파일 입력 필드 커스텀 스타일 */
+input[type="file"] {
+    padding: 10px;
+    background-color: #ffffff;
+    cursor: pointer;
+}
+
+/* 구분선 스타일 */
+hr {
+    margin: 30px 0;
+    border: 0;
+    border-top: 1px solid #e3e6f0;
 }
