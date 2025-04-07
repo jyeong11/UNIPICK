@@ -23,3 +23,14 @@
     color: #6e707e;
     border-radius: 0.35rem;
 }
+
+.select-target {
+	width: 150px;
+}
+
+#reportSearch {
+	color: white;
+    background-color: black;
+    height: 41px;
+    width: 75px;
+}

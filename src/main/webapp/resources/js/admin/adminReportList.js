@@ -1,10 +1,11 @@
 let dtModal;
+let first = false;
 
 $(function() {
-	ReportList();
+	reportList();
 
 	$('#reportSearch').on('click',function() {
-		buyerList();
+		reportList();
 	}); 
 	$('#reportSearchWord').on('keydown', function(event) {	
 		if (event.key === "Enter"){
@@ -20,26 +21,34 @@ $(function() {
 	$(document).on('click', '#close', function() {
         if (dtModal) {
             dtModal.hide();
-			ReportList();
+			reportList();
         }
     });
 
-	function ReportList() {
+	function reportList() {
 		let data = {};
 		
 		let kindElement = document.getElementById('reportSearchKind');
 		let wordElement = document.getElementById('reportSearchWord');
+		let stKindElement = document.getElementById('reportStatusKind');
 		
 		let kind = kindElement ? kindElement.value : null;
 		let word = wordElement ? wordElement.value : null;
+		let stKind = stKindElement ? stKindElement.value : null;
 		
 		data[kind] = word;
+		data["cod_cd"] = stKind;
 		
 		$.ajax({
 		url: "getReportInfo",
 		method: "POST",
 		data: data,
 		success: function (res) {
+			if(!first){
+				let status = res.rptSt.map(item => `<option value="${item.cod_cd}">${item.cod_nm}</option>`);
+				$('#reportStatusKind').append(status);
+				first = true;
+			}
 			
 			let tableBody = $("#reportListTable");
             tableBody.empty();

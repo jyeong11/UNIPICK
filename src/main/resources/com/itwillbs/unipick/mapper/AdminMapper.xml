@@ -272,23 +272,44 @@
 	
 	<!-- 신고내역 리스트 -->
 	<select id="reportList">
-		SELECT rpt_id,
-			   CASE 
-			   	   WHEN rpt_tg = '판매자' THEN buy_em 
-			   	   ELSE sel_id 
-			   END AS rpr_id,
-			   CASE
-			   	   WHEN rpt_tg = '판매자' THEN sel_id
-			   	   ELSE buy_em
-			   END AS rpd_id,
+		select rpt_id,
+			   rpr_id,
+			   rpd_id,
 			   rpt_tg,
 			   rpt_rs,
 			   rpt_dt,
-			   cd.cod_nm
-		  FROM report r
-		  JOIN common_detailcode cd ON r.rpt_st = cd.cod_cd
+			   cod_cd,
+			   cod_nm
+		  FROM (SELECT rpt_id,
+					   CASE 
+					   	   WHEN rpt_tg = '판매자' THEN buy_em 
+					   	   ELSE sel_id 
+					   END AS rpr_id,
+					   CASE
+					   	   WHEN rpt_tg = '판매자' THEN sel_id
+					   	   ELSE buy_em
+					   END AS rpd_id,
+					   rpt_tg,
+					   rpt_rs,
+					   rpt_dt,
+					   cd.cod_cd,
+					   cd.cod_nm
+				  FROM report r
+				  JOIN common_detailcode cd ON r.rpt_st = cd.cod_cd) re
+		 WHERE 1 = 1
 		  <if test="rpt_id != null and !rpt_id.equals('')">
-		  	WHERE rpt_id = #{rpt_id}
+		  	AND rpt_id = #{rpt_id}
+		  </if>
+		  <choose>
+		  	<when test="rpr_id != null and !rpr_id.equals('')">
+		  		AND rpr_id LIKE CONCAT(#{rpr_id}, '%') 
+		  	</when>
+		  	<when test="rpd_id != null and !rpd_id.equals('')">
+		  		AND rpd_id LIKE CONCAT(#{rpd_id}, '%')
+		  	</when>
+		  </choose>
+		  <if test="cod_cd != all and !cod_cd.equals('all')">
+		  	AND cod_cd = #{cod_cd}
 		  </if>
 		 ORDER BY rpt_dt DESC
 	</select>

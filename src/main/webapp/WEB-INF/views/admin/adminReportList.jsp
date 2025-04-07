@@ -64,10 +64,15 @@
 								</div>
 								<div class="container">
 									<div class="row align-items-start justify-content-end" id="searchList">
-										<div class="col-2">
+										<div class="select-target">
+											<select class="form-select" id="reportStatusKind">
+												<option value="all">전체</option>
+											</select>
+										</div>
+										<div class="select-target">
 											<select class="form-select" id="reportSearchKind">
-												<option value="rpr">신고자ID</option>
-												<option value="rpd">신고대상자ID</option>
+												<option value="rpr_id">신고자ID</option>
+												<option value="rpd_id">신고대상자ID</option>
 											</select>
 										</div>
 										<div class="col-3">
