@@ -108,14 +108,16 @@
 	    			</div>
 		    		<div id="selAnthorprd">
 					    <c:forEach var="sel" items="${selImg}" begin="1" end="6">
-						    <div class="prd-item" style="cursor: pointer;">
-						        <img src="${pageContext.request.contextPath}${sel.fil_pt}" alt="상품 이미지">
-						        <div class="prdInfo">${sel.sel_nm}</div>
-									<div class="prdInfo">${prd.prd_nm}</div>
-				                    <div class="prd_pr">
-				                    	<div class="dc">${sel.dc}</div>
-				                    	<div class="prd_sp">${sel.prd_sp}원</div>
-				                </div>
+					        <div class="prd-item" data-id="${sel.prd_cd}" data-sel="${prd.sel_nm}" style="cursor: pointer;">
+<!-- 						    <div class="prd-item" style="cursor: pointer;"> -->
+							        <img src="${pageContext.request.contextPath}${sel.fil_pt}" alt="상품 이미지">
+							        <div class="prdInfo">${prd.sel_nm}</div>
+										<div class="prdInfo">${sel.prd_nm}</div>
+					                    <div class="prd_pr">
+					                    	<div class="dc">${sel.dc}</div>
+					                    	<div class="prd_sp">${sel.prd_sp}원</div>
+					                </div>
+<!-- 					            </div> -->
 				             </div>
 					    </c:forEach>
 					</div>

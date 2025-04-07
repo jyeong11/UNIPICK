@@ -92,6 +92,14 @@ $(function() {
 		$("#total-price").hide();
         loadSize();
     });
+	
+	// 사진 클릭시 해당 상품으로 이동
+	$(document).on("click", ".prd-item", function() {
+        let prdCd = $(this).data("id");
+		let selNm = $(this).data("sel");
+		debugger;
+    	window.location.href = `productDetail?prd_cd=${prdCd}&sel_nm=${encodeURIComponent(selNm)}`;
+    });
 
 	// 맨 위로 스크롤
 	document.getElementById('scrollToTop').addEventListener('click', function () {
@@ -288,15 +296,16 @@ function RecommendPrd() {
         success: function(res) {
 			let pickPrd = $("#pickPrd");
             let productHtml = "";
-
             res.forEach(prd => {
                 productHtml += `
                     <div class="product">
-                        <img src="${contextPath}${prd.fil_pt}" alt="${prd.prd_nm} class="pick-img">
-                        <p class="pick-nm">${prd.prd_nm}</p>
-						<div class="pick-pc">
-                    		<p class="pick-dc">${prd.dc}</p>
-                        	<p class="pick-sp">${prd.prd_sp.toLocaleString()}원</p>
+						<div class="prd-item" data-id="${prd.prd_cd}" data-sel="${prd.sel_nm}" style="cursor: pointer;">
+	                        <img src="${contextPath}${prd.fil_pt}" alt="${prd.prd_nm} class="pick-img">
+	                        <p class="pick-nm">${prd.prd_nm}</p>
+							<div class="pick-pc">
+	                    		<p class="pick-dc">${prd.dc}</p>
+	                        	<p class="pick-sp">${prd.prd_sp.toLocaleString()}원</p>
+							</div>
 						</div>
 					</div>
                 `;

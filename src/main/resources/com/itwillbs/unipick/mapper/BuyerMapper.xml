@@ -36,7 +36,7 @@
 	<select id="getPrdImg" parameterType="map">
 	 SELECT fil_pt
 	   FROM product_images
-	  WHERE prd_cd = #{prdCd}
+	  WHERE prd_cd = #{prdCd};
 	</select>
 	
 <!-- 	상품 상세 옵션 -->
@@ -92,6 +92,8 @@
 	 SELECT pd.prd_nm,
 	 		pi.fil_pt,
 	 		pd.prd_op,
+	 		sl.sel_nm,
+	 		pd.prd_cd,
 		    CONCAT(ROUND(((pd.prd_op - pd.prd_sp) / pd.prd_op) * 100, 0), '%') AS dc,
 		    FORMAT(pd.prd_sp, 0) AS prd_sp
 	   FROM products pd
@@ -128,7 +130,8 @@
 	   	 ON  pd.prd_bd= cd.cod_cd
 	   JOIN sellers sl
 	     ON pd.sel_id = sl.sel_id
-      WHERE prd_nm LIKE CONCAT('%',#{query},'%')
+      WHERE (prd_nm LIKE CONCAT('%',#{query},'%')
+      	 OR sl.sel_nm LIKE CONCAT('%', #{query}, '%'))
       	AND prd_st = (SELECT cod_cd
 				        FROM common_detailcode 
 				       WHERE com_cd = 'PRD_REGISTERSTATUS' 
@@ -169,19 +172,19 @@
                od.cnt
   		  FROM products p 
 		  LEFT JOIN (SELECT prd_cd, fil_nm, fil_pt
-						FROM product_images
-						WHERE fil_nb = 1) i ON p.prd_cd = i.prd_cd
+					   FROM product_images
+					  WHERE fil_nb = 1) i ON p.prd_cd = i.prd_cd
 		  LEFT JOIN sellers s ON p.sel_id = s.sel_id
 		  LEFT JOIN (SELECT prd_cd, COUNT(*) AS 'count'
 				  	   FROM options o JOIN reviews r ON o.opt_id = r.opt_id
 				 	  GROUP by prd_cd) r ON p.prd_cd = r.prd_cd
 		  LEFT JOIN common_detailcode cd ON p.prd_bd = cd.cod_cd
 		  LEFT JOIN wishlist w on p.prd_cd = w.prd_cd
-          LEFT JOIN (select prd_cd, count(odd_qt) as cnt
-					from order_details od
-					join options o on od.opt_id = o.opt_id
-					where odd_st = '배송완료'
-					group by prd_cd) od on p.prd_cd = od.prd_cd
+          LEFT JOIN (SELECT prd_cd, COUNT(odd_qt) as cnt
+					   FROM order_details od
+					   JOIN options o on od.opt_id = o.opt_id
+					  WHERE odd_st = '배송완료'
+					  GROUP BY prd_cd) od on p.prd_cd = od.prd_cd
 		 WHERE prd_st = (SELECT cod_cd
 		 				   FROM common_detailcode 
 		 				  WHERE com_cd = 'PRD_REGISTERSTATUS' 
@@ -555,6 +558,7 @@
 	 		p.prd_sp,
 	 		s.sel_nm,
 	 		pi.fil_pt,
+	 		p.prd_cd,
 		    CONCAT(ROUND(((p.prd_op - p.prd_sp) / p.prd_op) * 100, 0), '%') AS dc
 	   FROM products p
 	   JOIN product_images pi 
@@ -619,12 +623,23 @@
 	                      AND siz_nm = #{size}
 	                      AND prd_cd = #{prd_cd}));
 	</insert>
+<!-- 	장바구니 같은 옵션, 상품일 경우 업데이트 -->
+	<update id="updateCartQty" parameterType="map">
+     UPDATE cart
+    	SET crt_qt = crt_qt + #{qty}
+      WHERE buy_em = #{buy_em}
+        AND opt_id = (SELECT opt_id 
+			            FROM options 
+			           WHERE clr_nm = #{color}
+			             AND siz_nm = #{size}
+			             AND prd_cd = #{prd_cd})
+	</update>
 	
 <!-- 	장바구니 조회 -->
 	<select id="cartSelect" parameterType="map">
 	 SELECT *
 	   FROM cart c
-	   JOIN options o 
+	   	JOIN options o 
 	     ON c.opt_id = o.opt_id
 	   JOIN common_detailcode d
 	     ON o.siz_nm = d.cod_cd
@@ -636,6 +651,7 @@
 	     ON p.prd_cd = i.prd_cd
 	  WHERE i.fil_nb = 1;
 	</select>
+	
 	
 	<!-- 찜 목록 -->
 	<select id="myWishPrd">

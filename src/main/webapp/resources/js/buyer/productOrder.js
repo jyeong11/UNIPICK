@@ -38,9 +38,11 @@ $(function() {
                                 <div class="pr"> 주문 금액 </div>
                             </div>
                             <div class="order-info">
-                                <div class="order-img">
-                                    <img src="${contextPath}${item.fil_pt}">
-                                </div>
+								<div class="prd-item" data-id="${item.prd_cd}" data-sel="${item.sel_nm}" style="cursor: pointer;">
+	                            	<div class="order-img">
+	                                	<img src="${contextPath}${item.fil_pt}">
+	                            	</div>
+								</div>
                                 <div>
                                     <div class="prd">
                                         <div class="prd-nm">${item.prd_nm}</div>
@@ -87,7 +89,12 @@ $(function() {
             }
         });
     });
-
+	// 사진 클릭시 해당 상품으로 이동
+	$(document).on("click", ".prd-item", function() {
+        let prdCd = $(this).data("id");
+		let selNm = $(this).data("sel");
+    	window.location.href = `productDetail?prd_cd=${prdCd}&sel_nm=${encodeURIComponent(selNm)}`;
+    });
 	// 카카오 주소창 띄우기 
 	$(document).on("click", "#search-address", function(e) {
 		e.preventDefault();
@@ -368,8 +375,8 @@ $(function() {
 	    $("#term-container").html(`
 	        <div id="total"><h2>주문내용 확인 및 결제 동의</h2></div>
 	        <div class="price">
-	            <label><input type="checkbox" id="agree_all"> 전체 동의하기</label>
-	            <label><input type="checkbox" class="agree_chk"> 유니픽 약관 동의 (필수)</label>
+	            <label><input type="checkbox" id="agree_all"> 전체 동의하기 </label>
+	            <label><input type="checkbox" class="agree_chk"> 유니픽 약관 동의 (필수) <a id="agree">더보기 ></a></label>
 	            <label><input type="checkbox" class="agree_chk"> 개인정보수집 및 이용에 대한 안내 (필수)</label>
 	            <label><input type="checkbox" class="agree_chk"> 구매조건 및 개인정보 제3자 제공 (필수)</label>
 	        </div>

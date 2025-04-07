@@ -138,7 +138,11 @@ input[type="checkbox"]:checked::before {
 }
 .prd_nm{
     font-size: 1.2em;
-    height: 30px;
+    height: auto;
+    max-width: 360px;
+    white-space: normal;
+    word-wrap: break-word;
+    line-height: 1.4;
 }
 .sel_nm{
 	font-weight: bold;

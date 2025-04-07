@@ -215,7 +215,11 @@ public class BuyerService {
 	
 	// 장바구니
 	public void cartInsert(Map<String, Object> data) {
-		mapper.cartInsert(data);
+		int updated = mapper.updateCartQty(data); // 수량 업데이트 먼저 시도
+
+	    if (updated == 0) {
+	        mapper.cartInsert(data);
+	    }
 	}
 	
 	// 장바구니 조회

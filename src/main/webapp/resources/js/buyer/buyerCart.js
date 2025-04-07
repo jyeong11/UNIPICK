@@ -1,6 +1,5 @@
 $(function() {
 	let sum = 0;
-	let totalSf = 0;
 	
 	$.ajax({
 		url:"cartSelect",
@@ -12,7 +11,6 @@ $(function() {
 			res.forEach(prd => {
 				let totalPrdPrice = parseInt(prd.prd_sp * parseInt(prd.crt_qt));
 				const html = `
-					<div class="cart-item" data-cart-id="${prd.crt_id}" data-unit-price="${prd.prd_sp}">
 					<div class="cart-item" data-cart-id="${prd.crt_id}" data-unit-price="${prd.prd_sp}" data-prd-cd="${prd.prd_cd}">
 						<div class="check">
 							<div><input type="checkbox" class="item-checkbox" checked></div>
@@ -22,10 +20,8 @@ $(function() {
 								<div>상품 금액</div>
 							</div>
 						</div>
-						<div class="tie">
-							<a href="#">
-								<img src="${contextPath}${prd.fil_pt}" alt="${prd.prd_nm}">
-							</a>
+						<div class="tie" data-id="${prd.prd_cd}" data-sel="${prd.sel_nm}" style="cursor: pointer;">
+							<img src="${contextPath}${prd.fil_pt}" alt="${prd.prd_nm}">
 							<div>
 								<a href="sellerShopDetail?sel_nm=${prd.sel_nm}">
 									<div class="sel_nm">${prd.sel_nm}</div>
@@ -49,7 +45,7 @@ $(function() {
 									<div>${prd.prd_sf.toLocaleString()}원</div>
 								</div>
 								<div class="tt">
-									<div>${(prd.prd_sp * parseInt(prd.crt_qt) + prd.prd_sf).toLocaleString()}원</div>
+									<div class="ttsp">${(prd.prd_sp * parseInt(prd.crt_qt) + prd.prd_sf).toLocaleString()}원</div>
 								</div>
 							</div>
 						</div>
@@ -101,8 +97,16 @@ $(function() {
 		});
 	});
 	
+	// 사진 클릭시 해당 상품으로 이동
+	$(document).on("click", ".tie", function() {
+        let prdCd = $(this).data("id");
+		let selNm = $(this).data("sel");
+    	window.location.href = `productDetail?prd_cd=${prdCd}&sel_nm=${encodeURIComponent(selNm)}`;
+    });
+	
 	// 옵션 변경시 업데이트 
-	$(document).on("click", ".qty-btn", function () {
+	$(document).on("click", ".qty-btn", function (e) {
+		e.stopPropagation();
 		// 버튼이 +, -인지 판별
 	    const isPlus = $(this).hasClass("plus");
 	    const cartItem = $(this).closest(".cart-item");
@@ -115,7 +119,6 @@ $(function() {
 	    } else {
 	        if (qty > 1) qty -= 1;
 	    }
-		debugger;
 	    qtyInput.val(qty);
 		
 	    $.ajax({
@@ -127,10 +130,11 @@ $(function() {
 	            qty: qty
 	        }),
 			success: function () {
-				const unitPrice = parseInt(cartItem.data("unit-price")); // 단가 가져옴
+				const unitPrice = parseInt(cartItem.data("unit-price"));
 	            const newTotal = unitPrice * qty;
 
-				cartItem.find(".prd-sp").text(newTotal.toLocaleString() + "원");
+				cartItem.find(".ttsp").text(newTotal.toLocaleString() + "원");
+				updateTotalPrice();
 			},
 	        error: function (xhr, status, error) {
 	            console.error("수량 업데이트 실패:", error);
@@ -157,8 +161,15 @@ $(function() {
 		// 전체 선택 체크박스의 상태 동기화
 		document.getElementById("selectAll").checked = allCheckboxes.length === checkedCheckboxes.length;
 	});
+	
+	
 	document.querySelector("#price-button button").addEventListener("click", function () {
 	    const checkedItems = document.querySelectorAll(".item-checkbox:checked");
+		
+		if (checkedItems.length === 0) {
+	        alert("선택된 상품이 없습니다.");
+	        return;
+    	}
 	    const params = new URLSearchParams();
 	
 	    checkedItems.forEach(item => {
