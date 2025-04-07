@@ -45,8 +45,37 @@ input[type="checkbox"]:checked::before {
 	align-items: center; /* 세로 가운데 정렬 */
 }
 .prd-sp{
-	margin-left: 68px;
+	margin-left: 104px;
     font-size: 1.2em;
+}
+.tt{
+	font-size: 1.2em;
+    justify-content: end;
+    display: flex;
+    margin-top: 20px;
+    color: #f2a900;
+}
+#price-button button {
+    padding: 25px;
+    width: 100%;
+    max-width: 260px;
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+/*     background: #ccc; */
+/*     color: #fff; */
+	cursor: pointer;
+    font-size: 1.5em;
+    border: none; 
+    outline: none; 
+/*     cursor: not-allowed; */
+    border-radius: 65px;
+    margin-bottom: 20px;
+}
+#price-button button.active {
+    background: black;
+    color: white;
+    cursor: pointer;
 }
 #best, #new {
     max-width: 1200px;

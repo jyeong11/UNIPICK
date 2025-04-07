@@ -485,7 +485,7 @@
 	      		   		  #{qty},
 	      		   		  DEFAULT,
 	      		   		  #{opt_id},
-	      		   		  #{amount.total})
+	      		   		  #{odd_am})
 	</insert>	
 <!-- 	주문시 상품 재고 빼기 -->
 	<update id="minusPrdqt" parameterType="map">

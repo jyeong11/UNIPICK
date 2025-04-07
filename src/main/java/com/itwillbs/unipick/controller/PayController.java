@@ -2,6 +2,7 @@ package com.itwillbs.unipick.controller;
 
 import java.math.BigInteger;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -47,23 +48,26 @@ public class PayController {
     // 1. 결제 준비 API - 결제 요청
     @PostMapping("/ready")
     public ResponseEntity<Map<String, Object>> kakaoPayReady(HttpSession session, @RequestBody Map<String, Object> req) {
-    	int amount = (int)req.get("amount");
-        String prd_cd = (String)req.get("prd_cd");
-        String qty = (String)req.get("qty");
+    	String amount = String.valueOf(req.get("amount"));
+    	List<Map<String, Object>> productList = (List<Map<String, Object>>) req.get("productList");
+    	
+    	session.setAttribute("productList", productList);
+    	session.setAttribute("amount", amount);
         String referer1 = "http://localhost:8080/UNIPICK/orderDetail" ;
         String referer2 = "http://localhost:8080/UNIPICK/productOrder" ;
         
+        // item_name은 대표 상품 + 외 n건 식으로 표기
+        String itemName = (String) productList.get(0).get("prd_cd");
+        if (productList.size() > 1) {
+            itemName += " 외 " + (productList.size() - 1) + "건";
+        }
         Map<String, String> shippingDetails = new HashMap<>();
-        shippingDetails.put("prd_cd", (String) req.get("prd_cd"));
         shippingDetails.put("shipping_name", (String) req.get("shipping_name"));
         shippingDetails.put("shipping_telephone", (String) req.get("shipping_telephone"));
         shippingDetails.put("shipping_zipcode", (String) req.get("shipping_zipcode"));
         shippingDetails.put("shipping_address", (String) req.get("shipping_address"));
         shippingDetails.put("shipping_addDetail", (String) req.get("shipping_addDetail"));
         shippingDetails.put("shipping_memo", (String) req.get("shipping_memo"));
-        shippingDetails.put("siz_nm", (String) req.get("siz_nm"));
-        shippingDetails.put("clr_nm", (String) req.get("clr_nm"));
-        shippingDetails.put("qty", (String) req.get("qty"));
         
         // 들고온 값들을 세션에 저장하는 for문
         for (Map.Entry<String, String> entry : shippingDetails.entrySet()) {
@@ -76,13 +80,13 @@ public class PayController {
         params.add("cid", "TC0ONETIME");
         params.add("partner_order_id", "order_" + System.currentTimeMillis());
         params.add("partner_user_id", "user1234");
-        params.add("item_name", prd_cd);
-        params.add("quantity", qty);
-        params.add("total_amount", String.valueOf(amount));
+        params.add("item_name", itemName);
+        params.add("quantity", String.valueOf(productList.size())); 
+        params.add("total_amount", amount);
         params.add("tax_free_amount", "0");
         params.add("approval_url", "http://localhost:8080/UNIPICK/pay/success?returnUrl=" + referer1);
-        params.add("cancel_url", "http://localhost:8080/UNIPICK/pay/cancel?returnUrl=" + referer2 + prd_cd);
-        params.add("fail_url", "http://localhost:8080/UNIPICK/pay/fail?returnUrl=" + referer2 + prd_cd);
+        params.add("cancel_url", "http://localhost:8080/UNIPICK/pay/cancel?returnUrl=" + referer2 + itemName);
+        params.add("fail_url", "http://localhost:8080/UNIPICK/pay/fail?returnUrl=" + referer2 + itemName);
         
         // 카카오페이 API 호출
         HttpHeaders headers = new HttpHeaders();
@@ -144,23 +148,38 @@ public class PayController {
         orderData.put("shipping_addDetail", (String)session.getAttribute("shipping_addDetail"));
         orderData.put("shipping_memo", (String)session.getAttribute("shipping_memo"));
         orderData.put("buy_em", (String)session.getAttribute("buyEm"));
-        orderData.put("qty", (String)session.getAttribute("qty"));
         
         
-        System.out.println("orderData"+orderData);
-        String sizNm = (String) session.getAttribute("siz_nm");
-        String clrNm = (String) session.getAttribute("clr_nm");
-        String prdCd = (String) session.getAttribute("prd_cd");
+        // 주문& 주문 상세등록
+        buyService.insertOrder(orderData);
+        Object ordIdObj = orderData.get("ord_id");
+        String ordId = String.valueOf(ordIdObj);
+        
         
         if (response.getStatusCode() == HttpStatus.OK) {
-        	// 옵션 id 찾기
-        	Map<String, Object> optId = buyService.getOptionId(sizNm, clrNm, prdCd);
-            orderData.put("opt_id", optId.get("opt_id"));
+        	List<Map<String, Object>> productList = (List<Map<String, Object>>) session.getAttribute("productList");
+        	 String odd_am = (String)session.getAttribute("amount");
+        	 for (Map<String, Object> product : productList) {
+	    		 String prdCd = (String) product.get("prd_cd");
+	 	         String sizNm = (String) product.get("siz_nm");
+	 	         String clrNm = (String) product.get("clr_nm");
+	 	         String qty = String.valueOf(product.get("qty")); 
+
+    	        // 옵션 ID 찾기
+    	        Map<String, Object> optIdMap = buyService.getOptionId(sizNm, clrNm, prdCd);
+    	        Object optId = optIdMap.get("opt_id");
+
+    	        // 주문 상세 저장
+    	        Map<String, Object> detailMap = new HashMap<>();
+    	        detailMap.put("ord_id", ordId);
+    	        detailMap.put("prd_cd", prdCd);
+    	        detailMap.put("opt_id", optId);
+    	        detailMap.put("qty", qty);
+    	        detailMap.put("odd_am", odd_am);
+    	        
+    	        buyService.insertOrderDetail(detailMap);
+        	 }
             
-        	// 주문& 주문 상세등록
-        	buyService.insertOrder(orderData);
-        	BigInteger ordIdBigInt = (BigInteger) orderData.get("ord_id");
-        	long ordId = ordIdBigInt.longValue();
         	String realreturnUrl = returnUrl + "?ord_id=" + ordId;
         	return ResponseEntity.ok("<script>alert('결제가 완료되었습니다!'); window.opener.location.href='" + realreturnUrl + "'; window.close();</script>");
         } else {

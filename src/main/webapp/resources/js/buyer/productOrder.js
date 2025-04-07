@@ -1,75 +1,91 @@
 $(function() {
     let query = window.location.search;
     let param = new URLSearchParams(query);
-    let prd_cd = param.get('prd_cd');
-    let color = param.get("clr_nm");
-    let size = param.get("siz_nm");
-	let qty = param.get("qty");
-	let sum = 0;
-	let totalSf = 0;
-	sessionStorage.setItem("color", color);
-	sessionStorage.setItem("size", size);
-	sessionStorage.setItem("qty", qty);
-	
-    $.ajax({
-        url: "productOrder",
-        method: "POST",
-        data: JSON.stringify({ prd_cd: prd_cd }),
-        contentType: 'application/json',
-        success: function(res){
-    
-            if (res.length > 0) {
-                res.forEach(function(item) {
-                    let totalPrdPrice = parseInt(item.prd_sp.replace(/,/g, '')) * parseInt(qty);
-                    $("#order-container").append(`
-                        <div class="ord-title">
-                            <div class="order-selnm">${item.sel_nm}</div>
-                            <div class="pr"> 주문 금액 </div>
-                        </div>
-                        <div class="order-info">
-                            <div class="order-img">
-                                <img src="${contextPath}${item.fil_pt}">
+
+    let prd_cdArr = param.getAll("prd_cd");
+    let colorArr = param.getAll("clr_nm");
+    let sizeArr = param.getAll("siz_nm");
+    let qtyArr = param.getAll("qty");
+
+    let sum = 0;
+    let totalSf = 0;
+    let ajaxCount = 0;
+
+    prd_cdArr.forEach((prd_cd, idx) => {
+        let color = colorArr[idx];
+        let size = sizeArr[idx];
+        let qty = qtyArr[idx];
+
+        sessionStorage.setItem(`color_${prd_cd}`, color);
+        sessionStorage.setItem(`size_${prd_cd}`, size);
+        sessionStorage.setItem(`qty_${prd_cd}`, qty);
+
+        $.ajax({
+            url: "productOrder",
+            method: "POST",
+            data: JSON.stringify({ prd_cd: prd_cd }),
+            contentType: 'application/json',
+            success: function(res) {
+                if (res.length > 0) {
+                    res.forEach(function(item) {
+                        let totalPrdPrice = parseInt(item.prd_sp.replace(/,/g, '')) * parseInt(qty);
+                        sum += totalPrdPrice + item.prd_sf;
+                        totalSf += item.prd_sf;
+
+                        $("#order-container").append(`
+                            <div class="ord-title">
+                                <div class="order-selnm">${item.sel_nm}</div>
+                                <div class="pr"> 주문 금액 </div>
                             </div>
-                            <div>
-                                <div class="prd">
-                                    <div class="prd-nm">${item.prd_nm}</div>
-                                    <div class="prd-sp"> ${(parseInt(item.prd_sp.replace(/,/g, '')) * parseInt(qty)).toLocaleString()}원</div>
+                            <div class="order-info">
+                                <div class="order-img">
+                                    <img src="${contextPath}${item.fil_pt}">
                                 </div>
-								<div class="prd-2">
-									 <span>${color}</span> / <span>${size}</span>
-								</div>
-                                <div class="prd-1">
-                                    <div class="prd-sf">배송비</div>
-                                    <div class="prd-sf-wrap">${item.prd_sf.toLocaleString()}원</div>
+                                <div>
+                                    <div class="prd">
+                                        <div class="prd-nm">${item.prd_nm}</div>
+                                        <div class="prd-sp">${totalPrdPrice.toLocaleString()}원</div>
+                                    </div>
+                                    <div class="prd-2">
+                                        <span>${color}</span> / <span>${size}</span>
+                                    </div>
+                                    <div class="prd-1">
+                                        <div class="prd-sf">배송비</div>
+                                        <div class="prd-sf-wrap">${item.prd_sf.toLocaleString()}원</div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        `);
+                    });
+                }
+
+                ajaxCount++;
+                if (ajaxCount === prd_cdArr.length) {
+                    $("#orderInfo-container").html(`
+                        <div class="ttpr">총 주문금액: ${sum.toLocaleString()}원</div>
                     `);
-                    sum += totalPrdPrice + item.prd_sf;
-        			totalSf += item.prd_sf;
-                });
-                 $("#orderInfo-container").html(`
-			        <div class="ttpr">총 주문금액:  ${sum.toLocaleString()}원</div>
-			    `);
-                renderDeliveryForm();
-			    renderPriceInfo(sum, totalSf);
-			    renderPaymentOptions();
-			    renderTerms();
-    
-                $("#agree_all").change(function() {
-                    $(".agree_chk").prop("checked", $(this).prop("checked"));
-                    ButtonState();
-                });
-    
-                $(".agree_chk").change(function() {
-                    $("#agree_all").prop("checked", $(".agree_chk:checked").length === $(".agree_chk").length);
-                    ButtonState();
-                });
+
+                    renderDeliveryForm();
+                    renderPriceInfo(sum, totalSf);
+                    renderPaymentOptions();
+                    renderTerms();
+
+                    $("#agree_all").change(function() {
+                        $(".agree_chk").prop("checked", $(this).prop("checked"));
+                        ButtonState();
+                    });
+
+                    $(".agree_chk").change(function() {
+                        $("#agree_all").prop("checked", $(".agree_chk:checked").length === $(".agree_chk").length);
+                        ButtonState();
+                    });
+                }
+            },
+            error: function() {
+                alert("주문 정보를 불러오는 데 실패했습니다.");
+                ajaxCount++;
             }
-        },
-        error: function() {
-            alert("주문 정보를 불러오는 데 실패했습니다.");
-        }
+        });
     });
 
 	// 카카오 주소창 띄우기 
@@ -85,11 +101,19 @@ $(function() {
 	
 	// 결제하기 버튼 클릭시 카카오페이
 	$(document).on("click", "#submit-btn", function(e) {
+		let productList = prd_cdArr.map(prd_cd => {
+		    return {
+		        prd_cd: prd_cd,
+		        siz_nm: sessionStorage.getItem(`size_${prd_cd}`),
+		        clr_nm: sessionStorage.getItem(`color_${prd_cd}`),
+		        qty: sessionStorage.getItem(`qty_${prd_cd}`)
+		    };
+		});
 	    if (!checkShippingInfo()) {
 	        e.preventDefault();
 	    } else {
 			saveShippingInfo();
-	        requestKakaoPay(sum, prd_cd);
+	        requestKakaoPay(sum, productList);
 	    }
 	});
 
@@ -136,16 +160,13 @@ $(function() {
 	}
 	
 	// 카카오페이 api
-	function requestKakaoPay(amount, prd_cd) {
+	function requestKakaoPay(amount, productList) {
 		const shippingName = sessionStorage.getItem("shipping_name");
 	    const shippingTelephone = sessionStorage.getItem("shipping_telephone");
 	    const shippingZipcode = sessionStorage.getItem("shipping_zipcode");
 	    const shippingAddress = sessionStorage.getItem("shipping_address");
 		const shippingAddDetail = sessionStorage.getItem("shipping_addDetail");
 	    const shippingMemo = sessionStorage.getItem("shipping_memo");
-		const siz_nm = sessionStorage.getItem("size");
-		const clr_nm = sessionStorage.getItem("color");
-		const qty = sessionStorage.getItem("qty");
 
 	    fetch("pay/ready", {
 	        method: "POST",
@@ -154,16 +175,13 @@ $(function() {
 	        },
 	        body: JSON.stringify({ 
 				amount: amount,
-				prd_cd: prd_cd,
+				productList: productList,
 				shipping_name: shippingName,
 	            shipping_telephone: shippingTelephone,
 	            shipping_zipcode: shippingZipcode,
 	            shipping_address: shippingAddress,
 				shipping_addDetail: shippingAddDetail,
-	            shipping_memo: shippingMemo,
-				siz_nm: siz_nm,
-				clr_nm: clr_nm,
-				qty: qty
+	            shipping_memo: shippingMemo
 			})
 	    })
 	    .then(response => response.json()) 

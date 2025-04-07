@@ -13,6 +13,7 @@ $(function() {
 				let totalPrdPrice = parseInt(prd.prd_sp * parseInt(prd.crt_qt));
 				const html = `
 					<div class="cart-item" data-cart-id="${prd.crt_id}" data-unit-price="${prd.prd_sp}">
+					<div class="cart-item" data-cart-id="${prd.crt_id}" data-unit-price="${prd.prd_sp}" data-prd-cd="${prd.prd_cd}">
 						<div class="check">
 							<div><input type="checkbox" class="item-checkbox" checked></div>
 							<div class="info">
@@ -47,6 +48,9 @@ $(function() {
 									<div class="prd-sf">배송비</div>
 									<div>${prd.prd_sf.toLocaleString()}원</div>
 								</div>
+								<div class="tt">
+									<div>${(prd.prd_sp * parseInt(prd.crt_qt) + prd.prd_sf).toLocaleString()}원</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -56,7 +60,7 @@ $(function() {
 				container.insertAdjacentHTML("beforeend", html);
 				
 				 $("#orderInfo-container").html(`
-			        <div class="ttpr">총 주문금액:  ${sum.toLocaleString()}원</div>
+			        <div class="ttpr">총 결제금액:  ${sum.toLocaleString()}원</div>
 			    `);
 				
             });
@@ -141,5 +145,57 @@ $(function() {
 		itemCheckboxes.forEach(cb => {
 			cb.checked = isChecked;
 		});
+		updateTotalPrice();
+	});
+	// 개별 체크박스가 바뀔 때
+	$(document).on("change", ".item-checkbox", function () {
+	    updateTotalPrice();
+
+		const allCheckboxes = document.querySelectorAll(".item-checkbox");
+		const checkedCheckboxes = document.querySelectorAll(".item-checkbox:checked");
+
+		// 전체 선택 체크박스의 상태 동기화
+		document.getElementById("selectAll").checked = allCheckboxes.length === checkedCheckboxes.length;
+	});
+	document.querySelector("#price-button button").addEventListener("click", function () {
+	    const checkedItems = document.querySelectorAll(".item-checkbox:checked");
+	    const params = new URLSearchParams();
+	
+	    checkedItems.forEach(item => {
+	        const cartItem = item.closest(".cart-item");
+	
+	        const prd_cd = cartItem.dataset.prdCd;
+	        const [clr_nm, siz_nm] = cartItem.querySelector(".opt div").innerText.split(" / ");
+	        const qty = cartItem.querySelector(".qty-input").value;
+	
+	        params.append("prd_cd", prd_cd);
+	        params.append("clr_nm", clr_nm);
+	        params.append("siz_nm", siz_nm);
+	        params.append("qty", qty);
+	    });
+	
+	    // 최종 URL 이동
+	    location.href = `/UNIPICK/productOrder?${params.toString()}`;
 	});
 });
+// 상품 총 금액 계산 
+function updateTotalPrice() {
+    let sum = 0;
+
+    document.querySelectorAll(".item-checkbox:checked").forEach(checkbox => {
+        const cartItem = checkbox.closest(".cart-item");
+        const unitPrice = parseInt(cartItem.dataset.unitPrice);
+        const qty = parseInt(cartItem.querySelector(".qty-input").value);
+        const shippingFee = parseInt(cartItem.querySelector(".del div:last-child").innerText.replace(/[^0-9]/g, ''));
+
+        sum += unitPrice * qty + shippingFee;
+    });
+
+    document.getElementById("orderInfo-container").innerHTML = `
+        <div class="ttpr">총 주문금액: ${sum.toLocaleString()}원</div>
+    `;
+	
+	// 결제하기 버튼 활성화
+  	const btn = document.querySelector("#price-button button");
+	    btn.classList.toggle("active", sum > 0);
+}

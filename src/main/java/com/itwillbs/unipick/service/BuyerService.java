@@ -126,11 +126,13 @@ public class BuyerService {
 		mapper.Withdraw(buyer);
 	}
 	// 주문 등록
-	@Transactional
 	public void insertOrder (Map<String, Object> orderData) {
 		mapper.insertOrder(orderData);
-		mapper.insertOrderDetail(orderData);
-		mapper.minusPrdqt(orderData);
+	}
+	@Transactional
+	public void insertOrderDetail(Map<String, Object> detailData) {
+	    mapper.insertOrderDetail(detailData);
+	    mapper.minusPrdqt(detailData);
 	}
 	// 옵션 id 들고옴
 	public Map<String, Object> getOptionId(String sizNm, String clrNm, String prdCd){

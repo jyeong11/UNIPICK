@@ -56,6 +56,7 @@
 				<div id="orderInfo-container"></div>
 			</div>
 		</div>
+		<div id="price-button"><button id="submit-btn">결제하기</button></div>
 	</div>
 	<div id="footer">
 		<jsp:include page="../inc/footer.jsp"></jsp:include>
