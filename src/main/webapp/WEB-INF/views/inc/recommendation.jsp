@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<script src="${pageContext.request.contextPath}/resources/js/recommendation.js"></script>
-
+<script src="${pageContext.request.contextPath}/resources/js/buyer/recommendation.js"></script>
+<link href="${pageContext.request.contextPath }/resources/css/buyer/recommendation.css" rel="stylesheet" type="text/css">
 <div id="recommendation">
 	<div class = "two">
 		<h2>추천 상품</h2>

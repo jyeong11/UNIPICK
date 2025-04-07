@@ -16,8 +16,6 @@
 <link href="${pageContext.request.contextPath }/resources/css/public.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/top.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/footer.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resources/css/buyer/buyerbest.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resources/css/recommendation.css" rel="stylesheet" type="text/css">
 
 <!-- js -->
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
@@ -61,9 +59,6 @@
 		<div>
 			<jsp:include page="./inc/newProduct.jsp"></jsp:include>
 		</div>
-	</section>
-	<section>
-	<input type="button" value="임시 비밀번호찾기" onclick="location.href='buyerPw'">
 	</section>
 	<div>
 		<jsp:include page="./inc/footer.jsp"></jsp:include>
