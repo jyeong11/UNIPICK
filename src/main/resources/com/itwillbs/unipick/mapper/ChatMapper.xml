@@ -105,4 +105,57 @@
         ORDER BY sel_nm ASC
         LIMIT 10
     </select>
+    
+    <!-- 채팅방 판매자 신고 -->
+    <insert id="reportSeller" parameterType="map">
+        INSERT INTO report (
+            buy_em, 
+            sel_id, 
+            rpt_tg, 
+            rpt_rs, 
+            rpt_dt, 
+            rpt_st
+        ) VALUES (
+            #{buy_em}, 
+            #{sel_id}, 
+            #{rpt_tg}, 
+            #{rpt_rs}, 
+            NOW(), 
+            #{rpt_st}
+        )
+    </insert>
+    
+    <!-- 채팅방 구매자 신고 -->
+    <insert id="reportBuyer" parameterType="map">
+        INSERT INTO report (
+            buy_em, 
+            sel_id, 
+            rpt_tg, 
+            rpt_rs, 
+            rpt_dt, 
+            rpt_st
+        ) VALUES (
+            #{buy_em}, 
+            #{sel_id}, 
+            #{rpt_tg}, 
+            #{rpt_rs}, 
+            NOW(), 
+            #{rpt_st}
+        )
+    </insert>
+    
+    <!-- 채팅방 신고 내역 조회 -->
+    <select id="getChatReports" parameterType="int" resultType="map">
+        SELECT r.*, 
+               c.code_nm as status_name,
+               b.buy_nm,
+               s.sel_nm
+        FROM report r
+        INNER JOIN chats ch ON r.buy_em = ch.buy_em AND r.sel_id = ch.sel_id
+        LEFT JOIN common_detail c ON r.rpt_st = c.detail_code AND c.code_cd = 'RS'
+        LEFT JOIN buyers b ON r.buy_em = b.buy_em
+        LEFT JOIN sellers s ON r.sel_id = s.sel_id
+        WHERE ch.cht_id = #{cht_id}
+        ORDER BY r.rpt_dt DESC
+    </select>
 </mapper> 

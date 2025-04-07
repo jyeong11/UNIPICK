@@ -135,4 +135,39 @@ public class ChatService {
     public List<Map<String, Object>> searchSellers(String searchTerm) {
         return chatMapper.searchSellers(searchTerm);
     }
+    
+    // 채팅방 판매자 신고
+    public void reportSeller(Map<String, Object> reportData) {
+        // 신고 상태가 없으면 기본값 설정
+        if (reportData.get("rpt_st") == null || ((String) reportData.get("rpt_st")).isEmpty()) {
+            reportData.put("rpt_st", "RS01"); // 기본값
+        }
+        
+        // 신고 대상이 없으면 기본값 설정
+        if (reportData.get("rpt_tg") == null || ((String) reportData.get("rpt_tg")).isEmpty()) {
+            reportData.put("rpt_tg", "판매자");
+        }
+        
+        chatMapper.reportSeller(reportData);
+    }
+    
+    // 채팅방 구매자 신고
+    public void reportBuyer(Map<String, Object> reportData) {
+        // 신고 상태가 없으면 기본값 설정
+        if (reportData.get("rpt_st") == null || ((String) reportData.get("rpt_st")).isEmpty()) {
+            reportData.put("rpt_st", "RS01"); // 기본값
+        }
+        
+        // 신고 대상이 없으면 기본값 설정
+        if (reportData.get("rpt_tg") == null || ((String) reportData.get("rpt_tg")).isEmpty()) {
+            reportData.put("rpt_tg", "구매자");
+        }
+        
+        chatMapper.reportBuyer(reportData);
+    }
+    
+    // 채팅방 신고 내역 조회
+    public List<Map<String, Object>> getChatReports(int cht_id) {
+        return chatMapper.getChatReports(cht_id);
+    }
 } 

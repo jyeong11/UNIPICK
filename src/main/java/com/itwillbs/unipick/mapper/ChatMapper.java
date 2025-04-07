@@ -34,4 +34,13 @@ public interface ChatMapper {
     
     // 판매자 검색
     public List<Map<String, Object>> searchSellers(String searchTerm);
+    
+    // 채팅방 판매자 신고
+    public void reportSeller(Map<String, Object> reportData);
+    
+    // 채팅방 구매자 신고
+    public void reportBuyer(Map<String, Object> reportData);
+    
+    // 채팅방 신고 내역 조회
+    public List<Map<String, Object>> getChatReports(int cht_id);
 } 

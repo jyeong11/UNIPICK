@@ -455,4 +455,212 @@ public class ChatController {
         
         return "chat/WebSocketChat";
     }
+    
+    // 채팅방 판매자 신고 (AJAX)
+    @PostMapping("/report")
+    @ResponseBody
+    public Map<String, Object> reportSeller(
+            @RequestParam("cht_id") int cht_id,
+            @RequestParam("rpt_rs") String reportReason,
+            @RequestParam(value = "rpt_tg", required = false) String reportTarget,
+            HttpSession session) {
+        
+        Map<String, Object> result = new HashMap<>();
+        
+        // 세션에서 구매자 이메일 가져오기
+        String buy_em = (String) session.getAttribute("buyEm");
+        
+        // 다른 세션 키 시도
+        if (buy_em == null) {
+            buy_em = (String) session.getAttribute("buyerEm");
+        }
+        
+        // 로그인 상태 확인
+        if (buy_em == null) {
+            result.put("success", false);
+            result.put("message", "구매자 로그인이 필요합니다.");
+            return result;
+        }
+        
+        try {
+            // 채팅방 정보 조회
+            Map<String, Object> chatRoom = chatService.getChatRoom(cht_id);
+            
+            if (chatRoom == null) {
+                result.put("success", false);
+                result.put("message", "채팅방을 찾을 수 없습니다.");
+                return result;
+            }
+            
+            // 해당 채팅방의 구매자인지 확인
+            if (!buy_em.equals(chatRoom.get("buy_em"))) {
+                result.put("success", false);
+                result.put("message", "해당 채팅방의 구매자만 신고할 수 있습니다.");
+                return result;
+            }
+            
+            // 신고 데이터 구성
+            Map<String, Object> reportData = new HashMap<>();
+            reportData.put("buy_em", buy_em);
+            reportData.put("sel_id", chatRoom.get("sel_id"));
+            reportData.put("rpt_rs", reportReason);
+            
+            // 신고 대상이 지정되지 않은 경우 기본값 설정 (판매자 자체를 신고)
+            if (reportTarget == null || reportTarget.isEmpty()) {
+                reportData.put("rpt_tg", "판매자");
+            } else {
+                reportData.put("rpt_tg", reportTarget);
+            }
+            
+            // 신고 등록 처리
+            chatService.reportSeller(reportData);
+            
+            result.put("success", true);
+            result.put("message", "신고가 접수되었습니다.");
+        } catch (Exception e) {
+            result.put("success", false);
+            result.put("message", "신고 처리 중 오류가 발생했습니다: " + e.getMessage());
+            e.printStackTrace();
+        }
+        
+        return result;
+    }
+    
+    // 채팅방 구매자 신고 (AJAX)
+    @PostMapping("/report-buyer")
+    @ResponseBody
+    public Map<String, Object> reportBuyer(
+            @RequestParam("cht_id") int cht_id,
+            @RequestParam("rpt_rs") String reportReason,
+            @RequestParam(value = "rpt_tg", required = false) String reportTarget,
+            HttpSession session) {
+        
+        Map<String, Object> result = new HashMap<>();
+        
+        // 세션에서 판매자 ID 가져오기
+        String sel_id = (String) session.getAttribute("sel_id");
+        
+        // 다른 판매자 세션 키 시도
+        if (sel_id == null) {
+            sel_id = (String) session.getAttribute("sellerId");
+        }
+        if (sel_id == null) {
+            sel_id = (String) session.getAttribute("seller_id");
+        }
+        if (sel_id == null) {
+            sel_id = (String) session.getAttribute("selId");
+        }
+        
+        // 로그인 상태 확인
+        if (sel_id == null) {
+            result.put("success", false);
+            result.put("message", "판매자 로그인이 필요합니다.");
+            return result;
+        }
+        
+        try {
+            // 채팅방 정보 조회
+            Map<String, Object> chatRoom = chatService.getChatRoom(cht_id);
+            
+            if (chatRoom == null) {
+                result.put("success", false);
+                result.put("message", "채팅방을 찾을 수 없습니다.");
+                return result;
+            }
+            
+            // 해당 채팅방의 판매자인지 확인
+            if (!sel_id.equals(chatRoom.get("sel_id"))) {
+                result.put("success", false);
+                result.put("message", "해당 채팅방의 판매자만 신고할 수 있습니다.");
+                return result;
+            }
+            
+            // 신고 데이터 구성
+            Map<String, Object> reportData = new HashMap<>();
+            reportData.put("buy_em", chatRoom.get("buy_em"));
+            reportData.put("sel_id", sel_id);
+            reportData.put("rpt_rs", reportReason);
+            
+            // 신고 대상이 지정되지 않은 경우 기본값 설정 (구매자 자체를 신고)
+            if (reportTarget == null || reportTarget.isEmpty()) {
+                reportData.put("rpt_tg", "구매자");
+            } else {
+                reportData.put("rpt_tg", reportTarget);
+            }
+            
+            // 신고 등록 처리
+            chatService.reportBuyer(reportData);
+            
+            result.put("success", true);
+            result.put("message", "신고가 접수되었습니다.");
+        } catch (Exception e) {
+            result.put("success", false);
+            result.put("message", "신고 처리 중 오류가 발생했습니다: " + e.getMessage());
+            e.printStackTrace();
+        }
+        
+        return result;
+    }
+    
+    // 채팅방 신고 내역 조회 (AJAX)
+    @GetMapping("/reports/{cht_id}")
+    @ResponseBody
+    public Map<String, Object> getChatReports(@PathVariable("cht_id") int cht_id, HttpSession session) {
+        Map<String, Object> result = new HashMap<>();
+        
+        // 세션에서 사용자 정보 가져오기
+        String buy_em = (String) session.getAttribute("buyEm");
+        String sel_id = (String) session.getAttribute("sel_id");
+        
+        // 다른 판매자 세션 키 시도
+        if (sel_id == null) {
+            sel_id = (String) session.getAttribute("sellerId");
+        }
+        if (sel_id == null) {
+            sel_id = (String) session.getAttribute("seller_id");
+        }
+        if (sel_id == null) {
+            sel_id = (String) session.getAttribute("selId");
+        }
+        
+        if (buy_em == null && sel_id == null) {
+            // 로그인되지 않은 경우
+            result.put("success", false);
+            result.put("message", "로그인이 필요합니다.");
+            return result;
+        }
+        
+        try {
+            // 채팅방 정보 조회
+            Map<String, Object> chatRoom = chatService.getChatRoom(cht_id);
+            
+            if (chatRoom == null) {
+                result.put("success", false);
+                result.put("message", "채팅방을 찾을 수 없습니다.");
+                return result;
+            }
+            
+            // 채팅방 참여자인지 확인
+            boolean isParticipant = (buy_em != null && buy_em.equals(chatRoom.get("buy_em"))) || 
+                                  (sel_id != null && sel_id.equals(chatRoom.get("sel_id")));
+            
+            if (!isParticipant) {
+                result.put("success", false);
+                result.put("message", "해당 채팅방의 참여자만 신고 내역을 조회할 수 있습니다.");
+                return result;
+            }
+            
+            // 신고 내역 조회
+            List<Map<String, Object>> reports = chatService.getChatReports(cht_id);
+            
+            result.put("success", true);
+            result.put("reports", reports);
+        } catch (Exception e) {
+            result.put("success", false);
+            result.put("message", "신고 내역 조회 중 오류가 발생했습니다: " + e.getMessage());
+            e.printStackTrace();
+        }
+        
+        return result;
+    }
 }

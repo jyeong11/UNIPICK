@@ -37,6 +37,18 @@
         position: sticky;
         top: 0;
         z-index: 10;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .chat-title {
+        flex: 1;
+    }
+    
+    .chat-controls {
+        display: flex;
+        gap: 10px;
     }
     
     .chat-messages {
@@ -95,6 +107,90 @@
         padding: 5px 10px;
         border-radius: 12px;
     }
+    
+    /* 신고 모달 스타일 */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 100;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.4);
+    }
+    
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 500px;
+        border-radius: 10px;
+    }
+    
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    
+    .form-group textarea {
+        width: 100%;
+        height: 100px;
+        padding: 10px;
+        box-sizing: border-box;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        resize: vertical;
+    }
+    
+    .form-group button {
+        background-color: #ff6f00;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    .form-group button:hover {
+        background-color: #ff8f00;
+    }
+    
+    .report-btn {
+        background-color: #f44336;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 12px;
+    }
+    
+    .report-btn:hover {
+        background-color: #d32f2f;
+    }
 </style>
 </head>
 <body>
@@ -109,7 +205,13 @@
                         </c:choose>
                     </h3>
                 </div>
-                <div class="popup-controls">
+                <div class="chat-controls">
+                    <c:if test="${userType eq 'buyer'}">
+                        <button id="reportBtn" class="report-btn">신고하기</button>
+                    </c:if>
+                    <c:if test="${userType eq 'seller'}">
+                        <button id="reportBuyerBtn" class="report-btn">구매자 신고</button>
+                    </c:if>
                     <button id="closeBtn" onclick="window.close();">닫기</button>
                 </div>
             </div>
@@ -125,11 +227,42 @@
         </div>
     </div>
     
+    <!-- 신고 모달 -->
+    <div id="reportModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>판매자 신고하기</h2>
+            <div class="form-group">
+                <label for="reportReason">신고 사유</label>
+                <textarea id="reportReason" placeholder="신고 사유를 작성해 주세요."></textarea>
+            </div>
+            <div class="form-group">
+                <button id="submitReport">신고 접수</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 구매자 신고 모달 -->
+    <div id="reportBuyerModal" class="modal">
+        <div class="modal-content">
+            <span class="close buyer-close">&times;</span>
+            <h2>구매자 신고하기</h2>
+            <div class="form-group">
+                <label for="reportBuyerReason">신고 사유</label>
+                <textarea id="reportBuyerReason" placeholder="신고 사유를 작성해 주세요."></textarea>
+            </div>
+            <div class="form-group">
+                <button id="submitBuyerReport">신고 접수</button>
+            </div>
+        </div>
+    </div>
+    
     <script>
         $(document).ready(function() {
-            var cht_id = ${chatRoom.cht_id};
+            var cht_id = parseInt("${chatRoom.cht_id}");
             var userType = "${userType}";
             var currentUserId = "${userId}";
+            var sel_id = "${chatRoom.sel_id}";
             
             // 로그인 상태 확인
             if (!currentUserId) {
@@ -165,6 +298,96 @@
             
             // 웹소켓 연결
             connectWebSocket();
+            
+            // 신고 버튼 클릭 이벤트
+            $("#reportBtn").click(function() {
+                $("#reportModal").css("display", "block");
+            });
+            
+            // 구매자 신고 버튼 클릭 이벤트
+            $("#reportBuyerBtn").click(function() {
+                $("#reportBuyerModal").css("display", "block");
+            });
+            
+            // 신고 모달 닫기 버튼
+            $(".close").click(function() {
+                $("#reportModal").css("display", "none");
+                $("#reportBuyerModal").css("display", "none");
+            });
+            
+            // 모달 외부 클릭 시 닫기
+            $(window).click(function(event) {
+                if ($(event.target).is("#reportModal")) {
+                    $("#reportModal").css("display", "none");
+                }
+                if ($(event.target).is("#reportBuyerModal")) {
+                    $("#reportBuyerModal").css("display", "none");
+                }
+            });
+            
+            // 신고 제출 버튼 클릭 이벤트
+            $("#submitReport").click(function() {
+                var reportReason = $("#reportReason").val().trim();
+                
+                if (reportReason === "") {
+                    alert("신고 사유를 입력해 주세요.");
+                    return;
+                }
+                
+                $.ajax({
+                    url: "${pageContext.request.contextPath}/chat/report",
+                    type: "POST",
+                    data: {
+                        cht_id: cht_id,
+                        rpt_rs: reportReason
+                    },
+                    dataType: "json",
+                    success: function(response) {
+                        if (response.success) {
+                            alert(response.message);
+                            $("#reportModal").css("display", "none");
+                            $("#reportReason").val("");
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function() {
+                        alert("신고 처리 중 오류가 발생했습니다.");
+                    }
+                });
+            });
+            
+            // 구매자 신고 제출 버튼 클릭 이벤트
+            $("#submitBuyerReport").click(function() {
+                var reportReason = $("#reportBuyerReason").val().trim();
+                
+                if (reportReason === "") {
+                    alert("신고 사유를 입력해 주세요.");
+                    return;
+                }
+                
+                $.ajax({
+                    url: "${pageContext.request.contextPath}/chat/report-buyer",
+                    type: "POST",
+                    data: {
+                        cht_id: cht_id,
+                        rpt_rs: reportReason
+                    },
+                    dataType: "json",
+                    success: function(response) {
+                        if (response.success) {
+                            alert(response.message);
+                            $("#reportBuyerModal").css("display", "none");
+                            $("#reportBuyerReason").val("");
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function() {
+                        alert("신고 처리 중 오류가 발생했습니다.");
+                    }
+                });
+            });
             
             // 메시지 불러오기 (이전 대화 내역)
             function loadMessages() {
@@ -360,4 +583,4 @@
         });
     </script>
 </body>
-</html> 
+</html>
