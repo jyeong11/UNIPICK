@@ -46,6 +46,7 @@
 	        <exclude-mapping path="/sellerlogin" />
 	        <exclude-mapping path="/sellerjoin" />
 	        <exclude-mapping path="/sellerFindAcc" />
+	        <exclude-mapping path="/sellerShopDetail" />
 	        <beans:bean class="com.itwillbs.unipick.handler.SellerInterceptor" />
 	    </interceptor>
 	    <!-- 구매자 로그인 인터셉터 -->

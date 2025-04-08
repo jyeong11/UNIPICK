@@ -53,8 +53,8 @@ public class PayController {
     	
     	session.setAttribute("productList", productList);
     	session.setAttribute("amount", amount);
-        String referer1 = "http://localhost:8080/UNIPICK/orderDetail" ;
-        String referer2 = "http://localhost:8080/UNIPICK/productOrder" ;
+        String referer1 = "http://c2d2410t2p2.itwillbs.com/UNIPICK/orderDetail" ;
+        String referer2 = "http://c2d2410t2p2.itwillbs.com/UNIPICK/productOrder" ;
         
         // item_name은 대표 상품 + 외 n건 식으로 표기
         String itemName = (String) productList.get(0).get("prd_cd");
@@ -84,9 +84,9 @@ public class PayController {
         params.add("quantity", String.valueOf(productList.size())); 
         params.add("total_amount", amount);
         params.add("tax_free_amount", "0");
-        params.add("approval_url", "http://localhost:8080/UNIPICK/pay/success?returnUrl=" + referer1);
-        params.add("cancel_url", "http://localhost:8080/UNIPICK/pay/cancel?returnUrl=" + referer2 + itemName);
-        params.add("fail_url", "http://localhost:8080/UNIPICK/pay/fail?returnUrl=" + referer2 + itemName);
+        params.add("approval_url", "http://c2d2410t2p2.itwillbs.com/UNIPICK/pay/success?returnUrl=" + referer1);
+        params.add("cancel_url", "http://c2d2410t2p2.itwillbs.com/UNIPICK/pay/cancel?returnUrl=" + referer2 + itemName);
+        params.add("fail_url", "hhttp://c2d2410t2p2.itwillbs.com/UNIPICK/pay/fail?returnUrl=" + referer2 + itemName);
         
         // 카카오페이 API 호출
         HttpHeaders headers = new HttpHeaders();
