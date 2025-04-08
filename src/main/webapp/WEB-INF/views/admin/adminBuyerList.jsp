@@ -123,11 +123,7 @@
 					</div>
 				</section>
 			</main>
-	            
-            </div>
-		</div>
-    </div>
-			<!-- Footer -->
+	            			<!-- Footer -->
 			<footer class="sticky-footer bg-white">
 				<div class="container my-auto">
 					<div class="copyright text-center my-auto">
@@ -135,6 +131,9 @@
 					</div>
 				</div>
 			</footer>
+            </div>
+		</div>
+    </div>
 	<!-- Bootstrap core JavaScript-->
 	<script src="${pageContext.request.contextPath }/resources/public/vendor/jquery/jquery.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

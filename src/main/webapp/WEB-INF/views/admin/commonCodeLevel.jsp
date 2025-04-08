@@ -173,16 +173,16 @@ document.addEventListener("DOMContentLoaded", function () {
 						</div>
 				</section>
                 <!-- /.container-fluid -->
+                <footer class="sticky-footer bg-white">
+				<div class="container my-auto">
+					<div class="copyright text-center my-auto">
+						<span>Copyright &copy; UNIPICK SELLER 2025</span>
+					</div>
+				</div>
+			</footer>
             </div>
             <!-- End of Main Content -->
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-    <div class="copyright text-center my-auto">
-        <span>Copyright © UNIPICK Admin 2025</span>
-    </div>
-</div>
-            </footer>
+			
             <!-- End of Footer -->
         </div>
         <!-- End of Content Wrapper -->

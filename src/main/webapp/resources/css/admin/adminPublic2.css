@@ -31,3 +31,15 @@
 .border-left-yellow {
 	border-left: 0.25rem solid #f2a900;
 }
+
+.card {
+	height: 694px;
+}
+
+.card-body {
+	display: flex;
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.25rem;
+    flex-direction: column;
+}
