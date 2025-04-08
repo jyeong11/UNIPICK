@@ -18,6 +18,7 @@
 #prdImg {
 	width: 200px;
 	height: 200px;
+	object-fit: cover;
 }
 
 #content-top, #content-middle, #content-bottom {
@@ -121,5 +122,4 @@
 #cancel {
 	background-color: #f5f6f8;
 	color: #4f5558;
-	
 }

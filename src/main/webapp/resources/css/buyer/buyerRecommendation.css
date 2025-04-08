@@ -47,7 +47,7 @@
 .slide img {
     width: 280px;
     height: 280px;
-    object-fit: contain;
+    object-fit: cover;
 }
 
 .recommendation_btn {
@@ -55,7 +55,7 @@
     justify-content: space-between; /* 좌우 버튼을 배치 */
     width: 100%;
     position: absolute;
-    top: 50%;
+    top: 40%;
     transform: translateY(-50%);
     z-index: 10;
 }
@@ -75,6 +75,66 @@
 
 .rec_btn:hover {
     background-color: rgba(0, 0, 0, 0.8);
+}
+
+.prd-nm {
+	white-space: nowrap;         /* 한 줄로 표시 */
+	overflow: hidden;            /* 넘치는 텍스트 숨김 */
+	text-overflow: ellipsis;     /* ... 으로 표시 */
+	width: 280px;         
+}
+
+.price {
+	display: flex;
+}
+
+.slide a {
+    color: #292b2b;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.prd-dc {
+	color: #f2a900;
+    font-size: 23px;
+}
+
+.prd-op {
+	color: #808893;
+    text-decoration: line-through;
+}
+
+.prd-sp, .prd-op {
+	font-size: 18px;
+}
+
+.prd-bd {
+	background-color: #f2a900;
+    width: 67px;
+    height: 25px;
+    color: white;
+    text-align: center;
+    font-size: 15px;
+}
+
+.prd-img {
+	position: relative;
+}
+
+.slide a:hover {
+	font-weight: bold;
+}
+
+.slide img {
+	transition: transform 0.3s ease; /* 부드러운 확대 */
+}
+
+.slide img {
+	overflow: hidden; /* 확대될 때 바깥으로 튀어나오는 부분 잘라냄 */
+}
+
+.slide:hover img {
+	transform: scale(1.05); /* 5% 확대 */
 }
 
 #rec_btn_prev {

@@ -1,5 +1,6 @@
 $(function() {
-	
+	const contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2));
+		
 	search();
 	$('#ordSearch').on('click', function() {
 		search();
@@ -26,7 +27,8 @@ $(function() {
 	
 	$(document).on('click', '#questionBtn', function(event) {
 	    event.preventDefault();
-	    window.location.href = 'myReview';
+		var popupUrl = contextPath + "/chat/product-inquiry?prd_cd=" + $(this).data('prd') + "&prd_nm=" + $(this).data('sel');
+			                window.open(popupUrl, "상품문의", "width=500,height=700");
 	});
 	
 });
@@ -107,7 +109,7 @@ function search() {
 										       		<div><b id="price">${formatOddAm}원</b></div>
 											   		<div>
 										           		<button id="reviewBtn" data-value="${item.odd_id}" class="order-btn ${display}${revClass} " >${revName}</button>
-										           		<button id="questionBtn" class="order-btn">문의하기</button>
+										           		<button id="questionBtn" class="order-btn" data-prd="${item.prd_cd}" data-sel="${item.sel_nm}">문의하기</button>
 									   	       		</div>
 										  		 </div>
 									   		</div>

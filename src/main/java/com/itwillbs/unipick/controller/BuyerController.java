@@ -426,4 +426,11 @@ public class BuyerController {
 		String buy_em = (String)session.getAttribute("buyEm");
 		buyService.updateCart(updataData, buy_em);
 	}
+	
+	// 메인 추천 상품
+	@ResponseBody
+	@PostMapping("recomProduct")
+	public List<Map<String, Object>> recomProduct(@RequestBody Map<String, Object> data) {
+		return buyService.recomProduct(data);
+	}
 }

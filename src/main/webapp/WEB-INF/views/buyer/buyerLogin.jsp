@@ -34,7 +34,7 @@
 		 <form action="" method="post" class="memberform" onsubmit="return false">
 			 
 		 	<div class="joinNav-inner2">
-				<a href="buyerlogin"><img src="${pageContext.request.contextPath}/resources/images/로고 가로.png" alt="로고" id="logo"></a>
+				<a href="main"><img src="${pageContext.request.contextPath}/resources/images/로고 가로.png" alt="로고" id="logo"></a>
 			</div>
 		 		<div class="sec01">
 		 			<div class="sec-span"><span>안녕하세요 유니픽입니다</span>

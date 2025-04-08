@@ -37,7 +37,8 @@
 
 .prd-img {
 	width: 180px;
-    height: auto;
+    height: 180px;
+    object-fit: cover;
 }
 
 .left-info, .top-info {

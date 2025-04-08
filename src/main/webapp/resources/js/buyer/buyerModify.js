@@ -197,16 +197,21 @@ $(function() {
 	function checkPhone(phone) {
 	    let phoneValue = phone.val().trim();
 	    let errorMsg = '';
-		effectiveness = false;
-		
-		if (phoneValue.length > 13) {
-	        phone.val(phoneValue.substring(0, 13));
+	    effectiveness = false;
+	
+	    phoneValue = phoneValue.replace(/[^0-9]/g, '');
+	
+	    if (phoneValue.length > 11) {
+	        phoneValue = phoneValue.substring(0, 11);
+	        phone.val(phoneValue);
+	    } else {
+	        phone.val(phoneValue);
 	    }
 	
 	    if (!phoneValue) {
 	        errorMsg = '휴대폰 번호를 입력해주세요.';
 	    } else {
-	        const phoneRegex = /^(01[016789])-?(\d{3,4})-?(\d{4})$/;
+	        const phoneRegex = /^01[016789][0-9]{7,8}$/;
 	        if (!phoneRegex.test(phoneValue)) {
 	            errorMsg = '유효한 휴대폰 번호를 입력해주세요.';
 	        }
@@ -215,7 +220,7 @@ $(function() {
 	    if (errorMsg) {
 	        $('#phoneError').text(errorMsg).css('color', 'red');
 	    } else {
-			effectiveness = true;
+	        effectiveness = true;
 	        $('#phoneError').text('');
 	    }
 	}
@@ -237,7 +242,6 @@ $(function() {
 	        if (!birthDateRegex.test(birthDateValue)) {
 	            errorMsg = '유효한 생년월일(YYMMDD)을 입력해주세요.';
 	        } else {
-	            // 날짜가 실제로 존재하는 유효한 날짜인지 확인
 	            const year = parseInt(birthDateValue.substr(0, 2), 10);
 	            const month = parseInt(birthDateValue.substr(2, 2), 10);
 	            const day = parseInt(birthDateValue.substr(4, 2), 10);

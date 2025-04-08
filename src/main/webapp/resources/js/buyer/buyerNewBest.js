@@ -54,8 +54,8 @@ $(function() {
 											<div>${item.prd_nm}</div>
 											<div class="price">
 												<div class='dc'>${item.dc}</div>
-												<div class="prdOp">${item.prd_op}</div>
-												<div class="prdSp">${item.prd_sp}</div>
+												<div class="prdOp">${item.prd_op}원</div>
+												<div class="prdSp">${item.prd_sp}원</div>
 											</div>
 											<div class="prdBd">${item.cod_nm}</div>
 										</div>

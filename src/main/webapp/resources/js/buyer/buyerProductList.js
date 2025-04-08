@@ -101,8 +101,8 @@ $(function() {
 															<div class="prdNm">${prd.prd_nm}</div>
 															<div class="price">
 																<div class="dc">${prd.dc}</div>
-																<div class="prdOp">${prd.prd_op}</div>
-																<div class="prdSp">${prd.prd_sp}</div>
+																<div class="prdOp">${prd.prd_op}원</div>
+																<div class="prdSp">${prd.prd_sp}원</div>
 															</div>
 															<div class="prdBd">${prd.cod_nm}</div>
 														</div>

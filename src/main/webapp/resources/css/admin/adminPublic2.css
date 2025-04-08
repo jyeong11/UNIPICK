@@ -43,3 +43,8 @@
     padding: 1.25rem;
     flex-direction: column;
 }
+
+.id-top {
+	font-weight: 500;
+	font-size: 20px;
+}

@@ -13,7 +13,7 @@
         </a>
         <div id="menu01" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-            	<h6 class="collapse-header">회원관리</h6>
+            	<h6 class="collapse-header">공통코드</h6>
             	<a class="collapse-item" href="commonCode">공통코드</a>
                 <a class="collapse-item" href="commonCodeDetail">상세공통코드</a>
                 <a class="collapse-item" href="commonCodeLevel">계층공통코드</a>

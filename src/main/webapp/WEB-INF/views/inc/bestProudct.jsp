@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<link href="${pageContext.request.contextPath }/resources/css/buyer/mainBest.css" rel="stylesheet" type="text/css">
-<script src="${pageContext.request.contextPath }/resources/js/buyer/mainBest.js"></script>    
+<link href="${pageContext.request.contextPath }/resources/css/buyer/buyerMainBest.css" rel="stylesheet" type="text/css">
+<script src="${pageContext.request.contextPath }/resources/js/buyer/buyerMainBest.js"></script>    
     
 <div id = "best">
 	<div class = "two">

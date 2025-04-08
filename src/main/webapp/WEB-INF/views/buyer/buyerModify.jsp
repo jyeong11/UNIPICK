@@ -70,7 +70,7 @@
 					<label for="phoneNumber">휴대폰 번호</label><span id="phoneError"></span>
 				</div>
 				<input type="text" id="phoneNumber" class="input-value">
-				<p class="note">*입력형식 : 000-0000-0000</p>
+				<p class="note">*입력형식 : 01012345678</p>
 			</div>
 			<div class="field">
 				<div class="modi-title">

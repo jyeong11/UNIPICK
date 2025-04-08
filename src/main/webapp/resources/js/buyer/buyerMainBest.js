@@ -28,8 +28,8 @@ $(function() {
 											<div>${item.prd_nm}</div>
 											<div class="price">
 												<div class='dc'>${item.dc}</div>
-												<div class="prdOp">${item.prd_op}</div>
-												<div class="prdSp">${item.prd_sp}</div>
+												<div class="prdOp">${item.prd_op}원</div>
+												<div class="prdSp">${item.prd_sp}원</div>
 											</div>
 											<div class="prdBd">${item.cod_nm}</div>
 										</div>
@@ -45,29 +45,29 @@ $(function() {
 })
 
 // 찜 버튼
-//	function wish(heart) {
-//		heartIcon = heart[0];
-//		let prd_cd = heart.data('value');
-//		heartIcon.classList.toggle("fa-regular");
-//		heartIcon.classList.toggle("fa-solid");
-//		heartIcon.classList.toggle("yellow");
-//		
-//		let action = "insert";
-//		
-//		if(heartIcon.classList.contains("fa-regular")) {
-//			 action = "delete";
-//		}
-//		
-//		data = {prd_cd : prd_cd, action : action};
-//		
-//		$.ajax({
-//			type: "POST",
-//	        url: "wishList",
-//			data: JSON.stringify(data),
-//			contentType: "application/json",
-//	        error: function(xhr, status, error) {
-//	        	alert("서버 오류가 발생했습니다.");
-//	        }
-//		});
-//		
-//	}
+	function wish(heart) {
+		heartIcon = heart[0];
+		let prd_cd = heart.data('value');
+		heartIcon.classList.toggle("fa-regular");
+		heartIcon.classList.toggle("fa-solid");
+		heartIcon.classList.toggle("yellow");
+		
+		let action = "insert";
+		
+		if(heartIcon.classList.contains("fa-regular")) {
+			 action = "delete";
+		}
+		
+		data = {prd_cd : prd_cd, action : action};
+		
+		$.ajax({
+			type: "POST",
+	        url: "wishList",
+			data: JSON.stringify(data),
+			contentType: "application/json",
+	        error: function(xhr, status, error) {
+	        	alert("서버 오류가 발생했습니다.");
+	        }
+		});
+		
+	}

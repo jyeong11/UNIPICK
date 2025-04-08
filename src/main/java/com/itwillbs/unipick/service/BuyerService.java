@@ -250,4 +250,9 @@ public class BuyerService {
 	public String getSellerIdByProductId(String prd_cd) {
 		return mapper.getSellerIdByProductId(prd_cd);
 	}
+	
+	// 메인 추천 상품
+	public List<Map<String, Object>> recomProduct(Map<String, Object> data) {
+		return mapper.recomProduct(data);
+	}
 }

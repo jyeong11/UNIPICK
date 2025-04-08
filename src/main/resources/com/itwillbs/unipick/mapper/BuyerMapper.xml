@@ -205,10 +205,10 @@
   		 		ORDER BY p.prd_dt DESC
   		 	</when>
   		 	<when test="kind == 'PST04'">
-  		 		ORDER BY prd_sp DESC
+  		 		ORDER BY p.prd_sp DESC
   		 	</when>
   		 	<when test="kind == 'PST05'">
-  		 		ORDER BY prd_sp
+  		 		ORDER BY p.prd_sp
   		 	</when>
   		 </choose>
   		 <if test="limit != null and !limit.equals('')">
@@ -694,5 +694,34 @@
 		SELECT sel_id
 		FROM products
 		WHERE prd_cd = #{prd_cd}
+	</select>
+	
+	<!-- 메인 추천 상품 -->
+	<select id="recomProduct" parameterType="map">
+		SELECT i.fil_nm,
+  			   i.fil_pt,
+  			   s.sel_nm,
+  			   p.prd_cd,
+  			   p.prd_nm,
+  			   FORMAT(p.prd_op, 0) AS prd_op,
+  			   FORMAT(p.prd_sp, 0) AS prd_sp,
+  			   CONCAT(ROUND(((p.prd_op - p.prd_sp) / p.prd_op) * 100, 0), '%') AS dc,
+               p.prd_ca,
+               p.prd_dt,
+               w.buy_em,
+               cd.cod_nm
+  		  FROM products p 
+		  LEFT JOIN (SELECT prd_cd, fil_nm, fil_pt
+					   FROM product_images
+					  WHERE fil_nb = 1) i ON p.prd_cd = i.prd_cd
+		  LEFT JOIN wishlist w on p.prd_cd = w.prd_cd
+		  LEFT JOIN sellers s ON p.sel_id = s.sel_id
+		  LEFT JOIN common_detailcode cd ON p.prd_bd = cd.cod_cd
+		 WHERE prd_st = (SELECT cod_cd
+		 				   FROM common_detailcode 
+		 				  WHERE com_cd = 'PRD_REGISTERSTATUS' 
+		 				    AND cod_nm = '승인')
+		 ORDER BY RAND()
+		 LIMIT #{limit}
 	</select>
   </mapper>
