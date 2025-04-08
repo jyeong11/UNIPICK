@@ -101,6 +101,7 @@ public class PayController {
             Map.class
         );
         Map<String, Object> responseBody = response.getBody();
+        System.out.println("responseBody" + responseBody);
         session.setAttribute("tid", responseBody.get("tid"));
         session.setAttribute("partner_order_id", params.getFirst("partner_order_id"));
         session.setAttribute("partner_user_id", params.getFirst("partner_user_id"));
@@ -115,6 +116,8 @@ public class PayController {
 									              @RequestParam("returnUrl") String returnUrl,
                                                   HttpSession session) {
     	
+
+    	
         // 결제 승인 요청
     	MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
     	params.add("cid", "TC0ONETIME");
@@ -123,7 +126,7 @@ public class PayController {
     	params.add("partner_user_id", (String)session.getAttribute("partner_user_id"));
     	params.add("pg_token", pgToken);
     	
-    	
+    	System.out.println("params: " + params.toString());
     	
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "KakaoAK " + adminKey);
