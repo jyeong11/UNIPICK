@@ -72,6 +72,8 @@
 	 		pi.fil_pt,
 	 		pd.prd_nm,
 	 		pd.prd_cd,
+	 		sl.sel_pp,
+	 		sl.sel_bp,
 	 		CONCAT(ROUND(((pd.prd_op - pd.prd_sp) / pd.prd_op) * 100, 0), '%') AS dc,
 		    FORMAT(pd.prd_sp, 0) AS prd_sp
 	   FROM sellers sl 

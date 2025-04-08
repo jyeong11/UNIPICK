@@ -60,15 +60,13 @@
 	<!-- 	내용삽입 -->
 	<div id="content">
 		<div class="content-container">
+<!-- 			배경사진 -->
 			<div class="background">
-				<img
-					src="${pageContext.request.contextPath }/resources/sellerStore/셔츠.png">
-				<img
-					src="${pageContext.request.contextPath }/resources/sellerStore/셔츠2.png">
+				<img src="${pageContext.request.contextPath }${selList[0].sel_bp}">
 			</div>
+<!-- 			프로필사진 -->
 			<div class="store-img">
-				<img
-					src="${pageContext.request.contextPath }/resources/sellerStore/프로필 사진.webp">
+				<img src="${pageContext.request.contextPath }${selList[0].sel_pp}">
 			</div>
 		</div>
 		<div class="selIfo">

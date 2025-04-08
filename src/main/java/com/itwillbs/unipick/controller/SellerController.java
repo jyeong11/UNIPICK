@@ -152,7 +152,7 @@ public class SellerController {
 	public Map<String, Object> joinSucess(@RequestParam Map<String, Object> sellerInfo,
 										  @RequestParam("businessLicense") MultipartFile businessLicense,
 										  HttpServletRequest req) {
-       
+       System.out.println("sellerInfo" + sellerInfo);
 		 ServletContext servletContext = req.getServletContext();
 		// 1. 실제 배포 경로 가져오기 (톰캣 내 실제 저장될 경로)
 		String uploadDir = servletContext.getRealPath("/resources/businessLicense/");

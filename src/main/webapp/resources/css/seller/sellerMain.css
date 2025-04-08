@@ -7,7 +7,7 @@ body {
 .card-body{
 	cursor: pointer;
 }
-#orderCnt {
+#orderCnt, #account, #sellerVisit{
 	text-decoration: none;
     color: white !important;
 }

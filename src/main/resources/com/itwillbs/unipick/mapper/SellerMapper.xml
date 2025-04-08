@@ -15,7 +15,8 @@
 					        sel_br, 
 					        sel_ad, 
 					        sel_bf, 
-					        sel_st, 
+					        sel_st,
+					        sel_mp,
 					        sel_at
 		  )VALUES (#{storeId},
 			 	   #{storePw},
@@ -28,6 +29,7 @@
 			 	   #{storead},
 			 	   #{sel_bf},
 			 	   'ss01',
+			 	   #{phNumber},
 			 	   DEFAULT)
 			 		
 	</insert>
@@ -108,7 +110,7 @@
      SELECT sel_id,
      		sel_pw
        FROM sellers
-      WHERE sel_cs = #{userPhone}
+      WHERE sel_mp = #{userPhone}
       	AND sel_id = #{sel_id}
 	</select>
 	

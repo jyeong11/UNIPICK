@@ -38,17 +38,6 @@
         </div>
     </li>
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu03" aria-expanded="true" aria-controls="menu03">
-        	<i class="fa-solid fa-credit-card"></i> <span>쿠폰관리</span>
-        </a>
-        <div id="menu03" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-            	<h6 class="collapse-header">쿠폰관리</h6>
-                <a class="collapse-item" href="sellerOrdDetail?ord_id=1">상품</a>
-            </div>
-        </div>
-    </li>
-    <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu04" aria-expanded="true" aria-controls="menu04">
         	<i class="fa-solid fa-land-mine-on"></i> <span>통계관리</span>
         </a>
@@ -56,20 +45,6 @@
             <div class="bg-white py-2 collapse-inner rounded">
             	<h6 class="collapse-header">통계관리</h6>
                 <a class="collapse-item" href="sellerVisit">통계</a>
-            </div>
-        </div>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu05" aria-expanded="true" aria-controls="menu05">
-        	<i class="fa-solid fa-newspaper"></i> <span>고객지원관리</span>
-        </a>
-        <div id="menu05" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-            	<h6 class="collapse-header">고객지원관리</h6>
-                <a class="collapse-item" href="#" data-sub-page="AdmNoticeModify" data-sub-page2="AdmNoticeRegist">가이드리스트</a>
-                <a class="collapse-item" href="#">공지사항리스트</a>
-                <a class="collapse-item" href="#">관리자문의</a>
-                <a class="collapse-item" href="selModifyForm">마이페이지</a>
             </div>
         </div>
     </li>

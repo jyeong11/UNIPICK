@@ -71,6 +71,7 @@
 							</div>
 							<button id="verifyOtpBtn" type="button">인증번호 확인</button>
 						</div>
+						<div>* 휴대폰 번호는 담당자 번호로 인증해주세요 *</div>
 						<div id="resultContainer"></div>
 					</div>
 				</main>

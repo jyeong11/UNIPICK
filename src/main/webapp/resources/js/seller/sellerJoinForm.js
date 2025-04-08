@@ -144,7 +144,6 @@ function submitForm() {
         contentType: false,
         success: function(res) {
             alert("입점 신청이 완료되었습니다.");
-            window.location.href = "successPage.html"; // 성공 페이지로 이동
         },
         error: function (xhr, textStatus, errorThrown) {
             alert("다시 접속해주세요.");

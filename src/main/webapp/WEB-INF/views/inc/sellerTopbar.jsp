@@ -71,7 +71,7 @@
 			<div class="modal-body">로그아웃 후에는 판매자 사이트 접근이 불가능합니다.</div>
 			<div class="modal-footer">
 				<button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
-				<a class="btn btn-primary" href="sellerLogout">로그아웃</a>
+				<a class="btn btn-primary" href="sellerLogout" style="background-color: #f2a900; border-color: #f2a900; border-radius: 0.35rem;">로그아웃</a>
 			</div>
 		</div>
 	</div>
