@@ -457,7 +457,7 @@
             // 웹소켓 연결 함수
             function connectWebSocket() {
                 // 요청 주소 생성(웹소켓 기본 프로토콜은 ws, 보안 프로토콜은 wss)
-                let ws_base_url = "ws://localhost:8080/UNIPICK";
+                let ws_base_url = "ws://c2d2410t2p2.itwillbs.com/UNIPICK";
                 
                 ws = new WebSocket(ws_base_url + "/echo");
                 
