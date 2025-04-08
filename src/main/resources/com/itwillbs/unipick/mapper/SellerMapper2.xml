@@ -188,6 +188,9 @@
 	  INNER JOIN options o ON p.prd_cd = o.prd_cd
 	  JOIN common_detailcode c ON o.siz_nm = c.cod_cd
 	  WHERE 1=1
+	  <if test="map.sel_id != null and !map.sel_id.isEmpty()">
+	      AND p.sel_id = #{map.sel_id}
+	  </if>
 	  <if test="map.prd_nm != null and !map.prd_nm.isEmpty()">
 	      AND p.prd_nm LIKE CONCAT('%', #{map.prd_nm}, '%')
 	  </if>
@@ -214,17 +217,20 @@
 	  FROM products p
 	  INNER JOIN options o ON p.prd_cd = o.prd_cd
 	  WHERE 1=1
-	  <if test="map.prd_nm != null and !map.prd_nm.isEmpty()">
-	      AND p.prd_nm LIKE CONCAT('%', #{map.prd_nm}, '%')
+	  <if test="sel_id != null and !sel_id.isEmpty()">
+	      AND p.sel_id = #{sel_id}
 	  </if>
-	  <if test="map.prd_ca != null and !map.prd_ca.isEmpty()">
-	      AND p.prd_ca LIKE CONCAT('%', #{map.prd_ca}, '%')
+	  <if test="prd_nm != null and !prd_nm.isEmpty()">
+	      AND p.prd_nm LIKE CONCAT('%', #{prd_nm}, '%')
 	  </if>
-	  <if test="map.clr_nm != null and !map.clr_nm.isEmpty()">
-	      AND o.clr_nm LIKE CONCAT('%', #{map.clr_nm}, '%')
+	  <if test="prd_ca != null and !prd_ca.isEmpty()">
+	      AND p.prd_ca LIKE CONCAT('%', #{prd_ca}, '%')
 	  </if>
-	  <if test="map.siz_nm != null and !map.siz_nm.isEmpty()">
-	      AND o.siz_nm LIKE CONCAT('%', #{map.siz_nm}, '%')
+	  <if test="clr_nm != null and !clr_nm.isEmpty()">
+	      AND o.clr_nm LIKE CONCAT('%', #{clr_nm}, '%')
+	  </if>
+	  <if test="siz_nm != null and !siz_nm.isEmpty()">
+	      AND o.siz_nm LIKE CONCAT('%', #{siz_nm}, '%')
 	  </if>
 	 </select>
 

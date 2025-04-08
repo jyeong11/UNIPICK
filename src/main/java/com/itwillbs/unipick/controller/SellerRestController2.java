@@ -32,6 +32,7 @@ public class SellerRestController2 {
   //AJAX를 통한 상품 리스트 조회
     @RequestMapping("/api/selProductList")
     public Map<String, Object> getProductList(
+            HttpSession session,
             @RequestParam(value = "prd_nm", required = false, defaultValue = "") String prdNm,
             @RequestParam(value = "prd_ca", required = false, defaultValue = "") String prdCa,
             @RequestParam(value = "clr_nm", required = false, defaultValue = "") String clrNm,
@@ -42,6 +43,11 @@ public class SellerRestController2 {
 
         // 검색 조건 Map 생성
         Map<String, String> searchParams = new HashMap<>();
+        // 현재 로그인한 판매자 ID 추가
+        String sellerId = (String) session.getAttribute("selId");
+        if (sellerId != null && !sellerId.isEmpty()) {
+            searchParams.put("sel_id", sellerId);
+        }
 			if (!prdNm.isEmpty()) searchParams.put("prd_nm", prdNm);
 			if (!prdCa.isEmpty()) searchParams.put("prd_ca", prdCa);
 			if (!clrNm.isEmpty()) searchParams.put("clr_nm", clrNm);
