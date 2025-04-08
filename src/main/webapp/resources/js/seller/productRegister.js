@@ -174,6 +174,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
   updateByteCount("#item-regi-title-text", "#item-regi-name-byte", 100, "최대 100자까지 입력 가능합니다.");
+  updateByteCount("#item-regi-code-text", "#item-regi-code-byte", 20, "최대 20자까지 입력 가능합니다.");
 
   // 8. TOAST UI Editor 초기화
   const { colorSyntax } = toastui.Editor.plugin;

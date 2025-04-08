@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+#content {
+	height: 834px;
+}
+
 .card-header {
 	display: flex;
 	justify-content: space-between;

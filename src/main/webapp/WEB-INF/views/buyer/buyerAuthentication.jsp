@@ -29,16 +29,11 @@
     <script src="${pageContext.request.contextPath}/resources/js/buyer/buyerAuthentication.js"></script>
 </head>
 <body>
-  <div class="join">
+  <div class="join" id="join1">
     <div class="nav">
       <nav class="joinNav">
-        <div class="joinNav-inner">
-          <button class="backBtn">
-            <i class="fa-solid fa-arrow-left"></i>
-          </button>
-        </div>
         <div class="joinNav-inner2">
-          <a href="index.jsp">
+          <a href="buyerlogin">
             <img src="${pageContext.request.contextPath}/resources/images/로고 가로.png" alt="로고" id="logo">
           </a>
         </div>
@@ -74,9 +69,16 @@
           </div>
           <button id="verifyOtpBtn" type="button" class="BODY_153">인증번호 확인</button>
         </div>
+                <div class="joinNav-inner">
+          <button class="backBtn">
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+        </div>
       </div>
     </main>
   </div>
-  <input type="button" onclick="location.href='buyerEmail'" value="이메일로 이동">
+  	<div class="ft">
+		<jsp:include page="../inc/footer.jsp"></jsp:include>
+	</div>
 </body>
 </html>

@@ -51,13 +51,9 @@
 	<div class="join">
 		<div class="nav">
 			<nav class="joinNav">
-				<div class="joinNav-inner">
-					<button class="backBtn">
-						<i class="fa-solid fa-arrow-left"></i>
-					</button>
-				</div>
+
 				<div class="joinNav-inner2">
-					<a href="index.jsp"><img
+					<a href="buyerlogin"><img
 						src="${pageContext.request.contextPath}/resources/images/로고 가로.png"
 						alt="로고" id="logo"></a>
 				</div>
@@ -89,6 +85,14 @@
 			</form>
 			<button class="css-1lhlb22" id="completeBtn" >완료</button>
 		</main>
+						<div class="joinNav-inner">
+					<button class="backBtn">
+						<i class="fa-solid fa-arrow-left"></i>
+					</button>
+				</div>
+	</div>
+		<div class="ft">
+		<jsp:include page="../inc/footer.jsp"></jsp:include>
 	</div>
 </body>
 </html>

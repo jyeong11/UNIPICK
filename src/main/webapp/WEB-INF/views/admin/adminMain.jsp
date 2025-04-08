@@ -24,6 +24,7 @@
 <link href="${pageContext.request.contextPath }/resources/public/vendor/datatables/datatables.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath }/resources/css/public.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath }/resources/css/admin/adminMain.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath }/resources/css/admin/adminPublic2.css" rel="stylesheet" type="text/css">
 <!-- Favicon -->
 <link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
 
@@ -55,11 +56,11 @@
                     	
                     	<!-- 상단1) 등록된 전체 상품 수 -->
                         <div class="col-xl-4 col-md-6 mb-4">
-                            <div class="card border-left-primary shadow h-100 py-2">
+                            <div class="card border-left-yellow shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="font-weight-bold text-primary text-uppercase mb-1">오늘의 방문자 수</div>
+                                            <div class="font-weight-bold text-uppercase mb-1 text-yellow">오늘의 방문자 수</div>
                                             <div class="h3 mb-0 font-weight-bold text-gray-600 counter-text" id="visit-date"></div>
                                             <div class="h3 mb-0 font-weight-bold text-gray-800 counter-text" id="visit-count"></div>
                                         </div>
@@ -74,7 +75,7 @@
                         <div class="col-xl-5 col-lg-5">
 	                        <div class="card shadow mb-4">
 	                            <div class="card-header py-3">
-	                                <h6 class="m-0 font-weight-bold text-primary">최근 일주일 가입내역</h6>
+	                                <h6 class="m-0 font-weight-bold text-yellow">최근 일주일 가입내역</h6>
 	                            </div>
 	                            <div class="card-body">
 	                            	<div class="table-responsive">
@@ -96,7 +97,7 @@
                     	<div class="col-xl-6 col-lg-5">
 	                        <div class="card shadow mb-4">
 	                            <div class="card-header py-3">
-	                                <h6 class="m-0 font-weight-bold text-primary">신고내역</h6>
+	                                <h6 class="m-0 font-weight-bold text-yellow">신고내역</h6>
 	                                <a href="adminReportList" id="report-link">신고 리스트 이동</a>
 	                            </div>
 	                            <div class="card-body">

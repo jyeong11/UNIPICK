@@ -27,31 +27,25 @@
 </head>
 <body>
 <div class="join">
-	<div class="nav">
-	<nav class="joinNav">
-		<div class="joinNav-inner">
-			<button class="backBtn"><i class="fa-solid fa-arrow-left"></i></button></div>
-		<div class="joinNav-inner2"><a href="index.jsp"><img src="${pageContext.request.contextPath}/resources/images/로고 가로.png" alt="로고" id="logo"></a>
-		</div>
-		<div class="joinNav-inner3"></div>
-	</nav>
-	</div>
-	<main class="css-ds6z7l">
-		<h1 class="HEAD_24 BOLD css-17sedfb e1pr4wto0">서비스 이용약관에<br>동의해주세요.</h1>
-		<form method="post" action="buyerJoin">
+		<form method="post" action="buyerJoin" class="memberform">
+			<div class="nav">
+	 			<div class="joinNav-inner2">
+					<a href="buyerlogin"><img src="${pageContext.request.contextPath}/resources/images/로고 가로.png" alt="로고" id="logo"></a>
+				</div>
+			</div>
+		<h1 class="HEAD_24 BOLD css-17sedfb e1pr4wto0">서비스 이용약관에 동의해주세요.</h1>
 		<div class="form8">
-		<label class="lb1">
-		<input type="checkbox" id="terms_all" class="terms">
-		<span class="formspan">네, 모두 동의합니다.</span>
-		</label></div>
-		
+			<label class="lb1">
+				<input type="checkbox" id="terms_all" class="terms">
+				<span class="formspan">네, 모두 동의합니다.</span>
+			</label></div>
 		<div class="css-19tsq9r"></div>
 		
 		<div class="form8">
-		<label class="lb1">
-		<input type="checkbox" id="terms_ta" name="terms" class="terms">
-		<span>(필수) 이용 약관 동의</span>
-		</label><a href="policy" class="cssjoin">보기</a></div>
+			<label class="lb1">
+				<input type="checkbox" id="terms_ta" name="terms" class="terms">
+				<span>(필수) 이용 약관 동의</span>
+			</label><a href="policy" class="cssjoin">보기</a></div>
 		
 		<div class="form8">
 		<label class="lb1">
@@ -65,30 +59,13 @@
 		<span>(필수) 마케팅 동의</span>
 		</label><a href="#" class="cssjoin">보기</a></div>
 		
-<!-- 		<div class="form8"> -->
-<!-- 		<label class="lb1"> -->
-<!-- 		<input type="checkbox" name="terms" class="terms"> -->
-<!-- 		<span>(선택) 야간 혜택 수신에 동의</span> -->
-<!-- 		</label><a href="#" class="cssjoin">보기</a></div> -->
-		
-<!-- 		<div class="form8"> -->
-<!-- 		<label class="lb1"> -->
-<!-- 		<input type="checkbox" name="terms" class="terms"> -->
-<!-- 		<span>(선택) 홍보 및 마케팅 이용에 동의</span> -->
-<!-- 		</label><a href="#" class="cssjoin">보기</a></div> -->
-		
-<!-- 		<div class="form8"> -->
-<!-- 		<label class="lb1"> -->
-<!-- 		<input type="checkbox" name="terms" class="terms"> -->
-<!-- 		<span>(선택) 마케팅 개인정보 제3자 제공 동의</span> -->
-<!-- 		</label><a href="#" class="cssjoin">보기</a></div> -->
-		
-		</form>
 		<button class="joinBtn" id="completeBtn">다음</button>
-		<div class="joinAgree">"‘선택' 항목에 동의하지 않아도 서비스 이용이 가능합니다."<br>
-		"개인정보 수집 및 이용에 대한 동의를 거부할 권리가 있으며,"<br>
-		"동의 거부시 회원제 서비스 이용이 제한됩니다."</div>
-		</main>
+			<div class="joinAgree">"‘선택' 항목에 동의하지 않아도 서비스 이용이 가능합니다."<br>
+								   "개인정보 수집 및 이용에 대한 동의를 거부할 권리가 있으며,"<br>
+								"동의 거부시 회원제 서비스 이용이 제한됩니다."</div>
+			<div class="joinNav-inner">
+				<button class="backBtn" onclick="location.href='buyerlogin'"><i class="fa-solid fa-arrow-left"></i></button></div>
+		</form>
 </div>
 	<div class="ft">
 		<jsp:include page="../inc/footer.jsp"></jsp:include>

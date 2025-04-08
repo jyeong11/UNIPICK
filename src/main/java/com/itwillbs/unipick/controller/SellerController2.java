@@ -39,6 +39,9 @@ public class SellerController2 {
     
     @GetMapping("selProductList")
     public String getPrdouctList() {
+    	
+    	
+    	
     	return "seller/productList";
     }
     
