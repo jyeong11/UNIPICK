@@ -136,7 +136,9 @@ body {
 .item-regi-color select,
 .item-regi-size select,
 .item-regi-stock select,
-.item-regi-color input[type="color"] {
+.item-regi-color input[type="color"],
+.item-regi-badge-box select,
+.color-name input[type="text"] {
   margin-left: 10px;
   width: 200px;  /* 필요에 따라 조정 가능 */
   height: 40px;

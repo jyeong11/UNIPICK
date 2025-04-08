@@ -76,7 +76,7 @@
 						<div class="col-lg-12">
 							<div class="card shadow mb-4">
 								<div class="card-header py-3">
-									<h5 class="m-0 font-weight-bold text-primary">상품 등록</h5>
+									<h5 class="m-0 font-weight-bold" id="h5css">상품 등록</h5>
 									<input type="hidden" id="sessionUserId"
 										value="${session.getId() }">
 								</div>
@@ -128,15 +128,14 @@
 														class="item-regi-title-text" id="item-regi-code-text"
 														maxlength="20">
 												</div>
-												<h6 class="item-regi-name-byte" id="item-regi-name-byte">(0
-													/ 20)</h6>
+												<h6 class="item-regi-name-byte" id="item-regi-code-byte">(0 / 20)</h6>
 											</section>
 											<section class="item-regi-section">
 												<h2 class="item-regi-name">상품설명</h2>
 												<div id="editor"></div>
 												<input type="hidden" id="prd_ct" name="prd_ct" value="">
-												<h6 class="item-regi-description-byte"
-													id="item-regi-description-byte">(0 / 2000)</h6>
+<!-- 												<h6 class="item-regi-description-byte" -->
+<!-- 													id="item-regi-description-byte">(0 / 2000)</h6> -->
 											</section>
 											<!-- 카테고리 선택 영역 -->
 											<section class="item-regi-category">
@@ -170,40 +169,32 @@
 															<input type="number" id="sale_price" name="product_price"
 																placeholder="판매가를 입력해주세요." required>
 														</div>
-														<input type="hidden" name="product_discount_status"
-															id="discount_status" value="0">
+														<input type="hidden" name="product_discount_status" id="discount_status" value="0">
 													</div>
 												</div>
 											</section>
 											<section class="item-regi-price">
-												<h6 class="item-regi-name">뱃지 설정</h6>
+											 <h6 class="item-regi-name">뱃지 설정</h6>
 												<div class="item-regi-badge-box">
-													<select class="item-regi-badge-box" name="product_badge[]"
-														id="product_badge"></select>
+													<select class="item-regi-badge-box" name="product_badge[]" id="product_badge"></select>
 												</div>
 											</section>
 											<section class="item-regi-stock">
-												<h6 class="item-regi-name">옵션 설정</h6>
+											 <h6 class="item-regi-name">옵션 설정</h6>
 												<div id="option-container">
 													<div class="option-row"
 														style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-														<input type="color" name="color_number[]"
-															class="color-picker" required> <input type="text"
-															name="color_name[]" class="color-name" id="color_name"
-															required> <select name="size_option[]"
-															class="size-select" id="product_size"></select> <input
-															type="number" name="stock_number[]" class="stock-number"
-															id="stock_number" placeholder="재고 수량을 입력해주세요." required>
+														<input type="color" name="color_number[]" class="color-picker" required>
+														<input type="text" name="color_name[]" class="color-name" id="color_name" required>
+														<select name="size_option[]" class="size-select" id="product_size"></select>
+														<input type="number" name="stock_number[]" class="stock-number" id="stock_number" placeholder="재고 수량을 입력해주세요." required>
 													</div>
 												</div>
-												<button type="button" id="add-option"
-													class="btn btn-sm btn-outline-primary">추가</button>
+												<button type="button" id="add-option" class="btn btn-sm btn-outline-primary">추가</button>
 											</section>
 											<div class="item-regi-submit-group">
-												<input type="button" class="item-backpage"
-													onclick="history.back()" value="뒤로 가기"> <input
-													type="submit" id="createProduct" class="item-submit"
-													value="상품 등록">
+												<input type="button" class="item-backpage" onclick="history.back()" value="뒤로 가기">
+												<input type="submit" id="createProduct" class="item-submit" value="상품 등록">
 											</div>
 										</form>
 									</section>

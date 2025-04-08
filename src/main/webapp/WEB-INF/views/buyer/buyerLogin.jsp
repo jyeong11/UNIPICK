@@ -32,25 +32,32 @@
 <body>
 	<div class="login-container">
 		 <form action="" method="post" class="memberform" onsubmit="return false">
-		 	<a href=""><img src="${pageContext.request.contextPath}/resources/images/로고 가로.png" alt="로고" class="logo"></a>
-		 	<div class="sec01">
-		 	<div class="sec-span"><span>안녕하세요 유니픽입니다</span></div>
-			<div class="member-info">
-			<input type="text" id="buyerId" placeholder="아이디 입력" value="${savedBuyerId != null ? savedBuyerId : ''}"></div>
-			<div class="member-info">
-			<input type="password" id="buyerPw" placeholder="비밀번호 입력"></div>
-	        <button type="submit" class="buyerbutton">로그인</button>
-	        <input type="hidden" id="contextPathHolder" value="${pageContext.request.contextPath}">
-            </div>
-        <div class="btn-wrap">
-        <label class="buyer-btn"><input type="checkbox" id="rememberId">아이디 기억하기</label>
-        <input class="btn-wrap-btn" type="button" onclick="location.href ='buyerId'" value="아이디 찾기">
-        <input class="btn-wrap-btn" type="button" onclick="location.href ='buyerPw'" value="비밀번호 찾기">
-        <input class="btn-wrap-btn" type="button" onclick="location.href ='buyerJoin'" value="회원가입">
-        </div>
-<!--         <div><button type="submit" class="nbutton">네이버 로그인</button></div> -->
-<!--         <div><button type="submit" class="kbutton">카카오톡 로그인</button></div> -->
+			 
+		 	<div class="joinNav-inner2">
+				<a href="buyerlogin"><img src="${pageContext.request.contextPath}/resources/images/로고 가로.png" alt="로고" id="logo"></a>
+			</div>
+		 		<div class="sec01">
+		 			<div class="sec-span"><span>안녕하세요 유니픽입니다</span>
+		 		</div>
+				<div class="member-info">
+					<input type="text" id="buyerId" placeholder="아이디 입력" value="${savedBuyerId != null ? savedBuyerId : ''}">
+				</div>
+				<div class="member-info">
+					<input type="password" id="buyerPw" placeholder="비밀번호 입력">
+				</div>
+	        	<button type="submit" class="buyerbutton">로그인</button>
+	        		<input type="hidden" id="contextPathHolder" value="${pageContext.request.contextPath}">
+            	</div>
+      			<div class="btn-wrap">
+		        	<label class="buyer-btn"><input type="checkbox" id="rememberId">아이디 기억하기</label>
+		       		<input class="btn-wrap-btn" type="button" onclick="location.href ='buyerId'" value="아이디 찾기">
+		        	<input class="btn-wrap-btn" type="button" onclick="location.href ='buyerPw'" value="비밀번호 찾기">
+		        	<input class="btn-wrap-btn" type="button" onclick="location.href ='buyerJoin'" value="회원가입">
+        		</div>
+        		<div class="joinNav-inner">
+				<button class="backBtn" onclick="location.href='buyerlogin'"><i class="fa-solid fa-arrow-left"></i></button></div>
         </form>
+        
     </div>
 <div class="ft">
 	<jsp:include page="../inc/footer.jsp"></jsp:include>

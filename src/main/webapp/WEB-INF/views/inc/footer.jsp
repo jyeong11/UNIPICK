@@ -1,4 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<nav>
+<a href="chat/buyer/list" class="chat-link">
+    <img class="chat" src="${pageContext.request.contextPath}/resources/images/chat.png" alt="실시간 상담">
+    <span id="chatNotificationBadge" class="notification-badge" style="display: none;">0</span>
+</a>
+</nav>
 <div class="ft-nav">
 	<ul class="ft-navinner">
 		<li><a href="#"><i class="fa-solid fa-house"></i><span class="gray-footer">홈</span></a></li>
@@ -34,12 +40,6 @@
 		</div>
 	</div>
 </div>
-<nav>
-<a href="chat/buyer/list" class="chat-link">
-    <img class="chat" src="${pageContext.request.contextPath}/resources/images/chat.png" alt="실시간 상담">
-    <span id="chatNotificationBadge" class="notification-badge" style="display: none;">0</span>
-</a>
-</nav>
 </footer>
 
 <style>

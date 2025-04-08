@@ -1,11 +1,183 @@
 @charset "UTF-8";
 
-.join{
-	max-width: 600px;
+body {font-family: "Noto Sans KR", sans-serif;}
+
+.backBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    margin: 10px auto;
+    font-size: 1.2rem;
+    color: #000;
+    transition: color 0.3s ease;
+}
+
+.backBtn:hover {
+    color: #666;
+}
+
+@media all and (min-width:1280px) and (max-width:1920px){
+footer {padding-bottom: 0px !important;}
+.logo {position: relative;top: 2rem;width: 180px;}
+.join {display: flex;justify-content: center;align-items: center;text-align: center;flex-direction: column;}
+.memberform {padding: 20vh;width: 90vh;height: 90vh;box-sizing: border-box;margin-top: 10px;background: #fff;border-radius: 20px;box-shadow: 0 4px 31px 0 rgba(0, 0, 0, 0.1);}
+.HEAD_24 {font-size: 1.5rem;padding: 2rem;}
+.form8 {padding: 5px; margin: -4px; text-align: left; display: flex; justify-content: space-between; align-items: center;}
+.form8 input[type="checkbox"] {width: 20px; height: 20px; margin-right: 10px;}
+.formspan {font-size: 1.2rem; font-weight: bold;}
+.joinBtn {
+	margin-top: 20px;
     width: 100%;
-    height: auto;
-    background: rgb(255, 255, 255);
-    margin: 0px auto;
+    padding: 13px 0;
+    font-size: 12px;
+    color: #fff;
+    background: #000;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.joinAgree {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.5;
+}
+.cssjoin {
+    color: #000;
+    text-decoration: none;
+    margin-left: 10px;
+}
+}
+
+@media all and (min-width:1024px) and (max-width:1279px){
+footer {padding-bottom: 0px !important;}
+.logo {position: relative;top: 2rem;width: 180px;}
+.join {display: flex;justify-content: center;align-items: center;text-align: center;flex-direction: column;padding-bottom: 10rem;}
+.memberform {padding: 20vh;width: 90vh;height: 90vh;box-sizing: border-box;margin-top: 10px;background: #fff;border-radius: 20px;box-shadow: 0 4px 31px 0 rgba(0, 0, 0, 0.1);}
+.HEAD_24 {font-size: 2rem;padding: 2rem;}
+.form8 {padding: 5px; margin: -4px; text-align: left; display: flex; justify-content: space-between; align-items: center;}
+.form8 input[type="checkbox"] {width: 20px; height: 20px; margin-right: 10px;}
+.formspan {font-size: 1.2rem; font-weight: bold;}
+.joinBtn {
+	margin-top: 10px;
+    width: 100%;
+    padding: 13px 0;
+    font-size: 12px;
+    color: #fff;
+    background: #000;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.joinAgree {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.5;
+}
+.cssjoin {
+    color: #000;
+    text-decoration: none;
+    margin-left: 10px;
+}
+}
+
+@media all and (min-width:768px) and (max-width:1023px){
+footer {padding-bottom: 0px !important;}
+.logo {position: relative;top: 2rem;width: 180px;}
+.join {display: flex;justify-content: center;align-items: center;text-align: center;flex-direction: column;padding-bottom: 3rem;}
+.memberform {padding: 20vh;width: 90vh;height: 90vh;box-sizing: border-box;margin-top: 10px;background: #fff;border-radius: 20px;box-shadow: 0 4px 31px 0 rgba(0, 0, 0, 0.1);}
+.HEAD_24 {font-size: 2rem;padding: 2rem;}
+.form8 {padding: 5px; margin: -4px; text-align: left; display: flex; justify-content: space-between; align-items: center;}
+.form8 input[type="checkbox"] {width: 20px; height: 20px; margin-right: 10px;}
+.formspan {font-size: 1.2rem; font-weight: bold;}
+.joinBtn {
+	margin-top: 10px;
+    width: 100%;
+    padding: 13px 0;
+    font-size: 12px;
+    color: #fff;
+    background: #000;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.joinAgree {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.5;
+}
+.cssjoin {
+    color: #000;
+    text-decoration: none;
+    margin-left: 10px;
+}
+}
+
+@media all and (min-width:480px) and (max-width:767px){
+footer {padding-bottom: 0px !important;}
+.logo {position: relative;top: 2rem;width: 180px;}
+.join {display: flex;justify-content: center;align-items: center;text-align: center;flex-direction: column;padding-bottom: 3rem;}
+.memberform {padding: 20vh;width: 90vh;box-sizing: border-box;margin-top: 10px;background: #fff;border-radius: 20px;box-shadow: 0 4px 31px 0 rgba(0, 0, 0, 0.1);}
+.HEAD_24 {font-size: 2rem;padding: 2rem;}
+.form8 {padding: 5px; margin: -4px; text-align: left; display: flex; justify-content: space-between; align-items: center;}
+.form8 input[type="checkbox"] {width: 20px; height: 20px; margin-right: 10px;}
+.formspan {font-size: 1.2rem; font-weight: bold;}
+.joinBtn {
+	margin-top: 10px;
+    width: 100%;
+    padding: 13px 0;
+    font-size: 12px;
+    color: #fff;
+    background: #000;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.joinAgree {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.5;
+}
+.cssjoin {
+    color: #000;
+    text-decoration: none;
+    margin-left: 10px;
+}
+}
+
+@media all and (max-width:479px) {
+footer {padding-bottom: 0px !important;}
+.logo {position: relative;top: 2rem;width: 180px;}
+.join {display: flex;justify-content: center;align-items: center;text-align: center;flex-direction: column;padding-bottom: 3rem;}
+.memberform {padding: 20vh;width: 90vh;box-sizing: border-box;margin-top: 10px;background: #fff;border-radius: 20px;box-shadow: 0 4px 31px 0 rgba(0, 0, 0, 0.1);}
+.HEAD_24 {font-size: 2rem;padding: 2rem;}
+.form8 {padding: 5px; margin: -4px; text-align: left; display: flex; justify-content: space-between; align-items: center;}
+.form8 input[type="checkbox"] {width: 20px; height: 20px; margin-right: 10px;}
+.formspan {font-size: 1.2rem; font-weight: bold;}
+.joinBtn {
+	margin-top: 10px;
+    width: 100%;
+    padding: 13px 0;
+    font-size: 12px;
+    color: #fff;
+    background: #000;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.joinAgree {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.5;
+}
+.cssjoin {
+    color: #000;
+    text-decoration: none;
+    margin-left: 10px;
+}
 }
 
 .nav{
@@ -13,11 +185,6 @@
     max-width: 600px;
     margin: 0 auto;
  
-}
-
-.backBtn{
-	background-color: white;
-	border: none;
 }
 
 .joinNav{
@@ -42,11 +209,14 @@
 }
 
 .joinNav-inner2{
-	text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    text-align: center;
-    flex: 2 1 0%;
+	margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    letter-spacing: -0.5px;
+    font-family: "Noto Sans KR", sans-serif;
+
 }
 
 .joinNav-inner3{
@@ -160,12 +330,14 @@
     font-size: inherit;
     font-weight: inherit;
     line-height: inherit;
-    color: inherit;
     background-color: inherit;
     appearance: none;
     margin: 0;
-    padding: 0;
-    border: none;
+   padding: 11px 16px;
+        border: 1px solid rgb(228, 230, 233);
+        color: rgb(32, 36, 41);
+        border-radius: 6px;
+        box-sizing: border-box;
 }
 
 .css-8lsbin{
@@ -221,13 +393,20 @@ flex: 0 1 0%;
     padding: 12px 16px;
     height: 42px;
     min-width: 68px;
-    background: #E8E9EB;
     border: 1px solid #E8E9EB;
-    color: #A1A9AD;
+    color: white;
     font-size: 15px;
     line-height: 18px;
     -webkit-appearance: button;
     cursor: pointer;
+}
+
+#join1 {
+	margin-bottom: 11rem;
+}
+
+#verifyOtpBtn {
+	margin-top: 15px;
 }
 
 .joinBtn{
@@ -242,7 +421,6 @@ flex: 0 1 0%;
     padding: 14px 24px;
     min-height: 50px;
     min-width: 74px;
-    background: rgb(210, 213, 214);
     color: rgb(255, 255, 255);
     margin: 7px 0px 28px;
     width: 100%;
@@ -262,5 +440,13 @@ flex: 0 1 0%;
 #logo {
 	align-items: center;
 	width: 180px;
+}
+
+.joinNav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    width: 100%;
 }
 
