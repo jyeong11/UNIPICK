@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!-- Topbar -->
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
     <!-- Sidebar Toggle (Topbar) -->
@@ -8,7 +9,7 @@
    </button>
    
    <!-- Title -->
-	<h4 class="m-0 text-gray-900">UNIPICK 관리자 대시보드</h4>
+	<h4 class="m-0 text-gray-900" id="adminTitle">UNIPICK 관리자 대시보드</h4>
 	
    <!-- Topbar Navbar -->
    <ul class="navbar-nav ml-auto">
@@ -60,7 +61,7 @@
             <div class="modal-body">로그아웃 후에는 관리자 사이트 접근이 불가능합니다.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
-                <a class="btn btn-primary" href="adminLogin">로그아웃</a>
+                <a class="btn btn-yellow" href="adminLogin">로그아웃</a>
             </div>
         </div>
     </div>

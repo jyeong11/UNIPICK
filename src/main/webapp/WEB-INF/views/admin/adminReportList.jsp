@@ -37,6 +37,8 @@
 <link href="${pageContext.request.contextPath }/resources/public/vendor/datatables/datatables.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath }/resources/css/admin/adminSellerList.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath }/resources/css/admin/adminReportList.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath }/resources/css/admin/adminPublic2.css" rel="stylesheet" type="text/css">
+
 <script src="${pageContext.request.contextPath }/resources/js/admin/adminReportList.js"></script>
 <link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
 </head>
@@ -60,7 +62,7 @@
 							<div class="col-lg-12">
 							<div class="card shadow mb-4">
 								<div class="card-header py-3">
-									<h5 class="m-0 font-weight-bold text-primary">신고 목록</h5>
+									<h5 class="m-0 font-weight-bold" id="subTitle">신고 목록</h5>
 								</div>
 								<div class="container">
 									<div class="row align-items-start justify-content-end" id="searchList">
@@ -84,7 +86,7 @@
 									</div>
 								</div>
 									<!-- 상품 목록 테이블 -->
-									<div class="table-responsive">
+									<div class="table-responsive left-table">
 										<table class="table table-bordered" id="reportList">
 											<thead>
 												<tr>

@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+#subTitle {
+	font-size: 20px;
+	color: #f2a900;
+}
+
+.left-table{
+	padding: 0 20px 0 20px;
+}
+
+#left-session {
+	padding-left: 25px;
+}
+
+.btn-yellow {
+	color: white;
+	background-color: #f2a900;
+}
+
+.text-yellow {
+	color: #f2a900;
+}
+
+#adminTitle {
+	font-size: 24px;
+	font-weight: 500;
+	letter-spacing: normal !important;
+}
+
+.border-left-yellow {
+	border-left: 0.25rem solid #f2a900;
+}

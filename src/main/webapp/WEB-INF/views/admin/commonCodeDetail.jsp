@@ -49,6 +49,7 @@
 <link href="${pageContext.request.contextPath }/resources/css/admin/cmcd.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/public.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/admin/adminPublic.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/admin/adminPublic2.css" rel="stylesheet" type="text/css">
 
 <!-- script -->
 <script src="${pageContext.request.contextPath }/resources/js/admin/commoncodedetail.js"></script>
@@ -128,10 +129,10 @@ document.addEventListener("DOMContentLoaded", function () {
             <div>
             	<jsp:include page="../inc/adminTopbar.jsp"></jsp:include>
             </div>
-                <section class="section">
+                <section class="section" id="left-session">
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
-							<h6 class="m-0 font-weight-bold">상세공통코드</h6>
+							<h6 class="m-0 font-weight-bold" id="subTitle">상세공통코드</h6>
 						</div>
 						<div class="card-body">
 							<div class="common-top-div">

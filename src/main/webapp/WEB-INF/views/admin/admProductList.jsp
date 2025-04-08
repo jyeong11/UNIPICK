@@ -55,6 +55,8 @@
 <link
 	href="${pageContext.request.contextPath }/resources/css/admin/adminMain.css"
 	rel="stylesheet" type="text/css">
+	
+<link href="${pageContext.request.contextPath }/resources/css/admin/adminPublic2.css" rel="stylesheet" type="text/css">
 
 <!-- script -->
 <script
@@ -137,10 +139,10 @@ document.addEventListener("DOMContentLoaded", function () {
 					<jsp:include page="../inc/adminTopbar.jsp"></jsp:include>
 				</div>
 				<!-- Begin Page Content -->
-				<section class="section">
+				<section class="section" id="left-session">
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
-							<h6 class="m-0 font-weight-bold">상품관리</h6>
+							<h6 class="m-0 font-weight-bold" id="subTitle">상품관리</h6>
 						</div>
 						<div class="card-body">
 							<div class="admProductList-top-div">
