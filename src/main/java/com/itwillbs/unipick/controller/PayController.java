@@ -86,7 +86,7 @@ public class PayController {
         params.add("tax_free_amount", "0");
         params.add("approval_url", "http://c2d2410t2p2.itwillbs.com/UNIPICK/pay/success?returnUrl=" + referer1);
         params.add("cancel_url", "http://c2d2410t2p2.itwillbs.com/UNIPICK/pay/cancel?returnUrl=" + referer2 + itemName);
-        params.add("fail_url", "hhttp://c2d2410t2p2.itwillbs.com/UNIPICK/pay/fail?returnUrl=" + referer2 + itemName);
+        params.add("fail_url", "http://c2d2410t2p2.itwillbs.com/UNIPICK/pay/fail?returnUrl=" + referer2 + itemName);
         
         // 카카오페이 API 호출
         HttpHeaders headers = new HttpHeaders();
@@ -159,6 +159,7 @@ public class PayController {
         if (response.getStatusCode() == HttpStatus.OK) {
         	List<Map<String, Object>> productList = (List<Map<String, Object>>) session.getAttribute("productList");
         	 String odd_am = (String)session.getAttribute("amount");
+        	 System.out.println("productList" + productList);
         	 for (Map<String, Object> product : productList) {
 	    		 String prdCd = (String) product.get("prd_cd");
 	 	         String sizNm = (String) product.get("siz_nm");
@@ -167,6 +168,7 @@ public class PayController {
 
     	        // 옵션 ID 찾기
     	        Map<String, Object> optIdMap = buyService.getOptionId(sizNm, clrNm, prdCd);
+    	        System.out.println("optIdMap" + optIdMap);
     	        Object optId = optIdMap.get("opt_id");
 
     	        // 주문 상세 저장

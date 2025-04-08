@@ -286,7 +286,6 @@ public class AdminController {
 	
 		result.put("prdList", prdList);
 		result.put("statusList", commonStatus);
-		System.out.println("result@!#@!#!@" + result);
 		return result;
 	}
 	

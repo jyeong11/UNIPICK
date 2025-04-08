@@ -453,7 +453,7 @@
          ON o.siz_nm = c.cod_cd
 	  WHERE o.prd_cd = #{prdCd}
 	  	AND o.clr_nm = #{clrNm}
-        AND c.cod_nm = #{sizNm}
+        AND c.cod_cd = #{sizNm}
 	</select>
 	
 	<!-- 	주문 등록 -->
