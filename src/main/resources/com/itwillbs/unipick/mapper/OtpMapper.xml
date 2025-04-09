@@ -5,8 +5,8 @@
 <mapper namespace="com.itwillbs.unipick.mapper.OtpMapper">
 
 	   <insert id="insertVerification" parameterType="map">
-    INSERT INTO VERIFICATION (pho_nm, pho_otp, pho_at)
-    VALUES (#{pho_nm}, #{pho_otp}, #{pho_at})
+    INSERT INTO VERIFICATION (pho_nm, pho_otp, pho_at, pho_tm, pho_ve)
+    VALUES (#{pho_nm}, #{pho_otp}, #{pho_at}, now(), 0)
 </insert>
     
     <select id="selectByPhoneNumber" parameterType="string" resultType="map">
