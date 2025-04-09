@@ -241,8 +241,26 @@ public class BuyerController {
 	@ResponseBody
 	@GetMapping("myPageData")
 	public Map<String, Object> myPageData(HttpSession session, Map<String, Object> myPage) {
-	
-		myPage.put("buy_em", session.getAttribute("buyEm"));
+		// 먼저 "buyEm" 속성 확인
+		Object buyEmObj = session.getAttribute("buyEm");
+		
+		// "buyEm"이 없으면 "buy_em" 속성 확인
+		if (buyEmObj == null) {
+			buyEmObj = session.getAttribute("buy_em");
+		}
+		
+		// 디버그 로그
+		System.out.println("마이페이지 세션 데이터: buyEm=" + buyEmObj);
+		
+		// 값이 있는 경우에만 세션 값 저장
+		if (buyEmObj != null) {
+			// String으로 변환하여 저장
+			myPage.put("buy_em", buyEmObj.toString());
+		} else {
+			// 값이 없으면 빈 문자열 저장 (NPE 방지)
+			myPage.put("buy_em", "");
+			System.out.println("경고: 마이페이지 접근 시 로그인 세션 정보가 없습니다.");
+		}
 		
 		return buyService.myPageData(myPage);
 	}

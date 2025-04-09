@@ -16,9 +16,20 @@ public class BuyerLoginIntercepter implements HandlerInterceptor {
 
         HttpSession session = request.getSession(false);
 
-        String email = (session != null) ? (String) session.getAttribute("buyEm") : null;
-
-        if (email == null || email.isEmpty()) {
+        // buyEm 또는 buy_em 속성 중 하나라도 있으면 로그인된 것으로 처리
+        Object emailObj = (session != null) ? session.getAttribute("buyEm") : null;
+        if (emailObj == null) {
+            emailObj = (session != null) ? session.getAttribute("buy_em") : null;
+        }
+        
+        // isLoggedIn 플래그도 체크
+        Boolean isLoggedIn = (session != null) ? (Boolean) session.getAttribute("isLoggedIn") : null;
+        
+        if ((emailObj == null || (emailObj instanceof String && ((String) emailObj).isEmpty())) 
+                && (isLoggedIn == null || !isLoggedIn)) {
+            
+            System.out.println("비로그인 상태 - 인터셉터에 의해 차단됨");
+            
             String requestedWith = request.getHeader("X-Requested-With");
             boolean isAjax = "XMLHttpRequest".equals(requestedWith);
             
@@ -40,6 +51,7 @@ public class BuyerLoginIntercepter implements HandlerInterceptor {
             return false;
         }
         
+        System.out.println("로그인 상태 - 인터셉터 통과");
         return true;
     }
 }

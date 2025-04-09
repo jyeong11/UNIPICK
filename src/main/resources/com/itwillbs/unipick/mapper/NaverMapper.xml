@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwillbs.unipick.mapper.NaverMapper">
+	<select id="findByEmail" resultType="map">
+	  SELECT * FROM buyers WHERE buy_em = #{buy_em}
+	</select>
+	
+	<!-- 회원 등록 -->
+	<insert id="insertNaverUser" parameterType="map">
+	  INSERT INTO buyers (
+	    buy_em, buy_pw, buy_nm, buy_ph, acc_at, acc_st, acc_ta, acc_pa
+	  ) VALUES (
+	    #{buy_em},
+	    #{buy_pw},
+	    #{buy_nm},
+	    #{buy_ph},
+	    CURRENT_TIMESTAMP,
+	    '활성',
+	    true,
+	    true
+	  )
+	  </insert>
+</mapper>
