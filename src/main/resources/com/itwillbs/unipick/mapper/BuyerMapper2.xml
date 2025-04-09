@@ -29,6 +29,7 @@
     FROM buyers
     WHERE buy_nm = #{buy_nm}
     AND buy_ph = #{buy_ph}
+    LIMIT 1
 </select>
 
 <select id="findEmployeeByNoAndEmail" resultType="map">

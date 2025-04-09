@@ -71,6 +71,7 @@ display: inline-flex;
 
 .buyer-btn,
 .btn-wrap-btn {
+	padding: 10px;
 	cursor: pointer;
 }
 

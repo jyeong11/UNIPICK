@@ -88,7 +88,7 @@ $("#rest-password-form").submit(function(event) {
             buyEm: buyEm
         },
         success: function(res) {
-            $("#result").html("<div class='alert alert-success'>" + res.message + "</div>");
+            $("#result").html("<div class='alert alert-success'style='background-color:#f2a900ff; color:black;'>" + res.message + "</div>");
         },
         error: function(xhr) {
             var errorMessage = xhr.responseJSON ? xhr.responseJSON.error : "정보 불일치";

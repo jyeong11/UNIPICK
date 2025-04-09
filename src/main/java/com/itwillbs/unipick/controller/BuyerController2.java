@@ -313,12 +313,18 @@ public class BuyerController2 {
 	            return ResponseEntity.badRequest().body(Map.of("error", "이름과 이메일을 모두 입력해 주세요."));
 	        }
 
-	        boolean isSent = buyerService.resetPassword(buyNm, buyEm);
-	        if (isSent) {
-	            return ResponseEntity.ok(Map.of("message", "임시 비밀번호가 이메일로 전송되었습니다."));
-	        } else {
-	            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", "이름 또는 이메일이 일치하지 않습니다."));
-	        }
+	        // 비동기 처리를 위한 쓰레드 생성
+	        Thread resetThread = new Thread(() -> {
+	            try {
+	                buyerService.resetPassword(buyNm, buyEm);
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	            }
+	        });
+	        resetThread.start();
+
+	        // 즉시 응답 반환
+	        return ResponseEntity.ok(Map.of("message", "임시 비밀번호가 이메일로 전송되었습니다. 이메일을 확인해주세요."));
 	    }
 
 

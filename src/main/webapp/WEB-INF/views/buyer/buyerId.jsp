@@ -78,7 +78,7 @@ $(document).ready(function(){
 	      dataType: "json",
 	      success: function(res){
 	        if (res.message) {
-	          $("#result").html("<div class='alert alert-success'>" + res.message + "</div>");
+	          $("#result").html("<div class='alert alert-success' style='background-color:#f2a900ff; color:black;'>" + res.message + "</div>");
 	        } else if (res.error) {
 	          $("#result").html("<div class='alert alert-warning'>" + res.error + "</div>");
 	        }
