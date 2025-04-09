@@ -50,11 +50,19 @@
 	
 <!-- 	상품 리뷰조회 -->
 	<select id="getPrdReviews" parameterType="map">
-	 SELECT bu.buy_nm, rv.opt_id, rv.rev_ct, ri.rei_pt,
-		    ot.clr_nm, cd.cod_nm, bu.buy_wt, bu.buy_ht,
+	 SELECT bu.buy_nm,
+	 		rv.opt_id,
+	 		rv.rev_ct,
+	 		ri.rei_pt,
+		    ot.clr_nm,
+		    cd.cod_nm,
+		    bu.buy_wt,
+		    bu.buy_ht,
 		    rv.rev_rt
 	   FROM reviews rv
-	  RIGHT join review_images ri
+	   LEFT JOIN (SELECT rei_pt, rev_id
+					FROM review_images
+			   	   limit 1) ri 
 	     ON rv.rev_id = ri.rev_id
 	   JOIN options ot
 	     ON rv.opt_id = ot.opt_id

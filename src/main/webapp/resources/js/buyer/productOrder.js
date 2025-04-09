@@ -376,7 +376,7 @@ $(function() {
 	        <div id="total"><h2>주문내용 확인 및 결제 동의</h2></div>
 	        <div class="price">
 	            <label><input type="checkbox" id="agree_all"> 전체 동의하기 </label>
-	            <label><input type="checkbox" class="agree_chk"> 유니픽 약관 동의 (필수) <a id="agree">더보기 ></a></label>
+	            <label><input type="checkbox" class="agree_chk"> 유니픽 약관 동의 (필수)</label>
 	            <label><input type="checkbox" class="agree_chk"> 개인정보수집 및 이용에 대한 안내 (필수)</label>
 	            <label><input type="checkbox" class="agree_chk"> 구매조건 및 개인정보 제3자 제공 (필수)</label>
 	        </div>
