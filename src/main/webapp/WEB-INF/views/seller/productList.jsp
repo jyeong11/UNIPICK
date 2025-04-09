@@ -40,12 +40,159 @@
 <link
 	href="${pageContext.request.contextPath }/resources/css/seller/productRegister.css"
 	rel="stylesheet">
-
+<link
+	href="${pageContext.request.contextPath }/resources/css/seller/product.css"
+	rel="stylesheet">
 <script
 	src="${pageContext.request.contextPath }/resources/js/seller/prdList.js"></script>
 
 <link rel="icon"
 	href="${pageContext.request.contextPath }/resources/images/favicon.png">
+	
+<style>
+    .search-container {
+        background-color: #f8f9fc;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 15px 0;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+    }
+    
+    .search-container:hover {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .search-row {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 10px;
+    }
+    
+    .search-select {
+        border-radius: 5px;
+        border: 1px solid #d1d3e2;
+        padding: 8px 10px;
+        font-size: 14px;
+        box-shadow: none;
+        transition: border-color 0.2s;
+        width: 100%;
+        background-color: white;
+    }
+    
+    .search-select:focus {
+        border-color: #4e73df;
+        box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+    }
+    
+    .search-input {
+        border-radius: 5px;
+        border: 1px solid #d1d3e2;
+        padding: 8px 15px;
+        font-size: 14px;
+        transition: all 0.2s;
+        width: 100%;
+    }
+    
+    .search-input:focus {
+        border-color: #4e73df;
+        box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+    }
+    
+    .search-button {
+        background-color: black;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 8px 20px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        width: 100%;
+    }
+    
+    .search-button:hover {
+        background-color: #2e59d9;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(46, 89, 217, 0.2);
+    }
+    
+    .search-button:active {
+        transform: translateY(0);
+    }
+    
+    .table-container {
+        border-radius: 5px;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+    }
+    
+    #productList {
+        border-collapse: separate;
+    }
+    
+    #productList thead th {
+        background-color: #f2a900ff;
+        color: white;
+        font-weight: 500;
+        border: none;
+        padding: 12px 15px;
+    }
+    
+    #productList tbody tr {
+        transition: all 0.3s;
+    }
+    
+    #productList tbody tr:hover {
+        background-color: #f8f9fc;
+    }
+    
+    /* 페이징 스타일 */
+    #pageList {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 25px 0;
+        gap: 5px;
+    }
+    
+    #pageList .page-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 5px;
+        background-color: #fff;
+        color: #4e73df;
+        text-decoration: none;
+        border: 1px solid #d1d3e2;
+        font-size: 14px;
+        transition: all 0.2s;
+    }
+    
+    #pageList .page-link:hover {
+        background-color: #f8f9fc;
+        border-color: #4e73df;
+    }
+    
+    #pageList .page-link.active {
+        background-color: #4e73df;
+        color: #fff;
+        border-color: #4e73df;
+        font-weight: bold;
+    }
+    
+    #pageList .prev-page,
+    #pageList .next-page {
+        font-weight: bold;
+        width: auto;
+        padding: 0 12px;
+    }
+</style>
 </head>
 <body id="page-top">
 	<div id="wrapper">
@@ -65,27 +212,27 @@
 								<div class="card-header py-3">
 									<h5 class="m-0 font-weight-bold text-primary">상품 목록</h5>
 								</div>
-								<div class="container">
-									<div class="row align-items-start justify-content-end">
-										<div class="col-2">
-											<select class="form-select" id="noticeSearchKind">
+								<div class="search-container">
+									<div class="search-row">
+										<div class="col-md-2">
+											<select class="search-select" id="noticeSearchKind">
 												<option value="name">상품명</option>
 												<option value="category">카테고리</option>
 												<option value="color">컬러</option>
 											</select>
 										</div>
-										<div class="col-3">
-											<input type="text" id="noticeSearchWord" class="form-control"
-												placeholder="검색어 입력">
+										<div class="col-md-3">
+											<input type="text" id="noticeSearchWord" class="search-input"
+												placeholder="검색어를 입력하세요">
 										</div>
-										<div class="col-1">
-											<button id="noticeSearch" class="btn btn_main_color"
+										<div class="col-md-1">
+											<button id="noticeSearch" class="search-button"
 												type="button">조회</button>
 										</div>
 									</div>
 								</div>
 								<!-- 상품 목록 테이블 -->
-								<div class="table-responsive">
+								<div class="table-container">
 									<table class="table table-bordered" id="productList">
 										<thead>
 											<tr>
@@ -105,7 +252,9 @@
 										</tbody>
 									</table>
 								</div>
-								<section id="pageList"></section>
+								<div class="pagination-container">
+									<section id="pageList" class="pagination"></section>
+								</div>
 							</div>
 						</div>
 					</div>

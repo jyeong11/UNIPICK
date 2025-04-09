@@ -213,7 +213,7 @@
 
 	<!-- 상품 개수 조회 -->
 	 <select id="getProductListCount" resultType="int">
-	  SELECT COUNT(*) 
+	  SELECT COUNT(DISTINCT p.prd_cd) 
 	  FROM products p
 	  INNER JOIN options o ON p.prd_cd = o.prd_cd
 	  WHERE 1=1

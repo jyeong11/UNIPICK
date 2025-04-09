@@ -60,22 +60,28 @@
                         <div class="col-12">
                             <div class="card shadow">
                                 <div class="card-body">
-                                    <form id="searchForm" class="row g-3">
-                                        <div class="col-md-3">
+                                    <form id="searchForm" class="row g-3 align-items-end">
+                                        <div class="col-md-2">
+                                            <label for="periodType" class="form-label">기간 유형</label>
                                             <select class="form-select" id="periodType">
                                                 <option value="daily">일별</option>
                                                 <option value="weekly">주간별</option>
-                                                <option value="monthly">월별</option>
+                                                <option value="monthly" selected>월별</option>
                                                 <option value="yearly">연도별</option>
                                             </select>
                                         </div>
                                         <div class="col-md-3">
+                                            <label for="startDate" class="form-label">시작일</label>
                                             <input type="date" class="form-control" id="startDate">
                                         </div>
                                         <div class="col-md-3">
+                                            <label for="endDate" class="form-label">종료일</label>
                                             <input type="date" class="form-control" id="endDate">
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-2">
+                                            <button type="button" class="btn btn-primary" id="searchBtn">조회</button>
+                                        </div>
+                                        <div class="col-md-2">
                                             <button type="button" class="btn btn-success" id="excelBtn">Excel 다운로드</button>
                                         </div>
                                     </form>
