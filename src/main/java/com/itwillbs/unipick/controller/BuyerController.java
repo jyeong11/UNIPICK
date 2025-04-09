@@ -420,6 +420,8 @@ public class BuyerController {
 										  HttpSession session) {
 		System.out.println(data);
 		data.put("buy_em", session.getAttribute("buyEm"));
+		System.out.println("dtata : " + data);
+		System.out.println("session : " + session.getAttribute("buyEm"));
 		buyService.cartInsert(data);
 	}
 	

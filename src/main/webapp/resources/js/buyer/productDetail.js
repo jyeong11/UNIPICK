@@ -59,6 +59,7 @@ $(function() {
 	// 장바구니
 	$('.cart-btn').on("click", function (e) {
 		let color = $("#color").val();
+		let sizenm = $("#size").val();
 		let size = $("#size option:selected").text();
 		let qty = $("#qty-input").val();
 		
@@ -74,8 +75,8 @@ $(function() {
 			data: JSON.stringify({
 				prd_cd: prdCd,
 				sel_nm: sel_nm,
+				size: sizenm, 
 				color: color,
-				size: size,
 				qty: qty
 			}),
 			contentType: "application/json",

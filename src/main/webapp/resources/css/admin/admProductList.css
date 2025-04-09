@@ -5,9 +5,11 @@
 .prdList{
 	cursor: pointer;
 }
+#pageList{
+	margin-right: 657px;	
+}
 .search-div {
-    display: flex
-;
+    display: flex;
     justify-content: flex-end;
     flex-grow: 1;
     gap: 10px;
