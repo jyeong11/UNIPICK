@@ -52,7 +52,7 @@
     }
     
     .card-header {
-      background: linear-gradient(135deg, #4e73df 0%, #36b9cc 100%);
+      background: linear-gradient(135deg, #f2a900 0%, #7422bd 100%);
       color: white;
       border-top-left-radius: 10px !important;
       border-top-right-radius: 10px !important;
