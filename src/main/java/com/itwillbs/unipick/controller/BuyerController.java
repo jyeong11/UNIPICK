@@ -201,8 +201,11 @@ public class BuyerController {
 	// 상품검색
 	@ResponseBody
 	@GetMapping("searchProduct")
-	public List<Map<String, Object>> searchProduct(@RequestParam("query") String query) {
-		return buyService.getSearchPrd(query);
+	public List<Map<String, Object>> searchProduct(HttpSession session, @RequestParam("query") String query) {
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("buy_em", session.getAttribute("buyEm"));
+		data.put("query", query);
+		return buyService.getSearchPrd(data);
 	}
 
 	// 상품 리스트(카테고리, 정렬종류)
@@ -399,7 +402,8 @@ public class BuyerController {
 	// 추천상품
 	@ResponseBody
 	@PostMapping("getRecommendPrd")
-	public List<Map<String, Object>> getRecommendPrd(@RequestBody Map<String, Object> prd_cd) {
+	public List<Map<String, Object>> getRecommendPrd(HttpSession session, @RequestBody Map<String, Object> prd_cd) {
+		prd_cd.put("buy_em", session.getAttribute("buyEm"));
 		return buyService.getRecommendPrd(prd_cd);
 	}
 	

@@ -53,3 +53,17 @@ p {
     padding-bottom: 50px;
     text-align: center;
 }
+
+.prdImg-div {
+	position: relative;
+}
+
+.heart {
+	position: absolute;
+    cursor: pointer;
+    right: 10px;
+    bottom: 10px;
+    font-size: 32px;
+    z-index: 10;
+    color: #f2a900;
+}

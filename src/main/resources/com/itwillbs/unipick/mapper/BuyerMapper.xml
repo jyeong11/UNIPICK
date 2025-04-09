@@ -137,7 +137,8 @@
 			FORMAT(pd.prd_sp, 0) AS prd_sp, 
 			pd.prd_bd,
 			pi.fil_nm,
-			pi.fil_pt
+			pi.fil_pt,
+			w.buy_em
   	   FROM products pd
        JOIN (SELECT prd_cd,
 					fil_pt,
@@ -149,6 +150,9 @@
 	   	 ON  pd.prd_bd= cd.cod_cd
 	   JOIN sellers sl
 	     ON pd.sel_id = sl.sel_id
+	   LEFT JOIN (select buy_em, prd_cd
+	   				FROM wishlist
+	   			   WHERE buy_em = #{buy_em}) w ON pd.prd_cd = w.prd_cd
       WHERE (prd_nm LIKE CONCAT('%',#{query},'%')
       	 OR sl.sel_nm LIKE CONCAT('%', #{query}, '%'))
       	AND prd_st = (SELECT cod_cd
@@ -584,12 +588,16 @@
 	 		s.sel_nm,
 	 		pi.fil_pt,
 	 		p.prd_cd,
-		    CONCAT(ROUND(((p.prd_op - p.prd_sp) / p.prd_op) * 100, 0), '%') AS dc
+		    CONCAT(ROUND(((p.prd_op - p.prd_sp) / p.prd_op) * 100, 0), '%') AS dc,
+		    w.buy_em
 	   FROM products p
 	   JOIN product_images pi 
 	     ON p.prd_cd = pi.prd_cd
 	   JOIN sellers s
 	     ON p.sel_id = s.sel_id
+	   LEFT JOIN (SELECT buy_em, prd_cd
+	   				FROM wishlist
+	   			   WHERE buy_em = #{buy_em}) w ON w.prd_cd = p.prd_cd
 	  WHERE p.prd_ca = (SELECT prd_ca
 						  FROM products 
 						 WHERE prd_cd = #{prd_cd})

@@ -453,3 +453,17 @@ a {
 .heart {
 	color: #f2a900 !important;
 }
+
+.heart2 {
+	position: absolute;
+    cursor: pointer;
+    right: 10px;
+    bottom: 10px;
+    font-size: 32px;
+    z-index: 10;
+    color: #f2a900;
+}
+
+.prdImg-div {
+	position: relative;
+}

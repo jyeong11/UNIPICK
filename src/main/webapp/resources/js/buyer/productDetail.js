@@ -8,6 +8,12 @@ $(function() {
 	$(document).on("click", ".wishlist-btn", function() {
 		wish($(this).find("i"));
 	});
+	
+	// 찜 버튼2
+	$(document).on("click", ".prdImg-div .heart2", function(event) {
+		event.stopPropagation();
+		wish($(this));
+	});
 
 	// 다음 버튼
 	let currentIndex = 0; // 현재 이미지의 인덱스
@@ -303,10 +309,14 @@ function RecommendPrd() {
 			let pickPrd = $("#pickPrd");
             let productHtml = "";
             res.forEach(prd => {
+				let heartClass = prd.buy_em ? 'fa-solid yellow' : 'fa-regular';
                 productHtml += `
                     <div class="product">
 						<div class="prd-item" data-id="${prd.prd_cd}" data-sel="${prd.sel_nm}" style="cursor: pointer;">
-	                        <img src="${contextPath}${prd.fil_pt}" alt="${prd.prd_nm} class="pick-img">
+							<div class="prdImg-div">
+	                        	<img src="${contextPath}${prd.fil_pt}" alt="${prd.prd_nm} class="pick-img">
+								<i class="${heartClass} fa-heart heart2" data-value="${prd.prd_cd}"></i>
+							</div>
 	                        <p class="pick-nm">${prd.prd_nm}</p>
 							<div class="pick-pc">
 	                    		<p class="pick-dc">${prd.dc}</p>
@@ -331,7 +341,7 @@ function wish(heart) {
 	heartIcon.classList.toggle("fa-regular");
 	heartIcon.classList.toggle("fa-solid");
 	let action = "insert";
-	
+	debugger;
 	if(heartIcon.classList.contains("fa-regular")) {
 		 action = "delete";
 	}

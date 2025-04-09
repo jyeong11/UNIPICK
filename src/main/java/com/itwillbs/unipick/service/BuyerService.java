@@ -33,8 +33,8 @@ public class BuyerService {
 		return mapper.getAllMenu();
 	}
 	//상품검색
-	public List<Map<String, Object>> getSearchPrd(String query) {
-		return mapper.getSearchPrd(query);
+	public List<Map<String, Object>> getSearchPrd(Map<String, Object> data) {
+		return mapper.getSearchPrd(data);
 	}
 	//상품 상세 조회
 	public Map<String, Object> getPrdDetail(Map<String, Object> prdData) {

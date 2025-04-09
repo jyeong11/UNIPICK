@@ -13,7 +13,7 @@ public interface BuyerMapper {
 	//상단 메뉴바
 	public List<Map<String, Object>> getAllMenu();
 	//상품검색
-	public List<Map<String, Object>> getSearchPrd(String query);
+	public List<Map<String, Object>> getSearchPrd(Map<String, Object> data);
 	//상품 상세 조회
 	public Map<String, Object> getPrdDetail(Map<String, Object> prdData);
 	// 상품 상세 판매자 다른 상품

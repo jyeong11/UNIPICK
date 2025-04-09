@@ -117,7 +117,17 @@
 					    <c:forEach var="sel" items="${selImg}" begin="1" end="6">
 					        <div class="prd-item" data-id="${sel.prd_cd}" data-sel="${prd.sel_nm}" style="cursor: pointer;">
 <!-- 						    <div class="prd-item" style="cursor: pointer;"> -->
+								<div class="prdImg-div">
 							        <img src="${pageContext.request.contextPath}${sel.fil_pt}" alt="상품 이미지">
+							        <c:choose>
+					            		<c:when test="${sel.buy_em == null}">
+					            			<i class="fa-regular fa-heart heart2" data-value="${sel.prd_cd}"></i>
+					            		</c:when>
+					            		<c:otherwise>
+									        <i class="fa-solid yellow fa-heart heart2" data-value="${sel.prd_cd}"></i>
+									    </c:otherwise>
+					            	</c:choose>
+					            </div>
 							        <div class="prdInfo">${prd.sel_nm}</div>
 										<div class="prdInfo">${sel.prd_nm}</div>
 					                    <div class="prd_pr">
