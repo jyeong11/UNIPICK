@@ -45,8 +45,8 @@ public class BuyerService {
 		return mapper.getPrdImg(prdCd);
 	}
 	// 판매자 상세 페이지
-	public List<Map<String, Object>> getselDetail(String sel_nm) {
-		return mapper.getselDetail(sel_nm);
+	public List<Map<String, Object>> getselDetail(Map<String, Object> data) {
+		return mapper.getselDetail(data);
 	}
 	// 판매자 카테고리 
 	public List<Map<String, Object>> categoryList() {

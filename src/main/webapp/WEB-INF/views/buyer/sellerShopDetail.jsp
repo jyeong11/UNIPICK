@@ -96,7 +96,17 @@
 			<div id="imageGallery" class="image-gallery">
 			    <c:forEach var="sel" items="${selList}">
 			        <div class="image-item" data-id="${sel['prd_cd']}" data-sel="${sel['sel_nm']}">
-			            <img src="${pageContext.request.contextPath}${sel['fil_pt']}" alt="${sel['prd_nm']}"/>
+			        	<div class="prd-img">
+			            	<img src="${pageContext.request.contextPath}${sel['fil_pt']}" alt="${sel['prd_nm']}"/>
+			            	<c:choose>
+			            		<c:when test="${sel['buy_em'] == null}">
+			            			<i class="fa-regular fa-heart heart" data-value="${sel['prd_cd']}"></i>
+			            		</c:when>
+			            		<c:otherwise>
+							        <i class="fa-solid yellow fa-heart heart" data-value="${sel['prd_cd']}"></i>
+							    </c:otherwise>
+			            	</c:choose>
+			            </div>
 			            <div class="sel-nm">${sel['sel_nm']}</div>
 			            <div class="prd-nm">${sel['prd_nm']}</div>
 			            <div class="pr">

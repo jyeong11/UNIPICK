@@ -60,6 +60,13 @@ $(function() {
 		let selNm = $(this).data("sel");
     	window.location.href = `productDetail?prd_cd=${prdCd}&sel_nm=${encodeURIComponent(selNm)}`;
     });
+
+	// 찜
+	$(document).on("click", ".prd-img .heart", function(event) {
+		event.preventDefault();
+		event.stopPropagation();
+		wish($(this));
+	});
 });
 function loadProducts(category, sel_nm) {
 	$.ajax({
@@ -98,3 +105,30 @@ function loadProducts(category, sel_nm) {
             }
         });
     }
+
+// 찜 버튼
+function wish(heart) {
+	heartIcon = heart[0];
+	let prd_cd = heart.data('value');
+	heartIcon.classList.toggle("fa-regular");
+	heartIcon.classList.toggle("fa-solid");
+	heartIcon.classList.toggle("yellow");
+	let action = "insert";
+	
+	if(heartIcon.classList.contains("fa-regular")) {
+		 action = "delete";
+	}
+	
+	data = {prd_cd : prd_cd, action : action};
+	debugger;
+	$.ajax({
+		type: "POST",
+        url: "wishList",
+		data: JSON.stringify(data),
+		contentType: "application/json",
+        error: function(xhr, status, error) {
+        	alert("서버 오류가 발생했습니다.");
+        }
+	});
+	
+}

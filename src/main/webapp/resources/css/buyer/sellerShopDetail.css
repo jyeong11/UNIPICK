@@ -240,3 +240,17 @@ h2{
 .cate-ul{
 	margin:0
 }
+
+.heart {
+	position: absolute;
+    cursor: pointer;
+    right: 78px;
+    bottom: 10px;
+    font-size: 32px;
+    z-index: 10;
+    color: #f2a900;
+}
+
+.prd-img {
+	position: relative;
+}

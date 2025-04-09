@@ -25,7 +25,7 @@ public interface BuyerMapper {
 	// 상품 리뷰 조회
 	public List<Map<String, Object>> getPrdReviews(Map<String, Object> prd_cd);
 	// 판매자 상세페이지
-	public List<Map<String, Object>> getselDetail(String sel_nm);
+	public List<Map<String, Object>> getselDetail(Map<String, Object> data);
 	// 판매자 상세 카테고리
 	public List<Map<String, Object>> categoryList();
 	// 카테고리 메뉴

@@ -75,26 +75,30 @@
 	
 <!-- 	판매자 상세 페이지 -->
 	<select id="getselDetail" parameterType="map">
-	 SELECT sl.sel_nm,
-	 		sl.sel_if,
-	 		pi.fil_pt,
-	 		pd.prd_nm,
-	 		pd.prd_cd,
-	 		sl.sel_pp,
-	 		sl.sel_bp,
-	 		CONCAT(ROUND(((pd.prd_op - pd.prd_sp) / pd.prd_op) * 100, 0), '%') AS dc,
-		    FORMAT(pd.prd_sp, 0) AS prd_sp
-	   FROM sellers sl 
-	   JOIN products pd
-	     ON sl.sel_id = pd.sel_id 
-	  RIGHT join product_images pi
-	     ON pd.prd_cd = pi.prd_cd
-	  WHERE pd.prd_st = (SELECT cod_cd
-				           FROM common_detailcode 
-				          WHERE com_cd = 'PRD_REGISTERSTATUS'
-				            AND cod_nm = '승인')
-	    AND sl.sel_nm = #{sel_nm}
-	    AND pi.fil_nb = 1;
+		 SELECT sl.sel_nm,
+		 		sl.sel_if,
+		 		pi.fil_pt,
+		 		pd.prd_nm,
+		 		pd.prd_cd,
+		 		sl.sel_pp,
+		 		sl.sel_bp,
+		 		CONCAT(ROUND(((pd.prd_op - pd.prd_sp) / pd.prd_op) * 100, 0), '%') AS dc,
+			    FORMAT(pd.prd_sp, 0) AS prd_sp,
+			    w.buy_em
+		   FROM sellers sl 
+		   JOIN products pd
+		     ON sl.sel_id = pd.sel_id 
+		  RIGHT join product_images pi
+		     ON pd.prd_cd = pi.prd_cd
+		   LEFT JOIN (SELECT buy_em, prd_cd
+		   				FROM wishlist
+		   			   WHERE buy_em = #{buy_em}) w ON pd.prd_cd = w.prd_cd
+		  WHERE pd.prd_st = (SELECT cod_cd
+					           FROM common_detailcode 
+					          WHERE com_cd = 'PRD_REGISTERSTATUS'
+					            AND cod_nm = '승인')
+		    AND sl.sel_nm = #{sel_nm}
+		    AND pi.fil_nb = 1;
 	</select>
 	
 <!-- 	상품 상세 판매자 다른 상품 -->

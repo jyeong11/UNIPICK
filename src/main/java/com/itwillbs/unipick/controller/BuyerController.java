@@ -103,8 +103,14 @@ public class BuyerController {
 	
 	// 판매자 상세 페이지 이동
 	@GetMapping("sellerShopDetail")
-	public String sellerShopDetail(@RequestParam("sel_nm") String sel_nm, Model model) {
-		List<Map<String, Object>> selList = buyService.getselDetail(sel_nm);
+	public String sellerShopDetail(HttpSession session, @RequestParam("sel_nm") String sel_nm, Model model) {
+		
+		Map<String, Object> data = new HashMap<String, Object>();
+		
+		data.put("sel_nm", sel_nm);
+		data.put("buy_em", session.getAttribute("buyEm"));
+		
+		List<Map<String, Object>> selList = buyService.getselDetail(data);
 		List<Map<String, Object>> cateList = buyService.categoryList();
 		
 		model.addAttribute("cateList", cateList);
