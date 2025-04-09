@@ -8,6 +8,11 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/public/fontawesome/all.min.css" />
 <script src="${pageContext.request.contextPath }/resources/public/fontawesome/all.min.js"></script>
 
+<!-- default -->
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/admin/adminMain.js"></script>
+
+
 <!-- CSS for Page -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,81 +24,85 @@
 <link href="${pageContext.request.contextPath }/resources/public/vendor/datatables/datatables.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath }/resources/css/public.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath }/resources/css/admin/adminMain.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath }/resources/css/admin/adminPublic2.css" rel="stylesheet" type="text/css">
 <!-- Favicon -->
 <link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
 
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- jQuery는 한 번만 로드 -->
 <script src="${pageContext.request.contextPath }/resources/js/admin/adminRegister.js"></script>
 
-    <title>관리자 등록</title>
+<title>관리자 등록</title>
 
-    <style>
-        .tag-container {
-            display: flex;
-            flex-wrap: wrap;
-            padding: 5px;
-            border: 1px solid #ced4da;
-            border-radius: 5px;
-            min-height: 38px;
-            background-color: #fff;
-            margin-top: 5px;
-        }
-        .tag {
-            display: inline-flex;
-            align-items: center;
-            background-color: #e9ecef;
-            border-radius: 15px;
-            padding: 5px 10px;
-            margin: 3px;
-            font-size: 14px;
-            color: #495057;
-        }
-        .tag-close {
-            margin-left: 5px;
-            cursor: pointer;
-            color: #6c757d;
-        }
-        .tag-close:hover {
-            color: #dc3545;
-        }
-        .dropdown-results {
-            position: absolute;
-            z-index: 1050;
-            background-color: #fff;
-            border: 1px solid #ced4da;
-            border-radius: 4px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            max-height: 200px;
-            overflow-y: auto;
-            width: 100%;
-            margin-top: 2px;
-            display: none;
-        }
-        .store-item {
-            cursor: pointer;
-            padding: 8px 12px;
-            display: block;
-            width: 100%;
-            text-align: left;
-            border: none;
-            background: none;
-            color: #212529;
-        }
-        .store-item:hover {
-            background-color: #f8f9fa;
-        }
-        .dropdown-item {
-            cursor: pointer;
-            padding: 8px 12px;
-        }
-        .input-group {
-            position: relative;
-            margin-bottom: 0;
-        }
-    </style>
+<style>
+    .tag-container {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 5px;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        min-height: 38px;
+        background-color: #fff;
+        margin-top: 5px;
+    }
+    .tag {
+        display: inline-flex;
+        align-items: center;
+        background-color: #e9ecef;
+        border-radius: 15px;
+        padding: 5px 10px;
+        margin: 3px;
+        font-size: 14px;
+        color: #495057;
+    }
+    .tag-close {
+        margin-left: 5px;
+        cursor: pointer;
+        color: #6c757d;
+    }
+    .tag-close:hover {
+        color: #dc3545;
+    }
+    .dropdown-results {
+        position: absolute;
+        z-index: 1050;
+        background-color: #fff;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        max-height: 200px;
+        overflow-y: auto;
+        width: 100%;
+        margin-top: 2px;
+        display: none;
+    }
+    .store-item {
+        cursor: pointer;
+        padding: 8px 12px;
+        display: block;
+        width: 100%;
+        text-align: left;
+        border: none;
+        background: none;
+        color: #212529;
+    }
+    .store-item:hover {
+        background-color: #f8f9fa;
+    }
+    .dropdown-item {
+        cursor: pointer;
+        padding: 8px 12px;
+    }
+    .input-group {
+        position: relative;
+        margin-bottom: 0;
+    }
+    
+    footer.sticky-footer {
+    top: 2rem !important;
+    position: relative !important;
+    padding: 2.4rem 0;
+}
+</style>
 </head>
 <body id="page-top">
 
@@ -179,20 +188,18 @@
 					<!-- /.row -->
 				</div>
 				<!-- /.container-fluid -->
-						<footer class="sticky-footer bg-white">
+	
+			</section>
+		</div>
+		<!-- End of Main Content -->
+							<footer class="sticky-footer bg-white">
 			<div class="container my-auto">
 				<div class="copyright text-center my-auto">
 					<span>Copyright &copy; UNIPICK Admin 2025</span>
 				</div>
 			</div>
-		</footer>	
-			</section>
-		</div>
-		<!-- End of Main Content -->
-	
+		</footer>
 </div>
-		<!-- Footer -->
-
 		<!-- End of Footer -->
 	</div>
 	<!-- End of Content Wrapper -->
@@ -200,8 +207,10 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-    <!-- Bootstrap core JavaScript-->
+    
+     <!-- Bootstrap core JavaScript-->
     <script src="${pageContext.request.contextPath }/resources/public/vendor/jquery/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
     <script src="${pageContext.request.contextPath }/resources/public/vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -214,6 +223,48 @@
 	<script src="${pageContext.request.contextPath }/resources/public/vendor/datepicker/moment.min.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/public/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="${pageContext.request.contextPath }/resources/public/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-	 
+	
+    <!-- Page level custom scripts -->
+    <script src="${pageContext.request.contextPath }/resources/public/js/index.js"></script>
+    
+    <script>
+//     	const categoryStats = '';
+//     	let data = categoryStats.replaceAll('=', ':').replaceAll('{', '{"').replaceAll(':', '":').replaceAll('", ', '", "');
+    </script>
+    
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const menuTitles = document.querySelectorAll(".menu-title");
+
+    menuTitles.forEach(title => {
+        title.addEventListener("click", function (event) {
+            event.preventDefault(); // 링크 이동 방지
+            const submenu = this.nextElementSibling;
+            submenu.classList.toggle("open");
+        });
+    });
+});
+</script>
+<script type="text/javascript">
+
+// 	console.log("현재 페이지 주소: " + window.location.pathname);
+
+	document.addEventListener("DOMContentLoaded", function(){
+		// 현재 페이지에 해당하는 메뉴 활성화
+		let pathName = window.location.pathname.substring(1);
+		let collapseItems = document.querySelectorAll(".collapse-item");
+		
+		collapseItems.forEach((item) => {
+			item.classList.remove("active");
+			
+			if (pathName == item.getAttribute('href') || pathName == item.getAttribute('data-sub-page') || pathName == item.getAttribute('data-sub-page2')) {
+				item.classList.add("active");
+				item.parentElement.parentElement.classList.add("show");
+				item.parentElement.parentElement.parentElement.classList.add("active");
+			}
+			
+		});
+	});
+</script>
 </body>
 </html> 

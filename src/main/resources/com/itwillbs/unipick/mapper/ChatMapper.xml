@@ -9,11 +9,11 @@
     <!-- 채팅방 목록 조회 (구매자용) -->
     <select id="getBuyerChatList" parameterType="String" resultType="map">
         SELECT c.cht_id, c.buy_em, c.sel_id, 
-               cd.chd_ms as last_message, cd.chd_st as last_date, cd.sender as last_sender,
+               cd.chd_ms as last_message, cd.chd_st as last_date, cd.chd_sd as last_sender,
                b.buy_nm, s.sel_nm
         FROM chats c
         LEFT JOIN (
-            SELECT cht_id, chd_ms, chd_st, sender
+            SELECT cht_id, chd_ms, chd_st, chd_sd
             FROM chat_details
             WHERE (cht_id, chd_id) IN (
                 SELECT cht_id, MAX(chd_id)
@@ -30,11 +30,11 @@
     <!-- 채팅방 목록 조회 (판매자용) -->
     <select id="getSellerChatList" parameterType="String" resultType="map">
         SELECT c.cht_id, c.buy_em, c.sel_id, 
-               cd.chd_ms as last_message, cd.chd_st as last_date, cd.sender as last_sender,
+               cd.chd_ms as last_message, cd.chd_st as last_date, cd.chd_sd as last_sender,
                b.buy_nm, s.sel_nm
         FROM chats c
         LEFT JOIN (
-            SELECT cht_id, chd_ms, chd_st, sender
+            SELECT cht_id, chd_ms, chd_st, chd_sd
             FROM chat_details
             WHERE (cht_id, chd_id) IN (
                 SELECT cht_id, MAX(chd_id)
@@ -84,7 +84,7 @@
     
     <!-- 메시지 목록 조회 -->
     <select id="getChatMessages" parameterType="int" resultType="map">
-        SELECT chd_id, cht_id, chd_ms, chd_st, sender
+        SELECT chd_id, cht_id, chd_ms, chd_st, chd_sd
         FROM chat_details
         WHERE cht_id = #{cht_id}
         ORDER BY chd_st ASC
@@ -92,7 +92,7 @@
     
     <!-- 메시지 전송 -->
     <insert id="sendMessage" parameterType="map">
-        INSERT INTO chat_details (cht_id, chd_ms, sender)
+        INSERT INTO chat_details (cht_id, chd_ms, chd_sd)
         VALUES (#{cht_id}, #{chd_ms}, #{sender})
     </insert>
     
@@ -165,7 +165,7 @@
         FROM chat_details cd
         JOIN chats c ON cd.cht_id = c.cht_id
         WHERE c.buy_em = #{buy_em}
-          AND cd.sender != #{buy_em}
+          AND cd.chd_sd != #{buy_em}
           AND cd.chd_st > (
               SELECT IFNULL(last_checked_time, '2000-01-01 00:00:00')
               FROM buyer_last_checked 
@@ -186,7 +186,7 @@
         FROM chat_details cd
         JOIN chats c ON cd.cht_id = c.cht_id
         WHERE c.sel_id = #{sel_id}
-          AND cd.sender != #{sel_id}
+          AND cd.chd_sd != #{sel_id}
           AND cd.chd_st > (
               SELECT IFNULL(last_checked_time, '2000-01-01 00:00:00')
               FROM seller_last_checked 

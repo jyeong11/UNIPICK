@@ -203,7 +203,7 @@
                                     '<td class="store-data" data-stores=\'' + JSON.stringify(admin.stores || []) + '\'>' + storeHtml + '</td>' +
                                     '<td>' + roleText + '</td>' +
                                     '<td>' +
-                                    '<button class="btn btn-sm btn-primary manage-stores-btn" data-admin-id="' + admin.adm_id + '">스토어 관리</button> ' +
+                                    '<button class="btn1 btn-sm manage-stores-btn" data-admin-id="' + admin.adm_id + '">스토어 관리</button> ' +
                                     '<button class="btn btn-sm btn-secondary change-role-btn" data-admin-id="' + admin.adm_id + '" data-current-role="' + admin.adm_sl + '">권한 변경</button>' +
                                     '</td>' +
                                     '</tr>'

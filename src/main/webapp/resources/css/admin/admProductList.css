@@ -30,3 +30,20 @@
 .form-control-plaintext {
 	color: black;
 }
+
+footer.sticky-footer {
+    top: 2rem !important;
+    position: relative !important;
+    padding: 2.4rem 0;
+}
+
+.btn {
+}
+
+.btn1 {
+	background: #f6c23e;
+	color: #292b2b;
+	font-size: 15px;
+	border: white;
+	
+}

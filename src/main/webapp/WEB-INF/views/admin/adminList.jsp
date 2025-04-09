@@ -8,6 +8,11 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/public/fontawesome/all.min.css" />
 <script src="${pageContext.request.contextPath }/resources/public/fontawesome/all.min.js"></script>
 
+<!-- default -->
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/admin/adminMain.js"></script>
+
+
 <!-- CSS for Page -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,14 +24,13 @@
 <link href="${pageContext.request.contextPath }/resources/public/vendor/datatables/datatables.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath }/resources/css/public.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath }/resources/css/admin/adminMain.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath }/resources/css/admin/adminPublic2.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/admin/admProductList.css" rel="stylesheet" type="text/css">
 <!-- Favicon -->
 <link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
 
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
 <script src="${pageContext.request.contextPath }/resources/js/admin/adminList.js"></script>
 
     <title>관리자 리스트</title>
@@ -55,8 +59,6 @@
 			<jsp:include page="../inc/adminSidebar.jsp"></jsp:include>
 		</div>
 
-
-		<!-- // Sidebar -->
 		<!-- Content Wrapper -->
 		<div id="content-wrapper" class="d-flex flex-column">
 			<!-- Main Content -->
@@ -177,13 +179,6 @@
 
 			</div>
 			<!-- /.row -->
-
-		</div>
-		<!-- /.container-fluid -->
-
-	</div>
-	<!-- End of Main Content -->
-
 	<!-- Footer -->
 	<footer class="sticky-footer bg-white">
 		<div class="container my-auto">
@@ -192,18 +187,17 @@
 			</div>
 		</div>
 	</footer>
-	<!-- End of Footer -->
-	<!-- End of Content Wrapper -->
+		</div>
+		<!-- /.container-fluid -->
 
-    <!-- End of Page Wrapper -->
+	</div>
+	<!-- End of Main Content -->
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
 
-    <!-- Bootstrap core JavaScript-->
+    
+     <!-- Bootstrap core JavaScript-->
     <script src="${pageContext.request.contextPath }/resources/public/vendor/jquery/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
     <script src="${pageContext.request.contextPath }/resources/public/vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -219,6 +213,45 @@
 	
     <!-- Page level custom scripts -->
     <script src="${pageContext.request.contextPath }/resources/public/js/index.js"></script>
+    
+    <script>
+//     	const categoryStats = '';
+//     	let data = categoryStats.replaceAll('=', ':').replaceAll('{', '{"').replaceAll(':', '":').replaceAll('", ', '", "');
+    </script>
+    
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const menuTitles = document.querySelectorAll(".menu-title");
 
+    menuTitles.forEach(title => {
+        title.addEventListener("click", function (event) {
+            event.preventDefault(); // 링크 이동 방지
+            const submenu = this.nextElementSibling;
+            submenu.classList.toggle("open");
+        });
+    });
+});
+</script>
+<script type="text/javascript">
+
+// 	console.log("현재 페이지 주소: " + window.location.pathname);
+
+	document.addEventListener("DOMContentLoaded", function(){
+		// 현재 페이지에 해당하는 메뉴 활성화
+		let pathName = window.location.pathname.substring(1);
+		let collapseItems = document.querySelectorAll(".collapse-item");
+		
+		collapseItems.forEach((item) => {
+			item.classList.remove("active");
+			
+			if (pathName == item.getAttribute('href') || pathName == item.getAttribute('data-sub-page') || pathName == item.getAttribute('data-sub-page2')) {
+				item.classList.add("active");
+				item.parentElement.parentElement.classList.add("show");
+				item.parentElement.parentElement.parentElement.classList.add("active");
+			}
+			
+		});
+	});
+</script>
 </body>
 </html> 
