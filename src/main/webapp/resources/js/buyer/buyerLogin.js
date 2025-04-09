@@ -51,11 +51,13 @@ function login() {
 			    } else {
 			        window.location.href = contextPath + "/";
 			    }
-			}
+			} else {
+                alert("아이디 또는 비밀번호가 틀립니다.");
+            }
 		},
         error: function(xhr, status, error) {
             console.error("로그인 요청 실패", error);
-            alert("서버 오류가 발생했습니다.");
+            alert("아이디 또는 비밀번호가 틀립니다.");
         }
     });
 }
