@@ -48,40 +48,16 @@
         </div>
     </li>
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu04" aria-expanded="true" aria-controls="menu04">
-        	<i class="fa-solid fa-land-mine-on"></i> <span>배너 관리</span>
-        </a>
-        <div id="menu04" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-            	<h6 class="collapse-header">배너관리</h6>
-                <a class="collapse-item" href="#">배너</a>
-            </div>
-        </div>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu05" aria-expanded="true" aria-controls="menu05">
-        	<i class="fa-solid fa-newspaper"></i> <span>판매지원</span>
-        </a>
-        <div id="menu05" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-            	<h6 class="collapse-header">판매지원</h6>
-                <a class="collapse-item" href="#" data-sub-page="AdmNoticeModify" data-sub-page2="AdmNoticeRegist">공지사항</a>
-                <a class="collapse-item" href="#">가이드리스트</a>
-                <a class="collapse-item" href="#">1:1문의</a>
-            </div>
-        </div>
-    </li>
-        <li class="nav-item">
-        <a class="nav-link" href="#" data-toggle="collapse" data-target="#menu06" aria-expanded="true" aria-controls="menu06">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>신고관리</span>
-        </a>
-        <div id="menu06" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-            	<h6 class="collapse-header">신고관리</h6>
-                <a class="collapse-item" href="adminReportList">신고</a>
-            </div>
-        </div>
+	    <a class="nav-link" href="#" data-toggle="collapse" data-target="#menu06" aria-expanded="true" aria-controls="menu06">
+	        <i class="fas fa-solid fa-land-mine-on"></i>
+	        <span>신고관리</span>
+	    </a>
+	    <div id="menu06" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+	        <div class="bg-white py-2 collapse-inner rounded">
+	        	<h6 class="collapse-header">신고관리</h6>
+	            <a class="collapse-item" href="adminReportList">신고</a>
+	        </div>
+	    </div>
     </li>
 <!--     <hr class="sidebar-divider">
     <div class="sidebar-heading">신고관리</div>
