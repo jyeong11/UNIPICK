@@ -15,8 +15,6 @@
 	        <a href="main">
 	        	<img src="${pageContext.request.contextPath}/resources/images/로고 가로.png" alt="로고" id="logo">
 	        </a>
-	        <div><a href="seller" target="_blank">판매자 새탭</a></div>
-		    <div><a href="admin" target="_blank">관리자 새탭</a></div>
 	        <!-- 검색 아이콘 & 장바구니 아이콘 -->
 	        <div id="icons-container">
 			    <div>
