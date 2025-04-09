@@ -189,7 +189,7 @@ body {font-family: "Nunito", 'Pretendard', serif;}
 }
 
 .table {font-size:15px;}
-.btn {font-size:15px;font-weight:500;}
+.btn .btn1 {font-size:15px;font-weight:500;}
 .grade {background: var(--dark);color: var(--white);padding: 4px 10px;border-radius: 50px;display:inline-block;font-weight: 500;font-size: 14px;}
 .grade-adm {background: var(--cyan);min-width:65px;}
 .grade-normal {}

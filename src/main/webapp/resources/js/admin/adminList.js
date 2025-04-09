@@ -23,8 +23,7 @@
                     });
                 }
                 
-                let manageStoresModal = new bootstrap.Modal(document.getElementById('manageStoresModal'));
-                manageStoresModal.show();
+                $("#manageStoresModal").modal('show');
             });
             
             // 권한 변경 모달 열기
@@ -35,8 +34,7 @@
                 $("#roleAdminId").val(adminId);
                 $("#adminRole").val(currentRole);
                 
-                let changeRoleModal = new bootstrap.Modal(document.getElementById('changeRoleModal'));
-                changeRoleModal.show();
+                $("#changeRoleModal").modal('show');
             });
             
             // 스토어 검색 (모달)
@@ -100,7 +98,7 @@
                     success: function(response) {
                         if (response.success) {
                             alert("관리 스토어가 성공적으로 업데이트되었습니다.");
-                            bootstrap.Modal.getInstance(document.getElementById('manageStoresModal')).hide();
+                            $("#manageStoresModal").modal('hide');
                             loadAdminList();
                         } else {
                             alert(response.msg || "업데이트 중 오류가 발생했습니다.");
@@ -129,7 +127,7 @@
                     success: function(response) {
                         if (response.success) {
                             alert("관리자 권한이 성공적으로 업데이트되었습니다.");
-                            bootstrap.Modal.getInstance(document.getElementById('changeRoleModal')).hide();
+                            $("#changeRoleModal").modal('hide');
                             loadAdminList();
                         } else {
                             alert(response.msg || "업데이트 중 오류가 발생했습니다.");
