@@ -57,6 +57,12 @@
 	        <mapping path="/wishList" />
 	        <beans:bean class="com.itwillbs.unipick.handler.BuyerLoginIntercepter" />
 	    </interceptor>
+	    <!-- 관리자 로그인 인터셉터 -->
+	    <interceptor>
+	        <mapping path="/admin**" />
+	        <exclude-mapping path="/adminLogin" />
+	        <beans:bean class="com.itwillbs.unipick.handler.AdminInterceptor" />
+	    </interceptor>
 	</interceptors>
 	
 	
