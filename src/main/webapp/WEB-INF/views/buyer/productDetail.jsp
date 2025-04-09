@@ -78,7 +78,14 @@
 					    <i class="cart fa fa-solid fa-cart-shopping"></i>
 					</button>
 					<button class="wishlist-btn">
-					    <i class="fa-regular fa-heart"></i>
+						<c:choose>
+		            		<c:when test="${prd.buy_em == null}">
+		            			<i class="fa-regular fa-heart heart" data-value="${prd.prd_cd}"></i>
+		            		</c:when>
+		            		<c:otherwise>
+						        <i class="fa-solid yellow fa-heart heart" data-value="${prd.prd_cd}"></i>
+						    </c:otherwise>
+		            	</c:choose>
 					</button>
 		        </div>
 					<button id="scrollToTop">↑</button>

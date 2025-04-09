@@ -25,11 +25,16 @@
 	 SELECT p.prd_cd, s.sel_nm, p.prd_nm, p.prd_ct,
 	  		CONCAT(ROUND(((p.prd_op - p.prd_sp) / p.prd_op) * 100, 0), '%') AS dc,
 	  		FORMAT(p.prd_op, 0) AS prd_op, 
-	  		FORMAT(p.prd_sp, 0) AS prd_sp
+	  		FORMAT(p.prd_sp, 0) AS prd_sp,
+	  		w.buy_em
 	    FROM products p 
 	    JOIN sellers s
           ON p.sel_id = s.sel_id
-	   WHERE prd_cd = #{prdCd};
+        LEFT JOIN (SELECT buy_em, prd_cd
+					 FROM wishlist
+		   			WHERE buy_em = #{buyEm}) w
+		  ON p.prd_cd = w.prd_cd
+	   WHERE p.prd_cd = #{prdCd};
 	</select>
 	
 <!-- 	상품 상세 이미지 -->
@@ -550,7 +555,8 @@
 			FORMAT(pd.prd_sp, 0) AS prd_sp, 
 			pd.prd_bd,
 			pi.fil_nm,
-			pi.fil_pt
+			pi.fil_pt,
+			w.buy_em
   	   FROM products pd
        JOIN  product_images pi 
 	     ON pd.prd_cd = pi.prd_cd
@@ -558,6 +564,9 @@
 	   	 ON  pd.prd_bd = cd.cod_cd
 	   JOIN sellers sl
 	     ON pd.sel_id = sl.sel_id
+	   LEFT JOIN (SELECT buy_em, prd_cd
+	   				FROM wishlist
+	   			   WHERE buy_em = #{buy_em}) w ON pd.prd_cd = w.prd_cd
       WHERE pd.prd_nm LIKE CONCAT('%',#{keyword},'%')
         AND sl.sel_nm = #{sel_nm}
       	AND pd.prd_st = (SELECT cod_cd
@@ -603,14 +612,19 @@
 	SELECT p.prd_nm,
 		   p.prd_sp,
 		   p.prd_bd,
+		   p.prd_cd,
 		   s.sel_nm,
 		   pi.fil_pt,
-		   CONCAT(ROUND(((p.prd_op - p.prd_sp) / p.prd_op) * 100, 0), '%') AS dc
+		   CONCAT(ROUND(((p.prd_op - p.prd_sp) / p.prd_op) * 100, 0), '%') AS dc,
+		   w.buy_em
 	  FROM products p
 	  JOIN sellers s
 	    ON p.sel_id = s.sel_id
 	  JOIN product_images pi
     	ON p.prd_cd = pi.prd_cd
+      LEFT JOIN (SELECT buy_em, prd_cd
+      			   FROM wishlist
+      			  WHERE buy_em = #{buy_em}) w ON p.prd_cd = w.prd_cd
 	 WHERE 
 	 	 (CASE 
 		      WHEN #{category} = 'all' THEN p.prd_ca LIKE CONCAT('CATEGORY__', '%') 

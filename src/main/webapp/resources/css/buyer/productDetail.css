@@ -449,3 +449,7 @@ a {
 .buy-total {
  	font-size: 23px;	
 }
+
+.heart {
+	color: #f2a900 !important;
+}

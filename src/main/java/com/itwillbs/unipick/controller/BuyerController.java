@@ -119,14 +119,19 @@ public class BuyerController {
 	}
 	// 상품 상세조회 (조회)
 	@GetMapping("productDetail")
-	public String productDetail(@RequestParam("prd_cd") String prdCd,
+	public String productDetail(HttpSession session,
+								@RequestParam("prd_cd") String prdCd,
 								@RequestParam("sel_nm") String selNm,
 								Model model) {
-
-		Map<String, Object> prdList = buyService.getPrdDetail(prdCd);
+		Map<String, Object> prdData = new HashMap<String, Object>();
+		prdData.put("prdCd", prdCd);
+		prdData.put("buyEm", session.getAttribute("buyEm"));
+		Map<String, Object> prdList = buyService.getPrdDetail(prdData);
 		List<Map<String, Object>> prdImg = buyService.getPrdImg(prdCd);
 		List<Map<String, Object>> selImg = buyService.getselanother(selNm);
 		List<Map<String, Object>> optionList = buyService.getPrdOption(prdCd); 
+		
+		System.out.println("prdList : " + prdList);
 		
 		model.addAttribute("prd", prdList);
 		model.addAttribute("prdImg", prdImg);
@@ -355,7 +360,8 @@ public class BuyerController {
 	// 판매자 상세 페이지 카테고리 
 	@ResponseBody
 	@PostMapping("selPrdsearch")
-	public List<Map<String, Object>> selPrdsearch(@RequestBody Map<String, Object> data) {
+	public List<Map<String, Object>> selPrdsearch(HttpSession session, @RequestBody Map<String, Object> data) {
+		data.put("buy_em", session.getAttribute("buyEm"));
 		return buyService.selPrdsearch(data);
 	}
 	
@@ -376,7 +382,8 @@ public class BuyerController {
 	// 판매자 상세 카테고리 클릭시
 	@ResponseBody
 	@PostMapping("getCatePrd")
-	public List<Map<String, Object>> getCatePrd(@RequestBody Map<String, Object> cate) {
+	public List<Map<String, Object>> getCatePrd(HttpSession session, @RequestBody Map<String, Object> cate) {
+		cate.put("buy_em", session.getAttribute("buyEm"));
 		return buyService.getCatePrd(cate);
 	}
 	

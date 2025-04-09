@@ -122,7 +122,7 @@ $(function() {
 	// 찜 버튼
 	function wish(heart) {
 		heartIcon = heart[0];
-		let prd_cd = heart.data('value');
+		let prd_cd = heart.attr('data-value');
 		heartIcon.classList.toggle("fa-regular");
 		heartIcon.classList.toggle("fa-solid");
 		heartIcon.classList.toggle("yellow");

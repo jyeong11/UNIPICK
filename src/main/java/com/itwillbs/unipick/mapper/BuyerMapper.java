@@ -15,7 +15,7 @@ public interface BuyerMapper {
 	//상품검색
 	public List<Map<String, Object>> getSearchPrd(String query);
 	//상품 상세 조회
-	public Map<String, Object> getPrdDetail(String prdCd);
+	public Map<String, Object> getPrdDetail(Map<String, Object> prdData);
 	// 상품 상세 판매자 다른 상품
 	public List<Map<String, Object>> getselanother(String selNm);
 	//상품 상세이미지

@@ -19,9 +19,13 @@ $(function() {
                 gallery.empty();
 
                 res.forEach(sel => {
+					let heartClass = sel.buy_em ? 'fa-solid yellow' : 'fa-regular';
                     let item = `
                         <div class="image-item" data-id="${sel.prd_cd}" data-sel="${sel.sel_nm}">
-                            <img src="${contextPath}${sel.fil_pt}" alt="${sel.prd_nm}"/>
+							<div class="prd-img">
+	                            <img src="${contextPath}${sel.fil_pt}" alt="${sel.prd_nm}"/>
+								<i class="${heartClass} fa-heart heart" data-value="${sel.prd_cd}"></i>
+							</div>
                             <div class="sel-nm">${sel.sel_nm}</div>
                             <div class="prd-nm">${sel.prd_nm}</div>
                             <div class="pr">
@@ -87,9 +91,13 @@ function loadProducts(category, sel_nm) {
                 }
 
                 res.forEach(function (sel) {
+					let heartClass = sel.buy_em ? 'fa-solid yellow' : 'fa-regular';
                     let productHTML = `
                         <div class="image-item" data-id="${sel.prd_cd}" data-sel="${sel.sel_nm}">
-                            <img src="${contextPath}${sel.fil_pt}" alt="${sel.prd_nm}"/>
+                            <div class="prd-img">
+	                            <img src="${contextPath}${sel.fil_pt}" alt="${sel.prd_nm}"/>
+								<i class="${heartClass} fa-heart heart" data-value="${sel.prd_cd}"></i>
+							</div>
                             <div class="sel-nm">${sel.sel_nm}</div>
                             <div class="prd-nm">${sel.prd_nm}</div>
                             <div class="pr">
@@ -109,7 +117,7 @@ function loadProducts(category, sel_nm) {
 // 찜 버튼
 function wish(heart) {
 	heartIcon = heart[0];
-	let prd_cd = heart.data('value');
+	let prd_cd = heart.attr('data-value');
 	heartIcon.classList.toggle("fa-regular");
 	heartIcon.classList.toggle("fa-solid");
 	heartIcon.classList.toggle("yellow");

@@ -3,6 +3,12 @@ $(function() {
 	loadReviews();
 	// 추천상품
 	RecommendPrd();
+	
+	// 찜 버튼
+	$(document).on("click", ".wishlist-btn", function() {
+		debugger;
+		wish($(this).find("i"));
+	});
 
 	// 다음 버튼
 	let currentIndex = 0; // 현재 이미지의 인덱스
@@ -316,4 +322,31 @@ function RecommendPrd() {
             console.error("리뷰 데이터를 불러오는 데 실패했습니다:", error);
       	}
 	});
+}
+
+// 찜 버튼
+function wish(heart) {
+	heartIcon = heart[0];
+	let prd_cd = heart.attr('data-value');
+	heartIcon.classList.toggle("fa-regular");
+	heartIcon.classList.toggle("fa-solid");
+	heartIcon.classList.toggle("yellow");
+	let action = "insert";
+	
+	if(heartIcon.classList.contains("fa-regular")) {
+		 action = "delete";
+	}
+	
+	data = {prd_cd : prd_cd, action : action};
+	
+	$.ajax({
+		type: "POST",
+        url: "wishList",
+		data: JSON.stringify(data),
+		contentType: "application/json",
+        error: function(xhr, status, error) {
+        	alert("서버 오류가 발생했습니다.");
+        }
+	});
+	
 }

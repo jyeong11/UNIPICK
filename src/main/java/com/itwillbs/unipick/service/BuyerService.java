@@ -37,8 +37,8 @@ public class BuyerService {
 		return mapper.getSearchPrd(query);
 	}
 	//상품 상세 조회
-	public Map<String, Object> getPrdDetail(String prdCd) {
-		return mapper.getPrdDetail(prdCd);
+	public Map<String, Object> getPrdDetail(Map<String, Object> prdData) {
+		return mapper.getPrdDetail(prdData);
 	}
 	// 상품 상세 이미지
 	public List<Map<String, Object>> getPrdImg(String prdCd) {
