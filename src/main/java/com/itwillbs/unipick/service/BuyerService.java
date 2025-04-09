@@ -255,4 +255,9 @@ public class BuyerService {
 	public List<Map<String, Object>> recomProduct(Map<String, Object> data) {
 		return mapper.recomProduct(data);
 	}
+	
+	// 메인 스토어 페이지
+	public List<Map<String, Object>>sellerStore(){
+		return mapper.sellerStore();
+	}
 }

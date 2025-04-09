@@ -754,4 +754,12 @@
 		 ORDER BY RAND()
 		 LIMIT #{limit}
 	</select>
+	
+<!-- 	메인 스토어 페이지 -->
+	<select id="sellerStore" parameterType="list">
+	 SELECT sel_nm,
+	 		sel_pp,
+	 		sel_if
+	   FROM sellers;
+	</select>
   </mapper>

@@ -95,4 +95,6 @@ public interface BuyerMapper {
 	public String getSellerIdByProductId(String prd_cd);
 	// 메인 추천 상품
 	public List<Map<String, Object>> recomProduct(Map<String, Object> data);
+	// 메인 스토어 페이지
+	public List<Map<String, Object>>sellerStore();
 }

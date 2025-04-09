@@ -99,7 +99,13 @@ public class BuyerController {
 	@GetMapping("withdraw")
 	public String withdraw() {
 		return "buyer/buyerWithdraw";
-	}	
+	}
+	
+	// 메인 스토어 페이지 이동
+	@GetMapping("store")
+	public String store() {
+		return "buyer/buyerSellerStore";
+	}
 	
 	// 판매자 상세 페이지 이동
 	@GetMapping("sellerShopDetail")
@@ -466,4 +472,12 @@ public class BuyerController {
 	public List<Map<String, Object>> recomProduct(@RequestBody Map<String, Object> data) {
 		return buyService.recomProduct(data);
 	}
+	
+	// 메인 스토어 페이지
+	@ResponseBody
+	@PostMapping("buyerSellerStore")
+	public List<Map<String, Object>> sellerStore(){
+		return buyService.sellerStore();
+	}
+	
 }
