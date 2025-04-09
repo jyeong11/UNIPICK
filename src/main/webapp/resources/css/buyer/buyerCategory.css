@@ -9,6 +9,10 @@
 .all {
 	display: flex;
 }
+.all-cate{
+	height: 21px;
+    width: 183px;
+}
 
 .first-info {
 	display: flex;
@@ -17,33 +21,47 @@
 	padding-top: 10px;
 	gap: 10px;
 }
+.first-cate {
+	grid-column: span 2;
+	font-weight: bold;
+	padding: 10px;
+	border-radius: 6px;
+	color: #f2a900;
 
+}
 .first-info li {
-	height: auto;
-    box-sizing: border-box;
     text-align: center;
     padding: 10px;
-    border: 1px solid #ccc;
     list-style: none;
-}
-
-.second-info {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 10px;
-	padding: 10px;
+    
 }
 
 .second-info li {
-	width: calc(50% - 5px);
-	height: auto;
     box-sizing: border-box;
     text-align: center;
-    padding: 10px;
-    border: 1px solid #ccc;
     list-style: none;
+    border-radius: 5px;
 }
-
+.second-info {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2열로 */
+  gap: 10px;
+  padding: 0;
+  list-style: none;
+  padding: 10px;
+}
+#liAll{
+	height: 31px;
+	color: #f2a900;
+}
+.second-cate {
+  padding: 8px 12px;
+  text-align: center;
+  border-radius: 4px;
+}
+.second-info{
+	width: 450px;
+}
 .first-cate:not(:first-of-type) {
 	margin-top: 15px;
 }
@@ -54,12 +72,11 @@
 
 .second-cate:hover, .first-info li:hover, .all-cate:hover {
 	cursor: pointer;
-	background-color: #f2a900;
+	border-bottom: 2px solid #f2a900;
 }
 
 .second-info li.first-cate, .second-info li.all-cate {
 	font-weight: bold;
-	width: 100%;
 }
 
 .first-info, .second-info {

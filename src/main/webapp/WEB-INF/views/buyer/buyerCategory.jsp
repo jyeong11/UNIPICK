@@ -43,13 +43,13 @@
 		</div>
 		<section class="all">
 			<section class="first-category">
-				<ul class="first-info">
+				<ul id="cate-wrap" class="first-info">
 					<li class="all-cate">전체</li>
 				</ul>
 			</section>
 			<section class="second-category">
 				<ul class="second-info">
-					<li class="all-cate" data-value="All">전체</li>
+					<li id="liAll" class="all-cate" data-value="All">전체</li>
 				</ul>
 			</section>
 		</section>

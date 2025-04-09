@@ -75,9 +75,13 @@ $(window).on('scroll', function() {
 
         		$('.first-info').append(firstCate); // 한 번에 추가
 								
-				let secondCate = res.map(item => {let className = item.lev_cd.length === 10 ? 'class="first-cate"' : 'class="second-cate"';
-								        		  return `<li data-value="${item.lev_cd}" ${className}>${item.lev_nm}</li>`;})
-								    .join('');
+				let secondCate = res.map(item => {
+					if (item.lev_cd.length === 10) {
+						return `<li data-value="${item.lev_cd}" class="first-cate">${item.lev_nm}</li>`;
+					} else {
+						return `<li data-value="${item.lev_cd}"><div class="second-cate">${item.lev_nm}</div></li>`;
+					}
+					}).join('');
 								
 				$('.second-info').append(secondCate); // 한 번에 추가
 			},
