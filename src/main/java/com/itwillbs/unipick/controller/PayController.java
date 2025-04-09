@@ -67,7 +67,7 @@ public class PayController {
         shippingDetails.put("shipping_addDetail", (String) req.get("shipping_addDetail"));
         shippingDetails.put("shipping_memo", (String) req.get("shipping_memo"));
         
-        // 들고온 값들을 세션에 저장하는 for문
+        // 들고온 값들을 세션에 저장
         for (Map.Entry<String, String> entry : shippingDetails.entrySet()) {
             session.setAttribute(entry.getKey(), entry.getValue());
         }
@@ -114,7 +114,7 @@ public class PayController {
 									              @RequestParam("returnUrl") String returnUrl,
                                                   HttpSession session) {
     	
-
+    	System.out.println("tid!@@!" + (String)session.getAttribute("tid"));
     	
         // 결제 승인 요청
     	MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
@@ -169,8 +169,8 @@ public class PayController {
 
     	        // 옵션 ID 찾기
     	        Map<String, Object> optIdMap = buyService.getOptionId(sizNm, clrNm, prdCd);
-    	        System.out.println("optIdMap" + optIdMap);
     	        Object optId = optIdMap.get("opt_id");
+    	        System.out.println("optId" + optId);
 
     	        // 주문 상세 저장
     	        Map<String, Object> detailMap = new HashMap<>();

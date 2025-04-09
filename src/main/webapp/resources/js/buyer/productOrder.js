@@ -5,6 +5,7 @@ $(function() {
     let prd_cdArr = param.getAll("prd_cd");
     let colorArr = param.getAll("clr_nm");
     let sizeArr = param.getAll("siz_nm");
+	let sizeotArr = param.getAll("siz_ot");
     let qtyArr = param.getAll("qty");
 
     let sum = 0;
@@ -15,10 +16,12 @@ $(function() {
         let color = colorArr[idx];
         let size = sizeArr[idx];
         let qty = qtyArr[idx];
+		let ot = sizeotArr[idx];
 
         sessionStorage.setItem(`color_${prd_cd}`, color);
         sessionStorage.setItem(`size_${prd_cd}`, size);
         sessionStorage.setItem(`qty_${prd_cd}`, qty);
+		sessionStorage.setItem(`ot_${prd_cd}`, ot);
 
         $.ajax({
             url: "productOrder",
@@ -49,7 +52,7 @@ $(function() {
                                         <div class="prd-sp">${totalPrdPrice.toLocaleString()}원</div>
                                     </div>
                                     <div class="prd-2">
-                                        <span>${color}</span> / <span>${size}</span>
+                                        <span>${color}</span> / <span>${ot}</span>
                                     </div>
                                     <div class="prd-1">
                                         <div class="prd-sf">배송비</div>
@@ -168,13 +171,6 @@ $(function() {
 	
 	// 카카오페이 api
 	function requestKakaoPay(amount, productList) {
-		const shippingName = sessionStorage.getItem("shipping_name");
-	    const shippingTelephone = sessionStorage.getItem("shipping_telephone");
-	    const shippingZipcode = sessionStorage.getItem("shipping_zipcode");
-	    const shippingAddress = sessionStorage.getItem("shipping_address");
-		const shippingAddDetail = sessionStorage.getItem("shipping_addDetail");
-	    const shippingMemo = sessionStorage.getItem("shipping_memo");
-
 	    fetch("pay/ready", {
 	        method: "POST",
 	        headers: {
@@ -183,12 +179,12 @@ $(function() {
 	        body: JSON.stringify({ 
 				amount: amount,
 				productList: productList,
-				shipping_name: shippingName,
-	            shipping_telephone: shippingTelephone,
-	            shipping_zipcode: shippingZipcode,
-	            shipping_address: shippingAddress,
-				shipping_addDetail: shippingAddDetail,
-	            shipping_memo: shippingMemo
+				shipping_name: sessionStorage.getItem("shipping_name"),
+	            shipping_telephone: sessionStorage.getItem("shipping_telephone"),
+	            shipping_zipcode: sessionStorage.getItem("shipping_zipcode"),
+	            shipping_address: sessionStorage.getItem("shipping_address"),
+				shipping_addDetail: sessionStorage.getItem("shipping_addDetail"),
+	            shipping_memo: sessionStorage.getItem("shipping_memo")
 			})
 	    })
 	    .then(response => response.json()) 

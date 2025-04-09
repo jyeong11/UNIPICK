@@ -122,7 +122,8 @@ $(function() {
 	// 구매하기 버튼 
 	document.getElementById('buyButton').addEventListener('click', function(event) {
 		let color= $("#color").val();
-		let size = $("#size option:selected").text();
+		let size = $("#size").val();
+		let sizenm = $("#size option:selected").text();
 		let qty = $("#qty-input").val();
 		
 		if (!color || !size || size.trim() === "" || size === "[사이즈]를 선택하세요.") {
@@ -130,7 +131,7 @@ $(function() {
 	        event.preventDefault();
 	        return;
     	}
-    	window.location.href = `productOrder?prd_cd=${prdCd}&clr_nm=${encodeURIComponent(color)}&siz_nm=${encodeURIComponent(size)}&qty=${encodeURIComponent(qty)}`;
+    	window.location.href = `productOrder?prd_cd=${prdCd}&clr_nm=${encodeURIComponent(color)}&siz_nm=${encodeURIComponent(size)}&siz_ot=${encodeURIComponent(sizenm)}&qty=${encodeURIComponent(qty)}`;
     });
 	
 });
