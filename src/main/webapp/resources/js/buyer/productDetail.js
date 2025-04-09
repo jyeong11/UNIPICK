@@ -6,7 +6,6 @@ $(function() {
 	
 	// 찜 버튼
 	$(document).on("click", ".wishlist-btn", function() {
-		debugger;
 		wish($(this).find("i"));
 	});
 
@@ -103,7 +102,6 @@ $(function() {
 	$(document).on("click", ".prd-item", function() {
         let prdCd = $(this).data("id");
 		let selNm = $(this).data("sel");
-		debugger;
     	window.location.href = `productDetail?prd_cd=${prdCd}&sel_nm=${encodeURIComponent(selNm)}`;
     });
 

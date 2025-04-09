@@ -39,7 +39,6 @@ $(function() {
         	alert("비밀번호를 입력한 후 수정을 눌러주세요.");
 			return;
 	    }
-		debugger;
 		let admId = $('#id').prop('value').trim();
 		admPw = admPw.trim();
 	    admPwCheck = admPwCheck.trim();

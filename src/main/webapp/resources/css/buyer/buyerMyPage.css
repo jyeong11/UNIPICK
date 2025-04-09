@@ -13,6 +13,14 @@
 	padding-top: 50px;
 }
 
+.two h2 {
+	font-size: 24px;
+}
+
+.nickName {
+	font-size: 18px;
+}
+
 .buyer-info {
 	display: flex;
     justify-content: space-between;

@@ -21,7 +21,6 @@ $(function() {
 			data: data,
 			success: function(res) {
 				renderPrdDetail(res);
-				debugger;
 			},
 			error: function(xhr, status, error) {
 				alert("오류가 발생했습니다! 다시 접속해주세요.");

@@ -33,7 +33,7 @@ $(function() {
 									.join('');
 								
 				$('.myPageIcon').append(icon);
-				$('.nickName').append(res.buyer.buy_nn);
+				$('.nickName').append("\"" + res.buyer.buy_nn + "\"님 유니픽에 오신걸 환영합니다.");
 				
         	},
 			error: function(xhr, status, error) {

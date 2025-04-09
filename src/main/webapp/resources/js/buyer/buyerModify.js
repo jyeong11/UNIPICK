@@ -98,7 +98,6 @@ $(function() {
 			buy_wt : $('#weightSize').val(),
 			acc_pa : $('#agreement').prop('checked')
 		};
-		debugger;
 		
 		if(!effectiveness){
 			alert('정보를 올바르게 입력 후 수정하기를 눌러주세요.');

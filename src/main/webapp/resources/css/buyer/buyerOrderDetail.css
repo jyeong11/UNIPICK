@@ -85,10 +85,12 @@ h2 {
 	margin: 40px auto;
 }
 .ttpr {
-	display: flex;
+    display: flex;
     justify-content: end;
     font-size: 25px;
     color: #f2a900;
+    height: 100px;
+    padding-top: 15px;
 }
 #orderInfo-container h2 {
 	padding-bottom: 20px;

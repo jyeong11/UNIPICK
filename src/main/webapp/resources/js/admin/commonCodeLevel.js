@@ -96,7 +96,6 @@ $(function() {
 			lev_so: row.find("td:eq(4)").text(),
 	        lev_yn: row.find("td:eq(5)").text() 
 	    };
-	debugger;
 		 let bodydata;
             $('#modal-con').empty();
             bodydata = `
@@ -152,7 +151,6 @@ $(function() {
 		let codeLink = $('#codeLink').val();
         let useYN = $('#useYN').val();
 		let sortNum = $('#sortNum').val();
-		debugger;
 		$.ajax({
 			type: "POST",
 			url: "lvCodeUpdate",

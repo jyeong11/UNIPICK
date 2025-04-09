@@ -128,7 +128,6 @@ function wish(heart) {
 	}
 	
 	data = {prd_cd : prd_cd, action : action};
-	debugger;
 	$.ajax({
 		type: "POST",
         url: "wishList",

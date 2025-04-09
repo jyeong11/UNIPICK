@@ -194,7 +194,6 @@ document.addEventListener("DOMContentLoaded", function () {
     ],
     hooks: {
       addImageBlobHook: async (blob, callback) => {
-		debugger;
         const formData = new FormData();
         formData.append('file', blob);
         try {

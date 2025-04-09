@@ -97,7 +97,6 @@ console.log({
             alert("비밀번호를 올바르게 입력해주세요.");
             return;
         }
-	debugger;
         // 이메일과 비밀번호가 모두 유효하다면 서버로 데이터 전송
         $.ajax({
     type: "POST",
