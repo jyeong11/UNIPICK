@@ -66,8 +66,7 @@
 		    rv.rev_rt
 	   FROM reviews rv
 	   LEFT JOIN (SELECT rei_pt, rev_id
-					FROM review_images
-			   	   limit 1) ri 
+					FROM review_images) ri 
 	     ON rv.rev_id = ri.rev_id
 	   JOIN options ot
 	     ON rv.opt_id = ot.opt_id
@@ -75,7 +74,8 @@
 	     ON ot.siz_nm = cd.cod_cd
 	   JOIN buyers bu
     	 ON rv.buy_em = bu.buy_em
-	  WHERE prd_cd = #{prd_cd}; 
+	  WHERE prd_cd = #{prd_cd}
+	  limit 1; 
 	</select>
 	
 <!-- 	판매자 상세 페이지 -->
