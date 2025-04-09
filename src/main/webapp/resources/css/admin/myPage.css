@@ -54,3 +54,7 @@ button {
 .read-text > input:focus {
 	 outline: none;
 }
+
+#edit-btn, #cancel-btn {
+	font-size: 16px;
+}

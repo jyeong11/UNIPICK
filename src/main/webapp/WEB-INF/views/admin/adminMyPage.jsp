@@ -39,7 +39,9 @@
 <link href="${pageContext.request.contextPath }/resources/css/admin/cmcd.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/public.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/admin/adminPublic.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/admin/adminPublic2.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/admin/myPage.css" rel="stylesheet" type="text/css">
+
 
 <!-- script -->
 <script src="${pageContext.request.contextPath }/resources/js/admin/myPage.js"></script>

@@ -4,6 +4,7 @@ $(function() {
 	$('.second-info').on('click', '.second-cate, .all-cate', function() {
 	    let cateName = $(this).text();
     	let cateCode = $(this).data('value');
+		debugger;
 	    window.location.href = "productList?lev_cd=" + encodeURIComponent(cateCode) 
 							   + "&category=" + encodeURIComponent(cateName);
 	});
@@ -79,7 +80,7 @@ $(window).on('scroll', function() {
 					if (item.lev_cd.length === 10) {
 						return `<li data-value="${item.lev_cd}" class="first-cate">${item.lev_nm}</li>`;
 					} else {
-						return `<li data-value="${item.lev_cd}"><div class="second-cate">${item.lev_nm}</div></li>`;
+						return `<li><div class="second-cate" data-value="${item.lev_cd}">${item.lev_nm}</div></li>`;
 					}
 					}).join('');
 								

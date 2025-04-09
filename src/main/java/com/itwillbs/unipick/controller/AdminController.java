@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,7 +38,8 @@ public class AdminController {
 	
 	// 관리자 메인 페이지 화면이동
 	@GetMapping("admin")
-	public String adminMain() {
+	public String adminMain(HttpSession session, Model model) {
+		model.addAttribute("admNm", session.getAttribute("admNm"));
 		return "admin/adminMain";
 	}
 	//상품 목록 화면이동
@@ -140,7 +142,8 @@ public class AdminController {
 		
 		if (adminInfo != null) {
 			success = true;
-	        session.setAttribute("admId", adminInfo.get("adm_id"));
+			session.setAttribute("admId", adminInfo.get("adm_id"));
+			session.setAttribute("admNm", adminInfo.get("adm_nm"));
 	        boolean rememberMe = (boolean) admin.getOrDefault("rememberMe", false);
 
 	        if (rememberMe) {

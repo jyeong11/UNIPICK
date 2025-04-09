@@ -43,6 +43,8 @@ input[type="checkbox"]:checked::before {
 .product-line {
 	display: flex;
 	align-items: center; /* 세로 가운데 정렬 */
+    width: 900px;
+    justify-content: space-between;
 }
 .prd-sp{
 	    margin-left: 154px;
