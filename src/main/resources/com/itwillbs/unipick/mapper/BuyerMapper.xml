@@ -417,7 +417,7 @@
 					 fil_nm,
 					 fil_pt
 				FROM product_images
-			   WHERE fil_nm = 1) i ON p.prd_cd = i.prd_cd
+			   WHERE fil_nb = 1) i ON p.prd_cd = i.prd_cd
 		WHERE odd_id = #{odd_id}
 		  AND prd_st = (SELECT cod_cd
 		 				  FROM common_detailcode 

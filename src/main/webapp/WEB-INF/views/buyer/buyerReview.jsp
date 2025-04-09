@@ -38,7 +38,7 @@
 	</div>
 	
 	<div class="content">
-		<div>이 상품 어떠셨나요?</div>
+		<div id="reviewTitle">이 상품 어떠셨나요?</div>
 		<div id="content-top">
 		</div>
 		<div id="content-middle">
