@@ -1,6 +1,5 @@
 package com.itwillbs.unipick.controller;
 
-import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,8 +25,6 @@ import org.springframework.web.client.RestTemplate;
 
 import com.itwillbs.unipick.service.BuyerService;
 
-import kotlin.RequiresOptIn;
-import lombok.RequiredArgsConstructor;
 
 
 @RestController
@@ -47,7 +44,8 @@ public class PayController {
 
     // 1. 결제 준비 API - 결제 요청
     @PostMapping("/ready")
-    public ResponseEntity<Map<String, Object>> kakaoPayReady(HttpSession session, @RequestBody Map<String, Object> req) {
+    public ResponseEntity<Map<String, Object>> kakaoPayReady(HttpSession session,
+    														 @RequestBody Map<String, Object> req) {
     	String amount = String.valueOf(req.get("amount"));
     	List<Map<String, Object>> productList = (List<Map<String, Object>>) req.get("productList");
     	

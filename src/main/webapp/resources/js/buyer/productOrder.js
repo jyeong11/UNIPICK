@@ -43,7 +43,7 @@ $(function() {
 	                                	<img src="${contextPath}${item.fil_pt}">
 	                            	</div>
 								</div>
-                                <div>
+                                <div class="info">
                                     <div class="prd">
                                         <div class="prd-nm">${item.prd_nm}</div>
                                         <div class="prd-sp">${totalPrdPrice.toLocaleString()}원</div>
@@ -213,14 +213,14 @@ $(function() {
         const popup = window.open(url, "_blank", "width=380,height=670");
 
         const popupClosed = setInterval(() => {
-            if (popup.closed) { // 팝업 닫혔는지 확인
-                clearInterval(popupClosed); // 팝업 닫힘 확인 후 반복 중지
+            if (popup.closed) {
+                clearInterval(popupClosed);
                 const urlParams = new URLSearchParams(popup.location.search);
                 const code = urlParams.get("code");
                 if (code) {
-                    getAccessToken(code); // 인증 코드로 액세스 토큰 요청
+                    getAccessToken(code);
                 } else {
-                    alert('인증에 실패했습니다.'); // 인증 실패 시 알림
+                    alert('인증에 실패했습니다.');
                 }
             }
         }, 100);
@@ -233,7 +233,7 @@ $(function() {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ code: code }),  // 인증 받은 code를 서버로 전달
+            body: JSON.stringify({ code: code }),
         })
         .then(res => res.json())
         .then(data => {

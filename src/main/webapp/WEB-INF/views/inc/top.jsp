@@ -27,7 +27,7 @@
 			                    </button>
 			                </div>
 			            </li>
-			            <li><a href="cart" class="cart_btn"><i class="fa fa-solid fa-cart-shopping"></i></a></li>
+			            <li><a href="cart" class="cart_btn"><i class="fa fa-solid fa-cart-shopping"><small class="count">2</small></i></a></li>
 			            <li><a href="myPage" class="my_btn"><i class="fa-solid fa-user"></i></a></li>
 			        </ul>
 			    </div>

@@ -3,7 +3,7 @@
 <!-- Swiper -->
 <div class="swiper-container">
   <div class="swiper-wrapper">
-    <div class="swiper-slide"><img src="${pageContext.request.contextPath }/resources/images/banner1.jpg" alt="Banner 1"></div>
+    <div class="swiper-slide"><img src="${pageContext.request.contextPath }/resources/images/banner1.jpg" alt="Banner 1" style="width: 100%; height: 100%; object-fit: cover;"></div>
     <div class="swiper-slide"><img src="${pageContext.request.contextPath }/resources/images/banner2.jpg" alt="Banner 2"></div>
     <div class="swiper-slide"><img src="${pageContext.request.contextPath }/resources/images/banner3.jpg" alt="Banner 3"></div>
   </div>

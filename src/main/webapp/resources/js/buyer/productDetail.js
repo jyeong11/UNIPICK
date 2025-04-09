@@ -58,8 +58,8 @@ $(function() {
 	
 	// 장바구니
 	$('.cart-btn').on("click", function (e) {
-		var color = $("#color").val();
-		var size = $("#size").val();
+		let color = $("#color").val();
+		let size = $("#size option:selected").text();
 		let qty = $("#qty-input").val();
 		
 		if (!color || !size || size.trim() === "" || size === "[사이즈]를 선택하세요.") {
@@ -122,7 +122,7 @@ $(function() {
 	// 구매하기 버튼 
 	document.getElementById('buyButton').addEventListener('click', function(event) {
 		let color= $("#color").val();
-		let size = $("#size").val();
+		let size = $("#size option:selected").text();
 		let qty = $("#qty-input").val();
 		
 		if (!color || !size || size.trim() === "" || size === "[사이즈]를 선택하세요.") {
