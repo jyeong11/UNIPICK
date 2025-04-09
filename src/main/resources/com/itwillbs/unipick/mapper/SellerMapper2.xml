@@ -389,7 +389,9 @@
 <!-- 방문 기록 삽입 -->
 <insert id="insertProductVisitLog" parameterType="map">
     INSERT INTO seller_visit (sel_id, prd_cd, vis_dt, vis_ct)
-    VALUES ({sellerId}, #{productId}, DATE_FORMAT(NOW(), '%Y-%m-%d'), '1')
+    VALUES ((SELECT sel_id
+    		   FROM sellers
+    		  WHERE sel_nm = #{sellerNm}), #{productId}, DATE_FORMAT(NOW(), '%Y-%m-%d'), '1')
     ON DUPLICATE KEY UPDATE vis_ct = CAST(vis_ct AS UNSIGNED) + 1;
 </insert>
 

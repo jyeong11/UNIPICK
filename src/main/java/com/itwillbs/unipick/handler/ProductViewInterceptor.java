@@ -26,11 +26,13 @@ public class ProductViewInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         System.out.println("인터셉터 동작 테스트");
         String productId = request.getParameter("prd_cd");
+        String sellerNm = request.getParameter("sel_nm");
         
         if (productId != null) {
             // 상품 코드로 판매자 ID 조회
             Map<String, Object> params = new HashMap<>();
             params.put("productId", productId);
+            params.put("sellerNm", sellerNm);
             
             // 로그용 출력
             System.out.println("상품코드: " + productId);
