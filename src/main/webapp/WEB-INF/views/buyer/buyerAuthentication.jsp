@@ -31,7 +31,10 @@
 <body>
   <div class="join" id="join1">
     <div class="nav">
-      <nav class="joinNav">
+
+    </div>
+    <main class="css-ds6z7l">
+          <nav class="joinNav">
         <div class="joinNav-inner2">
           <a href="buyerlogin">
             <img src="${pageContext.request.contextPath}/resources/images/로고 가로.png" alt="로고" id="logo">
@@ -39,8 +42,6 @@
         </div>
         <div class="joinNav-inner3"></div>
       </nav>
-    </div>
-    <main class="css-ds6z7l">
       <div class="css-1bwfwm7">
         <div class="css-1ff3op5">
           <h1 class="HEAD_22">휴대폰 인증을 해주세요.</h1>
@@ -69,11 +70,11 @@
           </div>
           <button id="verifyOtpBtn" type="button" class="BODY_153">인증번호 확인</button>
         </div>
-                <div class="joinNav-inner">
-          <button class="backBtn">
-            <i class="fa-solid fa-arrow-left"></i>
-          </button>
-        </div>
+<!--                 <div class="joinNav-inner"> -->
+<!--           <button class="backBtn"> -->
+<!--             <i class="fa-solid fa-arrow-left"></i> -->
+<!--           </button> -->
+<!--         </div> -->
       </div>
     </main>
   </div>

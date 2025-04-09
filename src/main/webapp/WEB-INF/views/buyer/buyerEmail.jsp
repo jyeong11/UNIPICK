@@ -40,58 +40,103 @@
 <link href="${pageContext.request.contextPath }/resources/css/footer.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/index.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/buyer/buyerEmail.css" rel="stylesheet" type="text/css">
-
+<link href="${pageContext.request.contextPath}/resources/css/buyer/buyerJoin.css" rel="stylesheet" type="text/css">
 <link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
 
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/buyer/buyerEmail.js"></script>
 <title>UNIPICK</title>
+
+<style>
+.css-ds6z7l {
+    padding: 9vh !important;
+    width: 90vh;
+    height: 67vh !important;
+    box-sizing: border-box;
+    margin-top: 10px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 31px 0 rgba(0, 0, 0, 0.1);
+}
+
+.joinNav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0;
+    margin: 0 auto;
+    padding-left: 102px;
+}
+
+.joinNav-inner2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+}
+
+.joinNav-inner2 a {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+#logo {
+    display: block;
+    margin: 0 auto;
+    width: 180px;
+    position: relative;
+    left: 0;
+    right: 0;
+}
+</style>
 </head>
 <body>
-	<div class="join">
+	<div class="join" id="join1">
 		<div class="nav">
-			<nav class="joinNav">
-
-				<div class="joinNav-inner2">
-					<a href="buyerlogin"><img
-						src="${pageContext.request.contextPath}/resources/images/로고 가로.png"
-						alt="로고" id="logo"></a>
-				</div>
-				<div class="joinNav-inner3"></div>
-			</nav>
 		</div>
 		<main class="css-ds6z7l">
-			<h1 class="">
-				이메일과 비밀번호를<br>입력해주세요.
-			</h1>
 			<form action="register" method="post">
-				<div class="css-138pfvh">
-					<label class="BODY_13">이메일을 입력해주세요.</label>
-					<span class="BODY_15">
-					<input type="email" id="buy_em" class="css-1wr8iut" placeholder="로그인 시 필요" required >
-					</span>
-					<span id="checkIdResult"></span>
+				<nav class="joinNav">
+					<div class="joinNav-inner2">
+						<a href="buyerlogin">
+							<img src="${pageContext.request.contextPath}/resources/images/로고 가로.png" alt="로고" id="logo">
+						</a>
+					</div>
+					<div class="joinNav-inner3"></div>
+				</nav>
+				<div class="css-1bwfwm7">
+					<div class="css-1ff3op5">
+						<h1 class="HEAD_22">이메일과 비밀번호를<br>입력해주세요.</h1>
+					</div>
 				</div>
-				<div class="css-138pfvh">
-					<label class="BODY_13">비밀번호</label>
-					<span class="BODY_15">
-					<input type="password" id="buy_pw" class="css-1wr8iut" placeholder="영문, 숫자, 특수문자 포함 8자 이상" maxlength="16" required></span>
-					<span id="checkPasswdResult"></span>
-					<input type="hidden" id="userPhone" name="userPhone" value="${sessionScope.userPhone}" />
-					<input type="hidden" id="acc_ta" name="acc_ta" value="${sessionScope.acc_ta}" />
-					<input type="hidden" id="acc_pa" name="acc_pa" value="${sessionScope.acc_pa}" />
-					<input type="hidden" id="acc_ma" name="acc_ma" value="${sessionScope.acc_ma}" />
+				<div class="css-1rmy86f">
+					<div class="css-1wnzdoc">
+						<label class="BODY_13">이메일을 입력해주세요.</label>
+						<div class="css-1ycs6v8">
+							<input type="email" id="buy_em" class="css-1oi39wj" placeholder="로그인 시 필요" required>
+						</div>
+						<span id="checkIdResult"></span>
+					</div>
+					<div class="css-1wnzdoc">
+						<label class="BODY_13">비밀번호</label>
+						<div class="css-1ycs6v8">
+							<input type="password" id="buy_pw" class="css-1oi39wj" placeholder="영문, 숫자, 특수문자 포함 8자 이상" maxlength="16" required>
+						</div>
+						<span id="checkPasswdResult"></span>
+						<input type="hidden" id="userPhone" name="userPhone" value="${sessionScope.userPhone}" />
+						<input type="hidden" id="acc_ta" name="acc_ta" value="${sessionScope.acc_ta}" />
+						<input type="hidden" id="acc_pa" name="acc_pa" value="${sessionScope.acc_pa}" />
+						<input type="hidden" id="acc_ma" name="acc_ma" value="${sessionScope.acc_ma}" />
+					</div>
+					<button class="css-1lhlb22" id="completeBtn">완료</button>
 				</div>
 			</form>
-			<button class="css-1lhlb22" id="completeBtn" >완료</button>
 		</main>
-						<div class="joinNav-inner">
-					<button class="backBtn">
-						<i class="fa-solid fa-arrow-left"></i>
-					</button>
-				</div>
 	</div>
-		<div class="ft">
+	<div class="ft">
 		<jsp:include page="../inc/footer.jsp"></jsp:include>
 	</div>
 </body>
