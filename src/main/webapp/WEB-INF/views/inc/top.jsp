@@ -15,6 +15,8 @@
 	        <a href="main">
 	        	<img src="${pageContext.request.contextPath}/resources/images/로고 가로.png" alt="로고" id="logo">
 	        </a>
+	        <button id="sellerBtn">판매자 페이지</button>
+	        <button id="adminBtn">관리자 페이지</button>
 	        <!-- 검색 아이콘 & 장바구니 아이콘 -->
 	        <div id="icons-container">
 			    <div>

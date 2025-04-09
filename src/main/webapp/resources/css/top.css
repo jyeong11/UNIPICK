@@ -85,3 +85,14 @@ input[type="search"] {
 	width: 26px;
 	transform: translateY(-5px);  
 }
+
+#sellerBtn, #adminBtn {
+	height: 60px;
+    width: 140px;
+    border-radius: 10px;
+    background-color: #f2a900;
+    border: none;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}

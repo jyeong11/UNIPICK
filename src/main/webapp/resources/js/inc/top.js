@@ -13,5 +13,13 @@ $(function(){
             $("#search_btn").click(); // 버튼 클릭 이벤트 호출
         }
     });
+
+	$("#sellerBtn").click(function() {
+        window.open("seller","_blank");
+    });
+
+	$("#adminBtn").click(function() {
+        window.open("admin","_blank");
+    });
 	
 });

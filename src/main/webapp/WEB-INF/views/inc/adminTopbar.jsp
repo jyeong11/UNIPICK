@@ -28,10 +28,6 @@
                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                     판매자 화면
                 </a>
-                <a class="dropdown-item" href="AdmLogList">
-                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                    로그 기록
-                </a>
                 <a class="dropdown-item" href="adminMyPage">
                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                     마이페이지
