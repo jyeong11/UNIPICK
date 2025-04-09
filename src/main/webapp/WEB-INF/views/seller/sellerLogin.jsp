@@ -20,10 +20,12 @@
 <title>유니픽 셀러</title>
 </head>
 <body>
-	<div id="login-container">
+	<div style="text-align: center;">
 		<a href="">
-	       	<img src="${pageContext.request.contextPath}/resources/images/로고 가로.png" alt="로고" id="logo">
+       		<img src="${pageContext.request.contextPath}/resources/images/로고 가로.png" alt="로고" id="logo">
 		</a>
+	</div>
+	<div id="login-container">
 		 <form action="" method="post" onsubmit="return false">
 		 	<div id="login-form">
 			 	<h2>유니픽 셀러 로그인</h2>
@@ -46,6 +48,10 @@
 	            </div>
             </div>
         </form>
+        <div class="css">
+	       	<a href="sellerjoin"><img class ="sellerimg" alt="셀러가입" src="${pageContext.request.contextPath}/resources/images/셀러 로그인 .png"></a>
+	       	<a href="main"><img class ="sellerimg" alt="셀러가입" src="${pageContext.request.contextPath}/resources/images/셀러로그인2.png"></a>
+    	</div>
     </div>
 	<div>
 		<jsp:include page="../inc/footer.jsp"></jsp:include>
