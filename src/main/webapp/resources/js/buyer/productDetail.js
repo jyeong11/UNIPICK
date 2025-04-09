@@ -330,7 +330,6 @@ function wish(heart) {
 	let prd_cd = heart.attr('data-value');
 	heartIcon.classList.toggle("fa-regular");
 	heartIcon.classList.toggle("fa-solid");
-	heartIcon.classList.toggle("yellow");
 	let action = "insert";
 	
 	if(heartIcon.classList.contains("fa-regular")) {
@@ -345,7 +344,12 @@ function wish(heart) {
 		data: JSON.stringify(data),
 		contentType: "application/json",
         error: function(xhr, status, error) {
-        	alert("서버 오류가 발생했습니다.");
+        	if(confirm("로그인 후 사용하실 수 있습니다.\n 로그인페이지로 이동하시겠습니까?")){
+				window.location.href="buyerlogin";
+			}
+			heartIcon.classList.toggle("fa-regular");
+			heartIcon.classList.toggle("fa-solid");
+			return false;
         }
 	});
 	

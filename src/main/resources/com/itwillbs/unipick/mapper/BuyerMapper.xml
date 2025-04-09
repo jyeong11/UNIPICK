@@ -198,7 +198,9 @@
 				  	   FROM options o JOIN reviews r ON o.opt_id = r.opt_id
 				 	  GROUP by prd_cd) r ON p.prd_cd = r.prd_cd
 		  LEFT JOIN common_detailcode cd ON p.prd_bd = cd.cod_cd
-		  LEFT JOIN wishlist w on p.prd_cd = w.prd_cd
+		  LEFT JOIN (SELECT buy_em, prd_cd
+		  			   FROM wishlist
+		   			  WHERE buy_em = #{buy_em}) w ON p.prd_cd = w.prd_cd
           LEFT JOIN (SELECT prd_cd, COUNT(odd_qt) as cnt
 					   FROM order_details od
 					   JOIN options o on od.opt_id = o.opt_id
@@ -740,7 +742,9 @@
 		  LEFT JOIN (SELECT prd_cd, fil_nm, fil_pt
 					   FROM product_images
 					  WHERE fil_nb = 1) i ON p.prd_cd = i.prd_cd
-		  LEFT JOIN wishlist w on p.prd_cd = w.prd_cd
+		  LEFT JOIN (SELECT buy_em, prd_cd
+		   			   FROM wishlist
+		   			  WHERE buy_em = #{buy_em}) w ON p.prd_cd = w.prd_cd
 		  LEFT JOIN sellers s ON p.sel_id = s.sel_id
 		  LEFT JOIN common_detailcode cd ON p.prd_bd = cd.cod_cd
 		 WHERE prd_st = (SELECT cod_cd

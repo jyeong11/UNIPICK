@@ -54,6 +54,7 @@
 	    	<mapping path="/myPage" />
 	    	<mapping path="/cart" />
 	        <mapping path="/productOrder" />
+	        <mapping path="/wishList" />
 	        <beans:bean class="com.itwillbs.unipick.handler.BuyerLoginIntercepter" />
 	    </interceptor>
 	</interceptors>
