@@ -33,6 +33,15 @@
 <script src="${pageContext.request.contextPath }/resources/js/seller/sellerModifyForm.js"></script>
 
 <link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
+
+<style>
+#input-group1{
+	 display: flex;
+	 justify-content: flex-end;
+}
+
+</style>
+
 </head>
 <body id="page-top">
 	<div id="wrapper">
@@ -41,31 +50,34 @@
 		<div id="content-wrapper" class="d-flex flex-column">
 			<!-- Main Content -->
 			<div id="content">
+			      	<div>
+					<jsp:include page="../inc/sellerTopbar.jsp"></jsp:include>
+				</div>
 				<!-- Topbar -->
-				<nav
-					class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-					<!-- Sidebar Toggle (Mobile Topbar) -->
-					<button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-						<i class="fa fa-bars"></i>
-					</button>
-					<!-- Title -->
-					<h4 class="m-0 text-gray-900">마이페이지</h4>
-					<!-- Topbar Navbar -->
-					<ul class="navbar-nav ml-auto">
-						<li class="nav-item dropdown no-arrow">
-							<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<span class="mr-2 d-none d-lg-inline text-gray-600 small">관리자</span>
-								<img class="img-profile rounded-circle" src="../../resources/adm/img/admin_profile.png"></a>
-								<!-- Dropdown - User Information -->
-							<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-								<a class="dropdown-item" href="/." target="_blank"> <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>사용자 화면</a>
-								<a class="dropdown-item" href="AdmLogList"> <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>로그 기록</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal"> <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>로그아웃</a>
-							</div>
-						</li>
-					</ul>
-				</nav>
+<!-- 				<nav -->
+<!-- 					class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"> -->
+<!-- 					Sidebar Toggle (Mobile Topbar) -->
+<!-- 					<button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3"> -->
+<!-- 						<i class="fa fa-bars"></i> -->
+<!-- 					</button> -->
+<!-- 					Title -->
+<!-- 					<h4 class="m-0 text-gray-900">마이페이지</h4> -->
+<!-- 					Topbar Navbar -->
+<!-- 					<ul class="navbar-nav ml-auto"> -->
+<!-- 						<li class="nav-item dropdown no-arrow"> -->
+<!-- 							<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
+<!-- 							<span class="mr-2 d-none d-lg-inline text-gray-600 small">관리자</span> -->
+<!-- 								<img class="img-profile rounded-circle" src="../../resources/adm/img/admin_profile.png"></a> -->
+<!-- 								Dropdown - User Information -->
+<!-- 							<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown"> -->
+<!-- 								<a class="dropdown-item" href="/." target="_blank"> <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>사용자 화면</a> -->
+<!-- 								<a class="dropdown-item" href="AdmLogList"> <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>로그 기록</a> -->
+<!-- 								<div class="dropdown-divider"></div> -->
+<!-- 								<a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal"> <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>로그아웃</a> -->
+<!-- 							</div> -->
+<!-- 						</li> -->
+<!-- 					</ul> -->
+<!-- 				</nav> -->
 				<!-- Logout Modal-->
 				<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 					<div class="modal-dialog" role="document">
@@ -168,7 +180,7 @@
 										<label for="phNumber">휴대전화</label>
 										<input type="text" id="phNumber" name="phNumber" placeholder="010-xxxx-xxxx">
 									</div>
-									<div class="input-group">
+									<div class="input-group" id="input-group1">
 										<button type=button id="sellermodify">수정하기</button>
 										<button type=submit id="sellerWithdraw">탈퇴하기</button>
 									</div>

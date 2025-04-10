@@ -51,12 +51,15 @@
         <jsp:include page="../inc/sellerSidebar.jsp" />
         <div id="content-wrapper" class="d-flex flex-column">
             <div id="content">
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
-                    </button>
-                    <h4 class="m-0 text-gray-900 font-weight-bold">정산관리</h4>
-                </nav>
+            	<div>
+					<jsp:include page="../inc/sellerTopbar.jsp"></jsp:include>
+				</div>
+<!--                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"> -->
+<!--                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3"> -->
+<!--                         <i class="fa fa-bars"></i> -->
+<!--                     </button> -->
+<!--                     <h4 class="m-0 text-gray-900 font-weight-bold">정산관리</h4> -->
+<!--                 </nav> -->
                 
                 <div class="container-fluid">
                     <!-- 검색 필터 -->
