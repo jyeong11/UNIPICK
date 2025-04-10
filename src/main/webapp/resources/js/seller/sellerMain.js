@@ -11,7 +11,7 @@ function newOrdCount() {
 		url: "newOrdCount",
 		method: "POST",
 		success: function(res){
-			$("#totalProducts").text(res);
+			$("#totalProduct").text(res);
 		},	
 		error: function (xhr, textStatus, errorThrown) {
             alert("다시 접속해주세요.");

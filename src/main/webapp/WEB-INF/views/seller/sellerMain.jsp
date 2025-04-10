@@ -313,7 +313,7 @@ document.addEventListener("DOMContentLoaded", function () {
 													주문</div>
 												<div
 													class="h3 mb-0 font-weight-bold text-gray-800 counter-text"
-													id="totalProducts"></div>
+													id="totalProduct"></div>
 											</div>
 											<div class="col-auto">
 												<i class="fa-solid fa-box fa-2x text-gray-300"></i>

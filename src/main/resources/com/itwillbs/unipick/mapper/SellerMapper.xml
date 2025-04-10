@@ -217,6 +217,7 @@
 	     ON t.prd_cd = p.prd_cd
 	   LEFT JOIN sellers s 
 	     ON  p.sel_id = s.sel_id
+	  WHERE d.odd_st = '결제완료'
 	    AND s.sel_id = #{sel_id};
 	</select>
 	
@@ -232,8 +233,7 @@
 	     ON t.prd_cd = p.prd_cd
 	   LEFT JOIN sellers s 
 	     ON  p.sel_id = s.sel_id
-	  WHERE d.odd_st = '결제완료'
-	    AND s.sel_id = #{sel_id}
+	  WHERE s.sel_id = #{sel_id}
 	    AND DATE_FORMAT(o.ord_at, '%Y-%m') = DATE_FORMAT(NOW(), '%Y-%m');
 	</select>
 
