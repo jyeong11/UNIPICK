@@ -26,6 +26,10 @@
     <script src="${pageContext.request.contextPath}/resources/js/seller/sellerAccount.js"></script>
     
     <style>
+    	.container-fluid{
+    	height: 47.5rem;
+    	}
+    
         .card {
             margin-bottom: 20px;
         }
@@ -148,7 +152,10 @@
                             </table>
                         </div>
                     </div>
+            
                 </div>
+                        			<!-- Footer -->
+			<jsp:include page="../inc/sellerfooter.jsp"></jsp:include>
             </div>
         </div>
     </div>

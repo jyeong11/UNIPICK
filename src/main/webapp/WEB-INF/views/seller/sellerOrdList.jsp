@@ -25,6 +25,14 @@
 <link href="${pageContext.request.contextPath }/resources/css/seller/sellerOrdList.css" rel="stylesheet">
 <script src="${pageContext.request.contextPath }/resources/js/seller/sellerOrdList.js"></script>
 <link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
+<style>
+    .col-lg-12 {
+        flex: 0 0 100%;
+        max-width: 100%;
+        height: 47rem !important;
+    }
+
+</style>
 </head>
 <body id="page-top">
 	<div id="wrapper">
