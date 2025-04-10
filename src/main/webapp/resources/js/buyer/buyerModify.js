@@ -29,9 +29,9 @@ $(function() {
 		checkPasswd($(this));
 	})
 	// 휴대폰번호
-	$('#phoneNumber').on('input', function() {
-		checkPhone($(this));
-	})
+//	$('#phoneNumber').on('input', function() {
+//		checkPhone($(this));
+//	})
 	// 생년월일
 	$('#birthDate').on('input', function() {
 		checkBirth($(this));
@@ -193,36 +193,36 @@ $(function() {
 	}
 	
 	// 핸드폰
-	function checkPhone(phone) {
-	    let phoneValue = phone.val().trim();
-	    let errorMsg = '';
-	    effectiveness = false;
-	
-	    phoneValue = phoneValue.replace(/[^0-9]/g, '');
-	
-	    if (phoneValue.length > 11) {
-	        phoneValue = phoneValue.substring(0, 11);
-	        phone.val(phoneValue);
-	    } else {
-	        phone.val(phoneValue);
-	    }
-	
-	    if (!phoneValue) {
-	        errorMsg = '휴대폰 번호를 입력해주세요.';
-	    } else {
-	        const phoneRegex = /^01[016789][0-9]{7,8}$/;
-	        if (!phoneRegex.test(phoneValue)) {
-	            errorMsg = '유효한 휴대폰 번호를 입력해주세요.';
-	        }
-	    }
-	
-	    if (errorMsg) {
-	        $('#phoneError').text(errorMsg).css('color', 'red');
-	    } else {
-	        effectiveness = true;
-	        $('#phoneError').text('');
-	    }
-	}
+//	function checkPhone(phone) {
+//	    let phoneValue = phone.val().trim();
+//	    let errorMsg = '';
+//	    effectiveness = false;
+//	
+//	    phoneValue = phoneValue.replace(/[^0-9]/g, '');
+//	
+//	    if (phoneValue.length > 11) {
+//	        phoneValue = phoneValue.substring(0, 11);
+//	        phone.val(phoneValue);
+//	    } else {
+//	        phone.val(phoneValue);
+//	    }
+//	
+//	    if (!phoneValue) {
+//	        errorMsg = '휴대폰 번호를 입력해주세요.';
+//	    } else {
+//	        const phoneRegex = /^01[016789][0-9]{7,8}$/;
+//	        if (!phoneRegex.test(phoneValue)) {
+//	            errorMsg = '유효한 휴대폰 번호를 입력해주세요.';
+//	        }
+//	    }
+//	
+//	    if (errorMsg) {
+//	        $('#phoneError').text(errorMsg).css('color', 'red');
+//	    } else {
+//	        effectiveness = true;
+//	        $('#phoneError').text('');
+//	    }
+//	}
 	
 	// 생년월일	
 	function checkBirth(birthDate) {

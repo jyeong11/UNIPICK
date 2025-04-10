@@ -83,3 +83,9 @@ button {
 	display: flex;
 	gap: 20px;
 }
+
+#phoneNumber {
+	background-color: #e9ecef;
+	cursor: not-allowed;
+	color: #6c757d;
+}

@@ -69,8 +69,7 @@
 				<div class="modi-title">
 					<label for="phoneNumber">휴대폰 번호</label><span id="phoneError"></span>
 				</div>
-				<input type="text" id="phoneNumber" class="input-value">
-				<p class="note">*입력형식 : 01012345678</p>
+				<input type="text" id="phoneNumber" class="input-value" readonly>
 			</div>
 			<div class="field">
 				<div class="modi-title">
