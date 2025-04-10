@@ -770,4 +770,11 @@
 	 		sel_if
 	   FROM sellers;
 	</select>
+	
+<!-- 	메인 상단 장바구니 갯수 -->
+	<select id="cartCnt">
+	 SELECT count(crt_id) AS count
+	   FROM cart
+	  WHERE buy_em = #{buy_em};
+	</select>
   </mapper>

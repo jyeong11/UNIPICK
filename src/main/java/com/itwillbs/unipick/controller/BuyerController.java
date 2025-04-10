@@ -481,4 +481,11 @@ public class BuyerController {
 		return buyService.sellerStore();
 	}
 	
+	// 메인 상단 장바구니 갯수
+	@ResponseBody
+	@PostMapping("cartCnt")
+	public int cartCnt(HttpSession session) {
+		String buy_em = (String)session.getAttribute("buyEm");
+		return buyService.cartCnt(buy_em);
+	}
 }

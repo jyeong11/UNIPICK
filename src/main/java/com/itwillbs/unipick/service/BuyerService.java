@@ -260,4 +260,9 @@ public class BuyerService {
 	public List<Map<String, Object>>sellerStore(){
 		return mapper.sellerStore();
 	}
+	
+	// 메인 상단 장바구니 갯수
+	public int cartCnt(String buy_em) {
+		return mapper.cartCnt(buy_em);
+	}
 }

@@ -97,4 +97,6 @@ public interface BuyerMapper {
 	public List<Map<String, Object>> recomProduct(Map<String, Object> data);
 	// 메인 스토어 페이지
 	public List<Map<String, Object>>sellerStore();
+	// 메인 상단 장바구니 갯수
+	public int cartCnt(String buy_em);
 }
