@@ -401,7 +401,7 @@
 	<!-- 회원 탈퇴 -->
 	<update id="Withdraw" parameterType="map">
 		UPDATE buyers
-		   SET acc_st = '탈퇴'
+		   SET acc_st = 'BS02'
 		 WHERE buy_em = #{buy_em}
 	</update>
 	
