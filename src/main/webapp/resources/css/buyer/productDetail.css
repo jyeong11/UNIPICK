@@ -467,3 +467,7 @@ a {
 .prdImg-div {
 	position: relative;
 }
+
+#prdCt p img {
+  max-width: 800px;
+}

@@ -10,10 +10,11 @@
 }
 #top_menu .menu-nav {
     display: flex;
-    justify-content: center;
-    gap: 10rem; 
+    gap: 10rem;
     padding-bottom: 18px;
-    margin-right: 200px;
+    width: 1200px;
+    justify-content: space-around;
+    margin: auto;
 }
 menu-inner {
     display: flex;

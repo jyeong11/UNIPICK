@@ -36,7 +36,7 @@
 	height: 694px;
 }
 
-.card-body {
+#body-card {
 	display: flex;
     flex: 1 1 auto;
     min-height: 1px;

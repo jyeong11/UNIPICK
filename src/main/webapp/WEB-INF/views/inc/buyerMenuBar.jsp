@@ -4,7 +4,5 @@
 
 <link href="${pageContext.request.contextPath }/resources/css/buyer/buyerMenuBar.css" rel="stylesheet" type="text/css">
 	<div id="top_menu">
-		<ul class="menu-nav">
-			<li class="menu-inner"></li>
-		</ul>
+		<ul class="menu-nav"></ul>
 	</div>

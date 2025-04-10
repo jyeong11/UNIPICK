@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
 						<div class="card-header py-3">
 							<h6 class="m-0 font-weight-bold" id="subTitle">공통코드</h6>
 						</div>
-						<div class="card-body">
+						<div class="card-body"  id="body-card">
 								<div class="common-top-div">
 									<div class="top-btn">
 										<input class="btn btn_main_color"

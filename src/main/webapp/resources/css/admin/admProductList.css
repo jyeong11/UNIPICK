@@ -22,9 +22,11 @@
     font-size: 14px;
     transition: all 0.2s;
     outline: none;
+    left: 0rem !important;
 }
 #pageList{
-	margin-right: 657px;	
+	display: flex;
+    justify-content: center;
 }
 .search-div {
     display: flex;
@@ -57,13 +59,14 @@ footer.sticky-footer {
     padding: 2.4rem 0;
 }
 
-.btn {
-}
-
 .btn1 {
 	background: #f6c23e;
 	color: #292b2b;
 	font-size: 15px;
 	border: white;
 	
+}
+
+.card {
+	height: 725px !important;
 }

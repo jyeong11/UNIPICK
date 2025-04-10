@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="admin">
@@ -48,7 +48,7 @@
         </div>
     </li>
     <li class="nav-item">
-	    <a class="nav-link" href="#" data-toggle="collapse" data-target="#menu06" aria-expanded="true" aria-controls="menu06">
+	    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu06" aria-expanded="true" aria-controls="menu06">
 	        <i class="fas fa-solid fa-land-mine-on"></i>
 	        <span>신고관리</span>
 	    </a>

@@ -85,7 +85,7 @@
 											<h3 class="mb-0">관리자 리스트</h3>
 											<a href="adminRegister" class="btn btn-light">관리자 등록</a>
 										</div>
-										<div class="card-body">
+										<div class="card-body"  id="body-card">
 											<div class="table-responsive">
 												<table class="table table-striped table-hover">
 													<thead>
