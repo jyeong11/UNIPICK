@@ -368,20 +368,22 @@ function productUpdate() {
 function productDelete() {
 	let data = { prd_cd : $('#item-regi-code-text').val()}
 	
-	$.ajax({
-		url: 'productDelete',
-		type: 'POST',
-		data: JSON.stringify(data),
-		contentType: "application/json",
-		success: function() {
-			alert('상품 삭제가 완료되었습니다.');
-			window.location.href = "selProductList";
-		},
-		error: function(xhr, status, error) {
-            alert('상품 삭제중 오류가 발생했습니다.');
-        }
-		
-	});
+	if(confirm('상품을 삭제하시겠습니까?')){
+		$.ajax({
+			url: 'productDelete',
+			type: 'POST',
+			data: JSON.stringify(data),
+			contentType: "application/json",
+			success: function() {
+				alert('상품 삭제가 완료되었습니다.');
+				window.location.href = "selProductList";
+			},
+			error: function(xhr, status, error) {
+	            alert('상품 삭제중 오류가 발생했습니다.');
+	        }
+			
+		});
+	}
 }
 
 

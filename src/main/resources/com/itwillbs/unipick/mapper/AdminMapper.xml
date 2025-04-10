@@ -396,7 +396,7 @@
 			   b.buy_ad,
 			   b.buy_ph,
 			   b.buy_bd,
-			   b.buy_nn,
+			   IFNULL(b.buy_nn, '') as buy_nn,
 			   b.buy_gn,
 			   b.buy_ht,
 			   b.buy_wt,
