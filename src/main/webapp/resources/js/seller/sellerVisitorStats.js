@@ -136,6 +136,23 @@ $(document).ready(function () {
             return new Date(a.visitDate) - new Date(b.visitDate);
         });
 
+        // 오늘 날짜 확인
+        const today = new Date();
+        const todayFormatted = today.toISOString().split('T')[0]; // YYYY-MM-DD 형식
+        
+        // 오늘 날짜가 데이터에 없는 경우 추가
+        const hasToday = sortedData.some(item => item.visitDate === todayFormatted);
+        if (!hasToday) {
+            console.log("오늘 날짜 데이터가 없어 추가합니다:", todayFormatted);
+            sortedData.push({
+                visitDate: todayFormatted,
+                visitCount: 0 // 기본값은 0으로 설정
+            });
+            
+            // 다시 날짜순으로 정렬
+            sortedData.sort((a, b) => new Date(a.visitDate) - new Date(b.visitDate));
+        }
+
         console.log("차트 데이터 (정렬 후):", sortedData);
         
         // 현재 선택된 기간 유형 확인

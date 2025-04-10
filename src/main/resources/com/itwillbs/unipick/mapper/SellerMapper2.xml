@@ -401,10 +401,17 @@
 <!-- 방문 기록 삽입 -->
 <insert id="insertProductVisitLog" parameterType="map">
     INSERT INTO seller_visit (sel_id, prd_cd, vis_dt, vis_ct)
-    VALUES ((SELECT sel_id
-    		   FROM sellers
-    		  WHERE sel_nm = #{sellerNm}), #{productId}, DATE_FORMAT(NOW(), '%Y-%m-%d'), '1')
-    ON DUPLICATE KEY UPDATE vis_ct = CAST(vis_ct AS UNSIGNED) + 1;
+    VALUES (
+        (SELECT sel_id
+         FROM sellers
+         WHERE sel_nm = #{sellerNm}),
+        #{productId},
+        DATE_FORMAT(NOW(), '%Y-%m-%d'),
+        '1'
+    )
+    ON DUPLICATE KEY UPDATE 
+        vis_ct = CAST(vis_ct AS UNSIGNED) + 1,
+        vis_dt = DATE_FORMAT(NOW(), '%Y-%m-%d')
 </insert>
 
 <!-- 상세 방문자 통계 조회 -->
@@ -446,6 +453,31 @@
             WHEN #{periodType} = 'monthly' THEN DATE_FORMAT(STR_TO_DATE(vis_dt, '%Y-%m-%d'), '%Y-%m')
             WHEN #{periodType} = 'yearly' THEN DATE_FORMAT(STR_TO_DATE(vis_dt, '%Y-%m-%d'), '%Y')
         END
+    
+    UNION ALL
+    
+    SELECT 
+        CASE 
+            WHEN #{periodType} = 'daily' THEN DATE_FORMAT(NOW(), '%Y-%m-%d')
+            WHEN #{periodType} = 'weekly' THEN DATE_FORMAT(NOW(), '%Y-%U')
+            WHEN #{periodType} = 'monthly' THEN DATE_FORMAT(NOW(), '%Y-%m')
+            WHEN #{periodType} = 'yearly' THEN DATE_FORMAT(NOW(), '%Y')
+        END as visitDate,
+        0 as visitCount
+    FROM dual
+    WHERE NOT EXISTS (
+        SELECT 1 FROM seller_visit 
+        WHERE sel_id = #{sellerId}
+        AND (
+            CASE 
+                WHEN #{periodType} = 'daily' THEN vis_dt = DATE_FORMAT(NOW(), '%Y-%m-%d')
+                WHEN #{periodType} = 'weekly' THEN DATE_FORMAT(STR_TO_DATE(vis_dt, '%Y-%m-%d'), '%Y-%U') = DATE_FORMAT(NOW(), '%Y-%U')
+                WHEN #{periodType} = 'monthly' THEN DATE_FORMAT(STR_TO_DATE(vis_dt, '%Y-%m-%d'), '%Y-%m') = DATE_FORMAT(NOW(), '%Y-%m')
+                WHEN #{periodType} = 'yearly' THEN DATE_FORMAT(STR_TO_DATE(vis_dt, '%Y-%m-%d'), '%Y') = DATE_FORMAT(NOW(), '%Y')
+            END
+        )
+    )
+    
     ORDER BY visitDate DESC
     LIMIT 30;
 </select>

@@ -73,7 +73,7 @@
 										<div class="row">
 											<div class="my-tabs">
 												<button class="filter-btn active" data-status="all">전체</button>
-												<button class="filter-btn" data-status="배송대기">배송대기</button>
+												<button class="filter-btn" data-status="결제완료">결제완료</button>
 												<button class="filter-btn" data-status="배송중">배송중</button>
 												<button class="filter-btn" data-status="배송완료">배송완료</button>
 												<button class="filter-btn" data-status="취소접수">취소접수</button>

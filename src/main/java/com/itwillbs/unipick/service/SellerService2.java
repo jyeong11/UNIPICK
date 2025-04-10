@@ -409,7 +409,28 @@ public class SellerService2 {
 
     // 방문자 로그 저장
     public void logProductVisit(Map<String, Object> params) {
-        mapper.insertProductVisitLog(params);
+        try {
+            System.out.println("=== 방문자 로그 저장 시도 ===");
+            System.out.println("요청 파라미터: " + params);
+            
+            // 필요한 파라미터 확인
+            if (params.get("productId") == null) {
+                System.err.println("상품 ID가 null입니다.");
+                return;
+            }
+            
+            if (params.get("sellerNm") == null) {
+                System.err.println("판매자 이름이 null입니다.");
+                return;
+            }
+            
+            // 방문 로그 저장 (오늘 날짜로 자동 설정)
+            mapper.insertProductVisitLog(params);
+            System.out.println("방문자 로그 저장 성공: 상품ID=" + params.get("productId") + ", 판매자=" + params.get("sellerNm"));
+        } catch (Exception e) {
+            System.err.println("방문자 로그 저장 중 오류 발생: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
     
 

@@ -195,7 +195,7 @@ $(document).ready(function() {
             case '반품접수': return 'DELIVERY09';
             case '반품취소': return 'DELIVERY10';
             case '반품완료': return 'DELIVERY11';
-            case '결제완료': return 'DELIVERY01'; // 기본값으로 상품준비중 사용
+            case '결제완료': return 'DELIVERY01'; // 결제완료 상태 추가 (상품준비중과 동일한 코드 사용)
             default: return 'DELIVERY01';
         }
     }
