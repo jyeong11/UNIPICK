@@ -14,31 +14,60 @@ $(document).ready(function() {
             dataType: "json",
             success: function(data) {
                 console.log("주문상태 옵션 로드 성공:", data);
+                
                 if (data && data.length > 0) {
-                    statusOptions = data;
+                    // 서버에서 받은 데이터 구조에 맞게 매핑
+                    // com_cd와 com_cd_nm 필드를 사용
+                    statusOptions = data.map(function(item) {
+                        return {
+                            code: item.com_cd,  // DELIVERY01, DELIVERY02, ...
+                            name: item.com_nm  // 상품준비중, 배송준비중, ...
+                        };
+                    });
+
+                    console.log("상태 옵션 설정 완료:", statusOptions);
+                    
+                    // 상태 옵션이 로드되면 주문 목록도 다시 로드
+                    loadOrderList(currentPage);
                 } else {
                     // 데이터가 없을 경우 기본값 설정
                     statusOptions = [
-                        {com_cd: '결제완료', com_cd_nm: '결제완료'},
-                        {com_cd: '배송대기', com_cd_nm: '배송대기'},
-                        {com_cd: '배송중', com_cd_nm: '배송중'},
-                        {com_cd: '배송완료', com_cd_nm: '배송완료'},
-                        {com_cd: '취소접수', com_cd_nm: '취소접수'},
-                        {com_cd: '반품접수', com_cd_nm: '반품접수'}
+                        {code: 'DELIVERY01', name: '상품준비중'},
+                        {code: 'DELIVERY02', name: '배송준비중'},
+                        {code: 'DELIVERY03', name: '배송시작'},
+                        {code: 'DELIVERY04', name: '배송중'},
+                        {code: 'DELIVERY05', name: '배송완료'},
+                        {code: 'DELIVERY06', name: '교환접수'},
+                        {code: 'DELIVERY07', name: '교환취소'},
+                        {code: 'DELIVERY08', name: '교환완료'},
+                        {code: 'DELIVERY09', name: '반품접수'},
+                        {code: 'DELIVERY10', name: '반품취소'},
+                        {code: 'DELIVERY11', name: '반품완료'}
                     ];
+                    
+                    // 상태 옵션이 로드되면 주문 목록도 다시 로드
+                    loadOrderList(currentPage);
                 }
             },
             error: function(xhr, status, error) {
                 console.error("주문상태 옵션 로드 실패:", error);
                 // 에러 시 기본값 설정
                 statusOptions = [
-                    {com_cd: '결제완료', com_cd_nm: '결제완료'},
-                    {com_cd: '배송대기', com_cd_nm: '배송대기'},
-                    {com_cd: '배송중', com_cd_nm: '배송중'},
-                    {com_cd: '배송완료', com_cd_nm: '배송완료'},
-                    {com_cd: '취소접수', com_cd_nm: '취소접수'},
-                    {com_cd: '반품접수', com_cd_nm: '반품접수'}
+                    {code: 'DELIVERY01', name: '상품준비중'},
+                    {code: 'DELIVERY02', name: '배송준비중'},
+                    {code: 'DELIVERY03', name: '배송시작'},
+                    {code: 'DELIVERY04', name: '배송중'},
+                    {code: 'DELIVERY05', name: '배송완료'},
+                    {code: 'DELIVERY06', name: '교환접수'},
+                    {code: 'DELIVERY07', name: '교환취소'},
+                    {code: 'DELIVERY08', name: '교환완료'},
+                    {code: 'DELIVERY09', name: '반품접수'},
+                    {code: 'DELIVERY10', name: '반품취소'},
+                    {code: 'DELIVERY11', name: '반품완료'}
                 ];
+                
+                // 에러가 발생해도 주문 목록 로드
+                loadOrderList(currentPage);
             }
         });
     }
@@ -48,7 +77,17 @@ $(document).ready(function() {
     
     // 주문상태 변경 함수
     function updateOrderStatus(ordId, statusCode) {
-        console.log("주문상태 변경 시도:", ordId, statusCode);
+        console.log("주문상태 변경 시도:", ordId, statusCode, "타입:", typeof statusCode);
+        
+        // 상태 코드가 유효하지 않은 경우 처리 (undefined, 'undefined', null, '', 공백문자열 등)
+        if (!statusCode || statusCode === 'undefined' || statusCode.trim() === '') {
+            alert("유효하지 않은 상태 코드입니다. 다시 선택해주세요.");
+            return;
+        }
+        
+        // 서버에 전송할 데이터 로깅
+        console.log("서버에 전송할 데이터:", { ordId, statusCode });
+        
         $.ajax({
             url: "/UNIPICK/seller/updateOrderStatus",
             type: "POST",
@@ -58,11 +97,12 @@ $(document).ready(function() {
             },
             dataType: "json",
             success: function(response) {
+                console.log("주문상태 변경 성공:", response);
                 alert("주문상태가 변경되었습니다.");
                 loadOrderList(currentPage); // 목록 새로고침
             },
             error: function(xhr, status, error) {
-                console.error("주문상태 변경 실패:", error);
+                console.error("주문상태 변경 실패:", error, "상태:", xhr.status, "응답:", xhr.responseText);
                 alert("주문상태 변경에 실패했습니다.");
             }
         });
@@ -72,12 +112,25 @@ $(document).ready(function() {
     $(document).on('change', '.status-select', function() {
         const ordId = $(this).data('ord-id');
         const statusCode = $(this).val();
+        const originalValue = $(this).data('original-value');
+        const originalCode = getStatusCode(originalValue);
+        
+        console.log("상태 변경 이벤트 발생:", ordId, "새 상태코드:", statusCode, "원래 상태값:", originalValue, "원래 상태코드:", originalCode);
+        
+        // 상태 코드가 유효하지 않은 경우 처리
+        if (!statusCode || statusCode === 'undefined' || statusCode.trim() === '') {
+            console.warn("유효하지 않은 상태 코드:", statusCode);
+            alert("유효하지 않은 상태 코드입니다. 다시 선택해주세요.");
+            // 원래 값으로 되돌림
+            $(this).val(originalCode);
+            return;
+        }
         
         if (confirm("주문상태를 변경하시겠습니까?")) {
             updateOrderStatus(ordId, statusCode);
         } else {
             // 취소 시 원래 값으로 되돌림
-            $(this).val($(this).data('original-value'));
+            $(this).val(originalCode);
         }
     });
     
@@ -127,9 +180,43 @@ $(document).ready(function() {
         });
     }
 
-    function getStatusLabel(status) {
-        // DB에 저장된 값 그대로 사용
-        return status || '-';
+    // 상태 이름을 코드로 변환하는 함수
+    function getStatusCode(statusName) {
+        // 한글 상태명을 코드로 변환
+        switch (statusName) {
+            case '상품준비중': return 'DELIVERY01';
+            case '배송준비중': return 'DELIVERY02';
+            case '배송시작': return 'DELIVERY03';
+            case '배송중': return 'DELIVERY04';
+            case '배송완료': return 'DELIVERY05';
+            case '교환접수': return 'DELIVERY06';
+            case '교환취소': return 'DELIVERY07';
+            case '교환완료': return 'DELIVERY08';
+            case '반품접수': return 'DELIVERY09';
+            case '반품취소': return 'DELIVERY10';
+            case '반품완료': return 'DELIVERY11';
+            case '결제완료': return 'DELIVERY01'; // 기본값으로 상품준비중 사용
+            default: return 'DELIVERY01';
+        }
+    }
+
+    // 코드를 상태 이름으로 변환하는 함수
+    function getStatusName(statusCode) {
+        // 코드를 한글 상태명으로 변환
+        switch (statusCode) {
+            case 'DELIVERY01': return '상품준비중';
+            case 'DELIVERY02': return '배송준비중';
+            case 'DELIVERY03': return '배송시작';
+            case 'DELIVERY04': return '배송중';
+            case 'DELIVERY05': return '배송완료';
+            case 'DELIVERY06': return '교환접수';
+            case 'DELIVERY07': return '교환취소';
+            case 'DELIVERY08': return '교환완료';
+            case 'DELIVERY09': return '반품접수';
+            case 'DELIVERY10': return '반품취소';
+            case 'DELIVERY11': return '반품완료';
+            default: return '상품준비중';
+        }
     }
 
     function renderOrderList(orderList) {
@@ -141,6 +228,8 @@ $(document).ready(function() {
 
         if (orderList.length > 0) {
             $.each(orderList, function(index, order) {
+                console.log("주문 데이터:", order); // 각 주문 데이터 확인용 로그
+                
                 // 여기서 명확하게 각 TD를 분리해서 작성합니다
                 let row = '<tr>';
                 // 1. 주문번호
@@ -156,26 +245,54 @@ $(document).ready(function() {
                 // 6. 결제금액
                 row += `<td>${order.odd_am || '-'}</td>`;
                 // 7. 주문상태
-                row += `<td class="product-card" data-status="${order.odd_st}">${getStatusLabel(order.odd_st)}</td>`;
+                row += `<td class="product-card" data-status="${order.odd_st}">${order.odd_st || '-'}</td>`;
                 // 8. 상태변경 - 여기가 문제였을 수 있음
-                row += '<td><select class="status-select form-control" data-ord-id="' + order.ord_id + '" data-original-value="' + (order.odd_st || '-') + '">';
-                row += '<option value="결제완료" ' + (order.odd_st === '결제완료' ? 'selected' : '') + '>결제완료</option>';
-                row += '<option value="배송대기" ' + (order.odd_st === '배송대기' ? 'selected' : '') + '>배송대기</option>';
-                row += '<option value="배송중" ' + (order.odd_st === '배송중' ? 'selected' : '') + '>배송중</option>';
-                row += '<option value="배송완료" ' + (order.odd_st === '배송완료' ? 'selected' : '') + '>배송완료</option>';
-                row += '<option value="취소접수" ' + (order.odd_st === '취소접수' ? 'selected' : '') + '>취소접수</option>';
-                row += '<option value="반품접수" ' + (order.odd_st === '반품접수' ? 'selected' : '') + '>반품접수</option>';
+                
+                // 한글 상태명을 코드로 변환하여 저장
+                const originalValue = order.odd_st || '';
+                const statusCode = getStatusCode(originalValue);
+                
+                console.log("주문 ID:", order.ord_id, "원래 상태값:", originalValue, "변환된 코드:", statusCode);
+                
+                row += '<td><select class="status-select form-control" data-ord-id="' + order.ord_id + '" data-original-value="' + originalValue + '">';
+                
+                // 상태 옵션 동적 생성
+                if (statusOptions && statusOptions.length > 0) {
+                    statusOptions.forEach(function(option) {
+                        const isSelected = statusCode === option.code ? 'selected' : '';
+                        row += `<option value="${option.code}" ${isSelected}>${option.name}</option>`;
+                    });
+                } else {
+                    // 기본 옵션
+                    row += '<option value="DELIVERY01" ' + (statusCode === 'DELIVERY01' ? 'selected' : '') + '>상품준비중</option>';
+                    row += '<option value="DELIVERY02" ' + (statusCode === 'DELIVERY02' ? 'selected' : '') + '>배송준비중</option>';
+                    row += '<option value="DELIVERY03" ' + (statusCode === 'DELIVERY03' ? 'selected' : '') + '>배송시작</option>';
+                    row += '<option value="DELIVERY04" ' + (statusCode === 'DELIVERY04' ? 'selected' : '') + '>배송중</option>';
+                    row += '<option value="DELIVERY05" ' + (statusCode === 'DELIVERY05' ? 'selected' : '') + '>배송완료</option>';
+                    row += '<option value="DELIVERY06" ' + (statusCode === 'DELIVERY06' ? 'selected' : '') + '>교환접수</option>';
+                    row += '<option value="DELIVERY07" ' + (statusCode === 'DELIVERY07' ? 'selected' : '') + '>교환취소</option>';
+                    row += '<option value="DELIVERY08" ' + (statusCode === 'DELIVERY08' ? 'selected' : '') + '>교환완료</option>';
+                    row += '<option value="DELIVERY09" ' + (statusCode === 'DELIVERY09' ? 'selected' : '') + '>반품접수</option>';
+                    row += '<option value="DELIVERY10" ' + (statusCode === 'DELIVERY10' ? 'selected' : '') + '>반품취소</option>';
+                    row += '<option value="DELIVERY11" ' + (statusCode === 'DELIVERY11' ? 'selected' : '') + '>반품완료</option>';
+                }
+                
                 row += '</select></td>';
                 row += '</tr>';
                 
                 html += row;
             });
         } else {
-            html = '<tr><td colspan="8">조회된 상품이 없습니다.</td></tr>';
+            html = '<tr><td colspan="8" class="text-center">조회된 주문이 없습니다.</td></tr>';
         }
         
         console.log("HTML 일부:", html.substring(0, 300)); // 처음 300자만 로그로 출력
         $("#noticeListTable").html(html);
+        
+        // 모든 상태 선택 요소의 original-value 확인
+        $('.status-select').each(function() {
+            console.log("선택 요소:", $(this).data('ord-id'), "저장된 원래 값:", $(this).data('original-value'));
+        });
     }
 
     function formatDate(timestamp) {

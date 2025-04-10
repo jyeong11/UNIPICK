@@ -236,17 +236,23 @@
 
 
 	 <select id="getOrderList" resultType="map">
-	  SELECT o.ord_id, -- 주문ID
+	  SELECT DISTINCT
+			 o.ord_id, -- 주문ID
 			 o.ord_at, -- 주문일자 
 	         b.buy_nm, -- 구매자명 
 	         b.buy_ph, -- 연락처
 	         d.odd_qt, -- 구매수량 
 	         d.odd_am, -- 결제금액
-	         d.odd_st  -- 주문상태 (원래 값 그대로 반환)
+	         COALESCE(d.odd_st, '결제완료') as odd_st  -- 주문상태 (기본값 설정)
 		FROM orders o
 		JOIN buyers b ON o.buy_em = b.buy_em
 		JOIN order_details d ON o.ord_id = d.ord_id
+		JOIN options op ON d.opt_id = op.opt_id
+		JOIN products p ON op.prd_cd = p.prd_cd
 	 WHERE 1=1
+	  <if test="map.sel_id != null and !map.sel_id.isEmpty()">
+	      AND p.sel_id = #{map.sel_id}
+	  </if>
 	  <if test="map.ord_id != null and !map.ord_id.isEmpty()">
 	      AND o.ord_id LIKE CONCAT('%', #{map.ord_id}, '%')
 	  </if>
@@ -275,18 +281,24 @@
 	</select>
 
 	<select id="getOrderListCount" resultType="int">
-	 SELECT COUNT(*) 
+	 SELECT COUNT(DISTINCT o.ord_id) 
 		FROM orders o
 		JOIN buyers b ON o.buy_em = b.buy_em
-		WHERE 1= 1
-	  <if test="map.buy_nm != null and !map.buy_nm.isEmpty()">
-	      AND b.buy_nm LIKE CONCAT('%', #{map.buy_nm}, '%')
+		JOIN order_details d ON o.ord_id = d.ord_id
+		JOIN options op ON d.opt_id = op.opt_id
+		JOIN products p ON op.prd_cd = p.prd_cd
+	 WHERE 1= 1
+	  <if test="sel_id != null and !sel_id.isEmpty()">
+	      AND p.sel_id = #{sel_id}
 	  </if>
-	  <if test="map.buy_ph != null and !map.buy_ph.isEmpty()">
-	      AND b.buy_ph LIKE CONCAT('%', #{map.buy_ph}, '%')
+	  <if test="buy_nm != null and !buy_nm.isEmpty()">
+	      AND b.buy_nm LIKE CONCAT('%', #{buy_nm}, '%')
 	  </if>
-	  <if test="map.ord_id != null and !map.ord_id.isEmpty()">
-	      AND o.ord_id LIKE CONCAT('%', #{map.ord_id}, '%')
+	  <if test="buy_ph != null and !buy_ph.isEmpty()">
+	      AND b.buy_ph LIKE CONCAT('%', #{buy_ph}, '%')
+	  </if>
+	  <if test="ord_id != null and !ord_id.isEmpty()">
+	      AND o.ord_id LIKE CONCAT('%', #{ord_id}, '%')
 	  </if>
 	</select>
 
@@ -459,10 +471,11 @@
 
      <!-- 공통 코드 조회 -->
     <select id="getCommonCode" resultType="java.util.Map">
-        SELECT com_cd, com_cd_nm
-        FROM common_detail_code
-        WHERE com_cd_grp = #{comCd}
-        ORDER BY com_cd ASC
+        SELECT SUBSTRING(cod_cd, 1, 10) as code, SUBSTRING(cod_nm, 1, 20) as name
+        FROM common_detailcode
+        WHERE com_cd like #{comCd}
+          AND cod_yn = 'Y'
+        ORDER BY cod_cd ASC
     </select>
     
     <!-- 주문상태 업데이트 -->

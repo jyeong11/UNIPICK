@@ -36,40 +36,6 @@
 				<div>
 					<jsp:include page="../inc/sellerTopbar.jsp"></jsp:include>
 				</div>
-				<nav
-					class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-					<!-- Sidebar Toggle (Mobile Topbar) -->
-					<button id="sidebarToggleTop"
-						class="btn btn-link d-md-none rounded-circle mr-3">
-						<i class="fa fa-bars"></i>
-					</button>
-					<!-- Title -->
-					<h4 class="m-0 text-gray-900">주문 리스트</h4>
-					<!-- Topbar Navbar -->
-					<ul class="navbar-nav ml-auto">
-						<li class="nav-item dropdown no-arrow"><a
-							class="nav-link dropdown-toggle" href="#" id="userDropdown"
-							role="button" data-toggle="dropdown" aria-haspopup="true"
-							aria-expanded="false"> <span
-								class="mr-2 d-none d-lg-inline text-gray-600 small">관리자</span> <img
-								class="img-profile rounded-circle"
-								src="../../resources/adm/img/admin_profile.png"></a> <!-- Dropdown - User Information -->
-							<div
-								class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-								aria-labelledby="userDropdown">
-								<a class="dropdown-item" href="/." target="_blank"> <i
-									class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>사용자 화면
-								</a> <a class="dropdown-item" href="AdmLogList"> <i
-									class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>로그 기록
-								</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#" data-toggle="modal"
-									data-target="#logoutModal"> <i
-									class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>로그아웃
-								</a>
-							</div></li>
-					</ul>
-				</nav>
 				<!-- Logout Modal-->
 				<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
 					aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -113,18 +79,20 @@
 												<button class="filter-btn" data-status="취소접수">취소접수</button>
 												<button class="filter-btn" data-status="반품접수">반품접수</button>
 											</div>
-											<div class="col-2">
-												<select class="form-select" id="noticeSearchKind">
-													<option value="name">이름</option>
-													<option value="phone">연락처</option>
-													<option value="order">주문번호</option>
-												</select>
-											</div>
-											<div class="col-3">
-												<input type="text" id="noticeSearchWord" class="form-control" placeholder="검색어 입력">
-											</div>
-											<div class="col-1">
-												<button id="noticeSearch" class="btn btn_main_color" type="button">조회</button>
+											<div class="search-container">
+												<div class="col-md-3">
+													<select class="form-select" id="noticeSearchKind">
+														<option value="name">이름</option>
+														<option value="phone">연락처</option>
+														<option value="order">주문번호</option>
+													</select>
+												</div>
+												<div class="col-md-6">
+													<input type="text" id="noticeSearchWord" class="form-control" placeholder="검색어 입력">
+												</div>
+												<div class="col-md-3">
+													<button id="noticeSearch" class="btn btn_main_color" type="button">조회</button>
+												</div>
 											</div>
 										</div>
 									</div>

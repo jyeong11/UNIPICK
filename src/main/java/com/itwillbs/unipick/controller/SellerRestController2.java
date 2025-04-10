@@ -72,35 +72,42 @@ public class SellerRestController2 {
   //AJAX를 통한 상품 리스트 조회
     @RequestMapping("/api/selOrderList")
     public Map<String, Object> getOrderList(
+            HttpSession session,
             @RequestParam(value = "ord_id", required = false, defaultValue = "") String ordId,
             @RequestParam(value = "ord_at", required = false, defaultValue = "") String ordAt,
             @RequestParam(value = "buy_nm", required = false, defaultValue = "") String buyNm,
             @RequestParam(value = "buy_ph", required = false, defaultValue = "") String buyPh,
             @RequestParam(value = "odd_qt", required = false, defaultValue = "") String oddPt,
             @RequestParam(value = "odd_am", required = false, defaultValue = "") String oddAm,
-            /*@RequestParam(value = "odd_st", required = false, defaultValue = "") String oddSt,*/
             @RequestParam(value = "orderStatus", required = false, defaultValue = "all") String orderStatus,
             @RequestParam(value = "startRow", required = false, defaultValue = "0") int startRow,
             @RequestParam(value = "listLimit", required = false, defaultValue = "10") int listLimit) {
 
         // 검색 조건 Map 생성
         Map<String, String> search = new HashMap<>();
-			if (!ordId.isEmpty()) search.put("ord_id", ordId);
-			if (!ordAt.isEmpty()) search.put("ord_at", ordAt);
-			if (!buyNm.isEmpty()) search.put("buy_nm", buyNm);
-			if (!buyPh.isEmpty()) search.put("buy_ph", buyPh);
-			if (!oddPt.isEmpty()) search.put("odd_qt", oddPt);
-			if (!oddAm.isEmpty()) search.put("odd_am", oddAm);
-			//if (!oddSt.isEmpty()) search.put("odd_st", oddSt);
+        
+        // 세션에서 판매자 ID 가져오기
+        String selId = (String) session.getAttribute("selId");
+        if (selId != null && !selId.isEmpty()) {
+            search.put("sel_id", selId);
+        }
+        
+        if (!ordId.isEmpty()) search.put("ord_id", ordId);
+        if (!ordAt.isEmpty()) search.put("ord_at", ordAt);
+        if (!buyNm.isEmpty()) search.put("buy_nm", buyNm);
+        if (!buyPh.isEmpty()) search.put("buy_ph", buyPh);
+        if (!oddPt.isEmpty()) search.put("odd_qt", oddPt);
+        if (!oddAm.isEmpty()) search.put("odd_am", oddAm);
 
-		    // orderStatus 값이 "all"이 아니라면, 이를 DB의 odd_st 값에 맞게 변환하여 조건에 추가
-		    if (!"all".equals(orderStatus)) {
-		        search.put("odd_st", orderStatus);
-		    }
-			
+        // orderStatus 값이 "all"이 아니라면, 이를 DB의 odd_st 값에 맞게 변환하여 조건에 추가
+        if (!"all".equals(orderStatus)) {
+            search.put("odd_st", orderStatus);
+        }
+            
         // 상품 리스트 조회
         List<Map<String, Object>> orderList = sellerService.getOrderList(search, startRow, listLimit);
-        System.out.println(orderList);
+        System.out.println("검색 파라미터: " + search);
+        System.out.println("조회된 주문 목록: " + orderList);
 
         // 상품 개수 조회
         int totalCount = sellerService.getOrderListCount(search);
@@ -182,15 +189,47 @@ public class SellerRestController2 {
     @PostMapping("/updateOrderStatus")
     public ResponseEntity<?> updateOrderStatus(@RequestParam String ordId, @RequestParam String statusCode) {
         try {
+            if (ordId == null || ordId.isEmpty() || statusCode == null || statusCode.isEmpty() || "undefined".equals(statusCode)) {
+                return ResponseEntity.badRequest().body("주문 ID와 상태 코드는 필수이며, 유효한 값이어야 합니다.");
+            }
+
+            // DELIVERY01 ~ DELIVERY11 코드를 해당하는 짧은 상태명으로 변환
+            String convertedStatus = convertStatusCode(statusCode);
+            
+            System.out.println("상태 코드 변환: " + statusCode + " -> " + convertedStatus);
+
             Map<String, Object> params = new HashMap<>();
             params.put("ord_id", ordId);
-            params.put("odd_st", statusCode);
+            params.put("odd_st", convertedStatus);
+            
             sellerService.updateOrderStatus(params);
-            return ResponseEntity.ok(Map.of("message", "주문상태가 업데이트 되었습니다."));
+            
+            return ResponseEntity.ok(Map.of(
+                "message", "주문상태가 업데이트 되었습니다.",
+                "ordId", ordId,
+                "status", convertedStatus
+            ));
         } catch (Exception e) {
             return ResponseEntity.status(500).body("주문상태 업데이트 중 오류 발생: " + e.getMessage());
         }
     }
     
+    // 상태 코드를 짧은 형태로 변환하는 메소드
+    private String convertStatusCode(String statusCode) {
+        switch (statusCode) {
+            case "DELIVERY01": return "상품준비중";
+            case "DELIVERY02": return "배송준비중";
+            case "DELIVERY03": return "배송시작";
+            case "DELIVERY04": return "배송중";
+            case "DELIVERY05": return "배송완료";
+            case "DELIVERY06": return "교환접수";
+            case "DELIVERY07": return "교환취소";
+            case "DELIVERY08": return "교환완료";
+            case "DELIVERY09": return "반품접수";
+            case "DELIVERY10": return "반품취소";
+            case "DELIVERY11": return "반품완료";
+            default: return "상품준비중"; // 알 수 없는 코드는 기본값으로 설정
+        }
+    }
     
 }
