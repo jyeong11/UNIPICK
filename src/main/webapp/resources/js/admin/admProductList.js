@@ -4,6 +4,7 @@ $(function() {
 	$('#search').on('click',function(){
 		prdLoad();
 	});
+	
 	// 검색 이벤트
 	$('#ListSearchWord').on('keydown', function(event){
 		if (event.key === 'Enter'){
@@ -117,7 +118,7 @@ function renderPrdTbody(prd) {
                     data-bs-target="#exampleModal"> ${(currentPage - 1) * listLimit + idx + 1}</td>
 				<td>${prd.prd_cd}</td>
 				<td>${prd.prd_nm}</td>
-				<td>${prd.prd_sp}</td>
+				<td>${prd.prd_sp.toLocaleString()}원</td>
 				<td>${prd.sel_nm}</td>
 				<td>${prd.prd_st}</td>
 			</tr>

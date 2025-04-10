@@ -220,18 +220,19 @@
 	  WHERE 1 = 1
 	 <choose>
 	   	<when test="prd_cd != null and !prd_cd.equals('')">
-	   		AND p.prd_cd LIKE CONCAT(#{prd_cd}, '%')
+	   		AND p.prd_cd LIKE CONCAT('%', #{prd_cd}, '%')
 	   	</when>
 	   	<when test="prd_nm != null and !prd_nm.equals('')">
-	   		AND p.prd_nm LIKE CONCAT(#{prd_nm}, '%')
+	   		AND p.prd_nm LIKE CONCAT('%', #{prd_nm}, '%')
 	   	</when>
 	   	<when test="store_nm != null and !store_nm.equals('')">
-	   		AND s.sel_nm LIKE CONCAT(#{store_nm}, '%')
+	   		AND s.sel_nm LIKE CONCAT('%', #{store_nm}, '%')
 	   	</when>
 	   	<when test="store_st != null and !store_st.equals('')">
-	   		AND p.prd_st LIKE CONCAT(#{store_st}, '%')
+	   		AND p.prd_st LIKE CONCAT('%', #{store_st}, '%')
 	   	</when>
      </choose>
+        AND s.adm_id = #{adm_id}
       LIMIT #{limit} OFFSET #{offset}
 	</select>
 	
@@ -247,18 +248,19 @@
 	  WHERE 1 = 1
 	 <choose>
 	   	<when test="prd_cd != null and !prd_cd.equals('')">
-	   		AND p.prd_cd LIKE CONCAT(#{prd_cd}, '%')
+	   		AND p.prd_cd LIKE CONCAT('%', #{prd_cd}, '%')
 	   	</when>
 	   	<when test="prd_nm != null and !prd_nm.equals('')">
-	   		AND p.prd_nm LIKE CONCAT(#{prd_nm}, '%')
+	   		AND p.prd_nm LIKE CONCAT('%', #{prd_nm}, '%')
 	   	</when>
 	   	<when test="store_nm != null and !store_nm.equals('')">
-	   		AND s.sel_nm LIKE CONCAT(#{store_nm}, '%')
+	   		AND s.sel_nm LIKE CONCAT('%', #{store_nm}, '%')
 	   	</when>
 	   	<when test="store_st != null and !store_st.equals('')">
-	   		AND p.prd_st LIKE CONCAT(#{store_st}, '%')
+	   		AND p.prd_st LIKE CONCAT('%', #{store_st}, '%')
 	   	</when>
      </choose>
+        AND s.adm_id = #{adm_id};
 	</select>
 	
 <!-- 	상품 상세 관리 -->

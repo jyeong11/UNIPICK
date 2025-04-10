@@ -265,10 +265,12 @@ public class AdminController {
 	// 관리자 상품관리
 	@ResponseBody
 	@PostMapping("admproductList")
-	public Map<String, Object> admproductList(@RequestParam Map<String, Object> map) {
+	public Map<String, Object> admproductList(@RequestParam Map<String, Object> map,
+											  HttpSession session) {
 		// map으로 받으면 String 형태로 db에 전달되어 Integer로 변경후 전달
 		map.put("limit", Integer.parseInt((String) map.get("limit")));
 	    map.put("offset", Integer.parseInt((String) map.get("offset")));
+	    map.put("adm_id",session.getAttribute("admId"));
 
 	    List<Map<String, Object>> list = adminservice.getPrdList(map);
 	    int totalCount = adminservice.getPrdTotalCount(map);
