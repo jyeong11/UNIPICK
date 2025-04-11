@@ -98,7 +98,7 @@
 		<div class="nav">
 		</div>
 		<main class="css-ds6z7l">
-			<form action="register" method="post">
+			<form action="#" method="get" onsubmit="return false;">
 				<nav class="joinNav">
 					<div class="joinNav-inner2">
 						<a href="buyerlogin">
