@@ -548,7 +548,7 @@
 			     WHERE fil_nb = 1) i ON p.prd_cd = i.prd_cd
 		 WHERE buy_em = #{buy_em}
 		 ORDER BY vie_tm DESC
-		 LIMIT 9
+		 LIMIT 100
 	</select>
 	
 <!-- 	판매자 페이지내에 검색 -->
