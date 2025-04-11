@@ -109,17 +109,8 @@ public class MyWebSocketHandler extends TextWebSocketHandler {
 		
 		System.out.println("웹소켓 연결 해제됨(afterConnectionClosed)");
 		
-		// 세션 목록에서 제거만 하고 별도의 LEAVE 메시지는 전송하지 않음
-		// 메시지 전송은 클라이언트 측의 beforeunload 이벤트에서 처리함
 		userSessionList.remove(session.getId());
 		
-		// 아래 코드 제거 (클라이언트에서 이미 LEAVE 메시지를 보냈기 때문에 중복 방지)
-		// Map<String, Object> map = new HashMap<String, Object>();
-		// map.put("type", "LEAVE");
-		// map.put("sender_id", "");
-		// map.put("message", "");
-		// 
-		// sendMessage(session, map);
 	}
 	//4. handleTransportError - 웹소켓 통신 과정에서 오류 발생 시 자동으로 호출되는 메서드
 	@Override
