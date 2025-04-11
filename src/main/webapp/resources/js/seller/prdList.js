@@ -94,7 +94,7 @@ $(document).ready(function() {
                         <td>${product.sizes || '-'}</td>
                         <td>${product.total_stock || '-'}</td>
                         <td>${formatDate(product.prd_dt)}</td>
-                        <td>${product.prd_st || '-'}</td>
+                        <td>${product.prd_st_nm || '-'}</td>
                     </tr>`;
             });
         } else {

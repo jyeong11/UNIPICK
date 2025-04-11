@@ -182,11 +182,13 @@
 	      GROUP_CONCAT(DISTINCT c.cod_nm ORDER BY c.cod_nm ASC SEPARATOR ', ') AS sizes,  <!-- 사이즈 리스트 -->
 	      SUM(o.prd_qt) AS total_stock,  <!-- 총 재고 수량 -->
 	      p.prd_dt,        <!-- 등록일 -->
-	      p.prd_st
+	      p.prd_st,
+	      cd.cod_nm AS prd_st_nm
 	  FROM products p
 	  JOIN level l ON p.prd_ca = l.lev_cd
 	  INNER JOIN options o ON p.prd_cd = o.prd_cd
 	  JOIN common_detailcode c ON o.siz_nm = c.cod_cd
+	  LEFT JOIN common_detailcode cd ON p.prd_st = cd.cod_cd AND cd.com_cd = 'PRD_REGISTERSTATUS'
 	  WHERE 1=1
 	  <if test="map.sel_id != null and !map.sel_id.isEmpty()">
 	      AND p.sel_id = #{map.sel_id}
@@ -203,7 +205,7 @@
 	  <if test="map.siz_nm != null and !map.siz_nm.isEmpty()">
 	      AND o.siz_nm LIKE CONCAT('%', #{map.siz_nm}, '%')
 	  </if>
-	  GROUP BY p.prd_cd, p.prd_nm, p.prd_sp, l.lev_nm, p.prd_dt
+	  GROUP BY p.prd_cd, p.prd_nm, p.prd_sp, l.lev_nm, p.prd_dt, p.prd_st, cd.cod_nm
 	  ORDER BY p.prd_dt DESC
 	  <if test="pageList != null">
 	      LIMIT #{pageList[0]}, #{pageList[1]}
