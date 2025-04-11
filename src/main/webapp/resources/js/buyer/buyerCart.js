@@ -7,7 +7,6 @@ $(function() {
 		success: function(res) {
 			const container = document.querySelector(".product_posting");
 			container.innerHTML = "";
-debugger;
 			res.forEach(prd => {
 				let totalPrdPrice = parseInt(prd.prd_sp * parseInt(prd.crt_qt));
 				const html = `

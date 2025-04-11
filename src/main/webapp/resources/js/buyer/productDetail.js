@@ -138,7 +138,7 @@ $(function() {
 	        event.preventDefault();
 	        return;
     	}
-    	window.location.href = `productOrder?prd_cd=${prdCd}&clr_nm=${encodeURIComponent(color)}&siz_nm=${encodeURIComponent(size)}&siz_ot=${encodeURIComponent(sizenm)}&qty=${encodeURIComponent(qty)}`;
+    	window.location.href = `productOrder?prd_cd=${prdCd}&clr_nm=${encodeURIComponent(color)}&siz_nm=${encodeURIComponent(sizenm)}&siz_ot=${encodeURIComponent(size)}&qty=${encodeURIComponent(qty)}`;
     });
 	
 });
