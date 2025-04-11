@@ -5,7 +5,7 @@ $(function() {
     let prd_cdArr = param.getAll("prd_cd");
     let colorArr = param.getAll("clr_nm");
     let sizeArr = param.getAll("siz_nm");
-	let sizeotArr = param.getAll("siz_ot");
+	let sizeotArr = param.getAll("ot");
     let qtyArr = param.getAll("qty");
 
     let sum = 0;
@@ -119,6 +119,8 @@ $(function() {
 		        qty: sessionStorage.getItem(`qty_${prd_cd}`)
 		    };
 		});
+		
+debugger;
 	    if (!checkShippingInfo()) {
 	        e.preventDefault();
 	    } else {

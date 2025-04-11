@@ -687,7 +687,8 @@
 	     ON p.sel_id = s.sel_id
 	   LEFT JOIN product_images i
 	     ON p.prd_cd = i.prd_cd
-	  WHERE i.fil_nb = 1;
+	  WHERE i.fil_nb = 1
+	    AND buy_em = #{buy_em};
 	</select>
 	
 	
@@ -714,7 +715,7 @@
 	<delete id="deleteCart">
 	  DELETE FROM cart
        WHERE crt_id = #{crt_id}
-         AND buy_em = #{buy_em}
+         AND buy_em = #{buy_em};
 	</delete>
 	
 <!-- 	장바구니 수정 -->
