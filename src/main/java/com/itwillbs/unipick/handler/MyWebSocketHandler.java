@@ -75,9 +75,14 @@ public class MyWebSocketHandler extends TextWebSocketHandler {
 
 		//메세지 발신자의 세션 아이디 가져오기
 		String sender_id = (String)session.getAttributes().get("sId");
+		
+		// 디버깅을 위한 출력
+		System.out.println("발신자 세션 ID: " + sender_id);
+		
+		// 메시지에 발신자 아이디 추가
 		map.put("sender_id", sender_id);
 		
-		//메세지 타입(type) 판별하여 "ENTER" 또는 "LEAVE"일 경우 입장/퇴장 메세지 설정
+		//메시지 타입(type) 판별하여 "ENTER" 또는 "LEAVE"일 경우 입장/퇴장 메세지 설정
 		if (map.get("type").equals("ENTER")) {
 			map.put("message", ">>" + sender_id + "님이 입장하셨습니다. <<");
 		} else if (map.get("type").equals("LEAVE")) {
@@ -86,6 +91,8 @@ public class MyWebSocketHandler extends TextWebSocketHandler {
 		
 		JSONObject json = new JSONObject(map);
 		String jsonStr = json.toString();
+		
+		System.out.println("전송되는 JSON 메시지: " + jsonStr);
 		
 		for(WebSocketSession ws : userSessionList.values()) {
 			//ENTER 타입은 본인 포함 모든 세션에게 전송, 그 외에는 본인 제외 전송
@@ -102,17 +109,8 @@ public class MyWebSocketHandler extends TextWebSocketHandler {
 		
 		System.out.println("웹소켓 연결 해제됨(afterConnectionClosed)");
 		
-		// 세션 목록에서 제거만 하고 별도의 LEAVE 메시지는 전송하지 않음
-		// 메시지 전송은 클라이언트 측의 beforeunload 이벤트에서 처리함
 		userSessionList.remove(session.getId());
 		
-		// 아래 코드 제거 (클라이언트에서 이미 LEAVE 메시지를 보냈기 때문에 중복 방지)
-		// Map<String, Object> map = new HashMap<String, Object>();
-		// map.put("type", "LEAVE");
-		// map.put("sender_id", "");
-		// map.put("message", "");
-		// 
-		// sendMessage(session, map);
 	}
 	//4. handleTransportError - 웹소켓 통신 과정에서 오류 발생 시 자동으로 호출되는 메서드
 	@Override

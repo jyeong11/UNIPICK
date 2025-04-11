@@ -420,14 +420,32 @@
                 const $messages = $("#messages");
                 $messages.empty();
                 
+                console.log("현재 사용자 유형:", userType);
                 console.log("현재 사용자 ID:", currentUserId);
                 
                 messages.forEach(function(message) {
-                    // 정확한 비교를 위해 문자열로 변환
-                    console.log("메시지 발신자:", message.sender, "현재 사용자:", currentUserId);
+                    // 메시지 발신자와 현재 사용자 ID를 문자열로 변환하고 공백 제거
+                    const sender = String(message.chd_sd || message.sender || '').trim();
+                    const userId = String(currentUserId || '').trim();
                     
-                    // sender 필드가 현재 사용자 ID와 일치하는지 확인 (대소문자 무시)
-                    const isMine = String(message.sender).trim().toLowerCase() === String(currentUserId).trim().toLowerCase();
+                    console.log("메시지 발신자(chd_sd):", message.chd_sd);
+                    console.log("메시지 발신자(sender):", message.sender);
+                    console.log("변환된 발신자:", sender);
+                    console.log("변환된 사용자 ID:", userId);
+                    
+                    // 사용자 유형에 따라 메시지 발신자 식별
+                    let isMine = false;
+                    
+                    if (userType === "buyer") {
+                        // 구매자인 경우, 발신자가 구매자 이메일과 일치하는지 확인
+                        isMine = sender.toLowerCase() === userId.toLowerCase();
+                    } else if (userType === "seller") {
+                        // 판매자인 경우, 발신자가 판매자 ID와 일치하는지 확인
+                        isMine = sender.toLowerCase() === userId.toLowerCase();
+                    } else {
+                        // 사용자 유형이 명확하지 않은 경우 기본 비교
+                        isMine = sender.toLowerCase() === userId.toLowerCase();
+                    }
                     
                     console.log("내 메시지 여부:", isMine);
                     
@@ -436,11 +454,6 @@
                     
                     const $messageContent = $("<div>").addClass("message-content");
                     $messageContent.text(message.chd_ms);
-                    
-                    // 상품 문의 메시지인지 확인하고 스타일 적용
-                    if (message.chd_ms && message.chd_ms.indexOf("[상품문의]") === 0) {
-                        $messageContent.attr("data-product-inquiry", "true");
-                    }
                     
                     const $messageTime = $("<div>").addClass("message-time");
                     const messageDate = new Date(message.chd_st);
@@ -457,6 +470,7 @@
             // 웹소켓 연결 함수
             function connectWebSocket() {
                 // 요청 주소 생성(웹소켓 기본 프로토콜은 ws, 보안 프로토콜은 wss)
+               //let ws_base_url = "ws://localhost:8080/UNIPICK";
                 let ws_base_url = "ws://c2d2410t2p2.itwillbs.com/UNIPICK";
                 
                 ws = new WebSocket(ws_base_url + "/echo");
@@ -491,17 +505,44 @@
                     // 입장/퇴장 메시지 (중앙 정렬)
                     appendMessage(data.message, ALIGN_CENTER);
                 } else if (data.type === TYPE_TALK) {
-                    // 발신자 ID와 현재 사용자 ID 비교
-                    console.log("발신자:", data.sender_id, "현재 사용자:", currentUserId);
-                    const isMine = String(data.sender_id).trim() === String(currentUserId).trim();
+                    // 메시지 데이터 전체 출력 (디버깅)
+                    console.log("수신된 메시지 데이터:", data);
+                    
+                    // 발신자 ID와 현재 사용자 ID를 문자열로 변환하고 공백 제거
+                    const sender = String(data.sender_id || data.chd_sd || '').trim();
+                    const userId = String(currentUserId || '').trim();
+                    
+                    console.log("메시지 발신자(sender_id):", data.sender_id);
+                    console.log("메시지 발신자(chd_sd):", data.chd_sd);
+                    console.log("변환된 발신자:", sender);
+                    console.log("변환된 사용자 ID:", userId);
+                    
+                    // 사용자 유형에 따라 메시지 발신자 식별
+                    let isMine = false;
+                    
+                    if (userType === "buyer") {
+                        // 구매자인 경우, 발신자가 구매자 이메일과 일치하는지 확인
+                        isMine = sender.toLowerCase() === userId.toLowerCase();
+                    } else if (userType === "seller") {
+                        // 판매자인 경우, 발신자가 판매자 ID와 일치하는지 확인
+                        isMine = sender.toLowerCase() === userId.toLowerCase();
+                    } else {
+                        // 사용자 유형이 명확하지 않은 경우 기본 비교
+                        isMine = sender.toLowerCase() === userId.toLowerCase();
+                    }
+                    
+                    console.log("내 메시지 여부:", isMine);
                     
                     if (isMine) {
                         // 내가 보낸 메시지는 표시하지 않음 (이미 즉시 표시됨)
+                        console.log("내가 보낸 메시지로 판단하여 표시하지 않음");
                         return;
                     }
                     
-                    // 대화 메시지 (항상 왼쪽 정렬 - 다른 사람의 메시지)
-                    appendMessage(data.sender_id + ": " + data.message, ALIGN_LEFT);
+                    // 대화 메시지 (좌측 정렬 - 다른 사람의 메시지)
+                    console.log("상대방 메시지 표시:", data.message);
+                    const messageContent = data.message;
+                    appendMessage(messageContent, ALIGN_LEFT);
                 }
             }
             

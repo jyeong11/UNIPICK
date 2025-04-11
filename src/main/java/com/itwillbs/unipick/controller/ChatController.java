@@ -151,7 +151,10 @@ public class ChatController {
             // 현재 사용자가 구매자인지 판매자인지 확인
             String userType = (buy_em != null) ? "buyer" : "seller";
             model.addAttribute("userType", userType);
-            model.addAttribute("userId", (buy_em != null) ? buy_em : sel_id);
+            
+            // 사용자 ID 설정 (이메일 또는 ID)
+            String userId = (buy_em != null) ? buy_em : sel_id;
+            model.addAttribute("userId", userId);
             
             // 사용자 아이디를 세션에 저장 (웹소켓 핸들러에서 사용)
             // 이메일 대신 이름을 사용 (이름이 없는 경우 이메일 사용)
@@ -159,6 +162,11 @@ public class ChatController {
                 (buy_nm != null ? buy_nm : buy_em) : 
                 (sel_nm != null ? sel_nm : sel_id);
             session.setAttribute("sId", displayName);
+            
+            // 디버깅용 출력
+            System.out.println("사용자 유형: " + userType);
+            System.out.println("사용자 ID: " + userId);
+            System.out.println("표시 이름: " + displayName);
             
             return "chat/ChatRoom";
         } catch (NumberFormatException e) {
@@ -214,7 +222,10 @@ public class ChatController {
             // 현재 사용자가 구매자인지 판매자인지 확인
             String userType = (buy_em != null) ? "buyer" : "seller";
             model.addAttribute("userType", userType);
-            model.addAttribute("userId", (buy_em != null) ? buy_em : sel_id);
+            
+            // 사용자 ID 설정 (이메일 또는 ID)
+            String userId = (buy_em != null) ? buy_em : sel_id;
+            model.addAttribute("userId", userId);
             
             // 사용자 아이디를 세션에 저장 (웹소켓 핸들러에서 사용)
             // 이메일 대신 이름을 사용 (이름이 없는 경우 이메일 사용)
@@ -222,6 +233,11 @@ public class ChatController {
                 (buy_nm != null ? buy_nm : buy_em) : 
                 (sel_nm != null ? sel_nm : sel_id);
             session.setAttribute("sId", displayName);
+            
+            // 디버깅용 출력
+            System.out.println("사용자 유형: " + userType);
+            System.out.println("사용자 ID: " + userId);
+            System.out.println("표시 이름: " + displayName);
             
             return "chat/popUp";
         } catch (NumberFormatException e) {
