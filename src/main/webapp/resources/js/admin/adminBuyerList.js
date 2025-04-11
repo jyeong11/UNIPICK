@@ -114,37 +114,13 @@ $(function() {
                     </div>
                 </div>
 				<div class="row mb-3">
-                    <label class="col-sm-3 col-form-label">주소 : </label>
-                    <div class="col-sm-8">
-                        <input type="text" id="buyAd" class="col-sm-12 form-control" value="${buy.buy_ad}" disabled>
-                    </div>
-                </div>
-				<div class="row mb-3">
                     <label class="col-sm-3 col-form-label">가입일시 : </label>
                     <div class="col-sm-8">
                         <input type="text" id="date" class="col-sm-12 form-control" value="${date}" disabled>
                     </div>
                 </div>
 				<div class="row mb-3">
-                    <label class="col-sm-3 col-form-label">이용약관 : </label>
-                    <div class="col-sm-8">
-                        <input type="text" id="accTa" class="col-sm-12 form-control" value="${buy.acc_ta === 1 ? "동의" : "미동의"}" disabled>
-                    </div>
-                </div>
-				<div class="row mb-3">
-                    <label class="col-sm-3 col-form-label">개인정보 처리 : </label>
-                    <div class="col-sm-8">
-                        <input type="text" id="accPa" class="col-sm-12 form-control" value="${buy.acc_pa === 1 ? "동의" : "미동의"}" disabled>
-                    </div>
-                </div>
-				<div class="row mb-3">
-                    <label class="col-sm-3 col-form-label">마케팅 : </label>
-                    <div class="col-sm-8">
-                        <input type="text" id="accMa" class="col-sm-12 form-control" value="${buy.acc_ma === 1 ? "동의" : "미동의"}" disabled>
-                    </div>
-                </div>
-				<div class="row mb-3">
-                    <label class="col-sm-3 col-form-label">총 신고수 : </label>
+                    <label class="col-sm-3 col-form-label">누적 신고수 : </label>
                     <div class="col-sm-8">
                         <input type="text" id="buySt" class="col-sm-12 form-control" value="${buy.cnt_rp}" disabled>
                     </div>
@@ -156,7 +132,7 @@ $(function() {
                     </div>
                 </div>
 				<div align="right">
-					<input type="button" id="close" class="btn btn_main_color" value="닫기">	
+					<input type="button" id="close" class="btn btn_main_color modal-close" value="닫기">	
 				</div>`})
 					
 			$('#modal-con').append(buyer);

@@ -232,7 +232,9 @@
 	   		AND p.prd_st LIKE CONCAT('%', #{store_st}, '%')
 	   	</when>
      </choose>
+     <if test="!adm_id.equals('admin')">
         AND s.adm_id = #{adm_id}
+     </if>
       LIMIT #{limit} OFFSET #{offset}
 	</select>
 	
@@ -260,7 +262,9 @@
 	   		AND p.prd_st LIKE CONCAT('%', #{store_st}, '%')
 	   	</when>
      </choose>
-        AND s.adm_id = #{adm_id};
+     <if test="!adm_id.equals('admin')">
+        AND s.adm_id = #{adm_id}
+     </if>
 	</select>
 	
 <!-- 	상품 상세 관리 -->
@@ -314,6 +318,7 @@
 		  FROM sellers
 		 WHERE sel_at >= NOW() - INTERVAL 7 DAY
 		 ORDER BY buy_at DESC
+		 LIMIT 11
 	</select>
 	
 	<!-- 신고내역 리스트 -->
@@ -358,6 +363,7 @@
 		  	AND cod_cd = #{cod_cd}
 		  </if>
 		 ORDER BY rpt_dt DESC
+		 LIMIT 11
 	</select>
 	
 <!-- 	판매자 회원 조회 -->
@@ -365,6 +371,9 @@
 	 SELECT sel_id, sel_nm, sel_mn, sel_cs
 	   FROM sellers
 	  WHERE 1 = 1
+	  <if test="!adm_id.equals('admin')">
+	  	AND adm_id = #{adm_id}
+	  </if>
 	   <choose>
 		   	<when test="sel_id != null and !sel_id.equals('')">
 		   		AND sel_id LIKE CONCAT(#{sel_id}, '%')
@@ -397,7 +406,7 @@
 			   b.buy_ph,
 			   b.buy_bd,
 			   IFNULL(b.buy_nn, '') as buy_nn,
-			   b.buy_gn,
+			   IFNULL(b.buy_gn, '') as buy_gn,
 			   b.buy_ht,
 			   b.buy_wt,
 			   b.buy_pc,

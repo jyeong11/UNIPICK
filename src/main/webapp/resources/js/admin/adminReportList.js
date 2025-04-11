@@ -127,7 +127,7 @@ $(function() {
                         </div>
                     </div>
 	                <div align="right">
-	                    <input type="button" id="close" class="btn btn_main_color" value="닫기">
+	                    <input type="button" id="close" class="btn btn_main_color modal-close" value="닫기">
 	                </div>`;
 	            });
 	

@@ -39,6 +39,7 @@ public class AdminController {
 	// 관리자 메인 페이지 화면이동
 	@GetMapping("admin")
 	public String adminMain(HttpSession session, Model model) {
+		model.addAttribute("admId", session.getAttribute("admId"));
 		model.addAttribute("admNm", session.getAttribute("admNm"));
 		return "admin/adminMain";
 	}
@@ -319,7 +320,8 @@ public class AdminController {
 	// 판매자 회원 조회
 	@ResponseBody
 	@PostMapping("getSellerInfo")
-	public List<Map<String, Object>> getSellerInfo(@RequestParam Map<String, Object> data) {
+	public List<Map<String, Object>> getSellerInfo(HttpSession session, @RequestParam Map<String, Object> data) {
+		data.put("adm_id", session.getAttribute("admId"));
 		return adminservice.getSellerInfo(data);
 	}
 	
