@@ -52,7 +52,7 @@ $(function() {
                                         <div class="prd-sp">${totalPrdPrice.toLocaleString()}원</div>
                                     </div>
                                     <div class="prd-2">
-                                        <span>${color}</span> / <span>${ot}</span>
+                                        <span>${color}</span> / <span>${size}</span>
                                     </div>
                                     <div class="prd-1">
                                         <div class="prd-sf">배송비</div>
@@ -114,7 +114,7 @@ $(function() {
 		let productList = prd_cdArr.map(prd_cd => {
 		    return {
 		        prd_cd: prd_cd,
-		        siz_nm: sessionStorage.getItem(`size_${prd_cd}`),
+		        siz_nm: sessionStorage.getItem(`ot_${prd_cd}`),
 		        clr_nm: sessionStorage.getItem(`color_${prd_cd}`),
 		        qty: sessionStorage.getItem(`qty_${prd_cd}`)
 		    };

@@ -132,7 +132,7 @@ $(function() {
 		let size = $("#size").val();
 		let sizenm = $("#size option:selected").text();
 		let qty = $("#qty-input").val();
-		
+		debugger;
 		if (!color || !size || size.trim() === "" || size === "[사이즈]를 선택하세요.") {
 	        alert("색상과 사이즈를 모두 선택해주세요!");
 	        event.preventDefault();

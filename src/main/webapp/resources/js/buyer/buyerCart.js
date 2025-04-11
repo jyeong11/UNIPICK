@@ -7,7 +7,7 @@ $(function() {
 		success: function(res) {
 			const container = document.querySelector(".product_posting");
 			container.innerHTML = "";
-
+debugger;
 			res.forEach(prd => {
 				let totalPrdPrice = parseInt(prd.prd_sp * parseInt(prd.crt_qt));
 				const html = `
@@ -32,6 +32,7 @@ $(function() {
 									</div>
 									<div class="opt">
 										<div>${prd.clr_nm} / ${prd.cod_nm}</div>
+										<input type="hidden" class="siz" value="${prd.cod_cd}">
 										<div class="quantity-box">
 											<button type="button" class="qty-btn minus">-</button>
 											<input type="text" class="qty-input" value="${prd.crt_qt}" min="1">
@@ -162,7 +163,7 @@ $(function() {
 		document.getElementById("selectAll").checked = allCheckboxes.length === checkedCheckboxes.length;
 	});
 	
-	
+	// 결제하기
 	document.querySelector("#price-button button").addEventListener("click", function () {
 	    const checkedItems = document.querySelectorAll(".item-checkbox:checked");
 		
@@ -178,11 +179,13 @@ $(function() {
 	        const prd_cd = cartItem.dataset.prdCd;
 	        const [clr_nm, siz_nm] = cartItem.querySelector(".opt div").innerText.split(" / ");
 	        const qty = cartItem.querySelector(".qty-input").value;
+			const ot = cartItem.querySelector(".siz").value;
 	
 	        params.append("prd_cd", prd_cd);
 	        params.append("clr_nm", clr_nm);
 	        params.append("siz_nm", siz_nm);
 	        params.append("qty", qty);
+			params.append("ot", ot);
 	    });
 	
 	    // 최종 URL 이동
