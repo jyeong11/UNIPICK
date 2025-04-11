@@ -48,7 +48,7 @@
 	        	<button type="submit" class="buyerbutton">로그인</button>
 	        		<input type="hidden" id="contextPathHolder" value="${pageContext.request.contextPath}">
 	        	<a href="${pageContext.request.contextPath}/naver/login" onclick="window.open(this.href, 'naverloginpop', 'titlebar=1, resizable=1, scrollbars=yes, width=600, height=550'); return false" id="naver_id_login_anchor">
-	        	<img src="${pageContext.request.contextPath}/resources/images/btnG.png" style="width:462.5px; height:46px" border="0" title="네이버 아이디로 로그인"></a>	
+	        	<img src="${pageContext.request.contextPath}/resources/images/btnG.png" style="width:463.5px; height:46px" border="0" title="네이버 아이디로 로그인"></a>	
             	</div>
       			<div class="btn-wrap">
 		        	<label class="buyer-btn"><input type="checkbox" id="rememberId">아이디 기억하기</label>
