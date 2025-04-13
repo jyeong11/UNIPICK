@@ -21,12 +21,20 @@ $(document).ready(function () {
 
     // 날짜 범위 초기화
     function initializeDateRange() {
-        const today = new Date();
+        const realToday = new Date();
+        // 2025년 기준으로 오늘 날짜 설정
+        const today = new Date(2025, realToday.getMonth(), realToday.getDate());
         const thirtyDaysAgo = new Date(today);
         thirtyDaysAgo.setDate(today.getDate() - 30);
         
-        $('#endDate').val(today.toISOString().split('T')[0]);
-        $('#startDate').val(thirtyDaysAgo.toISOString().split('T')[0]);
+        // YYYY-MM-DD 형식으로 변환
+        const endDateFormatted = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+        const startDateFormatted = `${thirtyDaysAgo.getFullYear()}-${String(thirtyDaysAgo.getMonth() + 1).padStart(2, '0')}-${String(thirtyDaysAgo.getDate()).padStart(2, '0')}`;
+        
+        console.log("초기화된 날짜 범위:", startDateFormatted, "~", endDateFormatted);
+        
+        $('#endDate').val(endDateFormatted);
+        $('#startDate').val(startDateFormatted);
     }
 
     // 이벤트 핸들러 초기화
@@ -499,56 +507,43 @@ $(document).ready(function () {
         const totalVisits = data.dailyVisits.reduce((sum, visit) => sum + parseInt(visit.visitCount), 0);
         $('#totalVisits').text(totalVisits);
         
-        // 오늘 방문자 수 찾기
-        console.log("전체 방문 데이터:", data.dailyVisits);
+        // 오늘 날짜 (2025년 기준)
+        const realToday = new Date();
+        const todayFormatted = `2025-${String(realToday.getMonth() + 1).padStart(2, '0')}-${String(realToday.getDate()).padStart(2, '0')}`;
+        console.log("오늘 날짜 (2025년 기준):", todayFormatted);
         
-        // 현재 날짜 가져오기 (YYYY-MM-DD 형식)
-        const today = new Date();
-        const formattedDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
-        console.log("오늘 날짜 (포맷팅):", formattedDate);
-        
-        // 데이터베이스 날짜 형식과 일치하는지 확인하기 위해 모든 방식으로 시도
-        let todayVisit = null;
-        
-        // 1. 정확한 날짜 문자열로 찾기 (YYYY-MM-DD)
-        todayVisit = data.dailyVisits.find(visit => visit.visitDate === formattedDate);
-        
-        // 2. 날짜 객체의 시작 부분만 비교 (DB에서 시간이 포함된 경우)
-        if (!todayVisit) {
-            todayVisit = data.dailyVisits.find(visit => {
-                if (visit.visitDate && visit.visitDate.includes(' ')) {
-                    return visit.visitDate.split(' ')[0] === formattedDate;
-                }
-                return false;
-            });
-        }
-        
-        // 3. 날짜가 Date 객체인 경우를 위한 처리
-        if (!todayVisit) {
-            todayVisit = data.dailyVisits.find(visit => {
-                try {
-                    if (visit.visitDate) {
-                        const visitDate = new Date(visit.visitDate);
-                        return visitDate.getFullYear() === today.getFullYear() &&
-                               visitDate.getMonth() === today.getMonth() &&
-                               visitDate.getDate() === today.getDate();
-                    }
-                    return false;
-                } catch(e) {
-                    console.error("날짜 변환 오류:", e);
-                    return false;
-                }
-            });
-        }
+        // 데이터에서 오늘 방문자 수 찾기
+        const todayVisit = data.dailyVisits.find(visit => {
+            if (!visit.visitDate) return false;
+            
+            // 날짜에 시간이 포함된 경우 (YYYY-MM-DD HH:MM:SS)
+            if (visit.visitDate.includes(' ')) {
+                return visit.visitDate.startsWith(todayFormatted);
+            }
+            // 날짜만 있는 경우 (YYYY-MM-DD)
+            return visit.visitDate === todayFormatted;
+        });
         
         console.log("찾은 오늘 방문 데이터:", todayVisit);
         
-        // 방문자 수 업데이트
+        // 오늘 방문자 수 업데이트
         if (todayVisit) {
             $('#dailyVisits').text(todayVisit.visitCount);
         } else {
-            console.warn("오늘 날짜의 방문 데이터를 찾을 수 없습니다.");
-            $('#dailyVisits').text('0');
+            // 오늘 데이터가 없으면 가장 최근 날짜의 데이터 사용
+            const sortedVisits = [...data.dailyVisits].sort((a, b) => {
+                return new Date(b.visitDate) - new Date(a.visitDate);
+            });
+            
+            const latestVisit = sortedVisits.length > 0 ? sortedVisits[0] : null;
+            console.log("최신 방문 데이터:", latestVisit);
+            
+            if (latestVisit) {
+                $('#dailyVisits').text(latestVisit.visitCount);
+            } else {
+                console.warn("방문 데이터가 없습니다.");
+                $('#dailyVisits').text('0');
+            }
         }
         
         // 총 상품 수 (인기 상품의 고유 항목 수)
