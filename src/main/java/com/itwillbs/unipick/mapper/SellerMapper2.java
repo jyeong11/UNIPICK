@@ -70,4 +70,7 @@ public interface SellerMapper2 {
     
     // 주문상태 업데이트
     void updateOrderStatus(Map<String, Object> params);
+    
+    // 상품 코드로 판매자 ID 조회
+    public String getSellerIdByProductId(String productId);
 }

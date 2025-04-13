@@ -78,7 +78,7 @@ $(document).ready(function () {
                 
                 updateCharts(data);
                 updateTable(data);
-                updateSummaryStats();
+                updateSummaryStats(data);
             },
             error: function(xhr, status, error) {
                 console.error('데이터 로드 실패:', error);
@@ -485,43 +485,79 @@ $(document).ready(function () {
     }
 
     // 요약 통계 업데이트
-    function updateSummaryStats() {
-        const periodType = $('#periodType').val();
-        const startDate = $('#startDate').val();
-        const endDate = $('#endDate').val();
+    function updateSummaryStats(data) {
+        if (!data || !data.dailyVisits) {
+            console.error('요약 통계 업데이트를 위한 데이터가 없습니다.');
+            $('#totalVisits').text('0');
+            $('#dailyVisits').text('0');
+            $('#totalProducts').text('0');
+            $('#conversionRate').text('0%');
+            return;
+        }
 
-        $.ajax({
-            url: `${contextPath}/sellerVisit/stats/${sellerId}`,
-            type: "GET",
-            data: { periodType, startDate, endDate },
-            dataType: "json",
-            success: function(data) {
-                // 총 방문자 수 계산 (dailyVisits 배열의 visitCount 합계)
-                const totalVisits = data.dailyVisits.reduce((sum, visit) => sum + parseInt(visit.visitCount), 0);
-                $('#totalVisits').text(totalVisits);
-                
-                // 오늘 방문자 수 (오늘 날짜의 방문자 수 찾기)
-                const today = new Date().toISOString().split('T')[0];
-                const todayVisit = data.dailyVisits.find(visit => visit.visitDate === today);
-                $('#todayVisits').text(todayVisit ? todayVisit.visitCount : 0);
-                
-                // 총 상품 수 (인기 상품의 고유 항목 수)
-                const uniqueProducts = new Set(data.popularProducts.map(product => product.productName));
-                $('#totalProducts').text(uniqueProducts.size);
-                
-                // 전환율 계산 (여기서는 더미 데이터 대신 API에서 받아온 값을 사용)
-                // 전환율 = (구매 수 / 방문자 수) * 100 (예시 계산법)
-                const conversionRate = totalVisits > 0 ? Math.round((uniqueProducts.size / totalVisits) * 100) : 0;
-                $('#conversionRate').text(conversionRate + '%');
-            },
-            error: function(xhr, status, error) {
-                console.error('요약 통계 데이터 로드 실패:', error);
-                // 오류 발생 시 기본값 표시
-                $('#totalVisits').text('0');
-                $('#todayVisits').text('0');
-                $('#totalProducts').text('0');
-                $('#conversionRate').text('0%');
-            }
-        });
+        // 총 방문자 수 계산 (dailyVisits 배열의 visitCount 합계)
+        const totalVisits = data.dailyVisits.reduce((sum, visit) => sum + parseInt(visit.visitCount), 0);
+        $('#totalVisits').text(totalVisits);
+        
+        // 오늘 방문자 수 찾기
+        console.log("전체 방문 데이터:", data.dailyVisits);
+        
+        // 현재 날짜 가져오기 (YYYY-MM-DD 형식)
+        const today = new Date();
+        const formattedDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+        console.log("오늘 날짜 (포맷팅):", formattedDate);
+        
+        // 데이터베이스 날짜 형식과 일치하는지 확인하기 위해 모든 방식으로 시도
+        let todayVisit = null;
+        
+        // 1. 정확한 날짜 문자열로 찾기 (YYYY-MM-DD)
+        todayVisit = data.dailyVisits.find(visit => visit.visitDate === formattedDate);
+        
+        // 2. 날짜 객체의 시작 부분만 비교 (DB에서 시간이 포함된 경우)
+        if (!todayVisit) {
+            todayVisit = data.dailyVisits.find(visit => {
+                if (visit.visitDate && visit.visitDate.includes(' ')) {
+                    return visit.visitDate.split(' ')[0] === formattedDate;
+                }
+                return false;
+            });
+        }
+        
+        // 3. 날짜가 Date 객체인 경우를 위한 처리
+        if (!todayVisit) {
+            todayVisit = data.dailyVisits.find(visit => {
+                try {
+                    if (visit.visitDate) {
+                        const visitDate = new Date(visit.visitDate);
+                        return visitDate.getFullYear() === today.getFullYear() &&
+                               visitDate.getMonth() === today.getMonth() &&
+                               visitDate.getDate() === today.getDate();
+                    }
+                    return false;
+                } catch(e) {
+                    console.error("날짜 변환 오류:", e);
+                    return false;
+                }
+            });
+        }
+        
+        console.log("찾은 오늘 방문 데이터:", todayVisit);
+        
+        // 방문자 수 업데이트
+        if (todayVisit) {
+            $('#dailyVisits').text(todayVisit.visitCount);
+        } else {
+            console.warn("오늘 날짜의 방문 데이터를 찾을 수 없습니다.");
+            $('#dailyVisits').text('0');
+        }
+        
+        // 총 상품 수 (인기 상품의 고유 항목 수)
+        const uniqueProducts = new Set(data.popularProducts.map(product => product.productName));
+        $('#totalProducts').text(uniqueProducts.size);
+        
+        // 전환율 계산 (여기서는 더미 데이터 대신 API에서 받아온 값을 사용)
+        // 전환율 = (구매 수 / 방문자 수) * 100 (예시 계산법)
+        const conversionRate = totalVisits > 0 ? Math.round((uniqueProducts.size / totalVisits) * 100) : 0;
+        $('#conversionRate').text(conversionRate + '%');
     }
 });

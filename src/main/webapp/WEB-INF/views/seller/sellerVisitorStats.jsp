@@ -303,7 +303,7 @@
             <div class="col-xl-3 col-md-6 mb-4">
               <div class="data-card">
                 <i class="fas fa-chart-line fa-2x text-success mb-3"></i>
-                <div class="data-value" id="todayVisits">0</div>
+                <div class="data-value" id="dailyVisits">0</div>
                 <div class="data-label">오늘 방문자</div>
               </div>
             </div>
