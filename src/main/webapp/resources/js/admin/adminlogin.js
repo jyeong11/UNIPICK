@@ -34,7 +34,7 @@ $(function() {
 			
 	    $.ajax({
 	        type: "POST",
-	        url: "adminLogin",
+	        url: "adminlogin",
 	        data: JSON.stringify(loginData),
 	        contentType: "application/json; charset=UTF-8",
 	        dataType: "json",

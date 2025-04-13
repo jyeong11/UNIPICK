@@ -128,7 +128,7 @@ public class SellerController2 {
 		seller.put("sel_id", session.getAttribute("sel_id"));
 		
 		service.Withdraw(seller);
-		session.invalidate();
+		session.removeAttribute("selId");
 	}
 
 }

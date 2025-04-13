@@ -35,24 +35,25 @@
 	<div>
 		<jsp:include page="../inc/buyerMenuBar.jsp"></jsp:include>
 	</div>
-	
-	<div class = "two">
-		<h2>마이페이지</h2>
-	</div>
-	
-	<div>
-		<div class="buyer-info">
-			<span class="nickName"></span>
-			<div>
-				<button id="modify">회원정보 수정</button>
-				<button id="logout">로그아웃</button>
+	<div id="myPage">
+		<div class = "two">
+			<h2>마이페이지</h2>
+		</div>
+		
+		<div>
+			<div class="buyer-info">
+				<span class="nickName"></span>
+				<div>
+					<button id="modify">회원정보 수정</button>
+					<button id="logout">로그아웃</button>
+				</div>
 			</div>
 		</div>
-	</div>
-	
-	<div class="content">
-		<div class="IconList-div">
-			<ul class="myPageIcon"></ul>
+		
+		<div class="content">
+			<div class="IconList-div">
+				<ul class="myPageIcon"></ul>
+			</div>
 		</div>
 	</div>
 	

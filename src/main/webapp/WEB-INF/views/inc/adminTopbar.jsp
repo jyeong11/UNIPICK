@@ -33,7 +33,7 @@
                     마이페이지
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="adminLogin" data-toggle="modal" data-target="#logoutModal">
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                     로그아웃
                 </a>
@@ -55,7 +55,7 @@
             <div class="modal-body">로그아웃 후에는 관리자 사이트 접근이 불가능합니다.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
-                <a class="btn btn-yellow" href="adminLogin">로그아웃</a>
+                <a class="btn btn-yellow" href="adminlogout">로그아웃</a>
             </div>
         </div>
     </div>

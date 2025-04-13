@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.itwillbs.unipick.service.AdminService;
 
+import retrofit2.http.GET;
+
 @Controller
 public class AdminController {
 	
@@ -25,9 +27,9 @@ public class AdminController {
 	AdminService adminservice;
 	
 	// 로그인 페이지 화면이동
-	@GetMapping("adminLogin")
-	public String adminLogin() {
-		return "admin/adminLogin";
+	@GetMapping("adminlogin")
+	public String adminlogin() {
+		return "admin/adminlogin";
 	}
 	
 	// 마이 페이지 화면이동
@@ -91,6 +93,14 @@ public class AdminController {
 		return "admin/adminReportList";
 	}
 	
+	// 로그아웃
+	@GetMapping("adminlogout")
+	public String adminlogout(HttpSession session) {
+		session.removeAttribute("admId");
+		
+		return "redirect:adminlogin";
+	}
+	
 	// 공통코드 화면 List 
 	@ResponseBody
 	@GetMapping("cmCodeList")
@@ -131,8 +141,8 @@ public class AdminController {
 	
 	// 관리자 로그인
 	@ResponseBody
-	@PostMapping("adminLogin")
-	public Map<String, Object> adminLogin(
+	@PostMapping("adminlogin")
+	public Map<String, Object> adminlogin(
 			@RequestBody Map<String, Object> admin,
 			HttpSession session,
 			HttpServletResponse res) {

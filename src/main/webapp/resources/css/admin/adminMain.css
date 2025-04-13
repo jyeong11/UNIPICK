@@ -14,3 +14,7 @@
 	color: #292b2b;
 	font-size: 14px;
 }
+
+.card-body {
+	display: flex;
+}

@@ -9,7 +9,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 
 @Component
-public class BuyerLoginIntercepter implements HandlerInterceptor {
+public class BuyerLoginInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

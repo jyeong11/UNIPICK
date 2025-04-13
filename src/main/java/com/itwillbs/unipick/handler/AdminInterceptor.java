@@ -15,7 +15,7 @@ public class AdminInterceptor implements HandlerInterceptor {
         HttpSession session = request.getSession(false);
 
         if (session == null || session.getAttribute("admId") == null) {
-            response.sendRedirect("/UNIPICK/adminLogin");
+            response.sendRedirect("/UNIPICK/adminlogin");
             return false;
         }
         return true;

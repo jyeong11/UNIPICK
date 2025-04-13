@@ -163,7 +163,7 @@ document.addEventListener("DOMContentLoaded", function () {
 								<div id="modal" class="modal-dialog modal-xl"
 									role="document">
 									<div class="modal-content">
-										<div class="modal-header">공통코드 등록</div>
+										<div class="modal-header">상세공통코드 등록</div>
 										<div class="modal-body">
 											<div id="modal-con"></div>
 										</div>

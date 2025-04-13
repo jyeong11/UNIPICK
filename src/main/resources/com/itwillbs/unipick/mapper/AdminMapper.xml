@@ -318,7 +318,6 @@
 		  FROM sellers
 		 WHERE sel_at >= NOW() - INTERVAL 7 DAY
 		 ORDER BY buy_at DESC
-		 LIMIT 11
 	</select>
 	
 	<!-- 신고내역 리스트 -->
@@ -363,7 +362,6 @@
 		  	AND cod_cd = #{cod_cd}
 		  </if>
 		 ORDER BY rpt_dt DESC
-		 LIMIT 11
 	</select>
 	
 <!-- 	판매자 회원 조회 -->

@@ -102,7 +102,7 @@ public class SellerController {
 	// 셀러 로그아웃
 	 @GetMapping("sellerLogout")
     public String logout(HttpSession session) {
-        session.invalidate();
+		 session.removeAttribute("selId");
         return "redirect:/sellerlogin";
     }
 	

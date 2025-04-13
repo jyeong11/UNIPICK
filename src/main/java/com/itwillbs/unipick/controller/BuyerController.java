@@ -79,7 +79,7 @@ public class BuyerController {
 	// 로그아웃 이동
 	@GetMapping("logout")
 	public String logout(HttpSession session) {
-	    session.invalidate();
+		session.removeAttribute("buyEm");
 		return "redirect:buyerlogin";
 	}
 	
@@ -325,7 +325,7 @@ public class BuyerController {
 		buyer.put("buy_em", session.getAttribute("buyEm"));
 		
 		buyService.Withdraw(buyer);
-		session.invalidate();
+		session.removeAttribute("buyEm");
 	}
 	
 	// 주문 상세 정보

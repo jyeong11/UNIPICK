@@ -1,8 +1,17 @@
 @charset "UTF-8";
 
+#myPage {
+	min-height: 520px; 
+}
+
 .IconList-div, .two, .buyer-info {
 	width: 1200px;
 	margin: auto;
+}
+
+.content {
+	display: flex;
+	height: 300px;
 }
 
 .two, .buyer-info {

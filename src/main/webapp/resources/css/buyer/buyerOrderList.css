@@ -2,6 +2,7 @@
 
 .content {
 	width: 1200px;
+	min-height: 520px;
 	margin: auto;
 }
 

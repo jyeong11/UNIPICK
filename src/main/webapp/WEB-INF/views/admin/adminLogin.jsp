@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<link href="${pageContext.request.contextPath }/resources/css/admin/adminLogin.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/admin/adminlogin.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/footer.css" rel="stylesheet" type="text/css">
 
 <!-- 구글 폰트 -->
@@ -15,7 +15,7 @@
 <link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
 <!-- js -->
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/admin/adminLogin.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/admin/adminlogin.js"></script>
 <!-- Favicon -->
 <link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.png">
 
