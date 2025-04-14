@@ -184,7 +184,7 @@ public class PayController {
         	 }
             
         	String realreturnUrl = returnUrl + "?ord_id=" + ordId;
-        	return ResponseEntity.ok("<script>alert('결제가 완료되었습니다!'); window.opener.location.href='" + realreturnUrl + "'; window.close();</script>");
+        	return ResponseEntity.ok("<script>window.opener.location.href='" + realreturnUrl + "'; window.close();</script>");
         } else {
         	return ResponseEntity.ok("<script>alert('결제 승인에 실패했습니다.'); window.close();</script>");
         }
